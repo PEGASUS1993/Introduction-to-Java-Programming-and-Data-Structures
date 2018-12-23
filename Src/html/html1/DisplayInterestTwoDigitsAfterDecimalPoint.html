@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DisplayInterestTwoDigitsAfterDecimalPoint.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DisplayInterestTwoDigitsAfterDecimalPointWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DisplayInterestTwoDigitsAfterDecimalPoint" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> DisplayInterestTwoDigitsAfterDecimalPoint {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">double</span> amount = <span class = "constant">12618</span><span class = "literal">.</span><span class = "constant">98</span>;
+    <span class = "keyword">double</span> interestRate = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">0013</span>;
+    <span class = "keyword">double</span> interest = amount * interestRate;
+    System.out.println(<span class = "literal">"Interest is $"</span> + 
+      (<span class = "keyword">int</span>)(interest * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>);
+  }
+}
+</pre>
+</body>
+</html>

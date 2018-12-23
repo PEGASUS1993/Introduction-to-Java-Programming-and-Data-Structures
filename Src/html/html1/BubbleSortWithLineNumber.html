@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BubbleSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BubbleSort.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "BubbleSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> BubbleSort {
+  2&nbsp;&nbsp;  <span class = "comment">/** Bubble sort method */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> bubbleSort(<span class = "keyword">int</span>[] list) {
+  4&nbsp;&nbsp;    <span class = "keyword">boolean</span> needNextPass = <span class = "keyword">true</span>;
+  5&nbsp;&nbsp;    
+  6&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">1</span>; k &lt; list.length && needNextPass; k++) {
+  7&nbsp;&nbsp;      <span class = "comment">// Array may be sorted and next pass not needed</span>
+  8&nbsp;&nbsp;      needNextPass = <span class = "keyword">false</span>;
+  9&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length - k; i++) {
+ 10&nbsp;&nbsp;        <span class = "keyword">if</span> (list[i] &gt; list[i + <span class = "constant">1</span>]) {
+ 11&nbsp;&nbsp;          <span class = "comment">// Swap list[i] with list[i + 1]</span>
+ 12&nbsp;&nbsp;          <span class = "keyword">int</span> temp = list[i];
+ 13&nbsp;&nbsp;          list[i] = list[i + <span class = "constant">1</span>];
+ 14&nbsp;&nbsp;          list[i + <span class = "constant">1</span>] = temp;
+ 15&nbsp;&nbsp;          
+ 16&nbsp;&nbsp;          needNextPass = <span class = "keyword">true</span>; <span class = "comment">// Next pass still needed</span>
+ 17&nbsp;&nbsp;        }
+ 18&nbsp;&nbsp;      }
+ 19&nbsp;&nbsp;    }
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "comment">/** A test method */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 24&nbsp;&nbsp;    <span class = "keyword">int</span>[] list = {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">5</span>, <span class = "constant">6</span>, <span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">14</span>, <span class = "constant">12</span>};
+ 25&nbsp;&nbsp;    bubbleSort(list);
+ 26&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+ 27&nbsp;&nbsp;      System.out.print(list[i] + <span class = "literal">" "</span>);
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Exercise 33.8- Guess the State Capitals</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputText id="question" 
+                              value="#{exercise39_08.question}"/>
+                <h:inputText id="answer" 
+                             value="#{exercise39_08.guess}"/>
+                <h:commandButton action="#{exercise39_08.next()}" 
+                                 value="Submit"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

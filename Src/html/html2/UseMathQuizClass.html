@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - UseMathQuizClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "UseMathQuizClassWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "UseMathQuizClass" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; 
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> UseMathQuizClass {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Create a test for John Doe</span>
+    MathQuiz test1 = <span class = "keyword">new</span> MathQuiz(<span class = "literal">"John Doe"</span>);
+    TwoNumbers pair = <span class = "keyword">new</span> TwoNumbers();
+
+    <span class = "keyword">while</span> (test1.getCorrectCount() &lt; <span class = "constant">3</span>) {
+      pair.setNewNumbers(); <span class = "comment">// Generate new number1 and number2</span>
+      <span class = "keyword">int</span> number1 = pair.getNumber1();
+      <span class = "keyword">int</span> number2 = pair.getNumber2();
+
+      <span class = "comment">// Prompt the student to answer "what is number1 – number2?"</span>
+      System.out.print(<span class = "literal">"What is "</span> + number1 +
+        <span class = "literal">" - "</span> + number2 + <span class = "literal">"? "</span>);
+      <span class = "keyword">int</span> answer = input.nextInt();
+      test1.increaseTotalCount();
+      <span class = "keyword">if</span> (number1 - number2 == answer) {
+        System.out.println(<span class = "literal">"You are correct!"</span>);
+        test1.increaseCorrectCount();
+      }
+      <span class = "keyword">else</span> {
+        System.out.println(<span class = "literal">"Your answer is wrong.\n"</span> +
+          number1 + <span class = "literal">" - "</span> + number2 + <span class = "literal">" should be "</span> +
+          (number1 - number2));
+      }
+    }
+
+    System.out.println(<span class = "literal">"For user "</span> + test1.getUser() +
+      <span class = "literal">", the correct count is "</span> + test1.getCorrectCount() +
+      <span class = "literal">" out of  "</span> + test1.getTotalCount() + <span class = "literal">" questions.\n"</span>);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestException.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestExceptionWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestException" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestException  {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">try</span> {
+      System.out.println(sum(<span class = "keyword">new</span> <span class = "keyword">int</span>[] {<span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">5</span>}));
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      ex.printStackTrace();
+      System.out.println(<span class = "literal">"\n"</span> + ex.getMessage());
+      System.out.println(<span class = "literal">"\n"</span> + ex.toString());
+
+      System.out.println(<span class = "literal">"\nTrace Info Obtained from getStackTrace"</span>);
+      StackTraceElement[] traceElements = ex.getStackTrace();
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; traceElements.length; i++) {
+        System.out.print(<span class = "literal">"method "</span> + traceElements[i].getMethodName());
+        System.out.print(<span class = "literal">"("</span> + traceElements[i].getClassName() + <span class = "literal">":"</span>);
+        System.out.println(traceElements[i].getLineNumber() + <span class = "literal">")"</span>);
+      }
+    }
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> sum(<span class = "keyword">int</span>[] list) {
+    <span class = "keyword">int</span> result = <span class = "constant">0</span>;
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt;= list.length; i++)
+      result += list[i];
+    <span class = "keyword">return</span> result;
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--JBuilder XML Project-->
+<project>
+  <property category="generalFormatting" name="continuationIndent" value="2"/>
+  <property category="generalFormatting" name="tabSize" value="2"/>
+  <property category="generalFormatting2" name="continuationIndent" value="2"/>
+  <property category="generalFormatting2" name="overrideBasicFormatting" value="1"/>
+  <property category="generalFormatting2" name="tabSize" value="2"/>
+  <property category="javaFormatting" name="arrayInitDataOnNewLine" value="0"/>
+  <property category="javaFormatting" name="createBrace" value="0"/>
+  <property category="javaFormatting" name="extendsOnNewLine" value="0"/>
+  <property category="javaFormatting" name="implementsOnNewLine" value="0"/>
+  <property category="javaFormatting" name="packagePrefixGroups" value="java;javax;BLANK_LINE;java.awt;javax.swing;BLANK_LINE;org;(*)"/>
+  <property category="javaFormatting" name="packageThreshold" value="0"/>
+  <property category="javaFormatting" name="spaceAfterTypecast" value="0"/>
+  <property category="javaFormatting" name="spaceBeforeLparen" value="0"/>
+  <property category="javaFormatting" name="wrapAtColumn" value="69"/>
+  <property category="javadoc" name="custom.tags.1" value="todo;a;To Do:"/>
+  <property category="runtime" name="DefaultConfiguration" value="-1"/>
+  <property category="runtime" name="ExcludeDefaultForZero" value="1"/>
+  <property category="serverservices" name="disabled.services" value="jdatastore"/>
+  <property category="serverservices" name="single.server.name" value=""/>
+  <property category="sys" name="AuthorLabel" value="@author"/>
+  <property category="sys" name="BackupPath" value="bak"/>
+  <property category="sys" name="CheckStable" value="1"/>
+  <property category="sys" name="Company" value=""/>
+  <property category="sys" name="CompanyLabel" value="Company:"/>
+  <property category="sys" name="Copyright" value="Copyright (c) 2007"/>
+  <property category="sys" name="CopyrightLabel" value="Copyright:"/>
+  <property category="sys" name="DefaultPath" value="."/>
+  <property category="sys" name="Description" value=""/>
+  <property category="sys" name="DescriptionLabel" value="Description:"/>
+  <property category="sys" name="DocPath" value="doc"/>
+  <property category="sys" name="ExcludeClassEnabled" value="0"/>
+  <property category="sys" name="IncludeTestPath" value="1"/>
+  <property category="sys" name="InstanceVisibility" value="2"/>
+  <property category="sys" name="JDK" value="java version 1.6.0-b105"/>
+  <property category="sys" name="JvmVersion" value="1.5"/>
+  <property category="sys" name="LastTag" value="0"/>
+  <property category="sys" name="Libraries" value=""/>
+  <property category="sys" name="MakeStable" value="0"/>
+  <property category="sys" name="OutPath" value="."/>
+  <property category="sys" name="SourcePath" value="."/>
+  <property category="sys" name="SourceVersion" value="1.5"/>
+  <property category="sys" name="TestPath" value="."/>
+  <property category="sys" name="Title" value=""/>
+  <property category="sys" name="TitleLabel" value="Title:"/>
+  <property category="sys" name="Version" value="1.0"/>
+  <property category="sys" name="VersionLabel" value="@version"/>
+  <property category="sys" name="WorkingDirectory" value="."/>
+  <property category="sys" name="enable.auto.packages" value="false"/>
+  <file path="AbstractTree.java"/>
+  <file path="AccountWithoutSync.java"/>
+  <file path="AccountWithSyncUsingLock.java"/>
+  <file path="ActionInterfaceDemo.java"/>
+  <file path="AdapterDemo.java"/>
+  <file path="AdditionQuiz.java"/>
+  <file path="Address.java"/>
+  <file path="AddressBook.java"/>
+  <file path="AnimationDemo.java"/>
+  <file path="AppletClient.java"/>
+  <file path="AssignGrade.java"/>
+  <file path="Ball.java"/>
+  <file path="BallControl.java"/>
+  <file path="BinarySearch.java"/>
+  <file path="BinaryTree.java"/>
+  <file path="BorderDemo.java"/>
+  <file path="Borrower.java"/>
+  <file path="BorrowLoan.java"/>
+  <file path="BounceBallApp.java"/>
+  <file path="BoundedTypeDemo.java"/>
+  <file path="BubbleSort.java"/>
+  <file path="ButtonDemo.java"/>
+  <file path="Calculator.java"/>
+  <file path="CalendarApp.java"/>
+  <file path="CalendarPanel.java"/>
+  <file path="ChainedExceptionDemo.java"/>
+  <file path="CheckBoxDemo.java"/>
+  <file path="CheckPalindrome.java"/>
+  <file path="Circle.java"/>
+  <file path="Circle2.java"/>
+  <file path="Circle3.java"/>
+  <file path="Circle4.java"/>
+  <file path="CircleController.java"/>
+  <file path="CircleModel.java"/>
+  <file path="CircleView.java"/>
+  <file path="CircleWithException.java"/>
+  <file path="Client.java"/>
+  <file path="ClockAnimation.java"/>
+  <file path="ClockWithAudio.java"/>
+  <file path="ClockWithAudioOnSeparateThread.java"/>
+  <file path="ColorDialog.java"/>
+  <file path="ComboBoxCellRendererDemo.java"/>
+  <file path="ComboBoxDemo.java"/>
+  <file path="ComparableRectangle.java"/>
+  <file path="ComputeArea.java"/>
+  <file path="ComputeChange.java"/>
+  <file path="ComputeFactorial.java"/>
+  <file path="ComputeFibonacci.java"/>
+  <file path="ComputeLoan.java"/>
+  <file path="ComputeLoanUsingInputDialog.java"/>
+  <file path="ComputeTaxWithMethod.java"/>
+  <file path="ComputeTaxWithSelectionStatement.java"/>
+  <file path="ConsumerProducer.java"/>
+  <file path="ConsumerProducerUsingBlockingQueue.java"/>
+  <file path="Copy.java"/>
+  <file path="CopyFile.java"/>
+  <file path="CopyFileToTable.java"/>
+  <file path="CountEachLetter.java"/>
+  <file path="CountLettersInArray.java"/>
+  <file path="CountOccurrenceOfWords.java"/>
+  <file path="CountServer.java"/>
+  <file path="CourseWithActionEvent.java"/>
+  <file path="CourseWithEnrollmentEvent.java"/>
+  <file path="CreateLargeFile.java"/>
+  <file path="CustomFrame.java"/>
+  <file path="CustomTableCellRendererEditorDemo.java"/>
+  <file path="DatagramClient.java"/>
+  <file path="DatagramServer.java"/>
+  <file path="DateSet.java"/>
+  <file path="DescriptionPanel.java"/>
+  <file path="DiagonalLayout.java"/>
+  <file path="DirectorySize.java"/>
+  <file path="DisplayClock.java"/>
+  <file path="DisplayFigure.java"/>
+  <file path="DisplayImage.java"/>
+  <file path="DisplayImagePlayAudio.java"/>
+  <file path="DisplayImageWithURL.java"/>
+  <file path="DisplayMessage.java"/>
+  <file path="DisplayMessageApp.java"/>
+  <file path="DisplayTime.java"/>
+  <file path="DisplayUnicode.java"/>
+  <file path="DrawArcs.java"/>
+  <file path="DrawPolygon.java"/>
+  <file path="EfficientPrimeNumbers.java"/>
+  <file path="EncodingDemo.java"/>
+  <file path="EnrollmentEvent.java"/>
+  <file path="EnrollmentListener.java"/>
+  <file path="EvaluateExpression.java"/>
+  <file path="EventDispatcherThreadDemo.java"/>
+  <file path="ExceptionDemo.java"/>
+  <file path="ExecutorDemo.java"/>
+  <file path="Exercise36_3.java"/>
+  <file path="Exercise36_4.java"/>
+  <file path="FahrenheitToCelsius.java"/>
+  <file path="Figure35_1.java"/>
+  <file path="FigurePanel.java"/>
+  <file path="FinalizationDemo.java"/>
+  <file path="FinallyDemo.java"/>
+  <file path="FindGrade.java"/>
+  <file path="FindGradeUsingPreparedStatement.java"/>
+  <file path="FindNearestPoints.java"/>
+  <file path="FindSalesAmount.java"/>
+  <file path="FindUserTables.java"/>
+  <file path="FixedLengthStringIO.java"/>
+  <file path="FlashingText.java"/>
+  <file path="GCD1.java"/>
+  <file path="GCD2.java"/>
+  <file path="GenericMatrix.java"/>
+  <file path="GenericMethodDemo.java"/>
+  <file path="GenericSort.java"/>
+  <file path="GenericSortNew.java"/>
+  <file path="GenericStack.java"/>
+  <file path="GeometricObject.java"/>
+  <file path="GeometricObject1.java"/>
+  <file path="GeometricObjectComparator.java"/>
+  <file path="GradeExam.java"/>
+  <file path="GreatestCommonDivisor.java"/>
+  <file path="GreatestCommonDivisorMethod.java"/>
+  <file path="GuessBirthDate.java"/>
+  <file path="GuessBirthDateUsingArray.java"/>
+  <file path="GuessBirthDateUsingConfirmationDialog.java"/>
+  <file path="GuessNumber.java"/>
+  <file path="GuessNumberOneTime.java"/>
+  <file path="GuessNumberUsingBreak.java"/>
+  <file path="HandleEvent.java"/>
+  <file path="HandleExceptionDemo.java"/>
+  <file path="Heap.java"/>
+  <file path="HeapSort.java"/>
+  <file path="HidingDemo.java"/>
+  <file path="Histogram.java"/>
+  <file path="HoldComponents.java"/>
+  <file path="House.java"/>
+  <file path="IdentifyHostNameIP.java"/>
+  <file path="ImageAudioAnimation.java"/>
+  <file path="ImageViewer.java"/>
+  <file path="ImprovedFibonacci.java"/>
+  <file path="Increment.java"/>
+  <file path="InitializationDemo.java"/>
+  <file path="InputDialogDemo.java"/>
+  <file path="InsertionSort.java"/>
+  <file path="IntegerMatrix.java"/>
+  <file path="InvalidRadiusException.java"/>
+  <file path="JColorChooserDemo.java"/>
+  <file path="JOptionPaneDemo.java"/>
+  <file path="JSplitPaneDemo.java"/>
+  <file path="KeyEventDemo.java"/>
+  <file path="LargeFactorial.java"/>
+  <file path="LeapYear.java"/>
+  <file path="LinearSearch.java"/>
+  <file path="ListCellRendererDemo.java"/>
+  <file path="ListDemo.java"/>
+  <file path="ListModelDemo.java"/>
+  <file path="ListPropertiesDemo.java"/>
+  <file path="Loan.java"/>
+  <file path="LoanApplet.java"/>
+  <file path="Lottery.java"/>
+  <file path="MathQuiz.java"/>
+  <file path="Max.java"/>
+  <file path="Max1.java"/>
+  <file path="MenuDemo.java"/>
+  <file path="MergeSort.java"/>
+  <file path="MessagePanel.java"/>
+  <file path="ModifyTable.java"/>
+  <file path="ModifyTree.java"/>
+  <file path="MoveMessageDemo.java"/>
+  <file path="MultipleWindowsDemo.java"/>
+  <file path="MultiplicationTable.java"/>
+  <file path="MultiThreadServer.java"/>
+  <file path="MVCDemo.java"/>
+  <file path="MyAbstractList.java"/>
+  <file path="MyArrayList.java"/>
+  <file path="MyFrame.java"/>
+  <file path="MyFrameWithComponents.java"/>
+  <file path="MyImageCellRenderer.java"/>
+  <file path="MyLinkedList.java"/>
+  <file path="MyList.java"/>
+  <file path="MyListCellRenderer.java"/>
+  <file path="MyPriorityQueue.java"/>
+  <file path="MyQueue.java"/>
+  <file path="MyStack.java"/>
+  <file path="MyTableModel.java"/>
+  <file path="Name.java"/>
+  <file path="NumberFormatDemo.java"/>
+  <file path="PalindromeIgnoreNonAlphanumeric.java"/>
+  <file path="Person1.java"/>
+  <file path="PolymorphismDemo.java"/>
+  <file path="PopupMenuDemo.java"/>
+  <file path="PrimeNumber.java"/>
+  <file path="PrimeNumberMethod.java"/>
+  <file path="PrimeNumbers.java"/>
+  <file path="PrintCalendar.java"/>
+  <file path="PrintPyramid.java"/>
+  <file path="PriorityQueueDemo.java"/>
+  <file path="QuickSort.java"/>
+  <file path="RadioButtonDemo.java"/>
+  <file path="RandomCharacter.java"/>
+  <file path="Rational.java"/>
+  <file path="RationalMatrix.java"/>
+  <file path="ReadData.java"/>
+  <file path="ReadFileUsingJFileChooser.java"/>
+  <file path="Rectangle.java"/>
+  <file path="Rectangle1.java"/>
+  <file path="RecursiveBinarySearch.java"/>
+  <file path="RecursiveInsertionSort.java"/>
+  <file path="RecursivePalindrome.java"/>
+  <file path="RecursivePalindromeUsingSubstring.java"/>
+  <file path="RecursiveSelectionSort.java"/>
+  <file path="ReplaceText.java"/>
+  <file path="ResourceBundleDemo.java"/>
+  <file path="RowSetPreparedStatement.java"/>
+  <file path="RowSetTableModel.java"/>
+  <file path="SalesTax.java"/>
+  <file path="ScrollBarDemo.java"/>
+  <file path="ScrollMap.java"/>
+  <file path="ScrollUpdateResultSet.java"/>
+  <file path="ScrollUpdateRowSet.java"/>
+  <file path="SelectionSort.java"/>
+  <file path="SentinelValue.java"/>
+  <file path="SentinelValueUsingConfirmationDialog.java"/>
+  <file path="Server.java"/>
+  <file path="SetPerformanceTest.java"/>
+  <file path="ShowBorderLayout.java"/>
+  <file path="ShowBoxLayout.java"/>
+  <file path="ShowCardLayout.java"/>
+  <file path="ShowCurrentTime.java"/>
+  <file path="ShowDiagonalLayout.java"/>
+  <file path="ShowFlowLayout.java"/>
+  <file path="ShowGridBagLayout.java"/>
+  <file path="ShowGridLayout.java"/>
+  <file path="ShowInternalFrame.java"/>
+  <file path="ShowLayout.java"/>
+  <file path="ShowNoLayout.java"/>
+  <file path="ShowOverlayLayout.java"/>
+  <file path="ShowRuntimeErrors.java"/>
+  <file path="ShowSpringLayout.java"/>
+  <file path="ShowSyntaxErrors.java"/>
+  <file path="SierpinskiTriangle.java"/>
+  <file path="SimpleEventDemo.java"/>
+  <file path="SimpleEventDemoAnonymousInnerClass.java"/>
+  <file path="SimpleEventDemoInnerClass.java"/>
+  <file path="SimpleJdbc.java"/>
+  <file path="SimpleRowSet.java"/>
+  <file path="SimpleSpinner.java"/>
+  <file path="SimpleTreeDemo.java"/>
+  <file path="Singleton.java"/>
+  <file path="SixFlags.java"/>
+  <file path="SliderDemo.java"/>
+  <file path="SortLargeFile.java"/>
+  <file path="SpinnerModelEditorDemo.java"/>
+  <file path="SQLClient.java"/>
+  <file path="StillClock.java"/>
+  <file path="StoreAndRetrieveImage.java"/>
+  <file path="StudentAddress.java"/>
+  <file path="StudentClient.java"/>
+  <file path="StudentServer.java"/>
+  <file path="SubtractionQuiz.java"/>
+  <file path="SubtractionQuizLoop.java"/>
+  <file path="Sudoku.java"/>
+  <file path="TableCellRendererEditorDemo.java"/>
+  <file path="TableEditor.java"/>
+  <file path="TableEventsDemo.java"/>
+  <file path="TableModelDemo.java"/>
+  <file path="TablePropertiesDemo.java"/>
+  <file path="TaskThreadDemo.java"/>
+  <file path="Tax.java"/>
+  <file path="Test.java"/>
+  <file path="TestActionEvent.java"/>
+  <file path="TestArray.java"/>
+  <file path="TestArrayAndLinkedList.java"/>
+  <file path="TestArrayList.java"/>
+  <file path="TestArrayListNew.java"/>
+  <file path="TestBinaryTree.java"/>
+  <file path="TestBinaryTreeDelete.java"/>
+  <file path="TestBinaryTreeWithIterator.java"/>
+  <file path="TestBoolean.java"/>
+  <file path="TestBreak.java"/>
+  <file path="TestButtonIcons.java"/>
+  <file path="TestCallableStatement.java"/>
+  <file path="TestCenterMessage.java"/>
+  <file path="TestCircle1.java"/>
+  <file path="TestCircle2.java"/>
+  <file path="TestCircle3.java"/>
+  <file path="TestCircleRectangle.java"/>
+  <file path="TestCircleWithException.java"/>
+  <file path="TestColorDialog.java"/>
+  <file path="TestContinue.java"/>
+  <file path="TestCourseWithActionEvent.java"/>
+  <file path="TestCourseWithEnrollmentEvent.java"/>
+  <file path="TestDatabaseMetaData.java"/>
+  <file path="TestDataStream.java"/>
+  <file path="TestDoWhile.java"/>
+  <file path="TestEnumeratedType.java"/>
+  <file path="TestException.java"/>
+  <file path="TestFigurePanel.java"/>
+  <file path="TestFileClass.java"/>
+  <file path="TestFileStream.java"/>
+  <file path="TestFrame.java"/>
+  <file path="TestGeometricObject.java"/>
+  <file path="TestGetGraphics.java"/>
+  <file path="TestHashSet.java"/>
+  <file path="TestHeap.java"/>
+  <file path="TestImageIcon.java"/>
+  <file path="TestIntegerMatrix.java"/>
+  <file path="TestLinkedHashSet.java"/>
+  <file path="TestList.java"/>
+  <file path="TestLoanClass.java"/>
+  <file path="TestMap.java"/>
+  <file path="TestMax.java"/>
+  <file path="TestMessagePanel.java"/>
+  <file path="TestMethodOverloading.java"/>
+  <file path="TestMethodsInCollection.java"/>
+  <file path="TestObjectInputStream.java"/>
+  <file path="TestObjectOutputStream.java"/>
+  <file path="TestObjectStreamForArray.java"/>
+  <file path="TestPaintComponent.java"/>
+  <file path="TestPanelDrawing.java"/>
+  <file path="TestPanels.java"/>
+  <file path="TestPassArray.java"/>
+  <file path="TestPassByValue.java"/>
+  <file path="TestPassObject.java"/>
+  <file path="TestPolymorphismCasting.java"/>
+  <file path="TestQueue.java"/>
+  <file path="TestRandomAccessFile.java"/>
+  <file path="TestRandomCharacter.java"/>
+  <file path="TestRationalClass.java"/>
+  <file path="TestRationalMatrix.java"/>
+  <file path="TestResultSetMetaData.java"/>
+  <file path="TestRowSetEvent.java"/>
+  <file path="TestScanner.java"/>
+  <file path="TestSourceListener.java"/>
+  <file path="TestStackQueue.java"/>
+  <file path="TestSum.java"/>
+  <file path="TestSwingCommonFeatures.java"/>
+  <file path="TestSwingModel1.java"/>
+  <file path="TestSwingModel2.java"/>
+  <file path="TestTable.java"/>
+  <file path="TestTableColumnModel.java"/>
+  <file path="TestTableEditor.java"/>
+  <file path="TestTableModel.java"/>
+  <file path="TestTableSortFilter.java"/>
+  <file path="TestTreeModel.java"/>
+  <file path="TestTreePath.java"/>
+  <file path="TestTreeSet.java"/>
+  <file path="TestTreeSetWithComparator.java"/>
+  <file path="TestVoidMethod.java"/>
+  <file path="TestWindowEvent.java"/>
+  <file path="TextAreaDemo.java"/>
+  <file path="TextEditor.java"/>
+  <file path="TextFieldDemo.java"/>
+  <file path="ThreadCooperation.java"/>
+  <file path="TicTacToe.java"/>
+  <file path="TicTacToeClient.java"/>
+  <file path="TicTacToeConstants.java"/>
+  <file path="TicTacToeServer.java"/>
+  <file path="ToolBarDemo.java"/>
+  <file path="TotalArea.java"/>
+  <file path="TotalScore.java"/>
+  <file path="TowerOfHanoi.java"/>
+  <file path="Tree.java"/>
+  <file path="TreeCellRendererEditorDemo.java"/>
+  <file path="TreeNodeDemo.java"/>
+  <file path="TwoButtons.java"/>
+  <file path="TwoNumbers.java"/>
+  <file path="UseCustomFrame.java"/>
+  <file path="UseDateSetClass.java"/>
+  <file path="UseFlowLayout.java"/>
+  <file path="UseMathQuizClass.java"/>
+  <file path="UseTaxClass.java"/>
+  <file path="VarArgsDemo.java"/>
+  <file path="ViewController.java"/>
+  <file path="ViewRemoteFile.java"/>
+  <file path="WebBrowser.java"/>
+  <file path="Welcome.java"/>
+  <file path="WelcomeApplet.java"/>
+  <file path="WelcomeInMessageDialogBox.java"/>
+  <file path="WildCardDemo1.java"/>
+  <file path="WildCardDemo2.java"/>
+  <file path="WildCardDemo3.java"/>
+  <file path="WorldClock.java"/>
+  <file path="WorldClockApp.java"/>
+  <file path="WorldClockControl.java"/>
+  <file path="WriteData.java"/>
+</project>

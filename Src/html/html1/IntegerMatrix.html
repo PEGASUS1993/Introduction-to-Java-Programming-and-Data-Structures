@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - IntegerMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "IntegerMatrixWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> IntegerMatrix <span class = "keyword">extends</span> GenericMatrix&lt;Integer&gt; {
+  @Override <span class = "comment">/** Add two integers */</span>
+  <span class = "keyword">protected</span> Integer add(Integer o1, Integer o2) {
+    <span class = "keyword">return</span> o1 + o2;
+  }
+
+  @Override <span class = "comment">/** Multiply two integers */</span>
+  <span class = "keyword">protected</span> Integer multiply(Integer o1, Integer o2) {
+    <span class = "keyword">return</span> o1 * o2;
+  }
+
+  @Override <span class = "comment">/** Specify zero for an integer */</span>
+  <span class = "keyword">protected</span> Integer zero() {
+    <span class = "keyword">return</span> <span class = "constant">0</span>;
+  }
+}
+</pre>
+</body>
+</html>

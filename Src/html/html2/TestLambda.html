@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestLambda.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestLambdaWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestLambda" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestLambda {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    TestLambda test = <span class = "keyword">new</span> TestLambda();
+    test.setAction1(() -&gt; System.out.print(<span class = "literal">"Action 1! "</span>));
+    test.setAction2(e -&gt; System.out.print(e + <span class = "literal">" "</span>));
+    System.out.println(test.getValue((e1, e2) -&gt; e1 + e2));
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setAction1(T1 t) {
+    t.m1();
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setAction2(T2 t) {
+    t.m2(<span class = "constant">4</span><span class = "literal">.</span><span class = "constant">5</span>);
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getValue(T3 t) {
+    <span class = "keyword">return</span> t.m3(<span class = "constant">5</span>, <span class = "constant">2</span>);
+  }
+}
+
+@FunctionalInterface
+<span class = "keyword">interface</span> T1 {
+  <span class = "keyword">public</span> <span class = "keyword">void</span> m1();
+}
+
+@FunctionalInterface
+<span class = "keyword">interface</span> T2 {
+  <span class = "keyword">public</span> <span class = "keyword">void</span> m2(Double d);
+}
+
+@FunctionalInterface
+<span class = "keyword">interface</span> T3 {
+  <span class = "keyword">public</span> <span class = "keyword">int</span> m3(<span class = "keyword">int</span> d1, <span class = "keyword">int</span> d2);
+}
+</pre>
+</body>
+</html>

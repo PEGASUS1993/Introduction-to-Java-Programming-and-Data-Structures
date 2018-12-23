@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestPassObject.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestPassObject.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestPassObject" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestPassObject {
+  2&nbsp;&nbsp;  <span class = "comment">/** Main method */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  4&nbsp;&nbsp;    <span class = "comment">// Create a Circle object with radius 1</span>
+  5&nbsp;&nbsp;    CircleWithPrivateDataFields myCircle = 
+  6&nbsp;&nbsp;      <span class = "keyword">new</span> CircleWithPrivateDataFields(<span class = "constant">1</span>);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Print areas for radius 1, 2, 3, 4, and 5.</span>
+  9&nbsp;&nbsp;    <span class = "keyword">int</span> n = <span class = "constant">5</span>;
+ 10&nbsp;&nbsp;    printAreas(myCircle, n);
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "comment">// See myCircle.radius and times</span>
+ 13&nbsp;&nbsp;    System.out.println(<span class = "literal">"\n"</span> + <span class = "literal">"Radius is "</span> + myCircle.getRadius());
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"n is "</span> + n);
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "comment">/** Print a table of areas for radius */</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printAreas(
+ 19&nbsp;&nbsp;      CircleWithPrivateDataFields c, <span class = "keyword">int</span> times) {
+ 20&nbsp;&nbsp;    System.out.println(<span class = "literal">"Radius \t\tArea"</span>);
+ 21&nbsp;&nbsp;    <span class = "keyword">while</span> (times &gt;= <span class = "constant">1</span>) {
+ 22&nbsp;&nbsp;      System.out.println(c.getRadius() + <span class = "literal">"\t\t"</span> + c.getArea());
+ 23&nbsp;&nbsp;      c.setRadius(c.getRadius() + <span class = "constant">1</span>);
+ 24&nbsp;&nbsp;      times--;
+ 25&nbsp;&nbsp;    }
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

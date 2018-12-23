@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MultiThreadServer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MultiThreadServerWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> java.net.*;
+<span class = "keyword">import</span> java.util.Date;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.application.Platform;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+<span class = "keyword">import</span> javafx.scene.control.TextArea;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> MultiThreadServer <span class = "keyword">extends</span> Application {
+  <span class = "comment">// Text area for displaying contents</span>
+  <span class = "keyword">private</span> TextArea ta = <span class = "keyword">new</span> TextArea();
+  
+  <span class = "comment">// Number a client</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> clientNo = <span class = "constant">0</span>;
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> ScrollPane(ta), <span class = "constant">450</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"MultiThreadServer"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+
+    <span class = "keyword">new</span> Thread( () -&gt; {
+      <span class = "keyword">try</span> {
+        <span class = "comment">// Create a server socket</span>
+        ServerSocket serverSocket = <span class = "keyword">new</span> ServerSocket(<span class = "constant">8000</span>);
+        ta.appendText(<span class = "literal">"MultiThreadServer started at "</span> 
+          + <span class = "keyword">new</span> Date() + <span class = "literal">'\n'</span>);
+    
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          <span class = "comment">// Listen for a new connection request</span>
+          Socket socket = serverSocket.accept();
+    
+          <span class = "comment">// Increment clientNo</span>
+          clientNo++;
+          
+          Platform.runLater( () -&gt; {
+            <span class = "comment">// Display the client number</span>
+            ta.appendText(<span class = "literal">"Starting thread for client "</span> + clientNo +
+              <span class = "literal">" at "</span> + <span class = "keyword">new</span> Date() + <span class = "literal">'\n'</span>);
+
+            <span class = "comment">// Find the client's host name, and IP address</span>
+            InetAddress inetAddress = socket.getInetAddress();
+            ta.appendText(<span class = "literal">"Client "</span> + clientNo + <span class = "literal">"'s host name is "</span>
+              + inetAddress.getHostName() + <span class = "literal">"\n"</span>);
+            ta.appendText(<span class = "literal">"Client "</span> + clientNo + <span class = "literal">"'s IP Address is "</span>
+              + inetAddress.getHostAddress() + <span class = "literal">"\n"</span>);
+          });
+          
+          <span class = "comment">// Create and start a new thread for the connection</span>
+          <span class = "keyword">new</span> Thread(<span class = "keyword">new</span> HandleAClient(socket)).start();
+        }
+      }
+      <span class = "keyword">catch</span>(IOException ex) {
+        System.err.println(ex);
+      }
+    }).start();
+  }
+  
+  <span class = "comment">// Define the thread class for handling new connection</span>
+  <span class = "keyword">class</span> HandleAClient <span class = "keyword">implements</span> Runnable {
+    <span class = "keyword">private</span> Socket socket; <span class = "comment">// A connected socket</span>
+
+    <span class = "comment">/** Construct a thread */</span>
+    <span class = "keyword">public</span> HandleAClient(Socket socket) {
+      <span class = "keyword">this</span>.socket = socket;
+    }
+
+    <span class = "comment">/** Run a thread */</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      <span class = "keyword">try</span> {
+        <span class = "comment">// Create data input and output streams</span>
+        DataInputStream inputFromClient = <span class = "keyword">new</span> DataInputStream(
+          socket.getInputStream());
+        DataOutputStream outputToClient = <span class = "keyword">new</span> DataOutputStream(
+          socket.getOutputStream());
+
+        <span class = "comment">// Continuously serve the client</span>
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          <span class = "comment">// Receive radius from the client</span>
+          <span class = "keyword">double</span> radius = inputFromClient.readDouble();
+
+          <span class = "comment">// Compute area</span>
+          <span class = "keyword">double</span> area = radius * radius * Math.PI;
+
+          <span class = "comment">// Send area back to the client</span>
+          outputToClient.writeDouble(area);
+          
+          Platform.runLater(() -&gt; {
+            ta.appendText(<span class = "literal">"radius received from client: "</span> +
+              radius + <span class = "literal">'\n'</span>);
+            ta.appendText(<span class = "literal">"Area found: "</span> + area + <span class = "literal">'\n'</span>);
+          });
+        }
+      }
+      <span class = "keyword">catch</span>(IOException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

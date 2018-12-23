@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericSortWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GenericSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> GenericSort {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create an Integer array</span>
+    Integer[] intArray = {<span class = "keyword">new</span> Integer(<span class = "constant">2</span>), <span class = "keyword">new</span> Integer(<span class = "constant">4</span>),
+      <span class = "keyword">new</span> Integer(<span class = "constant">3</span>)};
+
+    <span class = "comment">// Create a Double array</span>
+    Double[] doubleArray = {<span class = "keyword">new</span> Double(<span class = "constant">3</span><span class = "literal">.</span><span class = "constant">4</span>), <span class = "keyword">new</span> Double(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">3</span>),
+      <span class = "keyword">new</span> Double(<span class = "literal">-</span><span class = "constant">22</span><span class = "literal">.</span><span class = "constant">1</span>)};
+
+    <span class = "comment">// Create a Character array</span>
+    Character[] charArray = {<span class = "keyword">new</span> Character(<span class = "literal">'a'</span>),
+      <span class = "keyword">new</span> Character(<span class = "literal">'J'</span>), <span class = "keyword">new</span> Character(<span class = "literal">'r'</span>)};
+
+    <span class = "comment">// Create a String array</span>
+    String[] stringArray = {<span class = "literal">"Tom"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>};
+
+    <span class = "comment">// Sort the arrays</span>
+    sort(intArray);
+    sort(doubleArray);
+    sort(charArray);
+    sort(stringArray);
+
+    <span class = "comment">// Display the sorted arrays</span>
+    System.out.print(<span class = "literal">"Sorted Integer objects: "</span>);
+    printList(intArray);
+    System.out.print(<span class = "literal">"Sorted Double objects: "</span>);
+    printList(doubleArray);
+    System.out.print(<span class = "literal">"Sorted Character objects: "</span>);
+    printList(charArray);
+    System.out.print(<span class = "literal">"Sorted String objects: "</span>);
+    printList(stringArray);
+  }
+
+  <span class = "comment">/** Sort an array of comparable objects */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">void</span> sort(E[] list) {
+    E currentMin;
+    <span class = "keyword">int</span> currentMinIndex;
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length - <span class = "constant">1</span>; i++) {
+      <span class = "comment">// Find the minimum in the list[i..list.length-1]</span>
+      currentMin = list[i];
+      currentMinIndex = i;
+
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i + <span class = "constant">1</span>; j &lt; list.length; j++) {
+        <span class = "keyword">if</span> (currentMin.compareTo(list[j]) &gt; <span class = "constant">0</span>) {
+          currentMin = list[j];
+          currentMinIndex = j;
+        }
+      }
+
+      <span class = "comment">// Swap list[i] with list[currentMinIndex] if necessary;</span>
+      <span class = "keyword">if</span> (currentMinIndex != i) {
+        list[currentMinIndex] = list[i];
+        list[i] = currentMin;
+      }
+    }
+  }
+
+  <span class = "comment">/** Print an array of objects */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printList(Object[] list) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+      System.out.print(list[i] + <span class = "literal">" "</span>);
+    System.out.println();
+  }
+}
+</pre>
+</body>
+</html>

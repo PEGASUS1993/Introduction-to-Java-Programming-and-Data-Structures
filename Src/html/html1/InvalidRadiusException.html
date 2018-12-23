@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - InvalidRadiusException.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "InvalidRadiusExceptionWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> InvalidRadiusException <span class = "keyword">extends</span> Exception {
+  <span class = "keyword">private</span> <span class = "keyword">double</span> radius;
+
+  <span class = "comment">/** Construct an exception */</span>
+  <span class = "keyword">public</span> InvalidRadiusException(<span class = "keyword">double</span> radius) {
+    <span class = "keyword">super</span>(<span class = "literal">"Invalid radius "</span> + radius);
+    <span class = "keyword">this</span>.radius = radius;
+  }
+
+  <span class = "comment">/** Return the radius */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getRadius() {
+    <span class = "keyword">return</span> radius;
+  }
+}
+</pre>
+</body>
+</html>

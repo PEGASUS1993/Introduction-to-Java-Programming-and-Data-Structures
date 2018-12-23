@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - QuotientWithException.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/QuotientWithException.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "QuotientWithException" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> QuotientWithException { 
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> quotient(<span class = "keyword">int</span> number1, <span class = "keyword">int</span> number2) {
+    <span class = "keyword">if</span> (number2 == <span class = "constant">0</span>)
+      <span class = "keyword">throw</span> <span class = "keyword">new</span> ArithmeticException(<span class = "literal">"Divisor cannot be zero"</span>);
+
+    <span class = "keyword">return</span> number1 / number2;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    
+    <span class = "comment">// Prompt the user to enter two integers</span>
+    System.out.print(<span class = "literal">"Enter two integers: "</span>);
+    <span class = "keyword">int</span> number1 = input.nextInt();
+    <span class = "keyword">int</span> number2 = input.nextInt();
+    
+    <span class = "keyword">try</span> {
+      <span class = "keyword">int</span> result = quotient(number1, number2);
+      System.out.println(number1 + <span class = "literal">" / "</span> + number2 + <span class = "literal">" is "</span> 
+        + result);
+    }
+    <span class = "keyword">catch</span> (ArithmeticException ex) {
+      System.out.println(<span class = "literal">"Exception: an integer "</span> + 
+        <span class = "literal">"cannot be divided by zero "</span>);
+    }
+
+    System.out.println(<span class = "literal">"Execution continues ..."</span>);
+  }
+}
+</pre>
+</body>
+</html>

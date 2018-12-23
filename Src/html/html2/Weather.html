@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Weather.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WeatherWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Weather" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Weather {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_OF_DAYS = <span class = "constant">10</span>;
+    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_OF_HOURS = <span class = "constant">24</span>;
+    <span class = "keyword">double</span>[][][] data 
+      = <span class = "keyword">new</span> <span class = "keyword">double</span>[NUMBER_OF_DAYS][NUMBER_OF_HOURS][<span class = "constant">2</span>];
+
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    <span class = "comment">// Read input using input redirection from a file</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; NUMBER_OF_DAYS * NUMBER_OF_HOURS; k++) {
+      <span class = "keyword">int</span> day = input.nextInt(); 
+      <span class = "keyword">int</span> hour = input.nextInt();
+      <span class = "keyword">double</span> temperature = input.nextDouble();
+      <span class = "keyword">double</span> humidity = input.nextDouble();
+      data[day - <span class = "constant">1</span>][hour - <span class = "constant">1</span>][<span class = "constant">0</span>] = temperature;
+      data[day - <span class = "constant">1</span>][hour - <span class = "constant">1</span>][<span class = "constant">1</span>] = humidity;
+    }
+
+    <span class = "comment">// Find the average daily temperature and humidity</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; NUMBER_OF_DAYS; i++) {
+      <span class = "keyword">double</span> dailyTemperatureTotal = <span class = "constant">0</span>, dailyHumidityTotal = <span class = "constant">0</span>;
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; NUMBER_OF_HOURS; j++) {
+        dailyTemperatureTotal += data[i][j][<span class = "constant">0</span>];
+        dailyHumidityTotal += data[i][j][<span class = "constant">1</span>];
+      }
+ 
+      <span class = "comment">// Display result</span>
+      System.out.println(<span class = "literal">"Day "</span> + (i + <span class = "constant">1</span>) + <span class = "literal">"'s average temperature is "</span> 
+        + dailyTemperatureTotal / NUMBER_OF_HOURS);
+      System.out.println(<span class = "literal">"Day "</span> + (i + <span class = "constant">1</span>) + <span class = "literal">"'s average humidity is "</span> 
+        + dailyHumidityTotal / NUMBER_OF_HOURS);
+    }       
+  }       
+}
+</pre>
+</body>
+</html>

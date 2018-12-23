@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StandaloneEnumTypeDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StandaloneEnumTypeDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StandaloneEnumTypeDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> StandaloneEnumTypeDemo {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    Day day1 = Day.FRIDAY;
+  4&nbsp;&nbsp;    Day day2 = Day.THURSDAY;
+  5&nbsp;&nbsp;    
+  6&nbsp;&nbsp;    System.out.println(<span class = "literal">"day1's name is "</span> + day1.name());
+  7&nbsp;&nbsp;    System.out.println(<span class = "literal">"day2's name is "</span> + day2.name());
+  8&nbsp;&nbsp;    System.out.println(<span class = "literal">"day1's ordinal is "</span> + day1.ordinal());
+  9&nbsp;&nbsp;    System.out.println(<span class = "literal">"day2's ordinal is "</span> + day2.ordinal());  
+ 10&nbsp;&nbsp;    
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"day1.equals(day2) returns "</span> + 
+ 12&nbsp;&nbsp;      day1.equals(day2));  
+ 13&nbsp;&nbsp;    System.out.println(<span class = "literal">"day1.toString() returns "</span> + 
+ 14&nbsp;&nbsp;      day1.toString()); 
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"day1.compareTo(day2) returns "</span> + 
+ 16&nbsp;&nbsp;      day1.compareTo(day2));
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;}
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;<span class = "keyword">enum</span> Day {SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, 
+ 21&nbsp;&nbsp;  FRIDAY, SATURDAY}
+</pre>
+</body>
+</html>

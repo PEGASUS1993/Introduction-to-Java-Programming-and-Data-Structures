@@ -1,0 +1,165 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TicTacToeImpl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TicTacToeImpl.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TicTacToeImpl" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.server.*;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.registry.*;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.registry.*;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TicTacToeImpl <span class = "keyword">extends</span> UnicastRemoteObject
+  7&nbsp;&nbsp;    <span class = "keyword">implements</span> TicTacToeInterface {
+  8&nbsp;&nbsp;  <span class = "comment">// Declare two players, used to call players back</span>
+  9&nbsp;&nbsp;  <span class = "keyword">private</span> CallBack player1 = <span class = "keyword">null</span>;
+ 10&nbsp;&nbsp;  <span class = "keyword">private</span> CallBack player2 = <span class = "keyword">null</span>;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  <span class = "comment">// board records players' moves</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">char</span>[][] board = <span class = "keyword">new</span> <span class = "keyword">char</span>[<span class = "constant">3</span>][<span class = "constant">3</span>];
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;  <span class = "comment">/** Constructs TicTacToeImpl object and exports it 
+ 16&nbsp;&nbsp;   * on default port. */</span>
+ 17&nbsp;&nbsp;  <span class = "keyword">public</span> TicTacToeImpl() <span class = "keyword">throws</span> RemoteException {
+ 18&nbsp;&nbsp;    <span class = "keyword">super</span>();
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;  <span class = "comment">/** Constructs TicTacToeImpl object and exports it on specified
+ 22&nbsp;&nbsp;   * port.
+ 23&nbsp;&nbsp;   * @param port The port for exporting
+ 24&nbsp;&nbsp;   */</span>
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> TicTacToeImpl(<span class = "keyword">int</span> port) <span class = "keyword">throws</span> RemoteException {
+ 26&nbsp;&nbsp;    <span class = "keyword">super</span>(port);
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "comment">/**
+ 30&nbsp;&nbsp;   * Connect to the TicTacToe server and return the token.
+ 31&nbsp;&nbsp;   * If the returned token is ' ', the client is not connected to
+ 32&nbsp;&nbsp;   * the server
+ 33&nbsp;&nbsp;   */</span>
+ 34&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">char</span> connect(CallBack client) <span class = "keyword">throws</span> RemoteException {
+ 35&nbsp;&nbsp;    <span class = "keyword">if</span> (player1 == <span class = "keyword">null</span>) {
+ 36&nbsp;&nbsp;      <span class = "comment">// player1 (first player) registered</span>
+ 37&nbsp;&nbsp;      player1 = client;
+ 38&nbsp;&nbsp;      player1.notify(<span class = "literal">"Wait for a second player to join"</span>);
+ 39&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">'X'</span>;
+ 40&nbsp;&nbsp;    }
+ 41&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (player2 == <span class = "keyword">null</span>) {
+ 42&nbsp;&nbsp;      <span class = "comment">// player2 (second player) registered</span>
+ 43&nbsp;&nbsp;      player2 = client;
+ 44&nbsp;&nbsp;      player2.notify(<span class = "literal">"Wait for the first player to move"</span>);
+ 45&nbsp;&nbsp;      player2.takeTurn(<span class = "keyword">false</span>);
+ 46&nbsp;&nbsp;      player1.notify(<span class = "literal">"It is my turn (X token)"</span>);
+ 47&nbsp;&nbsp;      player1.takeTurn(<span class = "keyword">true</span>);
+ 48&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">'O'</span>;
+ 49&nbsp;&nbsp;    }
+ 50&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 51&nbsp;&nbsp;      <span class = "comment">// Already two players</span>
+ 52&nbsp;&nbsp;      client.notify(<span class = "literal">"Two players are already in the game"</span>);
+ 53&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">' '</span>;
+ 54&nbsp;&nbsp;    }
+ 55&nbsp;&nbsp;  }
+ 56&nbsp;&nbsp;
+ 57&nbsp;&nbsp;  <span class = "comment">/** A client invokes this method to notify the 
+ 58&nbsp;&nbsp;   * server of its move*/</span>
+ 59&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> myMove(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column, <span class = "keyword">char</span> token)
+ 60&nbsp;&nbsp;      <span class = "keyword">throws</span> RemoteException {
+ 61&nbsp;&nbsp;    <span class = "comment">// Set token to the specified cell</span>
+ 62&nbsp;&nbsp;    board[row][column] = token;
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;    <span class = "comment">// Notify the other player of the move</span>
+ 65&nbsp;&nbsp;    <span class = "keyword">if</span> (token == <span class = "literal">'X'</span>)
+ 66&nbsp;&nbsp;      player2.mark(row, column, <span class = "literal">'X'</span>);
+ 67&nbsp;&nbsp;    <span class = "keyword">else</span>
+ 68&nbsp;&nbsp;      player1.mark(row, column, <span class = "literal">'O'</span>);
+ 69&nbsp;&nbsp;
+ 70&nbsp;&nbsp;    <span class = "comment">// Check if the player with this token wins</span>
+ 71&nbsp;&nbsp;    <span class = "keyword">if</span> (isWon(token)) {
+ 72&nbsp;&nbsp;      <span class = "keyword">if</span> (token == <span class = "literal">'X'</span>) {
+ 73&nbsp;&nbsp;        player1.notify(<span class = "literal">"I won!"</span>);
+ 74&nbsp;&nbsp;        player2.notify(<span class = "literal">"I lost!"</span>);
+ 75&nbsp;&nbsp;        player1.takeTurn(<span class = "keyword">false</span>);
+ 76&nbsp;&nbsp;      }
+ 77&nbsp;&nbsp;      <span class = "keyword">else</span> {
+ 78&nbsp;&nbsp;        player2.notify(<span class = "literal">"I won!"</span>);
+ 79&nbsp;&nbsp;        player1.notify(<span class = "literal">"I lost!"</span>);
+ 80&nbsp;&nbsp;        player2.takeTurn(<span class = "keyword">false</span>);
+ 81&nbsp;&nbsp;      }
+ 82&nbsp;&nbsp;    }
+ 83&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (isFull()) {
+ 84&nbsp;&nbsp;      player1.notify(<span class = "literal">"Draw!"</span>);
+ 85&nbsp;&nbsp;      player2.notify(<span class = "literal">"Draw!"</span>);
+ 86&nbsp;&nbsp;    }
+ 87&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (token == <span class = "literal">'X'</span>) {
+ 88&nbsp;&nbsp;      player1.notify(<span class = "literal">"Wait for the second player to move"</span>);
+ 89&nbsp;&nbsp;      player1.takeTurn(<span class = "keyword">false</span>);
+ 90&nbsp;&nbsp;      player2.notify(<span class = "literal">"It is my turn, (O token)"</span>);
+ 91&nbsp;&nbsp;      player2.takeTurn(<span class = "keyword">true</span>);
+ 92&nbsp;&nbsp;    }
+ 93&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (token == <span class = "literal">'O'</span>) {
+ 94&nbsp;&nbsp;      player2.notify(<span class = "literal">"Wait for the first player to move"</span>);
+ 95&nbsp;&nbsp;      player2.takeTurn(<span class = "keyword">false</span>);
+ 96&nbsp;&nbsp;      player1.notify(<span class = "literal">"It is my turn, (X token)"</span>);
+ 97&nbsp;&nbsp;      player1.takeTurn(<span class = "keyword">true</span>);
+ 98&nbsp;&nbsp;    }
+ 99&nbsp;&nbsp;  }
+100&nbsp;&nbsp;
+101&nbsp;&nbsp;  <span class = "comment">/** Check if a player with the specified token wins */</span>
+102&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isWon(<span class = "keyword">char</span> token) {
+103&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+104&nbsp;&nbsp;      <span class = "keyword">if</span> ((board[i][<span class = "constant">0</span>] == token) && (board[i][<span class = "constant">1</span>] == token)
+105&nbsp;&nbsp;        && (board[i][<span class = "constant">2</span>] == token))
+106&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "keyword">true</span>;
+107&nbsp;&nbsp;
+108&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+109&nbsp;&nbsp;      <span class = "keyword">if</span> ((board[<span class = "constant">0</span>][j] == token) && (board[<span class = "constant">1</span>][j] == token)
+110&nbsp;&nbsp;        && (board[<span class = "constant">2</span>][j] == token))
+111&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "keyword">true</span>;
+112&nbsp;&nbsp;
+113&nbsp;&nbsp;    <span class = "keyword">if</span> ((board[<span class = "constant">0</span>][<span class = "constant">0</span>] == token) && (board[<span class = "constant">1</span>][<span class = "constant">1</span>] == token)
+114&nbsp;&nbsp;      && (board[<span class = "constant">2</span>][<span class = "constant">2</span>] == token))
+115&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+116&nbsp;&nbsp;
+117&nbsp;&nbsp;    <span class = "keyword">if</span> ((board[<span class = "constant">0</span>][<span class = "constant">2</span>] == token) && (board[<span class = "constant">1</span>][<span class = "constant">1</span>] == token)
+118&nbsp;&nbsp;      && (board[<span class = "constant">2</span>][<span class = "constant">0</span>] == token))
+119&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+120&nbsp;&nbsp;
+121&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+122&nbsp;&nbsp;  }
+123&nbsp;&nbsp;
+124&nbsp;&nbsp;  <span class = "comment">/** Check if the board is full */</span>
+125&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isFull() {
+126&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+127&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+128&nbsp;&nbsp;        <span class = "keyword">if</span> (board[i][j] == <span class = "literal">'\u0000'</span>)
+129&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "keyword">false</span>;
+130&nbsp;&nbsp;
+131&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+132&nbsp;&nbsp;  }
+133&nbsp;&nbsp;
+134&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+135&nbsp;&nbsp;    <span class = "keyword">try</span> {
+136&nbsp;&nbsp;      TicTacToeInterface obj = <span class = "keyword">new</span> TicTacToeImpl();
+137&nbsp;&nbsp;      Registry registry = LocateRegistry.getRegistry();
+138&nbsp;&nbsp;      registry.rebind(<span class = "literal">"TicTacToeImpl"</span>, obj);
+139&nbsp;&nbsp;      System.out.println(<span class = "literal">"Server "</span> + obj + <span class = "literal">" registered"</span>);
+140&nbsp;&nbsp;    }
+141&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+142&nbsp;&nbsp;      ex.printStackTrace();
+143&nbsp;&nbsp;    }    
+144&nbsp;&nbsp;  }
+145&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

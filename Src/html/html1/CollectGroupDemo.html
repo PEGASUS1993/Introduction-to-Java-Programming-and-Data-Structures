@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CollectGroupDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CollectGroupDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CollectGroupDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Map;
+<span class = "keyword">import</span> java.util.TreeMap;
+<span class = "keyword">import</span> java.util.stream.Collectors;
+<span class = "keyword">import</span> java.util.stream.IntStream;
+<span class = "keyword">import</span> java.util.stream.Stream;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CollectGroupDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    String[] names = {<span class = "literal">"John"</span>, <span class = "literal">"Peter"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>, <span class = "literal">"Jen"</span>, 
+      <span class = "literal">"George"</span>, <span class = "literal">"Alan"</span>, <span class = "literal">"Stacy"</span>, <span class = "literal">"Steve"</span>, <span class = "literal">"john"</span>};
+    
+    Map&lt;String, Long&gt; map1 = Stream.of(names).
+      map(e -&gt; e.toUpperCase()).collect(
+      Collectors.groupingBy(e -&gt; e, Collectors.counting()));
+    System.out.println(map1);
+    
+    Map&lt;Character, Long&gt; map2 = Stream.of(names).collect(
+      Collectors.groupingBy(e -&gt; e.charAt(<span class = "constant">0</span>), TreeMap::new,
+        Collectors.counting()));
+    System.out.println(map2);
+    
+    <span class = "keyword">int</span>[] values = {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">5</span>, <span class = "constant">1</span>, <span class = "constant">421</span>};
+    IntStream.of(values).mapToObj(e -&gt; e).collect(
+      Collectors.groupingBy(e -&gt; e, TreeMap::new,
+        Collectors.counting())).
+      forEach((k, v) -&gt; System.out.println(k + <span class = "literal">" occurs "</span> + v +
+        (v &gt; <span class = "constant">1</span> ? <span class = "literal">" times "</span> : <span class = "literal">" time "</span>)));
+    
+    MyStudent[] students = {<span class = "keyword">new</span> MyStudent(<span class = "literal">"John"</span>, <span class = "literal">"Lu"</span>, <span class = "literal">"CS"</span>, <span class = "constant">32</span>, <span class = "constant">78</span>),
+      <span class = "keyword">new</span> MyStudent(<span class = "literal">"Susan"</span>, <span class = "literal">"Yao"</span>, <span class = "literal">"Math"</span>, <span class = "constant">31</span>, <span class = "constant">85</span><span class = "literal">.</span><span class = "constant">4</span>),
+      <span class = "keyword">new</span> MyStudent(<span class = "literal">"Kim"</span>, <span class = "literal">"Johnson"</span>, <span class = "literal">"CS"</span>, <span class = "constant">30</span>, <span class = "constant">78</span><span class = "literal">.</span><span class = "constant">1</span>)};
+    
+    System.out.printf(<span class = "literal">"%10s%10s\n"</span>, <span class = "literal">"Department"</span>, <span class = "literal">"Average"</span>);
+    Stream.of(students).collect(Collectors.
+      groupingBy(MyStudent::getMajor, TreeMap::new,
+      Collectors.averagingDouble(MyStudent::getScore))).
+      forEach((k, v) -&gt; System.out.printf(<span class = "literal">"%10s%10<span class = "literal">.</span>2f\n"</span>, k, v));
+  }
+}
+
+<span class = "keyword">class</span> MyStudent {
+  <span class = "keyword">private</span> String firstName;
+  <span class = "keyword">private</span> String lastName;
+  <span class = "keyword">private</span> String major;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> age;
+  <span class = "keyword">private</span> <span class = "keyword">double</span> score;
+  
+  <span class = "keyword">public</span> MyStudent(String firstName, String lastName, String major, 
+      <span class = "keyword">int</span> age, <span class = "keyword">double</span> score) {
+    <span class = "keyword">this</span>.firstName = firstName;
+    <span class = "keyword">this</span>.lastName = lastName;
+    <span class = "keyword">this</span>.major = major;
+    <span class = "keyword">this</span>.age = age;
+    <span class = "keyword">this</span>.score = score;
+  }
+  
+  <span class = "keyword">public</span> String getFirstName() {
+    <span class = "keyword">return</span> firstName;
+  }
+  
+  <span class = "keyword">public</span> String getLastName() {
+    <span class = "keyword">return</span> lastName;
+  }
+   
+  <span class = "keyword">public</span> String getMajor() {
+    <span class = "keyword">return</span> major;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getAge() {
+    <span class = "keyword">return</span> age;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getScore() {
+    <span class = "keyword">return</span> score;
+  }
+}
+</pre>
+</body>
+</html>

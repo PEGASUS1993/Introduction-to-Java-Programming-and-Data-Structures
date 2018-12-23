@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - KeyEventDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "KeyEventDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> KeyEventDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a pane and set its properties</span>
+    Pane pane = <span class = "keyword">new</span> Pane();
+    Text text = <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "literal">"A"</span>);
+    
+    pane.getChildren().add(text);
+    text.setOnKeyPressed(e -&gt; {          
+      <span class = "keyword">switch</span> (e.getCode()) {
+        <span class = "keyword">case</span> DOWN: text.setY(text.getY() + <span class = "constant">10</span>); <span class = "keyword">break</span>;
+        <span class = "keyword">case</span> UP:  text.setY(text.getY() - <span class = "constant">10</span>); <span class = "keyword">break</span>;
+        <span class = "keyword">case</span> LEFT: text.setX(text.getX() - <span class = "constant">10</span>); <span class = "keyword">break</span>;
+        <span class = "keyword">case</span> RIGHT: text.setX(text.getX() + <span class = "constant">10</span>); <span class = "keyword">break</span>;
+        default: 
+          <span class = "keyword">if</span> (e.getText().length() &gt; <span class = "constant">0</span>)
+            text.setText(e.getText());
+      }
+    });
+    
+    <span class = "comment">// Create a scene and place the pane in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane);
+    primaryStage.setTitle(<span class = "literal">"KeyEventDemo"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    text.requestFocus(); <span class = "comment">// text is focused to receive key input</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+} 
+</pre>
+</body>
+</html>

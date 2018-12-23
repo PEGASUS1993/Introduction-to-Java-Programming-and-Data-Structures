@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountOccurrenceOfWordsStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountOccurrenceOfWordsStream.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountOccurrenceOfWordsStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.Collectors;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.Stream;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CountOccurrenceOfWordsStream {
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  7&nbsp;&nbsp;    <span class = "comment">// Set text in a string</span>
+  8&nbsp;&nbsp;    String text = <span class = "literal">"Good morning. Have a good class. "</span>
+  9&nbsp;&nbsp;      + <span class = "literal">"Have a good visit. Have fun!"</span>;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    Stream.of(text.split(<span class = "literal">"[\\s+\\p{Punct}]"</span>)).parallel()
+ 12&nbsp;&nbsp;      .filter(e -&gt; e.length() &gt; <span class = "constant">0</span>).collect(
+ 13&nbsp;&nbsp;        Collectors.groupingBy(String::toLowerCase, TreeMap::new,
+ 14&nbsp;&nbsp;          Collectors.counting()))
+ 15&nbsp;&nbsp;      .forEach((k, v) -&gt; System.out.println(k + <span class = "literal">" "</span> + v));
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ArrayListvsLinkedList1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ArrayListvsLinkedList1.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ArrayListvsLinkedList1" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ArrayListvsLinkedList1 {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;	List&lt;Integer&gt; list1 = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+  6&nbsp;&nbsp;	List&lt;Integer&gt; list2 = <span class = "keyword">new</span> LinkedList&lt;&gt;();
+  7&nbsp;&nbsp;	
+  8&nbsp;&nbsp;	test(list1, <span class = "literal">"Time for ArrayList is "</span>);
+  9&nbsp;&nbsp;	test(list2, <span class = "literal">"Time for LinkedList is "</span>);	
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;  
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> test(List&lt;Integer&gt; list, String title) {
+ 13&nbsp;&nbsp;	<span class = "keyword">long</span> startTime = System.currentTimeMillis();
+ 14&nbsp;&nbsp;	
+ 15&nbsp;&nbsp;	<span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">1000000</span>; i++) {
+ 16&nbsp;&nbsp;      list.add(<span class = "constant">0</span>, i);
+ 17&nbsp;&nbsp;	}
+ 18&nbsp;&nbsp;	
+ 19&nbsp;&nbsp;	<span class = "keyword">long</span> time = System.currentTimeMillis() - startTime;
+ 20&nbsp;&nbsp;	System.out.println(title + time + <span class = "literal">" milliseconds"</span>);
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

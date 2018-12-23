@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ControlCircleWithMouseAndKey.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ControlCircleWithMouseAndKeyWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.input.KeyCode;
+<span class = "keyword">import</span> javafx.scene.input.MouseButton;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ControlCircleWithMouseAndKey <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> CirclePane circlePane = <span class = "keyword">new</span> CirclePane();
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Hold two buttons in an HBox</span>
+    HBox hBox = <span class = "keyword">new</span> HBox();
+    hBox.setSpacing(<span class = "constant">10</span>);
+    hBox.setAlignment(Pos.CENTER);
+    Button btEnlarge = <span class = "keyword">new</span> Button(<span class = "literal">"Enlarge"</span>);
+    Button btShrink = <span class = "keyword">new</span> Button(<span class = "literal">"Shrink"</span>);
+    hBox.getChildren().add(btEnlarge);
+    hBox.getChildren().add(btShrink);
+    
+    <span class = "comment">// Create and register the handler</span>
+    btEnlarge.setOnAction(e -&gt; circlePane.enlarge());
+    btShrink.setOnAction(e -&gt; circlePane.shrink());
+    
+    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+    borderPane.setCenter(circlePane);
+    borderPane.setBottom(hBox);
+    BorderPane.setAlignment(hBox, Pos.CENTER);
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">200</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"ControlCircle"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    circlePane.setOnMouseClicked(e -&gt; {
+      <span class = "keyword">if</span> (e.getButton() == MouseButton.PRIMARY) {
+        circlePane.enlarge();
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (e.getButton() == MouseButton.SECONDARY) {
+        circlePane.shrink();
+      }
+    });
+    
+    scene.setOnKeyPressed(e -&gt; {
+      <span class = "keyword">if</span> (e.getCode() == KeyCode.UP) {
+        circlePane.enlarge();
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (e.getCode() == KeyCode.DOWN) {
+        circlePane.shrink();
+      }
+    });
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

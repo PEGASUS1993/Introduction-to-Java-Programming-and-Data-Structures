@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AnonymousHandlerDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AnonymousHandlerDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> AnonymousHandlerDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    Text text = <span class = "keyword">new</span> Text(<span class = "constant">40</span>, <span class = "constant">40</span>, <span class = "literal">"Programming is fun"</span>);
+    Pane pane = <span class = "keyword">new</span> Pane(text);
+    
+    <span class = "comment">// Hold four buttons in an HBox</span>
+    Button btUp = <span class = "keyword">new</span> Button(<span class = "literal">"Up"</span>);
+    Button btDown = <span class = "keyword">new</span> Button(<span class = "literal">"Down"</span>);
+    Button btLeft = <span class = "keyword">new</span> Button(<span class = "literal">"Left"</span>);
+    Button btRight = <span class = "keyword">new</span> Button(<span class = "literal">"Right"</span>);
+    HBox hBox = <span class = "keyword">new</span> HBox(btUp, btDown, btLeft, btRight);
+    hBox.setSpacing(<span class = "constant">10</span>);
+    hBox.setAlignment(Pos.CENTER);
+    
+    BorderPane borderPane = <span class = "keyword">new</span> BorderPane(pane);
+    borderPane.setBottom(hBox);
+    
+    <span class = "comment">// Create and register the handler</span>
+    btUp.setOnAction(<span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+      @Override <span class = "comment">// Override the handle method</span>
+      <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+        text.setY(text.getY() &gt; <span class = "constant">10</span> ? text.getY() - <span class = "constant">5</span> : <span class = "constant">10</span>);
+      }
+    });
+
+    btDown.setOnAction(<span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+      @Override <span class = "comment">// Override the handle method</span>
+      <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+        text.setY(text.getY() &lt; pane.getHeight() ? 
+          text.getY() + <span class = "constant">5</span> : pane.getHeight());
+      }
+    });
+    
+    btLeft.setOnAction(<span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+      @Override <span class = "comment">// Override the handle method</span>
+      <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+        text.setX(text.getX() &gt; <span class = "constant">0</span> ? text.getX() - <span class = "constant">5</span> : <span class = "constant">0</span>);
+      }
+    });
+    
+    btRight.setOnAction(<span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+      @Override <span class = "comment">// Override the handle method</span>
+      <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+        text.setX(text.getX() &lt; pane.getWidth() - 100?
+          text.getX() + <span class = "constant">5</span> : pane.getWidth() - <span class = "constant">100</span>);
+      }
+    });
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">400</span>, <span class = "constant">350</span>);
+    primaryStage.setTitle(<span class = "literal">"AnonymousHandlerDemo"</span>); <span class = "comment">// Set title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

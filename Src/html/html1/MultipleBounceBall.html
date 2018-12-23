@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MultipleBounceBall.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MultipleBounceBallWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.animation.KeyFrame;
+<span class = "keyword">import</span> javafx.animation.Timeline;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.beans.property.DoubleProperty;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Node;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.ScrollBar;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.util.Duration;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> MultipleBounceBall <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    MultipleBallPane ballPane = <span class = "keyword">new</span> MultipleBallPane();
+    ballPane.setStyle(<span class = "literal">"-fx-border-color: yellow"</span>);
+
+    Button btAdd = <span class = "keyword">new</span> Button(<span class = "literal">"+"</span>);
+    Button btSubtract = <span class = "keyword">new</span> Button(<span class = "literal">"-"</span>);
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+    hBox.getChildren().addAll(btAdd, btSubtract);
+    hBox.setAlignment(Pos.CENTER);
+
+    <span class = "comment">// Add or remove a ball</span>
+    btAdd.setOnAction(e -&gt; ballPane.add());
+    btSubtract.setOnAction(e -&gt; ballPane.subtract());
+
+    <span class = "comment">// Pause and resume animation</span>
+    ballPane.setOnMousePressed(e -&gt; ballPane.pause());
+    ballPane.setOnMouseReleased(e -&gt; ballPane.play());
+
+    <span class = "comment">// Use a scroll bar to control animation speed</span>
+    ScrollBar sbSpeed = <span class = "keyword">new</span> ScrollBar();
+    sbSpeed.setMax(<span class = "constant">20</span>);
+    sbSpeed.setValue(<span class = "constant">10</span>);
+    ballPane.rateProperty().bind(sbSpeed.valueProperty());
+    
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setCenter(ballPane);
+    pane.setTop(sbSpeed);
+    pane.setBottom(hBox);
+
+    <span class = "comment">// Create a scene and place the pane in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">250</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"MultipleBounceBall"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">class</span> MultipleBallPane <span class = "keyword">extends</span> Pane {
+    <span class = "keyword">private</span> Timeline animation;
+
+    <span class = "keyword">public</span> MultipleBallPane() {
+      <span class = "comment">// Create an animation for moving the ball</span>
+      animation = <span class = "keyword">new</span> Timeline(
+        <span class = "keyword">new</span> KeyFrame(Duration.millis(<span class = "constant">50</span>), e -&gt; moveBall()));
+      animation.setCycleCount(Timeline.INDEFINITE);
+      animation.play(); <span class = "comment">// Start animation</span>
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> add() {
+      Color color = <span class = "keyword">new</span> Color(Math.random(), 
+        Math.random(), Math.random(), <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">5</span>);
+      getChildren().add(<span class = "keyword">new</span> Ball(<span class = "constant">30</span>, <span class = "constant">30</span>, <span class = "constant">20</span>, color)); 
+    }
+    
+    <span class = "keyword">public</span> <span class = "keyword">void</span> subtract() {
+      <span class = "keyword">if</span> (getChildren().size() &gt; <span class = "constant">0</span>) {
+        getChildren().remove(getChildren().size() - <span class = "constant">1</span>); 
+      }
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> play() {
+      animation.play();
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> pause() {
+      animation.pause();
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> increaseSpeed() {
+      animation.setRate(animation.getRate() + <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">1</span>);
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> decreaseSpeed() {
+      animation.setRate(
+        animation.getRate() &gt; <span class = "constant">0</span> ? animation.getRate() - <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">1</span> : <span class = "constant">0</span>);
+    }
+
+    <span class = "keyword">public</span> DoubleProperty rateProperty() {
+      <span class = "keyword">return</span> animation.rateProperty();
+    }
+
+    <span class = "keyword">protected</span> <span class = "keyword">void</span> moveBall() {
+      <span class = "keyword">for</span> (Node node: <span class = "keyword">this</span>.getChildren()) {
+        Ball ball = (Ball)node;
+        <span class = "comment">// Check boundaries</span>
+        <span class = "keyword">if</span> (ball.getCenterX() &lt; ball.getRadius() || 
+            ball.getCenterX() &gt; getWidth() - ball.getRadius()) {
+          ball.dx *= <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Change ball move direction</span>
+        }
+        <span class = "keyword">if</span> (ball.getCenterY() &lt; ball.getRadius() || 
+            ball.getCenterY() &gt; getHeight() - ball.getRadius()) {
+          ball.dy *= <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Change ball move direction</span>
+        }
+
+        <span class = "comment">// Adjust ball position</span>
+        ball.setCenterX(ball.dx + ball.getCenterX());
+        ball.setCenterY(ball.dy + ball.getCenterY());
+      }
+    }
+  }
+
+  <span class = "keyword">class</span> Ball <span class = "keyword">extends</span> Circle {
+    <span class = "keyword">private</span> <span class = "keyword">double</span> dx = <span class = "constant">1</span>, dy = <span class = "constant">1</span>;
+
+    Ball(<span class = "keyword">double</span> x, <span class = "keyword">double</span> y, <span class = "keyword">double</span> radius, Color color) {
+      <span class = "keyword">super</span>(x, y, radius);
+      setFill(color); <span class = "comment">// Set ball color</span>
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

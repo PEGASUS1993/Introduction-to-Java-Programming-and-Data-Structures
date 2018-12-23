@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CollectDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CollectDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CollectDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.ArrayList;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.util.List;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Map;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Set;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.Collectors;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.Stream;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CollectDemo {
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 10&nbsp;&nbsp;    String[] names = {<span class = "literal">"John"</span>, <span class = "literal">"Peter"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>, <span class = "literal">"Jen"</span>, 
+ 11&nbsp;&nbsp;      <span class = "literal">"George"</span>, <span class = "literal">"Alan"</span>, <span class = "literal">"Stacy"</span>, <span class = "literal">"Michelle"</span>, <span class = "literal">"john"</span>};
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"The number of characters for all names: "</span> +
+ 13&nbsp;&nbsp;      Stream.of(names).collect(StringBuilder::new, 
+ 14&nbsp;&nbsp;        StringBuilder::append, StringBuilder::append).length());
+ 15&nbsp;&nbsp;    
+ 16&nbsp;&nbsp;    List&lt;String&gt; list = Stream.of(names).collect(ArrayList::new, 
+ 17&nbsp;&nbsp;      ArrayList::add, ArrayList::addAll);
+ 18&nbsp;&nbsp;    System.out.println(list);
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    list = Stream.of(names).collect(Collectors.toList());
+ 21&nbsp;&nbsp;    System.out.println(list);
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;    Set&lt;String&gt; set = Stream.of(names).map(e -&gt; e.toUpperCase()).
+ 24&nbsp;&nbsp;      collect(Collectors.toSet());
+ 25&nbsp;&nbsp;    System.out.println(set);
+ 26&nbsp;&nbsp;    
+ 27&nbsp;&nbsp;    Map&lt;String, Integer&gt; map = Stream.of(names).collect(
+ 28&nbsp;&nbsp;      Collectors.toMap(e -&gt; e, e -&gt; e.length()));
+ 29&nbsp;&nbsp;    System.out.println(map);
+ 30&nbsp;&nbsp;    
+ 31&nbsp;&nbsp;    System.out.println(<span class = "literal">"The total number of characters is "</span> +
+ 32&nbsp;&nbsp;      Stream.of(names).
+ 33&nbsp;&nbsp;        collect(Collectors.summingInt(e -&gt; e.length())));
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;    java.util.IntSummaryStatistics stats = Stream.of(names).
+ 36&nbsp;&nbsp;      collect(Collectors.summarizingInt(e -&gt; e.length()));
+ 37&nbsp;&nbsp;    System.out.println(<span class = "literal">"Max is "</span> + stats.getMax());
+ 38&nbsp;&nbsp;    System.out.println(<span class = "literal">"Min is "</span> + stats.getMin());
+ 39&nbsp;&nbsp;    System.out.println(<span class = "literal">"Average is "</span> + stats.getAverage());
+ 40&nbsp;&nbsp;  }
+ 41&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

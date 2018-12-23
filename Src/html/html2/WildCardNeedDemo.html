@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WildCardNeedDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WildCardNeedDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "WildCardNeedDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> WildCardNeedDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args ) {
+    GenericStack&lt;Integer&gt; intStack = <span class = "keyword">new</span> GenericStack&lt;&gt;();
+    intStack.push(<span class = "constant">1</span>); <span class = "comment">// 1 is autoboxed into new Integer(1)</span>
+    intStack.push(<span class = "constant">2</span>);
+    intStack.push(<span class = "literal">-</span><span class = "constant">2</span>);
+
+    System.out.print(<span class = "literal">"The max number is "</span> + max(intStack)); <span class = "comment">// Error: </span>
+  }
+
+  <span class = "comment">/** Find the maximum in a stack of numbers */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">double</span> max(GenericStack&lt;Number&gt; stack) {
+    <span class = "keyword">double</span> max = stack.pop().doubleValue(); <span class = "comment">// initialize max</span>
+
+    <span class = "keyword">while</span> (!stack.isEmpty()) {
+      <span class = "keyword">double</span> value = stack.pop().doubleValue();
+      <span class = "keyword">if</span> (value &gt; max)
+        max = value;
+    }
+
+    <span class = "keyword">return</span> max;
+  }
+}
+</pre>
+</body>
+</html>

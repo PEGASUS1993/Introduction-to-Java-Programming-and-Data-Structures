@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LotteryUsingStrings.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/LotteryUsingStrings.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "LotteryUsingStrings" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> LotteryUsingStrings {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Generate a lottery as a two-digit string</span>
+    String lottery = <span class = "literal">""</span> + (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>)
+      + (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>);
+
+    <span class = "comment">// Prompt the user to enter a guess</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter your lottery pick (two digits): "</span>);
+    String guess = input.nextLine();
+
+    <span class = "comment">// Get digits from lottery</span>
+    <span class = "keyword">char</span> lotteryDigit1 = lottery.charAt(<span class = "constant">0</span>); 
+    <span class = "keyword">char</span> lotteryDigit2 = lottery.charAt(<span class = "constant">1</span>); 
+
+    <span class = "comment">// Get digits from guess</span>
+    <span class = "keyword">char</span> guessDigit1 = guess.charAt(<span class = "constant">0</span>);
+    <span class = "keyword">char</span> guessDigit2 = guess.charAt(<span class = "constant">1</span>);
+
+    System.out.println(<span class = "literal">"The lottery number is "</span> + lottery);
+
+    <span class = "comment">// Check the guess</span>
+    <span class = "keyword">if</span> (guess.equals(lottery))
+      System.out.println(<span class = "literal">"Exact match: you win $10,000"</span>);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (guessDigit2 == lotteryDigit1
+          && guessDigit1 == lotteryDigit2)
+      System.out.println(<span class = "literal">"Match all digits: you win $3,000"</span>);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (guessDigit1 == lotteryDigit1 
+          || guessDigit1 == lotteryDigit2 
+          || guessDigit2 == lotteryDigit1 
+          || guessDigit2 == lotteryDigit2)
+      System.out.println(<span class = "literal">"Match one digit: you win $1,000"</span>);
+    <span class = "keyword">else</span>
+      System.out.println(<span class = "literal">"Sorry, no match"</span>); 
+  }
+}
+</pre>
+</body>
+</html>

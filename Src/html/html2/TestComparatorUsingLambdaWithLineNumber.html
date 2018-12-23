@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestComparatorUsingLambda.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestComparatorUsingLambda.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestComparatorUsingLambda" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Comparator;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestComparatorUsingLambda {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    GeometricObject g1 = <span class = "keyword">new</span> Rectangle(<span class = "constant">5</span>, <span class = "constant">5</span>);
+  6&nbsp;&nbsp;    GeometricObject g2 = <span class = "keyword">new</span> Circle(<span class = "constant">5</span>);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    GeometricObject g = 
+  9&nbsp;&nbsp;      max(g1, g2, (o1, o2) -&gt; o1.getArea() &gt; o2.getArea() ? 
+ 10&nbsp;&nbsp;        <span class = "constant">1</span> : o1.getArea() == o2.getArea() ? <span class = "constant">0</span> : <span class = "literal">-</span><span class = "constant">1</span>);
+ 11&nbsp;&nbsp;    
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"The area of the larger object is "</span> + 
+ 13&nbsp;&nbsp;      g.getArea());
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;  
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> GeometricObject max(GeometricObject g1, 
+ 17&nbsp;&nbsp;      GeometricObject g2, Comparator&lt;GeometricObject&gt; c) {
+ 18&nbsp;&nbsp;    <span class = "keyword">if</span> (c.compare(g1, g2) &gt; <span class = "constant">0</span>)
+ 19&nbsp;&nbsp;      <span class = "keyword">return</span> g1;
+ 20&nbsp;&nbsp;    <span class = "keyword">else</span>
+ 21&nbsp;&nbsp;      <span class = "keyword">return</span> g2;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

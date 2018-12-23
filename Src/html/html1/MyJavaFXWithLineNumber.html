@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyJavaFX.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyJavaFX.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MyJavaFX <span class = "keyword">extends</span> Application {
+  7&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+  9&nbsp;&nbsp;    <span class = "comment">// Create a button and place it in the scene</span>
+ 10&nbsp;&nbsp;    Button btOK = <span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>);
+ 11&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(btOK, <span class = "constant">200</span>, <span class = "constant">250</span>);
+ 12&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"MyJavaFX"</span>); <span class = "comment">// Set the stage title</span>
+ 13&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 14&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;  
+ 17&nbsp;&nbsp;  <span class = "comment">/**
+ 18&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 19&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 20&nbsp;&nbsp;   */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) { 
+ 22&nbsp;&nbsp;    launch(args);
+ 23&nbsp;&nbsp;  }
+ 24&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

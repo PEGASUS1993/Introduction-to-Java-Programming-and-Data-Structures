@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TaskThreadDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TaskThreadDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TaskThreadDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TaskThreadDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create tasks</span>
+    Runnable printA = <span class = "keyword">new</span> PrintChar(<span class = "literal">'a'</span>, <span class = "constant">100</span>);
+    Runnable printB = <span class = "keyword">new</span> PrintChar(<span class = "literal">'b'</span>, <span class = "constant">100</span>);
+    Runnable print100 = <span class = "keyword">new</span> PrintNum(<span class = "constant">100</span>);
+
+    <span class = "comment">// Create threads</span>
+    Thread thread1 = <span class = "keyword">new</span> Thread(printA);
+    Thread thread2 = <span class = "keyword">new</span> Thread(printB);
+    Thread thread3 = <span class = "keyword">new</span> Thread(print100);
+
+    <span class = "comment">// Start threads</span>
+    thread1.start();
+    thread2.start();
+    thread3.start();
+  }
+}
+
+<span class = "comment">// The task for printing a specified character in specified times</span>
+<span class = "keyword">class</span> PrintChar <span class = "keyword">implements</span> Runnable {
+  <span class = "keyword">private</span> <span class = "keyword">char</span> charToPrint; <span class = "comment">// The character to print</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> times; <span class = "comment">// The times to repeat</span>
+
+  <span class = "comment">/** Construct a task with specified character and number of
+   *  times to print the character
+   */</span>
+  <span class = "keyword">public</span> PrintChar(<span class = "keyword">char</span> c, <span class = "keyword">int</span> t) {
+    charToPrint = c;
+    times = t;
+  }
+
+  @Override <span class = "comment">/** Override the run() method to tell the system
+   *  what the task to perform
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; times; i++) {
+      System.out.print(charToPrint);
+    }
+  }
+}
+
+<span class = "comment">// The task class for printing number from 1 to n for a given n</span>
+<span class = "keyword">class</span> PrintNum <span class = "keyword">implements</span> Runnable {
+  <span class = "keyword">private</span> <span class = "keyword">int</span> lastNum;
+
+  <span class = "comment">/** Construct a task for printing 1, 2, ... i */</span>
+  <span class = "keyword">public</span> PrintNum(<span class = "keyword">int</span> n) {
+    lastNum = n;
+  }
+
+  @Override <span class = "comment">/** Tell the thread how to run */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= lastNum; i++) {
+      System.out.print(<span class = "literal">" "</span> + i);
+    }
+  }
+}
+</pre>
+</body>
+</html>

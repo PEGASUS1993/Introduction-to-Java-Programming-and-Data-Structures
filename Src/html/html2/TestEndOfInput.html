@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestEndOfInput.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestEndOfInputWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">import</span> javax.swing.JFileChooser;
+<span class = "keyword">import</span> javax.swing.JOptionPane;
+
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestEndOfInput <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) <span class = "keyword">throws</span> Exception {
+    <span class = "comment">// Create a button and place it in the scene</span>
+    Button btOK = <span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>);
+    Scene scene = <span class = "keyword">new</span> Scene(btOK, <span class = "constant">200</span>, <span class = "constant">250</span>);
+    primaryStage.setTitle(<span class = "literal">"MyJavaFX"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    JOptionPane.showMessageDialog(<span class = "keyword">null</span>, <span class = "literal">"Message"</span>);
+    JFileChooser fileChooser = <span class = "keyword">new</span> JFileChooser();
+    <span class = "keyword">if</span> (fileChooser.showOpenDialog(<span class = "keyword">null</span>)
+        == JFileChooser.APPROVE_OPTION) {
+      <span class = "comment">// Get the selected file</span>
+      java.io.File file = fileChooser.getSelectedFile();
+
+      <span class = "comment">// Create a Scanner for the file</span>
+      Scanner input = <span class = "keyword">new</span> Scanner(file);
+
+      <span class = "comment">// Read text from the file</span>
+      <span class = "keyword">while</span> (input.hasNext()) {
+        System.out.println(input.nextLine());
+      }
+
+      <span class = "comment">// Close the file</span>
+      input.close();
+    }
+    <span class = "keyword">else</span> {
+      System.out.println(<span class = "literal">"No file selected"</span>);
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) { 
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

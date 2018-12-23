@@ -1,0 +1,95 @@
+Chapter 27 Hashing
+
+Section 27.2 What Is Hashing?
+1. A hashing function __________.
+a. stores an element in the hash table
+b. maps a key to an index in the hash table
+Key:b
+
+#
+2. If each key is mapped to a different index in the hash table, it is called _______.
+a. normal hashing
+b. perfect hashing 
+Key:b
+
+#
+3. A collision occurs _____________.
+a. when two or more keys are mapped to the same hash value. 
+b. when two elements have the same key value. 
+c. when two elements are mapped to the same key.
+Key:a
+
+#
+Section 27.3 Hash Functions and Hash Codes
+4. Every object has the hashCode() method.
+a. True
+b. False
+Key:a
+
+#
+5. What is the return type value for the hashCode() method?
+a. byte
+b. short
+c. int
+d. long
+Key:c
+
+#
+6. Two objects are equal if their hashCodes are the same.
+a. True
+b. False
+Key:b
+
+#
+7. Two objects have the same hashCodes if they are equal.
+a. True
+b. False
+Key:a
+
+#
+8. If two strings are equal, the two strings have the same hashCodes.
+a. True
+b. False
+Key:a
+
+#
+9. For an Integer object with value 20, what is its hashCode?
+a. 10
+b. 20
+c. 30
+d. 40
+Key:b
+
+#
+10. 1 << 2 is _________.
+a. 2
+b. 3
+c. 4
+d. 5
+Key:c
+
+#
+Sections 27.4-27.5
+11. _____________ is to find an open location in the hash table in the event of collision. 
+a. Open addressing
+b. Separate chaining
+Key:a
+
+#
+12. When a collision occurs during the insertion of an entry to a hash table, ______ finds the next available location sequentially. 
+a. linear probing
+b. quadratic probing
+c. double hashing.
+Key:a
+
+#
+13. The __________ places all entries with the same hash index into the same location, rather than finding new locations.
+a. open addressing scheme
+b. separate chaining scheme
+Key:b
+
+#
+14. _______ measures how full the hash table is. 
+a. Load factor   
+b. Threshold 
+Key:a

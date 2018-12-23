@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WorldClock.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WorldClock.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Calendar;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.util.TimeZone;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.GregorianCalendar;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> java.text.*;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Locale;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.KeyFrame;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.Timeline;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.ActionEvent;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.EventHandler;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.util.Duration;
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> WorldClock <span class = "keyword">extends</span> BorderPane {
+ 16&nbsp;&nbsp;  <span class = "keyword">private</span> TimeZone timeZone = TimeZone.getTimeZone(<span class = "literal">"EST"</span>);
+ 17&nbsp;&nbsp;  <span class = "keyword">private</span> Locale locale = Locale.getDefault();
+ 18&nbsp;&nbsp;  <span class = "keyword">private</span> ClockPane clock = <span class = "keyword">new</span> ClockPane(); <span class = "comment">// Still clock</span>
+ 19&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblDigitTime = <span class = "keyword">new</span> Label();
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> WorldClock() {
+ 22&nbsp;&nbsp;    setCenter(clock);
+ 23&nbsp;&nbsp;    setBottom(lblDigitTime);
+ 24&nbsp;&nbsp;    BorderPane.setAlignment(lblDigitTime, Pos.CENTER);
+ 25&nbsp;&nbsp;    
+ 26&nbsp;&nbsp;    EventHandler&lt;ActionEvent&gt; eventHandler = e -&gt; {
+ 27&nbsp;&nbsp;      setCurrentTime(); <span class = "comment">// Set a new clock time</span>
+ 28&nbsp;&nbsp;    };
+ 29&nbsp;&nbsp;    
+ 30&nbsp;&nbsp;    <span class = "comment">// Create an animation for a running clock</span>
+ 31&nbsp;&nbsp;    Timeline animation = <span class = "keyword">new</span> Timeline(
+ 32&nbsp;&nbsp;      <span class = "keyword">new</span> KeyFrame(Duration.millis(<span class = "constant">1000</span>), eventHandler));    
+ 33&nbsp;&nbsp;    animation.setCycleCount(Timeline.INDEFINITE);
+ 34&nbsp;&nbsp;    animation.play(); <span class = "comment">// Start animation</span>
+ 35&nbsp;&nbsp;    
+ 36&nbsp;&nbsp;    <span class = "comment">// Resize the clock </span>
+ 37&nbsp;&nbsp;    widthProperty().addListener(ov -&gt; clock.setWidth(getWidth()));
+ 38&nbsp;&nbsp;    heightProperty().addListener(ov -&gt; clock.setHeight(getHeight()));
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setTimeZone(TimeZone timeZone) {
+ 42&nbsp;&nbsp;    <span class = "keyword">this</span>.timeZone = timeZone;
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setLocale(Locale locale) {
+ 46&nbsp;&nbsp;    <span class = "keyword">this</span>.locale = locale;
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;    
+ 49&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> setCurrentTime() {
+ 50&nbsp;&nbsp;    Calendar calendar = <span class = "keyword">new</span> GregorianCalendar(timeZone, locale);
+ 51&nbsp;&nbsp;    clock.setHour(calendar.get(Calendar.HOUR));
+ 52&nbsp;&nbsp;    clock.setMinute(calendar.get(Calendar.MINUTE));
+ 53&nbsp;&nbsp;    clock.setSecond(calendar.get(Calendar.SECOND));
+ 54&nbsp;&nbsp;
+ 55&nbsp;&nbsp;    <span class = "comment">// Display digit time on the label</span>
+ 56&nbsp;&nbsp;    DateFormat formatter = DateFormat.getDateTimeInstance
+ 57&nbsp;&nbsp;      (DateFormat.MEDIUM, DateFormat.LONG, locale);
+ 58&nbsp;&nbsp;    formatter.setTimeZone(timeZone);
+ 59&nbsp;&nbsp;    lblDigitTime.setText(formatter.format(calendar.getTime()));
+ 60&nbsp;&nbsp;  }
+ 61&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

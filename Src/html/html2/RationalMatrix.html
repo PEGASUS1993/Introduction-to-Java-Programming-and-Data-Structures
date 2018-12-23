@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RationalMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RationalMatrixWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> RationalMatrix <span class = "keyword">extends</span> GenericMatrix&lt;Rational&gt; {
+  @Override <span class = "comment">/** Add two rational numbers */</span>
+  <span class = "keyword">protected</span> Rational add(Rational r1, Rational r2) {
+    <span class = "keyword">return</span> r1.add(r2);
+  }
+
+  @Override <span class = "comment">/** Multiply two rational numbers */</span>
+  <span class = "keyword">protected</span> Rational multiply(Rational r1, Rational r2) {
+    <span class = "keyword">return</span> r1.multiply(r2);
+  }
+
+  @Override <span class = "comment">/** Specify zero for a Rational number */</span>
+  <span class = "keyword">protected</span> Rational zero() {
+    <span class = "keyword">return</span> <span class = "keyword">new</span> Rational(<span class = "constant">0</span>,<span class = "constant">1</span>);
+  }
+}
+</pre>
+</body>
+</html>

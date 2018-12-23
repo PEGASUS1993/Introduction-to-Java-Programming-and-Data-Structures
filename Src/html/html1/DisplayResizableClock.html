@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DisplayResizableClock.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DisplayResizableClockWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> DisplayResizableClock <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {       
+    <span class = "comment">// Create a clock and a label</span>
+    ClockPane clock = <span class = "keyword">new</span> ClockPane();
+    String timeString = clock.getHour() + <span class = "literal">":"</span> + clock.getMinute() 
+      + <span class = "literal">":"</span> + clock.getSecond();
+    Label lblCurrentTime = <span class = "keyword">new</span> Label(timeString);
+
+    <span class = "comment">// Place clock and label in border pane</span>
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setCenter(clock);
+    pane.setBottom(lblCurrentTime);
+    BorderPane.setAlignment(lblCurrentTime, Pos.TOP_CENTER);
+    
+    <span class = "comment">// Create a scene and place the pane in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">250</span>, <span class = "constant">250</span>);
+    primaryStage.setTitle(<span class = "literal">"DisplayClock"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    pane.widthProperty().addListener(ov -&gt;
+      clock.setWidth(pane.getWidth())
+    );
+    
+    pane.heightProperty().addListener(ov -&gt;
+      clock.setHeight(pane.getHeight())
+    );
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

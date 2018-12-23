@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - EncodingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EncodingDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> EncodingDemo <span class = "keyword">extends</span> Application {
+ 10&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) <span class = "keyword">throws</span> Exception {
+ 12&nbsp;&nbsp;    <span class = "keyword">try</span> (
+ 13&nbsp;&nbsp;      PrintWriter output = <span class = "keyword">new</span> PrintWriter(<span class = "literal">"temp.txt"</span>, <span class = "literal">"GB18030"</span>);
+ 14&nbsp;&nbsp;    ) {
+ 15&nbsp;&nbsp;      output.print(<span class = "literal">"\u6B22\u8FCE Welcome \u03b1\u03b2\u03b3"</span>);
+ 16&nbsp;&nbsp;    }
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    <span class = "keyword">try</span> (
+ 19&nbsp;&nbsp;      Scanner input = <span class = "keyword">new</span> Scanner(<span class = "keyword">new</span> File(<span class = "literal">"temp.txt"</span>), <span class = "literal">"GB18030"</span>);
+ 20&nbsp;&nbsp;    ) {
+ 21&nbsp;&nbsp;      StackPane pane = <span class = "keyword">new</span> StackPane();
+ 22&nbsp;&nbsp;      pane.getChildren().add(<span class = "keyword">new</span> Text(input.nextLine()));
+ 23&nbsp;&nbsp;      
+ 24&nbsp;&nbsp;      <span class = "comment">// Create a scene and place it in the stage</span>
+ 25&nbsp;&nbsp;      Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">200</span>, <span class = "constant">200</span>);
+ 26&nbsp;&nbsp;      primaryStage.setTitle(<span class = "literal">"EncodingDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 27&nbsp;&nbsp;      primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 28&nbsp;&nbsp;      primaryStage.show(); <span class = "comment">// Display the stage    </span>
+ 29&nbsp;&nbsp;    }
+ 30&nbsp;&nbsp;  }
+ 31&nbsp;&nbsp;  
+ 32&nbsp;&nbsp;  <span class = "comment">/**
+ 33&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 34&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 35&nbsp;&nbsp;   */</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 37&nbsp;&nbsp;    launch(args);
+ 38&nbsp;&nbsp;  }
+ 39&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AnyWildCardDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AnyWildCardDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "AnyWildCardDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> AnyWildCardDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    GenericStack&lt;Integer&gt; intStack = <span class = "keyword">new</span> GenericStack&lt;&gt;();
+    intStack.push(<span class = "constant">1</span>); <span class = "comment">// 1 is autoboxed into new Integer(1)</span>
+    intStack.push(<span class = "constant">2</span>);
+    intStack.push(<span class = "literal">-</span><span class = "constant">2</span>);
+
+    print(intStack);
+  }
+
+  <span class = "comment">/** Print objects and empties the stack */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> print(GenericStack&lt;?&gt; stack) {
+    <span class = "keyword">while</span> (!stack.isEmpty()) {
+      System.out.print(stack.pop() + <span class = "literal">" "</span>);
+    }
+  }
+}
+</pre>
+</body>
+</html>

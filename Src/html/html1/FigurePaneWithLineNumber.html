@@ -1,0 +1,127 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FigurePane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FigurePane.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.beans.property.BooleanProperty;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.beans.property.ObjectProperty;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.beans.property.SimpleBooleanProperty;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.beans.property.SimpleObjectProperty;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Line;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;<span class = "comment">// Define constants</span>
+ 12&nbsp;&nbsp;<span class = "keyword">enum</span> FigureType {LINE, RECTANGLE, ROUND_RECTANGLE, ELLIPSE};
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> FigurePane <span class = "keyword">extends</span> Pane { 
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> ObjectProperty&lt;FigureType&gt; type 
+ 16&nbsp;&nbsp;    = <span class = "keyword">new</span> SimpleObjectProperty&lt;FigureType&gt;(FigureType.LINE);
+ 17&nbsp;&nbsp;  <span class = "keyword">private</span> BooleanProperty filled = <span class = "keyword">new</span> SimpleBooleanProperty(<span class = "keyword">false</span>);
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;  <span class = "comment">// Shapes used in FigurePane</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">private</span> Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>);
+ 21&nbsp;&nbsp;  <span class = "keyword">private</span> Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>);
+ 22&nbsp;&nbsp;  <span class = "keyword">private</span> Rectangle rect1 = <span class = "keyword">new</span> Rectangle(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">100</span>);
+ 23&nbsp;&nbsp;  <span class = "keyword">private</span> Rectangle rect2 = <span class = "keyword">new</span> Rectangle(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">100</span>);
+ 24&nbsp;&nbsp;  <span class = "keyword">private</span> Ellipse ellipse = <span class = "keyword">new</span> Ellipse(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">100</span>);
+ 25&nbsp;&nbsp;  
+ 26&nbsp;&nbsp;  <span class = "comment">/** Construct a default FigurePane */</span>
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> FigurePane() {
+ 28&nbsp;&nbsp;    <span class = "keyword">this</span>(FigureType.LINE, <span class = "keyword">false</span>);
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  <span class = "comment">/** Construct a FigurePane with the specified type */</span>
+ 32&nbsp;&nbsp;  <span class = "keyword">public</span> FigurePane(FigureType type) {
+ 33&nbsp;&nbsp;    <span class = "keyword">this</span>(type, <span class = "keyword">false</span>);
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;  <span class = "comment">/** Construct a FigurePane with the specified type and filled */</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> FigurePane(FigureType type, <span class = "keyword">boolean</span> filled) {
+ 38&nbsp;&nbsp;    <span class = "keyword">this</span>.type.set(type);
+ 39&nbsp;&nbsp;    setFilled(filled);
+ 40&nbsp;&nbsp;    rect2.setArcWidth(<span class = "constant">50</span>);
+ 41&nbsp;&nbsp;    rect2.setArcHeight(<span class = "constant">50</span>);
+ 42&nbsp;&nbsp;    display();
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> display() {
+ 46&nbsp;&nbsp;    getChildren().removeAll();
+ 47&nbsp;&nbsp;    <span class = "keyword">switch</span> (type.get()) {
+ 48&nbsp;&nbsp;      <span class = "keyword">case</span> LINE: <span class = "comment">// Display two cross lines</span>
+ 49&nbsp;&nbsp;        getChildren().add(<span class = "keyword">new</span> Line(<span class = "constant">0</span>, <span class = "constant">0</span>, <span class = "constant">100</span>, <span class = "constant">100</span>));
+ 50&nbsp;&nbsp;        <span class = "keyword">break</span>;
+ 51&nbsp;&nbsp;      <span class = "keyword">case</span> RECTANGLE: <span class = "comment">// Display a rectangle</span>
+ 52&nbsp;&nbsp;        rect1.widthProperty().bind(widthProperty().subtract(<span class = "constant">10</span>));
+ 53&nbsp;&nbsp;        rect1.heightProperty().bind(heightProperty().subtract(<span class = "constant">10</span>));        
+ 54&nbsp;&nbsp;        getChildren().add(rect1);
+ 55&nbsp;&nbsp;        
+ 56&nbsp;&nbsp;        <span class = "keyword">if</span> (filled.get()) {
+ 57&nbsp;&nbsp;          rect1.setFill(Color.RED);
+ 58&nbsp;&nbsp;        }
+ 59&nbsp;&nbsp;        <span class = "keyword">else</span> {
+ 60&nbsp;&nbsp;          rect1.setFill(Color.WHITE);
+ 61&nbsp;&nbsp;          rect1.setStroke(Color.BLACK);
+ 62&nbsp;&nbsp;        }      
+ 63&nbsp;&nbsp;        <span class = "keyword">break</span>;
+ 64&nbsp;&nbsp;      <span class = "keyword">case</span> ROUND_RECTANGLE: <span class = "comment">// Display a round-cornered rectangle</span>
+ 65&nbsp;&nbsp;        rect2.widthProperty().bind(widthProperty().subtract(<span class = "constant">10</span>));
+ 66&nbsp;&nbsp;        rect2.heightProperty().bind(heightProperty().subtract(<span class = "constant">10</span>));        
+ 67&nbsp;&nbsp;        getChildren().add(rect2);
+ 68&nbsp;&nbsp;        
+ 69&nbsp;&nbsp;        <span class = "keyword">if</span> (filled.get()) {
+ 70&nbsp;&nbsp;          rect2.setFill(Color.RED);
+ 71&nbsp;&nbsp;        }
+ 72&nbsp;&nbsp;        <span class = "keyword">else</span> {
+ 73&nbsp;&nbsp;          rect2.setFill(Color.WHITE);
+ 74&nbsp;&nbsp;          rect2.setStroke(Color.BLACK);
+ 75&nbsp;&nbsp;        }
+ 76&nbsp;&nbsp;        
+ 77&nbsp;&nbsp;        <span class = "keyword">break</span>;
+ 78&nbsp;&nbsp;      <span class = "keyword">case</span> ELLIPSE: <span class = "comment">// Display an oval</span>
+ 79&nbsp;&nbsp;        getChildren().add(ellipse);
+ 80&nbsp;&nbsp;        <span class = "keyword">break</span>;
+ 81&nbsp;&nbsp;    }
+ 82&nbsp;&nbsp;  }
+ 83&nbsp;&nbsp;  
+ 84&nbsp;&nbsp;  <span class = "comment">/** value getter for a figure type */</span>
+ 85&nbsp;&nbsp;  <span class = "keyword">public</span> FigureType getType() {
+ 86&nbsp;&nbsp;    <span class = "keyword">return</span> type.get();
+ 87&nbsp;&nbsp;  }
+ 88&nbsp;&nbsp;
+ 89&nbsp;&nbsp;  <span class = "comment">/** value setter a new figure type */</span>
+ 90&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setType(FigureType type) {
+ 91&nbsp;&nbsp;    <span class = "keyword">this</span>.type.set(type);
+ 92&nbsp;&nbsp;  }
+ 93&nbsp;&nbsp;
+ 94&nbsp;&nbsp;  <span class = "comment">/** property getter for a figure type */</span>
+ 95&nbsp;&nbsp;  <span class = "keyword">public</span> ObjectProperty&lt;FigureType&gt; typeProperty() {
+ 96&nbsp;&nbsp;    <span class = "keyword">return</span> type;
+ 97&nbsp;&nbsp;  }
+ 98&nbsp;&nbsp;
+ 99&nbsp;&nbsp;  <span class = "comment">/** value getter method for filled property */</span>
+100&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isFilled() {
+101&nbsp;&nbsp;    <span class = "keyword">return</span> filled.get();
+102&nbsp;&nbsp;  }
+103&nbsp;&nbsp;  
+104&nbsp;&nbsp;  <span class = "comment">/** value setter method for filled property */</span>
+105&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setFilled(<span class = "keyword">boolean</span> filled) {
+106&nbsp;&nbsp;    <span class = "keyword">this</span>.filled.set(filled);
+107&nbsp;&nbsp;  }
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;  <span class = "comment">/** property getter method for filled property */</span>
+110&nbsp;&nbsp;  <span class = "keyword">public</span> BooleanProperty filledProperty() {
+111&nbsp;&nbsp;    <span class = "keyword">return</span> filled;
+112&nbsp;&nbsp;  }
+113&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

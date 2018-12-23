@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestRandomAccessFile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestRandomAccessFileWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestRandomAccessFile" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestRandomAccessFile {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> IOException {
+    <span class = "keyword">try</span> ( <span class = "comment">// Create a random access file</span>
+      RandomAccessFile inout = <span class = "keyword">new</span> RandomAccessFile(<span class = "literal">"inout.dat"</span>, <span class = "literal">"rw"</span>);
+    ) {
+      <span class = "comment">// Clear the file to destroy the old contents if exists</span>
+      inout.setLength(<span class = "constant">0</span>);
+  
+      <span class = "comment">// Write new integers to the file</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">200</span>; i++)
+        inout.writeInt(i);
+  
+      <span class = "comment">// Display the current length of the file</span>
+      System.out.println(<span class = "literal">"Current file length is "</span> + inout.length());
+  
+      <span class = "comment">// Retrieve the first number</span>
+      inout.seek(<span class = "constant">0</span>); <span class = "comment">// Move the file pointer to the beginning</span>
+      System.out.println(<span class = "literal">"The first number is "</span> + inout.readInt());
+  
+      <span class = "comment">// Retrieve the second number</span>
+      inout.seek(<span class = "constant">1</span> * <span class = "constant">4</span>); <span class = "comment">// Move the file pointer to the second number</span>
+      System.out.println(<span class = "literal">"The second number is "</span> + inout.readInt());
+  
+      <span class = "comment">// Retrieve the tenth number</span>
+      inout.seek(<span class = "constant">9</span> * <span class = "constant">4</span>); <span class = "comment">// Move the file pointer to the tenth number</span>
+      System.out.println(<span class = "literal">"The tenth number is "</span> + inout.readInt());
+  
+      <span class = "comment">// Modify the eleventh number</span>
+      inout.writeInt(<span class = "constant">555</span>);
+  
+      <span class = "comment">// Append a new number</span>
+      inout.seek(inout.length()); <span class = "comment">// Move the file pointer to the end</span>
+      inout.writeInt(<span class = "constant">999</span>);
+  
+      <span class = "comment">// Display the new length</span>
+      System.out.println(<span class = "literal">"The new length is "</span> + inout.length());
+  
+      <span class = "comment">// Retrieve the new eleventh number</span>
+      inout.seek(<span class = "constant">10</span> * <span class = "constant">4</span>); <span class = "comment">// Move the file pointer to the eleventh number</span>
+      System.out.println(<span class = "literal">"The eleventh number is "</span> + inout.readInt());
+    }
+  }
+}
+</pre>
+</body>
+</html>

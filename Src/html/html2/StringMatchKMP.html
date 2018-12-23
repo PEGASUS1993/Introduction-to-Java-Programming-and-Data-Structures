@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StringMatchKMP.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StringMatchKMPWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StringMatchKMP" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> StringMatchKMP {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    java.util.Scanner input = <span class = "keyword">new</span> java.util.Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a string text: "</span>);
+    String text = input.nextLine();
+    System.out.print(<span class = "literal">"Enter a string pattern: "</span>);
+    String pattern = input.nextLine();
+    
+    <span class = "keyword">int</span> index = match(text, pattern);
+    <span class = "keyword">if</span> (index &gt;= <span class = "constant">0</span>)
+      System.out.println(<span class = "literal">"matched at index "</span> + index);
+    <span class = "keyword">else</span>
+      System.out.println(<span class = "literal">"unmatched"</span>);   
+  }
+
+  <span class = "comment">// Return the index of the first match. -1 otherwise.</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> match(String text, String pattern) {
+    <span class = "keyword">int</span>[] fail = getFailure(pattern);
+    <span class = "keyword">int</span> i = <span class = "constant">0</span>; <span class = "comment">// Index on text</span>
+    <span class = "keyword">int</span> k = <span class = "constant">0</span>; <span class = "comment">// Index on pattern</span>
+    <span class = "keyword">while</span> (i &lt; text.length()) {
+      <span class = "keyword">if</span> (text.charAt(i) == pattern.charAt(k)) {
+        <span class = "keyword">if</span> (k == pattern.length() - <span class = "constant">1</span>) {
+          <span class = "keyword">return</span> i - pattern.length() + <span class = "constant">1</span>; <span class = "comment">// pattern matched</span>
+        }
+        i++; <span class = "comment">// Compare the next pair of characters</span>
+        k++;
+      }
+      <span class = "keyword">else</span> {
+        <span class = "keyword">if</span> (k &gt; <span class = "constant">0</span>) {
+          k = fail[k - <span class = "constant">1</span>]; <span class = "comment">// Matching prefix position</span>
+        }
+        <span class = "keyword">else</span> {
+          i++; <span class = "comment">// No prefix</span>
+        }
+      }
+    }
+
+    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+  }
+	
+  <span class = "comment">// Compute failure function</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[] getFailure(String pattern) {
+    <span class = "keyword">int</span>[] fail = <span class = "keyword">new</span> <span class = "keyword">int</span>[pattern.length()];
+    <span class = "keyword">int</span> i = <span class = "constant">1</span>;
+    <span class = "keyword">int</span> k = <span class = "constant">0</span>;
+    <span class = "keyword">while</span> (i &lt; pattern.length()) {
+      <span class = "keyword">if</span> (pattern.charAt(i) == pattern.charAt(k)) {
+        fail[i] = k + <span class = "constant">1</span>;
+        i++;
+        k++;
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (k &gt; <span class = "constant">0</span>) {
+        k = fail[k - <span class = "constant">1</span>];
+      }
+      <span class = "keyword">else</span> {
+        i++;
+      }
+    }
+    
+    <span class = "keyword">return</span> fail;
+  }
+}
+</pre>
+</body>
+</html>

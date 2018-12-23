@@ -1,0 +1,462 @@
+Chapter 32 Multithreading and Parallel Programming
+
+Section 32.3 Creating Tasks and Threads
+1. Analyze the following code:
+
+public class Test implements Runnable {
+  public static void main(String[] args) {
+    Thread t = new Thread(this);
+    t.start();
+  }
+
+  public void run() {
+    System.out.println("test");
+  }
+}
+a.	The program does not compile because this cannot be referenced in a static method.
+b.	The program compiles fine, but it does not print anything because t does not invoke the run() method.
+c.	The program compiles and runs fine and displays test on the console.
+d.	None of the above.
+Key:a
+
+#
+2.	What is the output of the following code?
+
+// Test.java: Define threads using the Thread class
+public class Test {
+  /** Main method */
+  public static void main(String[] args) {
+    new Test();
+  }
+
+  public Test() {
+    // Create threads
+    PrintChar printA = new PrintChar('a', 4);
+    PrintChar printB = new PrintChar('b', 4);
+
+    // Start threads
+    printA.run();
+    printB.run();
+  }
+
+  class PrintChar implements Runnable {
+    private char charToPrint; // The character to print
+    private int times; // The times to repeat
+
+    /** Construct a thread with specified character and number of
+       times to print the character
+     */
+    public PrintChar(char c, int t) {
+      charToPrint = c;
+      times = t;
+    }
+
+    /** Override the run() method to tell the system
+       what the thread will do
+     */
+    public void run() {
+      for (int i = 0; i < times; i++)
+        System.out.print(charToPrint);
+    }
+  }
+}
+a.	aaaaabbbbb
+b.	bbbbbaaaaa
+c.      character a and b are randomly printed
+d.	ababababab
+Key:a Note that the run() in the thread is directly invoked. The threads printA and printB are not started. Threads printA and printB are actually running from the same main thread sequentially.
+
+#
+3.	Analyze the following code:
+
+public abstract class Test implements Runnable {
+  public void doSomething()  {
+  };
+}
+a.	The program will not compile because it does not implement the run() method.
+b.	The program will not compile because it does not contain abstract methods.
+c.	The program compiles fine.
+d.	None of the above.
+Key:c (a) is wrong because class Test is abstract, (b) is wrong because an abstract class may contain no abstract method. (c) is correct.
+
+#
+4.	Analyze the following code:
+
+public class Test implements Runnable {
+  public static void main(String[] args) {
+    Test t = new Test();
+    t.start();
+  }
+
+  public void run() {
+  }
+}
+a.	The program does not compile because the start() method is not defined in the Test class.
+b.	The program compiles, but it does not run because the start() method is not defined.
+c.	The program compiles, but it does not run because the run() method is not implemented.
+d.	The program compiles and runs fine.
+Key:a 
+
+#
+5.	Analyze the following code:
+
+public class Test implements Runnable {
+  public static void main(String[] args) {
+    Test t = new Test();
+  }
+
+  public Test() {
+    Thread t = new Thread(this);
+    t.start();
+  }
+
+  public void run() {
+    System.out.println("test");
+  }
+}
+a.	The program has a compilation error because t is defined in both the main() method and the constructor Test().
+b.	The program compiles fine, but it does not run because you cannot use the keyword this in the constructor.
+c.	The program compiles and runs and displays nothing.
+d.	The program compiles and runs and displays test.
+Key:d
+
+#
+Section 32.4 The Thread Class 
+6.	Why does the following class have a syntax error?
+
+import java.applet.*;
+
+public class Test extends Applet implements Runnable {
+   public void init() throws InterruptedException {
+     Thread t = new Thread(this);
+      t.sleep(1000);
+   }
+
+   public synchronized void run() {
+   }
+}
+a.	The sleep() method is not invoked correctly; it should be invoked as Thread.sleep(1000).
+b.	You cannot put the keyword synchronized in the run() method.
+c.	The init() method is defined in the Applet class, and it is overridden incorrectly because it cannot claim exceptions in the subclass.
+d.	The sleep() method should be put in the try-catch block. This is the only reason for the compilation failure.
+Key:c
+
+#
+7.	Which of the following expressions must be true if you create a thread using Thread =  new Thread(object)?
+a.	object instanceof Thread
+b.	object instanceof Frame
+c.	object instanceof Applet
+d.	object instanceof Runnable
+Key:d
+
+#
+8.	Which of the following methods in the Thread class are deprecated?
+a.	yield()
+b.	stop();
+c.	resume();
+d.	suspend();
+Key:bcd
+
+#
+9. You can use the _________ method to temporarily release time for other threads.
+a. sleep(long milliseconds)
+b. yield()
+c. stop()
+d. suspend()
+Key:ab
+
+#
+10. Which of the following statements are defined in the Object class?
+a. sleep(long milliseconds)
+b. wait()
+c. notify()
+d. notifyAll()
+e. toString()
+Key:bcde
+
+#
+11. You can use the ________ method to force one thread to wait for another thread to finish. 
+a. sleep(long milliseconds)
+b. yield()
+c. stop()
+d. suspend()
+e. join()
+Key:e
+
+#
+12.	When you run the following program, what will happen?
+
+public class Test extends Thread {
+  public static void main(String[] args) {
+    Test t = new Test();
+    t.start();
+    t.start();
+  }
+
+  public void run() {
+    System.out.println("test");
+  }
+}
+a.	Nothing is displayed.
+b.	The program displays test twice.
+c.	The program displays test once.
+d.	An illegal java.lang.IllegalThreadStateException may be thrown because you just started thread and thread might have not yet finished before you start it again.
+Key:d
+
+#
+13.	Which of the following method is a static in java.lang.Thread?
+a.	run()
+b.	sleep(long)
+c.	start()
+d.	join()
+e.	setPriority(int)
+Key:b
+
+#
+14.	Which of the following methods in Thread throws InterruptedException?
+a.	run()
+b.	sleep(long)
+c.	start()
+d.	yield()
+e.	setPriority(int)
+Key:b
+
+#
+15.	Given the following code, which set of code can be used to replace the comment so that the program displays time to the console every second?
+
+import java.applet.*;
+import java.util.*;
+
+public class Test extends Applet implements Runnable {
+  public void init() {
+    Thread t = new Thread(this);
+    t.start();
+  }
+
+  public void run() {
+    for(; ;) {
+      //display time every second
+      System.out.println(new Date().toString());  
+    }
+  }
+}
+a. try { sleep(1000); } catch(InterruptedException e) { }
+b. try { t.sleep(1000); } catch(InterruptedException e) { }
+c. try { Thread.sleep(1000); } catch(RuntimeException e) { }
+d. try { Thread.sleep(1000); } catch(InterruptedException e) { }
+Key:d t is defined in the init() method, which cannot be accessed in the run() method. So, b is incorrect.
+
+#
+Section 32.5 Case Study: Flashing Text
+16. Which of the following statements are true?
+a. You can use a timer or a thread to control animation. 
+b. A timer is a source component that fires an ActionEvent at a 'fixed rate.'
+c. The timer and event-handling run on the same event dispatcher thread. If it takes a long time to handle the event, the actual delay time between two events will be longer than the requested delay time.
+d. In general, threads are more reliable and responsive than timers. 
+Key:abcd
+
+#
+Section 32.6 GUI Event Dispatcher Thread
+17. Which of the following statements are true?
+a. The javax.swing.SwingUtilities.invokeLater method creates a thread.
+b. The javax.swing.SwingUtilities.invokeAndWait method runs the code in the event dispatcher thread.
+c. The javax.swing.SwingUtilities.invokeLater method runs the code in the event dispatcher thread and doesn't return until the event-dispatching thread has executed the specified code.
+d. GUI event handling is executed in the event dispatcher thread. 
+Key:bcd invokeLater and invokeAndWait methods do not create a thread. These methods run the code in the event dispatcher thread.
+
+#
+Section 32.8 Thread Pools
+18. Suppose there are three Runnable tasks, task1, task2, task3. How do you run them in a thread pool with 2 fixed threads?
+a.	new Thread(task1).start(); new Thread(task2).start(); new Thread(task3).start(); 
+b.	ExecutorService executor = Executors.newFixedThreadPool(3); executor.execute(task1); executor.execute(task2); executor.execute(task3);
+c.	ExecutorService executor = Executors.newFixedThreadPool(2); executor.execute(task1); executor.execute(task2); executor.execute(task3);
+d.	ExecutorService executor = Executors.newFixedThreadPool(1); executor.execute(task1); executor.execute(task2); executor.execute(task3);
+Key:c
+
+#
+19. How do you create a cached thread pool?
+a.	ExecutorService executor = Executors.newCachedThreadPool(); 
+b.	ExecutorService executor = Executors.newCachedThreadPool(1);
+c.	ExecutorService executor = Executors.newCachedThreadPool(2);
+d.	ExecutorService executor = Executors.newCachedThreadPool(3);
+Key:a
+
+#
+Section 32.9 Thread Synchronization
+20.	The keyword to synchronize methods in Java is __________.
+a.	synchronize
+b.	synchronizing
+c.	synchronized
+d.  Synchronized
+Key:c
+
+#
+21. Which of the following statements are true?
+a. A synchronized instance method acquires a lock on the object for which the method was invoked.
+b. A synchronized instance method acquires a lock on the class of the object for which the method was invoked.
+c. A synchronized statement can be used to acquire a lock on any object, not just this object, when executing a block of the code in a method. 
+d. A synchronized statement is placed inside a synchronized block.
+Key:abcd
+
+#
+Section 32.10 Synchronization Using Locks
+22.	Which of the following are correct statements to create a Lock?
+a.	Lock lock = new Lock();
+b.	Lock lock = new ReentrantLock();
+c.	Lock lock = new ReentrantLock(true);
+d.  	Lock lock = new ReentrantLock(false);
+Key:bcd
+
+#
+23.	Which of the following are correct statements to create a Lock so the longest-wait thread will obtain the lock first?
+a.	Lock lock = new Lock();
+b.	Lock lock = new ReentrantLock();
+c.	Lock lock = new ReentrantLock(true);
+d.  	Lock lock = new ReentrantLock(false);
+Key:c
+
+#
+24.	You should always invoke the unlock method in the finally clause.
+a. true
+b. false
+Key:a To ensure that the lock will eventually be released.
+
+#
+Section 32.11 Cooperation Among Threads 
+25.	How do you create a condition on a lock?
+a.	Condition condition = lock.getCondition();
+b.	Condition condition = lock.newCondition();
+c.	Condition condition = Lock.newCondition();
+d.  	Condition condition = Lock.getCondition();
+Key:b
+
+#
+26.	Which method on a condition should you invoke to causes the current thread to wait until the condition is signaled?
+a.	condition.await();
+b.	condition.wait();
+c.	condition.waiting();
+d.  	condition.waited();
+Key:a
+
+#
+27.	Which method on a condition should you invoke to wake all waiting threads?
+a.	condition.wake();
+b.	condition.signal();
+c.	condition.wakeAll();
+d.  	condition.signalAll();
+Key:d
+
+#
+28.	Which of the following statements are true?
+a.	A condition is associated with a lock.
+b.	To invoke methods on a condition, the lock must be obtained first.
+c.	Once you invoke the await method on a condition, the lock is automatically released. Once the condition is right, the thread re-acquires the lock and continues executing.
+d.  	The signal method on a condition causes the lock for the condition to be released.
+Key:abc
+
+#
+29. Which of the following statements are true?
+a.	The wait(), notify(), and notifyAll() methods must be invoked from a synchronized method or a synchronized block.  
+b.	When wait() is invoked, it pauses the thread and releases the lock on the object simultaneously. When the thread is restarted after being notified, the lock is automatically reacquired. 
+c.	The notify() method can wake only one waiting thread.
+d.	An exception would occur if no thread is waiting on the object when the notify() method is invoked on the object.
+Key:d
+
+#
+32.	Analyze the following code.
+
+// Test.java: Define threads using the Thread class
+import java.util.*;
+
+public class Test {
+  private Stack stack = new Stack();
+  private int i = 0;
+
+  /** Main method */
+  public static void main(String[] args) {
+    new Test();
+  }
+
+  public Test() {
+    // Start threads
+    new Producer().start();
+    new Consumer().start();
+  }
+
+  class Producer extends Thread {
+    public void run() {
+      while (true) {
+          System.out.println("Producer: put " + i);
+          stack.push(new Integer(i++));
+          synchronized (stack) {
+            notifyAll();
+          }
+      }
+    }
+  }
+
+  class Consumer extends Thread {
+    public void run() {
+      while (true) {
+        synchronized (stack) {
+          try {
+            while (stack.isEmpty())
+              stack.wait();
+            System.out.println("Consumer: get " + stack.pop());
+          }
+          catch (InterruptedException ex) {
+            ex.printStackTrace();
+          }
+        }
+      }
+    }
+  }
+}
+a. The program creates two threads: one to add data to the stack and the other to get data from the stack.
+b. The program has a compilation error on the notifyAll() method in the Producer class because it is not invoked from the stack object.
+c. The program will throw an exception because the notifyAll() method in the Producer class is not invoked from the stack object.
+d. The program has a logic error because the lock obtained by the synchronized block for notifyAll in the Producer class is stack and it should be this (i.e., synchronized (this) { notifyAll(); }).
+Key:c notifyAll() should be invoked from stack because stack is the object the Consumer thread is waiting on.
+
+#
+Section 32.13 Blocking Queues 
+31. You can create a blocking queue using _____________.
+a. ArrayBlockingQueue 
+b. LinkedBlockingQueue
+c. PriorityBlockingQueue
+d. PriorityQueue
+Key:abc
+
+#
+32. Which of the following statements are true?
+a. a blocking queue has a capacity.
+b. A blocking queue causes a thread to block when you try to add an element to a full queue.
+c. A blocking queue causes a thread to block when you try to remove an element from an empty queue. 
+d. The BlockingQueue interface is the base interface for all concrete blocking queue classes.
+e. The BlockingQueue interface provides the synchronized put and take methods for adding an element to the head of the queue and for removing an element from the tail of the queue, 
+Key:abcde
+
+#
+Section 32.14 Semaphores
+33. Which of the following statements are true?
+a. Semaphores can be used to restrict the number of threads that access a shared resource.
+b. Before accessing the resource, a thread must acquire a permit from the semaphore.
+c. After finishing with the resource, the thread must return the permit back to the semaphore.
+d. You can create a Semaphore with a specified number of permits.
+Key:abcd
+
+#
+34. Which of the following methods can be used to obtain a permit from a Semaphore s?
+a. get()
+b. ask()
+c. acquire()
+d. delete()
+Key:c
+
+#
+35. Which of the following methods can be used to return a permit to a Semaphore s?
+a. return()
+b. release()
+c. send()
+d. add()
+Key:c

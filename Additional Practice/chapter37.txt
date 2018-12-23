@@ -1,0 +1,368 @@
+Chapter 37 Servlets
+
+Section 37.2 HTML and Common Gateway Interface
+1. Which of the following statements are true?
+a. Static information is preprocessed and stored in a file. The information in the files can be updated, but at any given time every request for the same document returns exactly the same result. 
+b. Dynamic information is not stored in a file. It is generated dynamically and sent directly to the client.
+c. Common GateWay Interface provides a standard framework for Web servers to interact with external programs, known as CGI programs.
+d. CGI programs are all written in Perl.
+Key:abc
+
+#
+2. In a URL query string, the ______ symbol separates the program from the parameters.
+a. ?
+b. =
+c. &
+d. +
+e. -
+Key:a
+
+#
+3. In a URL query string, the parameter name and value are associated using the ____ symbol. 
+a. ?
+b. =
+c. &
+d. +
+e. -
+Key:b
+
+#
+4. In a URL query string, parameter pairs are separated using the ___ symbol.
+a. ?
+b. =
+c. &
+d. +
+e. -
+Key:c
+
+#
+5. In a URL query string, the ____ symbol denotes a space character.
+a. ?
+b. =
+c. &
+d. +
+e. -
+Key:d
+
+#
+6. The GET and POST methods are specified in _________.
+a. a CGI program
+b. a Java program
+c. an HTML form
+d. a URL string
+Key:c
+
+#
+7. Which of the following statements are true?
+a. When issuing a request from an HTML form, either a GET method or a POST method can be used. The form explicitly specifies which of the two is used. 
+b. If the GET method is used, the data in the form are appended to the request string as if they were submitted using a URL. 
+c. If the POST method is used, the data in the form are packaged as part of the request file. The server program obtains the data by reading the file. 
+d. The POST method always triggers the execution of the corresponding CGI program. The GET method may not cause the CGI program to be executed if the previous same request is cached in the Web browser. 
+Key:abcd
+
+#
+8. The _______ method ensures that a new Web page is generated.
+a. GET
+b. POST
+c. DELETE
+d. UPDATE
+Key:b
+
+#
+9. If your request is not time-sensitive, such as finding the address of a student in the database, use the __________ method to speed up the performance.
+a. GET
+b. POST
+c. DELETE
+d. UPDATE
+Key:a
+
+#
+10. Java servlets are better than the CGI programs because ______________.
+a. servlets are written in Java while CGI programs are written in Perl or other languages. you can develop servlets with the support of Java API for accessing databases and network resources
+b. servlets are dynamically executed
+c. sor each CGI execution, the Web browser spawns a new process to execute a CGI program. However, all servlets are executed within the servlet engine. Each execution of a servlet is handled as a thread by the servlet engine. So, servlets runs faster than CGI programs
+d. servlet programs can run on any Web server
+Key:ac Both CGI and servlets are dynamically executed. Servlet programs can run only on Web server with Java servlet engine
+
+#
+Section 37.3 Creating and Running Servlets
+11. Apache Tomcat is a ________.
+a. Servlet
+b. Java program
+c. Web server 
+d. Web server that is capable of running Java programs
+Key:d
+
+#
+12. A servlet is an instance of __________.
+a. the Object class
+b. the Applet class
+c. the HttpServlet class
+d. the HTTPServlet class
+Key:c
+
+#
+13. To compile a Java servlet program, the ___________ file must be in the classpath.
+a. TomcatRootDir\servlet.jar
+b. TomcatRootDir\common\servlet.jar
+c. TomcatRootDir\common\lib\servlet.jar
+d. TomcatRootDir\common\bin\lib\servlet.jar
+Key:c
+
+#
+14. If your servlet class file does not have a package statement, the servlet .class file must be placed in ________ by default.
+a. the same directory with the .java file.
+b. TomcatRootDir\webapps\WEB-INF\classes
+c. TomcatRootDir\webapps\examples\WEB-INF
+d. TomcatRootDir\webapps\examples\WEB-INF\classes
+Key:d
+
+#
+15. If your servlet class file has a package statement package chapter33, the servlet .class file must be placed in ________ by default.
+a. the same directory with the .java file.
+b. TomcatRootDir\webapps\WEB-INF\classes
+c. TomcatRootDir\webapps\examples\WEB-INF\classes
+d. TomcatRootDir\webapps\examples\WEB-INF\classes\chapter33
+Key:d
+
+#
+16. Before starting Tomcat, you have to set the environment variable JAVA_HOME to _______
+a. JDKHomeDir
+b. JDKHomeDir/bin
+c. JDKHomeDir/bin/java
+d. JDKHomeDir/java
+Key:a
+
+#
+17. To start the Tomcat servlet engine, use the command __________ from the TomcatRootDir\bin directory.
+a. java TomcatServlet
+b. start Tomcat
+c. start
+d. startup
+Key:d
+
+#
+18. By default, Tomcat runs on port ___________.
+a. 8080
+b. 80
+c. 1080
+d. 8888
+Key:a
+
+#
+19. Suppose the servlet class named Test does not have the package statement, by default, you use ________ to invoke it.
+a. http://localhost:8080/examples/servlet/Test
+b. http://localhost:8080/examples/servlet/test
+c. http://localhost:8080/Test
+d. http://localhost:8080/test
+Key:a
+
+#
+Section 37.4 The Servlet API
+20. The _________ interface defines the methods that all servlets must implement.
+a. javax.servlet.Servlet
+b. HttpServlet
+c. ServletRequest
+d. ServletResponse
+Key:a
+
+#
+21. The _______ method is called when the servlet is first created, and is not called again as long as the servlet is not destroyed.
+a. init
+b. service
+c. destroy
+d. getServletInfo
+Key:a
+	
+#
+22. The _________ class defines a servlet for the HTTP protocol.
+a. javax.servlet.http.HttpServlet
+b. Servlet
+c. HttpServletRequest
+d. HttpServletResponse
+Key:a
+
+#
+23. _________ is a subinterface of ServletRequest. 
+a. HttpServletRequest
+b. HttpServletResponse
+c. HttpServlet
+d. Servlet
+Key:a
+
+#
+24. Every doXxx method in the HttpServlet class has a parameter of the __________ type, which is an object that contains HTTP request information, including parameter name and values, attributes, and an input stream. 
+a. HttpServletRequest
+b. HttpServletResponse
+c. HttpSession
+d. Cookie
+Key:a
+
+#
+25. Every doXxx method in the HttpServlet class has a parameter of the _____________ type, which is an object that assists a servlet in sending a response to the client. 
+a. HttpServletRequest
+b. HttpServletResponse
+c. HttpSession
+d. Cookie
+Key:b
+
+#
+Section 37.5 Creating Servlets
+26. Suppose the two parameters in the doGet or doPost method are request and response. To specify HTML content type sent to the client, invoke ___________.
+a. response.setContentType("text/html")
+b. request.setContentType("text/html")
+c. response.setContentType("html")
+d. request.setContentType("html")
+Key:a
+
+#
+27. Suppose the two parameters in the doGet or doPost method are request and response. To send output to a client, create a PrintWriter using _____________.
+a. response.getWriter()
+b. response.getPrintWriter()
+c. response.writer()
+d. response.getWrite()
+Key:a
+
+#
+Section 37.6 HTML Forms
+28. Which of the following creates a text field in an HTML form?
+a. <input type="text" name="mi" size="1">
+b. <input type="radio" name="gender" value="M" checked>
+c. Major <elect name="major" size="1"> <option value="CS">Computer Science<option value="Math">Mathematics<option>English<option>Chinese</select>
+d. <input type="checkbox" name="tennis"> Tennis
+e. <textarea name="remarks" rows="3" cols="56"></textarea>
+Key:a
+
+#
+29. Which of the following creates a radio button in an HTML form?
+a. <input type="text" name="mi" size="1">
+b. <input type="radio" name="gender" value="M" checked>
+c. Major <select name="major" size="1"> <option value="CS">Computer Science<option value="Math">Mathematics<option>English<option>Chinese</select>
+d. <input type="checkbox" name="tennis"> Tennis
+e. <textarea name="remarks" rows="3" cols="56"></textarea>
+Key:b
+
+#
+30. Which of the following creates a list in an HTML form?
+a. <input type="text" name="mi" size="1">
+b. <input type="radio" name="gender" value="M" checked>
+c. Major <select name="major" size="1"> <option value="CS">Computer Science<option value="Math">Mathematics<option>English<option>Chinese</select>
+d. <input type="checkbox" name="tennis"> Tennis
+e. <textarea name="remarks" rows="3" cols="56"></textarea>
+Key:c
+
+#
+31. Which of the following creates a check box in an HTML form?
+a. <input type="text" name="mi" size="1">
+b. <input type="radio" name="gender" value="M" checked>
+c. Major <select name="major" size="1"> <option value="CS">Computer Science<option value="Math">Mathematics<option>English<option>Chinese</select>
+d. <input type="checkbox" name="tennis"> Tennis
+e. <textarea name="remarks" rows="3" cols="56"></textarea>
+Key:d
+
+#
+32. Which of the following creates a text area in an HTML form?
+a. <input type="text" name="mi" size="1">
+b. <input type="radio" name="gender" value="M" checked>
+c. Major <select name="major" size="1"> <option value="CS">Computer Science<option value="Math">Mathematics<option>English<option>Chinese</select>
+d. <input type="checkbox" name="tennis"> Tennis
+e. <textarea name="remarks" rows="3" cols="56"></textarea>
+Key:e
+
+#
+Section 37.7 Database Programming in Servlets 
+33. The code for loading a JDBC driver and connecting to a database should be invoked from _____ in a servlet.
+a. the init method
+b. the doGet method
+c. the doPut method
+d. the destroy method
+Key:a
+
+#
+34. To access Oracle or MySQL from servlet, where the Oracle and MySQL jar files should be placed?
+a. in the class directory of the servlet source code
+b. in the class directory of the servlet class code
+c. TomcatRootDir\webapps\WEB-INF\classes
+d. TomcatRootDir\common\lib
+Key:d
+
+#
+Section	39.8 Session Tracking
+35. You can use __________ to implement session tracking in servlets.
+a. HTML hidden values in a form
+b. the Cookie class
+c. the HttpSession class
+Key:abc
+
+#
+36. To store a hidden value for lastName as Smith in an HTML form, use __________.
+a. <input type=”text” name=”lastName” value=”Smith”>
+b. <input type=”text area” name=”lastName” value=”Smith”>
+c. <input type=”radio” name=”lastName” value=”Smith”>
+d. <input type=”checkbox” name=”lastName” value=”Smith”>
+e. <input type=”hidden” name=”lastName” value=”Smith”>
+Key:e
+
+#
+37. To create a cookie for lastName with value Smith, use ____________.
+a. new Cookie("Smith", "lastName");
+b. new Cookie(Smith, lastName);
+c. new Cookie("lastName", "Smith");
+d. new Cookie(lastName, \Smith);
+Key:c
+
+#
+38. Suppose the two parameters in the doGet or doPost method are request and response. To send a cookie to a client, use ____________.
+a. response.addCookie(cookie)
+b. response.sendCookie(cookie)
+c. request.addCookie(cookie)
+d. request.sendCookie(cookie)
+Key:a
+
+#
+39. Suppose the two parameters in the doGet or doPost method are request and response. To retrieve a cookie from a client, use ____________.
+a. response.retrieveCookie()
+b. response.getCookie()
+c. You have to use request.getCookies() to obtain all cookies in an array
+d. You have to use request.getCookie() to obtain a cookie
+Key:c
+
+#
+40. For an instance of Cookie, say cookie, to retrieve the name of the cookie, use ____________.
+a. cookie.getValue()
+b. cookie.getName()
+c. You have to use cookie.getNames() to obtain all values in an array.
+d. You have to use cookie.getValues() to obtain all values in an array.
+Key:b
+
+#
+41. By default, how long does a cookie last?
+a. 24 hours
+b. 30 days
+c. 365 days
+d. By default, a newly created cookie persists until the browser exits.
+Key:d You can use the setMaxAge method to set a time for a cookie on a local client.
+
+#
+37. Suppose the two parameters in the doGet or doPost method are request and response. To create an HTTP session, use ____________.
+a. request.createSession() 
+b. request.getSession() 
+c. response.createSession() 
+d. response.getSession() 
+Key:b  	request.getSession() obtains the session or creates a new session if the client does not have a session on the server. 
+
+#
+43. For a HttpSession, say session, how do you set an attribute pair with name lastName and value Smith?
+a. session.setValue("lastName", "Smith") 
+b. session.setAttribute("lastName", "Smith") 
+c. session.value("lastName", "Smith") 
+d. session.attribute("lastName", "Smith") 
+Key:b 
+
+#
+44. For a HttpSession, say session, how do you get its attribute?
+a. session.getValue("lastName") 
+b. session.getAttribute("lastName") 
+c. session.value("lastName") 
+d. session.attribute("lastName") 
+Key:b 

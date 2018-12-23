@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LoanCalculator.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LoanCalculatorWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.geometry.HPos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> LoanCalculator <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> TextField tfAnnualInterestRate = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfNumberOfYears = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfLoanAmount = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfMonthlyPayment = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfTotalPayment = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> Button btCalculate = <span class = "keyword">new</span> Button(<span class = "literal">"Calculate"</span>);
+  
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create UI</span>
+    GridPane gridPane = <span class = "keyword">new</span> GridPane();
+    gridPane.setHgap(<span class = "constant">5</span>);
+    gridPane.setVgap(<span class = "constant">5</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Annual Interest Rate:"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+    gridPane.add(tfAnnualInterestRate, <span class = "constant">1</span>, <span class = "constant">0</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Number of Years:"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+    gridPane.add(tfNumberOfYears, <span class = "constant">1</span>, <span class = "constant">1</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Loan Amount:"</span>), <span class = "constant">0</span>, <span class = "constant">2</span>);
+    gridPane.add(tfLoanAmount, <span class = "constant">1</span>, <span class = "constant">2</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Monthly Payment:"</span>), <span class = "constant">0</span>, <span class = "constant">3</span>);
+    gridPane.add(tfMonthlyPayment, <span class = "constant">1</span>, <span class = "constant">3</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Total Payment:"</span>), <span class = "constant">0</span>, <span class = "constant">4</span>);
+    gridPane.add(tfTotalPayment, <span class = "constant">1</span>, <span class = "constant">4</span>);
+    gridPane.add(btCalculate, <span class = "constant">1</span>, <span class = "constant">5</span>);
+
+    <span class = "comment">// Set properties for UI</span>
+    gridPane.setAlignment(Pos.CENTER);
+    tfAnnualInterestRate.setAlignment(Pos.BOTTOM_RIGHT);
+    tfNumberOfYears.setAlignment(Pos.BOTTOM_RIGHT);
+    tfLoanAmount.setAlignment(Pos.BOTTOM_RIGHT);
+    tfMonthlyPayment.setAlignment(Pos.BOTTOM_RIGHT);
+    tfTotalPayment.setAlignment(Pos.BOTTOM_RIGHT);
+    tfMonthlyPayment.setEditable(<span class = "keyword">false</span>);
+    tfTotalPayment.setEditable(<span class = "keyword">false</span>);
+    GridPane.setHalignment(btCalculate, HPos.RIGHT);
+
+    <span class = "comment">// Process events</span>
+    btCalculate.setOnAction(e -&gt; calculateLoanPayment());
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(gridPane, <span class = "constant">400</span>, <span class = "constant">250</span>);
+    primaryStage.setTitle(<span class = "literal">"LoanCalculator"</span>); <span class = "comment">// Set title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "keyword">private</span> <span class = "keyword">void</span> calculateLoanPayment() {
+    <span class = "comment">// Get values from text fields</span>
+    <span class = "keyword">double</span> interest =
+      Double.parseDouble(tfAnnualInterestRate.getText());
+    <span class = "keyword">int</span> year = Integer.parseInt(tfNumberOfYears.getText());
+    <span class = "keyword">double</span> loanAmount =
+      Double.parseDouble(tfLoanAmount.getText());
+
+    <span class = "comment">// Create a loan object. Loan defined in Listing 10.2</span>
+    Loan loan = <span class = "keyword">new</span> Loan(interest, year, loanAmount);
+
+    <span class = "comment">// Display monthly payment and total payment</span>
+    tfMonthlyPayment.setText(String.format(<span class = "literal">"$%<span class = "literal">.</span>2f"</span>,
+      loan.getMonthlyPayment()));
+    tfTotalPayment.setText(String.format(<span class = "literal">"$%<span class = "literal">.</span>2f"</span>,
+      loan.getTotalPayment()));
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

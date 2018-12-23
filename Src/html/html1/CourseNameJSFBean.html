@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CourseNameJSFBean.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CourseNameJSFBeanWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">package</span> jsf2demo;
+
+<span class = "keyword">import</span> java.sql.*;
+<span class = "keyword">import</span> java.util.ArrayList;
+<span class = "keyword">import</span> javax.enterprise.context.ApplicationScoped;
+<span class = "keyword">import</span> javax.inject.Named;
+
+@Named(value = <span class = "literal">"courseName"</span>)
+@ApplicationScoped
+<span class = "keyword">public</span> <span class = "keyword">class</span> CourseNameJSFBean {
+  <span class = "keyword">private</span> PreparedStatement studentStatement = <span class = "keyword">null</span>;
+  <span class = "keyword">private</span> String choice; <span class = "comment">// Selected course</span>
+  <span class = "keyword">private</span> String[] titles; <span class = "comment">// Course titles</span>
+
+  <span class = "comment">/** Creates a new instance of CourseName */</span>
+  <span class = "keyword">public</span> CourseNameJSFBean() {
+    initializeJdbc();
+  }
+
+  <span class = "comment">/** Initialize database connection */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> initializeJdbc() {
+    <span class = "keyword">try</span> {
+      Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+      System.out.println(<span class = "literal">"Driver loaded"</span>);
+      
+      <span class = "comment">// Connect to the sample database</span>
+      Connection connection = DriverManager.getConnection(
+        <span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+
+      <span class = "comment">// Get course titles</span>
+      PreparedStatement statement = connection.prepareStatement(
+        <span class = "literal">"select title from course"</span>);
+      
+      ResultSet resultSet = statement.executeQuery();
+      
+      <span class = "comment">// Store resultSet into array titles</span>
+      ArrayList&lt;String&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+      <span class = "keyword">while</span> (resultSet.next()) {
+        list.add(resultSet.getString(<span class = "constant">1</span>));
+      }
+      titles = <span class = "keyword">new</span> String[list.size()]; <span class = "comment">// An array for titles</span>
+      list.toArray(titles); <span class = "comment">// Copy strings from list to array</span>
+        
+      <span class = "comment">// Define a SQL statement for getting students</span>
+      studentStatement = connection.prepareStatement(
+        <span class = "literal">"select Student.ssn, "</span>
+        + <span class = "literal">"student.firstName, Student.mi, Student.lastName, "</span>
+        + <span class = "literal">"Student.phone, Student.birthDate, Student.street, "</span>
+        + <span class = "literal">"Student.zipCode, Student.deptId "</span>
+        + <span class = "literal">"from Student, Enrollment, Course "</span>
+        + <span class = "literal">"where Course.title = ? "</span>
+        + <span class = "literal">"and Student.ssn = Enrollment.ssn "</span>
+        + <span class = "literal">"and Enrollment.courseId = Course.courseId;"</span>);
+    } 
+    <span class = "keyword">catch</span> (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  <span class = "keyword">public</span> String[] getTitles() {
+    <span class = "keyword">return</span> titles;
+  }
+
+  <span class = "keyword">public</span> String getChoice() {
+    <span class = "keyword">return</span> choice;
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setChoice(String choice) {
+    <span class = "keyword">this</span>.choice = choice;
+  }
+
+  <span class = "keyword">public</span> ResultSet getStudents() <span class = "keyword">throws</span> SQLException {
+    <span class = "keyword">if</span> (choice == <span class = "keyword">null</span>) {
+      <span class = "keyword">if</span> (titles.length == <span class = "constant">0</span>)
+        <span class = "keyword">return</span> <span class = "keyword">null</span>;
+      <span class = "keyword">else</span>
+        studentStatement.setString(<span class = "constant">1</span>, titles[<span class = "constant">0</span>]);
+    } 
+    <span class = "keyword">else</span> {
+      studentStatement.setString(<span class = "constant">1</span>, choice); <span class = "comment">// Set course title</span>
+    }
+    
+    <span class = "comment">// Get students for the specified course</span>
+    <span class = "keyword">return</span> studentStatement.executeQuery();
+  }
+}
+</pre>
+</body>
+</html>

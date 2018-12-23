@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - IntStreamDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "IntStreamDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "IntStreamDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.IntSummaryStatistics;
+<span class = "keyword">import</span> java.util.stream.IntStream;
+<span class = "keyword">import</span> java.util.stream.Stream;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> IntStreamDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span>[] values = {<span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">1</span>, <span class = "constant">5</span>, <span class = "constant">20</span>, <span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">6</span>};
+    
+    System.out.println(<span class = "literal">"The average of distinct even numbers &gt; 3: "</span> +
+      IntStream.of(values).distinct()
+        .filter(e -&gt; e &gt; <span class = "constant">3</span> && e % <span class = "constant">2</span> == <span class = "constant">0</span>).average().getAsDouble());
+    
+    System.out.println(<span class = "literal">"The sum of the first 4 numbers is "</span> +
+      IntStream.of(values).limit(<span class = "constant">4</span>).sum());
+    
+    IntSummaryStatistics stats = 
+      IntStream.of(values).summaryStatistics();
+
+    System.out.printf(<span class = "literal">"The summary of the stream is\n%<span class = "literal">-</span>10s%10d\n"</span> +
+      <span class = "literal">"%<span class = "literal">-</span>10s%10d\n%<span class = "literal">-</span>10s%10d\n%<span class = "literal">-</span>10s%10d\n%<span class = "literal">-</span>10s%10<span class = "literal">.</span>2f\n"</span>,
+      <span class = "literal">"  Count:"</span>, stats.getCount(), <span class = "literal">"  Max:"</span>, stats.getMax(),
+      <span class = "literal">"  Min:"</span>, stats.getMin(), <span class = "literal">"  Sum:"</span>, stats.getSum(),
+      <span class = "literal">"  Average:"</span>, stats.getAverage());
+    
+    String[] names = {<span class = "literal">"John"</span>, <span class = "literal">"Peter"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>, <span class = "literal">"Jen"</span>, 
+      <span class = "literal">"George"</span>, <span class = "literal">"Alan"</span>, <span class = "literal">"Stacy"</span>, <span class = "literal">"Michelle"</span>, <span class = "literal">"john"</span>};
+    
+    System.out.println(<span class = "literal">"Total character count for all names is "</span> 
+      + Stream.of(names).mapToInt(e -&gt; e.length()).sum());
+
+    System.out.println(<span class = "literal">"The number of digits in array values is "</span> +
+      IntStream.of(values).mapToObj(e -&gt; e + <span class = "literal">""</span>)
+        .mapToInt(e -&gt; e.length()).sum());
+  }
+}
+</pre>
+</body>
+</html>

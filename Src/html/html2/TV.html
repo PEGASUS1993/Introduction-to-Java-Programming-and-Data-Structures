@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TV.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TVWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TV {
+  <span class = "keyword">int</span> channel = <span class = "constant">1</span>; <span class = "comment">// Default channel is 1</span>
+  <span class = "keyword">int</span> volumeLevel = <span class = "constant">1</span>; <span class = "comment">// Default volume level is 1</span>
+  <span class = "keyword">boolean</span> on = <span class = "keyword">false</span>; <span class = "comment">// By default TV is off</span>
+  
+  <span class = "keyword">public</span> TV() {
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> turnOn() {
+    on = <span class = "keyword">true</span>;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> turnOff() {
+    on = <span class = "keyword">false</span>;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setChannel(<span class = "keyword">int</span> newChannel) {
+    <span class = "keyword">if</span> (on && newChannel &gt;= <span class = "constant">1</span> && newChannel &lt;= <span class = "constant">120</span>)
+      channel = newChannel;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setVolume(<span class = "keyword">int</span> newVolumeLevel) {
+    <span class = "keyword">if</span> (on && newVolumeLevel &gt;= <span class = "constant">1</span> && newVolumeLevel &lt;= <span class = "constant">7</span>)
+      volumeLevel = newVolumeLevel;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> channelUp() {
+    <span class = "keyword">if</span> (on && channel &lt; <span class = "constant">120</span>)
+      channel++;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> channelDown() {
+    <span class = "keyword">if</span> (on && channel &gt; <span class = "constant">1</span>)
+      channel--;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> volumeUp() {
+    <span class = "keyword">if</span> (on && volumeLevel &lt; <span class = "constant">7</span>)
+      volumeLevel++;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> volumeDown() {
+    <span class = "keyword">if</span> (on && volumeLevel &gt; <span class = "constant">1</span>)
+      volumeLevel--;
+  }
+}
+</pre>
+</body>
+</html>

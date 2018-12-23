@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WeightedNineTailModel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WeightedNineTailModel.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> WeightedNineTailModel <span class = "keyword">extends</span> NineTailModel {
+  4&nbsp;&nbsp;  <span class = "comment">/** Construct a model */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> WeightedNineTailModel() {
+  6&nbsp;&nbsp;    <span class = "comment">// Create edges</span>
+  7&nbsp;&nbsp;    List&lt;WeightedEdge&gt; edges = getEdges();
+  8&nbsp;&nbsp;    
+  9&nbsp;&nbsp;    <span class = "comment">// Create a graph</span>
+ 10&nbsp;&nbsp;    WeightedGraph&lt;Integer&gt; graph = <span class = "keyword">new</span> WeightedGraph&lt;&gt;(
+ 11&nbsp;&nbsp;      edges, NUMBER_OF_NODES); 
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "comment">// Obtain a shortest path tree rooted at the target node</span>
+ 14&nbsp;&nbsp;    tree = graph.getShortestPath(<span class = "constant">511</span>);
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "comment">/** Create all edges for the graph */</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">private</span> List&lt;WeightedEdge&gt; getEdges() {
+ 19&nbsp;&nbsp;    <span class = "comment">// Store edges</span>
+ 20&nbsp;&nbsp;    List&lt;WeightedEdge&gt; edges = <span class = "keyword">new</span> ArrayList&lt;&gt;(); 
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> u = <span class = "constant">0</span>; u &lt; NUMBER_OF_NODES; u++) {
+ 23&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; <span class = "constant">9</span>; k++) {
+ 24&nbsp;&nbsp;        <span class = "keyword">char</span>[] node = getNode(u); <span class = "comment">// Get the node for vertex u</span>
+ 25&nbsp;&nbsp;        <span class = "keyword">if</span> (node[k] == <span class = "literal">'H'</span>) {
+ 26&nbsp;&nbsp;          <span class = "keyword">int</span> v = getFlippedNode(node, k);
+ 27&nbsp;&nbsp;          <span class = "keyword">int</span> numberOfFlips = getNumberOfFlips(u, v);
+ 28&nbsp;&nbsp;          
+ 29&nbsp;&nbsp;          <span class = "comment">// Add edge (v, u) for a legal move from node u to node v</span>
+ 30&nbsp;&nbsp;          edges.add(<span class = "keyword">new</span> WeightedEdge(v, u, numberOfFlips));
+ 31&nbsp;&nbsp;        }
+ 32&nbsp;&nbsp;      }
+ 33&nbsp;&nbsp;    }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;    <span class = "keyword">return</span> edges;
+ 36&nbsp;&nbsp;  }
+ 37&nbsp;&nbsp;  
+ 38&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfFlips(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v) {
+ 39&nbsp;&nbsp;    <span class = "keyword">char</span>[] node1 = getNode(u);
+ 40&nbsp;&nbsp;    <span class = "keyword">char</span>[] node2 = getNode(v);
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;    <span class = "keyword">int</span> count = <span class = "constant">0</span>; <span class = "comment">// Count the number of different cells</span>
+ 43&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; node1.length; i++)
+ 44&nbsp;&nbsp;      <span class = "keyword">if</span> (node1[i] != node2[i]) count++;
+ 45&nbsp;&nbsp;
+ 46&nbsp;&nbsp;    <span class = "keyword">return</span> count;
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumberOfFlips(<span class = "keyword">int</span> u) {
+ 50&nbsp;&nbsp;    <span class = "keyword">return</span> (<span class = "keyword">int</span>)((WeightedGraph&lt;Integer&gt;.ShortestPathTree)tree)
+ 51&nbsp;&nbsp;      .getCost(u);
+ 52&nbsp;&nbsp;  }
+ 53&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

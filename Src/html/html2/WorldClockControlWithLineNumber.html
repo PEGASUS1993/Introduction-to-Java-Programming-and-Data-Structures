@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WorldClockControl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WorldClockControl.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> WorldClockControl <span class = "keyword">extends</span> BorderPane {
+  9&nbsp;&nbsp;  <span class = "comment">// Obtain all available locales and time zone ids</span>
+ 10&nbsp;&nbsp;  <span class = "keyword">private</span> Locale[] availableLocales = Locale.getAvailableLocales();
+ 11&nbsp;&nbsp;  <span class = "keyword">private</span> String[] availableTimeZones = TimeZone.getAvailableIDs();
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;  <span class = "comment">// Comboxes to display available locales and time zones</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboLocales = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboTimeZones = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "comment">// Create a clock</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">private</span> WorldClock clock = <span class = "keyword">new</span> WorldClock();
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> WorldClockControl() {
+ 21&nbsp;&nbsp;    <span class = "comment">// Initialize cboLocales with all available locales</span>
+ 22&nbsp;&nbsp;    setAvailableLocales();
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;    <span class = "comment">// Initialize cboTimeZones with all available time zones</span>
+ 25&nbsp;&nbsp;    setAvailableTimeZones();
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;    <span class = "comment">// Initialize locale and time zone</span>
+ 28&nbsp;&nbsp;    clock.setLocale(
+ 29&nbsp;&nbsp;      availableLocales[cboLocales.getSelectionModel()
+ 30&nbsp;&nbsp;        .getSelectedIndex()]);
+ 31&nbsp;&nbsp;    clock.setTimeZone(TimeZone.getTimeZone(
+ 32&nbsp;&nbsp;      availableTimeZones[cboTimeZones.getSelectionModel()
+ 33&nbsp;&nbsp;        .getSelectedIndex()]));
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;    GridPane pane = <span class = "keyword">new</span> GridPane();
+ 36&nbsp;&nbsp;    pane.setHgap(<span class = "constant">5</span>);
+ 37&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Locale"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+ 38&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Time Zone"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+ 39&nbsp;&nbsp;    pane.add(cboLocales, <span class = "constant">1</span>, <span class = "constant">0</span>);
+ 40&nbsp;&nbsp;    pane.add(cboTimeZones, <span class = "constant">1</span>, <span class = "constant">1</span>);
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;    setTop(pane);
+ 43&nbsp;&nbsp;    setCenter(clock);
+ 44&nbsp;&nbsp;    BorderPane.setAlignment(pane, Pos.CENTER);
+ 45&nbsp;&nbsp;    BorderPane.setAlignment(clock, Pos.CENTER);
+ 46&nbsp;&nbsp;
+ 47&nbsp;&nbsp;    cboLocales.setOnAction(e -&gt;
+ 48&nbsp;&nbsp;      clock.setLocale(availableLocales[cboLocales.
+ 49&nbsp;&nbsp;        getSelectionModel().getSelectedIndex()]));
+ 50&nbsp;&nbsp;    cboTimeZones.setOnAction(e -&gt;
+ 51&nbsp;&nbsp;      clock.setTimeZone(TimeZone.getTimeZone(
+ 52&nbsp;&nbsp;        availableTimeZones[cboTimeZones.
+ 53&nbsp;&nbsp;          getSelectionModel().getSelectedIndex()])));
+ 54&nbsp;&nbsp;  }
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> setAvailableLocales() {
+ 57&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; availableLocales.length; i++) 
+ 58&nbsp;&nbsp;      cboLocales.getItems().add(availableLocales[i]
+ 59&nbsp;&nbsp;       .getDisplayName() + <span class = "literal">" "</span> + availableLocales[i].toString());
+ 60&nbsp;&nbsp;
+ 61&nbsp;&nbsp;    cboLocales.getSelectionModel().selectFirst();
+ 62&nbsp;&nbsp;  }
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> setAvailableTimeZones() {
+ 65&nbsp;&nbsp;    <span class = "comment">// Sort time zones</span>
+ 66&nbsp;&nbsp;    Arrays.sort(availableTimeZones);
+ 67&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; availableTimeZones.length; i++) {
+ 68&nbsp;&nbsp;      cboTimeZones.getItems().add(availableTimeZones[i]);
+ 69&nbsp;&nbsp;    }
+ 70&nbsp;&nbsp;    cboTimeZones.getSelectionModel().selectFirst();
+ 71&nbsp;&nbsp;  }
+ 72&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

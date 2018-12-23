@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GCD.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GCDWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GCD" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> GCD {
+  <span class = "comment">/** Find gcd for integers m and n */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> gcd(<span class = "keyword">int</span> m, <span class = "keyword">int</span> n) {
+    <span class = "keyword">int</span> gcd = <span class = "constant">1</span>;
+    
+    <span class = "keyword">if</span> (m % n == <span class = "constant">0</span>) <span class = "keyword">return</span> n;
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = n / <span class = "constant">2</span>; k &gt;= <span class = "constant">1</span>; k--) {
+      <span class = "keyword">if</span> (m % k == <span class = "constant">0</span> && n % k == <span class = "constant">0</span>) {
+        gcd = k;
+        <span class = "keyword">break</span>;
+      }
+    }
+    
+    <span class = "keyword">return</span> gcd;
+  }
+  
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    
+    <span class = "comment">// Prompt the user to enter two integers</span>
+    System.out.print(<span class = "literal">"Enter first integer: "</span>);
+    <span class = "keyword">int</span> m = input.nextInt();
+    System.out.print(<span class = "literal">"Enter second integer: "</span>);
+    <span class = "keyword">int</span> n = input.nextInt();
+    
+    System.out.println(<span class = "literal">"The greatest common divisor for "</span> + m +
+      <span class = "literal">" and "</span> + n + <span class = "literal">" is "</span> + gcd(m, n));
+  }
+}
+</pre>
+</body>
+</html>

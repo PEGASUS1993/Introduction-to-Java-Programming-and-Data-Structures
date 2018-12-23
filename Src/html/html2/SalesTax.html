@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SalesTax.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/SalesTax.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SalesTax" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> SalesTax {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    System.out.print(<span class = "literal">"Enter purchase amount: "</span>);
+    <span class = "keyword">double</span> purchaseAmount = input.nextDouble();
+    
+    <span class = "keyword">double</span> tax = purchaseAmount * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">06</span>;
+    System.out.println(<span class = "literal">"Sales tax is "</span> + (<span class = "keyword">int</span>)(tax * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>);
+  }
+}
+</pre>
+</body>
+</html>

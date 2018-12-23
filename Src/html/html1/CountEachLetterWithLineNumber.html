@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountEachLetter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountEachLetter.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountEachLetter" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CountEachLetter {
+  4&nbsp;&nbsp;  <span class = "comment">/** Main method */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  6&nbsp;&nbsp;    <span class = "comment">// Create a Scanner</span>
+  7&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    <span class = "comment">// Prompt the user to enter a string</span>
+ 10&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a string: "</span>);
+ 11&nbsp;&nbsp;    String s = input.nextLine();
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "comment">// Invoke the countLetters method to count each letter</span>
+ 14&nbsp;&nbsp;    <span class = "keyword">int</span>[] counts = countLetters(s.toLowerCase());
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    <span class = "comment">// Display results</span>
+ 17&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; counts.length; i++) {
+ 18&nbsp;&nbsp;      <span class = "keyword">if</span> (counts[i] != <span class = "constant">0</span>)
+ 19&nbsp;&nbsp;        System.out.println((<span class = "keyword">char</span>)(<span class = "literal">'a'</span> + i) + <span class = "literal">" appears  "</span> +
+ 20&nbsp;&nbsp;          counts[i] + ((counts[i] == <span class = "constant">1</span>) ? <span class = "literal">" time"</span> : <span class = "literal">" times"</span>));
+ 21&nbsp;&nbsp;    }
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  <span class = "comment">/** Count each letter in the string */</span>
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[] countLetters(String s) {
+ 26&nbsp;&nbsp;    <span class = "keyword">int</span>[] counts = <span class = "keyword">new</span> <span class = "keyword">int</span>[<span class = "constant">26</span>];
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; s.length(); i++) {
+ 29&nbsp;&nbsp;      <span class = "keyword">if</span> (Character.isLetter(s.charAt(i)))
+ 30&nbsp;&nbsp;        counts[s.charAt(i) - <span class = "literal">'a'</span>]++;
+ 31&nbsp;&nbsp;    }
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;    <span class = "keyword">return</span> counts;
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

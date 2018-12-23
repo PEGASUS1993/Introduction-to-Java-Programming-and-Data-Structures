@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BounceBall.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BounceBall.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> BounceBall <span class = "keyword">extends</span> Application {
+  6&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+  8&nbsp;&nbsp;    BallPane pane = <span class = "keyword">new</span> BallPane();
+  9&nbsp;&nbsp;            
+ 10&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 11&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">250</span>, <span class = "constant">150</span>);
+ 12&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"BounceBall"</span>); <span class = "comment">// Set the stage title</span>
+ 13&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 14&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 15&nbsp;&nbsp;    
+ 16&nbsp;&nbsp;    <span class = "comment">// Pause and resume animation</span>
+ 17&nbsp;&nbsp;    pane.setOnMousePressed(e -&gt; pane.pause());
+ 18&nbsp;&nbsp;    pane.setOnMouseReleased(e -&gt; pane.play());
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;    pane.setFocusTraversable(<span class = "keyword">true</span>);
+ 21&nbsp;&nbsp;    pane.setOnKeyPressed(e -&gt; {
+ 22&nbsp;&nbsp;      <span class = "keyword">switch</span> (e.getCode()) {
+ 23&nbsp;&nbsp;        <span class = "keyword">case</span> S:
+ 24&nbsp;&nbsp;          pane.decreaseSpeed();
+ 25&nbsp;&nbsp;          <span class = "keyword">break</span>;
+ 26&nbsp;&nbsp;        <span class = "keyword">case</span> F:
+ 27&nbsp;&nbsp;          pane.increaseSpeed();
+ 28&nbsp;&nbsp;          <span class = "keyword">break</span>;
+ 29&nbsp;&nbsp;      }
+ 30&nbsp;&nbsp;    });
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;  <span class = "comment">/**
+ 34&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 35&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 36&nbsp;&nbsp;   */</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 38&nbsp;&nbsp;    launch(args);
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

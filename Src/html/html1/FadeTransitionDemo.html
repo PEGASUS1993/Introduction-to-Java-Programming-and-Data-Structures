@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FadeTransitionDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FadeTransitionDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.animation.FadeTransition;
+<span class = "keyword">import</span> javafx.animation.Timeline;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.util.Duration;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FadeTransitionDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Place an ellipse to the pane</span>
+    Pane pane = <span class = "keyword">new</span> Pane();
+    Ellipse ellipse = <span class = "keyword">new</span> Ellipse(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">50</span>);
+    ellipse.setFill(Color.RED); 
+    ellipse.setStroke(Color.BLACK);
+    ellipse.centerXProperty().bind(pane.widthProperty().divide(<span class = "constant">2</span>));
+    ellipse.centerYProperty().bind(pane.heightProperty().divide(<span class = "constant">2</span>));    
+    ellipse.radiusXProperty().bind(
+      pane.widthProperty().multiply(<span class = "constant">0</span><span class = "literal">.</span><span class = "constant">4</span>));    
+    ellipse.radiusYProperty().bind(
+      pane.heightProperty().multiply(<span class = "constant">0</span><span class = "literal">.</span><span class = "constant">4</span>)); 
+    pane.getChildren().add(ellipse);
+    
+    <span class = "comment">// Apply a fade transition to ellipse</span>
+    FadeTransition ft = 
+      <span class = "keyword">new</span> FadeTransition(Duration.millis(<span class = "constant">3000</span>), ellipse);
+    ft.setFromValue(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">0</span>);
+    ft.setToValue(<span class = "constant">0</span><span class = "literal">.</span><span class = "constant">1</span>);
+    ft.setCycleCount(Timeline.INDEFINITE);
+    ft.setAutoReverse(<span class = "keyword">true</span>);
+    ft.play(); <span class = "comment">// Start animation </span>
+    
+    <span class = "comment">// Control animation</span>
+    ellipse.setOnMousePressed(e -&gt; ft.pause());
+    ellipse.setOnMouseReleased(e -&gt; ft.play());
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">200</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"FadeTransitionDemo"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

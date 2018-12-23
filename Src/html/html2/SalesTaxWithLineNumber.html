@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SalesTax.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SalesTax.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SalesTax" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SalesTax {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter purchase amount: "</span>);
+  8&nbsp;&nbsp;    <span class = "keyword">double</span> purchaseAmount = input.nextDouble();
+  9&nbsp;&nbsp;    
+ 10&nbsp;&nbsp;    <span class = "keyword">double</span> tax = purchaseAmount * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">06</span>;
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"Sales tax is "</span> + (<span class = "keyword">int</span>)(tax * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>);
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

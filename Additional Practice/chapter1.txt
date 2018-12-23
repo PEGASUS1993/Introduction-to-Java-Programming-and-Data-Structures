@@ -1,0 +1,387 @@
+Chapter 1 Introduction to Computers, Programs, and Java 
+
+Section 1.2 What is a Computer?
+1. ________ is the physical aspect of the computer that can be seen.
+a. Hardware
+b. Software
+c. Operating system
+d. Application program
+Key:a
+
+#
+2. __________ is the brain of a computer. 
+a. Hardware
+b. CPU
+c. Memory
+d. Disk
+Key:b
+
+#
+3. The speed of the CPU may be measured in __________. 
+a. megabytes
+b. gigabytes
+c. megahertz
+d. gigahertz
+Key:cd  1 megahertz equals 1 million pulses per second and 1 gigahertz is 1000 megahertz.
+
+#
+4. Why do computers use zeros and ones?
+a. because combinations of zeros and ones can represent any numbers and characters.
+b. because digital devices have two stable states and it is natural to use one state for 0 and the other for 1.
+c. because binary numbers are simplest.
+d. because binary numbers are the bases upon which all other number systems are built.
+Key:b
+
+#
+5. One byte has ________ bits.
+a. 4
+b. 8
+c. 12
+d. 16
+Key:b
+
+#
+6. Which of the following is not permanent storage devices?
+a. floppy disk
+b. hard disk
+c. flash stick
+d. CD-ROM
+e. main memory
+Key:e Disks and CD are used to store data permanently. Data in memory is lost after the power is turned off.
+
+#
+7. ____________ is a device to connect a computer to a local area network (LAN).
+a. Regular modem
+b. DSL
+c. Cable modem
+d. NIC
+Key:d Network Interface Card (NIC) is a device to connect a computer to a local area network.
+
+#
+Section 1.3 Program Languages
+8. ____________ are instructions to the computer. 
+a. Hardware
+b. Software
+c. Programs
+d. Keyboards
+Key:bc
+
+#
+9. Computer can execute the code in ____________. 
+a. machine language
+b. assembly language
+c. high-level language
+d. none of the above
+Key:a
+
+#
+10. ___________ translates high-level language program into machine language program.
+a. An assembler
+b. A compiler
+c. CPU
+d. The operating system
+Key:b
+
+#
+Section 1.4 Operating Systems
+11. ____________ is an operating system. 
+a. Java
+b. C++
+c. Windows 
+d. Visual Basic
+e. Ada
+Key:c
+
+#
+12. _____________ is a program that runs on a computer to manage and control a computer's activities.
+a. Operating system
+b. Java
+c. Modem
+d. Interpreter
+e. Compiler
+Key:a
+
+#
+Section 1.5 Java, World Wide Web, and Beyond
+13. Java was developed by ____________. 
+a. Sun Microsystems 
+b. Microsoft
+c. Apple
+d. IBM
+e. Cisco Systems
+Key:a
+
+#
+14. Due to security reasons, Java ___________ cannot run from a Web browser in the new version of Java.
+a. applications
+b. applets
+c. servlets
+d. Micro Edition programs
+Key:b
+
+#
+15. ________  is not an object-oriented programming language.
+a. Java
+b. C++
+c. C
+d. C#
+e. Python
+Key:c
+
+#
+16. ________  is interpreted.
+a. Java
+b. C++
+c. C
+d. Ada
+e. Pascal
+Key:a
+
+#
+17. ________  is architecture-neutral.
+a. Java
+b. C++
+c. C
+d. Ada
+e. Pascal
+Key:a
+
+#
+Section 1.6 The Java Language Specification, API, JDK, and IDE
+18. ________  is a technical definition of the language that includes the syntax and semantics of the Java programming language.
+a. Java language specification
+b. Java API
+c. Java JDK
+d. Java IDE
+Key:a
+
+#
+19. ________ contains predefined classes and interfaces for developing Java programs.
+a. Java language specification
+b. Java API
+c. Java JDK
+d. Java IDE
+Key:b
+
+#
+20. ________ consists of a set of separate programs for developing and testing Java programs, each of which is invoked from a command line.
+a. Java language specification
+b. Java API
+c. Java JDK
+d. Java IDE
+Key:c
+
+#
+21. ________  provides an integrated development environment (IDE) for rapidly developing Java programs. Editing, compiling, building, debugging, and online help are integrated in one graphical user interface.
+a. Java language specification
+b. Java API
+c. Java JDK
+d. Java IDE
+Key:d
+
+#
+Section 1.7 A Simple Java Program
+22.	The main method header is written as:
+a.	public static void main(string[] args)
+b.	public static void Main(String[] args)
+c.	public static void main(String[] args)
+d.	public static main(String[] args)
+e.	public void main(String[] args)
+Key:c
+
+#
+23.	Which of the following statements is correct?
+a.	Every line in a program must end with a semicolon.
+b.	Every statement in a program must end with a semicolon.
+c.	Every comment line must end with a semicolon.
+d.	Every method must end with a semicolon.
+e.	Every class must end with a semicolon.
+Key:b
+
+#
+24.	Which of the following statements is correct to display Welcome to Java on the console?
+a.	System.out.println('Welcome to Java');
+b.	System.out.println("Welcome to Java");
+c.	System.println('Welcome to Java');
+d.	System.out.println('Welcome to Java");
+e.	System.out.println("Welcome to Java');
+Key:b
+
+#
+Section 1.8 Creating, Compiling, and Executing a Java Program
+25. The JDK command to compile a class in the file Test.java is
+a. java Test
+b. java Test.java
+c. javac Test.java
+d. javac Test
+e. JAVAC Test.java
+Key:c
+
+#
+26. Which JDK command is correct to run a Java application in ByteCode.class?
+a. java ByteCode
+b. java ByteCode.class
+c. javac ByteCode.java
+d. javac ByteCode
+e. JAVAC ByteCode
+Key:a
+
+#
+27. Java compiler translates Java source code into _________.
+a. Java bytecode
+b. machine code
+c. assembly code
+d. another high-level language code
+Key:a
+
+#
+28. _________ is a software that interprets Java bytecode.
+a. Java virtual machine
+b. Java compiler
+c. Java debugger
+d. Java API
+Key:a
+
+#
+29. Suppose you define a Java class as follows:
+
+public class Test {
+
+}
+
+In order to compile this program, the source code should be stored in a file named
+a. Test.class
+b. Test.doc
+c. Test.txt
+d. Test.java
+e. Any name with extension .java
+Key:d
+
+#
+30. The extension name of a Java bytecode file is
+a. .java
+b. .obj
+c. .class
+d. .exe
+Key:c
+
+#
+31.	The extension name of a Java source code file is
+a.	.java
+b.	.obj
+c.	.class
+d.	.exe
+Key:a
+
+#
+32. Which of the following lines is not a Java comment?
+a. /** comments */
+b. // comments
+c. -- comments
+d. /* comments */
+e. ** comments **
+Key:ce
+
+#
+33. Which of the following are the reserved words?
+a. public
+b. static
+c. void
+d. class
+Key:abcd
+
+#
+34. Every statement in Java ends with ________.
+a. a semicolon (;)
+b. a comma (,)
+c. a period (.)
+d. an asterisk (*)
+Key:a
+
+#
+35.	A block is enclosed inside __________.
+a.	parentheses
+b.	braces
+c.	brackets
+d.	quotes
+Key:b
+
+#
+Section 1.9 Programming Style and Documentation
+36.	Programming style is important, because ______________.
+a.	a program may not compile if it has a bad style
+b.	good programming style can make a program run faster
+c.	good programming style makes a program more readable
+d.      good programming style helps reduce programming errors
+Key:cd
+
+#
+37.	Analyze the following code.
+
+I:
+public class Test {
+  public static void main(String[] args) {
+    System.out.println("Welcome to Java!");
+  }
+}
+
+II: 
+public class Test {  public static void main(String[] args) {    System.out.println("Welcome to Java!");  } }
+
+a.	Both I and II can compile and run and display Welcome to Java, but the code in II has a better style than I.
+b.	Only the code in I can compile and run and display Welcome to Java.
+c.	Only the code in II can compile and run and display Welcome to Java.
+d.      Both I and II can compile and run and display Welcome to Java, but the code in I has a better style than II.
+Key:d
+
+#
+38. Which of the following code has the best style?
+
+I:
+public class Test {
+public static void main(String[] args) {
+    System.out.println("Welcome to Java!");
+  }
+}
+
+II:
+public class Test {
+    public static void main(String[] args) {
+    System.out.println("Welcome to Java!");
+  }
+}
+
+III:
+public class Test {
+  public static void main(String[] args) {
+  System.out.println("Welcome to Java!");
+  }
+}
+
+IV:
+public class Test {
+  public static void main(String[] args) {
+    System.out.println("Welcome to Java!");
+  }
+}
+
+a. I
+b. II
+c. III
+d. IV
+Key:d
+
+#
+Section 1.10 Programming Errors
+39.	If a program compiles fine, but it produces incorrect result, then the program suffers  __________.
+a.	a compilation error
+b.	a runtime error
+c.	a logic error
+Key:c 
+
+#
+40.	If you forget to put a closing quotation mark on a string, what kind of error will be raised?
+a.	a compile error
+b.	a runtime error
+c.	a logic error
+Key:a This is a syntax error, which will be detected by the compiler.

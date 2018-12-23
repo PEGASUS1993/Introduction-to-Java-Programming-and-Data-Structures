@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TimelineEvents.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TimelineEvents.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.AnimationTimer;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.KeyFrame;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.KeyValue;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.Timeline;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.ActionEvent;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.EventHandler;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Group;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.effect.Lighting;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+ 14&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+ 15&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+ 16&nbsp;&nbsp;<span class = "keyword">import</span> javafx.util.Duration;
+ 17&nbsp;&nbsp; 
+ 18&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TimelineEvents <span class = "keyword">extends</span> Application {
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    //main timeline
+ 21&nbsp;&nbsp;    <span class = "keyword">private</span> Timeline timeline;
+ 22&nbsp;&nbsp;    <span class = "keyword">private</span> AnimationTimer timer;
+ 23&nbsp;&nbsp; 
+ 24&nbsp;&nbsp;    //variable <span class = "keyword">for</span> storing actual frame
+ 25&nbsp;&nbsp;    <span class = "keyword">private</span> Integer i=0;
+ 26&nbsp;&nbsp; 
+ 27&nbsp;&nbsp;    @Override <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage stage) {
+ 28&nbsp;&nbsp;        Group p = <span class = "keyword">new</span> Group();
+ 29&nbsp;&nbsp;        Scene scene = <span class = "keyword">new</span> Scene(p);
+ 30&nbsp;&nbsp;        stage.setScene(scene);
+ 31&nbsp;&nbsp;        stage.setWidth(<span class = "constant">500</span>);
+ 32&nbsp;&nbsp;        stage.setHeight(<span class = "constant">500</span>);
+ 33&nbsp;&nbsp;        p.setTranslateX(<span class = "constant">80</span>);
+ 34&nbsp;&nbsp;        p.setTranslateY(<span class = "constant">80</span>);
+ 35&nbsp;&nbsp; 
+ 36&nbsp;&nbsp;        //create a circle with effect
+ 37&nbsp;&nbsp;        <span class = "keyword">final</span> Circle circle = <span class = "keyword">new</span> Circle(<span class = "constant">20</span>,  Color.rgb(<span class = "constant">156</span>,<span class = "constant">216</span>,<span class = "constant">255</span>));
+ 38&nbsp;&nbsp;        circle.setEffect(<span class = "keyword">new</span> Lighting());
+ 39&nbsp;&nbsp;        //create a text inside a circle
+ 40&nbsp;&nbsp;        <span class = "keyword">final</span> Text text = <span class = "keyword">new</span> Text (i.toString());
+ 41&nbsp;&nbsp;        text.setStroke(Color.BLACK);
+ 42&nbsp;&nbsp;        //create a layout <span class = "keyword">for</span> circle with text inside
+ 43&nbsp;&nbsp;        <span class = "keyword">final</span> StackPane stack = <span class = "keyword">new</span> StackPane();
+ 44&nbsp;&nbsp;        stack.getChildren().addAll(circle, text);
+ 45&nbsp;&nbsp;        stack.setLayoutX(<span class = "constant">30</span>);
+ 46&nbsp;&nbsp;        stack.setLayoutY(<span class = "constant">30</span>);
+ 47&nbsp;&nbsp; 
+ 48&nbsp;&nbsp;        p.getChildren().add(stack);
+ 49&nbsp;&nbsp;        stage.show();
+ 50&nbsp;&nbsp; 
+ 51&nbsp;&nbsp;        //create a timeline <span class = "keyword">for</span> moving the circle
+ 52&nbsp;&nbsp;        timeline = <span class = "keyword">new</span> Timeline();
+ 53&nbsp;&nbsp;        timeline.setCycleCount(Timeline.INDEFINITE);
+ 54&nbsp;&nbsp;        timeline.setAutoReverse(<span class = "keyword">true</span>);
+ 55&nbsp;&nbsp; 
+ 56&nbsp;&nbsp;//You can add a specific action when each frame is started.
+ 57&nbsp;&nbsp;        timer = <span class = "keyword">new</span> AnimationTimer() {
+ 58&nbsp;&nbsp;            @Override
+ 59&nbsp;&nbsp;            <span class = "keyword">public</span> <span class = "keyword">void</span> handle(<span class = "keyword">long</span> l) {
+ 60&nbsp;&nbsp;                text.setText(i.toString());
+ 61&nbsp;&nbsp;                i++;
+ 62&nbsp;&nbsp;            }
+ 63&nbsp;&nbsp; 
+ 64&nbsp;&nbsp;        };
+ 65&nbsp;&nbsp; 
+ 66&nbsp;&nbsp;        //create a keyValue with factory: scaling the circle 2times
+ 67&nbsp;&nbsp;        KeyValue keyValueX = <span class = "keyword">new</span> KeyValue(stack.scaleXProperty(), <span class = "constant">2</span>);
+ 68&nbsp;&nbsp;        KeyValue keyValueY = <span class = "keyword">new</span> KeyValue(stack.scaleYProperty(), <span class = "constant">2</span>);
+ 69&nbsp;&nbsp; 
+ 70&nbsp;&nbsp;        //create a keyFrame, the keyValue is reached at time 2s
+ 71&nbsp;&nbsp;        Duration duration = Duration.millis(<span class = "constant">2000</span>);
+ 72&nbsp;&nbsp;        //one can add a specific action when the keyframe is reached
+ 73&nbsp;&nbsp;        EventHandler onFinished = <span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+ 74&nbsp;&nbsp;            <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent t) {
+ 75&nbsp;&nbsp;                 stack.setTranslateX(java.lang.Math.random()*<span class = "constant">200</span><span class = "literal">-</span><span class = "constant">100</span>);
+ 76&nbsp;&nbsp;                 //reset counter
+ 77&nbsp;&nbsp;                 i = <span class = "constant">0</span>;
+ 78&nbsp;&nbsp;            }
+ 79&nbsp;&nbsp;        };
+ 80&nbsp;&nbsp; 
+ 81&nbsp;&nbsp;  KeyFrame keyFrame = <span class = "keyword">new</span> KeyFrame(duration, onFinished , keyValueX, keyValueY);
+ 82&nbsp;&nbsp; 
+ 83&nbsp;&nbsp;        //add the keyframe to the timeline
+ 84&nbsp;&nbsp;        timeline.getKeyFrames().add(keyFrame);
+ 85&nbsp;&nbsp; 
+ 86&nbsp;&nbsp;        timeline.play();
+ 87&nbsp;&nbsp;        timer.start();
+ 88&nbsp;&nbsp;    }
+ 89&nbsp;&nbsp;        
+ 90&nbsp;&nbsp;        
+ 91&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 92&nbsp;&nbsp;        Application.launch(args);
+ 93&nbsp;&nbsp;    }
+ 94&nbsp;&nbsp;  } 
+</pre>
+</body>
+</html>

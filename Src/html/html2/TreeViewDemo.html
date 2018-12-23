@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TreeViewDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TreeViewDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.TreeItem;
+<span class = "keyword">import</span> javafx.scene.control.TreeView;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TreeViewDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    TreeItem&lt;String&gt; root = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"Country"</span>);
+    root.setExpanded(<span class = "keyword">true</span>);
+    
+    TreeItem&lt;String&gt; us = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"US"</span>, 
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/usIcon.gif"</span>));
+    TreeItem&lt;String&gt; uk = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"UK"</span>,
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/ukIcon.gif"</span>));
+    TreeItem&lt;String&gt; france = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"France"</span>);
+    
+    TreeItem&lt;String&gt; georgia = <span class = "keyword">new</span> TreeItem(<span class = "literal">"Georgia"</span>);
+    TreeItem&lt;String&gt; floria = <span class = "keyword">new</span> TreeItem(<span class = "literal">"Florida"</span>);
+    TreeItem&lt;String&gt; alabama = <span class = "keyword">new</span> TreeItem(<span class = "literal">"Alabama"</span>);
+
+    root.getChildren().addAll(us, uk, france);
+    us.getChildren().addAll(georgia, floria, alabama);
+    TreeView&lt;String&gt; tree = <span class = "keyword">new</span> TreeView&lt;&gt;(root);
+    tree.setEditable(<span class = "keyword">true</span>);
+    
+    Scene scene = <span class = "keyword">new</span> Scene(tree, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+    primaryStage.setTitle(<span class = "literal">"TreeViewDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   * line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

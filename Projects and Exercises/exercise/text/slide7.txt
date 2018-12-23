@@ -1,0 +1,6 @@
+Chapter 8
+
+8.1 Introduction
+
+Chapter 7 introduced the concept of classes and objects. You learned how to design and develop simple classes. This chapter introduced more advanced features on classes and objects.
+

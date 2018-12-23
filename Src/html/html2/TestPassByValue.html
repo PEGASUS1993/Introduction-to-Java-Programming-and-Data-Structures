@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestPassByValue.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/TestPassByValue.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestPassByValue" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestPassByValue {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Declare and initialize variables</span>
+    <span class = "keyword">int</span> num1 = <span class = "constant">1</span>;
+    <span class = "keyword">int</span> num2 = <span class = "constant">2</span>;
+
+    System.out.println(<span class = "literal">"Before invoking the swap method, num1 is "</span> +
+      num1 + <span class = "literal">" and num2 is "</span> + num2);
+
+    <span class = "comment">// Invoke the swap method to attempt to swap two variables</span>
+    swap(num1, num2);
+
+    System.out.println(<span class = "literal">"After invoking the swap method, num1 is "</span> +
+      num1 + <span class = "literal">" and num2 is "</span> + num2);
+  }
+
+  <span class = "comment">/** Swap two variables */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> swap(<span class = "keyword">int</span> n1, <span class = "keyword">int</span> n2) {
+    System.out.println(<span class = "literal">"\tInside the swap method"</span>);
+    System.out.println(<span class = "literal">"\t\tBefore swapping, n1 is "</span> + n1
+      + <span class = "literal">" and n2 is "</span> + n2);
+
+    <span class = "comment">// Swap n1 with n2</span>
+    <span class = "keyword">int</span> temp = n1;
+    n1 = n2;
+    n2 = temp;
+
+    System.out.println(<span class = "literal">"\t\tAfter swapping, n1 is "</span> + n1
+      + <span class = "literal">" and n2 is "</span> + n2);
+  }
+}
+</pre>
+</body>
+</html>

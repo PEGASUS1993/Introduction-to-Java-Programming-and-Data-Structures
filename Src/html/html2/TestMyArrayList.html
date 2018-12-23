@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestMyArrayList.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestMyArrayListWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestMyArrayList" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestMyArrayList {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a list</span>
+    MyList&lt;String&gt; list = <span class = "keyword">new</span> MyArrayList&lt;&gt;();
+
+    <span class = "comment">// Add elements to the list</span>
+    list.add(<span class = "literal">"America"</span>); <span class = "comment">// Add America to the list</span>
+    System.out.println(<span class = "literal">"(1) "</span> + list);
+
+    list.add(<span class = "constant">0</span>, <span class = "literal">"Canada"</span>); <span class = "comment">// Add Canada to the beginning of the list</span>
+    System.out.println(<span class = "literal">"(2) "</span> + list);
+
+    list.add(<span class = "literal">"Russia"</span>); <span class = "comment">// Add Russia to the end of the list</span>
+    System.out.println(<span class = "literal">"(3) "</span> + list);
+
+    list.add(<span class = "literal">"France"</span>); <span class = "comment">// Add France to the end of the list</span>
+    System.out.println(<span class = "literal">"(4) "</span> + list);
+
+    list.add(<span class = "constant">2</span>, <span class = "literal">"Germany"</span>); <span class = "comment">// Add Germany to the list at index 2</span>
+    System.out.println(<span class = "literal">"(5) "</span> + list);
+
+    list.add(<span class = "constant">5</span>, <span class = "literal">"Norway"</span>); <span class = "comment">// Add Norway to the list at index 5</span>
+    System.out.println(<span class = "literal">"(6) "</span> + list);
+
+    <span class = "comment">// Remove elements from the list</span>
+    list.remove(<span class = "literal">"Canada"</span>); <span class = "comment">// Same as list.remove(0) in this case</span>
+    System.out.println(<span class = "literal">"(7) "</span> + list);
+
+    list.remove(<span class = "constant">2</span>); <span class = "comment">// Remove the element at index 2</span>
+    System.out.println(<span class = "literal">"(8) "</span> + list);
+
+    list.remove(list.size() - <span class = "constant">1</span>); <span class = "comment">// Remove the last element</span>
+    System.out.print(<span class = "literal">"(9) "</span> + list + <span class = "literal">"\n(10) "</span>);
+
+    <span class = "keyword">for</span> (String s: list)
+      System.out.print(s.toUpperCase() + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

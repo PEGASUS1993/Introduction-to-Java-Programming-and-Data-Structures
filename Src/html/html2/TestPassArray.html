@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestPassArray.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/TestPassArray.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestPassArray" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestPassArray {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span>[] a = {<span class = "constant">1</span>, <span class = "constant">2</span>};
+
+    <span class = "comment">// Swap elements using the swap method</span>
+    System.out.println(<span class = "literal">"Before invoking swap"</span>);
+    System.out.println(<span class = "literal">"array is {"</span> + a[<span class = "constant">0</span>] + <span class = "literal">", "</span> + a[<span class = "constant">1</span>] + <span class = "literal">"}"</span>);
+    swap(a[<span class = "constant">0</span>], a[<span class = "constant">1</span>]);
+    System.out.println(<span class = "literal">"After invoking swap"</span>);
+    System.out.println(<span class = "literal">"array is {"</span> + a[<span class = "constant">0</span>] + <span class = "literal">", "</span> + a[<span class = "constant">1</span>] + <span class = "literal">"}"</span>);
+
+    <span class = "comment">// Swap elements using the swapFirstTwoInArray method</span>
+    System.out.println(<span class = "literal">"Before invoking swapFirstTwoInArray"</span>);
+    System.out.println(<span class = "literal">"array is {"</span> + a[<span class = "constant">0</span>] + <span class = "literal">", "</span> + a[<span class = "constant">1</span>] + <span class = "literal">"}"</span>);
+    swapFirstTwoInArray(a);
+    System.out.println(<span class = "literal">"After invoking swapFirstTwoInArray"</span>);
+    System.out.println(<span class = "literal">"array is {"</span> + a[<span class = "constant">0</span>] + <span class = "literal">", "</span> + a[<span class = "constant">1</span>] + <span class = "literal">"}"</span>);
+  }
+
+  <span class = "comment">/** Swap two variables */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> swap(<span class = "keyword">int</span> n1, <span class = "keyword">int</span> n2) {
+    <span class = "keyword">int</span> temp = n1;
+    n1 = n2;
+    n2 = temp;
+  }
+
+  <span class = "comment">/** Swap the first two elements in the array */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> swapFirstTwoInArray(<span class = "keyword">int</span>[] array) {
+    <span class = "keyword">int</span> temp = array[<span class = "constant">0</span>];
+    array[<span class = "constant">0</span>] = array[<span class = "constant">1</span>];
+    array[<span class = "constant">1</span>] = temp;
+  }
+}
+</pre>
+</body>
+</html>

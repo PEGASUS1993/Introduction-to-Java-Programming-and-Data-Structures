@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StudentServerInterfaceImpl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StudentServerInterfaceImplWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.rmi.*;
+<span class = "keyword">import</span> java.rmi.server.*;
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> StudentServerInterfaceImpl 
+    <span class = "keyword">extends</span> UnicastRemoteObject 
+    <span class = "keyword">implements</span> StudentServerInterface {
+  <span class = "comment">// Stores scores in a map indexed by name</span>
+  <span class = "keyword">private</span> HashMap&lt;String, Double&gt; scores = 
+    <span class = "keyword">new</span> HashMap&lt;String, Double&gt;();
+
+  <span class = "keyword">public</span> StudentServerInterfaceImpl() <span class = "keyword">throws</span> RemoteException {
+    initializeStudent();
+  }
+
+  <span class = "comment">/** Initialize student information */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">void</span> initializeStudent() {
+    scores.put(<span class = "literal">"John"</span>, <span class = "keyword">new</span> Double(<span class = "constant">90</span><span class = "literal">.</span><span class = "constant">5</span>));
+    scores.put(<span class = "literal">"Michael"</span>, <span class = "keyword">new</span> Double(<span class = "constant">100</span>));
+    scores.put(<span class = "literal">"Michelle"</span>, <span class = "keyword">new</span> Double(<span class = "constant">98</span><span class = "literal">.</span><span class = "constant">5</span>));
+  }
+
+  <span class = "comment">/** Implement the findScore method from the 
+   * Student interface */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> findScore(String name) <span class = "keyword">throws</span> RemoteException {
+    Double d = (Double)scores.get(name);
+
+    <span class = "keyword">if</span> (d == <span class = "keyword">null</span>) {
+      System.out.println(<span class = "literal">"Student "</span> + name + <span class = "literal">" is not found "</span>);
+      <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+    }
+    <span class = "keyword">else</span> {
+      System.out.println(<span class = "literal">"Student "</span> + name + <span class = "literal">"\'s score is "</span>
+        + d.doubleValue());
+      <span class = "keyword">return</span> d.doubleValue();
+    }
+  }
+}
+</pre>
+</body>
+</html>

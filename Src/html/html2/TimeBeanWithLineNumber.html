@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TimeBean.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TimeBean.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">package</span> jsf2demo;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javax.inject.Named;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javax.enterprise.context.RequestScoped;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;@Named
+  7&nbsp;&nbsp;@RequestScoped
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TimeBean {
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> TimeBean() {
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;  
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> String getTime() {
+ 13&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> java.util.Date().toString();
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

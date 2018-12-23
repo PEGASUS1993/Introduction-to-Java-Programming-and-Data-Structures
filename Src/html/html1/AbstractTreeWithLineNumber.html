@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AbstractTree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AbstractTree.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">abstract</span> <span class = "keyword">class</span> AbstractTree&lt;E&gt; <span class = "keyword">implements</span> Tree&lt;E&gt; {
+  2&nbsp;&nbsp;  @Override <span class = "comment">/** Inorder traversal from the root*/</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> inorder() {
+  4&nbsp;&nbsp;  }
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;  @Override <span class = "comment">/** Postorder traversal from the root */</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> postorder() {
+  8&nbsp;&nbsp;  }
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;  @Override <span class = "comment">/** Preorder traversal from the root */</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> preorder() {
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  @Override <span class = "comment">/** Return true if the tree is empty */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+ 16&nbsp;&nbsp;    <span class = "keyword">return</span> getSize() == <span class = "constant">0</span>;
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

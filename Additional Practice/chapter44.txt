@@ -1,0 +1,28 @@
+Chapter 44 Testing Using JUnit
+
+1. A test class must be placed in a named package.
+a. True
+b. False
+Key:a
+
+#
+2. JUnit is part of the standard Java API?
+a. True
+b. False
+Key:b
+
+#
+2. To test whether two values v1 and v2 are the same, use ______.
+a. assertTrue(v1)
+b. assertTrue(v2)
+c. assertEquals(v1, v2)
+d. assertEquals(v2, v1)
+Key:cd
+
+#
+2. To test whether an expression e is true, use ______.
+a. assertTrue(e)
+b. asserttrue(e)
+c. assertEquals(e)
+d. assertequals(e)
+Key:a

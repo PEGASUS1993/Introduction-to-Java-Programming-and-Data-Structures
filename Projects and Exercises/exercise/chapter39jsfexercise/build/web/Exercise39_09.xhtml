@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Exercise39_09</title>
+    </h:head>
+    <h:body>
+        <h:head>Staff Information</h:head>
+        <br/>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="ID:"/>
+                <h:inputText value="#{exercise39_09.id}"/>
+            </h:panelGrid>            
+            <h:panelGrid columns="6">
+                <h:outputLabel value="Last Name"/>
+                <h:inputText id="lastNameInputText" 
+                             value="#{exercise39_09.lastName}"/>
+                <h:outputLabel value="First Name" />
+                <h:inputText id="firstNameInputText" 
+                             value="#{exercise39_09.firstName}"/>
+                <h:outputLabel value="MI" />
+                <h:inputText id="miInputText" size="1"
+                             value="#{exercise39_09.mi}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Address" />
+                <h:inputText id ="address" value="#{exercise39_09.address}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="4">
+                <h:outputLabel value="City" />
+                <h:inputText id ="city" value="#{exercise39_09.city}"/>
+                <h:outputLabel value="State" />
+                <h:inputText id ="state" size="2" 
+                             value="#{exercise39_09.state}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Telephone" />
+                <h:inputText id ="telephone" value="#{exercise39_09.telephone}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="4">
+                <h:commandButton value="View" action="#{exercise39_09.view}"/>
+                <h:commandButton value="Insert" action="#{exercise39_09.insert}"/>
+                <h:commandButton value="Update" action="#{exercise39_09.update}"/>
+                <h:commandButton value="Clear" action="#{exercise39_09.clear}"/>
+            </h:panelGrid>
+            <h:panelGrid>
+                <h:outputText style="color:red" value="#{exercise39_09.status}">
+                </h:outputText>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

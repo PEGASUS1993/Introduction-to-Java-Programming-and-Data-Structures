@@ -1,0 +1,642 @@
+Chapter 5 Loops
+
+Section 5.2 The while Loop
+1.	How many times will the following code print "Welcome to Java"?
+
+int count = 0;
+while (count < 10) {
+  System.out.println("Welcome to Java");
+  count++;
+}
+a.	8
+b.	9
+c.	10
+d.	11
+e.      0
+Key:c The count is initialized to 0 before the loop. The loop is executed 10 times for count from 1 to 9. When count is 10, the loop continuation condition becomes false. The loop is finished. So, the correct answer is C.
+
+#
+2. Analyze the following code.
+
+int count = 0;
+while (count < 100) {
+  // Point A
+  System.out.println("Welcome to Java!");
+  count++;
+  // Point B
+}
+
+  // Point C
+a.	count < 100 is always true at Point A
+b.	count < 100 is always true at Point B
+c.	count < 100 is always false at Point B
+d.	count < 100 is always true at Point C
+e.      count < 100 is always false at Point C
+Key:ae The count is initialized to 0 before the loop. The loop is executed 100 times for count from 0 to 99. Inside the loop body, at Point A, count < 100 is true. After executing count++, count < 100 in Point B may become false. After the loop is exited, count < 100 is false at Point C. So, the correct answer is AE.
+
+#
+3.	How many times will the following code print "Welcome to Java"?
+
+int count = 0;
+while (count++ < 10) {
+  System.out.println("Welcome to Java");
+}
+a.	8
+b.	9
+c.	10
+d.	11
+e.      0
+Key:c The count is initialized to 0 before the loop. (count++ < 10) increments count by 1 and uses the old count value to check if count < 10. So, the loop is executed 10 times for count from 0 to 9. The correct answer is C.
+
+4. What is the output of the following code?
+
+int x = 0;
+while (x < 4) {
+  x = x + 1;
+}
+System.out.println("x is " + x);
+
+a. x is 0
+b. x is 1
+c. x is 2
+d. x is 3
+e. x is 4
+Key:e x is 0 before the loop.  The loop is executed 4 times for x from 0 to 3. When x is 4 the loop exits. So, the correct answer is E.
+
+#
+5.	What will be displayed when the following code is executed?
+
+int number = 6;
+while (number > 0) {
+  number -= 3;
+  System.out.print(number + " ");
+}
+a.	6 3 0
+b.	6 3 
+c.	3 0
+d.      3 0 -3
+e.      0 -3
+Key:c number is 6 before the loop. In the first iteration, number is reduced to 3. In the second iteration, number is reduced to 0. The loop is now finished. The loop body is executed 2 times for number 6 and 3. Since number is reduced by 3 before the print statement. 3 and 0 and displayed. So, the correct answer is C.
+
+#
+Section 5.6 The do-while Loop
+6.	How many times will the following code print "Welcome to Java"?
+
+int count = 0;
+do {
+  System.out.println("Welcome to Java");
+  count++;
+} while (count < 10);
+a.	8
+b.	9
+c.	10
+d.	11
+e.      0
+Key:c The count is initialized to 0 before the loop. The loop is executed 10 times for count from 0 to 9. When count is 10, the loop continuation condition becomes false. The loop is finished. So, the correct answer is C.
+
+#
+7.	How many times will the following code print "Welcome to Java"?
+
+int count = 0;
+do {
+  System.out.println("Welcome to Java");
+} while (count++ < 10);
+a.	8
+b.	9
+c.	10
+d.	11
+e.      0
+Key:d The count is initialized to 0 before the loop. The loop is executed for the first time when count is 0. (count++ < 10) increments count by 1 and uses the old count value to check if count < 10. So, the loop is executed 11 times for count from 0 to 10.  Note that when count is 10, the loop body is executed before the loop is exited. The correct answer is D.
+
+#
+8.	How many times will the following code print "Welcome to Java"?
+
+int count = 0;
+do {
+  System.out.println("Welcome to Java");
+} while (++count < 10);
+a.	8
+b.	9
+c.	10
+d.	11
+e.      0
+Key:c The count is initialized to 0 before the loop. The loop is executed for the first time when count is 0. (++count < 10) increments count by 1 and uses the new count value to check if count < 10. So, the loop is executed 10 times for count from 0 to 9.  Note that when count is 9, ++count becomes 10, the loop exits. The correct answer is D.
+
+#
+9.	What is the value in count after the following loop is executed?
+
+int count = 0;
+do {
+  System.out.println("Welcome to Java");
+} while (count++ < 9);
+System.out.println(count);
+a.	8
+b.	9
+c.	10
+d.	11
+e.      0
+Key:c The count is initialized to 0 before the loop. The loop is executed for the first time when count is 0. (count++ < 9) increments count by 1 and uses the old count value to check if count < 9. So, the loop is executed 10 times for count from 0 to 9.  Note that when count is 9, the loop body is executed and then count++ increments count to 10. The previous count value 9 < 9 is false. So the loop is finished. Now count becomes 10 after the loop exits. The correct answer is C.
+
+#
+Section 5.7 The for Loop
+10.	Analyze the following statement:
+
+double sum = 0;
+for (double d = 0; d < 10;) {
+  d += 0.1;
+  sum += sum + d;
+}
+a.	The program has a compile error because the adjustment is missing in the for loop.
+b.	The program has a compile error because the control variable in the for loop cannot be of the double type.
+c.	The program runs in an infinite loop because d &lt; 10 would always be true.
+d.	The program compiles and runs fine.
+Key:d In this loop, the loop initial action is d = 0, the continuation condition is d < 10, and the action-after-each-iteration is blank. Note that any of these three parts in the loop can be omitted. So, the loop is correct. The correction answer is (D).
+
+#
+11. Which of the following loops prints "Welcome to Java" 10 times?
+
+A:
+for (int count = 1; count <= 10; count++) {
+  System.out.println("Welcome to Java");
+}
+
+B:
+for (int count = 0; count < 10; count++) {
+  System.out.println("Welcome to Java");
+}
+
+C:
+for (int count = 1; count < 10; count++) {
+  System.out.println("Welcome to Java");
+}
+
+D:
+for (int count = 0; count <= 10; count++) {
+  System.out.println("Welcome to Java");
+}
+a. BD
+b. ABC
+c. AC
+d. BC
+e. AB
+Key:e In (A), the loop displays Welcome to Java 10 times for count from 1 to 10. In (B), the loop displays Welcome to Java 10 times for count from 0 to 9. In (C), the loop displays Welcome to Java 9 times for count from 1 to 9. In (D), the loop displays Welcome to Java 11 times for count from 0 to 10. Therefore, the correct answer is AB.
+
+#
+12. Which of the following loops correctly computes 1/2 + 2/3 + 3/4 + ... + 99/100?
+
+A:
+double sum = 0;
+for (int i = 1; i <= 99; i++) {
+  sum = i / (i + 1);
+}
+System.out.println("Sum is " + sum);
+
+B:
+double sum = 0;
+for (int i = 1; i < 99; i++) {
+  sum += i / (i + 1);
+}
+System.out.println("Sum is " + sum);
+
+C:
+double sum = 0;
+for (int i = 1; i <= 99; i++) {
+  sum += 1.0 * i / (i + 1);
+}
+System.out.println("Sum is " + sum);
+
+D:
+double sum = 0;
+for (int i = 1; i <= 99; i++) {
+  sum += i / (i + 1.0);
+}
+System.out.println("Sum is " + sum);
+
+E:
+double sum = 0;
+for (int i = 1; i < 99; i++) {
+  sum += i / (i + 1.0);
+}
+System.out.println("Sum is " + sum);
+
+a. BCD
+b. ABCD
+c. B
+d. CDE
+e. CD
+Key:e Note that 1 / 2 is 0.5 in a math expression. In Java, however, integer division yields an integer. The fraction part is truncated. Therefore, i / (i + 1) is 0. (A) and (B) are incorrect. (E) is incorrect because the last i in the loop is 98. So the last item 99 / 100.0 is not added to sum. So, the correct answer is CD.
+
+#
+13. The following loop displays _______________.
+
+for (int i = 1; i <= 10; i++) {
+  System.out.print(i + " ");
+  i++;
+}
+
+a. 1 2 3 4 5 6 7 8 9
+b. 1 2 3 4 5 6 7 8 9 10
+c. 1 2 3 4 5 
+d. 1 3 5 7 9
+e. 2 4 6 8 10
+Key:d In this for loop, i is initialized to 1. i++ adds 1 to i at the end of the iteration. In the action-after-each-iteration, i is again incremented by 1. So, i is in effect incremented twice. So, i is 1, then 3, 5, 7, and 9.
+The correct answer is D.
+
+#
+14.	Do the following two statements in (I) and (II) result in the same value in sum?
+
+(I):
+for (int i = 0; i &lt; 10; ++i) {
+  sum += i;   
+}
+
+(II):
+for (int i = 0; i &lt; 10; i++) {
+  sum += i;   
+}
+a.	Yes
+b.	No
+Key:a In this case, ++i and i++ are used standalone with no side-effect. So, (I) and (II) are equivalent. The correct answer is A.
+
+#
+15.	What is the output for y?
+
+int y = 0;
+for (int i = 0; i &lt; 10; ++i) {
+  y += i;   
+}
+System.out.println(y);
+
+a.	10
+b.	11
+c.	12
+d.	13
+e.      45
+Key:e The loop is executed 10 times for i from 0 to 9. Each time, i is added to y. So y = 0 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9, which 45. The correct answer is E.
+
+#
+16.	What is i after the following for loop?
+
+int y = 0;
+for (int i = 0; i &lt; 10; ++i) {
+  y += i;   
+}
+a.	9
+b.	10
+c.	11
+d.	undefined
+Key:d The scope for i is inside the loop. After the loop, i is not defined. So, the correct answer is D.
+
+#
+17.	Is the following loop correct?
+
+for ( ;  ; );
+a.	Yes
+b.	No
+Key:a Yes. This is equivalent to for (; true; ).
+
+#
+Section 5.8 Which Loop to Use?
+18.	Analyze the following fragment:
+
+double sum = 0;
+double d = 0;
+while (d != 10.0) {
+  d += 0.1;
+  sum += sum + d;
+}
+a.	The program does not compile because sum and d are declared double, but assigned with integer value 0.
+b.	The program never stops because d is always 0.1 inside the loop.
+c.	The program may not stop because of the phenomenon referred to as numerical inaccuracy for operating with floating-point numbers.
+d.	After the loop, sum is 0 + 0.1 + 0.2 + 0.3 + ... + 1.9
+Key:c  The correct answer is C. There is no guarantee that d will be exactly 10.0 because real numbers are represented using approximation in a computer system.
+
+#
+19. Analyze the following code:
+
+public class Test {  
+  public static void main (String args[]) {
+    int i = 0;
+    for (i = 0; i < 10; i++);
+      System.out.println(i + 4);
+  }
+}	
+a.	The program has a compile error because of the semicolon (;) on the for loop line.
+b.	The program compiles despite the semicolon (;) on the for loop line, and displays 4.
+c.	The program compiles despite the semicolon (;) on the for loop line, and displays 14.
+d.	The for loop in this program is same as for (i = 0; i < 10; i++) { }; System.out.println(i + 4);
+Key:cd This is a logic error. System.out.println(i + 4) is not a part the for loop because the for loop ends with the last semicolon at for (i=0; i &lt; 10; i++);
+
+#
+Section 5.9 Nested Loops
+20.	How many times is the println statement executed?
+
+for (int i = 0; i < 10; i++) 
+  for (int j = 0; j < i; j++) 
+    System.out.println(i * j)
+
+a. 100
+b. 20
+c. 10
+d. 45
+Key:d 
+
+#
+21. Given the following four patterns,
+
+Pattern A        Pattern B        Pattern C        Pattern D
+1                1 2 3 4 5 6                1      1 2 3 4 5 6
+1 2              1 2 3 4 5                2 1        1 2 3 4 5
+1 2 3            1 2 3 4                3 2 1          1 2 3 4
+1 2 3 4          1 2 3                4 3 2 1            1 2 3
+1 2 3 4 5        1 2                5 4 3 2 1              1 2
+1 2 3 4 5 6      1                6 5 4 3 2 1                1
+
+
+Which of the pattern is produced by the following code?
+for (int i = 1; i <= 6; i++) {
+  for (int j = 6; j >= 1; j--)
+    System.out.print(j <= i ? j + " " : " " + " ");
+  System.out.println();
+}
+a.	Pattern A
+b.	Pattern B
+c.	Pattern C
+d.	Pattern D
+Key:c The outer loop displays a line. The inner loop displays all the numbers in the line. The outer loop is repeated 6 times for i from 1 to 6. For each i, the inner loops displays i as the first number in the line since j is from 6 to 1. j is printed for j <= i. Otherwise, a space is printed. Clearly, this code will print Pattern C.
+
+#
+22.	How many times is the println statement executed?
+
+for (int i = 0; i < 10; i++) 
+  for (int j = 0; j < 10; j++) 
+    System.out.println(i * j);
+
+a. 100
+b. 20
+c. 10
+d. 45
+Key:a The outer loop is executed 10 times for i from 0 to 9 and the inner loop is executed 10 times from j from 0 to 9. So the print statement is executed 100 times. The correct answer is A.
+
+#
+Section 5.10 Minimizing Numerical Errors
+23. To add 0.01 + 0.02 + ... + 1.00, what order should you use to add the numbers to get better accuracy?
+
+a. add 0.01, 0.02, ..., 1.00 in this order to a sum variable whose initial value is 0.
+b. add 1.00, 0.99, 0.98, ..., 0.02, 0.01 in this order to a sum variable whose initial value is 0.
+Key:a Adding the numbers in the order specified in A will result in a more accurate result than in B, because two numbers to be added will be about the same size.
+
+#
+24.	Analyze the following code.
+
+double sum = 0;
+for (double d = 0; d < 10; sum += sum + d)  {  
+  d += 0.1;
+}
+A.	The program has a syntax error because the adjustment statement is incorrect in the for loop.
+B.	The program has a syntax error because the control variable in the for loop cannot be of the double type.
+C.	The program compiles but does not stop because d would always be less than 10.
+D.	The program compiles and runs fine.
+Key:d In this loop, the loop initial action is d = 0, the continuation condition is d < 10, and the action-after-each-iteration is sum += sum + d. The loop body is d += 1. This code is correct in syntax.  d is initially 0 and d += 0.1 adds 0.1 to d in each iteration. Eventually d will be greater than or equal to 10. So the loop will terminate. The correct answer for this question is (D) The program compiles and runs fine.
+
+#
+Section 5.11 Case Studies
+25.	What is y after the following for loop statement is executed?
+
+int y = 0;
+for (int i = 0; i < 10; ++i)  { 
+   y += 1;   
+}
+A.	9
+B.	10
+C.	11
+D.	12
+Key:b Before the loop, y is 0. The loop is executed 10 times. Each time, 1 is added to y. So, after the loop is finished, y is 10. The correct answer is (B).
+
+#
+Section 5.12 Keywords break and continue
+26.	Will the following program terminate?
+
+int balance = 10;
+
+while (true) {
+  if (balance &lt; 9) 
+    break;
+  balance = balance - 9;
+}
+a.	Yes
+b.	No
+Key:a Yes. Before the loop, balance is 10. The loop-continuation-condition is always true. In the first iteration, balance is reduced to 1. In the second iteration, the break statement is executed since (balance < 9) is now true. The correct answer for this question is A.
+
+#
+27.	What is sum after the following loop terminates?
+
+int sum = 0;
+int item = 0;
+do {
+  item++;
+  sum += item;
+  if (sum &gt; 4) 
+    break;
+}
+while (item &lt; 5);
+a.	5
+b.	6
+c.	7
+d.	8
+e.      9
+Key:b sum and item are initialized to 0 before the loop. In the loop, item++ increments item by 1 and item is then added to sum. If sum > 4, the break statement exits the loop. item is initially 0, then 1, 2, 3 and sum is initially 0, and then 1, 3, and 6. When sum is 6, (sum > 4) is true, which causes the break statement to be executed. So, the correct answer is B.
+
+#
+28.	What is the output after the following loop terminates?
+
+int number = 25;
+int i;
+
+boolean isPrime = true;
+for (i = 2; i < number && isPrime; i++) {
+  if (number % i == 0) {
+    isPrime = false;
+  }
+}
+
+System.out.println("i is " + i + " isPrime is " + isPrime);
+
+a.	i is 5 isPrime is true
+b.	i is 5 isPrime is false
+c.	i is 6 isPrime is true
+d.	i is 6 isPrime is false
+Key:d The code tests if number is prime by dividing the number with possible divisors 2, 3, 4, and so on. Initially, isPrime is set to true. Once a divisor is found (i.e., number % i == 0 is true), isPrime is set to false. The loop continuation condition now becomes false. The loop ends. If no divisor is found after the loop is finished, isPrime remains true. Since number is 25, number % i  == 0 is true when i is 5. In this case, isPrime is set to false and i++ increments i by 1 in the action-after-each-iteration. So, the output is that i is 6 and isPrime is false. The correct anwer is D.
+
+#
+29.	What is the output after the following loop terminates?
+
+int number = 25;
+int i;
+
+boolean isPrime = true;
+for (i = 2; i < number; i++) {
+  if (number % i == 0) {
+    isPrime = false; 
+    break;
+  }
+}
+
+System.out.println("i is " + i + " isPrime is " + isPrime);
+
+a.	i is 5 isPrime is true
+b.	i is 5 isPrime is false
+c.	i is 6 isPrime is true
+d.	i is 6 isPrime is false
+Key:b The code tests if number is prime by dividing the number with possible divisors 2, 3, 4, and so on. Initially, isPrime is set to true. Once a divisor is found (i.e., number % i == 0 is true), isPrime is set to false and the break statement is then executed to exit the loop. If no divisor is found after the loop is finished, isPrime remains true. Since number is 25, number % i  == 0 is true when i is 5. In this case, isPrime is set to false and the loop exits. So, the output is taht i is 5 and isPrime is true. The correct answer is  B.
+
+#
+30.	What is sum after the following loop terminates?
+
+int sum = 0;
+int item = 0;
+do {
+  item++;
+  if (sum &gt;= 4) 
+    continue;
+  sum += item;
+}
+while (item &lt; 5);
+a.	6
+b.	7
+c.	8
+d.	9
+e.     10
+Key:a In this loop, when sum >= 4, the continue statement is executed to exit the current iteration so the next statement sum += item after the if statement will not be executed. The loop keeps adding item to sum for item 1, 2, 3, and so on. So sum is 1, 2, and 6. When sum is 6, sum >=4 is true, the continue statement is executed to skip the rest of the iteration. When the loop ends, sum is still 6. So, the correct answer is A.
+
+#
+31.	Will the following program terminate?
+
+int balance = 10;
+
+while (true) {
+  if (balance &lt; 9) 
+    continue;
+  balance = balance - 9;
+}
+a.	Yes
+b.	No
+Key:b Before the loop, balance is 10. In the loop, balance becomes 1. The loop-continuation-condition is always true. When balance < 9 is true, the continue statement is executed to skip the rest statement in the iteration. So the loop continues in an infinite loop. So, the correct answer is B.
+
+#
+32.	What balance after the following code is executed?
+
+int balance = 10;
+
+while (balance >= 1) {
+  if (balance < 9)
+    continue;
+  balance = balance - 9;
+}
+A. 	-1
+B.	0
+C.	1
+D.	2
+E.	The loop does not end
+Key:e Before the loop, balance is 10. The loop-continuation-condition is true (10 >= 1). In the first iteration, balance is reduced to 1. Since 1 >= 1 is true, the loop body is executed. Since balance < 9 is true, the continue statement is executed to skip the rest statement in the iteration. balance continues to be 1 and the continue statement is executed to skip the rest statement in the iteration. So the loop runs infinitely. So the correct answer to this question is E.
+
+#
+33.	What is the value of balance after the following code is executed?
+
+int balance = 10;
+
+while (balance >= 1) {
+  if (balance < 9) 
+    break;
+  balance = balance - 9;
+}
+A. 	-1
+B.	0
+C.	1
+D.	2
+Key:c Before the loop, balance is 10. The loop-continuation-condition is true (10 >= 1). In the first iteration, balance is reduced to 1. Since 1 >= 1 is true, the loop body is executed. Since balance < 9 is true, the break statement is executed to exit the loop. So, balance is 1 after the loop is finished. The correct answer for this question is C.
+
+#
+Section 5.13 Case Study: Checking Palindromes
+34. What is the number of iterations in the following loop?
+
+  for (int i = 1; i < n; i++) {
+    // iteration
+  }  
+
+a. 2*n
+b. n
+c. n - 1
+d. n + 1
+Key:c  The loop is executed n – 1 times for i from 1 to n – 1. So, the correct answer is C.
+
+#
+35. What is the number of iterations in the following loop?
+
+  for (int i = 1; i <= n; i++) {
+    // iteration
+  }  
+
+a. 2*n
+b. n
+c. n - 1
+d. n + 1
+Key:b  The loop is executed n times for i from 1 to n. So, the correct answer is B.
+
+#
+Section 5.14 Case Study: Displaying Prime Numbers
+36. Suppose the input for number is 9. What is the output from running the following program?
+
+import java.util.Scanner;
+
+public class Test {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    System.out.print("Enter an integer: ");
+    int number = input.nextInt();   
+
+    int i;
+
+    boolean isPrime = true;
+    for (i = 2; i < number && isPrime; i++) {
+      if (number % i == 0) {
+        isPrime = false;
+      }
+    }
+
+    System.out.println("i is " + i);
+
+    if (isPrime)
+      System.out.println(number + " is prime");
+    else
+      System.out.println(number + " is not prime");   
+  }
+}
+
+a. i is 3 followed by 9 is prime
+b. i is 3 followed by 9 is not prime
+c. i is 4 followed by 9 is prime
+d. i is 4 followed by 9 is not prime
+Key:d  The input number is 9. isPrime is initialized to true. The loop tests if number is divisble by i for i from 2, 3, and so on. When i is 3, isPrime is false. The loop continuation condition becomes false. The loop is not finished. Before the loop continuation condition is checked, i++ increments i by 1. So, output is that i is 4 and following by 9 is not prime. So, the correct answer is  is executed n times for i from 1 to n. So, the correct answer is D.
+
+#
+37. Analyze the following code:
+
+import java.util.Scanner;
+
+public class Test { 
+  public static void main(String[] args) {
+    int sum = 0;
+    for (int i = 0; i < 100000; i++) {
+      Scanner input = new Scanner(System.in);
+      sum += input.nextInt();
+    }
+  }
+}
+
+a. The program does not compile because the Scanner input = new Scanner(System.in); statement is inside the loop.                          
+b. The program compiles, but does not run because the Scanner input = new Scanner(System.in); statement is inside the loop.
+c. The program compiles and runs, but it is not efficient and unnecessary to execute the Scanner input = new Scanner(System.in); statement inside the loop. You should move the statement before the loop.
+d. The program compiles, but does not run because there is not prompting message for entering the input.
+Key:c To receive input from the keyboard, you need to create an input object from the Scanner class. You should create this object only once in the program. Placing the statement Scanner input = new Scanner(System.in) in the loop causes it to be created multiple times, which is a bad practice and could lead to potential errors. So, the correct answer is C.
+

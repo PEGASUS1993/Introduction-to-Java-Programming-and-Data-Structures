@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RotateDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RotateDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> RotateDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    Pane pane = <span class = "keyword">new</span> Pane();
+    java.util.Random random = <span class = "keyword">new</span> java.util.Random();
+    <span class = "comment">// The radius of the circle for anchoring rectangles</span>
+    <span class = "keyword">double</span> radius = <span class = "constant">90</span>; 
+    <span class = "keyword">double</span> width = <span class = "constant">20</span>; <span class = "comment">// Width of the rectangle</span>
+    <span class = "keyword">double</span> height = <span class = "constant">40</span>; <span class = "comment">// Height of the rectangle</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">8</span>; i++) {
+      <span class = "comment">// Center of a rectangle</span>
+      <span class = "keyword">double</span> x = <span class = "constant">150</span> + radius * Math.cos(i * <span class = "constant">2</span> * Math.PI / <span class = "constant">8</span>);
+      <span class = "keyword">double</span> y = <span class = "constant">150</span> + radius * Math.sin(i * <span class = "constant">2</span> * Math.PI / <span class = "constant">8</span>);              
+      Rectangle rectangle = <span class = "keyword">new</span> Rectangle(
+        x - width / <span class = "constant">2</span>, y - height / <span class = "constant">2</span>, width, height);  
+      rectangle.setFill(Color.WHITE);
+      rectangle.setStroke(Color.color(random.nextDouble(), 
+        random.nextDouble(), random.nextDouble()));
+      rectangle.setRotate(i * <span class = "constant">360</span> / <span class = "constant">8</span>); <span class = "comment">// Rotate the rectangle</span>
+      pane.getChildren().add(rectangle);
+    }
+
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">300</span>);           
+    primaryStage.setTitle(<span class = "literal">"RotateDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">// Lauch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

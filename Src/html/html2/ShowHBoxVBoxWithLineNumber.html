@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowHBoxVBox.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowHBoxVBox.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Insets;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.VBox;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.Image;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ShowHBoxVBox <span class = "keyword">extends</span> Application {
+ 14&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 16&nbsp;&nbsp;    <span class = "comment">// Create a border pane </span>
+ 17&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;    <span class = "comment">// Place nodes in the pane</span>
+ 20&nbsp;&nbsp;    pane.setTop(getHBox()); 
+ 21&nbsp;&nbsp;    pane.setLeft(getVBox());
+ 22&nbsp;&nbsp;    
+ 23&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 24&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane);
+ 25&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ShowHBoxVBox"</span>); <span class = "comment">// Set the stage title</span>
+ 26&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 27&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;  
+ 30&nbsp;&nbsp;  <span class = "keyword">private</span> HBox getHBox() {
+ 31&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">15</span>); 
+ 32&nbsp;&nbsp;    hBox.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">15</span>, <span class = "constant">15</span>, <span class = "constant">15</span>, <span class = "constant">15</span>));
+ 33&nbsp;&nbsp;    hBox.setStyle(<span class = "literal">"-fx-background-color: gold"</span>);
+ 34&nbsp;&nbsp;    hBox.getChildren().add(<span class = "keyword">new</span> Button(<span class = "literal">"Computer Science"</span>));
+ 35&nbsp;&nbsp;    hBox.getChildren().add(<span class = "keyword">new</span> Button(<span class = "literal">"Chemistry"</span>));
+ 36&nbsp;&nbsp;    ImageView imageView = <span class = "keyword">new</span> ImageView(<span class = "keyword">new</span> Image(<span class = "literal">"image/us.gif"</span>));
+ 37&nbsp;&nbsp;    hBox.getChildren().add(imageView);
+ 38&nbsp;&nbsp;    <span class = "keyword">return</span> hBox;
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;  
+ 41&nbsp;&nbsp;  <span class = "keyword">private</span> VBox getVBox() {
+ 42&nbsp;&nbsp;    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">15</span>);
+ 43&nbsp;&nbsp;    vBox.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">15</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>));
+ 44&nbsp;&nbsp;    vBox.getChildren().add(<span class = "keyword">new</span> Label(<span class = "literal">"Courses"</span>));
+ 45&nbsp;&nbsp;    
+ 46&nbsp;&nbsp;    Label[] courses = {<span class = "keyword">new</span> Label(<span class = "literal">"CSCI 1301"</span>), <span class = "keyword">new</span> Label(<span class = "literal">"CSCI 1302"</span>), 
+ 47&nbsp;&nbsp;        <span class = "keyword">new</span> Label(<span class = "literal">"CSCI 2410"</span>), <span class = "keyword">new</span> Label(<span class = "literal">"CSCI 3720"</span>)};
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;    <span class = "keyword">for</span> (Label course: courses) {
+ 50&nbsp;&nbsp;      VBox.setMargin(course, <span class = "keyword">new</span> Insets(<span class = "constant">0</span>, <span class = "constant">0</span>, <span class = "constant">0</span>, <span class = "constant">15</span>));
+ 51&nbsp;&nbsp;      vBox.getChildren().add(course);
+ 52&nbsp;&nbsp;    }
+ 53&nbsp;&nbsp;    
+ 54&nbsp;&nbsp;    <span class = "keyword">return</span> vBox;
+ 55&nbsp;&nbsp;  }
+ 56&nbsp;&nbsp;  
+ 57&nbsp;&nbsp;  <span class = "comment">/**
+ 58&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 59&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 60&nbsp;&nbsp;   */</span>
+ 61&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 62&nbsp;&nbsp;    launch(args);
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;} 
+</pre>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TableViewSample.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TableViewSampleWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.beans.property.SimpleStringProperty;
+<span class = "keyword">import</span> javafx.collections.FXCollections;
+<span class = "keyword">import</span> javafx.collections.ObservableList;
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.scene.Group;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TableColumn;
+<span class = "keyword">import</span> javafx.scene.control.TableColumn.CellEditEvent;
+<span class = "keyword">import</span> javafx.scene.control.TableView;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.control.cell.PropertyValueFactory;
+<span class = "keyword">import</span> javafx.scene.control.cell.TextFieldTableCell;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.scene.text.Font;
+<span class = "keyword">import</span> javafx.stage.Stage;
+ 
+<span class = "keyword">public</span> <span class = "keyword">class</span> TableViewSample <span class = "keyword">extends</span> Application {
+ 
+    <span class = "keyword">private</span> TableView&lt;Person&gt; table = <span class = "keyword">new</span> TableView&lt;Person&gt;();
+    <span class = "keyword">private</span> <span class = "keyword">final</span> ObservableList&lt;Person&gt; data =
+            FXCollections.observableArrayList(
+            <span class = "keyword">new</span> Person(<span class = "literal">"Jacob"</span>, <span class = "literal">"Smith"</span>, <span class = "literal">"jacob.smith@example.com"</span>),
+            <span class = "keyword">new</span> Person(<span class = "literal">"Isabella"</span>, <span class = "literal">"Johnson"</span>, <span class = "literal">"isabella.johnson@example.com"</span>),
+            <span class = "keyword">new</span> Person(<span class = "literal">"Ethan"</span>, <span class = "literal">"Williams"</span>, <span class = "literal">"ethan.williams@example.com"</span>),
+            <span class = "keyword">new</span> Person(<span class = "literal">"Emma"</span>, <span class = "literal">"Jones"</span>, <span class = "literal">"emma.jones@example.com"</span>),
+            <span class = "keyword">new</span> Person(<span class = "literal">"Michael"</span>, <span class = "literal">"Brown"</span>, <span class = "literal">"michael.brown@example.com"</span>));
+    <span class = "keyword">final</span> HBox hb = <span class = "keyword">new</span> HBox();
+ 
+    <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+        launch(args);
+    }
+ 
+    @Override
+    <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage stage) {
+        Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> Group());
+        stage.setTitle(<span class = "literal">"Table View Sample"</span>);
+        stage.setWidth(<span class = "constant">450</span>);
+        stage.setHeight(<span class = "constant">550</span>);
+ 
+        <span class = "keyword">final</span> Label label = <span class = "keyword">new</span> Label(<span class = "literal">"Address Book"</span>);
+        label.setFont(<span class = "keyword">new</span> Font(<span class = "literal">"Arial"</span>, <span class = "constant">20</span>));
+ 
+        table.setEditable(<span class = "keyword">true</span>);
+ 
+        TableColumn firstNameCol = <span class = "keyword">new</span> TableColumn(<span class = "literal">"First Name"</span>);
+        firstNameCol.setMinWidth(<span class = "constant">100</span>);
+        firstNameCol.setCellValueFactory(
+            <span class = "keyword">new</span> PropertyValueFactory&lt;Person, String&gt;(<span class = "literal">"firstName"</span>));
+        firstNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        firstNameCol.setOnEditCommit(
+            <span class = "keyword">new</span> EventHandler&lt;CellEditEvent&lt;Person, String&gt;&gt;() {
+                @Override
+                <span class = "keyword">public</span> <span class = "keyword">void</span> handle(CellEditEvent&lt;Person, String&gt; t) {
+                    ((Person) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                            ).setFirstName(t.getNewValue());
+                }
+            }
+        );
+ 
+ 
+        TableColumn lastNameCol = <span class = "keyword">new</span> TableColumn(<span class = "literal">"Last Name"</span>);
+        lastNameCol.setMinWidth(<span class = "constant">100</span>);
+        lastNameCol.setCellValueFactory(
+            <span class = "keyword">new</span> PropertyValueFactory&lt;Person, String&gt;(<span class = "literal">"lastName"</span>));
+        lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameCol.setOnEditCommit(
+            <span class = "keyword">new</span> EventHandler&lt;CellEditEvent&lt;Person, String&gt;&gt;() {
+                @Override
+                <span class = "keyword">public</span> <span class = "keyword">void</span> handle(CellEditEvent&lt;Person, String&gt; t) {
+                    ((Person) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                        ).setLastName(t.getNewValue());
+                }
+            }
+        );
+ 
+        TableColumn emailCol = <span class = "keyword">new</span> TableColumn(<span class = "literal">"Email"</span>);
+        emailCol.setMinWidth(<span class = "constant">200</span>);
+        emailCol.setCellValueFactory(
+            <span class = "keyword">new</span> PropertyValueFactory&lt;Person, String&gt;(<span class = "literal">"email"</span>));
+        emailCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        emailCol.setOnEditCommit(
+            <span class = "keyword">new</span> EventHandler&lt;CellEditEvent&lt;Person, String&gt;&gt;() {
+                @Override
+                <span class = "keyword">public</span> <span class = "keyword">void</span> handle(CellEditEvent&lt;Person, String&gt; t) {
+                    ((Person) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                        ).setEmail(t.getNewValue());
+                }
+            }
+        );
+ 
+        table.setItems(data);
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+ 
+        <span class = "keyword">final</span> TextField addFirstName = <span class = "keyword">new</span> TextField();
+        addFirstName.setPromptText(<span class = "literal">"First Name"</span>);
+        addFirstName.setMaxWidth(firstNameCol.getPrefWidth());
+        <span class = "keyword">final</span> TextField addLastName = <span class = "keyword">new</span> TextField();
+        addLastName.setMaxWidth(lastNameCol.getPrefWidth());
+        addLastName.setPromptText(<span class = "literal">"Last Name"</span>);
+        <span class = "keyword">final</span> TextField addEmail = <span class = "keyword">new</span> TextField();
+        addEmail.setMaxWidth(emailCol.getPrefWidth());
+        addEmail.setPromptText(<span class = "literal">"Email"</span>);
+ 
+        <span class = "keyword">final</span> Button addButton = <span class = "keyword">new</span> Button(<span class = "literal">"Add"</span>);
+        addButton.setOnAction(<span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+            @Override
+            <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+                data.add(<span class = "keyword">new</span> Person(
+                        addFirstName.getText(),
+                        addLastName.getText(),
+                        addEmail.getText()));
+                addFirstName.clear();
+                addLastName.clear();
+                addEmail.clear();
+            }
+        });
+ 
+        hb.getChildren().addAll(addFirstName, addLastName, addEmail, addButton);
+        hb.setSpacing(<span class = "constant">3</span>);
+ 
+        <span class = "keyword">final</span> VBox vbox = <span class = "keyword">new</span> VBox();
+        vbox.setSpacing(<span class = "constant">5</span>);
+        vbox.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">10</span>, <span class = "constant">0</span>, <span class = "constant">0</span>, <span class = "constant">10</span>));
+        vbox.getChildren().addAll(label, table, hb);
+ 
+        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+ 
+        stage.setScene(scene);
+        stage.show();
+    }
+ 
+    <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Person {
+ 
+        <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleStringProperty firstName;
+        <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleStringProperty lastName;
+        <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleStringProperty email;
+ 
+        <span class = "keyword">private</span> Person(String fName, String lName, String email) {
+            <span class = "keyword">this</span>.firstName = <span class = "keyword">new</span> SimpleStringProperty(fName);
+            <span class = "keyword">this</span>.lastName = <span class = "keyword">new</span> SimpleStringProperty(lName);
+            <span class = "keyword">this</span>.email = <span class = "keyword">new</span> SimpleStringProperty(email);
+        }
+ 
+        <span class = "keyword">public</span> String getFirstName() {
+            <span class = "keyword">return</span> firstName.get();
+        }
+ 
+        <span class = "keyword">public</span> <span class = "keyword">void</span> setFirstName(String fName) {
+            firstName.set(fName);
+        }
+ 
+        <span class = "keyword">public</span> String getLastName() {
+            <span class = "keyword">return</span> lastName.get();
+        }
+ 
+        <span class = "keyword">public</span> <span class = "keyword">void</span> setLastName(String fName) {
+            lastName.set(fName);
+        }
+ 
+        <span class = "keyword">public</span> String getEmail() {
+            <span class = "keyword">return</span> email.get();
+        }
+ 
+        <span class = "keyword">public</span> <span class = "keyword">void</span> setEmail(String fName) {
+            email.set(fName);
+        }
+    }
+}
+</pre>
+</body>
+</html>

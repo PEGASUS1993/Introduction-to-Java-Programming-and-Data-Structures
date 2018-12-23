@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PrimeNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PrimeNumbersWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PrimeNumbers" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> PrimeNumbers {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Find all prime numbers &lt;= n, enter n: "</span>);
+    <span class = "keyword">int</span> n = input.nextInt();
+
+    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_PER_LINE = <span class = "constant">10</span>; <span class = "comment">// Display 10 per line</span>
+    <span class = "keyword">int</span> count = <span class = "constant">0</span>; <span class = "comment">// Count the number of prime numbers</span>
+    <span class = "keyword">int</span> number = <span class = "constant">2</span>; <span class = "comment">// A number to be tested for primeness</span>
+
+    System.out.println(<span class = "literal">"The prime numbers are:"</span>);
+
+    <span class = "comment">// Repeatedly find prime numbers</span>
+    <span class = "keyword">while</span> (number &lt;= n) {
+      <span class = "comment">// Assume the number is prime</span>
+      <span class = "keyword">boolean</span> isPrime = <span class = "keyword">true</span>; <span class = "comment">// Is the current number prime?</span>
+
+      <span class = "comment">// ClosestPair if number is prime</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> divisor = <span class = "constant">2</span>; divisor &lt;= (<span class = "keyword">int</span>)(Math.sqrt(number)); 
+          divisor++) {
+        <span class = "keyword">if</span> (number % divisor == <span class = "constant">0</span>) { <span class = "comment">// If true, number is not prime</span>
+          isPrime = <span class = "keyword">false</span>; <span class = "comment">// Set isPrime to false          </span>
+          <span class = "keyword">break</span>; <span class = "comment">// Exit the for loop</span>
+        }
+      }
+
+      <span class = "comment">// Print the prime number and increase the count</span>
+      <span class = "keyword">if</span> (isPrime) {
+        count++; <span class = "comment">// Increase the count</span>
+
+        <span class = "keyword">if</span> (count % NUMBER_PER_LINE == <span class = "constant">0</span>) {
+          <span class = "comment">// Print the number and advance to the new line</span>
+          System.out.printf(<span class = "literal">"%7d\n"</span>, number);
+        }
+        <span class = "keyword">else</span>
+          System.out.printf(<span class = "literal">"%7d"</span>, number);
+      }
+
+      <span class = "comment">// Check if the next number is prime</span>
+      number++;
+    }
+    
+    System.out.println(<span class = "literal">"\n"</span> + count + 
+      <span class = "literal">" prime(s) less than or equal to "</span> + n);
+  }
+}
+</pre>
+</body>
+</html>

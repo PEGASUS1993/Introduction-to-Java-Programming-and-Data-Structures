@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComboBoxSample.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ComboBoxSample.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.beans.value.ChangeListener;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.beans.value.ObservableValue;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.ActionEvent;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.EventHandler;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Insets;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Group;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.*;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.util.Callback;
+ 14&nbsp;&nbsp; 
+ 15&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ComboBoxSample <span class = "keyword">extends</span> Application {
+ 16&nbsp;&nbsp;        <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 17&nbsp;&nbsp;        launch(args);
+ 18&nbsp;&nbsp;    }
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    <span class = "keyword">final</span> Button button = <span class = "keyword">new</span> Button (<span class = "literal">"Send"</span>);
+ 21&nbsp;&nbsp;    <span class = "keyword">final</span> Label notification = <span class = "keyword">new</span> Label ();
+ 22&nbsp;&nbsp;    <span class = "keyword">final</span> TextField subject = <span class = "keyword">new</span> TextField(<span class = "literal">""</span>);
+ 23&nbsp;&nbsp;    <span class = "keyword">final</span> TextArea text = <span class = "keyword">new</span> TextArea (<span class = "literal">""</span>);
+ 24&nbsp;&nbsp;    
+ 25&nbsp;&nbsp;    String address = <span class = "literal">" "</span>;
+ 26&nbsp;&nbsp;    
+ 27&nbsp;&nbsp;    @Override <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage stage) {
+ 28&nbsp;&nbsp;        stage.setTitle(<span class = "literal">"ComboBoxSample"</span>);
+ 29&nbsp;&nbsp;        Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> Group(), <span class = "constant">450</span>, <span class = "constant">250</span>);
+ 30&nbsp;&nbsp;        
+ 31&nbsp;&nbsp;        <span class = "keyword">final</span> ComboBox emailComboBox = <span class = "keyword">new</span> ComboBox();
+ 32&nbsp;&nbsp;        emailComboBox.getItems().addAll(
+ 33&nbsp;&nbsp;            <span class = "literal">"jacob.smith@example.com"</span>,
+ 34&nbsp;&nbsp;            <span class = "literal">"isabella.johnson@example.com"</span>,
+ 35&nbsp;&nbsp;            <span class = "literal">"ethan.williams@example.com"</span>,
+ 36&nbsp;&nbsp;            <span class = "literal">"emma.jones@example.com"</span>,
+ 37&nbsp;&nbsp;            <span class = "literal">"michael.brown@example.com"</span>  
+ 38&nbsp;&nbsp;        );
+ 39&nbsp;&nbsp;        emailComboBox.setPromptText(<span class = "literal">"Email address"</span>);
+ 40&nbsp;&nbsp;        emailComboBox.setEditable(<span class = "keyword">true</span>);        
+ 41&nbsp;&nbsp;        emailComboBox.valueProperty().addListener(<span class = "keyword">new</span> ChangeListener&lt;String&gt;() {
+ 42&nbsp;&nbsp;            @Override <span class = "keyword">public</span> <span class = "keyword">void</span> changed(ObservableValue ov, String t, String t1) {                
+ 43&nbsp;&nbsp;                address = t1;                
+ 44&nbsp;&nbsp;            }    
+ 45&nbsp;&nbsp;        });
+ 46&nbsp;&nbsp;        
+ 47&nbsp;&nbsp;        <span class = "keyword">final</span> ComboBox priorityComboBox = <span class = "keyword">new</span> ComboBox();
+ 48&nbsp;&nbsp;        priorityComboBox.getItems().addAll(
+ 49&nbsp;&nbsp;            <span class = "literal">"Highest"</span>,
+ 50&nbsp;&nbsp;            <span class = "literal">"High"</span>,
+ 51&nbsp;&nbsp;            <span class = "literal">"Normal"</span>,
+ 52&nbsp;&nbsp;            <span class = "literal">"Low"</span>,
+ 53&nbsp;&nbsp;            <span class = "literal">"Lowest"</span> 
+ 54&nbsp;&nbsp;        );   
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;        priorityComboBox.setValue(<span class = "literal">"Normal"</span>);
+ 57&nbsp;&nbsp;        priorityComboBox.setCellFactory(
+ 58&nbsp;&nbsp;            <span class = "keyword">new</span> Callback&lt;ListView&lt;String&gt;, ListCell&lt;String&gt;&gt;() {
+ 59&nbsp;&nbsp;                @Override <span class = "keyword">public</span> ListCell&lt;String&gt; call(ListView&lt;String&gt; param) {
+ 60&nbsp;&nbsp;                    <span class = "keyword">final</span> ListCell&lt;String&gt; cell = <span class = "keyword">new</span> ListCell&lt;String&gt;() {
+ 61&nbsp;&nbsp;                        {
+ 62&nbsp;&nbsp;                            <span class = "keyword">super</span>.setPrefWidth(<span class = "constant">100</span>);
+ 63&nbsp;&nbsp;                        }    
+ 64&nbsp;&nbsp;                        @Override <span class = "keyword">public</span> <span class = "keyword">void</span> updateItem(String item, 
+ 65&nbsp;&nbsp;                            <span class = "keyword">boolean</span> empty) {
+ 66&nbsp;&nbsp;                                <span class = "keyword">super</span>.updateItem(item, empty);
+ 67&nbsp;&nbsp;                                <span class = "keyword">if</span> (item != <span class = "keyword">null</span>) {
+ 68&nbsp;&nbsp;                                    setText(item);    
+ 69&nbsp;&nbsp;                                    <span class = "keyword">if</span> (item.contains(<span class = "literal">"High"</span>)) {
+ 70&nbsp;&nbsp;                                        setTextFill(Color.RED);
+ 71&nbsp;&nbsp;                                    }
+ 72&nbsp;&nbsp;                                    <span class = "keyword">else</span> <span class = "keyword">if</span> (item.contains(<span class = "literal">"Low"</span>)){
+ 73&nbsp;&nbsp;                                        setTextFill(Color.GREEN);
+ 74&nbsp;&nbsp;                                    }
+ 75&nbsp;&nbsp;                                    <span class = "keyword">else</span> {
+ 76&nbsp;&nbsp;                                        setTextFill(Color.BLACK);
+ 77&nbsp;&nbsp;                                    }
+ 78&nbsp;&nbsp;                                }
+ 79&nbsp;&nbsp;                                <span class = "keyword">else</span> {
+ 80&nbsp;&nbsp;                                    setText(<span class = "keyword">null</span>);
+ 81&nbsp;&nbsp;                                }
+ 82&nbsp;&nbsp;                            }
+ 83&nbsp;&nbsp;                };
+ 84&nbsp;&nbsp;                <span class = "keyword">return</span> cell;
+ 85&nbsp;&nbsp;            }
+ 86&nbsp;&nbsp;        });
+ 87&nbsp;&nbsp;     
+ 88&nbsp;&nbsp;        
+ 89&nbsp;&nbsp;        button.setOnAction(<span class = "keyword">new</span> EventHandler&lt;ActionEvent&gt;() {
+ 90&nbsp;&nbsp;            @Override
+ 91&nbsp;&nbsp;            <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+ 92&nbsp;&nbsp;                <span class = "keyword">if</span> (emailComboBox.getValue() != <span class = "keyword">null</span> && 
+ 93&nbsp;&nbsp;                    !emailComboBox.getValue().toString().isEmpty()){
+ 94&nbsp;&nbsp;                        notification.setText(<span class = "literal">"Your message was successfully sent"</span>
+ 95&nbsp;&nbsp;                            + <span class = "literal">" to "</span> + address);   
+ 96&nbsp;&nbsp;                        emailComboBox.setValue(<span class = "keyword">null</span>);
+ 97&nbsp;&nbsp;                        <span class = "keyword">if</span> (priorityComboBox.getValue() != <span class = "keyword">null</span> && 
+ 98&nbsp;&nbsp;                            !priorityComboBox.getValue().toString().isEmpty()){
+ 99&nbsp;&nbsp;                                priorityComboBox.setValue(<span class = "keyword">null</span>);
+100&nbsp;&nbsp;                            }
+101&nbsp;&nbsp;                        subject.clear();
+102&nbsp;&nbsp;                        text.clear();
+103&nbsp;&nbsp;                }
+104&nbsp;&nbsp;                <span class = "keyword">else</span> {
+105&nbsp;&nbsp;                    notification.setText(<span class = "literal">"You have not selected a recipient!"</span>); 
+106&nbsp;&nbsp;                }
+107&nbsp;&nbsp;            }
+108&nbsp;&nbsp;        });
+109&nbsp;&nbsp;        
+110&nbsp;&nbsp;        GridPane grid = <span class = "keyword">new</span> GridPane();
+111&nbsp;&nbsp;        grid.setVgap(<span class = "constant">4</span>);
+112&nbsp;&nbsp;        grid.setHgap(<span class = "constant">10</span>);
+113&nbsp;&nbsp;        grid.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>));
+114&nbsp;&nbsp;        grid.add(<span class = "keyword">new</span> Label(<span class = "literal">"To: "</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+115&nbsp;&nbsp;        grid.add(emailComboBox, <span class = "constant">1</span>, <span class = "constant">0</span>);
+116&nbsp;&nbsp;        grid.add(<span class = "keyword">new</span> Label(<span class = "literal">"Priority: "</span>), <span class = "constant">2</span>, <span class = "constant">0</span>);
+117&nbsp;&nbsp;        grid.add(priorityComboBox, <span class = "constant">3</span>, <span class = "constant">0</span>);
+118&nbsp;&nbsp;        grid.add(<span class = "keyword">new</span> Label(<span class = "literal">"Subject: "</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+119&nbsp;&nbsp;        grid.add(subject, <span class = "constant">1</span>, <span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">1</span>);            
+120&nbsp;&nbsp;        grid.add(text, <span class = "constant">0</span>, <span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">1</span>);
+121&nbsp;&nbsp;        grid.add(button, <span class = "constant">0</span>, <span class = "constant">3</span>);
+122&nbsp;&nbsp;        grid.add (notification, <span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">3</span>, <span class = "constant">1</span>);
+123&nbsp;&nbsp;        
+124&nbsp;&nbsp;        Group root = (Group)scene.getRoot();
+125&nbsp;&nbsp;        root.getChildren().add(grid);
+126&nbsp;&nbsp;        stage.setScene(scene);
+127&nbsp;&nbsp;        stage.show();
+128&nbsp;&nbsp; 
+129&nbsp;&nbsp;    }    
+130&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

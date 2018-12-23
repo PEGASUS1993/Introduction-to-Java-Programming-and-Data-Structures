@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GeometricObjectComparator.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GeometricObjectComparatorWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Comparator;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> GeometricObjectComparator
+    <span class = "keyword">implements</span> Comparator&lt;GeometricObject&gt;, java.io.Serializable {
+  <span class = "keyword">public</span> <span class = "keyword">int</span> compare(GeometricObject o1, GeometricObject o2) {
+    <span class = "keyword">return</span> o1.getArea() &gt; o2.getArea() ? 
+    	<span class = "constant">1</span> : o1.getArea() == o2.getArea() ? <span class = "constant">0</span> : <span class = "literal">-</span><span class = "constant">1</span>;
+  }
+}
+</pre>
+</body>
+</html>

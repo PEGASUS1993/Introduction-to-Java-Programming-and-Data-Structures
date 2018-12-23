@@ -1,0 +1,162 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StoreAndRetrieveImage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StoreAndRetrieveImageWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.*;
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> StoreAndRetrieveImage <span class = "keyword">extends</span> Application {
+  <span class = "comment">// Connection to the database</span>
+  <span class = "keyword">private</span> Connection connection;
+
+  <span class = "comment">// Statement for static SQL statements</span>
+  <span class = "keyword">private</span> Statement stmt;
+
+  <span class = "comment">// Prepared statement</span>
+  <span class = "keyword">private</span> PreparedStatement pstmt = <span class = "keyword">null</span>;
+  <span class = "keyword">private</span> DescriptionPane descriptionPane
+    = <span class = "keyword">new</span> DescriptionPane();
+
+  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboCountry = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "keyword">try</span> {
+      connectDB(); <span class = "comment">// Connect to DB</span>
+      storeDataToTable(); //Store data to the table (including image)
+      fillDataInComboBox(); <span class = "comment">// Fill in combo box</span>
+      retrieveFlagInfo(cboCountry.getSelectionModel().getSelectedItem());
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      ex.printStackTrace();
+    }
+
+    BorderPane paneForComboBox = <span class = "keyword">new</span> BorderPane();
+    paneForComboBox.setLeft(<span class = "keyword">new</span> Label(<span class = "literal">"Select a country: "</span>));
+    paneForComboBox.setCenter(cboCountry);
+    cboCountry.setPrefWidth(<span class = "constant">400</span>);
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setTop(paneForComboBox);
+    pane.setCenter(descriptionPane);
+    
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">350</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"StoreAndRetrieveImage"</span>); 
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    cboCountry.setOnAction(e -&gt;
+      retrieveFlagInfo(cboCountry.getValue()));
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> connectDB() <span class = "keyword">throws</span> Exception {
+    <span class = "comment">// Load the driver</span>
+    Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+    System.out.println(<span class = "literal">"Driver loaded"</span>);
+
+    <span class = "comment">// Establish connection</span>
+    connection = DriverManager.getConnection
+      (<span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+    System.out.println(<span class = "literal">"Database connected"</span>);
+
+    <span class = "comment">// Create a statement for static SQL</span>
+    stmt = connection.createStatement();
+
+    <span class = "comment">// Create a prepared statement to retrieve flag and description</span>
+    pstmt = connection.prepareStatement(<span class = "literal">"select flag, description "</span> +
+      <span class = "literal">"from Country where name = ?"</span>);
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> storeDataToTable() {
+    String[] countries = {<span class = "literal">"Canada"</span>, <span class = "literal">"UK"</span>, <span class = "literal">"USA"</span>, <span class = "literal">"Germany"</span>,
+      <span class = "literal">"Indian"</span>, <span class = "literal">"China"</span>};
+
+    String[] imageFilenames = {<span class = "literal">"image/ca.gif"</span>, <span class = "literal">"image/uk.gif"</span>,
+      <span class = "literal">"image/us.gif"</span>, <span class = "literal">"image/germany.gif"</span>, <span class = "literal">"image/india.gif"</span>,
+      <span class = "literal">"image/china.gif"</span>};
+
+    String[] descriptions = {<span class = "literal">"A text to describe Canadian "</span> +
+      <span class = "literal">"flag is omitted"</span>, <span class = "literal">"British flag ..."</span>, <span class = "literal">"American flag ..."</span>,
+      <span class = "literal">"German flag ..."</span>, <span class = "literal">"Indian flag ..."</span>, <span class = "literal">"Chinese flag ..."</span>};
+
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Create a prepared statement to insert records</span>
+      PreparedStatement pstmt = connection.prepareStatement(
+        <span class = "literal">"insert into Country values(?, ?, ?)"</span>);
+
+      <span class = "comment">// Store all predefined records</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; countries.length; i++) {
+        pstmt.setString(<span class = "constant">1</span>, countries[i]);
+
+        <span class = "comment">// Store image to the table cell</span>
+        java.net.URL url =
+          <span class = "keyword">this</span>.getClass().getResource(imageFilenames[i]);
+        InputStream inputImage = url.openStream();
+        pstmt.setBinaryStream(<span class = "constant">2</span>, inputImage,
+          (<span class = "keyword">int</span>)(inputImage.available()));
+
+        pstmt.setString(<span class = "constant">3</span>, descriptions[i]);
+        pstmt.executeUpdate();
+      }
+
+      System.out.println(<span class = "literal">"Table Country populated"</span>);
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> fillDataInComboBox() <span class = "keyword">throws</span> Exception {
+    ResultSet rs = stmt.executeQuery(<span class = "literal">"select name from Country"</span>);
+    <span class = "keyword">while</span> (rs.next()) {
+      cboCountry.getItems().add(rs.getString(<span class = "constant">1</span>));
+    }
+    cboCountry.getSelectionModel().selectFirst();
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> retrieveFlagInfo(String name) {
+    <span class = "keyword">try</span> {
+      pstmt.setString(<span class = "constant">1</span>, name);
+      ResultSet rs = pstmt.executeQuery();
+      <span class = "keyword">if</span> (rs.next()) {
+        Blob blob = rs.getBlob(<span class = "constant">1</span>);     
+        ByteArrayInputStream in = <span class = "keyword">new</span> ByteArrayInputStream
+          (blob.getBytes(<span class = "constant">1</span>, (<span class = "keyword">int</span>)blob.length()));
+        Image image = <span class = "keyword">new</span> Image(in);
+        ImageView imageView = <span class = "keyword">new</span> ImageView(image);
+        descriptionPane.setImageView(imageView);
+        descriptionPane.setTitle(name);
+        String description = rs.getString(<span class = "constant">2</span>);
+        descriptionPane.setDescription(description);
+      }
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      System.err.println(ex);
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * avaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) { 
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

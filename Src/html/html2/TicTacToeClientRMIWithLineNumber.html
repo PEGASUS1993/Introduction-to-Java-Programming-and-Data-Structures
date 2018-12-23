@@ -1,0 +1,219 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TicTacToeClientRMI.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TicTacToeClientRMI.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Platform;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Line;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.registry.Registry;
+ 16&nbsp;&nbsp;<span class = "keyword">import</span> java.rmi.registry.LocateRegistry;
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TicTacToeClientRMI <span class = "keyword">extends</span> Application {
+ 19&nbsp;&nbsp;  <span class = "comment">// marker is used to indicate the token type</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">char</span> marker;
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "comment">// myTurn indicates whether the player can move now</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">boolean</span> myTurn = <span class = "keyword">false</span>;
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;  <span class = "comment">// Indicate which player has a turn, initially it is the X player</span>
+ 26&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">char</span> whoseTurn = <span class = "literal">'X'</span>;
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  <span class = "comment">// Create and initialize cell</span>
+ 29&nbsp;&nbsp;  <span class = "keyword">private</span> Cell[][] cell =  <span class = "keyword">new</span> Cell[<span class = "constant">3</span>][<span class = "constant">3</span>];
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  <span class = "comment">// Create and initialize a status label</span>
+ 32&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblStatus = <span class = "keyword">new</span> Label(<span class = "literal">"X's turn to play"</span>);
+ 33&nbsp;&nbsp;
+ 34&nbsp;&nbsp;  <span class = "comment">// ticTacToe is the game server for coordinating </span>
+ 35&nbsp;&nbsp;  <span class = "comment">// with the players</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">private</span> TicTacToeInterface ticTacToe;
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblIdentification = <span class = "keyword">new</span> Label();
+ 39&nbsp;&nbsp;
+ 40&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 42&nbsp;&nbsp;    <span class = "comment">// Pane to hold cell</span>
+ 43&nbsp;&nbsp;    GridPane pane = <span class = "keyword">new</span> GridPane(); 
+ 44&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+ 45&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+ 46&nbsp;&nbsp;        pane.add(cell[i][j] = <span class = "keyword">new</span> Cell(i, j), j, i);
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+ 49&nbsp;&nbsp;    borderPane.setCenter(pane);
+ 50&nbsp;&nbsp;    borderPane.setTop(lblStatus);
+ 51&nbsp;&nbsp;    borderPane.setBottom(lblIdentification);
+ 52&nbsp;&nbsp;    
+ 53&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 54&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+ 55&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"TicTacToe"</span>); <span class = "comment">// Set the stage title</span>
+ 56&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 57&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+ 58&nbsp;&nbsp;    
+ 59&nbsp;&nbsp;    <span class = "keyword">new</span> Thread( () -&gt; {
+ 60&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 61&nbsp;&nbsp;      initializeRMI();
+ 62&nbsp;&nbsp;    }
+ 63&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+ 64&nbsp;&nbsp;      ex.printStackTrace();
+ 65&nbsp;&nbsp;    }}).start();
+ 66&nbsp;&nbsp;  }
+ 67&nbsp;&nbsp;
+ 68&nbsp;&nbsp;  <span class = "comment">/** Initialize RMI */</span>
+ 69&nbsp;&nbsp;  <span class = "keyword">protected</span> <span class = "keyword">boolean</span> initializeRMI() <span class = "keyword">throws</span> Exception {
+ 70&nbsp;&nbsp;    String host = <span class = "literal">""</span>;
+ 71&nbsp;&nbsp;
+ 72&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 73&nbsp;&nbsp;      Registry registry = LocateRegistry.getRegistry(host);
+ 74&nbsp;&nbsp;      ticTacToe = (TicTacToeInterface) 
+ 75&nbsp;&nbsp;        registry.lookup(<span class = "literal">"TicTacToeImpl"</span>);
+ 76&nbsp;&nbsp;      System.out.println
+ 77&nbsp;&nbsp;        (<span class = "literal">"Server object "</span> + ticTacToe + <span class = "literal">" found"</span>);
+ 78&nbsp;&nbsp;    } 
+ 79&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+ 80&nbsp;&nbsp;      System.out.println(ex);
+ 81&nbsp;&nbsp;    }
+ 82&nbsp;&nbsp;
+ 83&nbsp;&nbsp;    <span class = "comment">// Create callback for use by the </span>
+ 84&nbsp;&nbsp;    <span class = "comment">// server to control the client</span>
+ 85&nbsp;&nbsp;    CallBackImpl callBackControl = <span class = "keyword">new</span> CallBackImpl(<span class = "keyword">this</span>);
+ 86&nbsp;&nbsp;
+ 87&nbsp;&nbsp;    <span class = "keyword">if</span> (
+ 88&nbsp;&nbsp;      (marker = 
+ 89&nbsp;&nbsp;        ticTacToe.connect((CallBack)callBackControl)) != <span class = "literal">' '</span>)
+ 90&nbsp;&nbsp;    {
+ 91&nbsp;&nbsp;      System.out.println(<span class = "literal">"connected as "</span> + marker + <span class = "literal">" player."</span>);
+ 92&nbsp;&nbsp;      Platform.runLater(() -&gt;
+ 93&nbsp;&nbsp;        lblIdentification.setText(<span class = "literal">"You are player "</span> + marker));
+ 94&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+ 95&nbsp;&nbsp;    }
+ 96&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 97&nbsp;&nbsp;      System.out.println(<span class = "literal">"already two players connected as "</span>);
+ 98&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 99&nbsp;&nbsp;    }
+100&nbsp;&nbsp;  }
+101&nbsp;&nbsp;
+102&nbsp;&nbsp;  <span class = "comment">/** Set variable myTurn to true or false */</span>
+103&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setMyTurn(<span class = "keyword">boolean</span> myTurn) {
+104&nbsp;&nbsp;    <span class = "keyword">this</span>.myTurn = myTurn;
+105&nbsp;&nbsp;  }
+106&nbsp;&nbsp;
+107&nbsp;&nbsp;  <span class = "comment">/** Set message on the status label */</span>
+108&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setMessage(String message) {
+109&nbsp;&nbsp;    Platform.runLater(() -&gt; lblStatus.setText(message));
+110&nbsp;&nbsp;  }
+111&nbsp;&nbsp;
+112&nbsp;&nbsp;  <span class = "comment">/** Mark the specified cell using the token */</span>
+113&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> mark(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column, <span class = "keyword">char</span> token) {
+114&nbsp;&nbsp;    cell[row][column].setToken(token);
+115&nbsp;&nbsp;  }
+116&nbsp;&nbsp;
+117&nbsp;&nbsp;  <span class = "comment">// An inner class for a cell</span>
+118&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">class</span> Cell <span class = "keyword">extends</span> Pane {
+119&nbsp;&nbsp;    <span class = "comment">// marked indicates whether the cell has been used</span>
+120&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">boolean</span> marked = <span class = "keyword">false</span>;
+121&nbsp;&nbsp;
+122&nbsp;&nbsp;    <span class = "comment">// row and column indicate where the cell appears on the board</span>
+123&nbsp;&nbsp;    <span class = "keyword">int</span> row, column;
+124&nbsp;&nbsp;
+125&nbsp;&nbsp;   <span class = "comment">// Token used for this cell</span>
+126&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">char</span> token = <span class = "literal">' '</span>;
+127&nbsp;&nbsp;
+128&nbsp;&nbsp;    <span class = "keyword">public</span> Cell(<span class = "keyword">final</span> <span class = "keyword">int</span> row, <span class = "keyword">final</span> <span class = "keyword">int</span> column) {
+129&nbsp;&nbsp;      <span class = "keyword">this</span>.row = row;
+130&nbsp;&nbsp;      <span class = "keyword">this</span>.column = column;
+131&nbsp;&nbsp;      setStyle(<span class = "literal">"-fx-border-color: black"</span>); 
+132&nbsp;&nbsp;      <span class = "keyword">this</span>.setPrefSize(<span class = "constant">2000</span>, <span class = "constant">2000</span>);
+133&nbsp;&nbsp;      <span class = "keyword">this</span>.setOnMouseClicked(e -&gt; handleMouseClick());
+134&nbsp;&nbsp;    }
+135&nbsp;&nbsp;
+136&nbsp;&nbsp;    <span class = "comment">/** Return token */</span>
+137&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">char</span> getToken() {
+138&nbsp;&nbsp;      <span class = "keyword">return</span> token;
+139&nbsp;&nbsp;    }
+140&nbsp;&nbsp;
+141&nbsp;&nbsp;    <span class = "comment">/** Set a new token */</span>
+142&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> setToken(<span class = "keyword">char</span> c) {
+143&nbsp;&nbsp;      token = c;
+144&nbsp;&nbsp;      marked = <span class = "keyword">true</span>;
+145&nbsp;&nbsp;      
+146&nbsp;&nbsp;      <span class = "keyword">if</span> (token == <span class = "literal">'X'</span>) {
+147&nbsp;&nbsp;        Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, 
+148&nbsp;&nbsp;          <span class = "keyword">this</span>.getWidth() - <span class = "constant">10</span>, <span class = "keyword">this</span>.getHeight() - <span class = "constant">10</span>);
+149&nbsp;&nbsp;        line1.endXProperty().bind(<span class = "keyword">this</span>.widthProperty().subtract(<span class = "constant">10</span>));
+150&nbsp;&nbsp;        line1.endYProperty().bind(<span class = "keyword">this</span>.heightProperty().subtract(<span class = "constant">10</span>));
+151&nbsp;&nbsp;        Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "keyword">this</span>.getHeight() - <span class = "constant">10</span>, 
+152&nbsp;&nbsp;          <span class = "keyword">this</span>.getWidth() - <span class = "constant">10</span>, <span class = "constant">10</span>);
+153&nbsp;&nbsp;        line2.startYProperty().bind(
+154&nbsp;&nbsp;          <span class = "keyword">this</span>.heightProperty().subtract(<span class = "constant">10</span>));
+155&nbsp;&nbsp;        line2.endXProperty().bind(<span class = "keyword">this</span>.widthProperty().subtract(<span class = "constant">10</span>));
+156&nbsp;&nbsp;        
+157&nbsp;&nbsp;        <span class = "comment">// Add the lines to the pane</span>
+158&nbsp;&nbsp;        Platform.runLater(() -&gt;
+159&nbsp;&nbsp;          <span class = "keyword">this</span>.getChildren().addAll(line1, line2)); 
+160&nbsp;&nbsp;      }
+161&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (token == <span class = "literal">'O'</span>) {
+162&nbsp;&nbsp;        Ellipse ellipse = <span class = "keyword">new</span> Ellipse(<span class = "keyword">this</span>.getWidth() / <span class = "constant">2</span>, 
+163&nbsp;&nbsp;          <span class = "keyword">this</span>.getHeight() / <span class = "constant">2</span>, <span class = "keyword">this</span>.getWidth() / <span class = "constant">2</span> - <span class = "constant">10</span>, 
+164&nbsp;&nbsp;          <span class = "keyword">this</span>.getHeight() / <span class = "constant">2</span> - <span class = "constant">10</span>);
+165&nbsp;&nbsp;        ellipse.centerXProperty().bind(
+166&nbsp;&nbsp;          <span class = "keyword">this</span>.widthProperty().divide(<span class = "constant">2</span>));
+167&nbsp;&nbsp;        ellipse.centerYProperty().bind(
+168&nbsp;&nbsp;            <span class = "keyword">this</span>.heightProperty().divide(<span class = "constant">2</span>));
+169&nbsp;&nbsp;        ellipse.radiusXProperty().bind(
+170&nbsp;&nbsp;            <span class = "keyword">this</span>.widthProperty().divide(<span class = "constant">2</span>).subtract(<span class = "constant">10</span>));        
+171&nbsp;&nbsp;        ellipse.radiusYProperty().bind(
+172&nbsp;&nbsp;            <span class = "keyword">this</span>.heightProperty().divide(<span class = "constant">2</span>).subtract(<span class = "constant">10</span>));   
+173&nbsp;&nbsp;        ellipse.setStroke(Color.BLACK);
+174&nbsp;&nbsp;        ellipse.setFill(Color.WHITE);
+175&nbsp;&nbsp;        
+176&nbsp;&nbsp;        Platform.runLater(() -&gt;
+177&nbsp;&nbsp;          getChildren().add(ellipse)); <span class = "comment">// Add the ellipse to the pane</span>
+178&nbsp;&nbsp;      }
+179&nbsp;&nbsp;    }
+180&nbsp;&nbsp;
+181&nbsp;&nbsp;    <span class = "comment">/* Handle a mouse click event */</span>
+182&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">void</span> handleMouseClick() {
+183&nbsp;&nbsp;      <span class = "keyword">if</span> (myTurn && !marked) {
+184&nbsp;&nbsp;        <span class = "comment">// Mark the cell</span>
+185&nbsp;&nbsp;        setToken(marker);
+186&nbsp;&nbsp;
+187&nbsp;&nbsp;        <span class = "comment">// Notify the server of the move</span>
+188&nbsp;&nbsp;        <span class = "keyword">try</span> {
+189&nbsp;&nbsp;          ticTacToe.myMove(row, column, marker);
+190&nbsp;&nbsp;        }
+191&nbsp;&nbsp;        <span class = "keyword">catch</span> (RemoteException ex) {
+192&nbsp;&nbsp;          System.out.println(ex);
+193&nbsp;&nbsp;        }
+194&nbsp;&nbsp;      }
+195&nbsp;&nbsp;    }
+196&nbsp;&nbsp;  }
+197&nbsp;&nbsp;  
+198&nbsp;&nbsp;  <span class = "comment">/**
+199&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+200&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+201&nbsp;&nbsp;   */</span>
+202&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+203&nbsp;&nbsp;    launch(args);
+204&nbsp;&nbsp;  }
+205&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

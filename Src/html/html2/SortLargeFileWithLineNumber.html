@@ -1,0 +1,197 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SortLargeFile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SortLargeFile.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SortLargeFile" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SortLargeFile {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> MAX_ARRAY_SIZE = <span class = "constant">43</span>;
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> BUFFER_SIZE = <span class = "constant">100000</span>;
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+  8&nbsp;&nbsp;    <span class = "comment">// Sort largedata.dat to sortedfile.dat</span>
+  9&nbsp;&nbsp;    sort(<span class = "literal">"largedata.dat"</span>, <span class = "literal">"sortedfile.dat"</span>);
+ 10&nbsp;&nbsp;    
+ 11&nbsp;&nbsp;    <span class = "comment">// Display the first 100 numbers in the sorted file</span>
+ 12&nbsp;&nbsp;    displayFile(<span class = "literal">"sortedfile.dat"</span>);
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;  
+ 15&nbsp;&nbsp;  <span class = "comment">/** Sort data in source file and into target file */</span>
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> sort(String sourcefile, String targetfile) 
+ 17&nbsp;&nbsp;      <span class = "keyword">throws</span> Exception {
+ 18&nbsp;&nbsp;    <span class = "comment">// Implement Phase 1: Create initial segments</span>
+ 19&nbsp;&nbsp;    <span class = "keyword">int</span> numberOfSegments =
+ 20&nbsp;&nbsp;      initializeSegments(MAX_ARRAY_SIZE, sourcefile, <span class = "literal">"f1.dat"</span>);
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;    <span class = "comment">// Implement Phase 2: Merge segments recursively</span>
+ 23&nbsp;&nbsp;    merge(numberOfSegments, MAX_ARRAY_SIZE,
+ 24&nbsp;&nbsp;      <span class = "literal">"f1.dat"</span>, <span class = "literal">"f2.dat"</span>, <span class = "literal">"f3.dat"</span>, targetfile);
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;  <span class = "comment">/** Sort original file into sorted segments */</span>
+ 28&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> initializeSegments
+ 29&nbsp;&nbsp;      (<span class = "keyword">int</span> segmentSize, String originalFile, String f1)
+ 30&nbsp;&nbsp;      <span class = "keyword">throws</span> Exception {
+ 31&nbsp;&nbsp;    <span class = "keyword">int</span>[] list = <span class = "keyword">new</span> <span class = "keyword">int</span>[segmentSize];
+ 32&nbsp;&nbsp;    DataInputStream input = <span class = "keyword">new</span> DataInputStream(
+ 33&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedInputStream(<span class = "keyword">new</span> FileInputStream(originalFile)));
+ 34&nbsp;&nbsp;    DataOutputStream output = <span class = "keyword">new</span> DataOutputStream(
+ 35&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedOutputStream(<span class = "keyword">new</span> FileOutputStream(f1)));
+ 36&nbsp;&nbsp;
+ 37&nbsp;&nbsp;    <span class = "keyword">int</span> numberOfSegments = <span class = "constant">0</span>;
+ 38&nbsp;&nbsp;    <span class = "keyword">while</span> (input.available() &gt; <span class = "constant">0</span>) {
+ 39&nbsp;&nbsp;      numberOfSegments++;
+ 40&nbsp;&nbsp;      <span class = "keyword">int</span> i = <span class = "constant">0</span>;
+ 41&nbsp;&nbsp;      <span class = "keyword">for</span> ( ; input.available() &gt; <span class = "constant">0</span> && i &lt; segmentSize; i++) {
+ 42&nbsp;&nbsp;        list[i] = input.readInt();
+ 43&nbsp;&nbsp;      }
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;      <span class = "comment">// Sort an array list[0..i-1]</span>
+ 46&nbsp;&nbsp;      java.util.Arrays.sort(list, <span class = "constant">0</span>, i);
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;      <span class = "comment">// Write the array to f1.dat</span>
+ 49&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; i; j++) {
+ 50&nbsp;&nbsp;        output.writeInt(list[j]);
+ 51&nbsp;&nbsp;      }
+ 52&nbsp;&nbsp;    }
+ 53&nbsp;&nbsp;
+ 54&nbsp;&nbsp;    input.close();
+ 55&nbsp;&nbsp;    output.close();
+ 56&nbsp;&nbsp;    <span class = "keyword">return</span> numberOfSegments;
+ 57&nbsp;&nbsp;  }
+ 58&nbsp;&nbsp;
+ 59&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> merge(<span class = "keyword">int</span> numberOfSegments, <span class = "keyword">int</span> segmentSize, 
+ 60&nbsp;&nbsp;      String f1, String f2, String f3, String targetfile) 
+ 61&nbsp;&nbsp;      <span class = "keyword">throws</span> Exception {
+ 62&nbsp;&nbsp;    <span class = "keyword">if</span> (numberOfSegments &gt; <span class = "constant">1</span>) {
+ 63&nbsp;&nbsp;      mergeOneStep(numberOfSegments, segmentSize, f1, f2, f3);
+ 64&nbsp;&nbsp;      merge((numberOfSegments + <span class = "constant">1</span>) / <span class = "constant">2</span>, segmentSize * <span class = "constant">2</span>, 
+ 65&nbsp;&nbsp;        f3, f1, f2, targetfile);
+ 66&nbsp;&nbsp;    }
+ 67&nbsp;&nbsp;    <span class = "keyword">else</span> { <span class = "comment">// Rename f1 as the final sorted file</span>
+ 68&nbsp;&nbsp;      File sortedFile = <span class = "keyword">new</span> File(targetfile);
+ 69&nbsp;&nbsp;      <span class = "keyword">if</span> (sortedFile.exists()) sortedFile.delete();
+ 70&nbsp;&nbsp;      <span class = "keyword">new</span> File(f1).renameTo(sortedFile);
+ 71&nbsp;&nbsp;    }
+ 72&nbsp;&nbsp;  }
+ 73&nbsp;&nbsp;
+ 74&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> mergeOneStep(<span class = "keyword">int</span> numberOfSegments,
+ 75&nbsp;&nbsp;      <span class = "keyword">int</span> segmentSize, String f1, String f2, String f3)
+ 76&nbsp;&nbsp;      <span class = "keyword">throws</span> Exception {
+ 77&nbsp;&nbsp;    DataInputStream f1Input = <span class = "keyword">new</span> DataInputStream(
+ 78&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedInputStream(<span class = "keyword">new</span> FileInputStream(f1), BUFFER_SIZE));
+ 79&nbsp;&nbsp;    DataOutputStream f2Output = <span class = "keyword">new</span> DataOutputStream(
+ 80&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedOutputStream(<span class = "keyword">new</span> FileOutputStream(f2), BUFFER_SIZE));
+ 81&nbsp;&nbsp;
+ 82&nbsp;&nbsp;    <span class = "comment">// Copy half number of segments from f1.dat to f2.dat</span>
+ 83&nbsp;&nbsp;    copyHalfToF2(numberOfSegments, segmentSize, f1Input, f2Output);
+ 84&nbsp;&nbsp;    f2Output.close();
+ 85&nbsp;&nbsp;
+ 86&nbsp;&nbsp;    <span class = "comment">// Merge remaining segments in f1 with segments in f2 into f3</span>
+ 87&nbsp;&nbsp;    DataInputStream f2Input = <span class = "keyword">new</span> DataInputStream(
+ 88&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedInputStream(<span class = "keyword">new</span> FileInputStream(f2), BUFFER_SIZE));
+ 89&nbsp;&nbsp;    DataOutputStream f3Output = <span class = "keyword">new</span> DataOutputStream(
+ 90&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedOutputStream(<span class = "keyword">new</span> FileOutputStream(f3), BUFFER_SIZE));
+ 91&nbsp;&nbsp;
+ 92&nbsp;&nbsp;    mergeSegments(numberOfSegments / <span class = "constant">2</span>,
+ 93&nbsp;&nbsp;      segmentSize, f1Input, f2Input, f3Output);
+ 94&nbsp;&nbsp;
+ 95&nbsp;&nbsp;    f1Input.close();
+ 96&nbsp;&nbsp;    f2Input.close();
+ 97&nbsp;&nbsp;    f3Output.close();
+ 98&nbsp;&nbsp;  }
+ 99&nbsp;&nbsp;
+100&nbsp;&nbsp;  <span class = "comment">/** Copy first half number of segments from f1.dat to f2.dat */</span>
+101&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> copyHalfToF2(<span class = "keyword">int</span> numberOfSegments,
+102&nbsp;&nbsp;      <span class = "keyword">int</span> segmentSize, DataInputStream f1, DataOutputStream f2)
+103&nbsp;&nbsp;      <span class = "keyword">throws</span> Exception {
+104&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; (numberOfSegments / <span class = "constant">2</span>) * segmentSize; i++) {
+105&nbsp;&nbsp;      f2.writeInt(f1.readInt());
+106&nbsp;&nbsp;    }
+107&nbsp;&nbsp;  }
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;  <span class = "comment">/** Merge all segments */</span>
+110&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> mergeSegments(<span class = "keyword">int</span> numberOfSegments,
+111&nbsp;&nbsp;      <span class = "keyword">int</span> segmentSize, DataInputStream f1, DataInputStream f2,
+112&nbsp;&nbsp;      DataOutputStream f3) <span class = "keyword">throws</span> Exception {
+113&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numberOfSegments; i++) {
+114&nbsp;&nbsp;      mergeTwoSegments(segmentSize, f1, f2, f3);
+115&nbsp;&nbsp;    }
+116&nbsp;&nbsp;
+117&nbsp;&nbsp;    <span class = "comment">// If f1 has one extra segment, copy it to f3</span>
+118&nbsp;&nbsp;    <span class = "keyword">while</span> (f1.available() &gt; <span class = "constant">0</span>) {
+119&nbsp;&nbsp;      f3.writeInt(f1.readInt());
+120&nbsp;&nbsp;    }
+121&nbsp;&nbsp;  }
+122&nbsp;&nbsp;
+123&nbsp;&nbsp;  <span class = "comment">/** Merges two segments */</span>
+124&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> mergeTwoSegments(<span class = "keyword">int</span> segmentSize,
+125&nbsp;&nbsp;    DataInputStream f1, DataInputStream f2,
+126&nbsp;&nbsp;    DataOutputStream f3) <span class = "keyword">throws</span> Exception {
+127&nbsp;&nbsp;    <span class = "keyword">int</span> intFromF1 = f1.readInt();
+128&nbsp;&nbsp;    <span class = "keyword">int</span> intFromF2 = f2.readInt();
+129&nbsp;&nbsp;    <span class = "keyword">int</span> f1Count = <span class = "constant">1</span>;
+130&nbsp;&nbsp;    <span class = "keyword">int</span> f2Count = <span class = "constant">1</span>;
+131&nbsp;&nbsp;  
+132&nbsp;&nbsp;    <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+133&nbsp;&nbsp;      <span class = "keyword">if</span> (intFromF1 &lt; intFromF2) {
+134&nbsp;&nbsp;        f3.writeInt(intFromF1);
+135&nbsp;&nbsp;        <span class = "keyword">if</span> (f1.available() == <span class = "constant">0</span> || f1Count++ &gt;= segmentSize) {
+136&nbsp;&nbsp;          f3.writeInt(intFromF2);
+137&nbsp;&nbsp;          <span class = "keyword">break</span>;
+138&nbsp;&nbsp;        }
+139&nbsp;&nbsp;        <span class = "keyword">else</span> {
+140&nbsp;&nbsp;          intFromF1 = f1.readInt();
+141&nbsp;&nbsp;        }
+142&nbsp;&nbsp;      }
+143&nbsp;&nbsp;      <span class = "keyword">else</span> {
+144&nbsp;&nbsp;        f3.writeInt(intFromF2);
+145&nbsp;&nbsp;        <span class = "keyword">if</span> (f2.available() == <span class = "constant">0</span> || f2Count++ &gt;= segmentSize) {
+146&nbsp;&nbsp;          f3.writeInt(intFromF1);
+147&nbsp;&nbsp;          <span class = "keyword">break</span>;
+148&nbsp;&nbsp;        }
+149&nbsp;&nbsp;        <span class = "keyword">else</span> {
+150&nbsp;&nbsp;          intFromF2 = f2.readInt();
+151&nbsp;&nbsp;        }
+152&nbsp;&nbsp;      }
+153&nbsp;&nbsp;    }
+154&nbsp;&nbsp;  
+155&nbsp;&nbsp;    <span class = "keyword">while</span> (f1.available() &gt; <span class = "constant">0</span> && f1Count++ &lt; segmentSize) {
+156&nbsp;&nbsp;      f3.writeInt(f1.readInt());
+157&nbsp;&nbsp;    }
+158&nbsp;&nbsp;  
+159&nbsp;&nbsp;    <span class = "keyword">while</span> (f2.available() &gt; <span class = "constant">0</span> && f2Count++ &lt; segmentSize) {
+160&nbsp;&nbsp;      f3.writeInt(f2.readInt());
+161&nbsp;&nbsp;    }
+162&nbsp;&nbsp;  }
+163&nbsp;&nbsp;  
+164&nbsp;&nbsp;  <span class = "comment">/** Display the first 100 numbers in the specified file */</span>
+165&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> displayFile(String filename) {
+166&nbsp;&nbsp;    <span class = "keyword">try</span> {
+167&nbsp;&nbsp;      DataInputStream input = 
+168&nbsp;&nbsp;        <span class = "keyword">new</span> DataInputStream(<span class = "keyword">new</span> FileInputStream(filename));
+169&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">100</span>; i++)
+170&nbsp;&nbsp;        System.out.print(input.readInt() + <span class = "literal">" "</span>);
+171&nbsp;&nbsp;      input.close();
+172&nbsp;&nbsp;    }
+173&nbsp;&nbsp;    <span class = "keyword">catch</span> (IOException ex) {
+174&nbsp;&nbsp;      ex.printStackTrace();
+175&nbsp;&nbsp;    }
+176&nbsp;&nbsp;  }
+177&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

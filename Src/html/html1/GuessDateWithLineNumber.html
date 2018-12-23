@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GuessDate.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GuessDate.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GuessDate {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[][][] dates = {
+  3&nbsp;&nbsp;    {{ <span class = "constant">1</span>,  <span class = "constant">3</span>,  <span class = "constant">5</span>,  <span class = "constant">7</span>},
+  4&nbsp;&nbsp;     { <span class = "constant">9</span>, <span class = "constant">11</span>, <span class = "constant">13</span>, <span class = "constant">15</span>},
+  5&nbsp;&nbsp;     {<span class = "constant">17</span>, <span class = "constant">19</span>, <span class = "constant">21</span>, <span class = "constant">23</span>},
+  6&nbsp;&nbsp;     {<span class = "constant">25</span>, <span class = "constant">27</span>, <span class = "constant">29</span>, <span class = "constant">31</span>}},
+  7&nbsp;&nbsp;    {{ <span class = "constant">2</span>,  <span class = "constant">3</span>,  <span class = "constant">6</span>,  <span class = "constant">7</span>},
+  8&nbsp;&nbsp;     {<span class = "constant">10</span>, <span class = "constant">11</span>, <span class = "constant">14</span>, <span class = "constant">15</span>},
+  9&nbsp;&nbsp;     {<span class = "constant">18</span>, <span class = "constant">19</span>, <span class = "constant">22</span>, <span class = "constant">23</span>},
+ 10&nbsp;&nbsp;     {<span class = "constant">26</span>, <span class = "constant">27</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}},
+ 11&nbsp;&nbsp;    {{ <span class = "constant">4</span>,  <span class = "constant">5</span>,  <span class = "constant">6</span>,  <span class = "constant">7</span>},
+ 12&nbsp;&nbsp;     {<span class = "constant">12</span>, <span class = "constant">13</span>, <span class = "constant">14</span>, <span class = "constant">15</span>},
+ 13&nbsp;&nbsp;     {<span class = "constant">20</span>, <span class = "constant">21</span>, <span class = "constant">22</span>, <span class = "constant">23</span>},
+ 14&nbsp;&nbsp;     {<span class = "constant">28</span>, <span class = "constant">29</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}},
+ 15&nbsp;&nbsp;    {{ <span class = "constant">8</span>,  <span class = "constant">9</span>, <span class = "constant">10</span>, <span class = "constant">11</span>},
+ 16&nbsp;&nbsp;     {<span class = "constant">12</span>, <span class = "constant">13</span>, <span class = "constant">14</span>, <span class = "constant">15</span>},
+ 17&nbsp;&nbsp;     {<span class = "constant">24</span>, <span class = "constant">25</span>, <span class = "constant">26</span>, <span class = "constant">27</span>},
+ 18&nbsp;&nbsp;     {<span class = "constant">28</span>, <span class = "constant">29</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}},
+ 19&nbsp;&nbsp;    {{<span class = "constant">16</span>, <span class = "constant">17</span>, <span class = "constant">18</span>, <span class = "constant">19</span>},
+ 20&nbsp;&nbsp;     {<span class = "constant">20</span>, <span class = "constant">21</span>, <span class = "constant">22</span>, <span class = "constant">23</span>},
+ 21&nbsp;&nbsp;     {<span class = "constant">24</span>, <span class = "constant">25</span>, <span class = "constant">26</span>, <span class = "constant">27</span>},
+ 22&nbsp;&nbsp;     {<span class = "constant">28</span>, <span class = "constant">29</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}}};
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  <span class = "comment">/** Prevent the user from creating objects from GuessDate */</span> 
+ 25&nbsp;&nbsp;  <span class = "keyword">private</span> GuessDate() {
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  <span class = "comment">/** Return a date at the specified row and column in a given set */</span> 
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getValue(<span class = "keyword">int</span> setNo, <span class = "keyword">int</span> i, <span class = "keyword">int</span> j) {
+ 30&nbsp;&nbsp;    <span class = "keyword">return</span> dates[setNo][i][j];
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

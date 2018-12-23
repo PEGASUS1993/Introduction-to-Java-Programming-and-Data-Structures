@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CircleWithStaticMembers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CircleWithStaticMembers.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CircleWithStaticMembers {
+  2&nbsp;&nbsp;  <span class = "comment">/** The radius of the circle */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">double</span> radius;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;  <span class = "comment">/** The number of the objects created */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">int</span> numberOfObjects = <span class = "constant">0</span>;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;  <span class = "comment">/** Construct a circle with radius 1 */</span>
+  9&nbsp;&nbsp;  CircleWithStaticMembers() {
+ 10&nbsp;&nbsp;    radius = <span class = "constant">1</span><span class = "literal">.</span><span class = "constant">0</span>;
+ 11&nbsp;&nbsp;    numberOfObjects++;
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "comment">/** Construct a circle with a specified radius */</span>
+ 15&nbsp;&nbsp;  CircleWithStaticMembers(<span class = "keyword">double</span> newRadius) {
+ 16&nbsp;&nbsp;    radius = newRadius;
+ 17&nbsp;&nbsp;    numberOfObjects++;
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Return numberOfObjects */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfObjects() {
+ 22&nbsp;&nbsp;    <span class = "keyword">return</span> numberOfObjects;
+ 23&nbsp;&nbsp;  }
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;  <span class = "comment">/** Return the area of this circle */</span>
+ 26&nbsp;&nbsp;  <span class = "keyword">double</span> getArea() {
+ 27&nbsp;&nbsp;    <span class = "keyword">return</span> radius * radius * Math.PI;
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

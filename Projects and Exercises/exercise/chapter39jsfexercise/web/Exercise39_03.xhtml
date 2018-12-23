@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <h:head>
+    <title>Compute Tax</title>
+  </h:head>
+  <h:body>
+    <h:form>
+      <h3>Compute Tax</h3>
+      <h:panelGrid columns="2" style="color:black">
+        <h:outputLabel value="Taxable Income: "/>
+        <h:inputText id="taxableIncome" value="#{exercise39_03.taxableIncome}" />
+        <h:outputLabel value="Filing Status: " />
+        <h:selectOneMenu id="filingSatus" value="#{exercise39_03.filingStatus}">
+          <f:selectItem itemLabel="Single" itemValue="0" />
+          <f:selectItem itemLabel="Married File Joinedly" itemValue="1" />
+          <f:selectItem itemLabel="Married File Separately" itemValue="2" />
+          <f:selectItem itemLabel="Head of Household" itemValue="3" />
+        </h:selectOneMenu> 
+      </h:panelGrid>
+
+      <!-- Use command button -->
+      <h:commandButton value="Compute Tax" />
+      
+      <br />
+      <h:outputText escape="false" style="color:red"
+                    value="#{exercise39_03.response}" />
+    </h:form>
+  </h:body>
+</html>

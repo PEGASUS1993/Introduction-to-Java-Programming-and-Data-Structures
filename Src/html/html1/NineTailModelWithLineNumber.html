@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - NineTailModel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "NineTailModel.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> NineTailModel {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> NUMBER_OF_NODES = <span class = "constant">512</span>;
+  5&nbsp;&nbsp;  <span class = "keyword">protected</span> UnweightedGraph&lt;Integer&gt;.SearchTree tree; 
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  <span class = "comment">/** Construct a model */</span>
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> NineTailModel() {
+  9&nbsp;&nbsp;    <span class = "comment">// Create edges</span>
+ 10&nbsp;&nbsp;    List&lt;Edge&gt; edges = getEdges();
+ 11&nbsp;&nbsp;    
+ 12&nbsp;&nbsp;    <span class = "comment">// Create a graph</span>
+ 13&nbsp;&nbsp;    UnweightedGraph&lt;Integer&gt; graph = <span class = "keyword">new</span> UnweightedGraph&lt;&gt;(
+ 14&nbsp;&nbsp;      edges, NUMBER_OF_NODES); 
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    <span class = "comment">// Obtain a BSF tree rooted at the target node</span>
+ 17&nbsp;&nbsp;    tree = graph.bfs(<span class = "constant">511</span>);
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Create all edges for the graph */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">private</span> List&lt;Edge&gt; getEdges() {
+ 22&nbsp;&nbsp;    List&lt;Edge&gt; edges =
+ 23&nbsp;&nbsp;      <span class = "keyword">new</span> ArrayList&lt;&gt;(); <span class = "comment">// Store edges</span>
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> u = <span class = "constant">0</span>; u &lt; NUMBER_OF_NODES; u++) {
+ 26&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; <span class = "constant">9</span>; k++) {
+ 27&nbsp;&nbsp;        <span class = "keyword">char</span>[] node = getNode(u); <span class = "comment">// Get the node for vertex u</span>
+ 28&nbsp;&nbsp;        <span class = "keyword">if</span> (node[k] == <span class = "literal">'H'</span>) {
+ 29&nbsp;&nbsp;          <span class = "keyword">int</span> v = getFlippedNode(node, k);
+ 30&nbsp;&nbsp;          <span class = "comment">// Add edge (v, u) for a legal move from node u to node v</span>
+ 31&nbsp;&nbsp;          edges.add(<span class = "keyword">new</span> Edge(v, u));
+ 32&nbsp;&nbsp;        }
+ 33&nbsp;&nbsp;      }
+ 34&nbsp;&nbsp;    }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;    <span class = "keyword">return</span> edges;
+ 37&nbsp;&nbsp;  }
+ 38&nbsp;&nbsp;
+ 39&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getFlippedNode(<span class = "keyword">char</span>[] node, <span class = "keyword">int</span> position) {
+ 40&nbsp;&nbsp;    <span class = "keyword">int</span> row = position / <span class = "constant">3</span>;
+ 41&nbsp;&nbsp;    <span class = "keyword">int</span> column = position % <span class = "constant">3</span>;
+ 42&nbsp;&nbsp;
+ 43&nbsp;&nbsp;    flipACell(node, row, column);
+ 44&nbsp;&nbsp;    flipACell(node, row - <span class = "constant">1</span>, column);
+ 45&nbsp;&nbsp;    flipACell(node, row + <span class = "constant">1</span>, column);
+ 46&nbsp;&nbsp;    flipACell(node, row, column - <span class = "constant">1</span>);
+ 47&nbsp;&nbsp;    flipACell(node, row, column + <span class = "constant">1</span>);
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;    <span class = "keyword">return</span> getIndex(node);
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> flipACell(<span class = "keyword">char</span>[] node, <span class = "keyword">int</span> row, <span class = "keyword">int</span> column) {
+ 53&nbsp;&nbsp;    <span class = "keyword">if</span> (row &gt;= <span class = "constant">0</span> && row &lt;= <span class = "constant">2</span> && column &gt;= <span class = "constant">0</span> && column &lt;= <span class = "constant">2</span>) { 
+ 54&nbsp;&nbsp;      <span class = "comment">// Within the boundary</span>
+ 55&nbsp;&nbsp;      <span class = "keyword">if</span> (node[row * <span class = "constant">3</span> + column] == <span class = "literal">'H'</span>)
+ 56&nbsp;&nbsp;        node[row * <span class = "constant">3</span> + column] = <span class = "literal">'T'</span>; <span class = "comment">// Flip from H to T</span>
+ 57&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 58&nbsp;&nbsp;        node[row * <span class = "constant">3</span> + column] = <span class = "literal">'H'</span>; <span class = "comment">// Flip from T to H</span>
+ 59&nbsp;&nbsp;    }
+ 60&nbsp;&nbsp;  }
+ 61&nbsp;&nbsp;
+ 62&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getIndex(<span class = "keyword">char</span>[] node) {
+ 63&nbsp;&nbsp;    <span class = "keyword">int</span> result = <span class = "constant">0</span>;
+ 64&nbsp;&nbsp;
+ 65&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+ 66&nbsp;&nbsp;      <span class = "keyword">if</span> (node[i] == <span class = "literal">'T'</span>)
+ 67&nbsp;&nbsp;        result = result * <span class = "constant">2</span> + <span class = "constant">1</span>;
+ 68&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 69&nbsp;&nbsp;        result = result * <span class = "constant">2</span> + <span class = "constant">0</span>;
+ 70&nbsp;&nbsp;
+ 71&nbsp;&nbsp;    <span class = "keyword">return</span> result;
+ 72&nbsp;&nbsp;  }
+ 73&nbsp;&nbsp;
+ 74&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span>[] getNode(<span class = "keyword">int</span> index) {
+ 75&nbsp;&nbsp;    <span class = "keyword">char</span>[] result = <span class = "keyword">new</span> <span class = "keyword">char</span>[<span class = "constant">9</span>];
+ 76&nbsp;&nbsp;
+ 77&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++) {
+ 78&nbsp;&nbsp;      <span class = "keyword">int</span> digit = index % <span class = "constant">2</span>;
+ 79&nbsp;&nbsp;      <span class = "keyword">if</span> (digit == <span class = "constant">0</span>)
+ 80&nbsp;&nbsp;        result[<span class = "constant">8</span> - i] = <span class = "literal">'H'</span>;
+ 81&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 82&nbsp;&nbsp;        result[<span class = "constant">8</span> - i] = <span class = "literal">'T'</span>;
+ 83&nbsp;&nbsp;      index = index / <span class = "constant">2</span>;
+ 84&nbsp;&nbsp;    }
+ 85&nbsp;&nbsp;
+ 86&nbsp;&nbsp;    <span class = "keyword">return</span> result;
+ 87&nbsp;&nbsp;  }
+ 88&nbsp;&nbsp;  
+ 89&nbsp;&nbsp;  <span class = "keyword">public</span> List&lt;Integer&gt; getShortestPath(<span class = "keyword">int</span> nodeIndex) {
+ 90&nbsp;&nbsp;    <span class = "keyword">return</span> tree.getPath(nodeIndex);
+ 91&nbsp;&nbsp;  }
+ 92&nbsp;&nbsp;
+ 93&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printNode(<span class = "keyword">char</span>[] node) {
+ 94&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+ 95&nbsp;&nbsp;      <span class = "keyword">if</span> (i % <span class = "constant">3</span> != <span class = "constant">2</span>)
+ 96&nbsp;&nbsp;        System.out.print(node[i]);
+ 97&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 98&nbsp;&nbsp;        System.out.println(node[i]);
+ 99&nbsp;&nbsp;
+100&nbsp;&nbsp;    System.out.println();
+101&nbsp;&nbsp;  }
+102&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

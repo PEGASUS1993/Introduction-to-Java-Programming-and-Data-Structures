@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RecursivePalindrome.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RecursivePalindromeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "RecursivePalindrome" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> RecursivePalindrome {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isPalindrome(String s) {
+    <span class = "keyword">return</span> isPalindrome(s, <span class = "constant">0</span>, s.length() - <span class = "constant">1</span>);
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isPalindrome(String s, <span class = "keyword">int</span> low, <span class = "keyword">int</span> high) {
+    <span class = "keyword">if</span> (high &lt;= low) <span class = "comment">// Base case</span>
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (s.charAt(low) != s.charAt(high)) <span class = "comment">// Base case</span>
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> isPalindrome(s, low + <span class = "constant">1</span>, high - <span class = "constant">1</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    System.out.println(<span class = "literal">"Is moon a palindrome? "</span> 
+      + isPalindrome(<span class = "literal">"moon"</span>));
+    System.out.println(<span class = "literal">"Is noon a palindrome? "</span> 
+      + isPalindrome(<span class = "literal">"noon"</span>));
+    System.out.println(<span class = "literal">"Is a a palindrome? "</span> + isPalindrome(<span class = "literal">"a"</span>));
+    System.out.println(<span class = "literal">"Is aba a palindrome? "</span> + 
+      isPalindrome(<span class = "literal">"aba"</span>));
+    System.out.println(<span class = "literal">"Is ab a palindrome? "</span> + isPalindrome(<span class = "literal">"ab"</span>));
+  }
+}
+</pre>
+</body>
+</html>

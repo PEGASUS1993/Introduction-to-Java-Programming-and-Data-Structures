@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RecursiveInsertionSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RecursiveInsertionSortWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "RecursiveInsertionSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> RecursiveInsertionSort {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> sort(<span class = "keyword">double</span>[] list) {
+    sort(list, list.length - <span class = "constant">1</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> sort(<span class = "keyword">double</span>[] list, <span class = "keyword">int</span> high) {
+    <span class = "keyword">if</span> (high &gt; <span class = "constant">0</span>) {
+      <span class = "comment">// Sort the list[0 ... high – 1]</span>
+      sort(list, high - <span class = "constant">1</span>);
+
+      <span class = "comment">// Insert list[high] into list</span>
+      <span class = "keyword">double</span> lastElement = list[high];
+      <span class = "keyword">int</span> k;
+      <span class = "keyword">for</span> (k = high - <span class = "constant">1</span>; k &gt;= <span class = "constant">0</span> && list[k] &gt; lastElement; k--) {
+        list[k + <span class = "constant">1</span>] = list[k];
+      }
+      list[k + <span class = "constant">1</span>] = lastElement;
+
+    }
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">double</span>[] list = {<span class = "constant">7</span>, <span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">8</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">5</span>, <span class = "constant">6</span>};
+    sort(list);
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+      System.out.print(list[i] + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

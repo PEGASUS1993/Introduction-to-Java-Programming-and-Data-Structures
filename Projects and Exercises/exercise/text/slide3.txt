@@ -1,0 +1,8 @@
+Chapter 4
+
+4.1 Introduction
+
+Suppose that you need to print a string (e.g., "Welcome to Java!") a hundred times. It would be tedious to have to write the following statement a hundred times:
+System.out.println("Welcome to Java!");
+Java provides a powerful control structure called a loop that controls how many times an operation or a sequence of operations is performed in succession. Using a loop statement, you simply tell the computer to print a string a hundred times without having to code the print statement a hundred times. 
+

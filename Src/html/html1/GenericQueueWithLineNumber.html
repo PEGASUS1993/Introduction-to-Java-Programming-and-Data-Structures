@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericQueue.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericQueue.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GenericQueue&lt;E&gt; {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.LinkedList&lt;E&gt; list 
+  3&nbsp;&nbsp;    = <span class = "keyword">new</span> java.util.LinkedList&lt;E&gt;();
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> enqueue(E e) {
+  6&nbsp;&nbsp;    list.addLast(e);
+  7&nbsp;&nbsp;  }
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> E dequeue() {
+ 10&nbsp;&nbsp;    <span class = "keyword">return</span> list.removeFirst();
+ 11&nbsp;&nbsp;  }
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+ 14&nbsp;&nbsp;    <span class = "keyword">return</span> list.size();
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  @Override
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 19&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"Queue: "</span> + list.toString();
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PalindromeIgnoreNonAlphanumeric.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PalindromeIgnoreNonAlphanumericWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PalindromeIgnoreNonAlphanumeric" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> PalindromeIgnoreNonAlphanumeric {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Prompt the user to enter a string</span>
+    System.out.print(<span class = "literal">"Enter a string: "</span>);
+    String s = input.nextLine();
+
+    <span class = "comment">// Display result</span>
+    System.out.println(<span class = "literal">"Ignoring non-alphanumeric characters, \nis "</span>
+      + s + <span class = "literal">" a palindrome? "</span> + isPalindrome(s));
+  }
+
+  <span class = "comment">/** Return true if a string is a palindrome */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isPalindrome(String s) {
+    <span class = "comment">// Create a new string by eliminating non-alphanumeric chars</span>
+    String s1 = filter(s);
+
+    <span class = "comment">// Create a new string that is the reversal of s1</span>
+    String s2 = reverse(s1);
+
+    <span class = "comment">// Compare if the reversal is the same as the original string</span>
+    <span class = "keyword">return</span> s2.equals(s1);
+  }
+
+  <span class = "comment">/** Create a new string by eliminating non-alphanumeric chars */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String filter(String s) {
+    <span class = "comment">// Create a string builder</span>
+    StringBuilder stringBuilder = <span class = "keyword">new</span> StringBuilder();
+
+    <span class = "comment">// Examine each char in the string to skip alphanumeric char</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; s.length(); i++) {
+      <span class = "keyword">if</span> (Character.isLetterOrDigit(s.charAt(i))) {
+        stringBuilder.append(s.charAt(i));
+      }
+    }
+
+    <span class = "comment">// Return a new filtered string</span>
+    <span class = "keyword">return</span> stringBuilder.toString();
+  }
+
+  <span class = "comment">/** Create a new string by reversing a specified string */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String reverse(String s) {
+    StringBuilder stringBuilder = <span class = "keyword">new</span> StringBuilder(s);
+    stringBuilder.reverse(); <span class = "comment">// Invoke reverse in StringBuilder</span>
+    <span class = "keyword">return</span> stringBuilder.toString();
+  }
+}
+</pre>
+</body>
+</html>

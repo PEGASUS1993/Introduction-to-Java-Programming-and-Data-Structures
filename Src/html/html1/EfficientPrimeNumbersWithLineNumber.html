@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - EfficientPrimeNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EfficientPrimeNumbers.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "EfficientPrimeNumbers" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> EfficientPrimeNumbers {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  6&nbsp;&nbsp;    System.out.print(<span class = "literal">"Find all prime numbers &lt;= n, enter n: "</span>);
+  7&nbsp;&nbsp;    <span class = "keyword">int</span> n = input.nextInt();
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    <span class = "comment">// A list to hold prime numbers</span>
+ 10&nbsp;&nbsp;    java.util.List&lt;Integer&gt; list = 
+ 11&nbsp;&nbsp;      <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;(); 
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_PER_LINE = <span class = "constant">10</span>; <span class = "comment">// Display 10 per line</span>
+ 14&nbsp;&nbsp;    <span class = "keyword">int</span> count = <span class = "constant">0</span>; <span class = "comment">// Count the number of prime numbers</span>
+ 15&nbsp;&nbsp;    <span class = "keyword">int</span> number = <span class = "constant">2</span>; <span class = "comment">// A number to be tested for primeness</span>
+ 16&nbsp;&nbsp;    <span class = "keyword">int</span> squareRoot = <span class = "constant">1</span>; <span class = "comment">// Check whether number &lt;= squareRoot</span>
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    System.out.println(<span class = "literal">"The prime numbers are \n"</span>);
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;    <span class = "comment">// Repeatedly find prime numbers</span>
+ 21&nbsp;&nbsp;    <span class = "keyword">while</span> (number &lt;= n) {
+ 22&nbsp;&nbsp;      <span class = "comment">// Assume the number is prime</span>
+ 23&nbsp;&nbsp;      <span class = "keyword">boolean</span> isPrime = <span class = "keyword">true</span>; <span class = "comment">// Is the current number prime?</span>
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;      <span class = "keyword">if</span> (squareRoot * squareRoot &lt; number) squareRoot++;
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;      <span class = "comment">// Test whether number is prime</span>
+ 28&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; list.size() 
+ 29&nbsp;&nbsp;                        && list.get(k) &lt;= squareRoot; k++) {
+ 30&nbsp;&nbsp;        <span class = "keyword">if</span> (number % list.get(k) == <span class = "constant">0</span>) { <span class = "comment">// If true, not prime</span>
+ 31&nbsp;&nbsp;          isPrime = <span class = "keyword">false</span>; <span class = "comment">// Set isPrime to false          </span>
+ 32&nbsp;&nbsp;          <span class = "keyword">break</span>; <span class = "comment">// Exit the for loop</span>
+ 33&nbsp;&nbsp;        }
+ 34&nbsp;&nbsp;      }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;      <span class = "comment">// Print the prime number and increase the count</span>
+ 37&nbsp;&nbsp;      <span class = "keyword">if</span> (isPrime) {
+ 38&nbsp;&nbsp;        count++; <span class = "comment">// Increase the count</span>
+ 39&nbsp;&nbsp;        list.add(number); <span class = "comment">// Add a new prime to the list</span>
+ 40&nbsp;&nbsp;        <span class = "keyword">if</span> (count % NUMBER_PER_LINE == <span class = "constant">0</span>) {
+ 41&nbsp;&nbsp;          <span class = "comment">// Print the number and advance to the new line</span>
+ 42&nbsp;&nbsp;          System.out.println(number);
+ 43&nbsp;&nbsp;        }
+ 44&nbsp;&nbsp;        <span class = "keyword">else</span>
+ 45&nbsp;&nbsp;          System.out.print(number + <span class = "literal">" "</span>);
+ 46&nbsp;&nbsp;      }
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;      <span class = "comment">// Check if the next number is prime</span>
+ 49&nbsp;&nbsp;      number++;
+ 50&nbsp;&nbsp;    }
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;    System.out.println(<span class = "literal">"\n"</span> + count + 
+ 53&nbsp;&nbsp;      <span class = "literal">" prime(s) less than or equal to "</span> + n);
+ 54&nbsp;&nbsp;  }
+ 55&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

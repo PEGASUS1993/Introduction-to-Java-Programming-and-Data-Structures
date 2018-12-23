@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeAverage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ComputeAverage.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeAverage" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; <span class = "comment">// Scanner is in the java.util package</span>
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeAverage {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner object</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    
+    <span class = "comment">// Prompt the user to enter three numbers</span>
+    System.out.print(<span class = "literal">"Enter three numbers: "</span>);
+    <span class = "keyword">double</span> number1 = input.nextDouble();
+    <span class = "keyword">double</span> number2 = input.nextDouble();
+    <span class = "keyword">double</span> number3 = input.nextDouble();
+
+    <span class = "comment">// Compute average</span>
+    <span class = "keyword">double</span> average = (number1 + number2 + number3) / <span class = "constant">3</span>;
+
+    <span class = "comment">// Display result</span>
+    System.out.println(<span class = "literal">"The average of "</span> + number1 + <span class = "literal">" "</span> + number2
+      + <span class = "literal">" "</span> + number3 + <span class = "literal">" is "</span> + average);
+  } 
+}
+</pre>
+</body>
+</html>

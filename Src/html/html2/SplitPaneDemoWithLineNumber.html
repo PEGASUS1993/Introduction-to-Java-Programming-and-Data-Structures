@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SplitPaneDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SplitPaneDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Orientation;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.RadioButton;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.SplitPane;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextArea;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ToggleGroup;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.Image;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.VBox;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SplitPaneDemo <span class = "keyword">extends</span> Application {
+ 16&nbsp;&nbsp;  <span class = "keyword">private</span> Image usImage = <span class = "keyword">new</span> Image(
+ 17&nbsp;&nbsp;    <span class = "literal">"https://liveexample.pearsoncmg.com/common/image/us.gif"</span>);
+ 18&nbsp;&nbsp;  <span class = "keyword">private</span> Image ukImage = <span class = "keyword">new</span> Image(
+ 19&nbsp;&nbsp;    <span class = "literal">"https://liveexample.pearsoncmg.com/common/image/uk.gif"</span>);
+ 20&nbsp;&nbsp;  <span class = "keyword">private</span> Image caImage = <span class = "keyword">new</span> Image(
+ 21&nbsp;&nbsp;    <span class = "literal">"https://liveexample.pearsoncmg.com/common/image/ca.gif"</span>);
+ 22&nbsp;&nbsp;  <span class = "keyword">private</span> String usDescription = <span class = "literal">"Description for US ..."</span>;
+ 23&nbsp;&nbsp;  <span class = "keyword">private</span> String ukDescription = <span class = "literal">"Description for UK ..."</span>;
+ 24&nbsp;&nbsp;  <span class = "keyword">private</span> String caDescription = <span class = "literal">"Description for CA ..."</span>;
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 28&nbsp;&nbsp;    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">10</span>);
+ 29&nbsp;&nbsp;    RadioButton rbUS = <span class = "keyword">new</span> RadioButton(<span class = "literal">"US"</span>); 
+ 30&nbsp;&nbsp;    RadioButton rbUK = <span class = "keyword">new</span> RadioButton(<span class = "literal">"UK"</span>); 
+ 31&nbsp;&nbsp;    RadioButton rbCA = <span class = "keyword">new</span> RadioButton(<span class = "literal">"CA"</span>);            
+ 32&nbsp;&nbsp;    vBox.getChildren().addAll(rbUS, rbUK, rbCA);
+ 33&nbsp;&nbsp;    
+ 34&nbsp;&nbsp;    SplitPane content = <span class = "keyword">new</span> SplitPane();
+ 35&nbsp;&nbsp;    content.setOrientation(Orientation.VERTICAL);
+ 36&nbsp;&nbsp;    ImageView imageView = <span class = "keyword">new</span> ImageView(usImage);
+ 37&nbsp;&nbsp;    StackPane imagePane = <span class = "keyword">new</span> StackPane();
+ 38&nbsp;&nbsp;    imagePane.getChildren().add(imageView);
+ 39&nbsp;&nbsp;    TextArea taDescription = <span class = "keyword">new</span> TextArea();   
+ 40&nbsp;&nbsp;    taDescription.setText(usDescription);
+ 41&nbsp;&nbsp;    content.getItems().addAll(
+ 42&nbsp;&nbsp;      imagePane, <span class = "keyword">new</span> ScrollPane(taDescription));
+ 43&nbsp;&nbsp;        
+ 44&nbsp;&nbsp;    SplitPane sp = <span class = "keyword">new</span> SplitPane();
+ 45&nbsp;&nbsp;    sp.getItems().addAll(vBox, content);
+ 46&nbsp;&nbsp;
+ 47&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(sp, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+ 48&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"SplitPaneDemo"</span>); <span class = "comment">// Set the window title</span>
+ 49&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 50&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 51&nbsp;&nbsp;    
+ 52&nbsp;&nbsp;    <span class = "comment">// Group radio buttons</span>
+ 53&nbsp;&nbsp;    ToggleGroup group = <span class = "keyword">new</span> ToggleGroup();
+ 54&nbsp;&nbsp;    rbUS.setToggleGroup(group);
+ 55&nbsp;&nbsp;    rbUK.setToggleGroup(group);
+ 56&nbsp;&nbsp;    rbCA.setToggleGroup(group);
+ 57&nbsp;&nbsp;
+ 58&nbsp;&nbsp;    rbUS.setSelected(<span class = "keyword">true</span>);
+ 59&nbsp;&nbsp;    rbUS.setOnAction(e -&gt; {
+ 60&nbsp;&nbsp;      imageView.setImage(usImage);
+ 61&nbsp;&nbsp;      taDescription.setText(usDescription);
+ 62&nbsp;&nbsp;    });
+ 63&nbsp;&nbsp;    
+ 64&nbsp;&nbsp;    rbUK.setOnAction(e -&gt; {
+ 65&nbsp;&nbsp;      imageView.setImage(ukImage);
+ 66&nbsp;&nbsp;      taDescription.setText(ukDescription);
+ 67&nbsp;&nbsp;    });
+ 68&nbsp;&nbsp;        
+ 69&nbsp;&nbsp;    rbCA.setOnAction(e -&gt; {
+ 70&nbsp;&nbsp;      imageView.setImage(caImage);
+ 71&nbsp;&nbsp;      taDescription.setText(caDescription);
+ 72&nbsp;&nbsp;    });
+ 73&nbsp;&nbsp;  }
+ 74&nbsp;&nbsp;
+ 75&nbsp;&nbsp;  <span class = "comment">// Launch the program from command-line</span>
+ 76&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 77&nbsp;&nbsp;    launch(args);
+ 78&nbsp;&nbsp;  }
+ 79&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

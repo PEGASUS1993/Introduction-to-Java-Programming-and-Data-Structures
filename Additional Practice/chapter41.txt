@@ -1,0 +1,9 @@
+Chapter 41 Web Services
+
+1. Which of the following statements are correct?
+a.	The computer on which a Web service resides is referred to as a server.
+b.	The server needs to make the service available to the client, known as publishing a Web service.
+c.	Using a Web service from a client is known as consuming a Web service.
+d.	A client interacts with a Web service through a proxy object.
+e. The proxy object facilitates the communication between the client and the Web service. 
+Key:abcde

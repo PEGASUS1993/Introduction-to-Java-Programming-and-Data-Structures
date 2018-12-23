@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ConnectedCircles.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ConnectedCirclesWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Point2D;
+<span class = "keyword">import</span> javafx.scene.Node;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ConnectedCircles <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> CirclePane(), <span class = "constant">450</span>, <span class = "constant">350</span>);
+    primaryStage.setTitle(<span class = "literal">"ConnectedCircles"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/** Panel for displaying circles */</span>
+  <span class = "keyword">class</span> CirclePane <span class = "keyword">extends</span> Pane {
+    <span class = "keyword">public</span> CirclePane() {
+      <span class = "keyword">this</span>.setOnMouseClicked(e -&gt; {
+        <span class = "keyword">if</span> (!isInsideACircle(<span class = "keyword">new</span> Point2D(e.getX(), e.getY()))) { 
+          <span class = "comment">// Add a new circle</span>
+          getChildren().add(<span class = "keyword">new</span> Circle(e.getX(), e.getY(), <span class = "constant">20</span>));
+          colorIfConnected();
+        }
+      });
+    }
+
+    <span class = "comment">/** Returns true if the point is inside an existing circle */</span>
+    <span class = "keyword">private</span> <span class = "keyword">boolean</span> isInsideACircle(Point2D p) {
+      <span class = "keyword">for</span> (Node circle: <span class = "keyword">this</span>.getChildren())
+        <span class = "keyword">if</span> (circle.contains(p))
+          <span class = "keyword">return</span> <span class = "keyword">true</span>;
+
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+    }
+
+    <span class = "comment">/** Color all circles if they are connected */</span>
+    <span class = "keyword">private</span> <span class = "keyword">void</span> colorIfConnected() {
+      <span class = "keyword">if</span> (getChildren().size() == <span class = "constant">0</span>)
+        <span class = "keyword">return</span>; <span class = "comment">// No circles in the pane</span>
+
+      <span class = "comment">// Build the edges</span>
+      java.util.List&lt;Edge&gt; edges = 
+          <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;();
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; getChildren().size(); i++)
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i + <span class = "constant">1</span>; j &lt; getChildren().size(); j++)
+          <span class = "keyword">if</span> (overlaps((Circle)(getChildren().get(i)), 
+              (Circle)(getChildren().get(j)))) {
+            edges.add(<span class = "keyword">new</span> Edge(i, j));
+            edges.add(<span class = "keyword">new</span> Edge(j, i));
+          }
+
+      <span class = "comment">// Create a graph with circles as vertices</span>
+      Graph&lt;Node&gt; graph = <span class = "keyword">new</span> UnweightedGraph&lt;&gt;
+        ((java.util.List&lt;Node&gt;)getChildren(), edges);
+      UnweightedGraph&lt;Node&gt;.SearchTree tree = graph.dfs(<span class = "constant">0</span>); 
+      <span class = "keyword">boolean</span> isAllCirclesConnected = getChildren().size() == tree
+          .getNumberOfVerticesFound();
+
+      <span class = "keyword">for</span> (Node circle: getChildren()) {
+        <span class = "keyword">if</span> (isAllCirclesConnected) { <span class = "comment">// All circles are connected</span>
+          ((Circle)circle).setFill(Color.RED);
+        } 
+        <span class = "keyword">else</span> {
+          ((Circle)circle).setStroke(Color.BLACK);
+          ((Circle)circle).setFill(Color.WHITE);
+        }
+      }
+    }
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> overlaps(Circle circle1, Circle circle2) {
+    <span class = "keyword">return</span> <span class = "keyword">new</span> Point2D(circle1.getCenterX(), circle1.getCenterY()).
+      distance(circle2.getCenterX(), circle2.getCenterY()) 
+      &lt;= circle1.getRadius() + circle2.getRadius();
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

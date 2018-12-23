@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CallBack.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CallBackWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.rmi.*;
+
+<span class = "keyword">public</span> <span class = "keyword">interface</span> CallBack <span class = "keyword">extends</span> Remote {
+  <span class = "comment">/** The server notifies the client for taking a turn */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> takeTurn(<span class = "keyword">boolean</span> turn) <span class = "keyword">throws</span> RemoteException;
+
+  <span class = "comment">/** The server sends a message to be displayed by the client */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> notify(java.lang.String message)
+    <span class = "keyword">throws</span> RemoteException;
+
+  <span class = "comment">/** The server notifies a client of the other player's move */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> mark(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column, <span class = "keyword">char</span> token)
+    <span class = "keyword">throws</span> RemoteException;
+}
+</pre>
+</body>
+</html>

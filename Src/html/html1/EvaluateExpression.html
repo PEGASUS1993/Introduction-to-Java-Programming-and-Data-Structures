@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - EvaluateExpression.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EvaluateExpressionWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "EvaluateExpression" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Stack;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> EvaluateExpression {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Check number of arguments passed</span>
+    <span class = "keyword">if</span> (args.length != <span class = "constant">1</span>) {
+      System.out.println(
+        <span class = "literal">"Usage: java EvaluateExpression \"expression\""</span>);
+      System.exit(<span class = "constant">1</span>);
+    }
+
+    <span class = "keyword">try</span> {
+      System.out.println(evaluateExpression(args[<span class = "constant">0</span>]));
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      System.out.println(<span class = "literal">"Wrong expression: "</span> + args[<span class = "constant">0</span>]);
+    }
+  }
+
+  <span class = "comment">/** Evaluate an expression */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> evaluateExpression(String expression) {
+    <span class = "comment">// Create operandStack to store operands</span>
+    Stack&lt;Integer&gt; operandStack = <span class = "keyword">new</span> Stack&lt;&gt;();
+  
+    <span class = "comment">// Create operatorStack to store operators</span>
+    Stack&lt;Character&gt; operatorStack = <span class = "keyword">new</span> Stack&lt;&gt;();
+  
+    <span class = "comment">// Insert blanks around (, ), +, -, /, and *</span>
+    expression = insertBlanks(expression);
+
+    <span class = "comment">// Extract operands and operators</span>
+    String[] tokens = expression.split(<span class = "literal">" "</span>);
+
+    <span class = "comment">// Phase 1: Scan tokens</span>
+    <span class = "keyword">for</span> (String token: tokens) {
+      <span class = "keyword">if</span> (token.length() == <span class = "constant">0</span>) <span class = "comment">// Blank space</span>
+        <span class = "keyword">continue</span>; <span class = "comment">// Back to the while loop to extract the next token</span>
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.charAt(<span class = "constant">0</span>) == <span class = "literal">'+'</span> || token.charAt(<span class = "constant">0</span>) == <span class = "literal">'-'</span>) {
+        <span class = "comment">// Process all +, -, *, / in the top of the operator stack </span>
+        <span class = "keyword">while</span> (!operatorStack.isEmpty() &&
+          (operatorStack.peek() == <span class = "literal">'+'</span> || 
+           operatorStack.peek() == <span class = "literal">'-'</span> ||
+           operatorStack.peek() == <span class = "literal">'*'</span> ||
+           operatorStack.peek() == <span class = "literal">'/'</span>)) {
+          processAnOperator(operandStack, operatorStack);
+        }
+
+        <span class = "comment">// Push the + or - operator into the operator stack</span>
+        operatorStack.push(token.charAt(<span class = "constant">0</span>));
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.charAt(<span class = "constant">0</span>) == <span class = "literal">'*'</span> || token.charAt(<span class = "constant">0</span>) == <span class = "literal">'/'</span>) {
+        <span class = "comment">// Process all *, / in the top of the operator stack </span>
+        <span class = "keyword">while</span> (!operatorStack.isEmpty() &&
+          (operatorStack.peek() == <span class = "literal">'*'</span> ||
+          operatorStack.peek() == <span class = "literal">'/'</span>)) {
+          processAnOperator(operandStack, operatorStack);
+        }
+
+        <span class = "comment">// Push the * or / operator into the operator stack</span>
+        operatorStack.push(token.charAt(<span class = "constant">0</span>));
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.trim().charAt(<span class = "constant">0</span>) == <span class = "literal">'('</span>) {
+        operatorStack.push(<span class = "literal">'('</span>); <span class = "comment">// Push '(' to stack</span>
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.trim().charAt(<span class = "constant">0</span>) == <span class = "literal">')'</span>) {
+        <span class = "comment">// Process all the operators in the stack until seeing '('</span>
+        <span class = "keyword">while</span> (operatorStack.peek() != <span class = "literal">'('</span>) {
+          processAnOperator(operandStack, operatorStack);
+        }
+        
+        operatorStack.pop(); <span class = "comment">// Pop the '(' symbol from the stack</span>
+      }
+      <span class = "keyword">else</span> { <span class = "comment">// An operand scanned</span>
+        <span class = "comment">// Push an operand to the stack</span>
+        operandStack.push(<span class = "keyword">new</span> Integer(token));
+      }
+    }
+
+    <span class = "comment">// Phase 2: process all the remaining operators in the stack </span>
+    <span class = "keyword">while</span> (!operatorStack.isEmpty()) {
+      processAnOperator(operandStack, operatorStack);
+    }
+
+    <span class = "comment">// Return the result</span>
+    <span class = "keyword">return</span> operandStack.pop();
+  }
+
+  <span class = "comment">/** Process one operator: Take an operator from operatorStack and
+   *  apply it on the operands in the operandStack */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> processAnOperator(
+      Stack&lt;Integer&gt; operandStack, Stack&lt;Character&gt; operatorStack) {
+    <span class = "keyword">char</span> op = operatorStack.pop();
+    <span class = "keyword">int</span> op1 = operandStack.pop();
+    <span class = "keyword">int</span> op2 = operandStack.pop();
+    <span class = "keyword">if</span> (op == <span class = "literal">'+'</span>) 
+      operandStack.push(op2 + op1);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (op == <span class = "literal">'-'</span>) 
+      operandStack.push(op2 - op1);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (op == <span class = "literal">'*'</span>) 
+      operandStack.push(op2 * op1);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (op == <span class = "literal">'/'</span>) 
+      operandStack.push(op2 / op1);
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String insertBlanks(String s) {
+    String result = <span class = "literal">""</span>;
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; s.length(); i++) {
+      <span class = "keyword">if</span> (s.charAt(i) == <span class = "literal">'('</span> || s.charAt(i) == <span class = "literal">')'</span> || 
+          s.charAt(i) == <span class = "literal">'+'</span> || s.charAt(i) == <span class = "literal">'-'</span> ||
+          s.charAt(i) == <span class = "literal">'*'</span> || s.charAt(i) == <span class = "literal">'/'</span>)
+        result += <span class = "literal">" "</span> + s.charAt(i) + <span class = "literal">" "</span>;
+      <span class = "keyword">else</span>
+        result += s.charAt(i);
+    }
+    
+    <span class = "keyword">return</span> result;
+  }
+}
+</pre>
+</body>
+</html>

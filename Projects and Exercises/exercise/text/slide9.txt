@@ -1,0 +1,7 @@
+Chapter 10
+
+10.1 Introduction
+
+Object-oriented programming allows you to derive new classes from existing classes. This is called inheritance. Inheritance is an important and powerful concept in Java. In fact, every class you define in Java is inherited from an existing class, either explicitly or implicitly. The classes you created in the preceding chapters were all extended implicitly from the java.lang.Object class.
+
+This chapter introduces the concept of inheritance. Specifically, it discusses superclasses and subclasses, the use of the keyword super, and the Object class, explores polymorphism and dynamic binding, generic programming, and casting objects, and introduces the modifiers protected and final.

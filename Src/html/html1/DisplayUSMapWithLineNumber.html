@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DisplayUSMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DisplayUSMap.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> DisplayUSMap <span class = "keyword">extends</span> Application {
+  6&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+  8&nbsp;&nbsp;    City[] vertices = {<span class = "keyword">new</span> City(<span class = "literal">"Seattle"</span>, <span class = "constant">75</span>, <span class = "constant">50</span>),
+  9&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"San Francisco"</span>, <span class = "constant">50</span>, <span class = "constant">210</span>),
+ 10&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"Los Angeles"</span>, <span class = "constant">75</span>, <span class = "constant">275</span>), <span class = "keyword">new</span> City(<span class = "literal">"Denver"</span>, <span class = "constant">275</span>, <span class = "constant">175</span>),
+ 11&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"Kansas City"</span>, <span class = "constant">400</span>, <span class = "constant">245</span>),
+ 12&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"Chicago"</span>, <span class = "constant">450</span>, <span class = "constant">100</span>), <span class = "keyword">new</span> City(<span class = "literal">"Boston"</span>, <span class = "constant">700</span>, <span class = "constant">80</span>),
+ 13&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"New York"</span>, <span class = "constant">675</span>, <span class = "constant">120</span>), <span class = "keyword">new</span> City(<span class = "literal">"Atlanta"</span>, <span class = "constant">575</span>, <span class = "constant">295</span>),
+ 14&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"Miami"</span>, <span class = "constant">600</span>, <span class = "constant">400</span>), <span class = "keyword">new</span> City(<span class = "literal">"Dallas"</span>, <span class = "constant">408</span>, <span class = "constant">325</span>),
+ 15&nbsp;&nbsp;      <span class = "keyword">new</span> City(<span class = "literal">"Houston"</span>, <span class = "constant">450</span>, <span class = "constant">360</span>) };
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;    <span class = "comment">// Edge array for graph in Figure 28.1</span>
+ 18&nbsp;&nbsp;    <span class = "keyword">int</span>[][] edges = {
+ 19&nbsp;&nbsp;      {<span class = "constant">0</span>, <span class = "constant">1</span>}, {<span class = "constant">0</span>, <span class = "constant">3</span>}, {<span class = "constant">0</span>, <span class = "constant">5</span>}, {<span class = "constant">1</span>, <span class = "constant">0</span>}, {<span class = "constant">1</span>, <span class = "constant">2</span>}, {<span class = "constant">1</span>, <span class = "constant">3</span>},
+ 20&nbsp;&nbsp;      {<span class = "constant">2</span>, <span class = "constant">1</span>}, {<span class = "constant">2</span>, <span class = "constant">3</span>}, {<span class = "constant">2</span>, <span class = "constant">4</span>}, {<span class = "constant">2</span>, <span class = "constant">10</span>},
+ 21&nbsp;&nbsp;      {<span class = "constant">3</span>, <span class = "constant">0</span>}, {<span class = "constant">3</span>, <span class = "constant">1</span>}, {<span class = "constant">3</span>, <span class = "constant">2</span>}, {<span class = "constant">3</span>, <span class = "constant">4</span>}, {<span class = "constant">3</span>, <span class = "constant">5</span>},
+ 22&nbsp;&nbsp;      {<span class = "constant">4</span>, <span class = "constant">2</span>}, {<span class = "constant">4</span>, <span class = "constant">3</span>}, {<span class = "constant">4</span>, <span class = "constant">5</span>}, {<span class = "constant">4</span>, <span class = "constant">7</span>}, {<span class = "constant">4</span>, <span class = "constant">8</span>}, {<span class = "constant">4</span>, <span class = "constant">10</span>},
+ 23&nbsp;&nbsp;      {<span class = "constant">5</span>, <span class = "constant">0</span>}, {<span class = "constant">5</span>, <span class = "constant">3</span>}, {<span class = "constant">5</span>, <span class = "constant">4</span>}, {<span class = "constant">5</span>, <span class = "constant">6</span>}, {<span class = "constant">5</span>, <span class = "constant">7</span>},
+ 24&nbsp;&nbsp;      {<span class = "constant">6</span>, <span class = "constant">5</span>}, {<span class = "constant">6</span>, <span class = "constant">7</span>}, {<span class = "constant">7</span>, <span class = "constant">4</span>}, {<span class = "constant">7</span>, <span class = "constant">5</span>}, {<span class = "constant">7</span>, <span class = "constant">6</span>}, {<span class = "constant">7</span>, <span class = "constant">8</span>},
+ 25&nbsp;&nbsp;      {<span class = "constant">8</span>, <span class = "constant">4</span>}, {<span class = "constant">8</span>, <span class = "constant">7</span>}, {<span class = "constant">8</span>, <span class = "constant">9</span>}, {<span class = "constant">8</span>, <span class = "constant">10</span>}, {<span class = "constant">8</span>, <span class = "constant">11</span>},
+ 26&nbsp;&nbsp;      {<span class = "constant">9</span>, <span class = "constant">8</span>}, {<span class = "constant">9</span>, <span class = "constant">11</span>}, {<span class = "constant">10</span>, <span class = "constant">2</span>}, {<span class = "constant">10</span>, <span class = "constant">4</span>}, {<span class = "constant">10</span>, <span class = "constant">8</span>}, {<span class = "constant">10</span>, <span class = "constant">11</span>},
+ 27&nbsp;&nbsp;      {<span class = "constant">11</span>, <span class = "constant">8</span>}, {<span class = "constant">11</span>, <span class = "constant">9</span>}, {<span class = "constant">11</span>, <span class = "constant">10</span>}
+ 28&nbsp;&nbsp;    };
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;    Graph&lt;City&gt; graph = <span class = "keyword">new</span> UnweightedGraph&lt;&gt;(vertices, edges);
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 33&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> GraphView(graph), <span class = "constant">750</span>, <span class = "constant">450</span>);
+ 34&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"DisplayUSMap"</span>); <span class = "comment">// Set the stage title</span>
+ 35&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 36&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 37&nbsp;&nbsp;  }
+ 38&nbsp;&nbsp;  
+ 39&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">class</span> City <span class = "keyword">implements</span> Displayable {
+ 40&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">double</span> x, y;
+ 41&nbsp;&nbsp;    <span class = "keyword">private</span> String name;
+ 42&nbsp;&nbsp;    
+ 43&nbsp;&nbsp;    City(String name, <span class = "keyword">double</span> x, <span class = "keyword">double</span> y) {
+ 44&nbsp;&nbsp;      <span class = "keyword">this</span>.name = name;
+ 45&nbsp;&nbsp;      <span class = "keyword">this</span>.x = x;
+ 46&nbsp;&nbsp;      <span class = "keyword">this</span>.y = y;
+ 47&nbsp;&nbsp;    }
+ 48&nbsp;&nbsp;    
+ 49&nbsp;&nbsp;    @Override 
+ 50&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">double</span> getX() {
+ 51&nbsp;&nbsp;      <span class = "keyword">return</span> x;
+ 52&nbsp;&nbsp;    }
+ 53&nbsp;&nbsp;    
+ 54&nbsp;&nbsp;    @Override 
+ 55&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">double</span> getY() {
+ 56&nbsp;&nbsp;      <span class = "keyword">return</span> y;
+ 57&nbsp;&nbsp;    }
+ 58&nbsp;&nbsp;    
+ 59&nbsp;&nbsp;    @Override 
+ 60&nbsp;&nbsp;    <span class = "keyword">public</span> String getName() {
+ 61&nbsp;&nbsp;      <span class = "keyword">return</span> name;
+ 62&nbsp;&nbsp;    }
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;  
+ 65&nbsp;&nbsp;  <span class = "comment">/**
+ 66&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 67&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 68&nbsp;&nbsp;   */</span>
+ 69&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 70&nbsp;&nbsp;    launch(args);
+ 71&nbsp;&nbsp;  }
+ 72&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

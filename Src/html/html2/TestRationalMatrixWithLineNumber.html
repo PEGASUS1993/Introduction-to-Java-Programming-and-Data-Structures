@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestRationalMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestRationalMatrix.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestRationalMatrix" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestRationalMatrix {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "comment">// Create two Rational arrays m1 and m2</span>
+  4&nbsp;&nbsp;    Rational[][] m1 = <span class = "keyword">new</span> Rational[<span class = "constant">3</span>][<span class = "constant">3</span>];
+  5&nbsp;&nbsp;    Rational[][] m2 = <span class = "keyword">new</span> Rational[<span class = "constant">3</span>][<span class = "constant">3</span>];
+  6&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; m1.length; i++)
+  7&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; m1[<span class = "constant">0</span>].length; j++) {
+  8&nbsp;&nbsp;        m1[i][j] = <span class = "keyword">new</span> Rational(i + <span class = "constant">1</span>, j + <span class = "constant">5</span>);
+  9&nbsp;&nbsp;        m2[i][j] = <span class = "keyword">new</span> Rational(i + <span class = "constant">1</span>, j + <span class = "constant">6</span>);
+ 10&nbsp;&nbsp;      }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "comment">// Create an instance of RationalMatrix</span>
+ 13&nbsp;&nbsp;    RationalMatrix rationalMatrix = <span class = "keyword">new</span> RationalMatrix();
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nm1 + m2 is "</span>);
+ 16&nbsp;&nbsp;    GenericMatrix.printResult(
+ 17&nbsp;&nbsp;      m1, m2, rationalMatrix.addMatrix(m1, m2), <span class = "literal">'+'</span>);
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nm1 * m2 is "</span>);
+ 20&nbsp;&nbsp;    GenericMatrix.printResult(
+ 21&nbsp;&nbsp;      m1, m2, rationalMatrix.multiplyMatrix(m1, m2), <span class = "literal">'*'</span>);
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

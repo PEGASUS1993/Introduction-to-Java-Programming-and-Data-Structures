@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestTreeSetWithComparator.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestTreeSetWithComparator.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestTreeSetWithComparator" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestTreeSetWithComparator {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a tree set for geometric objects using a comparator</span>
+  6&nbsp;&nbsp;    Set&lt;GeometricObject&gt; set =
+  7&nbsp;&nbsp;      <span class = "keyword">new</span> TreeSet&lt;&gt;(<span class = "keyword">new</span> GeometricObjectComparator());
+  8&nbsp;&nbsp;    set.add(<span class = "keyword">new</span> Rectangle(<span class = "constant">4</span>, <span class = "constant">5</span>));
+  9&nbsp;&nbsp;    set.add(<span class = "keyword">new</span> Circle(<span class = "constant">40</span>));
+ 10&nbsp;&nbsp;    set.add(<span class = "keyword">new</span> Circle(<span class = "constant">40</span>));
+ 11&nbsp;&nbsp;    set.add(<span class = "keyword">new</span> Rectangle(<span class = "constant">4</span>, <span class = "constant">1</span>));
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "comment">// Display geometric objects in the tree set</span>
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"A sorted set of geometric objects"</span>);
+ 15&nbsp;&nbsp;    <span class = "keyword">for</span> (GeometricObject element: set)
+ 16&nbsp;&nbsp;      System.out.println(<span class = "literal">"area = "</span> + element.getArea());
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

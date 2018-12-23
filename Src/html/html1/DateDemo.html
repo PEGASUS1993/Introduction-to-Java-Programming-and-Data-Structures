@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DateDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DateDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DateDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> DateDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    java.util.Date date = <span class = "keyword">new</span> java.util.Date();
+    System.out.println(<span class = "literal">"The elapsed time since Jan 1, 1970 is "</span> +
+      date.getTime() + <span class = "literal">" milliseconds"</span>);
+    System.out.println(date.toString());
+  }
+}
+</pre>
+</body>
+</html>

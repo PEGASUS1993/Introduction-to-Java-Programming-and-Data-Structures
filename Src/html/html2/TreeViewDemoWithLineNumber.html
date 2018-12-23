@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TreeViewDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TreeViewDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TreeItem;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TreeView;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TreeViewDemo <span class = "keyword">extends</span> Application {
+  9&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 11&nbsp;&nbsp;    TreeItem&lt;String&gt; root = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"Country"</span>);
+ 12&nbsp;&nbsp;    root.setExpanded(<span class = "keyword">true</span>);
+ 13&nbsp;&nbsp;    
+ 14&nbsp;&nbsp;    TreeItem&lt;String&gt; us = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"US"</span>, 
+ 15&nbsp;&nbsp;      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/usIcon.gif"</span>));
+ 16&nbsp;&nbsp;    TreeItem&lt;String&gt; uk = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"UK"</span>,
+ 17&nbsp;&nbsp;      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/ukIcon.gif"</span>));
+ 18&nbsp;&nbsp;    TreeItem&lt;String&gt; france = <span class = "keyword">new</span> TreeItem&lt;&gt;(<span class = "literal">"France"</span>);
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    TreeItem&lt;String&gt; georgia = <span class = "keyword">new</span> TreeItem(<span class = "literal">"Georgia"</span>);
+ 21&nbsp;&nbsp;    TreeItem&lt;String&gt; floria = <span class = "keyword">new</span> TreeItem(<span class = "literal">"Florida"</span>);
+ 22&nbsp;&nbsp;    TreeItem&lt;String&gt; alabama = <span class = "keyword">new</span> TreeItem(<span class = "literal">"Alabama"</span>);
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;    root.getChildren().addAll(us, uk, france);
+ 25&nbsp;&nbsp;    us.getChildren().addAll(georgia, floria, alabama);
+ 26&nbsp;&nbsp;    TreeView&lt;String&gt; tree = <span class = "keyword">new</span> TreeView&lt;&gt;(root);
+ 27&nbsp;&nbsp;    tree.setEditable(<span class = "keyword">true</span>);
+ 28&nbsp;&nbsp;    
+ 29&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(tree, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+ 30&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"TreeViewDemo"</span>); <span class = "comment">// Set the window title</span>
+ 31&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 32&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "comment">/**
+ 36&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 37&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 38&nbsp;&nbsp;   * line.
+ 39&nbsp;&nbsp;   */</span>
+ 40&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 41&nbsp;&nbsp;    launch(args);
+ 42&nbsp;&nbsp;  }
+ 43&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DistinctNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DistinctNumbers.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DistinctNumbers" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.ArrayList;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  3&nbsp;&nbsp;
+  4&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> DistinctNumbers {
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  6&nbsp;&nbsp;    ArrayList&lt;Integer&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+  7&nbsp;&nbsp;    
+  8&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);   
+  9&nbsp;&nbsp;    System.out.println(<span class = "literal">"Enter integers (input ends with 0): "</span>);
+ 10&nbsp;&nbsp;    <span class = "keyword">int</span> value;
+ 11&nbsp;&nbsp;    
+ 12&nbsp;&nbsp;    <span class = "keyword">do</span> {
+ 13&nbsp;&nbsp;      value = input.nextInt(); <span class = "comment">// Read a value from the input</span>
+ 14&nbsp;&nbsp;      
+ 15&nbsp;&nbsp;      <span class = "keyword">if</span> (!list.contains(value) && value != <span class = "constant">0</span>) 
+ 16&nbsp;&nbsp;        list.add(value); <span class = "comment">// Add the value if it is not in the list</span>
+ 17&nbsp;&nbsp;    } <span class = "keyword">while</span> (value != <span class = "constant">0</span>);
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;    <span class = "comment">// Display the distinct numbers</span>
+ 20&nbsp;&nbsp;    System.out.print(<span class = "literal">"The distinct integers are: "</span>);
+ 21&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.size(); i++) 
+ 22&nbsp;&nbsp;      System.out.print(list.get(i) + <span class = "literal">" "</span>);
+ 23&nbsp;&nbsp;  }
+ 24&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

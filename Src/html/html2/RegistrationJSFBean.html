@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RegistrationJSFBean.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RegistrationJSFBeanWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">package</span> jsf2demo;
+
+<span class = "keyword">import</span> javax.enterprise.context.RequestScoped;
+<span class = "keyword">import</span> javax.inject.Named;
+
+@Named(value = <span class = "literal">"registration"</span>)
+@RequestScoped
+<span class = "keyword">public</span> <span class = "keyword">class</span> RegistrationJSFBean {
+  <span class = "keyword">private</span> String lastName;
+  <span class = "keyword">private</span> String firstName;
+  <span class = "keyword">private</span> String mi;
+  <span class = "keyword">private</span> String gender;
+  <span class = "keyword">private</span> String major;
+  <span class = "keyword">private</span> String[] minor;
+  <span class = "keyword">private</span> String[] hobby;
+  <span class = "keyword">private</span> String remarks;
+  
+  <span class = "keyword">public</span> RegistrationJSFBean() {
+  }
+    
+  <span class = "keyword">public</span> String getLastName() {
+    <span class = "keyword">return</span> lastName;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setLastName(String lastName) {
+    <span class = "keyword">this</span>.lastName = lastName;
+  }
+  
+  <span class = "keyword">public</span> String getFirstName() {
+    <span class = "keyword">return</span> firstName;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setFirstName(String firstName) {
+    <span class = "keyword">this</span>.firstName = firstName;
+  }
+  
+  <span class = "keyword">public</span> String getMi() {
+    <span class = "keyword">return</span> mi;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setMi(String mi) {
+    <span class = "keyword">this</span>.mi = mi;
+  }
+  
+  <span class = "keyword">public</span> String getGender() {
+    <span class = "keyword">return</span> gender;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setGender(String gender) {
+    <span class = "keyword">this</span>.gender = gender;
+  }
+  
+  <span class = "keyword">public</span> String getMajor() {
+    <span class = "keyword">return</span> major;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setMajor(String major) {
+    <span class = "keyword">this</span>.major = major;
+  }
+  
+  <span class = "keyword">public</span> String[] getMinor() {
+    <span class = "keyword">return</span> minor;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setMinor(String[] minor) {
+    <span class = "keyword">this</span>.minor = minor;
+  }
+  
+  <span class = "keyword">public</span> String[] getHobby() {
+    <span class = "keyword">return</span> hobby;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setHobby(String[] hobby) {
+    <span class = "keyword">this</span>.hobby = hobby;
+  }
+  
+  <span class = "keyword">public</span> String getRemarks() {
+    <span class = "keyword">return</span> remarks;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setRemarks(String remarks) {
+    <span class = "keyword">this</span>.remarks = remarks;
+  }
+  
+  <span class = "keyword">public</span> String getResponse() {
+    <span class = "keyword">if</span> (lastName == <span class = "keyword">null</span>)
+      <span class = "keyword">return</span> <span class = "literal">""</span>; <span class = "comment">// Request has not been made</span>
+    <span class = "keyword">else</span> {
+      String allMinor = <span class = "literal">""</span>;
+      <span class = "keyword">for</span> (String s: minor) {
+        allMinor += s + <span class = "literal">" "</span>;
+      }
+      
+      String allHobby = <span class = "literal">""</span>;
+      <span class = "keyword">for</span> (String s: hobby) {
+        allHobby += s + <span class = "literal">" "</span>;
+      }
+
+      <span class = "keyword">return</span> <span class = "literal">"&lt;p style=\"color:red\"&gt;You entered &lt;br /&gt;"</span> + 
+         <span class = "literal">"Last Name: "</span> + lastName + <span class = "literal">"&lt;br /&gt;"</span> + 
+         <span class = "literal">"First Name: "</span> + firstName + <span class = "literal">"&lt;br /&gt;"</span> + 
+         <span class = "literal">"MI: "</span> + mi + <span class = "literal">"&lt;br /&gt;"</span> +
+         <span class = "literal">"Gender: "</span> + gender + <span class = "literal">"&lt;br /&gt;"</span> + 
+         <span class = "literal">"Major: "</span> + major + <span class = "literal">"&lt;br /&gt;"</span> + 
+         <span class = "literal">"Minor: "</span> + allMinor + <span class = "literal">"&lt;br /&gt;"</span> + 
+         <span class = "literal">"Hobby: "</span> + allHobby + <span class = "literal">"&lt;br /&gt;"</span> + 
+         <span class = "literal">"Remarks: "</span> + remarks + <span class = "literal">"&lt;/p&gt;"</span>; 
+    }
+  }
+}
+</pre>
+</body>
+</html>

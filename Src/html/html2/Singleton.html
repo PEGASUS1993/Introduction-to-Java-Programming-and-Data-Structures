@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Singleton.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SingletonWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">final</span> <span class = "keyword">class</span> Singleton {
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">final</span> Singleton uniqueInstance = <span class = "keyword">new</span> Singleton();
+
+  <span class = "keyword">private</span> Singleton() {
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> Singleton getInstance() {
+    <span class = "keyword">return</span> uniqueInstance;
+  }
+}
+</pre>
+</body>
+</html>

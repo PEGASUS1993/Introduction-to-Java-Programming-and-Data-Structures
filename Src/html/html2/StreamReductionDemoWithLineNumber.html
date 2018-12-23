@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StreamReductionDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StreamReductionDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StreamReductionDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.IntStream;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.Stream;
+  3&nbsp;&nbsp;
+  4&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> StreamReductionDemo {
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  6&nbsp;&nbsp;    <span class = "keyword">int</span>[] values = {<span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">1</span>, <span class = "constant">5</span>, <span class = "constant">20</span>, <span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">6</span>};
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    System.out.print(<span class = "literal">"The values are "</span>);
+  9&nbsp;&nbsp;      IntStream.of(values).forEach(e -&gt; System.out.print(e + <span class = "literal">" "</span>));
+ 10&nbsp;&nbsp;    
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nThe result of multiplying all values is "</span> +
+ 12&nbsp;&nbsp;      IntStream.of(values).parallel().reduce(<span class = "constant">1</span>, (e1, e2) -&gt; e1 * e2));
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;    System.out.print(<span class = "literal">"The values are "</span> +
+ 15&nbsp;&nbsp;      IntStream.of(values).mapToObj(e -&gt; e + <span class = "literal">""</span>)
+ 16&nbsp;&nbsp;        .reduce((e1, e2) -&gt; e1 + <span class = "literal">", "</span> + e2).get());
+ 17&nbsp;&nbsp;        
+ 18&nbsp;&nbsp;    String[] names = {<span class = "literal">"John"</span>, <span class = "literal">"Peter"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>, <span class = "literal">"Jen"</span>, 
+ 19&nbsp;&nbsp;      <span class = "literal">"George"</span>, <span class = "literal">"Alan"</span>, <span class = "literal">"Stacy"</span>, <span class = "literal">"Michelle"</span>, <span class = "literal">"john"</span>};
+ 20&nbsp;&nbsp;    System.out.print(<span class = "literal">"\nThe names are: "</span>);
+ 21&nbsp;&nbsp;    System.out.println(Stream.of(names)
+ 22&nbsp;&nbsp;      .reduce((x, y) -&gt; x + <span class = "literal">", "</span> + y).get());
+ 23&nbsp;&nbsp;       
+ 24&nbsp;&nbsp;    System.out.print(<span class = "literal">"Concat names: "</span>);
+ 25&nbsp;&nbsp;    System.out.println(Stream.of(names)
+ 26&nbsp;&nbsp;      .reduce((x, y) -&gt; x + y).get());
+ 27&nbsp;&nbsp;    
+ 28&nbsp;&nbsp;    System.out.print(<span class = "literal">"Total number of characters: "</span>);
+ 29&nbsp;&nbsp;    System.out.println(Stream.of(names)
+ 30&nbsp;&nbsp;      .reduce((x, y) -&gt; x + y).get().length());
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

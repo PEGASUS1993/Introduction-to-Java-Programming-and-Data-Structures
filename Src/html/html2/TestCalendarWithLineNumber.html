@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCalendar.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCalendar.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCalendar" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestCalendar {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Construct a Gregorian calendar for the current date and time</span>
+  6&nbsp;&nbsp;    Calendar calendar = <span class = "keyword">new</span> GregorianCalendar();
+  7&nbsp;&nbsp;    System.out.println(<span class = "literal">"Current time is "</span> + <span class = "keyword">new</span> Date());
+  8&nbsp;&nbsp;    System.out.println(<span class = "literal">"YEAR: "</span> + calendar.get(Calendar.YEAR));
+  9&nbsp;&nbsp;    System.out.println(<span class = "literal">"MONTH: "</span> + calendar.get(Calendar.MONTH));
+ 10&nbsp;&nbsp;    System.out.println(<span class = "literal">"DATE: "</span> + calendar.get(Calendar.DATE));
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"HOUR: "</span> + calendar.get(Calendar.HOUR));
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"HOUR_OF_DAY: "</span> + 
+ 13&nbsp;&nbsp;      calendar.get(Calendar.HOUR_OF_DAY));
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"MINUTE: "</span> + calendar.get(Calendar.MINUTE));
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"SECOND: "</span> + calendar.get(Calendar.SECOND));
+ 16&nbsp;&nbsp;    System.out.println(<span class = "literal">"DAY_OF_WEEK: "</span> + 
+ 17&nbsp;&nbsp;      calendar.get(Calendar.DAY_OF_WEEK));
+ 18&nbsp;&nbsp;    System.out.println(<span class = "literal">"DAY_OF_MONTH: "</span> + 
+ 19&nbsp;&nbsp;      calendar.get(Calendar.DAY_OF_MONTH));
+ 20&nbsp;&nbsp;    System.out.println(<span class = "literal">"DAY_OF_YEAR: "</span> + 
+ 21&nbsp;&nbsp;      calendar.get(Calendar.DAY_OF_YEAR));
+ 22&nbsp;&nbsp;    System.out.println(<span class = "literal">"WEEK_OF_MONTH: "</span> + 
+ 23&nbsp;&nbsp;      calendar.get(Calendar.WEEK_OF_MONTH));
+ 24&nbsp;&nbsp;    System.out.println(<span class = "literal">"WEEK_OF_YEAR: "</span> + 
+ 25&nbsp;&nbsp;      calendar.get(Calendar.WEEK_OF_YEAR));
+ 26&nbsp;&nbsp;    System.out.println(<span class = "literal">"AM_PM: "</span> + calendar.get(Calendar.AM_PM));
+ 27&nbsp;&nbsp;    
+ 28&nbsp;&nbsp;    <span class = "comment">// Construct a calendar for December 25, 1997</span>
+ 29&nbsp;&nbsp;    Calendar calendar1 = <span class = "keyword">new</span> GregorianCalendar(<span class = "constant">1997</span>, <span class = "constant">11</span>, <span class = "constant">25</span>);
+ 30&nbsp;&nbsp;    String[] dayNameOfWeek = {<span class = "literal">"Sunday"</span>, <span class = "literal">"Monday"</span>, <span class = "literal">"Tuesday"</span>, <span class = "literal">"Wednesday"</span>, 
+ 31&nbsp;&nbsp;        <span class = "literal">"Thursday"</span>, <span class = "literal">"Friday"</span>, <span class = "literal">"Saturday"</span>};
+ 32&nbsp;&nbsp;    System.out.println(<span class = "literal">"December 25, 1997 is a "</span> + 
+ 33&nbsp;&nbsp;      dayNameOfWeek[calendar1.get(Calendar.DAY_OF_WEEK) - <span class = "constant">1</span>]);
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

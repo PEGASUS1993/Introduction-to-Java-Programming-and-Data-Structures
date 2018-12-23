@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DescriptionPane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DescriptionPaneWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.ContentDisplay;
+<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+<span class = "keyword">import</span> javafx.scene.control.TextArea;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.text.Font;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> DescriptionPane <span class = "keyword">extends</span> BorderPane {
+  <span class = "comment">/** Label for displaying an image and a title */</span>
+  <span class = "keyword">private</span> Label lblImageTitle = <span class = "keyword">new</span> Label();
+
+  <span class = "comment">/** Text area for displaying text */</span>
+  <span class = "keyword">private</span> TextArea taDescription = <span class = "keyword">new</span> TextArea();
+  
+  <span class = "keyword">public</span> DescriptionPane() {
+    <span class = "comment">// Center the icon and text and place the text under the icon</span>
+    lblImageTitle.setContentDisplay(ContentDisplay.TOP);
+    lblImageTitle.setPrefSize(<span class = "constant">200</span>,  <span class = "constant">100</span>);
+    
+    <span class = "comment">// Set the font in the label and the text field</span>
+    lblImageTitle.setFont(<span class = "keyword">new</span> Font(<span class = "literal">"SansSerif"</span>, <span class = "constant">16</span>));
+    taDescription.setFont(<span class = "keyword">new</span> Font(<span class = "literal">"Serif"</span>, <span class = "constant">14</span>));
+    
+    taDescription.setWrapText(<span class = "keyword">true</span>);
+    taDescription.setEditable(<span class = "keyword">false</span>);
+
+    <span class = "comment">// Create a scroll pane to hold the text area</span>
+    ScrollPane scrollPane = <span class = "keyword">new</span> ScrollPane(taDescription);
+
+    <span class = "comment">// Place label and scroll pane in the border pane</span>
+    setLeft(lblImageTitle);
+    setCenter(scrollPane);
+    setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>));
+  }
+  
+  <span class = "comment">/** Set the title */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setTitle(String title) {
+    lblImageTitle.setText(title);
+  }
+
+  <span class = "comment">/** Set the image view */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setImageView(ImageView icon) {
+    lblImageTitle.setGraphic(icon);
+  }
+
+  <span class = "comment">/** Set the text description */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setDescription(String text) {
+    taDescription.setText(text);
+  }
+}
+</pre>
+</body>
+</html>

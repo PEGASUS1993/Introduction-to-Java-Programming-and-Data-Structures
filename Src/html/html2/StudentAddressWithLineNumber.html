@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StudentAddress.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StudentAddress.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> StudentAddress <span class = "keyword">implements</span> java.io.Serializable {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> String name;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> String street;
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> String city;
+  5&nbsp;&nbsp;  <span class = "keyword">private</span> String state;
+  6&nbsp;&nbsp;  <span class = "keyword">private</span> String zip;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> StudentAddress(String name, String street, String city,
+  9&nbsp;&nbsp;    String state, String zip) {
+ 10&nbsp;&nbsp;    <span class = "keyword">this</span>.name = name;
+ 11&nbsp;&nbsp;    <span class = "keyword">this</span>.street = street;
+ 12&nbsp;&nbsp;    <span class = "keyword">this</span>.city = city;
+ 13&nbsp;&nbsp;    <span class = "keyword">this</span>.state = state;
+ 14&nbsp;&nbsp;    <span class = "keyword">this</span>.zip = zip;
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "keyword">public</span> String getName() {
+ 18&nbsp;&nbsp;    <span class = "keyword">return</span> name;
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> String getStreet() {
+ 22&nbsp;&nbsp;    <span class = "keyword">return</span> street;
+ 23&nbsp;&nbsp;  }
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> String getCity() {
+ 26&nbsp;&nbsp;    <span class = "keyword">return</span> city;
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> String getState() {
+ 30&nbsp;&nbsp;    <span class = "keyword">return</span> state;
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;  <span class = "keyword">public</span> String getZip() {
+ 34&nbsp;&nbsp;    <span class = "keyword">return</span> zip;
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

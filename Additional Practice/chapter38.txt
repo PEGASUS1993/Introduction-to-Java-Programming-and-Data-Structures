@@ -1,0 +1,106 @@
+Chapter 38 JavaServer Pages
+
+Section 38.2 A Simple JSP Page
+1. A JSP file ends with __________.
+a. .java extension
+b. .html extension
+c. .shtml extension
+d. .jsp extension
+Key:d
+
+#
+2. You can run JSP from _____________.
+a. any Web server
+b. any JVM
+c. any Web server that supports Java servlet and JSP
+d. any Web browser
+Key:c
+
+#
+Section 38.3 How Is a JSP Page Processed?
+3. Which of the following statements are true?
+a. JSP is translated into Java servlet by a Web server when a JSP is called.
+b. JSP is translated into HTML by a Web server when a JSP is called.
+c. JSP is translated into XML by a Web server when a JSP is called.
+d. You can embed Java code in JSP.
+Key:ad
+
+#
+Section 38.4 JSP Scripting Constructs
+4. _______________ is a JSP expression.
+a. &lt;%= i %&gt; 
+b. &lt;%= Math.pow(2, 3) %&gt;
+c. &lt;%= new Date().toString() %&gt;
+d. &lt;%  for (int i = 0; i <= 10; i++) { %&gt;
+Key:abc
+
+#
+5. _______________ is a JSP scriptlet.
+a. &lt;%= i %&gt
+b. &lt;%= Math.pow(2, 3) %&gt
+c. &lt;%! private long computeFactorial(int n) { if (n == 0)return 1;else return n * computeFactorial(n - 1); } %&gt
+d. &lt;%  for (int i = 0; i <= 10; i++) { %&gt
+e. &lt;!-- HTML Comment --%&gt 
+Key:d
+
+#
+6. _______________ is a JSP declaration.
+a. &lt;%= i %&gt;
+b. &lt;%= Math.pow(2, 3) %&gt;
+c. &lt;%! private long computeFactorial(int n) { if (n == 0) return 1; else return n * computeFactorial(n - 1); } %>
+d. &lt;%  for (int i = 0; i <= 10; i++) { %&gt;
+e. &lt;!-- HTML Comment --&gt; 
+Key:c
+
+#
+7. _______________ is a JSP comment.
+a. &lt;%= i %&gt;
+b. &lt;%-- i --%&gt; 
+c. &lt;%! private long computeFactorial(int n) { if (n == 0) return 1; else return n * computeFactorial(n - 1); } %&gt;
+d. &lt;%  for (int i = 0; i <= 10; i++) { %&gt;
+e. &lt;!-- HTML Comment --&gt; 
+Key:b
+
+#
+Section 38.5 Predefined Variables 
+8. Which of the following is a JSP implicit object?
+a. request
+b. response
+c. out
+d. session
+e. application
+Key:abcde
+
+#
+9. The JSP explicit object out is actually _________.
+a. response.getOutputStream()
+b. response.getWriter()
+c. request.getOutputStream()
+d. request.getWriter()
+e. application
+Key:b
+
+#
+Section 38.6 JSP Directives
+10. ________ is a statement that gives the JSP engine information about the JSP page.
+a. A JSP implicit object
+b. A JSP scriptlet
+c. A JSP expression
+d. A JSP directive
+Key:d
+
+#
+11. The ________ directive lets you provide information for the page, such as importing classes and setting up content type. The page directive can appear anywhere in the JSP file.
+a. page
+b. include
+c. tablib
+d. import
+Key:a
+
+#
+Section 38.7 Using JavaBeans in JSP
+12. A class is a JavaBeans component if ____________________.
+a. it is a public class
+b. it has a public constructor with no arguments
+c. it is serializable.
+Key:abc

@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyArrayList.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyArrayList.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MyArrayList&lt;E&gt; <span class = "keyword">implements</span> MyList&lt;E&gt; {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> INITIAL_CAPACITY = <span class = "constant">16</span>;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> E[] data = (E[])<span class = "keyword">new</span> Object[INITIAL_CAPACITY];
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> size = <span class = "constant">0</span>; <span class = "comment">// Number of elements in the list</span>
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;  <span class = "comment">/** Create an empty list */</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> MyArrayList() {
+  8&nbsp;&nbsp;  }
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;  <span class = "comment">/** Create a list from an array of objects */</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> MyArrayList(E[] objects) {
+ 12&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; objects.length; i++)
+ 13&nbsp;&nbsp;      add(objects[i]); <span class = "comment">// Warning: don’t use super(objects)! </span>
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;  @Override <span class = "comment">/** Add a new element at the specified index */</span>
+ 17&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> add(<span class = "keyword">int</span> index, E e) {   
+ 18&nbsp;&nbsp;    <span class = "comment">// Ensure the index is in the right range</span>
+ 19&nbsp;&nbsp;    <span class = "keyword">if</span> (index &lt; <span class = "constant">0</span> || index &gt; size)
+ 20&nbsp;&nbsp;      <span class = "keyword">throw</span> <span class = "keyword">new</span> IndexOutOfBoundsException
+ 21&nbsp;&nbsp;        (<span class = "literal">"Index: "</span> + index + <span class = "literal">", Size: "</span> + size);
+ 22&nbsp;&nbsp;    
+ 23&nbsp;&nbsp;    ensureCapacity();
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;    <span class = "comment">// Move the elements to the right after the specified index</span>
+ 26&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = size - <span class = "constant">1</span>; i &gt;= index; i--)
+ 27&nbsp;&nbsp;      data[i + <span class = "constant">1</span>] = data[i];
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;    <span class = "comment">// Insert new element to data[index]</span>
+ 30&nbsp;&nbsp;    data[index] = e;
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;    <span class = "comment">// Increase size by 1</span>
+ 33&nbsp;&nbsp;    size++;
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;  <span class = "comment">/** Create a new larger array, double the current size + 1 */</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> ensureCapacity() {
+ 38&nbsp;&nbsp;    <span class = "keyword">if</span> (size &gt;= data.length) {
+ 39&nbsp;&nbsp;      E[] newData = (E[])(<span class = "keyword">new</span> Object[size * <span class = "constant">2</span> + <span class = "constant">1</span>]);
+ 40&nbsp;&nbsp;      System.arraycopy(data, <span class = "constant">0</span>, newData, <span class = "constant">0</span>, size);
+ 41&nbsp;&nbsp;      data = newData;
+ 42&nbsp;&nbsp;    }
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;  @Override <span class = "comment">/** Clear the list */</span>
+ 46&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> clear() {
+ 47&nbsp;&nbsp;    data = (E[])<span class = "keyword">new</span> Object[INITIAL_CAPACITY];
+ 48&nbsp;&nbsp;    size = <span class = "constant">0</span>;
+ 49&nbsp;&nbsp;  }
+ 50&nbsp;&nbsp;
+ 51&nbsp;&nbsp;  @Override <span class = "comment">/** Return true if this list contains the element */</span>
+ 52&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> contains(Object e) {
+ 53&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; size; i++)
+ 54&nbsp;&nbsp;      <span class = "keyword">if</span> (e.equals(data[i])) <span class = "keyword">return</span> <span class = "keyword">true</span>;
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 57&nbsp;&nbsp;  }
+ 58&nbsp;&nbsp;
+ 59&nbsp;&nbsp;  @Override <span class = "comment">/** Return the element at the specified index */</span>
+ 60&nbsp;&nbsp;  <span class = "keyword">public</span> E get(<span class = "keyword">int</span> index) {
+ 61&nbsp;&nbsp;    checkIndex(index);
+ 62&nbsp;&nbsp;    <span class = "keyword">return</span> data[index];
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;
+ 65&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> checkIndex(<span class = "keyword">int</span> index) {
+ 66&nbsp;&nbsp;    <span class = "keyword">if</span> (index &lt; <span class = "constant">0</span> || index &gt;= size)
+ 67&nbsp;&nbsp;      <span class = "keyword">throw</span> <span class = "keyword">new</span> IndexOutOfBoundsException
+ 68&nbsp;&nbsp;        (<span class = "literal">"Index: "</span> + index + <span class = "literal">", Size: "</span> + size);
+ 69&nbsp;&nbsp;  }
+ 70&nbsp;&nbsp;  
+ 71&nbsp;&nbsp;  @Override <span class = "comment">/** Return the index of the first matching element 
+ 72&nbsp;&nbsp;   *  in this list. Return -1 if no match. */</span>
+ 73&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> indexOf(Object e) {
+ 74&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; size; i++)
+ 75&nbsp;&nbsp;      <span class = "keyword">if</span> (e.equals(data[i])) <span class = "keyword">return</span> i;
+ 76&nbsp;&nbsp;
+ 77&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+ 78&nbsp;&nbsp;  }
+ 79&nbsp;&nbsp;
+ 80&nbsp;&nbsp;  @Override <span class = "comment">/** Return the index of the last matching element 
+ 81&nbsp;&nbsp;   *  in this list. Return -1 if no match. */</span>
+ 82&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> lastIndexOf(E e) {
+ 83&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = size - <span class = "constant">1</span>; i &gt;= <span class = "constant">0</span>; i--)
+ 84&nbsp;&nbsp;      <span class = "keyword">if</span> (e.equals(data[i])) <span class = "keyword">return</span> i;
+ 85&nbsp;&nbsp;
+ 86&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+ 87&nbsp;&nbsp;  }
+ 88&nbsp;&nbsp;
+ 89&nbsp;&nbsp;  @Override <span class = "comment">/** Remove the element at the specified position 
+ 90&nbsp;&nbsp;   *  in this list. Shift any subsequent elements to the left.
+ 91&nbsp;&nbsp;   *  Return the element that was removed from the list. */</span>
+ 92&nbsp;&nbsp;  <span class = "keyword">public</span> E remove(<span class = "keyword">int</span> index) {
+ 93&nbsp;&nbsp;    checkIndex(index);
+ 94&nbsp;&nbsp;    
+ 95&nbsp;&nbsp;    E e = data[index];
+ 96&nbsp;&nbsp;
+ 97&nbsp;&nbsp;    <span class = "comment">// Shift data to the left</span>
+ 98&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> j = index; j &lt; size - <span class = "constant">1</span>; j++)
+ 99&nbsp;&nbsp;      data[j] = data[j + <span class = "constant">1</span>];
+100&nbsp;&nbsp;
+101&nbsp;&nbsp;    data[size - <span class = "constant">1</span>] = <span class = "keyword">null</span>; <span class = "comment">// This element is now null</span>
+102&nbsp;&nbsp;
+103&nbsp;&nbsp;    <span class = "comment">// Decrement size</span>
+104&nbsp;&nbsp;    size--;
+105&nbsp;&nbsp;
+106&nbsp;&nbsp;    <span class = "keyword">return</span> e;
+107&nbsp;&nbsp;  }
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;  @Override <span class = "comment">/** Replace the element at the specified position 
+110&nbsp;&nbsp;   *  in this list with the specified element. */</span>
+111&nbsp;&nbsp;  <span class = "keyword">public</span> E set(<span class = "keyword">int</span> index, E e) {
+112&nbsp;&nbsp;    checkIndex(index);
+113&nbsp;&nbsp;    E old = data[index];
+114&nbsp;&nbsp;    data[index] = e;
+115&nbsp;&nbsp;    <span class = "keyword">return</span> old;
+116&nbsp;&nbsp;  }
+117&nbsp;&nbsp;
+118&nbsp;&nbsp;  @Override
+119&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+120&nbsp;&nbsp;    StringBuilder result = <span class = "keyword">new</span> StringBuilder(<span class = "literal">"["</span>);
+121&nbsp;&nbsp;
+122&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; size; i++) {
+123&nbsp;&nbsp;      result.append(data[i]);
+124&nbsp;&nbsp;      <span class = "keyword">if</span> (i &lt; size - <span class = "constant">1</span>) result.append(<span class = "literal">", "</span>);
+125&nbsp;&nbsp;    }
+126&nbsp;&nbsp;
+127&nbsp;&nbsp;    <span class = "keyword">return</span> result.toString() + <span class = "literal">"]"</span>;
+128&nbsp;&nbsp;  }
+129&nbsp;&nbsp;
+130&nbsp;&nbsp;  <span class = "comment">/** Trims the capacity to current size */</span>
+131&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> trimToSize() {
+132&nbsp;&nbsp;    <span class = "keyword">if</span> (size != data.length) { 
+133&nbsp;&nbsp;      E[] newData = (E[])(<span class = "keyword">new</span> Object[size]);
+134&nbsp;&nbsp;      System.arraycopy(data, <span class = "constant">0</span>, newData, <span class = "constant">0</span>, size);
+135&nbsp;&nbsp;      data = newData;
+136&nbsp;&nbsp;    } <span class = "comment">// If size == capacity, no need to trim</span>
+137&nbsp;&nbsp;  }
+138&nbsp;&nbsp;
+139&nbsp;&nbsp;  @Override <span class = "comment">/** Override iterator() defined in Iterable */</span>
+140&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Iterator&lt;E&gt; iterator() {
+141&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> ArrayListIterator();
+142&nbsp;&nbsp;  }
+143&nbsp;&nbsp; 
+144&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">class</span> ArrayListIterator 
+145&nbsp;&nbsp;      <span class = "keyword">implements</span> java.util.Iterator&lt;E&gt; {
+146&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> current = <span class = "constant">0</span>; <span class = "comment">// Current index </span>
+147&nbsp;&nbsp;
+148&nbsp;&nbsp;    @Override
+149&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">boolean</span> hasNext() {
+150&nbsp;&nbsp;      <span class = "keyword">return</span> current &lt; size;
+151&nbsp;&nbsp;    }
+152&nbsp;&nbsp;
+153&nbsp;&nbsp;    @Override
+154&nbsp;&nbsp;    <span class = "keyword">public</span> E next() {
+155&nbsp;&nbsp;      <span class = "keyword">return</span> data[current++];
+156&nbsp;&nbsp;    }
+157&nbsp;&nbsp;
+158&nbsp;&nbsp;    @Override <span class = "comment">// Remove the element returned by the last next()</span>
+159&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> remove() {
+160&nbsp;&nbsp;    	<span class = "keyword">if</span> (current == <span class = "constant">0</span>) <span class = "comment">// next() has not been called yet</span>
+161&nbsp;&nbsp;        <span class = "keyword">throw</span> <span class = "keyword">new</span> IllegalStateException(); 
+162&nbsp;&nbsp;      MyArrayList.<span class = "keyword">this</span>.remove(--current);
+163&nbsp;&nbsp;    }
+164&nbsp;&nbsp;  }
+165&nbsp;&nbsp;  
+166&nbsp;&nbsp;  @Override <span class = "comment">/** Return the number of elements in this list */</span>
+167&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> size() {
+168&nbsp;&nbsp;    <span class = "keyword">return</span> size;
+169&nbsp;&nbsp;  }
+170&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

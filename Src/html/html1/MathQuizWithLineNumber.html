@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MathQuiz.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MathQuiz.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MathQuiz {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> String user;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> totalCount;
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> correctCount;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;  <span class = "comment">/** Construct a MathQuiz object with the specified user */</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> MathQuiz(String user) {
+  8&nbsp;&nbsp;    <span class = "keyword">this</span>.user = user;
+  9&nbsp;&nbsp;  }
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;  <span class = "comment">/** Construct a default MathQuiz object */</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> MathQuiz() {
+ 13&nbsp;&nbsp;    user = <span class = "literal">""</span>; <span class = "comment">// Anonymous user</span>
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;  <span class = "comment">/** Return the user for the test */</span>
+ 17&nbsp;&nbsp;  <span class = "keyword">public</span> String getUser() {
+ 18&nbsp;&nbsp;    <span class = "keyword">return</span> user;
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;  <span class = "comment">/** Return the total number of the questions */</span>
+ 22&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getTotalCount() {
+ 23&nbsp;&nbsp;    <span class = "keyword">return</span> totalCount;
+ 24&nbsp;&nbsp;  }
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  <span class = "comment">/** Return the number of the correct answers */</span>
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getCorrectCount() {
+ 28&nbsp;&nbsp;    <span class = "keyword">return</span> correctCount;
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  <span class = "comment">/** Increase the total number of the questions */</span>
+ 32&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> increaseTotalCount() {
+ 33&nbsp;&nbsp;    totalCount++;
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;  <span class = "comment">/** Increase the number of the correct answers */</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> increaseCorrectCount() {
+ 38&nbsp;&nbsp;    correctCount++;
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

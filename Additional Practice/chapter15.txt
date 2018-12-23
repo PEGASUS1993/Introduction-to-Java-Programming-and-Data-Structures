@@ -1,0 +1,595 @@
+Chapter 15 Event-Driven Programming and Animations
+
+Section 15.2 Events and Event Sources
+1.	A JavaFX action event handler is an instance of _______.
+a.	ActionEvent
+b.	Action
+c.	EventHandler
+d.	EventHandler<ActionEvent>
+Key:d
+
+#
+2.	A JavaFX action event handler contains a method ________.
+a.	public void actionPerformed(ActionEvent e)
+b.	public void actionPerformed(Event e)
+c.	public void handle(ActionEvent e)
+d.	public void handle(Event e)
+Key:c
+
+#
+3.	A JavaFX event handler for event type T is an instance of _______.
+a.	ActionEvent
+b.	Action
+c.	EventHandler
+d.	EventHandler<T>
+Key:d
+
+#
+4.	Which of the following are the classes in JavaFX for representing an event?
+a.	ActionEvent
+b.	MouseEvent
+c.	KeyEvent
+d.	WindowEvent
+Key:abcd
+
+#
+5.	To register a source for an action event with a handler, use __________.
+a.	source.addAction(handler)
+b.	source.setOnAction(handler)
+c.	source.addOnAction(handler)
+d.	source.setActionHandler(handler)
+Key:b
+
+#
+6.	Which of the following statements are true?
+a.	A handler object fires an event.
+b.	A source object fires an event.
+c.      Any object such a String object can fire an event.
+d.      A handler is registered with the source object for processing the event.
+Key:bd
+
+#
+7.	Which of the following statements are true?
+a.	A Button can fire an ActionEvent.
+b.	A Button can fire a MouseEvent.
+c.      A Button can fire a KeyEvent.
+d.      A TextField can fire an ActionEvent.
+Key:abcd
+
+#
+8.	Which of the following statements are true?
+a.	A Node can fire an ActionEvent.
+b.	A Noden can fire a MouseEvent.
+c.      A Node can fire a KeyEvent.
+d.      A Scene can fire a MouseEvent.
+Key:abcd
+
+#
+9.	Which of the following statements are true?
+a.	A Shape can fire an ActionEvent.
+b.	A Shape can fire a MouseEvent.
+c.      A Shape can fire a KeyEvent.
+d.      A Text is a Shape.
+e.      A Circle is a Shape.
+Key:bcde
+
+#
+Section 15.4 Inner Classes
+10. Which of the following statements are true?
+a. Inner classes can make programs simple and concise. 
+b. An inner class can be declared public or private subject to the same visibility rules applied to a member of the class. 
+c. An inner class can be declared static. A static inner class can be accessed using the outer class name. A static inner class cannot access nonstatic members of the outer class.
+d. An inner class supports the work of its containing outer class and is compiled into a class named OuterClassName$InnerClassName.class.
+Key:abcd
+
+#
+11. Suppose A is an inner class in Test. A is compiled into a file named _________.
+a. A.class
+b. Test$A.class
+c. A$Test.class
+d. Test&A.class
+Key:b
+
+#
+12. 	Which statement is true about a non-static inner class?
+a.	It must implement an interface. 
+b.	It is accessible from any other class. 
+c.	It can only be instantiated in the enclosing class. 
+d.	It must be final if it is declared in a method scope. 
+e.	It can access private instance variables in the enclosing object.
+Key:e
+
+#
+Section 15.5 Anonymous Class Handlers
+13. Which of the following statements are true?
+a. An anonymous inner class is an inner class without a name.
+b. An anonymous inner class must always extend a superclass or implement an interface, but it cannot have an explicit extends or implements clause. 
+c. An anonymous inner class must implement all the abstract methods in the superclass or in the interface.
+d. An anonymous inner class always uses the no-arg constructor from its superclass to create an instance. If an anonymous inner class implements an interface, the constructor is Object().
+e. An anonymous inner class is compiled into a class named OuterClassName$n.class. 
+Key:abcde
+
+#
+14. Suppose A is an anonymous inner class in Test. A is compiled into a file named _________.
+a. A.class
+b. Test$A.class
+c. A$Test.class
+d. Test$1.class
+e. Test&1.class
+Key:d
+
+#
+15. Analyze the following code.
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {
+    Button btOK = new Button("OK");
+   
+    btOK.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent e) {
+        System.out.println("The OK button is clicked");
+      }
+    });
+    
+    Scene scene = new Scene(btOK, 200, 250);
+    primaryStage.setTitle("MyJavaFX"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+  }
+
+  /**
+   * The main method is only needed for the IDE with limited JavaFX
+   * support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+a. The program has a compile error because no handlers are registered with btOK.
+b. The program has a runtime error because no handlers are registered with btOK.
+c. The message "The OK button is clicked" is displayed when you click the OK button.
+d. The handle method is not executed when you click the OK button, because no handler is registered with btOK.
+Key:c
+
+#
+16. Analyze the following code. 
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {
+    Button btOK = new Button("OK");
+    Button btCancel = new Button("Cancel");
+   
+    EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent e) {
+        System.out.println("The OK button is clicked");
+      }
+    };
+    
+    btOK.setOnAction(handler);
+    btCancel.setOnAction(handler);
+    
+    HBox pane = new HBox(5);
+    pane.getChildren().addAll(btOK, btCancel);
+    
+    Scene scene = new Scene(pane, 200, 250);
+    primaryStage.setTitle("Test"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+  }
+
+  /**
+   * The main method is only needed for the IDE with limited JavaFX
+   * support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+a. When clicking the OK button, the program displays The OK button is clicked.
+b. When clicking the Cancel button, the program displays The OK button is clicked.
+c. When clicking either button, the program displays The OK button is clicked twice. 
+d. The program has a runtime error, because the handler is registered with more than one source.
+Key:ab
+
+#
+Section 15.6 Simplifying Event Handing Using Lambda Expressions
+17. Analyze the following code. 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {
+    // Create a button and place it in the scene
+    Button btOK = new Button("OK");
+    btOK.setOnAction(e -> System.out.println("OK 1"));
+    btOK.setOnAction(e -> System.out.println("OK 2"));
+
+    Scene scene = new Scene(btOK, 200, 250);
+    primaryStage.setTitle("MyJavaFX"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+  }
+
+  /**
+   * The main method is only needed for the IDE with limited JavaFX
+   * support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+a. When clicking the button, the program displays OK1 OK2.
+b. When clicking the button, the program displays OK1.
+c. When clicking the button, the program displays OK2. 
+d. The program has a compile error, because the setOnAction method is invoked twice. 
+Key:c
+
+#
+18. Which of the following code correctly registers a handler with a button btOK?
+a. btOK.setOnAction(e -> System.out.println("Handle the event"));
+b. btOK.setOnAction((e) -> System.out.println("Handle the event"););
+c. btOK.setOnAction((ActionEvent e) -> System.out.println("Handle the event"));
+d. btOK.setOnAction(e -> {System.out.println("Handle the event");});
+Key:abcd
+
+#
+19. Fill in the code below in the underline:
+
+public class Test {
+  public static void main(String[] args) {
+    Test test = new Test();
+    test.setAction(______________________________);
+  }
+
+  public void setAction(T1 t) {
+    t.m();
+  }
+}
+
+interface T1 {
+  public void m();
+}
+a. () -> System.out.print("Action 1! ")
+b. (e) -> System.out.print("Action 1! ")
+c. System.out.print("Action 1! ")
+d. (e) -> {System.out.print("Action 1! ")}
+Key:a
+
+#
+20. Fill in the code below in the underline:
+
+public class Test {
+  public static void main(String[] args) {
+    Test test = new Test();
+    test.setAction2(______________________________);
+  }
+
+  public void setAction2(T2 t) {
+    t.m(4.5);
+  }
+}
+
+interface T2 {
+  public void m(Double d);
+}
+
+a. () -> System.out.print(e)
+b. (e) -> System.out.print(e)
+c. e -> System.out.print(e)
+d. (e) -> {System.out.print(e);}
+Key:bcd
+
+#
+21. Fill in the code below in the underline:
+
+public class Test {
+  public static void main(String[] args) {
+    Test test = new Test();
+    System.out.println(test.setAction3(_____________));
+  }
+  
+  public double setAction3(T3 t) {
+    return t.m(5.5);
+  }
+}
+
+interface T3 {
+  public double m(Double d);
+}
+a. () -> e * 2
+b. (e) -> e * 2
+c. e -> e * 2
+d. (e) -> {e * 2;}
+Key:bc
+
+#
+22. Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    Test test = new Test();
+    test.setAction(() -> System.out.print("Action 1! "));
+  }
+
+  public void setAction(T t) {
+    t.m1();
+  }
+}
+
+interface T {
+  public void m1();
+  public void m2();
+}
+
+a. The program displays Action 1.
+b. The program has a compile error because T is not a functional interface. T contains multiple methods.
+c. The program would work if you delete the method m2 from the interface T.
+d. The program has a runtime error because T is not a functional interface. T contains multiple methods.
+Key:bc
+
+#
+Section 15.8 Mouse Events
+23. To handle the mouse click event on a pane p, register the handler with p using ______.
+a. p.setOnMouseClicked(handler);
+b. p.setOnMouseDragged(handler);
+c. p.setOnMouseReleased(handler);
+d. p.setOnMousePressed(handler);
+Key:a
+
+#
+24. Fill in the code in the underlined location to display the mouse point location when the mouse is pressed in the pane.
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {    
+    Pane pane = new Pane();
+    ______________________________________
+    
+    Scene scene = new Scene(pane, 200, 250);
+    primaryStage.setTitle("Test"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+  }
+
+  /**
+   * The main method is only needed for the IDE with limited JavaFX
+   * support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+a. pane.setOnMouseClicked((e) -> System.out.println(e.getX() + ", " + e.getY()));
+b. pane.setOnMouseReleased(e -> {System.out.println(e.getX() + ", " + e.getY())});
+c. pane.setOnMousePressed(e -> System.out.println(e.getX() + ", " + e.getY()));
+d. pane.setOnMouseDragged((e) -> System.out.println(e.getX() + ", " + e.getY()));
+Key:c
+
+#
+Section 15.9 Key Events
+25. To handle the key pressed event on a pane p, register the handler with p using ______.
+a. p.setOnKeyClicked(handler);
+b. p.setOnKeyTyped(handler);
+c. p.setOnKeyReleased(handler);
+d. p.setOnKeyPressed(handler);
+Key:d
+
+#
+26. Fill in the code to display the key pressed in the text.
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {    
+    Pane pane = new Pane();
+    Text text = new Text(20, 20, "Welcome");
+    pane.getChildren().add(text);
+    Scene scene = new Scene(pane, 200, 250);
+    primaryStage.setTitle("Test"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+    
+    text.setFocusTraversable(true);
+    text.setOnKeyPressed(_______________________);
+  }
+
+  /**
+   * The main method is only needed for the IDE with limited JavaFX
+   * support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+
+a. () -> text.setText(e.getText())
+b. (e) -> text.setText(e.getText())
+c. e -> text.setText(e.getText())
+d. e -> {text.setText(e.getText());}
+Key:bcd
+
+#
+27. Suppose the following program displays a pane in the stage. What is the output if the user presses the key for letter B? 
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+// import javafx classes omitted
+public class Test1 extends Application {
+  @Override
+  public void start(Stage primaryStage) {
+    // Code to create and display pane omitted
+    Pane pane = new Pane();
+    Scene scene = new Scene(pane, 200, 250);
+    primaryStage.setTitle("MyJavaFX"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+    
+    pane.requestFocus();
+    pane.setOnKeyPressed(e ->
+      System.out.print("Key pressed " + e.getCode() + " "));
+    pane.setOnKeyTyped(e ->
+      System.out.println("Key typed " + e.getCode()));
+  }
+  
+  /**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) { 
+    launch(args);
+  }
+}
+a. Key pressed B Key typed UNDEFINED
+b. Key pressed B Key typed 
+c. Key typed UNDEFINED
+d. Key pressed B 
+Key:a
+
+#
+28. Supose the follwoing program displays a pane in the stage. What is the output if the user presses the DOWN arrow key? 
+
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+// import javafx classes omitted
+public class Test1 extends Application {
+  @Override
+  public void start(Stage primaryStage) {
+    // Code to create and display pane omitted
+    Pane pane = new Pane();
+    Scene scene = new Scene(pane, 200, 250);
+    primaryStage.setTitle("MyJavaFX"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+    
+    pane.requestFocus();
+    pane.setOnKeyPressed(e ->
+      System.out.print("Key pressed " + e.getCode() + " "));
+    pane.setOnKeyTyped(e ->
+      System.out.println("Key typed " + e.getCode()));
+  }
+  
+  /**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) { 
+    launch(args);
+  }
+}
+a. Key pressed DOWN Key typed UNDEFINED
+b. Key pressed DOWN Key typed 
+c. Key typed UNDEFINED
+d. Key pressed DOWN 
+Key:d
+
+#
+Section 15.10 Listeners for Observable Objects
+29. Analyze the following code:
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
+public class Test {
+  public static void main(String[] args) {
+    DoubleProperty balance = new SimpleDoubleProperty();
+    balance.addListener(ov -> 
+      System.out.println(2 + balance.doubleValue()));
+    
+    balance.set(4.5);
+  }
+}
+a. The program displays 4.5.
+b. The program displays 6.5.
+c. The program would display 4.5 if the balance.set(4.5) is placed before the balance.addLisnter(...) statement.
+d. The program would display 6.5 if the balance.set(4.5) is placed before the balance.addLisnter(...) statement.
+Key:b
+
+#
+Section 15.11 Animation 
+30. Which of the following methods is not defined in the Animation class?
+a. pause()
+b. play()
+c. stop()
+d. resume()
+Key:d
+
+#
+31. The properties _________ are defined in the Animation class.
+a. autoReverse
+b. cycleCount
+c. rate
+d. status
+Key:abcd
+
+#
+32. The properties _________ are defined in the PathTransition class.
+a. duration
+b. node
+c. orientation
+d. path
+Key:abcd
+
+#
+33. To properties _________ are defined in the FadeTransition class.
+a. duration
+b. node
+c. fromValue
+d. toValue
+e. byValue
+Key:abcde
+
+#
+34. To create a KeyFrame with duration 1 second, use ______________.
+a. new KeyFrame(1000, handler)
+b. new KeyFrame(1, handler)
+c. new KeyFrame(Duration.millis(1000), handler)
+d. new KeyFrame(Duration.seconds(1), handler)
+Key:cd
+
+#
+35. __________ is a subclass of Animation.
+a. PathTransition
+b. FadeTransition
+c. Timeline
+d. Duration
+Key:abc
+
+

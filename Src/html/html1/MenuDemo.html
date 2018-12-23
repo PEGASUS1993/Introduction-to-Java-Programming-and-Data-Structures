@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MenuDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MenuDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.Menu;
+<span class = "keyword">import</span> javafx.scene.control.MenuBar;
+<span class = "keyword">import</span> javafx.scene.control.MenuItem;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.input.KeyCombination;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> MenuDemo <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> TextField tfNumber1 = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfNumber2 = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfResult = <span class = "keyword">new</span> TextField();
+    
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    MenuBar menuBar = <span class = "keyword">new</span> MenuBar();    
+    
+    Menu menuOperation = <span class = "keyword">new</span> Menu(<span class = "literal">"Operation"</span>);
+    Menu menuExit = <span class = "keyword">new</span> Menu(<span class = "literal">"Exit"</span>);
+    menuBar.getMenus().addAll(menuOperation, menuExit);
+    
+    MenuItem menuItemAdd = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Add"</span>);
+    MenuItem menuItemSubtract = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Subtract"</span>);
+    MenuItem menuItemMultiply = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Multiply"</span>);
+    MenuItem menuItemDivide = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Divide"</span>);
+    menuOperation.getItems().addAll(menuItemAdd, menuItemSubtract,
+      menuItemMultiply, menuItemDivide);
+    
+    MenuItem menuItemClose = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Close"</span>);
+    menuExit.getItems().add(menuItemClose);
+    
+    menuItemAdd.setAccelerator(
+      KeyCombination.keyCombination(<span class = "literal">"Ctrl+A"</span>));
+    menuItemSubtract.setAccelerator(
+      KeyCombination.keyCombination(<span class = "literal">"Ctrl+S"</span>));
+    menuItemMultiply.setAccelerator(
+      KeyCombination.keyCombination(<span class = "literal">"Ctrl+M"</span>));
+    menuItemDivide.setAccelerator(
+      KeyCombination.keyCombination(<span class = "literal">"Ctrl+D"</span>));
+    
+    HBox hBox1 = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+    tfNumber1.setPrefColumnCount(<span class = "constant">2</span>);
+    tfNumber2.setPrefColumnCount(<span class = "constant">2</span>);
+    tfResult.setPrefColumnCount(<span class = "constant">2</span>);
+    hBox1.getChildren().addAll(<span class = "keyword">new</span> Label(<span class = "literal">"Number 1:"</span>), tfNumber1,
+      <span class = "keyword">new</span> Label(<span class = "literal">"Number 2:"</span>), tfNumber2, <span class = "keyword">new</span> Label(<span class = "literal">"Result:"</span>), 
+      tfResult);
+    hBox1.setAlignment(Pos.CENTER);
+            
+    HBox hBox2 = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+    Button btAdd = <span class = "keyword">new</span> Button(<span class = "literal">"Add"</span>);
+    Button btSubtract = <span class = "keyword">new</span> Button(<span class = "literal">"Subtract"</span>);
+    Button btMultiply = <span class = "keyword">new</span> Button(<span class = "literal">"Multiply"</span>);
+    Button btDivide = <span class = "keyword">new</span> Button(<span class = "literal">"Divide"</span>);
+    hBox2.getChildren().addAll(btAdd, btSubtract, btMultiply, btDivide);
+    hBox2.setAlignment(Pos.CENTER);
+    
+    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">10</span>);
+    vBox.getChildren().addAll(menuBar, hBox1, hBox2);
+    Scene scene = <span class = "keyword">new</span> Scene(vBox, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+    primaryStage.setTitle(<span class = "literal">"MenuDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+    
+    <span class = "comment">// Handle menu actions</span>
+    menuItemAdd.setOnAction(e -&gt; perform(<span class = "literal">'+'</span>));
+    menuItemSubtract.setOnAction(e -&gt; perform(<span class = "literal">'-'</span>));
+    menuItemMultiply.setOnAction(e -&gt; perform(<span class = "literal">'*'</span>));
+    menuItemDivide.setOnAction(e -&gt; perform(<span class = "literal">'/'</span>));
+    menuItemClose.setOnAction(e -&gt; System.exit(<span class = "constant">0</span>));
+    
+    <span class = "comment">// Handle button actions</span>
+    btAdd.setOnAction(e -&gt; perform(<span class = "literal">'+'</span>));
+    btSubtract.setOnAction(e -&gt; perform(<span class = "literal">'-'</span>));
+    btMultiply.setOnAction(e -&gt; perform(<span class = "literal">'*'</span>));
+    btDivide.setOnAction(e -&gt; perform(<span class = "literal">'/'</span>));
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> perform(<span class = "keyword">char</span> operator) {
+    <span class = "keyword">double</span> number1 = Double.parseDouble(tfNumber1.getText());
+    <span class = "keyword">double</span> number2 = Double.parseDouble(tfNumber2.getText());
+    
+    <span class = "keyword">double</span> result = <span class = "constant">0</span>;
+    <span class = "keyword">switch</span> (operator) {
+      <span class = "keyword">case</span> <span class = "literal">'+'</span>: result = number1 + number2; <span class = "keyword">break</span>;
+      <span class = "keyword">case</span> <span class = "literal">'-'</span>: result = number1 - number2; <span class = "keyword">break</span>;
+      <span class = "keyword">case</span> <span class = "literal">'*'</span>: result = number1 * number2; <span class = "keyword">break</span>;
+      <span class = "keyword">case</span> <span class = "literal">'/'</span>: result = number1 / number2; <span class = "keyword">break</span>;
+    }
+    
+    tfResult.setText(result + <span class = "literal">""</span>);
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

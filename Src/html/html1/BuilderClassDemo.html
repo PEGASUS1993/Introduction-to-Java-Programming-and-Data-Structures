@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BuilderClassDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BuilderClassDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.layout.PaneBuilder;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.text.Font;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.scene.text.TextBuilder;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> BuilderClassDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    Pane pane = PaneBuilder.create().build();
+    
+    TextBuilder textBuilder = TextBuilder.create().fill(Color.RED)
+      .font(Font.font(<span class = "literal">"Times"</span>, <span class = "constant">20</span>)).x(<span class = "constant">40</span>);
+    Text text1 = textBuilder.y(<span class = "constant">20</span>).text(<span class = "literal">"Java"</span>).build();
+    Text text2 = textBuilder.y(<span class = "constant">40</span>).text(<span class = "literal">"C++"</span>).build();
+    Text text3 = textBuilder.y(<span class = "constant">60</span>).text(<span class = "literal">"Python"</span>).build();
+
+    pane.getChildren().addAll(text1, text2, text3);
+    
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+    primaryStage.setTitle(<span class = "literal">"BuilderClassDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">// Lauch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

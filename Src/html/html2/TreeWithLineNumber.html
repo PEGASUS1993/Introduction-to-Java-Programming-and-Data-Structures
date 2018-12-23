@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Tree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Tree.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Collection;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">interface</span> Tree&lt;E&gt; <span class = "keyword">extends</span> Collection&lt;E&gt; {
+  4&nbsp;&nbsp;  <span class = "comment">/** Return true if the element is in the tree */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> search(E e);
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  <span class = "comment">/** Insert element e into the binary tree
+  8&nbsp;&nbsp;   * Return true if the element is inserted successfully */</span>
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> insert(E e);
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;  <span class = "comment">/** Delete the specified element from the tree
+ 12&nbsp;&nbsp;   * Return true if the element is deleted successfully */</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> delete(E e);
+ 14&nbsp;&nbsp;  
+ 15&nbsp;&nbsp;  <span class = "comment">/** Get the number of elements in the tree */</span>
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize();
+ 17&nbsp;&nbsp;  
+ 18&nbsp;&nbsp;  <span class = "comment">/** Inorder traversal from the root*/</span>
+ 19&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> inorder() {
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "comment">/** Postorder traversal from the root */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> postorder() {
+ 24&nbsp;&nbsp;  }
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  <span class = "comment">/** Preorder traversal from the root */</span>
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> preorder() {
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;  
+ 30&nbsp;&nbsp;  @Override <span class = "comment">/** Return true if the tree is empty */</span>
+ 31&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> isEmpty() {
+ 32&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">this</span>.size() == <span class = "constant">0</span>;
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  @Override
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> contains(Object e) {
+ 37&nbsp;&nbsp;    <span class = "keyword">return</span> search((E)e);
+ 38&nbsp;&nbsp;  }
+ 39&nbsp;&nbsp;  
+ 40&nbsp;&nbsp;  @Override
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> add(E e) {
+ 42&nbsp;&nbsp;    <span class = "keyword">return</span> insert(e);
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;  
+ 45&nbsp;&nbsp;  @Override
+ 46&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> remove(Object e) {
+ 47&nbsp;&nbsp;    <span class = "keyword">return</span> delete((E)e);
+ 48&nbsp;&nbsp;  }
+ 49&nbsp;&nbsp;  
+ 50&nbsp;&nbsp;  @Override
+ 51&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">int</span> size() {
+ 52&nbsp;&nbsp;    <span class = "keyword">return</span> getSize();
+ 53&nbsp;&nbsp;  }
+ 54&nbsp;&nbsp;  
+ 55&nbsp;&nbsp;  @Override
+ 56&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> containsAll(Collection&lt;?&gt; c) {
+ 57&nbsp;&nbsp;    <span class = "comment">// Left as an exercise</span>
+ 58&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 59&nbsp;&nbsp;  }
+ 60&nbsp;&nbsp;
+ 61&nbsp;&nbsp;  @Override
+ 62&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> addAll(Collection&lt;? <span class = "keyword">extends</span> E&gt; c) {
+ 63&nbsp;&nbsp;    <span class = "comment">// Left as an exercise</span>
+ 64&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 65&nbsp;&nbsp;  }
+ 66&nbsp;&nbsp;
+ 67&nbsp;&nbsp;  @Override
+ 68&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> removeAll(Collection&lt;?&gt; c) {
+ 69&nbsp;&nbsp;    <span class = "comment">// Left as an exercise</span>
+ 70&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 71&nbsp;&nbsp;  }
+ 72&nbsp;&nbsp;
+ 73&nbsp;&nbsp;  @Override
+ 74&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> retainAll(Collection&lt;?&gt; c) {
+ 75&nbsp;&nbsp;    <span class = "comment">// Left as an exercise</span>
+ 76&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 77&nbsp;&nbsp;  }
+ 78&nbsp;&nbsp;
+ 79&nbsp;&nbsp;  @Override
+ 80&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> Object[] toArray() {
+ 81&nbsp;&nbsp;    <span class = "comment">// Left as an exercise</span>
+ 82&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+ 83&nbsp;&nbsp;  }
+ 84&nbsp;&nbsp;
+ 85&nbsp;&nbsp;  @Override
+ 86&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> &lt;T&gt; T[] toArray(T[] array) {
+ 87&nbsp;&nbsp;    <span class = "comment">// Left as an exercise</span>
+ 88&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+ 89&nbsp;&nbsp;  }
+ 90&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

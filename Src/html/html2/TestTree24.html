@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestTree24.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestTree24WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestTree24" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestTree24 {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a 2-4 tree</span>
+    Tree24&lt;Integer&gt; tree = <span class = "keyword">new</span> Tree24&lt;&gt;();
+
+    tree.insert(<span class = "constant">34</span>);
+    tree.insert(<span class = "constant">3</span>);
+    tree.insert(<span class = "constant">50</span>);
+    tree.insert(<span class = "constant">20</span>);
+    tree.insert(<span class = "constant">15</span>);
+    tree.insert(<span class = "constant">16</span>);
+    tree.insert(<span class = "constant">25</span>);
+    tree.insert(<span class = "constant">27</span>);
+    tree.insert(<span class = "constant">29</span>);
+    tree.insert(<span class = "constant">24</span>);
+    System.out.print(<span class = "literal">"\nAfter inserting 24:"</span>);
+    printTree(tree);
+    tree.insert(<span class = "constant">23</span>);
+    tree.insert(<span class = "constant">22</span>);
+    tree.insert(<span class = "constant">60</span>);
+    tree.insert(<span class = "constant">70</span>);
+    System.out.print(<span class = "literal">"\nAfter inserting 70:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">34</span>);
+    System.out.print(<span class = "literal">"\nAfter deleting 34:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">25</span>);
+    System.out.print(<span class = "literal">"\nAfter deleting 25:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">50</span>);
+    System.out.print(<span class = "literal">"\nAfter deleting 50:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">16</span>);
+    System.out.print(<span class = "literal">"\nAfter deleting 16:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">3</span>);
+    System.out.print(<span class = "literal">"\nAfter deleting 3:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">15</span>);
+    System.out.print(<span class = "literal">"\nAfter deleting 15:"</span>);
+    printTree(tree);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt;
+      <span class = "keyword">void</span> printTree(Tree&lt;E&gt; tree) {
+    <span class = "comment">// Traverse tree</span>
+    System.out.print(<span class = "literal">"\nPreorder: "</span>);
+    tree.preorder();
+    System.out.print(<span class = "literal">"\nThe number of nodes is "</span> + tree.getSize());
+    System.out.println();
+  }
+}
+</pre>
+</body>
+</html>

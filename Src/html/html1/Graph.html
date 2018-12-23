@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Graph.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GraphWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">interface</span> Graph&lt;V&gt; {
+  <span class = "comment">/** Return the number of vertices in the graph */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize();
+
+  <span class = "comment">/** Return the vertices in the graph */</span>
+  <span class = "keyword">public</span> java.util.List&lt;V&gt; getVertices();
+
+  <span class = "comment">/** Return the object for the specified vertex index */</span>
+  <span class = "keyword">public</span> V getVertex(<span class = "keyword">int</span> index);
+
+  <span class = "comment">/** Return the index for the specified vertex object */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getIndex(V v);
+
+  <span class = "comment">/** Return the neighbors of vertex with the specified index */</span>
+  <span class = "keyword">public</span> java.util.List&lt;Integer&gt; getNeighbors(<span class = "keyword">int</span> index);
+
+  <span class = "comment">/** Return the degree for a specified vertex */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getDegree(<span class = "keyword">int</span> v);
+
+  <span class = "comment">/** Print the edges */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> printEdges();
+
+  <span class = "comment">/** Clear the graph */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> clear();
+
+  <span class = "comment">/** Add a vertex to the graph */</span>  
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addVertex(V vertex);
+
+  <span class = "comment">/** Add an edge (u, v) to the graph */</span>  
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v);
+
+  <span class = "comment">/** Add an edge to the graph */</span>  
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(Edge e);
+
+  <span class = "comment">/** Remove a vertex v from the graph, return true if successful */</span>  
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(V v);
+
+  <span class = "comment">/** Remove an edge (u, v) from the graph */</span>  
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v);
+  
+  <span class = "comment">/** Obtain a depth-first search tree */</span>
+  <span class = "keyword">public</span> UnweightedGraph&lt;V&gt;.SearchTree dfs(<span class = "keyword">int</span> v);
+
+  <span class = "comment">/** Obtain a breadth-first search tree */</span>
+  <span class = "keyword">public</span> UnweightedGraph&lt;V&gt;.SearchTree bfs(<span class = "keyword">int</span> v);
+}
+</pre>
+</body>
+</html>

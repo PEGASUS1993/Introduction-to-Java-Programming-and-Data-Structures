@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TotalScore.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TotalScoreWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TotalScore" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TotalScore {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">double</span>[][][] scores = {
+      {{<span class = "constant">7</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">20</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">0</span>, <span class = "constant">22</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">15</span>, <span class = "constant">33</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">13</span>, <span class = "constant">21</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">15</span>, <span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>}},
+      {{<span class = "constant">4</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">21</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">0</span>, <span class = "constant">22</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">15</span>, <span class = "constant">34</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">12</span>, <span class = "constant">20</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">14</span>, <span class = "constant">9</span><span class = "literal">.</span><span class = "constant">5</span>}},
+      {{<span class = "constant">6</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">30</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">10</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">11</span>, <span class = "constant">33</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">11</span>, <span class = "constant">23</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">10</span>, <span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>}},
+      {{<span class = "constant">6</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">23</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">32</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">13</span>, <span class = "constant">34</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">11</span>, <span class = "constant">20</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">16</span>, <span class = "constant">7</span><span class = "literal">.</span><span class = "constant">5</span>}},
+      {{<span class = "constant">8</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">26</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">52</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">13</span>, <span class = "constant">36</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">13</span>, <span class = "constant">24</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">16</span>, <span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>}},
+      {{<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">20</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">42</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">13</span>, <span class = "constant">31</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">12</span>, <span class = "constant">20</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">16</span>, <span class = "constant">6</span><span class = "literal">.</span><span class = "constant">5</span>}},
+      {{<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">29</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">6</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">22</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">14</span>, <span class = "constant">30</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">10</span>, <span class = "constant">30</span><span class = "literal">.</span><span class = "constant">5</span>}, {<span class = "constant">16</span>, <span class = "constant">6</span><span class = "literal">.</span><span class = "constant">0</span>}}};
+                 
+    <span class = "comment">// Calculate and display total score for each student</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; scores.length; i++) {
+      <span class = "keyword">double</span> totalScore = <span class = "constant">0</span>;
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; scores[i].length; j++)
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; scores[i][j].length; k++)
+          totalScore += scores[i][j][k];
+
+      System.out.println(<span class = "literal">"Student "</span> + i + <span class = "literal">"'s score is "</span> +
+        totalScore);
+    }
+  }
+}
+</pre>
+</body>
+</html>

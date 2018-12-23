@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Rational.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RationalWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Rational <span class = "keyword">extends</span> Number <span class = "keyword">implements</span> Comparable&lt;Rational&gt; {
+  <span class = "comment">// Data fields for numerator and denominator</span>
+  <span class = "keyword">private</span> <span class = "keyword">long</span> numerator = <span class = "constant">0</span>;
+  <span class = "keyword">private</span> <span class = "keyword">long</span> denominator = <span class = "constant">1</span>;
+
+  <span class = "comment">/** Construct a rational with default properties */</span>
+  <span class = "keyword">public</span> Rational() {
+    <span class = "keyword">this</span>(<span class = "constant">0</span>, <span class = "constant">1</span>);
+  }
+
+  <span class = "comment">/** Construct a rational with specified numerator and denominator */</span>
+  <span class = "keyword">public</span> Rational(<span class = "keyword">long</span> numerator, <span class = "keyword">long</span> denominator) {
+    <span class = "keyword">long</span> gcd = gcd(numerator, denominator);
+    <span class = "keyword">this</span>.numerator = (denominator &gt; <span class = "constant">0</span> ? <span class = "constant">1</span> : <span class = "literal">-</span><span class = "constant">1</span>) * numerator / gcd;
+    <span class = "keyword">this</span>.denominator = Math.abs(denominator) / gcd;
+  }
+
+  <span class = "comment">/** Find GCD of two numbers */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">long</span> gcd(<span class = "keyword">long</span> n, <span class = "keyword">long</span> d) {
+    <span class = "keyword">long</span> n1 = Math.abs(n);
+    <span class = "keyword">long</span> n2 = Math.abs(d);
+    <span class = "keyword">int</span> gcd = <span class = "constant">1</span>;
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">1</span>; k &lt;= n1 && k &lt;= n2; k++) {
+      <span class = "keyword">if</span> (n1 % k == <span class = "constant">0</span> && n2 % k == <span class = "constant">0</span>) 
+        gcd = k;
+    }
+
+    <span class = "keyword">return</span> gcd;
+  }
+
+  <span class = "comment">/** Return numerator */</span>
+  <span class = "keyword">public</span> <span class = "keyword">long</span> getNumerator() {
+    <span class = "keyword">return</span> numerator;
+  }
+
+  <span class = "comment">/** Return denominator */</span>
+  <span class = "keyword">public</span> <span class = "keyword">long</span> getDenominator() {
+    <span class = "keyword">return</span> denominator;
+  }
+
+  <span class = "comment">/** Add a rational number to this rational */</span>
+  <span class = "keyword">public</span> Rational add(Rational secondRational) {
+    <span class = "keyword">long</span> n = numerator * secondRational.getDenominator() +
+      denominator * secondRational.getNumerator();
+    <span class = "keyword">long</span> d = denominator * secondRational.getDenominator();
+    <span class = "keyword">return</span> <span class = "keyword">new</span> Rational(n, d);
+  }
+
+  <span class = "comment">/** Subtract a rational number from this rational */</span>
+  <span class = "keyword">public</span> Rational subtract(Rational secondRational) {
+    <span class = "keyword">long</span> n = numerator * secondRational.getDenominator()
+      - denominator * secondRational.getNumerator();
+    <span class = "keyword">long</span> d = denominator * secondRational.getDenominator();
+    <span class = "keyword">return</span> <span class = "keyword">new</span> Rational(n, d);
+  }
+
+  <span class = "comment">/** Multiply a rational number to this rational */</span>
+  <span class = "keyword">public</span> Rational multiply(Rational secondRational) {
+    <span class = "keyword">long</span> n = numerator * secondRational.getNumerator();
+    <span class = "keyword">long</span> d = denominator * secondRational.getDenominator();
+    <span class = "keyword">return</span> <span class = "keyword">new</span> Rational(n, d);
+  }
+
+  <span class = "comment">/** Divide a rational number from this rational */</span>
+  <span class = "keyword">public</span> Rational divide(Rational secondRational) {
+    <span class = "keyword">long</span> n = numerator * secondRational.getDenominator();
+    <span class = "keyword">long</span> d = denominator * secondRational.numerator;
+    <span class = "keyword">return</span> <span class = "keyword">new</span> Rational(n, d);
+  }
+
+  @Override  
+  <span class = "keyword">public</span> String toString() {
+    <span class = "keyword">if</span> (denominator == <span class = "constant">1</span>)
+      <span class = "keyword">return</span> numerator + <span class = "literal">""</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> numerator + <span class = "literal">"/"</span> + denominator;
+  }
+
+  @Override <span class = "comment">// Override the equals method in the Object class </span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> equals(Object other) {
+    <span class = "keyword">if</span> ((<span class = "keyword">this</span>.subtract((Rational)(other))).getNumerator() == <span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override <span class = "comment">// Implement the abstract intValue method in Number </span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> intValue() {
+    <span class = "keyword">return</span> (<span class = "keyword">int</span>)doubleValue();
+  }
+
+  @Override <span class = "comment">// Implement the abstract floatValue method in Number </span>
+  <span class = "keyword">public</span> <span class = "keyword">float</span> floatValue() {
+    <span class = "keyword">return</span> (<span class = "keyword">float</span>)doubleValue();
+  }
+
+  @Override <span class = "comment">// Implement the doubleValue method in Number </span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> doubleValue() {
+    <span class = "keyword">return</span> numerator * <span class = "constant">1</span><span class = "literal">.</span><span class = "constant">0</span> / denominator;
+  }
+
+  @Override <span class = "comment">// Implement the abstract longValue method in Number</span>
+  <span class = "keyword">public</span> <span class = "keyword">long</span> longValue() {
+    <span class = "keyword">return</span> (<span class = "keyword">long</span>)doubleValue();
+  }
+
+  @Override <span class = "comment">// Implement the compareTo method in Comparable</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(Rational o) {
+    <span class = "keyword">if</span> (<span class = "keyword">this</span>.subtract(o).getNumerator() &gt; <span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "constant">1</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (<span class = "keyword">this</span>.subtract(o).getNumerator() &lt; <span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "constant">0</span>;
+  }
+}
+</pre>
+</body>
+</html>

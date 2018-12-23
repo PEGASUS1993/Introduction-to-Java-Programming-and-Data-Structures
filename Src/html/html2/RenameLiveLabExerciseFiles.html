@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RenameLiveLabExerciseFiles.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RenameLiveLabExerciseFilesWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "RenameLiveLabExerciseFiles" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.File;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> RenameLiveLabExerciseFiles {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+	System.out.println(<span class = "literal">"Usage: java RenameLiveLabExerciseFiles * "</span>);
+	
+	System.out.println(<span class = "literal">"Exercise25_5ag"</span>.matches(<span class = "literal">"Exercise[\\d]_.*"</span>));
+	System.out.println(<span class = "literal">"Exercise5_54df"</span>.matches(<span class = "literal">"Exercise[\\d]_.*"</span>));
+	
+	<span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; args.length; i++) {
+	  <span class = "keyword">if</span> (args[i].matches(<span class = "literal">"Exercise.*_[\\d][\\D]*"</span>)) {
+		String s = args[i];
+		String newName = s.substring(<span class = "constant">0</span>, s.indexOf(<span class = "literal">'_'</span>) - <span class = "constant">1</span>) 
+		  + <span class = "literal">"0"</span> + s.substring(s.indexOf(<span class = "literal">'_'</span>) - <span class = "constant">1</span>) ;
+		
+		File file = <span class = "keyword">new</span> File(args[i]);
+		file.renameTo(<span class = "keyword">new</span> File(newName));
+	  }
+	} 
+  }
+}
+</pre>
+</body>
+</html>

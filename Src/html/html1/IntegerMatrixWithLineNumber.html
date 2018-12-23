@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - IntegerMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "IntegerMatrix.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> IntegerMatrix <span class = "keyword">extends</span> GenericMatrix&lt;Integer&gt; {
+  2&nbsp;&nbsp;  @Override <span class = "comment">/** Add two integers */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">protected</span> Integer add(Integer o1, Integer o2) {
+  4&nbsp;&nbsp;    <span class = "keyword">return</span> o1 + o2;
+  5&nbsp;&nbsp;  }
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  @Override <span class = "comment">/** Multiply two integers */</span>
+  8&nbsp;&nbsp;  <span class = "keyword">protected</span> Integer multiply(Integer o1, Integer o2) {
+  9&nbsp;&nbsp;    <span class = "keyword">return</span> o1 * o2;
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  @Override <span class = "comment">/** Specify zero for an integer */</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">protected</span> Integer zero() {
+ 14&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "constant">0</span>;
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

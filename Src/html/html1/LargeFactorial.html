@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LargeFactorial.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LargeFactorialWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "LargeFactorial" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+<span class = "keyword">import</span> java.math.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> LargeFactorial {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter an integer: "</span>);
+    <span class = "keyword">int</span> n = input.nextInt();
+    System.out.println(n + <span class = "literal">"! is \n"</span> + factorial(n));
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> BigInteger factorial(<span class = "keyword">long</span> n) {
+    BigInteger result = BigInteger.ONE; <span class = "comment">// Assign 1 to result</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= n; i++) <span class = "comment">// Multiply each i</span>
+      result = result.multiply(<span class = "keyword">new</span> BigInteger(i+<span class = "literal">""</span>));
+
+    <span class = "keyword">return</span> result;
+  }
+}
+</pre>
+</body>
+</html>

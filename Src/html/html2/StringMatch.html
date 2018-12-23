@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StringMatch.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StringMatchWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StringMatch" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> StringMatch {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    java.util.Scanner input = <span class = "keyword">new</span> java.util.Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a string text: "</span>);
+    String text = input.nextLine();
+    System.out.print(<span class = "literal">"Enter a string pattern: "</span>);
+    String pattern = input.nextLine();
+    
+    <span class = "keyword">int</span> index = match(text, pattern);
+    <span class = "keyword">if</span> (index &gt;= <span class = "constant">0</span>)
+      System.out.println(<span class = "literal">"matched at index "</span> + index);
+    <span class = "keyword">else</span>
+      System.out.println(<span class = "literal">"unmatched"</span>);   
+  }
+
+  <span class = "comment">// Return the index of the first match. -1 otherwise.</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> match(String text, String pattern) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; text.length() - pattern.length() + <span class = "constant">1</span>; i++) {
+      <span class = "keyword">if</span> (isMatched(i, text, pattern))
+        <span class = "keyword">return</span> i;
+    }
+
+    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+  }
+	
+  <span class = "comment">// Test if pattern matches text starting at index i</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isMatched(<span class = "keyword">int</span> i, String text, 
+      String pattern) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; pattern.length(); k++) {
+      <span class = "keyword">if</span> (pattern.charAt(k) != text.charAt(i + k)) {
+        <span class = "keyword">return</span> <span class = "keyword">false</span>;
+      }
+    }
+    
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+}
+</pre>
+</body>
+</html>

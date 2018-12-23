@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestDataStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestDataStreamWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestDataStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestDataStream {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> IOException {
+    <span class = "keyword">try</span> ( <span class = "comment">// Create an output stream for file temp.dat</span>
+      DataOutputStream output =
+        <span class = "keyword">new</span> DataOutputStream(<span class = "keyword">new</span> FileOutputStream(<span class = "literal">"temp.dat"</span>));
+    ) {
+      <span class = "comment">// Write student test scores to the file</span>
+      output.writeUTF(<span class = "literal">"John"</span>);
+      output.writeDouble(<span class = "constant">85</span><span class = "literal">.</span><span class = "constant">5</span>);
+      output.writeUTF(<span class = "literal">"Jim"</span>);
+      output.writeDouble(<span class = "constant">185</span><span class = "literal">.</span><span class = "constant">5</span>);
+      output.writeUTF(<span class = "literal">"George"</span>);
+      output.writeDouble(<span class = "constant">105</span><span class = "literal">.</span><span class = "constant">25</span>);
+    }
+    
+    <span class = "keyword">try</span> ( <span class = "comment">// Create an input stream for file temp.dat</span>
+      DataInputStream input =
+        <span class = "keyword">new</span> DataInputStream(<span class = "keyword">new</span> FileInputStream(<span class = "literal">"temp.dat"</span>));
+    ) {
+      <span class = "comment">// Read student test scores from the file</span>
+      System.out.println(input.readUTF() + <span class = "literal">" "</span> + input.readDouble());
+      System.out.println(input.readUTF() + <span class = "literal">" "</span> + input.readDouble());
+      System.out.println(input.readUTF() + <span class = "literal">" "</span> + input.readDouble());
+    }
+  }
+}
+</pre>
+</body>
+</html>

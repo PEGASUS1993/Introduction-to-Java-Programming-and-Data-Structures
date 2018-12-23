@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestPassObject.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestPassObjectWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestPassObject" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestPassObject {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Circle object with radius 1</span>
+    CircleWithPrivateDataFields myCircle = 
+      <span class = "keyword">new</span> CircleWithPrivateDataFields(<span class = "constant">1</span>);
+
+    <span class = "comment">// Print areas for radius 1, 2, 3, 4, and 5.</span>
+    <span class = "keyword">int</span> n = <span class = "constant">5</span>;
+    printAreas(myCircle, n);
+
+    <span class = "comment">// See myCircle.radius and times</span>
+    System.out.println(<span class = "literal">"\n"</span> + <span class = "literal">"Radius is "</span> + myCircle.getRadius());
+    System.out.println(<span class = "literal">"n is "</span> + n);
+  }
+
+  <span class = "comment">/** Print a table of areas for radius */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printAreas(
+      CircleWithPrivateDataFields c, <span class = "keyword">int</span> times) {
+    System.out.println(<span class = "literal">"Radius \t\tArea"</span>);
+    <span class = "keyword">while</span> (times &gt;= <span class = "constant">1</span>) {
+      System.out.println(c.getRadius() + <span class = "literal">"\t\t"</span> + c.getArea());
+      c.setRadius(c.getRadius() + <span class = "constant">1</span>);
+      times--;
+    }
+  }
+}
+</pre>
+</body>
+</html>

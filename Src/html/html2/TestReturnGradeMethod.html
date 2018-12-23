@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestReturnGradeMethod.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/TestReturnGradeMethod.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestReturnGradeMethod" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestReturnGradeMethod {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    System.out.print(<span class = "literal">"The grade is "</span> + getGrade(<span class = "constant">78</span><span class = "literal">.</span><span class = "constant">5</span>));
+    System.out.print(<span class = "literal">"\nThe grade is "</span> + getGrade(<span class = "constant">59</span><span class = "literal">.</span><span class = "constant">5</span>));
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getGrade(<span class = "keyword">double</span> score) {
+    <span class = "keyword">if</span> (score &gt;= <span class = "constant">90</span><span class = "literal">.</span><span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "literal">'A'</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (score &gt;= <span class = "constant">80</span><span class = "literal">.</span><span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "literal">'B'</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (score &gt;= <span class = "constant">70</span><span class = "literal">.</span><span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "literal">'C'</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (score &gt;= <span class = "constant">60</span><span class = "literal">.</span><span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "literal">'D'</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "literal">'F'</span>;
+  }
+}
+</pre>
+</body>
+</html>

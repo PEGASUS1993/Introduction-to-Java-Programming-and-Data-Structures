@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestArray.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestArrayWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestArray" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestArray {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">final</span> <span class = "keyword">int</span> TOTAL_NUMBERS = <span class = "constant">6</span>;
+    <span class = "keyword">int</span>[] numbers = <span class = "keyword">new</span> <span class = "keyword">int</span>[TOTAL_NUMBERS];
+
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Read all numbers</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numbers.length; i++) {
+      System.out.print(<span class = "literal">"Enter a number: "</span>);
+
+      <span class = "comment">// Convert string into integer</span>
+      numbers[i] = input.nextInt();
+    }
+
+    <span class = "comment">// Find the largest</span>
+    <span class = "keyword">int</span> max = numbers[<span class = "constant">0</span>];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt; numbers.length; i++) {
+      <span class = "keyword">if</span> (max &lt; numbers[i])
+        max = numbers[i];
+    }
+
+    <span class = "comment">// Find the occurrence of the largest number</span>
+    <span class = "keyword">int</span> count = <span class = "constant">0</span>;
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numbers.length; i++) {
+      <span class = "keyword">if</span> (numbers[i] == max) count++;
+    }
+
+    <span class = "comment">// Prepare the result</span>
+    String output = <span class = "literal">"The array is "</span>;
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numbers.length; i++) {
+      output += numbers[i] + <span class = "literal">" "</span>;
+    }
+
+    output += <span class = "literal">"\nThe largest number is "</span> + max;
+    output += <span class = "literal">"\nThe occurrence count of the largest number "</span>
+      + <span class = "literal">"is "</span> + count;
+
+    <span class = "comment">// Display the result</span>
+    System.out.println(output);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AccountWithSyncUsingLock.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AccountWithSyncUsingLockWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "AccountWithSyncUsingLock" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.concurrent.*;
+<span class = "keyword">import</span> java.util.concurrent.locks.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> AccountWithSyncUsingLock {
+  <span class = "keyword">private</span> <span class = "keyword">static</span> Account account = <span class = "keyword">new</span> Account();
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    ExecutorService executor = Executors.newCachedThreadPool();
+
+    <span class = "comment">// Create and launch 100 threads</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">100</span>; i++) {
+      executor.execute(<span class = "keyword">new</span> AddAPennyTask());
+    }
+
+    executor.shutdown();
+
+    <span class = "comment">// Wait until all tasks are finished</span>
+    <span class = "keyword">while</span> (!executor.isTerminated()) {
+    }
+
+    System.out.println(<span class = "literal">"What is balance ? "</span> + account.getBalance());
+  }
+
+  <span class = "comment">// A thread for adding a penny to the account</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> AddAPennyTask <span class = "keyword">implements</span> Runnable {
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      account.deposit(<span class = "constant">1</span>);
+    }
+  }
+
+  <span class = "comment">// An inner class for account</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Account {
+    <span class = "keyword">private</span> <span class = "keyword">static</span> Lock lock = <span class = "keyword">new</span> ReentrantLock(); <span class = "comment">// Create a lock</span>
+    <span class = "keyword">private</span> <span class = "keyword">int</span> balance = <span class = "constant">0</span>;
+
+    <span class = "keyword">public</span> <span class = "keyword">int</span> getBalance() {
+      <span class = "keyword">return</span> balance;
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> deposit(<span class = "keyword">int</span> amount) {
+      lock.lock(); <span class = "comment">// Acquire the lock</span>
+
+      <span class = "keyword">try</span> {
+        <span class = "keyword">int</span> newBalance = balance + amount;
+
+        <span class = "comment">// This delay is deliberately added to magnify the</span>
+        <span class = "comment">// data-corruption problem and make it easy to see.</span>
+        Thread.sleep(<span class = "constant">5</span>);
+
+        balance = newBalance;
+      }
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+      }
+      <span class = "keyword">finally</span> {
+        lock.unlock(); <span class = "comment">// Release the lock</span>
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

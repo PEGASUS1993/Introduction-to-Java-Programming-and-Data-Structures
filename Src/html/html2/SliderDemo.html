@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SliderDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SliderDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.geometry.Orientation;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Slider;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> SliderDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    Text text = <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "literal">"JavaFX Programming"</span>);
+    
+    Slider slHorizontal = <span class = "keyword">new</span> Slider();
+    slHorizontal.setShowTickLabels(<span class = "keyword">true</span>);
+    slHorizontal.setShowTickMarks(<span class = "keyword">true</span>);    
+    
+    Slider slVertical = <span class = "keyword">new</span> Slider();
+    slVertical.setOrientation(Orientation.VERTICAL);
+    slVertical.setShowTickLabels(<span class = "keyword">true</span>);
+    slVertical.setShowTickMarks(<span class = "keyword">true</span>);
+    slVertical.setValue(<span class = "constant">100</span>);
+    
+    <span class = "comment">// Create a text in a pane</span>
+    Pane paneForText = <span class = "keyword">new</span> Pane();
+    paneForText.getChildren().add(text);
+    
+    <span class = "comment">// Create a border pane to hold text and scroll bars</span>
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setCenter(paneForText);
+    pane.setBottom(slHorizontal);
+    pane.setRight(slVertical);
+
+    slHorizontal.valueProperty().addListener(ov -&gt; 
+      text.setX(slHorizontal.getValue() * paneForText.getWidth() /
+        slHorizontal.getMax()));
+    
+    slVertical.valueProperty().addListener(ov -&gt; 
+      text.setY((slVertical.getMax() - slVertical.getValue()) 
+        * paneForText.getHeight() / slVertical.getMax()));
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+    primaryStage.setTitle(<span class = "literal">"SliderDemo"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

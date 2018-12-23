@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RandomCharacter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RandomCharacterWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> RandomCharacter {
+  <span class = "comment">/** Generate a random character between ch1 and ch2 */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomCharacter(<span class = "keyword">char</span> ch1, <span class = "keyword">char</span> ch2) {
+    <span class = "keyword">return</span> (<span class = "keyword">char</span>)(ch1 + Math.random() * (ch2 - ch1 + <span class = "constant">1</span>));
+  }
+
+  <span class = "comment">/** Generate a random lowercase letter */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomLowerCaseLetter() {
+    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'a'</span>, <span class = "literal">'z'</span>);
+  }
+
+  <span class = "comment">/** Generate a random uppercase letter */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomUpperCaseLetter() {
+    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'A'</span>, <span class = "literal">'Z'</span>);
+  }
+
+  <span class = "comment">/** Generate a random digit character */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomDigitCharacter() {
+    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'0'</span>, <span class = "literal">'9'</span>);
+  }
+
+  <span class = "comment">/** Generate a random character */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomCharacter() {
+    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'\u0000'</span>, <span class = "literal">'\uFFFF'</span>);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - NineTailModel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "NineTailModelWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> NineTailModel {
+  <span class = "keyword">public</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> NUMBER_OF_NODES = <span class = "constant">512</span>;
+  <span class = "keyword">protected</span> UnweightedGraph&lt;Integer&gt;.SearchTree tree; 
+
+  <span class = "comment">/** Construct a model */</span>
+  <span class = "keyword">public</span> NineTailModel() {
+    <span class = "comment">// Create edges</span>
+    List&lt;Edge&gt; edges = getEdges();
+    
+    <span class = "comment">// Create a graph</span>
+    UnweightedGraph&lt;Integer&gt; graph = <span class = "keyword">new</span> UnweightedGraph&lt;&gt;(
+      edges, NUMBER_OF_NODES); 
+
+    <span class = "comment">// Obtain a BSF tree rooted at the target node</span>
+    tree = graph.bfs(<span class = "constant">511</span>);
+  }
+
+  <span class = "comment">/** Create all edges for the graph */</span>
+  <span class = "keyword">private</span> List&lt;Edge&gt; getEdges() {
+    List&lt;Edge&gt; edges =
+      <span class = "keyword">new</span> ArrayList&lt;&gt;(); <span class = "comment">// Store edges</span>
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> u = <span class = "constant">0</span>; u &lt; NUMBER_OF_NODES; u++) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; <span class = "constant">9</span>; k++) {
+        <span class = "keyword">char</span>[] node = getNode(u); <span class = "comment">// Get the node for vertex u</span>
+        <span class = "keyword">if</span> (node[k] == <span class = "literal">'H'</span>) {
+          <span class = "keyword">int</span> v = getFlippedNode(node, k);
+          <span class = "comment">// Add edge (v, u) for a legal move from node u to node v</span>
+          edges.add(<span class = "keyword">new</span> Edge(v, u));
+        }
+      }
+    }
+
+    <span class = "keyword">return</span> edges;
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getFlippedNode(<span class = "keyword">char</span>[] node, <span class = "keyword">int</span> position) {
+    <span class = "keyword">int</span> row = position / <span class = "constant">3</span>;
+    <span class = "keyword">int</span> column = position % <span class = "constant">3</span>;
+
+    flipACell(node, row, column);
+    flipACell(node, row - <span class = "constant">1</span>, column);
+    flipACell(node, row + <span class = "constant">1</span>, column);
+    flipACell(node, row, column - <span class = "constant">1</span>);
+    flipACell(node, row, column + <span class = "constant">1</span>);
+
+    <span class = "keyword">return</span> getIndex(node);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> flipACell(<span class = "keyword">char</span>[] node, <span class = "keyword">int</span> row, <span class = "keyword">int</span> column) {
+    <span class = "keyword">if</span> (row &gt;= <span class = "constant">0</span> && row &lt;= <span class = "constant">2</span> && column &gt;= <span class = "constant">0</span> && column &lt;= <span class = "constant">2</span>) { 
+      <span class = "comment">// Within the boundary</span>
+      <span class = "keyword">if</span> (node[row * <span class = "constant">3</span> + column] == <span class = "literal">'H'</span>)
+        node[row * <span class = "constant">3</span> + column] = <span class = "literal">'T'</span>; <span class = "comment">// Flip from H to T</span>
+      <span class = "keyword">else</span>
+        node[row * <span class = "constant">3</span> + column] = <span class = "literal">'H'</span>; <span class = "comment">// Flip from T to H</span>
+    }
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getIndex(<span class = "keyword">char</span>[] node) {
+    <span class = "keyword">int</span> result = <span class = "constant">0</span>;
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">if</span> (node[i] == <span class = "literal">'T'</span>)
+        result = result * <span class = "constant">2</span> + <span class = "constant">1</span>;
+      <span class = "keyword">else</span>
+        result = result * <span class = "constant">2</span> + <span class = "constant">0</span>;
+
+    <span class = "keyword">return</span> result;
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span>[] getNode(<span class = "keyword">int</span> index) {
+    <span class = "keyword">char</span>[] result = <span class = "keyword">new</span> <span class = "keyword">char</span>[<span class = "constant">9</span>];
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++) {
+      <span class = "keyword">int</span> digit = index % <span class = "constant">2</span>;
+      <span class = "keyword">if</span> (digit == <span class = "constant">0</span>)
+        result[<span class = "constant">8</span> - i] = <span class = "literal">'H'</span>;
+      <span class = "keyword">else</span>
+        result[<span class = "constant">8</span> - i] = <span class = "literal">'T'</span>;
+      index = index / <span class = "constant">2</span>;
+    }
+
+    <span class = "keyword">return</span> result;
+  }
+  
+  <span class = "keyword">public</span> List&lt;Integer&gt; getShortestPath(<span class = "keyword">int</span> nodeIndex) {
+    <span class = "keyword">return</span> tree.getPath(nodeIndex);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printNode(<span class = "keyword">char</span>[] node) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">if</span> (i % <span class = "constant">3</span> != <span class = "constant">2</span>)
+        System.out.print(node[i]);
+      <span class = "keyword">else</span>
+        System.out.println(node[i]);
+
+    System.out.println();
+  }
+}
+</pre>
+</body>
+</html>

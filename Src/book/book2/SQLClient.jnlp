@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP filr for SQLClient -->
+
+<jnlp spec="1.0+" 
+      codebase="http://www.cs.armstrong.edu/liang/intro8e/book/" 
+      href="SQLClient.jnlp">
+
+  <information>
+    <title>SQL Client</title>
+    <vendor>Y. Daniel Liang</vendor>
+    <description>Universal SQL Client</description>
+    <homepage href="http://www.cs.armstrong.edu/liang"/>
+    <offline-allowed />
+  </information>
+
+  <resources>
+    <java version = "1.6+" />
+    <jar href="SQLClient.jar" main="true" />
+    <jar href="lib/mysqljdbc.jar" />
+  </resources>
+
+  <applet-desc 
+    name="SQLClient"
+    main-class="SQLClient"
+    width ="800"   
+    height ="400">
+  </applet-desc>
+</jnlp>

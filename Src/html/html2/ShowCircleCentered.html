@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowCircleCentered.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowCircleCenteredWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowCircleCentered <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {    
+    <span class = "comment">// Create a pane to hold the circle </span>
+    Pane pane = <span class = "keyword">new</span> Pane();
+    
+    <span class = "comment">// Create a circle and set its properties</span>
+    Circle circle = <span class = "keyword">new</span> Circle();
+    circle.centerXProperty().bind(pane.widthProperty().divide(<span class = "constant">2</span>));
+    circle.centerYProperty().bind(pane.heightProperty().divide(<span class = "constant">2</span>));
+    circle.setRadius(<span class = "constant">50</span>);
+    circle.setStroke(Color.BLACK); 
+    circle.setFill(Color.WHITE);
+    pane.getChildren().add(circle); <span class = "comment">// Add circle to the pane</span>
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">200</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"ShowCircleCentered"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

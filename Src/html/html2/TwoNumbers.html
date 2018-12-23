@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TwoNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TwoNumbersWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TwoNumbers {
+  <span class = "keyword">private</span> <span class = "keyword">int</span> number1;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> number2;
+
+  <span class = "comment">/** Create new random numbers with number1 &gt;= number2 */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setNewNumbers() {
+    <span class = "comment">// Generate two random single-digit integers</span>
+    number1 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">100</span>);
+    number2 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">100</span>);
+
+    <span class = "comment">// If number1 &lt; number2, swap number1 with number2</span>
+    <span class = "keyword">if</span> (number1 &lt; number2) {
+      <span class = "keyword">int</span> temp = number1;
+      number1 = number2;
+      number2 = temp;
+    }
+  }
+
+  <span class = "comment">/** Return the first number */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumber1() {
+    <span class = "keyword">return</span> number1;
+  }
+
+  <span class = "comment">/** Return the second number */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumber2() {
+    <span class = "keyword">return</span> number2;
+  }
+}
+</pre>
+</body>
+</html>

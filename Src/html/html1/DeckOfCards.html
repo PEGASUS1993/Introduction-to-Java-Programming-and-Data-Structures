@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DeckOfCards.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/DeckOfCards.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DeckOfCards" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> DeckOfCards {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span>[] deck = <span class = "keyword">new</span> <span class = "keyword">int</span>[<span class = "constant">52</span>];
+    String[] suits = {<span class = "literal">"Spades"</span>, <span class = "literal">"Hearts"</span>, <span class = "literal">"Diamonds"</span>, <span class = "literal">"Clubs"</span>};
+    String[] ranks = {<span class = "literal">"Ace"</span>, <span class = "literal">"2"</span>, <span class = "literal">"3"</span>, <span class = "literal">"4"</span>, <span class = "literal">"5"</span>, <span class = "literal">"6"</span>, <span class = "literal">"7"</span>, <span class = "literal">"8"</span>, <span class = "literal">"9"</span>,
+      <span class = "literal">"10"</span>, <span class = "literal">"Jack"</span>, <span class = "literal">"Queen"</span>, <span class = "literal">"King"</span>};
+        
+    <span class = "comment">// Initialize cards</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; deck.length; i++)
+      deck[i] = i;
+    
+    <span class = "comment">// Shuffle the cards</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; deck.length; i++) {
+      <span class = "comment">// Generate an index randomly</span>
+      <span class = "keyword">int</span> index = (<span class = "keyword">int</span>)(Math.random() * deck.length);
+      <span class = "keyword">int</span> temp = deck[i];
+      deck[i] = deck[index]; 
+      deck[index] = temp;
+    }
+
+    <span class = "comment">// Display the first four cards</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">4</span>; i++) {
+      String suit = suits[deck[i] / <span class = "constant">13</span>];
+      String rank = ranks[deck[i] % <span class = "constant">13</span>];
+      System.out.println(<span class = "literal">"Card number "</span> + deck[i] + <span class = "literal">": "</span> 
+        + rank + <span class = "literal">" of "</span> + suit);
+    }
+  }
+}
+</pre>
+</body>
+</html>

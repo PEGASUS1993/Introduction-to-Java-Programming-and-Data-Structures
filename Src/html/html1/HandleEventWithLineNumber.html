@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - HandleEvent.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "HandleEvent.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.ActionEvent;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.EventHandler;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> HandleEvent <span class = "keyword">extends</span> Application {
+ 11&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 13&nbsp;&nbsp;    <span class = "comment">// Create a pane and set its properties</span>
+ 14&nbsp;&nbsp;    HBox pane = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+ 15&nbsp;&nbsp;    pane.setAlignment(Pos.CENTER);
+ 16&nbsp;&nbsp;    Button btOK = <span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>);
+ 17&nbsp;&nbsp;    Button btCancel = <span class = "keyword">new</span> Button(<span class = "literal">"Cancel"</span>);
+ 18&nbsp;&nbsp;    OKHandlerClass handler1 = <span class = "keyword">new</span> OKHandlerClass();
+ 19&nbsp;&nbsp;    btOK.setOnAction(handler1);
+ 20&nbsp;&nbsp;    CancelHandlerClass handler2 = <span class = "keyword">new</span> CancelHandlerClass();
+ 21&nbsp;&nbsp;    btCancel.setOnAction(handler2);
+ 22&nbsp;&nbsp;    pane.getChildren().addAll(btOK, btCancel);
+ 23&nbsp;&nbsp;    
+ 24&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 25&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane);
+ 26&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"HandleEvent"</span>); <span class = "comment">// Set the stage title</span>
+ 27&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 28&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  <span class = "comment">/**
+ 32&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 33&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 34&nbsp;&nbsp;   */</span>
+ 35&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 36&nbsp;&nbsp;    launch(args);
+ 37&nbsp;&nbsp;  }
+ 38&nbsp;&nbsp;} 
+ 39&nbsp;&nbsp;
+ 40&nbsp;&nbsp;<span class = "keyword">class</span> OKHandlerClass <span class = "keyword">implements</span> EventHandler&lt;ActionEvent&gt; {
+ 41&nbsp;&nbsp;  @Override
+ 42&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+ 43&nbsp;&nbsp;    System.out.println(<span class = "literal">"OK button clicked"</span>); 
+ 44&nbsp;&nbsp;  }
+ 45&nbsp;&nbsp;}
+ 46&nbsp;&nbsp;
+ 47&nbsp;&nbsp;<span class = "keyword">class</span> CancelHandlerClass <span class = "keyword">implements</span> EventHandler&lt;ActionEvent&gt; {
+ 48&nbsp;&nbsp;  @Override
+ 49&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+ 50&nbsp;&nbsp;    System.out.println(<span class = "literal">"Cancel button clicked"</span>);
+ 51&nbsp;&nbsp;  }
+ 52&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

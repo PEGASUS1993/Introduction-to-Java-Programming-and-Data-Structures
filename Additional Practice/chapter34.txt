@@ -1,0 +1,282 @@
+Chapter 34 Java Database Programming
+
+Section 34.2 Relational Database Systems
+1. In a relational data model, _________ defines the representation of the data. 
+a. Structure
+b. Integrity 
+c. Language 
+d. SQL
+Key:a
+
+#
+2. In a relational data model, _________ imposes constraints on the data. 
+a. Structure
+b. Integrity 
+c. Language 
+d. SQL
+Key:b
+
+#
+3. In a relational data model, ________ provides the means for accessing and manipulating data. 
+a. Structure
+b. Integrity 
+c. Language 
+d. SQL
+Key:cd
+
+#
+4. _________ specify the permissible values for an attribute. 
+a. Domain constraints
+b. Primary key constraints
+c. Foreign key constraints
+d. intra-relational constraints
+e. inter-relational constraints
+Key:a
+
+#
+5. ________ are known as intra-relational constraints, meaning that a constraint involves only one relation.  
+a. Domain constraints
+b. Primary key constraints
+c. Foreign key constraints
+Key:ab
+
+#
+6. ________ is an attribute or a set of attributes that uniquely identifies the relation.
+a. A superkey
+b. A key
+c. A candidate key
+d. A primary key
+Key:a
+
+#
+Section 34.3 SQL
+7. SQL ________ statements may change the contents of a database.
+a. SELECT
+b. UPDATE
+c. DELETE
+d. INSERT
+Key:bcd
+
+#
+8. To retrieve all courses with more than 3 credit hours, you write 
+
+select * from Course
+where numOfCredits > 3;
+
+Is this statement correct?
+
+a. Yes
+b. No
+Key:a
+
+#
+Section 34.4 JDBC
+9. Which of the following statements loads the JDBC-ODBC driver?
+a. Class.forName(sun.jdbc.odbc.JdbcOdbcDriver) 
+b. Class.forName("sun.jdbc.odbc.JdbcOdbcDriver") 
+c. Class.loadClass(sun.jdbc.odbc.JdbcOdbcDriver) 
+d. Class.loadClass("sun.jdbc.odbc.JdbcOdbcDriver") 
+Key:b
+
+#
+10. Where is com.mysql.jdbc.Driver located?
+a. in the standard Java library bundled with JDK
+b. in a JAR file mysqljdbc.jar downloadable from the book's Companion Website
+c. in a JAR file classes12.jar downloadable from the book's Companion Website
+d. in a JAR file ojdbc14.jar downloadable from the book's Companion Website 
+Key:b
+
+#
+11. Invoking Class.forName method may throw ___________.
+a. RuntimeException
+b. ClassNotFoundException
+c. IOException
+d. SQLException
+Key:b
+
+#
+12. A database URL for an access database source test is ________.
+a. test
+b. jdbcodbc:test
+c. jdbc:odbc:test
+d. sun.jdbc:odbc:test
+Key:c
+
+#
+13. A database URL for a MySQL database named test on host panda.armstrong.edu is ________.
+a. jdbc.mysql.//panda.armstrong.edu/test
+b. jdbc:mysql:/panda.armstrong.edu/test
+c. jdbc:mysql://panda.armstrong.edu/test
+d. jdbc.mysql://panda.armstrong.edu/test
+Key:c
+
+#
+14. To connect to a local MySQL database named test, use 
+a. Connection connection = DriverManager.getConnection(jdbc:mysql://localhost/test);
+b. Connection connection = DriverManager.connect("jdbc:mysql://localhost/test");
+c. Connection connection = DriverManager.getConnection("mysql:jdbc://localhost/test");
+d. Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test");
+Key:d
+
+#
+15. To create a statement on a Connection object conn, use
+a. Statement statement = conn.statement();
+b. Statement statement = Connection.createStatement();
+c. Statement statement = conn.createStatement();
+d. Statement statement = connection.create();
+Key:c
+
+#
+16. To execute a SELECT statement "select * from Address" on a Statement object stmt, use
+a. stmt.execute("select * from Address");
+b. stmt.executeQuery("select * from Address");
+c. stmt.executeUpdate("select * from Address");
+d. stmt.query("select * from Address");
+Key:b
+
+#
+17. Which of the following statements are true?
+a. You may load multiple JDBC drivers in a program.
+b. You may create multiple connections to a database.
+c. You may create multiple statements from one connection.
+d. You can send queries and update statements through a Statement object.
+Key:abcd
+
+#
+18. Analyze the following code:
+    ResultSet resultSet = statement.executeQuery
+      ("select firstName, mi, lastName from Student where lastName "
+        + " = 'Smith'");
+    System.out.println(resultSet.getString(1));
+a. If the SQL SELECT statement returns no result, resultSet is null.
+b. The program will have a runtime error, because the cursor in resultSet does not point to a row. You must use resultSet.next() to move the cursor to the first row in the result set. Subsequently, resultSet.next() moves the cursor to the next row in the result set. 
+c. resultSet.getString(1) returns the firstName field in the result set.
+d. resultSet.getString(1) returns the mi field in the result set.
+Key:bc
+
+#
+19. Suppose that your program accesses MySQL or Oracle database. Which of the following statements are true?
+a. If the driver for MySQL and Oracle are not in the classpath, the program will have a syntax error.
+b. If the driver for MySQL and Oracle are not in the classpath, the program will have a runtime error, indicating that the driver class cannot be loaded.
+c. If the database is not available, the program will have a syntax error.
+d. If the database is not available, the program will have a runtime error, when attempting to create a Connection object.
+Key:bd
+
+#
+20. Which of the following are interfaces?
+a. Connection
+b. Statement
+c. ResultSet
+d. DriverManager
+Key:abc
+
+#
+21. What is the return value from 
+     stmt.executeUpdate("insert into T values (100, 'Smith')")
+a. void
+b. an int value indicating how many rows are effected from the invocation
+c. a value indicating whether the SQL statement has been executed successfully
+d. an object that contains the status of the execution
+Key:b
+
+#
+Section 34.5 PreparedStatement
+22. Which of the following statements are true?
+a. PreparedStatement is a subinterface of Statement
+b. PreparedStatement is for SQL query statements only. You cannot create a PreparedStatement for SQL update statements.
+c. PreparedStatement is efficient for repeated executions.
+d. The parameters in a prepared statement are denoted using the ? sign.
+Key:acd
+
+#
+23. Suppose a prepared statement is created as follows:
+
+Statement preparedStatement = connection.prepareStatement
+  ("insert into Student (firstName, mi, lastName) " +
+   "values (?, ?, ?)");
+
+To set a value John to the first parameter, use
+
+a. preparedStatement.setString(0, "John");
+b. preparedStatement.setString(1, "John");
+c. preparedStatement.setString(0, 'John');
+d. preparedStatement.setString(1, 'John');
+Key:b
+
+#
+24. If a prepared statement preparedStatement is a SQL SELECT statement, you execute the statement using _________.
+
+a. preparedStatement.execute();
+b. preparedStatement.executeUpdate();
+c. preparedStatement.executeQuery();
+d. preparedStatement.query();
+Key:c
+
+#
+Section 34.6 CallableStatement
+25. Which of the following statements are true?
+a. CallableStatement is a subinterface of PreparedStatement
+b. CallableStatement is for SQL query statements only. You cannot create a CallableStatement for SQL update statements.
+c. CallableStatement is more efficient than PreparedStatement.
+d. CallableStatement is for executing predefined functions and procedures.
+Key:ad
+
+#
+26. Suppose a callable statement is created as follows:
+
+CallableStatement callableStatement = connection.prepareCall(
+  "{call sampleProcedure(?, ?, ?)}");
+
+Assume that the first parameter is an IN parameter with value John. To set this parameter value, use
+
+a. callableStatement.setString(0, "John");
+b. callableStatement.setString(1, "John");
+c. callableStatement.setString(0, 'John');
+d. callableStatement.setString(1, 'John');
+Key:b
+
+#
+27. Suppose a callable statement is created as follows:
+
+CallableStatement callableStatement = connection.prepareCall(
+  "{call sampleProcedure(?, ?, ?)}");
+
+Assume that the second parameter is an OUT parameter with value John. To register this parameter, use
+
+a. callableStatement.registerOutParameter(0, java.sql.Types.STRING);
+b. callableStatement.registerOutParameter(1, java.sql.Types.STRING);
+c. callableStatement.registerOutParameter(2, java.sql.Types.STRING);
+Key:c
+
+#
+Section 34.7 Retrieving Metadata
+28. Database meta data are retrieved through ____________.
+a. a Connection object
+b. a Statement object
+c. a ResultSet Object
+d. a PreparedStatement object
+Key:a  getMetaData() on a Connection object returns a DatabaseMetaData object.
+
+#
+29. What information may be obtained from a DatabaseMetaData object?
+a. database URL and product name
+b. JDBC driver name and version
+c. maximum number of connections to the database
+d. maximum table name length and maximum number of columns in a table
+Key:abcd
+
+#
+30. Result set meta data are retrieved through ____________.
+a. a Connection object
+b. a Statement object
+c. a ResultSet Object
+d. a PreparedStatement object
+Key:c  getMetaData() on a ResultSet object returns a DatabaseMetaData object.
+
+#
+31. What information may be obtained from a ResultSetMetaData object?
+a. database URL and product name
+b. JDBC driver name and version
+c. number of columns in the result set
+d. number of rows in the result set
+Key:c

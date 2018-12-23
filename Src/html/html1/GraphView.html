@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GraphView.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GraphViewWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.scene.Group;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.scene.shape.Line;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> GraphView <span class = "keyword">extends</span> BorderPane {
+  <span class = "keyword">private</span> Graph&lt;? <span class = "keyword">extends</span> Displayable&gt; graph;
+  <span class = "keyword">private</span> Group group = <span class = "keyword">new</span> Group();
+  
+  <span class = "keyword">public</span> GraphView(Graph&lt;? <span class = "keyword">extends</span> Displayable&gt; graph) {
+    <span class = "keyword">this</span>.graph = graph;
+    <span class = "keyword">this</span>.setCenter(group); <span class = "comment">// Center the group</span>
+    repaintGraph();
+  }
+  
+  <span class = "keyword">private</span> <span class = "keyword">void</span> repaintGraph() {
+    group.getChildren().clear(); <span class = "comment">// Clear group for a new display</span>
+    
+    <span class = "comment">// Draw vertices and text for vertices</span>
+    java.util.List&lt;? <span class = "keyword">extends</span> Displayable&gt; vertices 
+      = graph.getVertices();    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; graph.getSize(); i++) {
+      <span class = "keyword">double</span> x = vertices.get(i).getX();
+      <span class = "keyword">double</span> y = vertices.get(i).getY();
+      String name = vertices.get(i).getName();
+      
+      group.getChildren().add(<span class = "keyword">new</span> Circle(x, y, <span class = "constant">16</span>)); 
+      group.getChildren().add(<span class = "keyword">new</span> Text(x - <span class = "constant">8</span>, y - <span class = "constant">18</span>, name)); 
+    }
+    
+    <span class = "comment">// Draw edges for pairs of vertices</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; graph.getSize(); i++) {
+      java.util.List&lt;Integer&gt; neighbors = graph.getNeighbors(i);
+      <span class = "keyword">double</span> x1 = graph.getVertex(i).getX();
+      <span class = "keyword">double</span> y1 = graph.getVertex(i).getY();
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> v: neighbors) {
+        <span class = "keyword">double</span> x2 = graph.getVertex(v).getX();
+        <span class = "keyword">double</span> y2 = graph.getVertex(v).getY();
+        
+        <span class = "comment">// Draw an edge for (i, v)</span>
+        group.getChildren().add(<span class = "keyword">new</span> Line(x1, y1, x2, y2)); 
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

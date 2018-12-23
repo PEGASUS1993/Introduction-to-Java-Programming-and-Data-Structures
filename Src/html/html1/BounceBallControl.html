@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BounceBallControl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BounceBallControlWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.input.KeyCode;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> BounceBallControl <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    BallPane ballPane = <span class = "keyword">new</span> BallPane(); <span class = "comment">// Create a ball pane</span>
+
+    <span class = "comment">// Pause and resume animation</span>
+    ballPane.setOnMousePressed(e -&gt; ballPane.pause());
+    ballPane.setOnMouseReleased(e -&gt; ballPane.play());
+
+    <span class = "comment">// Increase and decrease animation   </span>
+    ballPane.setOnKeyPressed(e -&gt; {
+      <span class = "keyword">if</span> (e.getCode() == KeyCode.UP) {
+        ballPane.increaseSpeed();
+      } 
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (e.getCode() == KeyCode.DOWN) {
+        ballPane.decreaseSpeed();
+      }
+    });
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(ballPane, <span class = "constant">250</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"BounceBallControl"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    <span class = "comment">// Must request focus after the primary stage is displayed</span>
+    ballPane.requestFocus();
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestArrayListNew.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestArrayListNewWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestArrayListNew" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestArrayListNew {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a list to store cities</span>
+    ArrayList&lt;String&gt; cityList = <span class = "keyword">new</span> ArrayList&lt;String&gt;();
+
+    <span class = "comment">// Add some cities in the list</span>
+    cityList.add(<span class = "literal">"London"</span>);
+    cityList.add(<span class = "literal">"New York"</span>);
+    cityList.add(<span class = "literal">"Paris"</span>);
+    cityList.add(<span class = "literal">"Toronto"</span>);
+    cityList.add(<span class = "literal">"Hong Kong"</span>);
+    cityList.add(<span class = "literal">"Singapore"</span>);
+
+    System.out.println(<span class = "literal">"List size? "</span> + cityList.size());
+    System.out.println(<span class = "literal">"Is Toronto in the list? "</span> +
+      cityList.contains(<span class = "literal">"Toronto"</span>));
+    System.out.println(<span class = "literal">"The location of New York in the list? "</span>
+      + cityList.indexOf(<span class = "literal">"New York"</span>));
+    System.out.println(<span class = "literal">"Is the list empty? "</span> +
+      cityList.isEmpty()); <span class = "comment">// Print false</span>
+
+    <span class = "comment">// Insert a new city at index 2</span>
+    cityList.add(<span class = "constant">2</span>, <span class = "literal">"Beijing"</span>);
+
+    <span class = "comment">// Remove a city from the list</span>
+    cityList.remove(<span class = "literal">"Toronto"</span>);
+
+    <span class = "comment">// Remove a city at index 1</span>
+    cityList.remove(<span class = "constant">1</span>);
+
+    <span class = "comment">// Display London Beijing Paris Hong Kong Singapore</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; cityList.size(); i++)
+      System.out.print(cityList.get(i) + <span class = "literal">" "</span>);
+    System.out.println();
+
+    <span class = "comment">// Create a list to store two circles</span>
+    ArrayList&lt;Circle&gt; list = <span class = "keyword">new</span> ArrayList&lt;Circle&gt;();
+
+    <span class = "comment">// Add a circle and a cylinder</span>
+    list.add(<span class = "keyword">new</span> Circle(<span class = "constant">2</span>));
+    list.add(<span class = "keyword">new</span> Circle(<span class = "constant">3</span>));
+
+    <span class = "comment">// Display the area of the first circle in the list</span>
+    System.out.println(<span class = "literal">"The area of the circle? "</span> +
+      ((Circle)list.get(<span class = "constant">0</span>)).getArea());
+  }
+}
+</pre>
+</body>
+</html>

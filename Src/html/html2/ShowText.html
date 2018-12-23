@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowText.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowTextWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.scene.text.Font;
+<span class = "keyword">import</span> javafx.scene.text.FontWeight;
+<span class = "keyword">import</span> javafx.scene.text.FontPosture;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowText <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a pane to hold the texts</span>
+    Pane pane = <span class = "keyword">new</span> Pane();
+    pane.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>));
+    Text text1 = <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "literal">"Programming is fun"</span>);
+    text1.setFont(Font.font(<span class = "literal">"Courier"</span>, FontWeight.BOLD, 
+      FontPosture.ITALIC, <span class = "constant">15</span>));
+    pane.getChildren().add(text1);     
+
+    Text text2 = <span class = "keyword">new</span> Text(<span class = "constant">60</span>, <span class = "constant">60</span>, <span class = "literal">"Programming is fun\nDisplay text"</span>);
+    pane.getChildren().add(text2);     
+
+    Text text3 = <span class = "keyword">new</span> Text(<span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "literal">"Programming is fun\nDisplay text"</span>);
+    text3.setFill(Color.RED);
+    text3.setUnderline(<span class = "keyword">true</span>);
+    text3.setStrikethrough(<span class = "keyword">true</span>);    
+    pane.getChildren().add(text3); 
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane);
+    primaryStage.setTitle(<span class = "literal">"ShowText"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

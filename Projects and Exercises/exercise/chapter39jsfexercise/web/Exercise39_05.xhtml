@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Exercise39_05</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(0)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[0]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(1)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[1]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(2)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[2]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(3)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[3]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(4)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[4]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(5)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[5]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(6)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[6]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(7)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[7]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(8)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[8]}"/>
+                <h:outputText escape="false" value="#{exercise39_05.getQuestion(9)}"/>
+                <h:inputText value="#{exercise39_05.useranswer[9]}"/>
+            </h:panelGrid>
+            <h:commandButton value="Submit" action="#{exercise39_05.getEvaluation()}"/>
+            <h:commandButton value="Generate New Questions" action="#{exercise39_05.generateNumbers()}"/>           
+        </h:form>
+    </h:body>
+</html>

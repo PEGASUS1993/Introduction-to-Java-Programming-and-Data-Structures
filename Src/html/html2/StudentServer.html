@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StudentServer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StudentServerWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StudentServer" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> java.net.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> StudentServer {
+  <span class = "keyword">private</span> ObjectOutputStream outputToFile;
+  <span class = "keyword">private</span> ObjectInputStream inputFromClient;
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">new</span> StudentServer();
+  }
+
+  <span class = "keyword">public</span> StudentServer() {
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Create a server socket</span>
+      ServerSocket serverSocket = <span class = "keyword">new</span> ServerSocket(<span class = "constant">8001</span>);
+      System.out.println(<span class = "literal">"Server started "</span>);
+
+      <span class = "comment">// Create an object ouput stream</span>
+      outputToFile = <span class = "keyword">new</span> ObjectOutputStream(
+        <span class = "keyword">new</span> FileOutputStream(<span class = "literal">"student.dat"</span>, <span class = "keyword">true</span>));
+
+      <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+        <span class = "comment">// Listen for a new connection request</span>
+        Socket socket = serverSocket.accept();
+
+        <span class = "comment">// Create an input stream from the socket</span>
+        inputFromClient =
+          <span class = "keyword">new</span> ObjectInputStream(socket.getInputStream());
+
+        <span class = "comment">// Read from input</span>
+        Object object = inputFromClient.readObject();
+
+        <span class = "comment">// Write to the file</span>
+        outputToFile.writeObject(object);
+        System.out.println(<span class = "literal">"A new student object is stored"</span>);
+      }
+    }
+    <span class = "keyword">catch</span>(ClassNotFoundException ex) {
+      ex.printStackTrace();
+    }
+    <span class = "keyword">catch</span>(IOException ex) {
+      ex.printStackTrace();
+    }
+    <span class = "keyword">finally</span> {
+      <span class = "keyword">try</span> {
+        inputFromClient.close();
+        outputToFile.close();
+      }
+      <span class = "keyword">catch</span> (Exception ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FinalizationDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FinalizationDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "FinalizationDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> FinalizationDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Cake a1 = <span class = "keyword">new</span> Cake(<span class = "constant">1</span>);
+    Cake a2 = <span class = "keyword">new</span> Cake(<span class = "constant">2</span>);
+    Cake a3 = <span class = "keyword">new</span> Cake(<span class = "constant">3</span>);
+
+    <span class = "comment">// To dispose the objects a2 and a3</span>
+    a2 = a3 = <span class = "keyword">null</span>;
+    System.gc(); <span class = "comment">// Invoke the Java garbage collector</span>
+  }
+}
+
+<span class = "keyword">class</span> Cake <span class = "keyword">extends</span> Object {
+  <span class = "keyword">private</span> <span class = "keyword">int</span> id;
+
+  <span class = "keyword">public</span> Cake(<span class = "keyword">int</span> id) {
+    <span class = "keyword">this</span>.id = id;
+    System.out.println(<span class = "literal">"Cake object "</span> + id + <span class = "literal">" is created"</span>);
+  }
+
+  <span class = "keyword">protected</span> <span class = "keyword">void</span> finalize() <span class = "keyword">throws</span> java.lang.Throwable {
+    <span class = "keyword">super</span>.finalize();
+    System.out.println(<span class = "literal">"Cake object "</span> + id + <span class = "literal">" is disposed"</span>);
+  }
+}
+</pre>
+</body>
+</html>

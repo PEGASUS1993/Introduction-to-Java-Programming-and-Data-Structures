@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SubtractionQuiz.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/SubtractionQuiz.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SubtractionQuiz" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; 
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> SubtractionQuiz {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// 1. Generate two random single-digit integers</span>
+    <span class = "keyword">int</span> number1 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>);
+    <span class = "keyword">int</span> number2 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>);
+
+    <span class = "comment">// 2. If number1 &lt; number2, swap number1 with number2</span>
+    <span class = "keyword">if</span> (number1 &lt; number2) {
+      <span class = "keyword">int</span> temp = number1;
+      number1 = number2;
+      number2 = temp;
+    }
+
+    <span class = "comment">// 3. Prompt the student to answer "what is number1 – number2?"</span>
+    System.out.print
+      (<span class = "literal">"What is "</span> + number1 + <span class = "literal">" - "</span> + number2 + <span class = "literal">"? "</span>);
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    <span class = "keyword">int</span> answer = input.nextInt();
+
+    <span class = "comment">// 4. Grade the answer and display the result</span>
+    <span class = "keyword">if</span> (number1 - number2 == answer)
+      System.out.println(<span class = "literal">"You are correct!"</span>);
+    <span class = "keyword">else</span> {
+      System.out.println(<span class = "literal">"Your answer is wrong."</span>);
+      System.out.println(number1 + <span class = "literal">" - "</span> + number2 + 
+        <span class = "literal">" should be "</span> + (number1 - number2)); 
+    }
+  }
+}
+</pre>
+</body>
+</html>

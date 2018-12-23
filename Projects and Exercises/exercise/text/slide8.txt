@@ -1,0 +1,6 @@
+Chapter 9
+
+9.1 Introduction
+Strings are used often in programming. A string is sequence of characters. In many languages, strings are treated as arrays of characters, but in Java a string is an object. Java provides the String StringBuilder, and StringBuffer classes for storing and processing strings. 
+
+In most cases, you use the String class to create strings. The String class is efficient for storing and processing strings, but strings created with the String class cannot be modified. The StringBuilder and StringBuffer classes enable you to create flexible strings that can be modified. 

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeFactorialTailRecursion.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ComputeFactorialTailRecursion.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeFactorialTailRecursion" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeFactorialTailRecursion {
+  <span class = "comment">/** Return the factorial for a specified number */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">long</span> factorial(<span class = "keyword">int</span> n) {
+    <span class = "keyword">return</span> factorial(n, <span class = "constant">1</span>); <span class = "comment">// Call auxiliary method</span>
+  }
+    
+  <span class = "comment">/** Auxiliary tail-recursive method for factorial */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">long</span> factorial(<span class = "keyword">int</span> n, <span class = "keyword">int</span> result) {
+    <span class = "keyword">if</span> (n == <span class = "constant">0</span>) 
+      <span class = "keyword">return</span> result;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> factorial(n - <span class = "constant">1</span>, n * result); <span class = "comment">// Recursive call</span>
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a non-negative integer: "</span>);
+    <span class = "keyword">int</span> n = input.nextInt();
+    
+    <span class = "comment">// Display factorial</span>
+    System.out.println(<span class = "literal">"Factorial of "</span> + n + <span class = "literal">" is "</span> + factorial(n));
+  }
+}
+</pre>
+</body>
+</html>

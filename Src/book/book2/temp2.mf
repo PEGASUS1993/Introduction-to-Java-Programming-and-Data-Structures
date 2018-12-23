@@ -1,0 +1,2 @@
+Main-Class: chapter17.ImageAudioAnimation
+Sealed: true

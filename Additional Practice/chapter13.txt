@@ -1,0 +1,447 @@
+Chapter 13 Abstract Classes and Interfaces
+
+Section 13.2 Abstract Classes
+1.	Which of the following class definitions defines a legal abstract class?
+a. class A { abstract void unfinished() {     } }
+b. class A { abstract void unfinished(); }
+c. abstract class A { abstract void unfinished(); }
+d. public class abstract A { abstract void unfinished(); }
+Key:c In A and B, abstract keyword is missing for the class. In D, class and abstract are in a wrong order. The correct answer is C.
+
+#
+2. 	Which of the following declares an abstract method in an abstract Java class?
+a.	public abstract method(); 
+b.	public abstract void method(); 
+c.	public void abstract method(); 
+d.	public void method() {} 
+e.	public abstract void method() {} 
+Key:b In A, the method has no return type. In C, void and abstract are in a wrong order. In D, the abstract keyword is missing. In E, the body {} should be removed. The correct answer is B.
+
+#
+3. Which of the following statements regarding abstract methods is false?
+a. An abstract class can have instances created using the constructor of the abstract class.
+b. An abstract class can be extended.
+c. A subclass of a non-abstract superclass can be abstract.  
+d. A subclass can override a concrete method in a superclass to declare it abstract.
+e. An abstract class can be used as a data type.
+Key:a A is wrong because you cannot create an instance using the contructor from an abstract class.
+
+#
+4. Which of the following statements regarding abstract methods is false?
+a. Abstract classes have constructors.
+b. A class that contains abstract methods must be abstract.
+c. It is possible to declare an abstract class that contains no abstract methods. 
+d. An abstract method cannot be contained in a nonabstract class. 
+e. A data field can be declared abstract.
+Key:e E is wrong, because a data field cannot be declared abstract. Only methods and classes can be declared abstract.
+
+#
+5. Suppose A is an abstract class, B is a concrete subclass of A, and both A and B have a no-arg constructor. Which of the following is correct?
+a. A a = new A();
+b. A a = new B();
+c. B b = new A();
+d. B b = new B();
+Key:bd Since B is a concrete class with a no-arg constructor, d is correct. Since an instance of B is also an instance of A, b is also correct. 
+
+#
+6. What is the output of running class Test?
+
+public class Test {
+  public static void main(String[] args) {
+    new Circle9();
+  }
+}
+
+public abstract class GeometricObject {
+  protected GeometricObject() {
+    System.out.print("A");
+  }
+
+  protected GeometricObject(String color, boolean filled) {
+    System.out.print("B");
+  }
+}
+
+public class Circle9 extends GeometricObject {
+  /** No-arg constructor */
+  public Circle9() {
+    this(1.0);
+    System.out.print("C");
+  }
+
+  /** Construct circle with a specified radius */
+  public Circle9(double radius) {
+    this(radius, "white", false);
+    System.out.print("D");
+  }
+
+  /** Construct a circle with specified radius, filled, and color */
+  public Circle9(double radius, String color, boolean filled) {
+    super(color, filled);
+    System.out.print("E");
+  }
+}
+
+a. ABCD
+b. BACD
+c. CBAE
+d. AEDC
+e. BEDC
+Key:e 
+
+#
+Section 13.3 Case Study: the Abstract Number Class
+7. The java.lang.Number and its subclasses are introduced in Chapter 11. Analyze the following code.
+    Number numberRef = new Integer(0);
+    Double doubleRef = (Double)numberRef;
+   Which of the following statements is correct?
+a. There is no such class named Integer. You should use the class Int.
+b. The compiler detects that numberRef is not an instance of Double.
+c. A runtime class casting exception occurs, since numberRef is not an instance of Double.
+d. The program runs fine, since Integer is a subclass of Double.
+e. You can convert an int to double, so you can cast an Integer instance to a Double instance.
+Key:c
+
+#
+8. Analyze the following code.
+    Number[] numberArray = new Integer[2];
+    numberArray[0] = new Double(1.5);
+   Which of the following statements is correct?
+a. You cannot use Number as a data type since it is an abstract class.
+b. Since each element of numberArray is of the Number type, you cannot assign an Integer object to it.
+c. Since each element of numberArray is of the Number type, you cannot assign a Double object to it.
+d. At runtime, new Integer[2] is assigned to numberArray. This makes each element of numberArray an Integer object. So you cannot assign a Double object to it.
+Key:d
+
+#
+9. Analyze the following code. Which of the following statements is correct? 
+public class Test {
+  public static void main(String[] args) {
+    Number x = new Integer(3);
+    System.out.println(x.intValue());
+    System.out.println(x.compareTo(new Integer(4)));
+  }
+}
+a.	The program has a compile error because an Integer instance cannot be assigned to a Number variable.
+b.	The program has a compile error because intValue is an abstract method in Number. 
+c.	The program has a compile error because x does not have the compareTo method.
+d.	The program compiles and runs fine.
+Key:c
+
+#
+10. Analyze the following code. Which of the following statements is correct?
+public class Test {
+  public static void main(String[] args) {
+    Number x = new Integer(3);
+    System.out.println(x.intValue());
+    System.out.println((Integer)x.compareTo(new Integer(4)));
+  }
+}
+a.	The program has a compile error because an Integer instance cannot be assigned to a Number variable.
+b.	The program has a compile error because intValue is an abstract method in Number. 
+c.	The program has a compile error because x cannot be cast into Integer.
+d.	The program has a compile error because the member access operator (.) is executed before the casting operator.
+e.	The program compiles and runs fine.
+Key:d
+
+#
+11. Which of the following statements is incorrect?
+a. Integer i = 4.5;
+b. Double i = 4.5;
+c. Object i = 4.5;
+d. Number i = 4.5;
+Key:a i is an Integer. You cannot assign 4.5 to i. A is incorrect. B, C, and D are correct. 4.5 is autoboxed to new Double(4.5). A Double object is an instance of Object and Double.
+
+#
+Section 13.4 Case Study: Calendar and GregorianCalendar
+12.  The java.util.Calendar and java.util.GregorianCalendar classes are introduced in Chapter 11. Analyze the following code. Which of the following statements is correct?
+
+1. import java.util.*;
+2. public class Test {
+3.   public static void main(String[] args) {
+4.     Calendar[] calendars = new Calendar[10];
+5.     calendars[0] = new Calendar();
+6.     calendars[1] = new GregorianCalendar();
+7.   }
+8. }
+a. The program has a compile error on Line 4 because java.util.Calendar is an abstract class.
+b. The program has a compile error on Line 5 because java.util.Calendar is an abstract class. 
+c. The program has a compile error on Line 6 because Calendar[1] is not of a GregorianCalendar type.
+d. The program has no compile errors.
+Key:b (A) is incorrect since it is OK to use abstract class as data type for arrays. new Calendar[10] does not create Calendar objects. It just creates an array with 10 elements, each of which can reference to a Calendar object. (B) is correct since you cannot create an object from an abstract class. (C) is incorrect since it is fine to create a GregorianCalendar object and assign its reference to a variable of its superclass type. 
+
+#
+13. Assume Calendar calendar = new GregorianCalendar(). __________ returns the month of the year.
+a. calendar.get(Calendar.MONTH)
+b. calendar.get(Calendar.MONTH_OF_YEAR)
+c. calendar.get(Calendar.WEEK_OF_MONTH)
+d. calendar.get(Calendar.WEEK_OF_YEAR)
+Key:a B is wrong since Calendar.MONTH_OF_YEAR is not a valid field.
+
+#
+14. Assume Calendar calendar = new GregorianCalendar(). __________ returns the week of the year.
+a. calendar.get(Calendar.MONTH)
+b. calendar.get(Calendar.MONTH_OF_YEAR)
+c. calendar.get(Calendar.WEEK_OF_MONTH)
+d. calendar.get(Calendar.WEEK_OF_YEAR)
+Key:d
+
+#
+15. Assume Calendar calendar = new GregorianCalendar(). __________ returns the number of days in a month.
+a. calendar.get(Calendar.MONTH)
+b. calendar.get(Calendar.MONTH_OF_YEAR)
+c. calendar.get(Calendar.WEEK_OF_MONTH)
+d. calendar.get(Calendar.WEEK_OF_YEAR)
+e. calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+Key:e
+
+#	
+Section 13.5 Interfaces
+16.	Which of the following is a correct interface?
+a. interface A { void print() { }; }
+b. abstract interface A { print(); }
+c. abstract interface A { abstract void print() { };}
+d. interface A { void print();}
+Key:d In A, the print() method in the interface is a concrete method. In B and C, the abstract keyword is used before the interface, which is wrong. The correct answer is D.
+
+#
+17. Which of the following are incorrect?
+a. An abstract class contains constructors.
+b. The constructors in an abstract class should be protected.
+c. The constructors in an abstract class are private.
+d. You may declare a final abstract class.
+e. An interface may contain constructors.
+Key:cde A and B are correct. C is wrong. D is wrong. E is wrong because an interface does not have constructors.
+
+#
+18. _______ is not a reference type.
+a. A class type
+b. An interface type
+c. An array type
+d. A primitive type
+Key:d Objects and arrays are reference types. Primitive types are not.
+
+#
+19.	Show the output of running the class Test in the following code lines:
+
+interface A {
+}
+
+class C {  
+}
+
+class B extends D implements A {
+}
+
+public class Test {
+  public static void main(String[] args) {
+    B b = new B();
+    if (b instanceof A)
+      System.out.println("b is an instance of A");
+    if (b instanceof C)
+      System.out.println("b is an instance of C");
+  }
+}
+
+class D extends C {  
+}
+a.	Nothing.
+b.	b is an instance of A.
+c.	b is an instance of C.
+d.	b is an instance of A followed by b is an instance of C.
+Key:d 
+
+#
+20. Suppose A is an interface, B is a concrete class with a no-arg constructor that implements A. Which of the following is correct?
+a. A a = new A();
+b. A a = new B();
+c. B b = new A();
+d. B b = new B();
+Key:bd Since B is a concrete class with a no-arg constructor, d is correct. Since an instance of B is also an instance of A, b is also correct. 
+    
+#
+Section 13.6 The Comparable Interface
+21. Analyze the following code:
+
+public class Test1  {
+  public Object max(Object o1, Object o2) {
+    if ((Comparable)o1.compareTo(o2) >= 0) {
+      return o1;
+    }
+    else {
+      return o2;
+    }
+  }
+}
+a.	The program has a compile error because Test1 does not have a main method.
+b.	The program has a compile error because o1 is an Object instance and it does not have the compareTo method. 
+c.	The program has a compile error because you cannot cast an Object instance o1 into Comparable.
+d.	The program would compile if ((Comparable)o1.compareTo(o2) >= 0) is replaced by (((Comparable)o1).compareTo(o2) >= 0).
+Key:bd The . operator is performed before casting. 
+
+#
+22. Which of the following statements are true?
+a.	The String class implements Comparable.
+b.	The Date class implements Comparable.
+c.	The Double class implements Comparable.
+d.	The BigInteger class implements Comparable.
+Key:abcd Many classes in the Java API implements the Comparable interface if the objects of the class can be compared. Strings, Dates, Doubles, and BigIntegers can all be compared. These classes implement the Comparable interface.
+
+#
+23.	Analyze the following code.
+
+1. public class Test  {
+2.   public static void main(String[] args) {
+3.     Fruit[] fruits = {new Fruit(2), new Fruit(3), new Fruit(1)};
+4.     java.util.Arrays.sort(fruits);
+5.   }
+6. }
+
+class Fruit {
+  private double weight;
+  
+  public Fruit(double weight) {
+    this.weight = weight;
+  }
+}
+a. The program has a compile error because the Fruit class does not have a no-arg constructor.
+b. The program has a runtime error on Line 3 because the Fruit class does not have a no-arg constructor.
+c. The program has a compile error on Line 4 because the Fruit class does not implement the java.lang.Comparable interface and the Fruit objects are not comparable.
+d. The program has a runtime error on Line 4 because the Fruit class does not implement the java.lang.Comparable interface and the Fruit objects are not comparable.
+Key:d (A) and (B) are incorrect since it is OK to define a class without a no-arg constructor. (C) is incorrect since it is OK to pass fruits to Arrays.sort(Object[]) without compile errors. (D) is correct because the Arrays.sort method requires the objects in the array to be comparable and their class must implement the java.lang.Comparable interface.
+
+#
+Section 13.7 The Cloneable Interface
+24. Analyze the following code.
+
+public class Test {
+  public static void main(String[] args) {
+    java.util.Date x = new java.util.Date();
+    java.util.Date y = x.clone();
+    System.out.println(x = y);
+  }
+}
+a. A java.util.Date object is not cloneable.
+b. x = y in System.out.println(x = y) causes a compile error because you cannot have an assignment statement inside a statement.
+c. x = y in System.out.println(x = y) causes a runtime error because you cannot have an assignment statement inside a statement. 
+d. The program has a compile error because the return type of the clone() method is java.lang.Object. 
+Key:d (A) is wrong because Date implements and Cloneable and overrides the clone() method. (B) and (C) are wrong because x = y is an assignment expression, which assigns y to x. (D) is correct. You have to cast it into Date in order to assign it to y.
+
+#
+25. The output from the following code is __________.
+
+java.util.ArrayList<String> list = new java.util.ArrayList<String>();
+list.add("New York"); 
+java.util.ArrayList<String> list1 = (java.util.ArrayList<String>)(list.clone());
+list.add("Atlanta"); 
+list1.add("Dallas"); 
+System.out.println(list1);
+
+a. [New York]
+b. [New York, Atlanta]
+c. [New York, Atlanta, Dallas]
+d. [New York, Dallas]
+Key:d The code added New York to list and cloned list1 from list. list1 now contains New York. Dallas is added to list1. So list1 contains New Your and Dallas.
+
+#
+26.	The GeometricObject and Circle classes are defined in this chapter. Analyze the following code. Which statements are correct?
+
+public class Test {
+  public static void main(String[] args) {
+    GeometricObject x = new Circle(3);
+    GeometricObject y = (Circle)(x.clone());
+    System.out.println(x);
+    System.out.println(y);
+  }
+}
+a. The program has a compile error because the clone() method is protected in the Object class. 
+b. After you override the clone() method and make it public in the Circle class, the problem can compile and run just fine, but y is null if Circle does not implement the Cloneable interface.
+c. To enable a Circle object to be cloned, the Circle class has to override the clone() method and implement the java.lang.Cloneable interface.
+d. If GeometricObject implements Cloneable and Circle overrides the clone() method, the clone() method will work fine to clone Circle objects.
+Key:abcd
+
+#
+Section 13.8 Interfaces vs. Abstract Classes
+27. Which of the following statements is false?
+a. If you compile an interface without errors, a .class file is created for the interface.
+b. If you compile a class without errors but with warnings, a .class file is created.
+c. If you compile a class with errors, a .class file is created for the class.
+d. If you compile an interface without errors, but with warnings, a .class file is created for the interface.
+Key:c A .class file is created for each Java class and interface. But if it has a compile error, no .class file is created.
+
+#
+28. Which of the following statements are true?
+a. Inheritance models the is-a relationship between two classes. 
+b. A strong is-a relationship describes a direct inheritance relationship between two classes. 
+c. A weak is-a relationship describes that a class has certain properties. 
+d. A strong is-a relationship can be represented using class inheritance. 
+e. A weak is-a relationship can be represented using interfaces.
+Key:abcde 
+
+#
+29.	What is the best suitable relationship between Employee and Faculty?
+a.	Composition
+b.	Aggregation
+c.	Inheritance
+d.	None.
+Key:c
+
+#
+30.	Assume an employee can work for only one company. What is the best suitable relationship between Company and Employee?
+a.	None
+b.	Aggregation
+c.	Inheritance
+d.	Composition
+Key:d
+
+#
+31.	The relationship between an interface and the class that implements it is
+a.	Composition
+b.	Aggregation
+c.	Inheritance
+d.	None
+Key:c
+
+#
+Section 13.9 Case Study: The Rational Class
+32.	The Rational class in this chapter is defined as a subclass of java.lang.Number. Which of the following expressions is correct?
+a.	Rational.doubleValue();
+b.	Rational.doubleValue("5/4");
+c.	new Rational(5, 4).doubleValue();
+d.	new Rational(5, 4).toDoubleValue();
+e.      new Rational(5, 4).intValue();
+Key:ce A is wrong, because the doubleValue() method is an instance method. B is wrong for two reasons: 1. the doubleValue() method is an instance method; 2. the doubleValue() method does not have arguments. D is wrong becasue there is no method named toDoubleValue().
+
+#
+33.	The Rational class in this chapter extends java.lang.Number and implements java.lang.Comparable. Analyze the following code.
+
+1. public class Test {
+2.   public static void main(String[] args) {
+3.     Number[] numbers = {new Rational(1, 2), new Integer(4), new Double(5.6)};
+4.     java.util.Arrays.sort(numbers);
+5.   }
+6. } 
+
+a.	The program has a compile error because numbers is declared as Number[], so you cannot assign {new Rational(1, 2), new Integer(4), new Double(5.6)} to it.
+b.	The program has a runtime error because numbers is declared as Number[], so you cannot assign {new Rational(1, 2), new Integer(4), new Double(5.6)} to it.
+c.	The program has a compile error because numbers is declared as Number[], so you cannot pass it to Arrays.sort(Object[]).
+d.	The program has a runtime error because the compareTo methods in Rational, Integer, and Double classes do not compare the value of one type with a value of another type.
+Key:d (A) and (B) are incorrect because Rational, Integer, and Double are subclasses of Number and any instances of these classes can be elements of the Number[] array. (C) is incorrect because it is fine to pass an instance of Number[] to a parameter of the Object[] type. (D) is correct because the compareTo method in Rational, Integer, Double only compare two Rational objects, two Integer objects, or two Double objects.
+
+#
+Section 13.10 Class Design Guidelines
+34. Which of the following statements are true?
+a. A class should describe a single entity and all the class operations should logically fit together to support a coherent purpose.
+b. A class should always contain a no-arg constructor.
+c. The constructors must always be public.
+d. The constructors may be protected.
+Key:ad (B) is not true. Most classes have a no-arg constructor. But sometimes, it does not make any sense to provide a no-arg constructor. For example, StringTokenizer does not have a no-arg constructor. (C) is not true. For example, the constructor in the Math class is private to prevent creating instances from the class, because there is no need to create instances for the Math class since all methods are static in Math. The constructors for abstract classes should be protected in most cases.
+
+#
+35. Which of the following is poor design?
+a. A data field is derived from other data fields in the same class.
+b. A method must be invoked after/before invoking another method in the same class.
+c. A method is an instance method, but it does not reference any instance data fields or invoke instance methods.
+d. A parameter is passed from a constructor to initialize a static data field.
+Key:abcd A is not good because there is no need to define the data field if it can be derived from other data fields. B is not good because it is highly problematic to impose any order for invoking the methods. C is a bad design because in this case the method should be defined as static. D is not good because a static data field is now tied to the creation of a specific object, which should not be the case.
+

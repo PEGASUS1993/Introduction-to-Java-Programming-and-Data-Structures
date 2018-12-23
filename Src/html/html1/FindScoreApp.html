@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FindScoreApp.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FindScoreAppWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">package</span> chapter41; 
+
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> myWebservice.ScoreWebService;
+<span class = "keyword">import</span> myWebservice.ScoreService;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FindScoreApp <span class = "keyword">extends</span> Application {
+  <span class = "comment">// Declare a service object and a proxy object</span>
+  <span class = "keyword">private</span> ScoreWebService scoreWebService = <span class = "keyword">new</span> ScoreWebService();
+  <span class = "keyword">private</span> ScoreService proxy 
+    = scoreWebService.getScoreServicePort();
+
+  <span class = "keyword">private</span> Button btGetScore = <span class = "keyword">new</span> Button(<span class = "literal">"Get Score"</span>);
+  <span class = "keyword">private</span> TextField tfName = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfScore = <span class = "keyword">new</span> TextField();
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    GridPane gridPane = <span class = "keyword">new</span> GridPane();
+    gridPane.setHgap(<span class = "constant">5</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Name"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Score"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+    gridPane.add(tfName, <span class = "constant">1</span>, <span class = "constant">0</span>);
+    gridPane.add(tfScore, <span class = "constant">1</span>, <span class = "constant">1</span>);
+    gridPane.add(btGetScore, <span class = "constant">1</span>, <span class = "constant">2</span>);
+
+    <span class = "comment">// Create a scene and place the pane in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(gridPane, <span class = "constant">250</span>, <span class = "constant">250</span>);
+    primaryStage.setTitle(<span class = "literal">"FindScoreApp"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    btGetScore.setOnAction(e -&gt; getScore());
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> getScore() {
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Get student score</span>
+      <span class = "keyword">double</span> score = proxy.findScore(tfName.getText().trim());
+
+      <span class = "comment">// Display the result</span>
+      <span class = "keyword">if</span> (score &lt; <span class = "constant">0</span>)
+        tfScore.setText(<span class = "literal">"Not found"</span>);
+      <span class = "keyword">else</span>
+        tfScore.setText(<span class = "keyword">new</span> Double(score).toString());
+    }
+    <span class = "keyword">catch</span>(Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

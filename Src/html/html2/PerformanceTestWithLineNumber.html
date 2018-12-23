@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PerformanceTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PerformanceTest.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PerformanceTest" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> PerformanceTest {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    getTime(<span class = "constant">1000000</span>);
+  4&nbsp;&nbsp;    getTime(<span class = "constant">10000000</span>);
+  5&nbsp;&nbsp;    getTime(<span class = "constant">100000000</span>);
+  6&nbsp;&nbsp;    getTime(<span class = "constant">1000000000</span>);
+  7&nbsp;&nbsp;    getTime(<span class = "constant">10000000000L</span>);
+  8&nbsp;&nbsp;  }   
+  9&nbsp;&nbsp;  
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> getTime(<span class = "keyword">long</span> n) {
+ 11&nbsp;&nbsp;    <span class = "keyword">long</span> startTime = System.currentTimeMillis();
+ 12&nbsp;&nbsp;    <span class = "keyword">long</span> k = <span class = "constant">0</span>;
+ 13&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">long</span> i = <span class = "constant">1</span>; i &lt;= n; i++) {
+ 14&nbsp;&nbsp;      k = k + <span class = "constant">5</span>;
+ 15&nbsp;&nbsp;    }
+ 16&nbsp;&nbsp;    <span class = "keyword">long</span> endTime = System.currentTimeMillis();
+ 17&nbsp;&nbsp;    System.out.println(<span class = "literal">"Execution time for n = "</span> + n 
+ 18&nbsp;&nbsp;      + <span class = "literal">" is "</span> + (endTime - startTime) + <span class = "literal">" milliseconds"</span>);
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

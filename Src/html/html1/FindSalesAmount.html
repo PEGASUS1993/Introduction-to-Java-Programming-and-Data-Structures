@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FindSalesAmount.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FindSalesAmountWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "FindSalesAmount" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> FindSalesAmount {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// The commission sought</span>
+    <span class = "keyword">final</span> <span class = "keyword">double</span> COMMISSION_SOUGHT = <span class = "constant">25000</span>;
+    <span class = "keyword">final</span> <span class = "keyword">double</span> INITIAL_SALES_AMOUNT = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">01</span>;
+    <span class = "keyword">double</span> commission = <span class = "constant">0</span>;
+    <span class = "keyword">double</span> salesAmount = INITIAL_SALES_AMOUNT;
+
+    <span class = "keyword">do</span> {
+      <span class = "comment">// Increase salesAmount by 1 cent</span>
+      salesAmount += <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">01</span>;
+
+      <span class = "comment">// Compute the commission from the current salesAmount;</span>
+      <span class = "keyword">if</span> (salesAmount &gt;= <span class = "constant">10000</span><span class = "literal">.</span><span class = "constant">01</span>)
+        commission =
+          <span class = "constant">5000</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">08</span> + <span class = "constant">5000</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">1</span> + (salesAmount - <span class = "constant">10000</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">12</span>;
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (salesAmount &gt;= <span class = "constant">5000</span><span class = "literal">.</span><span class = "constant">01</span>)
+        commission = <span class = "constant">5000</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">08</span> + (salesAmount - <span class = "constant">5000</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span>;
+      <span class = "keyword">else</span>
+        commission = salesAmount * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">08</span>;
+    } <span class = "keyword">while</span> (commission &lt; COMMISSION_SOUGHT);
+
+    <span class = "comment">// Display the sales amount</span>
+    System.out.println(
+      <span class = "literal">"The sales amount $"</span> + (<span class = "keyword">int</span>)(salesAmount * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span> +
+      <span class = "literal">"\nis needed to make a commission of $"</span> + COMMISSION_SOUGHT);
+  }
+}
+</pre>
+</body>
+</html>

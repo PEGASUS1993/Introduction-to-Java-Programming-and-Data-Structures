@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - HexDigit2Dec.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "HexDigit2Dec.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "HexDigit2Dec" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> HexDigit2Dec {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  6&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a hex digit: "</span>);
+  7&nbsp;&nbsp;    String hexString = input.nextLine();
+  8&nbsp;&nbsp;    
+  9&nbsp;&nbsp;    <span class = "comment">// Check if the hex string has exactly one character</span>
+ 10&nbsp;&nbsp;    <span class = "keyword">if</span> (hexString.length() != <span class = "constant">1</span>) {
+ 11&nbsp;&nbsp;      System.out.println(<span class = "literal">"You must enter exactly one character"</span>);
+ 12&nbsp;&nbsp;      System.exit(<span class = "constant">1</span>);
+ 13&nbsp;&nbsp;    }
+ 14&nbsp;&nbsp;    
+ 15&nbsp;&nbsp;    <span class = "comment">// Display decimal value for the hex digit</span>
+ 16&nbsp;&nbsp;    <span class = "keyword">char</span> ch = Character.toUpperCase(hexString.charAt(<span class = "constant">0</span>));    
+ 17&nbsp;&nbsp;    <span class = "keyword">if</span> (<span class = "literal">'A'</span> &lt;= ch && ch &lt;= <span class = "literal">'F'</span>) {
+ 18&nbsp;&nbsp;      <span class = "keyword">int</span> value = ch - <span class = "literal">'A'</span> + <span class = "constant">10</span>;
+ 19&nbsp;&nbsp;      System.out.println(<span class = "literal">"The decimal value for hex digit "</span> 
+ 20&nbsp;&nbsp;        + ch + <span class = "literal">" is "</span> + value);
+ 21&nbsp;&nbsp;    }
+ 22&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (Character.isDigit(ch)) {
+ 23&nbsp;&nbsp;      System.out.println(<span class = "literal">"The decimal value for hex digit "</span> 
+ 24&nbsp;&nbsp;        + ch + <span class = "literal">" is "</span> + ch);
+ 25&nbsp;&nbsp;    }
+ 26&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 27&nbsp;&nbsp;      System.out.println(ch + <span class = "literal">" is an invalid input"</span>);
+ 28&nbsp;&nbsp;    }
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

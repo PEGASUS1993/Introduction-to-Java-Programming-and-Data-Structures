@@ -1,0 +1,8 @@
+Enter the integers between 1 and 100: 2 occurs 1 time
+3 occurs 2 times
+4 occurs 4 times
+5 occurs 4 times
+8 occurs 2 times
+34 occurs 1 time
+83 occurs 1 time
+93 occurs 1 time

@@ -1,0 +1,305 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - UnweightedGraph.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "UnweightedGraph.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> UnweightedGraph&lt;V&gt; <span class = "keyword">implements</span> Graph&lt;V&gt; {
+  4&nbsp;&nbsp;  <span class = "keyword">protected</span> List&lt;V&gt; vertices = <span class = "keyword">new</span> ArrayList&lt;&gt;(); <span class = "comment">// Store vertices</span>
+  5&nbsp;&nbsp;  <span class = "keyword">protected</span> List&lt;List&lt;Edge&gt;&gt; neighbors 
+  6&nbsp;&nbsp;    = <span class = "keyword">new</span> ArrayList&lt;&gt;(); <span class = "comment">// Adjacency lists</span>
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;  <span class = "comment">/** Construct an empty graph */</span>
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph() {
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;  
+ 12&nbsp;&nbsp;  <span class = "comment">/** Construct a graph from vertices and edges stored in arrays */</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph(V[] vertices, <span class = "keyword">int</span>[][] edges) {
+ 14&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; vertices.length; i++)
+ 15&nbsp;&nbsp;      addVertex(vertices[i]);
+ 16&nbsp;&nbsp;    
+ 17&nbsp;&nbsp;    createAdjacencyLists(edges, vertices.length);
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Construct a graph from vertices and edges stored in List */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph(List&lt;V&gt; vertices, List&lt;Edge&gt; edges) {
+ 22&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; vertices.size(); i++)
+ 23&nbsp;&nbsp;      addVertex(vertices.get(i));
+ 24&nbsp;&nbsp;        
+ 25&nbsp;&nbsp;    createAdjacencyLists(edges, vertices.size());
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  <span class = "comment">/** Construct a graph for integer vertices 0, 1, 2 and edge list */</span>
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph(List&lt;Edge&gt; edges, <span class = "keyword">int</span> numberOfVertices) {
+ 30&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numberOfVertices; i++) 
+ 31&nbsp;&nbsp;      addVertex((V)(<span class = "keyword">new</span> Integer(i))); <span class = "comment">// vertices is {0, 1, ...}</span>
+ 32&nbsp;&nbsp;    
+ 33&nbsp;&nbsp;    createAdjacencyLists(edges, numberOfVertices);
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;  <span class = "comment">/** Construct a graph from integer vertices 0, 1, and edge array */</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph(<span class = "keyword">int</span>[][] edges, <span class = "keyword">int</span> numberOfVertices) {
+ 38&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numberOfVertices; i++) 
+ 39&nbsp;&nbsp;      addVertex((V)(<span class = "keyword">new</span> Integer(i))); <span class = "comment">// vertices is {0, 1, ...}</span>
+ 40&nbsp;&nbsp;    
+ 41&nbsp;&nbsp;    createAdjacencyLists(edges, numberOfVertices);
+ 42&nbsp;&nbsp;  }
+ 43&nbsp;&nbsp;
+ 44&nbsp;&nbsp;  <span class = "comment">/** Create adjacency lists for each vertex */</span>
+ 45&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> createAdjacencyLists(
+ 46&nbsp;&nbsp;      <span class = "keyword">int</span>[][] edges, <span class = "keyword">int</span> numberOfVertices) {
+ 47&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; edges.length; i++) {
+ 48&nbsp;&nbsp;      addEdge(edges[i][<span class = "constant">0</span>], edges[i][<span class = "constant">1</span>]);
+ 49&nbsp;&nbsp;    }
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;  <span class = "comment">/** Create adjacency lists for each vertex */</span>
+ 53&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> createAdjacencyLists(
+ 54&nbsp;&nbsp;      List&lt;Edge&gt; edges, <span class = "keyword">int</span> numberOfVertices) {
+ 55&nbsp;&nbsp;    <span class = "keyword">for</span> (Edge edge: edges) {
+ 56&nbsp;&nbsp;      addEdge(edge.u, edge.v);
+ 57&nbsp;&nbsp;    }
+ 58&nbsp;&nbsp;  }
+ 59&nbsp;&nbsp;
+ 60&nbsp;&nbsp;  @Override <span class = "comment">/** Return the number of vertices in the graph */</span>
+ 61&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+ 62&nbsp;&nbsp;    <span class = "keyword">return</span> vertices.size();
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;
+ 65&nbsp;&nbsp;  @Override <span class = "comment">/** Return the vertices in the graph */</span>
+ 66&nbsp;&nbsp;  <span class = "keyword">public</span> List&lt;V&gt; getVertices() {
+ 67&nbsp;&nbsp;    <span class = "keyword">return</span> vertices;
+ 68&nbsp;&nbsp;  }
+ 69&nbsp;&nbsp;
+ 70&nbsp;&nbsp;  @Override <span class = "comment">/** Return the object for the specified vertex */</span>
+ 71&nbsp;&nbsp;  <span class = "keyword">public</span> V getVertex(<span class = "keyword">int</span> index) {
+ 72&nbsp;&nbsp;    <span class = "keyword">return</span> vertices.get(index);
+ 73&nbsp;&nbsp;  }
+ 74&nbsp;&nbsp;
+ 75&nbsp;&nbsp;  @Override <span class = "comment">/** Return the index for the specified vertex object */</span>
+ 76&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getIndex(V v) {
+ 77&nbsp;&nbsp;    <span class = "keyword">return</span> vertices.indexOf(v);
+ 78&nbsp;&nbsp;  }
+ 79&nbsp;&nbsp;
+ 80&nbsp;&nbsp;  @Override <span class = "comment">/** Return the neighbors of the specified vertex */</span>
+ 81&nbsp;&nbsp;  <span class = "keyword">public</span> List&lt;Integer&gt; getNeighbors(<span class = "keyword">int</span> index) {
+ 82&nbsp;&nbsp;    List&lt;Integer&gt; result = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+ 83&nbsp;&nbsp;    <span class = "keyword">for</span> (Edge e: neighbors.get(index))
+ 84&nbsp;&nbsp;      result.add(e.v);
+ 85&nbsp;&nbsp;    
+ 86&nbsp;&nbsp;    <span class = "keyword">return</span> result;
+ 87&nbsp;&nbsp;  }
+ 88&nbsp;&nbsp;
+ 89&nbsp;&nbsp;  @Override <span class = "comment">/** Return the degree for a specified vertex */</span>
+ 90&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getDegree(<span class = "keyword">int</span> v) {
+ 91&nbsp;&nbsp;    <span class = "keyword">return</span> neighbors.get(v).size();
+ 92&nbsp;&nbsp;  }
+ 93&nbsp;&nbsp;
+ 94&nbsp;&nbsp;  @Override <span class = "comment">/** Print the edges */</span>
+ 95&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> printEdges() {
+ 96&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> u = <span class = "constant">0</span>; u &lt; neighbors.size(); u++) {
+ 97&nbsp;&nbsp;      System.out.print(getVertex(u) + <span class = "literal">" ("</span> + u + <span class = "literal">"): "</span>);
+ 98&nbsp;&nbsp;      <span class = "keyword">for</span> (Edge e: neighbors.get(u)) {
+ 99&nbsp;&nbsp;        System.out.print(<span class = "literal">"("</span> + getVertex(e.u) + <span class = "literal">", "</span> +
+100&nbsp;&nbsp;          getVertex(e.v) + <span class = "literal">") "</span>);
+101&nbsp;&nbsp;      }
+102&nbsp;&nbsp;      System.out.println();
+103&nbsp;&nbsp;    }
+104&nbsp;&nbsp;  }
+105&nbsp;&nbsp;
+106&nbsp;&nbsp;  @Override <span class = "comment">/** Clear the graph */</span>
+107&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> clear() {
+108&nbsp;&nbsp;    vertices.clear();
+109&nbsp;&nbsp;    neighbors.clear();
+110&nbsp;&nbsp;  }
+111&nbsp;&nbsp;  
+112&nbsp;&nbsp;  @Override <span class = "comment">/** Add a vertex to the graph */</span>  
+113&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addVertex(V vertex) {
+114&nbsp;&nbsp;    <span class = "keyword">if</span> (!vertices.contains(vertex)) {
+115&nbsp;&nbsp;      vertices.add(vertex);
+116&nbsp;&nbsp;      neighbors.add(<span class = "keyword">new</span> ArrayList&lt;Edge&gt;());
+117&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+118&nbsp;&nbsp;    }
+119&nbsp;&nbsp;    <span class = "keyword">else</span> {
+120&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+121&nbsp;&nbsp;    }
+122&nbsp;&nbsp;  }
+123&nbsp;&nbsp;
+124&nbsp;&nbsp;  @Override <span class = "comment">/** Add an edge to the graph */</span>  
+125&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(Edge e) {
+126&nbsp;&nbsp;    <span class = "keyword">if</span> (e.u &lt; <span class = "constant">0</span> || e.u &gt; getSize() - <span class = "constant">1</span>)
+127&nbsp;&nbsp;      <span class = "keyword">throw</span> <span class = "keyword">new</span> IllegalArgumentException(<span class = "literal">"No such index: "</span> + e.u);
+128&nbsp;&nbsp;
+129&nbsp;&nbsp;    <span class = "keyword">if</span> (e.v &lt; <span class = "constant">0</span> || e.v &gt; getSize() - <span class = "constant">1</span>)
+130&nbsp;&nbsp;      <span class = "keyword">throw</span> <span class = "keyword">new</span> IllegalArgumentException(<span class = "literal">"No such index: "</span> + e.v);
+131&nbsp;&nbsp;    
+132&nbsp;&nbsp;    <span class = "keyword">if</span> (!neighbors.get(e.u).contains(e)) {
+133&nbsp;&nbsp;      neighbors.get(e.u).add(e);
+134&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+135&nbsp;&nbsp;    }
+136&nbsp;&nbsp;    <span class = "keyword">else</span> {
+137&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+138&nbsp;&nbsp;    }
+139&nbsp;&nbsp;  }
+140&nbsp;&nbsp;  
+141&nbsp;&nbsp;  @Override <span class = "comment">/** Add an edge to the graph */</span>  
+142&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v) {
+143&nbsp;&nbsp;    <span class = "keyword">return</span> addEdge(<span class = "keyword">new</span> Edge(u, v));
+144&nbsp;&nbsp;  }
+145&nbsp;&nbsp;  
+146&nbsp;&nbsp;  @Override <span class = "comment">/** Obtain a DFS tree starting from vertex u */</span>
+147&nbsp;&nbsp;  <span class = "comment">/** To be discussed in Section 28.7 */</span>
+148&nbsp;&nbsp;  <span class = "keyword">public</span> SearchTree dfs(<span class = "keyword">int</span> v) {
+149&nbsp;&nbsp;    List&lt;Integer&gt; searchOrder = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+150&nbsp;&nbsp;    <span class = "keyword">int</span>[] parent = <span class = "keyword">new</span> <span class = "keyword">int</span>[vertices.size()];
+151&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; parent.length; i++)
+152&nbsp;&nbsp;      parent[i] = <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Initialize parent[i] to -1</span>
+153&nbsp;&nbsp;
+154&nbsp;&nbsp;    <span class = "comment">// Mark visited vertices</span>
+155&nbsp;&nbsp;    <span class = "keyword">boolean</span>[] isVisited = <span class = "keyword">new</span> <span class = "keyword">boolean</span>[vertices.size()];
+156&nbsp;&nbsp;
+157&nbsp;&nbsp;    <span class = "comment">// Recursively search</span>
+158&nbsp;&nbsp;    dfs(v, parent, searchOrder, isVisited);
+159&nbsp;&nbsp;
+160&nbsp;&nbsp;    <span class = "comment">// Return a search tree</span>
+161&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> SearchTree(v, parent, searchOrder);
+162&nbsp;&nbsp;  }
+163&nbsp;&nbsp;
+164&nbsp;&nbsp;  <span class = "comment">/** Recursive method for DFS search */</span>
+165&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> dfs(<span class = "keyword">int</span> v, <span class = "keyword">int</span>[] parent, List&lt;Integer&gt; searchOrder,
+166&nbsp;&nbsp;      <span class = "keyword">boolean</span>[] isVisited) {
+167&nbsp;&nbsp;    <span class = "comment">// Store the visited vertex</span>
+168&nbsp;&nbsp;    searchOrder.add(v);
+169&nbsp;&nbsp;    isVisited[v] = <span class = "keyword">true</span>; <span class = "comment">// Vertex v visited</span>
+170&nbsp;&nbsp;
+171&nbsp;&nbsp;    <span class = "keyword">for</span> (Edge e : neighbors.get(v)) { <span class = "comment">// Note that e.u is v </span>
+172&nbsp;&nbsp;    	<span class = "keyword">int</span> w = e.v; <span class = "comment">// e.v is w in Listing 28.8</span>
+173&nbsp;&nbsp;      <span class = "keyword">if</span> (!isVisited[w]) { 
+174&nbsp;&nbsp;        parent[w] = v; <span class = "comment">// The parent of w is v</span>
+175&nbsp;&nbsp;        dfs(w, parent, searchOrder, isVisited); <span class = "comment">// Recursive search</span>
+176&nbsp;&nbsp;      }
+177&nbsp;&nbsp;    }
+178&nbsp;&nbsp;  }
+179&nbsp;&nbsp;
+180&nbsp;&nbsp;  @Override <span class = "comment">/** Starting bfs search from vertex v */</span>
+181&nbsp;&nbsp;  <span class = "comment">/** To be discussed in Section 28.9 */</span>
+182&nbsp;&nbsp;  <span class = "keyword">public</span> SearchTree bfs(<span class = "keyword">int</span> v) {
+183&nbsp;&nbsp;    List&lt;Integer&gt; searchOrder = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+184&nbsp;&nbsp;    <span class = "keyword">int</span>[] parent = <span class = "keyword">new</span> <span class = "keyword">int</span>[vertices.size()];
+185&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; parent.length; i++)
+186&nbsp;&nbsp;      parent[i] = <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Initialize parent[i] to -1</span>
+187&nbsp;&nbsp;
+188&nbsp;&nbsp;    java.util.LinkedList&lt;Integer&gt; queue =
+189&nbsp;&nbsp;      <span class = "keyword">new</span> java.util.LinkedList&lt;&gt;(); <span class = "comment">// list used as a queue</span>
+190&nbsp;&nbsp;    <span class = "keyword">boolean</span>[] isVisited = <span class = "keyword">new</span> <span class = "keyword">boolean</span>[vertices.size()];
+191&nbsp;&nbsp;    queue.offer(v); <span class = "comment">// Enqueue v</span>
+192&nbsp;&nbsp;    isVisited[v] = <span class = "keyword">true</span>; <span class = "comment">// Mark it visited</span>
+193&nbsp;&nbsp;
+194&nbsp;&nbsp;    <span class = "keyword">while</span> (!queue.isEmpty()) {
+195&nbsp;&nbsp;      <span class = "keyword">int</span> u = queue.poll(); <span class = "comment">// Dequeue to u</span>
+196&nbsp;&nbsp;      searchOrder.add(u); <span class = "comment">// u searched</span>
+197&nbsp;&nbsp;      <span class = "keyword">for</span> (Edge e: neighbors.get(u)) { <span class = "comment">// Note that e.u is u</span>
+198&nbsp;&nbsp;      	<span class = "keyword">int</span> w = e.v; <span class = "comment">// e.v is w in Listing 28.8</span>
+199&nbsp;&nbsp;        <span class = "keyword">if</span> (!isVisited[w]) { 
+200&nbsp;&nbsp;          queue.offer(w); <span class = "comment">// Enqueue w</span>
+201&nbsp;&nbsp;          parent[w] = u; <span class = "comment">// The parent of w is u</span>
+202&nbsp;&nbsp;          isVisited[w] = <span class = "keyword">true</span>; <span class = "comment">// Mark w visited</span>
+203&nbsp;&nbsp;        }
+204&nbsp;&nbsp;      }
+205&nbsp;&nbsp;    }
+206&nbsp;&nbsp;
+207&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> SearchTree(v, parent, searchOrder);
+208&nbsp;&nbsp;  }
+209&nbsp;&nbsp;
+210&nbsp;&nbsp;  <span class = "comment">/** Tree inner class inside the AbstractGraph class */</span>
+211&nbsp;&nbsp;  <span class = "comment">/** To be discussed in Section 28.6 */</span>
+212&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">class</span> SearchTree {
+213&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> root; <span class = "comment">// The root of the tree</span>
+214&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span>[] parent; <span class = "comment">// Store the parent of each vertex</span>
+215&nbsp;&nbsp;    <span class = "keyword">private</span> List&lt;Integer&gt; searchOrder; <span class = "comment">// Store the search order</span>
+216&nbsp;&nbsp;
+217&nbsp;&nbsp;    <span class = "comment">/** Construct a tree with root, parent, and searchOrder */</span>
+218&nbsp;&nbsp;    <span class = "keyword">public</span> SearchTree(<span class = "keyword">int</span> root, <span class = "keyword">int</span>[] parent, 
+219&nbsp;&nbsp;        List&lt;Integer&gt; searchOrder) {
+220&nbsp;&nbsp;      <span class = "keyword">this</span>.root = root;
+221&nbsp;&nbsp;      <span class = "keyword">this</span>.parent = parent;
+222&nbsp;&nbsp;      <span class = "keyword">this</span>.searchOrder = searchOrder;
+223&nbsp;&nbsp;    }
+224&nbsp;&nbsp;
+225&nbsp;&nbsp;    <span class = "comment">/** Return the root of the tree */</span>
+226&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> getRoot() {
+227&nbsp;&nbsp;      <span class = "keyword">return</span> root;
+228&nbsp;&nbsp;    }
+229&nbsp;&nbsp;
+230&nbsp;&nbsp;    <span class = "comment">/** Return the parent of vertex v */</span>
+231&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> getParent(<span class = "keyword">int</span> v) {
+232&nbsp;&nbsp;      <span class = "keyword">return</span> parent[v];
+233&nbsp;&nbsp;    }
+234&nbsp;&nbsp;
+235&nbsp;&nbsp;    <span class = "comment">/** Return an array representing search order */</span>
+236&nbsp;&nbsp;    <span class = "keyword">public</span> List&lt;Integer&gt; getSearchOrder() {
+237&nbsp;&nbsp;      <span class = "keyword">return</span> searchOrder;
+238&nbsp;&nbsp;    }
+239&nbsp;&nbsp;
+240&nbsp;&nbsp;    <span class = "comment">/** Return number of vertices found */</span>
+241&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> getNumberOfVerticesFound() {
+242&nbsp;&nbsp;      <span class = "keyword">return</span> searchOrder.size();
+243&nbsp;&nbsp;    }
+244&nbsp;&nbsp;    
+245&nbsp;&nbsp;    <span class = "comment">/** Return the path of vertices from a vertex to the root */</span>
+246&nbsp;&nbsp;    <span class = "keyword">public</span> List&lt;V&gt; getPath(<span class = "keyword">int</span> index) {
+247&nbsp;&nbsp;      ArrayList&lt;V&gt; path = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+248&nbsp;&nbsp;
+249&nbsp;&nbsp;      <span class = "keyword">do</span> {
+250&nbsp;&nbsp;        path.add(vertices.get(index));
+251&nbsp;&nbsp;        index = parent[index];
+252&nbsp;&nbsp;      }
+253&nbsp;&nbsp;      <span class = "keyword">while</span> (index != <span class = "literal">-</span><span class = "constant">1</span>);
+254&nbsp;&nbsp;
+255&nbsp;&nbsp;      <span class = "keyword">return</span> path;
+256&nbsp;&nbsp;    }
+257&nbsp;&nbsp;
+258&nbsp;&nbsp;    <span class = "comment">/** Print a path from the root to vertex v */</span>
+259&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> printPath(<span class = "keyword">int</span> index) {
+260&nbsp;&nbsp;      List&lt;V&gt; path = getPath(index);
+261&nbsp;&nbsp;      System.out.print(<span class = "literal">"A path from "</span> + vertices.get(root) + <span class = "literal">" to "</span> +
+262&nbsp;&nbsp;        vertices.get(index) + <span class = "literal">": "</span>);
+263&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = path.size() - <span class = "constant">1</span>; i &gt;= <span class = "constant">0</span>; i--)
+264&nbsp;&nbsp;        System.out.print(path.get(i) + <span class = "literal">" "</span>);
+265&nbsp;&nbsp;    }
+266&nbsp;&nbsp;
+267&nbsp;&nbsp;    <span class = "comment">/** Print the whole tree */</span>
+268&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> printTree() {
+269&nbsp;&nbsp;      System.out.println(<span class = "literal">"Root is: "</span> + vertices.get(root));
+270&nbsp;&nbsp;      System.out.print(<span class = "literal">"Edges: "</span>);
+271&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; parent.length; i++) {
+272&nbsp;&nbsp;        <span class = "keyword">if</span> (parent[i] != <span class = "literal">-</span><span class = "constant">1</span>) {
+273&nbsp;&nbsp;          <span class = "comment">// Display an edge</span>
+274&nbsp;&nbsp;          System.out.print(<span class = "literal">"("</span> + vertices.get(parent[i]) + <span class = "literal">", "</span> +
+275&nbsp;&nbsp;            vertices.get(i) + <span class = "literal">") "</span>);
+276&nbsp;&nbsp;        }
+277&nbsp;&nbsp;      }
+278&nbsp;&nbsp;      System.out.println();
+279&nbsp;&nbsp;    }
+280&nbsp;&nbsp;  }
+281&nbsp;&nbsp;  
+282&nbsp;&nbsp;  @Override <span class = "comment">/** Remove vertex v and return true if successful */</span>  
+283&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(V v) {
+284&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Implementation left as an exercise</span>
+285&nbsp;&nbsp;  }
+286&nbsp;&nbsp;
+287&nbsp;&nbsp;  @Override <span class = "comment">/** Remove edge (u, v) and return true if successful */</span>  
+288&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v) {
+289&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Implementation left as an exercise</span>
+290&nbsp;&nbsp;  }
+291&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

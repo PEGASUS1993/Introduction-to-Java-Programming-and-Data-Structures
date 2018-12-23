@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - QuickSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "QuickSortWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "QuickSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> QuickSort {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> quickSort(<span class = "keyword">int</span>[] list) {
+    quickSort(list, <span class = "constant">0</span>, list.length - <span class = "constant">1</span>);
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> quickSort(<span class = "keyword">int</span>[] list, <span class = "keyword">int</span> first, <span class = "keyword">int</span> last) {
+    <span class = "keyword">if</span> (last &gt; first) {
+      <span class = "keyword">int</span> pivotIndex = partition(list, first, last);
+      quickSort(list, first, pivotIndex - <span class = "constant">1</span>);
+      quickSort(list, pivotIndex + <span class = "constant">1</span>, last);
+    }
+  }
+
+  <span class = "comment">/** Partition the array list[first..last] */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> partition(<span class = "keyword">int</span>[] list, <span class = "keyword">int</span> first, <span class = "keyword">int</span> last) {
+    <span class = "keyword">int</span> pivot = list[first]; <span class = "comment">// Choose the first element as the pivot</span>
+    <span class = "keyword">int</span> low = first + <span class = "constant">1</span>; <span class = "comment">// Index for forward search</span>
+    <span class = "keyword">int</span> high = last; <span class = "comment">// Index for backward search</span>
+
+    <span class = "keyword">while</span> (high &gt; low) {
+      <span class = "comment">// Search forward from left</span>
+      <span class = "keyword">while</span> (low &lt;= high && list[low] &lt;= pivot)
+        low++;
+
+      <span class = "comment">// Search backward from right</span>
+      <span class = "keyword">while</span> (low &lt;= high && list[high] &gt; pivot)
+        high--;
+
+      <span class = "comment">// Swap two elements in the list</span>
+      <span class = "keyword">if</span> (high &gt; low) {
+        <span class = "keyword">int</span> temp = list[high];
+        list[high] = list[low];
+        list[low] = temp;
+      }
+    }
+
+    <span class = "keyword">while</span> (high &gt; first && list[high] &gt;= pivot)
+      high--;
+
+    <span class = "comment">// Swap pivot with list[high]</span>
+    <span class = "keyword">if</span> (pivot &gt; list[high]) {
+      list[first] = list[high];
+      list[high] = pivot;
+      <span class = "keyword">return</span> high;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">return</span> first;
+    }
+  }
+
+  <span class = "comment">/** A test method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span>[] list = {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">5</span>, <span class = "constant">6</span>, <span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">14</span>, <span class = "constant">12</span>};
+    quickSort(list);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+      System.out.print(list[i] + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

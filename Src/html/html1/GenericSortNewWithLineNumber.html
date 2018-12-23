@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericSortNew.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericSortNew.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GenericSortNew" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GenericSortNew {
+  2&nbsp;&nbsp;  <span class = "comment">/** Sort an array of comparable objects */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">void</span> sort(E[] list) {
+  4&nbsp;&nbsp;    E currentMax;
+  5&nbsp;&nbsp;    <span class = "keyword">int</span> currentMaxIndex;
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = list.length - <span class = "constant">1</span>; i &gt;= <span class = "constant">1</span>; i--) {
+  8&nbsp;&nbsp;      <span class = "comment">// Finds the maximum in the list[0..i]</span>
+  9&nbsp;&nbsp;      currentMax = list[i];
+ 10&nbsp;&nbsp;      currentMaxIndex = i;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i - <span class = "constant">1</span>; j &gt;= <span class = "constant">0</span>; j--) {
+ 13&nbsp;&nbsp;        <span class = "keyword">if</span> (currentMax.compareTo(list[j]) &lt; <span class = "constant">0</span>) {
+ 14&nbsp;&nbsp;          currentMax = list[j];
+ 15&nbsp;&nbsp;          currentMaxIndex = j;
+ 16&nbsp;&nbsp;        }
+ 17&nbsp;&nbsp;      }
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;      <span class = "comment">// Swap list[i] with list[currentMaxIndex] if necessary;</span>
+ 20&nbsp;&nbsp;      <span class = "keyword">if</span> (currentMaxIndex != i) {
+ 21&nbsp;&nbsp;        list[currentMaxIndex] = list[i];
+ 22&nbsp;&nbsp;        list[i] = currentMax;
+ 23&nbsp;&nbsp;      }
+ 24&nbsp;&nbsp;    }
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 28&nbsp;&nbsp;    <span class = "comment">// Create a String array</span>
+ 29&nbsp;&nbsp;    String[] stringArray = {<span class = "literal">"Tom"</span>, <span class = "literal">"John"</span>, <span class = "literal">"Fred"</span>};
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;    sort(stringArray);
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; stringArray.length; i++)
+ 34&nbsp;&nbsp;      System.out.print(stringArray[i] + <span class = "literal">" "</span>);
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

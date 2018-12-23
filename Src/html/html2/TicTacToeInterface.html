@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TicTacToeInterface.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TicTacToeInterfaceWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.rmi.*;
+
+<span class = "keyword">public</span> <span class = "keyword">interface</span> TicTacToeInterface <span class = "keyword">extends</span> Remote {
+  <span class = "comment">/** 
+   * Connect to the TicTacToe server and return the token.
+   * If the returned token is ' ', the client is not connected to
+   * the server
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">char</span> connect(CallBack client) <span class = "keyword">throws</span> RemoteException;
+
+  <span class = "comment">/** A client invokes this method to notify the server of its move*/</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> myMove(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column, <span class = "keyword">char</span> token)
+    <span class = "keyword">throws</span> RemoteException;
+}
+</pre>
+</body>
+</html>

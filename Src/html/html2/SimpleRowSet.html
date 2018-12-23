@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SimpleRowSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SimpleRowSetWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SimpleRowSet" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.SQLException;
+<span class = "keyword">import</span> javax.sql.RowSet;
+<span class = "keyword">import</span> com.sun.rowset.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> SimpleRowSet {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args)
+      <span class = "keyword">throws</span> SQLException, ClassNotFoundException {
+    <span class = "comment">// Load the JDBC driver</span>
+    Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+    System.out.println(<span class = "literal">"Driver loaded"</span>);
+
+    <span class = "comment">// Create a row set</span>
+    RowSet rowSet = <span class = "keyword">new</span> JdbcRowSetImpl();
+    
+    <span class = "comment">// Set RowSet properties</span>
+    rowSet.setUrl(<span class = "literal">"jdbc:mysql://localhost/javabook"</span>);
+    rowSet.setUsername(<span class = "literal">"scott"</span>);
+    rowSet.setPassword(<span class = "literal">"tiger"</span>);
+    rowSet.setCommand(<span class = "literal">"select firstName, mi, lastName "</span> +
+      <span class = "literal">"from Student where lastName = <span class = "literal">'Smith'</span>"</span>);
+    rowSet.execute();
+    
+    <span class = "comment">// Iterate through the result and print the student names</span>
+    <span class = "keyword">while</span> (rowSet.next())
+      System.out.println(rowSet.getString(<span class = "constant">1</span>) + <span class = "literal">"\t"</span> +
+        rowSet.getString(<span class = "constant">2</span>) + <span class = "literal">"\t"</span> + rowSet.getString(<span class = "constant">3</span>));    
+
+    <span class = "comment">// Close the connection</span>
+    rowSet.close();
+  }
+}
+</pre>
+</body>
+</html>

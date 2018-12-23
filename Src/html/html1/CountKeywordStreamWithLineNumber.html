@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountKeywordStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountKeywordStream.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountKeywordStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.nio.file.Files;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> java.util.stream.Stream;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CountKeywordStream {
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {  
+  8&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  9&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a Java source file: "</span>);
+ 10&nbsp;&nbsp;    String filename = input.nextLine();
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    File file = <span class = "keyword">new</span> File(filename);
+ 13&nbsp;&nbsp;    <span class = "keyword">if</span> (file.exists()) {
+ 14&nbsp;&nbsp;      System.out.println(<span class = "literal">"The number of keywords in "</span> + filename 
+ 15&nbsp;&nbsp;        + <span class = "literal">" is "</span> + countKeywords(file));
+ 16&nbsp;&nbsp;    }
+ 17&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 18&nbsp;&nbsp;      System.out.println(<span class = "literal">"File "</span> + filename + <span class = "literal">" does not exist"</span>);
+ 19&nbsp;&nbsp;    }    
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">long</span> countKeywords(File file) <span class = "keyword">throws</span> Exception {  
+ 23&nbsp;&nbsp;    <span class = "comment">// Array of all Java keywords + true, false and null</span>
+ 24&nbsp;&nbsp;    String[] keywordString = {<span class = "literal">"abstract"</span>, <span class = "literal">"assert"</span>, <span class = "literal">"boolean"</span>, 
+ 25&nbsp;&nbsp;        <span class = "literal">"break"</span>, <span class = "literal">"byte"</span>, <span class = "literal">"case"</span>, <span class = "literal">"catch"</span>, <span class = "literal">"char"</span>, <span class = "literal">"class"</span>, <span class = "literal">"const"</span>,
+ 26&nbsp;&nbsp;        <span class = "literal">"continue"</span>, <span class = "literal">"default"</span>, <span class = "literal">"do"</span>, <span class = "literal">"double"</span>, <span class = "literal">"else"</span>, <span class = "literal">"enum"</span>,
+ 27&nbsp;&nbsp;        <span class = "literal">"extends"</span>, <span class = "literal">"for"</span>, <span class = "literal">"final"</span>, <span class = "literal">"finally"</span>, <span class = "literal">"float"</span>, <span class = "literal">"goto"</span>,
+ 28&nbsp;&nbsp;        <span class = "literal">"if"</span>, <span class = "literal">"implements"</span>, <span class = "literal">"import"</span>, <span class = "literal">"instanceof"</span>, <span class = "literal">"int"</span>, 
+ 29&nbsp;&nbsp;        <span class = "literal">"interface"</span>, <span class = "literal">"long"</span>, <span class = "literal">"native"</span>, <span class = "literal">"new"</span>, <span class = "literal">"package"</span>, <span class = "literal">"private"</span>,
+ 30&nbsp;&nbsp;        <span class = "literal">"protected"</span>, <span class = "literal">"public"</span>, <span class = "literal">"return"</span>, <span class = "literal">"short"</span>, <span class = "literal">"static"</span>, 
+ 31&nbsp;&nbsp;        <span class = "literal">"strictfp"</span>, <span class = "literal">"super"</span>, <span class = "literal">"switch"</span>, <span class = "literal">"synchronized"</span>, <span class = "literal">"this"</span>,
+ 32&nbsp;&nbsp;        <span class = "literal">"throw"</span>, <span class = "literal">"throws"</span>, <span class = "literal">"transient"</span>, <span class = "literal">"try"</span>, <span class = "literal">"void"</span>, <span class = "literal">"volatile"</span>,
+ 33&nbsp;&nbsp;        <span class = "literal">"while"</span>, <span class = "literal">"true"</span>, <span class = "literal">"false"</span>, <span class = "literal">"null"</span>};
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;    Set&lt;String&gt; keywordSet = 
+ 36&nbsp;&nbsp;      <span class = "keyword">new</span> HashSet&lt;&gt;(Arrays.asList(keywordString));
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;    <span class = "keyword">return</span> Files.lines(file.toPath()).parallel().mapToLong(line -&gt; 
+ 39&nbsp;&nbsp;      Stream.of(line.split(<span class = "literal">"[\\s++]"</span>)).
+ 40&nbsp;&nbsp;        filter(word -&gt; keywordSet.contains(word)).count()).sum();
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

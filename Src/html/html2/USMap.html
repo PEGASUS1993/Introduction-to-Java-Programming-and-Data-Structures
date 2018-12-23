@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - USMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "USMapWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.shape.Polygon;
+<span class = "keyword">import</span> javafx.scene.Group;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.input.*;
+<span class = "keyword">import</span> javafx.geometry.Point2D;
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> USMap <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    MapPane map = <span class = "keyword">new</span> MapPane();
+    Scene scene = <span class = "keyword">new</span> Scene(map, <span class = "constant">1200</span>, <span class = "constant">800</span>);
+    primaryStage.setTitle(<span class = "literal">"USMap"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    map.setOnKeyPressed(e -&gt; {
+      <span class = "keyword">if</span> (e.getCode() == KeyCode.UP) {
+        map.enlarge(); <span class = "comment">// Enlarge the map</span>
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (e.getCode() == KeyCode.DOWN) {
+        map.shrink(); <span class = "comment">// Shrink the map</span>
+      }
+    });
+    map.requestFocus();
+  }
+
+  <span class = "keyword">class</span> MapPane <span class = "keyword">extends</span> BorderPane {
+    <span class = "keyword">private</span> Group group = <span class = "keyword">new</span> Group();
+    
+    MapPane() {
+      <span class = "comment">// Load coordinates from a file</span>
+      ArrayList&lt;ArrayList&lt;Point2D&gt;&gt; points = getPoints(); 
+
+      <span class = "comment">// Add points to the polygon list</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; points.size(); i++) {
+        Polygon polygon = <span class = "keyword">new</span> Polygon();
+        <span class = "comment">// Add points to the polygon list</span>
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; points.get(i).size(); j++)
+          polygon.getPoints().addAll(points.get(i).get(j).getX(), 
+            -points.get(i).get(j).getY());
+        polygon.setFill(Color.WHITE);
+        polygon.setStroke(Color.BLACK);
+        polygon.setStrokeWidth(<span class = "constant">1</span> / <span class = "constant">14</span><span class = "literal">.</span><span class = "constant">0</span>);
+        
+        polygon.setOnMouseClicked(e -&gt; {
+          <span class = "keyword">if</span> (e.getButton() == MouseButton.PRIMARY) {
+            polygon.setFill(Color.RED);
+          }
+          <span class = "keyword">else</span> <span class = "keyword">if</span> (e.getButton() == MouseButton.SECONDARY) {
+            polygon.setFill(Color.BLUE);
+          }
+          <span class = "keyword">else</span> {
+            polygon.setFill(Color.WHITE);
+          }
+        });
+
+        group.getChildren().add(polygon);
+      }
+
+      group.setScaleX(<span class = "constant">14</span>); 
+      group.setScaleY(<span class = "constant">14</span>);
+      <span class = "keyword">this</span>.setCenter(group);
+    }
+    
+    <span class = "keyword">public</span> <span class = "keyword">void</span> enlarge() {
+      group.setScaleX(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">1</span> * group.getScaleX());
+      group.setScaleY(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">1</span> * group.getScaleY());
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> shrink() {
+      group.setScaleX(<span class = "constant">0</span><span class = "literal">.</span><span class = "constant">9</span> * group.getScaleX());
+      group.setScaleY(<span class = "constant">0</span><span class = "literal">.</span><span class = "constant">9</span> * group.getScaleY());
+    }
+    
+    <span class = "keyword">private</span> ArrayList&lt;ArrayList&lt;Point2D&gt;&gt; getPoints() {
+      ArrayList&lt;ArrayList&lt;Point2D&gt;&gt; points = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+
+      <span class = "keyword">try</span> (Scanner input = <span class = "keyword">new</span> Scanner(<span class = "keyword">new</span> java.net.URL(<span class = "literal">"https://"</span> +
+          <span class = "literal">"liveexample.pearsoncmg.com/data/usmap.txt"</span>)
+          .openStream())) {
+        <span class = "keyword">while</span> (input.hasNext()) {
+          String s = input.nextLine(); 
+          <span class = "keyword">if</span> (Character.isAlphabetic(s.charAt(<span class = "constant">0</span>))) {
+            points.add(<span class = "keyword">new</span> ArrayList&lt;&gt;()); <span class = "comment">// For a new state </span>
+          }
+          <span class = "keyword">else</span> {  
+            Scanner scanAString = <span class = "keyword">new</span> Scanner(s); <span class = "comment">// Scan one point</span>
+            <span class = "keyword">double</span> y = scanAString.nextDouble();
+            <span class = "keyword">double</span> x = scanAString.nextDouble();
+            points.get(points.size() - <span class = "constant">1</span>).add(<span class = "keyword">new</span> Point2D(x, y));
+          }
+        }
+      } 
+      <span class = "keyword">catch</span> (Exception ex) {
+        ex.printStackTrace();
+      }
+
+      <span class = "keyword">return</span> points;
+    }
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited   
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

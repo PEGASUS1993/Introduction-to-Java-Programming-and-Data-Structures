@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowGridPane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowGridPane.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.HPos;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Insets;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextField;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ShowGridPane <span class = "keyword">extends</span> Application {
+ 13&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 15&nbsp;&nbsp;    <span class = "comment">// Create a pane and set its properties</span>
+ 16&nbsp;&nbsp;    GridPane pane = <span class = "keyword">new</span> GridPane();
+ 17&nbsp;&nbsp;    pane.setAlignment(Pos.CENTER);
+ 18&nbsp;&nbsp;    pane.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">11</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">12</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">13</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">14</span><span class = "literal">.</span><span class = "constant">5</span>));
+ 19&nbsp;&nbsp;    pane.setHgap(<span class = "constant">5</span><span class = "literal">.</span><span class = "constant">5</span>);
+ 20&nbsp;&nbsp;    pane.setVgap(<span class = "constant">5</span><span class = "literal">.</span><span class = "constant">5</span>);
+ 21&nbsp;&nbsp;    
+ 22&nbsp;&nbsp;    <span class = "comment">// Place nodes in the pane</span>
+ 23&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"First Name:"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+ 24&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> TextField(), <span class = "constant">1</span>, <span class = "constant">0</span>);
+ 25&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"MI:"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>); 
+ 26&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> TextField(), <span class = "constant">1</span>, <span class = "constant">1</span>);
+ 27&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Last Name:"</span>), <span class = "constant">0</span>, <span class = "constant">2</span>);
+ 28&nbsp;&nbsp;    pane.add(<span class = "keyword">new</span> TextField(), <span class = "constant">1</span>, <span class = "constant">2</span>);
+ 29&nbsp;&nbsp;    Button btAdd = <span class = "keyword">new</span> Button(<span class = "literal">"Add Name"</span>);
+ 30&nbsp;&nbsp;    pane.add(btAdd, <span class = "constant">1</span>, <span class = "constant">3</span>);
+ 31&nbsp;&nbsp;    GridPane.setHalignment(btAdd, HPos.RIGHT);
+ 32&nbsp;&nbsp;    
+ 33&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 34&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane);
+ 35&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ShowGridPane"</span>); <span class = "comment">// Set the stage title</span>
+ 36&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 37&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 38&nbsp;&nbsp;  }
+ 39&nbsp;&nbsp;  
+ 40&nbsp;&nbsp;  <span class = "comment">/**
+ 41&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 42&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 43&nbsp;&nbsp;   */</span>
+ 44&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 45&nbsp;&nbsp;    launch(args);
+ 46&nbsp;&nbsp;  }
+ 47&nbsp;&nbsp;} 
+</pre>
+</body>
+</html>

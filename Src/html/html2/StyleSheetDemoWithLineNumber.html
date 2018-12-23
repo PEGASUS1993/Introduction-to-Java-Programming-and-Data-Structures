@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StyleSheetDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StyleSheetDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> StyleSheetDemo <span class = "keyword">extends</span> Application {
+  9&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 11&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+ 12&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(hBox, <span class = "constant">300</span>, <span class = "constant">250</span>);        
+ 13&nbsp;&nbsp;    scene.getStylesheets().add(<span class = "literal">"mystyle.css"</span>); <span class = "comment">// Load the stylesheet          </span>
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    Pane pane1 = <span class = "keyword">new</span> Pane();
+ 16&nbsp;&nbsp;    Circle circle1 = <span class = "keyword">new</span> Circle(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">30</span>);
+ 17&nbsp;&nbsp;    Circle circle2 = <span class = "keyword">new</span> Circle(<span class = "constant">150</span>, <span class = "constant">50</span>, <span class = "constant">30</span>);
+ 18&nbsp;&nbsp;    Circle circle3 = <span class = "keyword">new</span> Circle(<span class = "constant">100</span>, <span class = "constant">100</span>, <span class = "constant">30</span>);
+ 19&nbsp;&nbsp;    pane1.getChildren().addAll(circle1, circle2, circle3);
+ 20&nbsp;&nbsp;    pane1.getStyleClass().add(<span class = "literal">"border"</span>);
+ 21&nbsp;&nbsp;    
+ 22&nbsp;&nbsp;    circle1.getStyleClass().add(<span class = "literal">"plaincircle"</span>); <span class = "comment">// Add a style class</span>
+ 23&nbsp;&nbsp;    circle2.getStyleClass().add(<span class = "literal">"plaincircle"</span>); <span class = "comment">// Add a style class</span>
+ 24&nbsp;&nbsp;    circle3.setId(<span class = "literal">"redcircle"</span>); <span class = "comment">// Add a style id</span>
+ 25&nbsp;&nbsp;    
+ 26&nbsp;&nbsp;    Pane pane2 = <span class = "keyword">new</span> Pane();
+ 27&nbsp;&nbsp;    Circle circle4 = <span class = "keyword">new</span> Circle(<span class = "constant">100</span>, <span class = "constant">100</span>, <span class = "constant">30</span>);
+ 28&nbsp;&nbsp;    circle4.getStyleClass().addAll(<span class = "literal">"circleborder"</span>, <span class = "literal">"plainCircle"</span>); 
+ 29&nbsp;&nbsp;    circle4.setId(<span class = "literal">"greencircle"</span>); <span class = "comment">// Add a style class</span>
+ 30&nbsp;&nbsp;    pane2.getChildren().add(circle4);
+ 31&nbsp;&nbsp;    pane2.getStyleClass().add(<span class = "literal">"border"</span>);
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;    hBox.getChildren().addAll(pane1, pane2); 
+ 34&nbsp;&nbsp;    
+ 35&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"StyleSheetDemo"</span>); <span class = "comment">// Set the window title</span>
+ 36&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 37&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 38&nbsp;&nbsp;  }
+ 39&nbsp;&nbsp;
+ 40&nbsp;&nbsp;  <span class = "comment">// Lauch the program from command-line</span>
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 42&nbsp;&nbsp;    launch(args);
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

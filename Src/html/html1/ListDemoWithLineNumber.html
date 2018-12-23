@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ListDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ListDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ListDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ListDemo {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    ArrayList&lt;Integer&gt; list1 = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+  6&nbsp;&nbsp;    list1.add(<span class = "constant">3</span>); list1.add(<span class = "constant">4</span>); list1.add(<span class = "constant">2</span>);
+  7&nbsp;&nbsp;    System.out.println(<span class = "literal">"Maximum value is list1: "</span> + max(list1));
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    LinkedList&lt;Integer&gt; list2 = <span class = "keyword">new</span> LinkedList&lt;&gt;();
+ 10&nbsp;&nbsp;    list2.add(<span class = "constant">13</span>); list2.add(<span class = "constant">40</span>); list2.add(<span class = "constant">12</span>);
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"Maximum value is list2: "</span> + max(list2));
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;  
+ 14&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> Integer max(List&lt;Integer&gt; list) {
+ 15&nbsp;&nbsp;    Integer max = list.get(<span class = "constant">0</span>);
+ 16&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">1</span>; k &lt; list.size(); k++)
+ 17&nbsp;&nbsp;      <span class = "keyword">if</span> (max &lt; list.get(k))
+ 18&nbsp;&nbsp;        max = list.get(k);
+ 19&nbsp;&nbsp;    <span class = "keyword">return</span> max;
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

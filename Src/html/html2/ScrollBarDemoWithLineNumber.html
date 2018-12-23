@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ScrollBarDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ScrollBarDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Orientation;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ScrollBar;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ScrollBarDemo <span class = "keyword">extends</span> Application {
+ 11&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 13&nbsp;&nbsp;    Text text = <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "literal">"JavaFX Programming"</span>);
+ 14&nbsp;&nbsp;    
+ 15&nbsp;&nbsp;    ScrollBar sbHorizontal = <span class = "keyword">new</span> ScrollBar();
+ 16&nbsp;&nbsp;    ScrollBar sbVertical = <span class = "keyword">new</span> ScrollBar();
+ 17&nbsp;&nbsp;    sbVertical.setOrientation(Orientation.VERTICAL);
+ 18&nbsp;&nbsp;    
+ 19&nbsp;&nbsp;    <span class = "comment">// Create a text in a pane</span>
+ 20&nbsp;&nbsp;    Pane paneForText = <span class = "keyword">new</span> Pane();
+ 21&nbsp;&nbsp;    paneForText.getChildren().add(text);
+ 22&nbsp;&nbsp;    
+ 23&nbsp;&nbsp;    <span class = "comment">// Create a border pane to hold text and scroll bars</span>
+ 24&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+ 25&nbsp;&nbsp;    pane.setCenter(paneForText);
+ 26&nbsp;&nbsp;    pane.setBottom(sbHorizontal);
+ 27&nbsp;&nbsp;    pane.setRight(sbVertical);
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;    <span class = "comment">// Listener for horizontal scroll bar value change</span>
+ 30&nbsp;&nbsp;    sbHorizontal.valueProperty().addListener(ov -&gt; 
+ 31&nbsp;&nbsp;      text.setX(sbHorizontal.getValue() * paneForText.getWidth() /
+ 32&nbsp;&nbsp;        sbHorizontal.getMax()));
+ 33&nbsp;&nbsp;    
+ 34&nbsp;&nbsp;    <span class = "comment">// Listener for vertical scroll bar value change</span>
+ 35&nbsp;&nbsp;    sbVertical.valueProperty().addListener(ov -&gt; 
+ 36&nbsp;&nbsp;      text.setY(sbVertical.getValue() * paneForText.getHeight() /
+ 37&nbsp;&nbsp;        sbVertical.getMax()));
+ 38&nbsp;&nbsp;    
+ 39&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 40&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+ 41&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ScrollBarDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 42&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 43&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 44&nbsp;&nbsp;  }
+ 45&nbsp;&nbsp;
+ 46&nbsp;&nbsp;  <span class = "comment">/**
+ 47&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 48&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 49&nbsp;&nbsp;   */</span>
+ 50&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 51&nbsp;&nbsp;    launch(args);
+ 52&nbsp;&nbsp;  }
+ 53&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

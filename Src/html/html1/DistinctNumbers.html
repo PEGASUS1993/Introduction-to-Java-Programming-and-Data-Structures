@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DistinctNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DistinctNumbersWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DistinctNumbers" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.ArrayList;
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> DistinctNumbers {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    ArrayList&lt;Integer&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);   
+    System.out.println(<span class = "literal">"Enter integers (input ends with 0): "</span>);
+    <span class = "keyword">int</span> value;
+    
+    <span class = "keyword">do</span> {
+      value = input.nextInt(); <span class = "comment">// Read a value from the input</span>
+      
+      <span class = "keyword">if</span> (!list.contains(value) && value != <span class = "constant">0</span>) 
+        list.add(value); <span class = "comment">// Add the value if it is not in the list</span>
+    } <span class = "keyword">while</span> (value != <span class = "constant">0</span>);
+
+    <span class = "comment">// Display the distinct numbers</span>
+    System.out.print(<span class = "literal">"The distinct integers are: "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.size(); i++) 
+      System.out.print(list.get(i) + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

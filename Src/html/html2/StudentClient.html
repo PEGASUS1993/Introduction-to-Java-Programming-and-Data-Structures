@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StudentClient.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StudentClientWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> java.net.*;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.geometry.HPos;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> StudentClient <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> TextField tfName = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfStreet = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfCity = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfState = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfZip = <span class = "keyword">new</span> TextField();
+
+  <span class = "comment">// Button for sending a student to the server</span>
+  <span class = "keyword">private</span> Button btRegister = <span class = "keyword">new</span> Button(<span class = "literal">"Register to the Server"</span>);
+
+  <span class = "comment">// Host name or ip</span>
+  String host = <span class = "literal">"localhost"</span>;
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    GridPane pane = <span class = "keyword">new</span> GridPane();
+    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Name"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+    pane.add(tfName, <span class = "constant">1</span>, <span class = "constant">0</span>);    
+    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Street"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+    pane.add(tfStreet, <span class = "constant">1</span>, <span class = "constant">1</span>);
+    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"City"</span>), <span class = "constant">0</span>, <span class = "constant">2</span>);
+    
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">2</span>);
+    pane.add(hBox, <span class = "constant">1</span>, <span class = "constant">2</span>);
+    hBox.getChildren().addAll(tfCity, <span class = "keyword">new</span> Label(<span class = "literal">"State"</span>), tfState,
+      <span class = "keyword">new</span> Label(<span class = "literal">"Zip"</span>), tfZip);
+    pane.add(btRegister, <span class = "constant">1</span>, <span class = "constant">3</span>);
+    GridPane.setHalignment(btRegister, HPos.RIGHT);
+    
+    pane.setAlignment(Pos.CENTER);   
+    tfName.setPrefColumnCount(<span class = "constant">15</span>);
+    tfStreet.setPrefColumnCount(<span class = "constant">15</span>);
+    tfCity.setPrefColumnCount(<span class = "constant">10</span>);
+    tfState.setPrefColumnCount(<span class = "constant">2</span>);
+    tfZip.setPrefColumnCount(<span class = "constant">3</span>);
+
+    btRegister.setOnAction(<span class = "keyword">new</span> ButtonListener());
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"StudentClient"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/** Handle button action */</span>
+  <span class = "keyword">private</span> <span class = "keyword">class</span> ButtonListener <span class = "keyword">implements</span> EventHandler&lt;ActionEvent&gt; {
+    @Override
+    <span class = "keyword">public</span> <span class = "keyword">void</span> handle(ActionEvent e) {
+      <span class = "keyword">try</span> {
+        <span class = "comment">// Establish connection with the server</span>
+        Socket socket = <span class = "keyword">new</span> Socket(host, <span class = "constant">8000</span>);
+
+        <span class = "comment">// Create an output stream to the server</span>
+        ObjectOutputStream toServer =
+          <span class = "keyword">new</span> ObjectOutputStream(socket.getOutputStream());
+
+        <span class = "comment">// Get text field</span>
+        String name = tfName.getText().trim();
+        String street = tfStreet.getText().trim();
+        String city = tfCity.getText().trim();
+        String state = tfState.getText().trim();
+        String zip = tfZip.getText().trim();
+
+        <span class = "comment">// Create a Student object and send to the server</span>
+        StudentAddress s =
+          <span class = "keyword">new</span> StudentAddress(name, street, city, state, zip);
+        toServer.writeObject(s);
+      }
+      <span class = "keyword">catch</span> (IOException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

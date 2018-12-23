@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FixedLengthStringIO.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FixedLengthStringIOWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FixedLengthStringIO {
+  <span class = "comment">/** Read fixed number of characters from a DataInput stream */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String readFixedLengthString(<span class = "keyword">int</span> size,
+      DataInput in) <span class = "keyword">throws</span> IOException {
+    <span class = "comment">// Declare an array of characters</span>
+    <span class = "keyword">char</span>[] chars = <span class = "keyword">new</span> <span class = "keyword">char</span>[size];
+
+    <span class = "comment">// Read fixed number of characters to the array</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; size; i++)
+      chars[i] = in.readChar();
+
+    <span class = "keyword">return</span> <span class = "keyword">new</span> String(chars);
+  }
+
+  <span class = "comment">/** Write fixed number of characters to a DataOutput stream */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> writeFixedLengthString(String s, <span class = "keyword">int</span> size,
+      DataOutput out) <span class = "keyword">throws</span> IOException {
+    <span class = "keyword">char</span>[] chars = <span class = "keyword">new</span> <span class = "keyword">char</span>[size];
+
+    <span class = "comment">// Fill in string with characters</span>
+    s.getChars(<span class = "constant">0</span>, Math.min(s.length(), size), chars, <span class = "constant">0</span>);
+
+    <span class = "comment">// Fill in blank characters in the rest of the array</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = Math.min(s.length(), size); i &lt; chars.length; i++)
+      chars[i] = <span class = "literal">' '</span>;
+
+    <span class = "comment">// Create and write a new string padded with blank characters</span>
+    out.writeChars(<span class = "keyword">new</span> String(chars));
+  }
+}
+</pre>
+</body>
+</html>

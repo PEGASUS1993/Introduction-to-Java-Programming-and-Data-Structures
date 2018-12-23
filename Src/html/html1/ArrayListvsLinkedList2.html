@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ArrayListvsLinkedList2.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ArrayListvsLinkedList2WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ArrayListvsLinkedList2" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.ArrayList;
+<span class = "keyword">import</span> java.util.LinkedList;
+<span class = "keyword">import</span> java.util.List;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ArrayListvsLinkedList2 {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+	List&lt;Integer&gt; list1 = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+	List&lt;Integer&gt; list2 = <span class = "keyword">new</span> LinkedList&lt;&gt;();
+	
+	test(list1, <span class = "literal">"Time for ArrayList is "</span>);
+	test(list2, <span class = "literal">"Time for LinkedList is "</span>);	
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> test(List&lt;Integer&gt; list, String title) {
+	<span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">1000000</span>; i++) {
+	  list.add(i);
+	}
+	
+	<span class = "keyword">long</span> startTime = System.currentTimeMillis();
+	<span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">10000</span>; i++) {
+      list.get((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">1000000</span>));
+	}
+	<span class = "keyword">long</span> time = System.currentTimeMillis() - startTime;
+	System.out.println(title + time + <span class = "literal">" milliseconds"</span>);
+  }
+}
+</pre>
+</body>
+</html>

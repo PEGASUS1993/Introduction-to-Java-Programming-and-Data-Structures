@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Palindrome.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Palindrome.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Palindrome" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Palindrome {
+  4&nbsp;&nbsp;  <span class = "comment">/** Main method */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  6&nbsp;&nbsp;    <span class = "comment">// Create a Scanner</span>
+  7&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    <span class = "comment">// Prompt the user to enter a string</span>
+ 10&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a string: "</span>);
+ 11&nbsp;&nbsp;    String s = input.nextLine();
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "comment">// The index of the first character in the string</span>
+ 14&nbsp;&nbsp;    <span class = "keyword">int</span> low = <span class = "constant">0</span>;
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    <span class = "comment">// The index of the last character in the string</span>
+ 17&nbsp;&nbsp;    <span class = "keyword">int</span> high = s.length() - <span class = "constant">1</span>;
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;    <span class = "keyword">boolean</span> isPalindrome = <span class = "keyword">true</span>;
+ 20&nbsp;&nbsp;    <span class = "keyword">while</span> (low &lt; high) {
+ 21&nbsp;&nbsp;      <span class = "keyword">if</span> (s.charAt(low) != s.charAt(high)) {
+ 22&nbsp;&nbsp;        isPalindrome = <span class = "keyword">false</span>;
+ 23&nbsp;&nbsp;        <span class = "keyword">break</span>;
+ 24&nbsp;&nbsp;      }
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;      low++;
+ 27&nbsp;&nbsp;      high--;
+ 28&nbsp;&nbsp;    }
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;    <span class = "keyword">if</span> (isPalindrome)
+ 31&nbsp;&nbsp;      System.out.println(s + <span class = "literal">" is a palindrome"</span>);
+ 32&nbsp;&nbsp;    <span class = "keyword">else</span>
+ 33&nbsp;&nbsp;      System.out.println(s + <span class = "literal">" is not a palindrome"</span>);
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

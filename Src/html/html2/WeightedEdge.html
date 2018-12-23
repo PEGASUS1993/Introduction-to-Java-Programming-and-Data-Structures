@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WeightedEdge.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WeightedEdgeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> WeightedEdge <span class = "keyword">extends</span> Edge
+    <span class = "keyword">implements</span> Comparable&lt;WeightedEdge&gt; {
+  <span class = "keyword">public</span> <span class = "keyword">double</span> weight; <span class = "comment">// The weight on edge (u, v)</span>
+
+  <span class = "comment">/** Create a weighted edge on (u, v) */</span>
+  <span class = "keyword">public</span> WeightedEdge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v, <span class = "keyword">double</span> weight) {
+    <span class = "keyword">super</span>(u, v);
+    <span class = "keyword">this</span>.weight = weight;
+  }
+
+  @Override <span class = "comment">/** Compare two edges on weights */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(WeightedEdge edge) {
+    <span class = "keyword">if</span> (weight &gt; edge.weight) {
+      <span class = "keyword">return</span> <span class = "constant">1</span>;
+    }
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (weight == edge.weight) {
+      <span class = "keyword">return</span> <span class = "constant">0</span>;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+    }
+  }
+}
+</pre>
+</body>
+</html>

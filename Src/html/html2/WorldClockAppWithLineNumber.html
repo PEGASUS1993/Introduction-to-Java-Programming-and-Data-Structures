@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WorldClockApp.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WorldClockApp.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> WorldClockApp <span class = "keyword">extends</span> Application {     
+  6&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+  8&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+  9&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> WorldClockControl(), <span class = "constant">450</span>, <span class = "constant">350</span>);
+ 10&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"WorldClockApp"</span>); <span class = "comment">// Set the stage title</span>
+ 11&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 12&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage    </span>
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;  <span class = "comment">/**
+ 16&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 17&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 18&nbsp;&nbsp;   */</span>
+ 19&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 20&nbsp;&nbsp;    launch(args);
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

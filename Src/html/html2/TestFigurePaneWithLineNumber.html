@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestFigurePane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestFigurePane.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.TilePane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Line;
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestFigurePane <span class = "keyword">extends</span> Application {
+ 10&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 12&nbsp;&nbsp;    <span class = "comment">// Create a pane</span>
+ 13&nbsp;&nbsp;    TilePane pane = <span class = "keyword">new</span> TilePane();
+ 14&nbsp;&nbsp;    
+ 15&nbsp;&nbsp;    FigurePane p = <span class = "keyword">new</span> FigurePane(FigureType.LINE);
+ 16&nbsp;&nbsp;    p.setPrefSize(<span class = "constant">40</span>, <span class = "constant">40</span>);
+ 17&nbsp;&nbsp;    pane.getChildren().add(p);
+ 18&nbsp;&nbsp;    pane.getChildren().add(<span class = "keyword">new</span> FigurePane(FigureType.RECTANGLE));
+ 19&nbsp;&nbsp;    pane.getChildren().add(<span class = "keyword">new</span> FigurePane(FigureType.ROUND_RECTANGLE));
+ 20&nbsp;&nbsp;    pane.getChildren().add(<span class = "keyword">new</span> FigurePane(FigureType.ELLIPSE));
+ 21&nbsp;&nbsp;        
+ 22&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 23&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">200</span>);
+ 24&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"TestFigurePane"</span>); <span class = "comment">// Set the stage title</span>
+ 25&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 26&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;  
+ 29&nbsp;&nbsp;  <span class = "comment">/**
+ 30&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 31&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 32&nbsp;&nbsp;   */</span>
+ 33&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 34&nbsp;&nbsp;    launch(args);
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

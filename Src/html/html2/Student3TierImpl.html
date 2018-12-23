@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Student3TierImpl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Student3TierImplWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.rmi.*;
+<span class = "keyword">import</span> java.rmi.server.*;
+<span class = "keyword">import</span> java.sql.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Student3TierImpl <span class = "keyword">extends</span> UnicastRemoteObject
+    <span class = "keyword">implements</span> StudentServerInterface {
+  <span class = "comment">// Use prepared statement for querying DB</span>
+  <span class = "keyword">private</span> PreparedStatement pstmt;
+
+  <span class = "comment">/** Constructs Student3TierImpl object and exports it on
+   * default port.
+   */</span>
+  <span class = "keyword">public</span> Student3TierImpl() <span class = "keyword">throws</span> RemoteException {
+    initializeDB();
+  }
+
+  <span class = "comment">/** Constructs Student3TierImpl object and exports it on
+   * specified port.
+   * @param port The port for exporting
+   */</span>
+  <span class = "keyword">public</span> Student3TierImpl(<span class = "keyword">int</span> port) <span class = "keyword">throws</span> RemoteException {
+    <span class = "keyword">super</span>(port);
+    initializeDB();
+  }
+
+  <span class = "comment">/** Load JDBC driver, establish connection and 
+   *  create statement */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">void</span> initializeDB() {
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Load the JDBC driver</span>
+      <span class = "comment">// Class.forName("oracle.jdbc.driver.OracleDriver");</span>
+      Class.forName(<span class = "literal">"com.mysql.jdbc.Driver "</span>);
+
+      System.out.println(<span class = "literal">"Driver registered"</span>);
+
+      <span class = "comment">// Establish connection</span>
+      <span class = "comment">/*Connection conn = DriverManager.getConnection
+        ("jdbc:oracle:thin:@drake.armstrong.edu:1521:orcl",
+          "scott", "tiger");  */</span>
+      Connection conn = DriverManager.getConnection(
+        <span class = "literal">"jdbc:mysql://localhost/javabook"</span> , <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+      System.out.println(<span class = "literal">"Database connected"</span>);
+
+      <span class = "comment">// Create a prepared statement for querying DB</span>
+      pstmt = conn.prepareStatement(
+        <span class = "literal">"select * from Scores where name = ?"</span>);
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      System.out.println(ex);
+    }
+  }
+
+  <span class = "comment">/** Return the score for specified the name
+   * Return -1 if score is not found.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> findScore(String name) <span class = "keyword">throws</span> RemoteException {
+    <span class = "keyword">double</span> score = <span class = "literal">-</span><span class = "constant">1</span>;
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Set the specified name in the prepared statement</span>
+      pstmt.setString(<span class = "constant">1</span>, name);
+
+      <span class = "comment">// Execute the prepared statement</span>
+      ResultSet rs = pstmt.executeQuery();
+
+      <span class = "comment">// Retrieve the score</span>
+      <span class = "keyword">if</span> (rs.next()) {
+        <span class = "keyword">if</span> (rs.getBoolean(<span class = "constant">3</span>))
+          score = rs.getDouble(<span class = "constant">2</span>);
+      }
+    }
+    <span class = "keyword">catch</span> (SQLException ex) {
+      System.out.println(ex);
+    }
+
+    <span class = "keyword">return</span> score;
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericSortNew.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericSortNewWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GenericSortNew" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> GenericSortNew {
+  <span class = "comment">/** Sort an array of comparable objects */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">void</span> sort(E[] list) {
+    E currentMax;
+    <span class = "keyword">int</span> currentMaxIndex;
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = list.length - <span class = "constant">1</span>; i &gt;= <span class = "constant">1</span>; i--) {
+      <span class = "comment">// Finds the maximum in the list[0..i]</span>
+      currentMax = list[i];
+      currentMaxIndex = i;
+
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i - <span class = "constant">1</span>; j &gt;= <span class = "constant">0</span>; j--) {
+        <span class = "keyword">if</span> (currentMax.compareTo(list[j]) &lt; <span class = "constant">0</span>) {
+          currentMax = list[j];
+          currentMaxIndex = j;
+        }
+      }
+
+      <span class = "comment">// Swap list[i] with list[currentMaxIndex] if necessary;</span>
+      <span class = "keyword">if</span> (currentMaxIndex != i) {
+        list[currentMaxIndex] = list[i];
+        list[i] = currentMax;
+      }
+    }
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a String array</span>
+    String[] stringArray = {<span class = "literal">"Tom"</span>, <span class = "literal">"John"</span>, <span class = "literal">"Fred"</span>};
+
+    sort(stringArray);
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; stringArray.length; i++)
+      System.out.print(stringArray[i] + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestResultSetMetaData.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestResultSetMetaDataWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestResultSetMetaData" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestResultSetMetaData {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args)
+      <span class = "keyword">throws</span> SQLException, ClassNotFoundException {
+    <span class = "comment">// Load the JDBC driver</span>
+    Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+    System.out.println(<span class = "literal">"Driver loaded"</span>);
+
+    <span class = "comment">// Connect to a database</span>
+    Connection connection = DriverManager.getConnection
+      (<span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+    System.out.println(<span class = "literal">"Database connected"</span>);
+
+    <span class = "comment">// Create a statement</span>
+    Statement statement = connection.createStatement();
+
+    <span class = "comment">// Execute a statement</span>
+    ResultSet resultSet = statement.executeQuery
+      (<span class = "literal">"select * from Enrollment"</span>);
+    
+    ResultSetMetaData rsMetaData = resultSet.getMetaData();
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= rsMetaData.getColumnCount(); i++)
+      System.out.printf(<span class = "literal">"%<span class = "literal">-</span>12s\t"</span>, rsMetaData.getColumnName(i));
+    System.out.println();
+    
+    <span class = "comment">// Iterate through the result and print the student names</span>
+    <span class = "keyword">while</span> (resultSet.next()) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= rsMetaData.getColumnCount(); i++)
+        System.out.printf(<span class = "literal">"%<span class = "literal">-</span>12s\t"</span>, resultSet.getObject(i));
+      System.out.println();
+    }
+
+    <span class = "comment">// Close the connection</span>
+    connection.close();
+  }
+}
+</pre>
+</body>
+</html>

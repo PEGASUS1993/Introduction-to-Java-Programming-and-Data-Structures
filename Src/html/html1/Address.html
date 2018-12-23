@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Address.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AddressWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">final</span> <span class = "keyword">class</span> Address {
+  <span class = "keyword">private</span> String street;
+  <span class = "keyword">private</span> String city;
+  <span class = "keyword">private</span> String state;
+  <span class = "keyword">private</span> String zip;
+
+  <span class = "comment">/** Create an address with street, city, state, and zip */</span>
+  <span class = "keyword">public</span> Address(String street, String city,
+    String state, String zip) {
+    <span class = "keyword">this</span>.street = street;
+    <span class = "keyword">this</span>.city = city;
+    <span class = "keyword">this</span>.state = state;
+    <span class = "keyword">this</span>.zip = zip;
+  }
+
+  <span class = "comment">/** Return street */</span>
+  <span class = "keyword">public</span> String getStreet() {
+    <span class = "keyword">return</span> street;
+  }
+
+  <span class = "comment">/** Return city */</span>
+  <span class = "keyword">public</span> String getCity() {
+    <span class = "keyword">return</span> city;
+  }
+
+  <span class = "comment">/** Return state */</span>
+  <span class = "keyword">public</span> String getState() {
+    <span class = "keyword">return</span> state;
+  }
+
+  <span class = "comment">/** Return zip */</span>
+  <span class = "keyword">public</span> String getZip() {
+    <span class = "keyword">return</span> zip;
+  }
+
+  <span class = "comment">/** Get full address */</span>
+  <span class = "keyword">public</span> String getFullAddress() {
+    <span class = "keyword">return</span> street + <span class = "literal">'\n'</span> + city + <span class = "literal">", "</span> + state + <span class = "literal">' '</span> + zip + <span class = "literal">'\n'</span>;
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PrintCalendar.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PrintCalendar.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PrintCalendar" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> PrintCalendar {
+  4&nbsp;&nbsp;  <span class = "comment">/** Main method */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  6&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Prompt the user to enter year</span>
+  9&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter full year (e.g., 2001): "</span>);
+ 10&nbsp;&nbsp;    <span class = "keyword">int</span> year = input.nextInt();
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "comment">// Prompt the user to enter month</span>
+ 13&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter month in number between 1 and 12: "</span>);
+ 14&nbsp;&nbsp;    <span class = "keyword">int</span> month = input.nextInt();
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    <span class = "comment">// Print calendar for the month of the year</span>
+ 17&nbsp;&nbsp;    printMonth(year, month);
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Print the calendar for a month in a year */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printMonth(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+ 22&nbsp;&nbsp;    <span class = "comment">// Print the headings of the calendar</span>
+ 23&nbsp;&nbsp;    printMonthTitle(year, month);
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;    <span class = "comment">// Print the body of the calendar</span>
+ 26&nbsp;&nbsp;    printMonthBody(year, month);
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "comment">/** Print the month title, e.g., May, 1999 */</span>
+ 30&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printMonthTitle(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+ 31&nbsp;&nbsp;    System.out.println(<span class = "literal">"         "</span> + getMonthName(month)
+ 32&nbsp;&nbsp;      + <span class = "literal">" "</span> + year);
+ 33&nbsp;&nbsp;    System.out.println(<span class = "literal">"-----------------------------"</span>);
+ 34&nbsp;&nbsp;    System.out.println(<span class = "literal">" Sun Mon Tue Wed Thu Fri Sat"</span>);
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;
+ 37&nbsp;&nbsp;  <span class = "comment">/** Get the English name for the month */</span>
+ 38&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> String getMonthName(<span class = "keyword">int</span> month) {
+ 39&nbsp;&nbsp;    String monthName = <span class = "literal">""</span>;
+ 40&nbsp;&nbsp;    <span class = "keyword">switch</span> (month) {
+ 41&nbsp;&nbsp;      <span class = "keyword">case</span> 1: monthName = <span class = "literal">"January"</span>; <span class = "keyword">break</span>;
+ 42&nbsp;&nbsp;      <span class = "keyword">case</span> 2: monthName = <span class = "literal">"February"</span>; <span class = "keyword">break</span>;
+ 43&nbsp;&nbsp;      <span class = "keyword">case</span> 3: monthName = <span class = "literal">"March"</span>; <span class = "keyword">break</span>;
+ 44&nbsp;&nbsp;      <span class = "keyword">case</span> 4: monthName = <span class = "literal">"April"</span>; <span class = "keyword">break</span>;
+ 45&nbsp;&nbsp;      <span class = "keyword">case</span> 5: monthName = <span class = "literal">"May"</span>; <span class = "keyword">break</span>;
+ 46&nbsp;&nbsp;      <span class = "keyword">case</span> 6: monthName = <span class = "literal">"June"</span>; <span class = "keyword">break</span>;
+ 47&nbsp;&nbsp;      <span class = "keyword">case</span> 7: monthName = <span class = "literal">"July"</span>; <span class = "keyword">break</span>;
+ 48&nbsp;&nbsp;      <span class = "keyword">case</span> 8: monthName = <span class = "literal">"August"</span>; <span class = "keyword">break</span>;
+ 49&nbsp;&nbsp;      <span class = "keyword">case</span> 9: monthName = <span class = "literal">"September"</span>; <span class = "keyword">break</span>;
+ 50&nbsp;&nbsp;      <span class = "keyword">case</span> 10: monthName = <span class = "literal">"October"</span>; <span class = "keyword">break</span>;
+ 51&nbsp;&nbsp;      <span class = "keyword">case</span> 11: monthName = <span class = "literal">"November"</span>; <span class = "keyword">break</span>;
+ 52&nbsp;&nbsp;      <span class = "keyword">case</span> 12: monthName = <span class = "literal">"December"</span>;
+ 53&nbsp;&nbsp;    }
+ 54&nbsp;&nbsp;
+ 55&nbsp;&nbsp;    <span class = "keyword">return</span> monthName;
+ 56&nbsp;&nbsp;  }
+ 57&nbsp;&nbsp;
+ 58&nbsp;&nbsp;  <span class = "comment">/** Print month body */</span>
+ 59&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printMonthBody(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+ 60&nbsp;&nbsp;    <span class = "comment">// Get start day of the week for the first date in the month</span>
+ 61&nbsp;&nbsp;    <span class = "keyword">int</span> startDay = getStartDay(year, month);
+ 62&nbsp;&nbsp;
+ 63&nbsp;&nbsp;    <span class = "comment">// Get number of days in the month</span>
+ 64&nbsp;&nbsp;    <span class = "keyword">int</span> numberOfDaysInMonth = getNumberOfDaysInMonth(year, month);
+ 65&nbsp;&nbsp;
+ 66&nbsp;&nbsp;    <span class = "comment">// Pad space before the first day of the month</span>
+ 67&nbsp;&nbsp;    <span class = "keyword">int</span> i = <span class = "constant">0</span>;
+ 68&nbsp;&nbsp;    <span class = "keyword">for</span> (i = <span class = "constant">0</span>; i &lt; startDay; i++)
+ 69&nbsp;&nbsp;      System.out.print(<span class = "literal">"    "</span>);
+ 70&nbsp;&nbsp;
+ 71&nbsp;&nbsp;    <span class = "keyword">for</span> (i = <span class = "constant">1</span>; i &lt;= numberOfDaysInMonth; i++) {
+ 72&nbsp;&nbsp;      System.out.printf(<span class = "literal">"%4d"</span>, i);
+ 73&nbsp;&nbsp;
+ 74&nbsp;&nbsp;      <span class = "keyword">if</span> ((i + startDay) % <span class = "constant">7</span> == <span class = "constant">0</span>)
+ 75&nbsp;&nbsp;        System.out.println();
+ 76&nbsp;&nbsp;    }
+ 77&nbsp;&nbsp;
+ 78&nbsp;&nbsp;    System.out.println();
+ 79&nbsp;&nbsp;  }
+ 80&nbsp;&nbsp;
+ 81&nbsp;&nbsp;  <span class = "comment">/** Get the start day of month/1/year */</span>
+ 82&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getStartDay(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+ 83&nbsp;&nbsp;    <span class = "keyword">final</span> <span class = "keyword">int</span> START_DAY_FOR_JAN_1_1800 = <span class = "constant">3</span>;
+ 84&nbsp;&nbsp;    <span class = "comment">// Get total number of days from 1/1/1800 to month/1/year</span>
+ 85&nbsp;&nbsp;    <span class = "keyword">int</span> totalNumberOfDays = getTotalNumberOfDays(year, month);
+ 86&nbsp;&nbsp;
+ 87&nbsp;&nbsp;    <span class = "comment">// Return the start day for month/1/year</span>
+ 88&nbsp;&nbsp;    <span class = "keyword">return</span> (totalNumberOfDays + START_DAY_FOR_JAN_1_1800) % <span class = "constant">7</span>;
+ 89&nbsp;&nbsp;  }
+ 90&nbsp;&nbsp;
+ 91&nbsp;&nbsp;  <span class = "comment">/** Get the total number of days since January 1, 1800 */</span>
+ 92&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getTotalNumberOfDays(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+ 93&nbsp;&nbsp;    <span class = "keyword">int</span> total = <span class = "constant">0</span>;
+ 94&nbsp;&nbsp;
+ 95&nbsp;&nbsp;    <span class = "comment">// Get the total days from 1800 to 1/1/year</span>
+ 96&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1800</span>; i &lt; year; i++)
+ 97&nbsp;&nbsp;      <span class = "keyword">if</span> (isLeapYear(i))
+ 98&nbsp;&nbsp;        total = total + <span class = "constant">366</span>;
+ 99&nbsp;&nbsp;      <span class = "keyword">else</span>
+100&nbsp;&nbsp;        total = total + <span class = "constant">365</span>;
+101&nbsp;&nbsp;
+102&nbsp;&nbsp;    <span class = "comment">// Add days from Jan to the month prior to the calendar month</span>
+103&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt; month; i++)
+104&nbsp;&nbsp;      total = total + getNumberOfDaysInMonth(year, i);
+105&nbsp;&nbsp;
+106&nbsp;&nbsp;    <span class = "keyword">return</span> total;
+107&nbsp;&nbsp;  }
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;  <span class = "comment">/** Get the number of days in a month */</span>
+110&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfDaysInMonth(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+111&nbsp;&nbsp;    <span class = "keyword">if</span> (month == <span class = "constant">1</span> || month == <span class = "constant">3</span> || month == <span class = "constant">5</span> || month == <span class = "constant">7</span> ||
+112&nbsp;&nbsp;      month == <span class = "constant">8</span> || month == <span class = "constant">10</span> || month == <span class = "constant">12</span>)
+113&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">31</span>;
+114&nbsp;&nbsp;
+115&nbsp;&nbsp;    <span class = "keyword">if</span> (month == <span class = "constant">4</span> || month == <span class = "constant">6</span> || month == <span class = "constant">9</span> || month == <span class = "constant">11</span>)
+116&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">30</span>;
+117&nbsp;&nbsp;
+118&nbsp;&nbsp;    <span class = "keyword">if</span> (month == <span class = "constant">2</span>) <span class = "keyword">return</span> isLeapYear(year) ? <span class = "constant">29</span> : <span class = "constant">28</span>;
+119&nbsp;&nbsp;
+120&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "constant">0</span>; <span class = "comment">// If month is incorrect</span>
+121&nbsp;&nbsp;  }
+122&nbsp;&nbsp;
+123&nbsp;&nbsp;  <span class = "comment">/** Determine if it is a leap year */</span>
+124&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isLeapYear(<span class = "keyword">int</span> year) {
+125&nbsp;&nbsp;    <span class = "keyword">return</span> year % <span class = "constant">400</span> == <span class = "constant">0</span> || (year % <span class = "constant">4</span> == <span class = "constant">0</span> && year % <span class = "constant">100</span> != <span class = "constant">0</span>);
+126&nbsp;&nbsp;  }
+127&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

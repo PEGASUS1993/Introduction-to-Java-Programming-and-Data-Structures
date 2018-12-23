@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CallBackImpl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CallBackImplWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.rmi.*;
+<span class = "keyword">import</span> java.rmi.server.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CallBackImpl <span class = "keyword">extends</span> UnicastRemoteObject
+    <span class = "keyword">implements</span> CallBack {
+  <span class = "comment">// The client will be called by the server through callback</span>
+  <span class = "keyword">private</span> TicTacToeClientRMI thisClient;
+
+  <span class = "comment">/** Constructor */</span>
+  <span class = "keyword">public</span> CallBackImpl(Object client) <span class = "keyword">throws</span> RemoteException {
+    thisClient = (TicTacToeClientRMI)client;
+  }
+
+  <span class = "comment">/** The server notifies the client for taking a turn */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> takeTurn(<span class = "keyword">boolean</span> turn) <span class = "keyword">throws</span> RemoteException {
+    thisClient.setMyTurn(turn);
+  }
+
+  <span class = "comment">/** The server sends a message to be displayed by the client */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> notify(String message) <span class = "keyword">throws</span> RemoteException {
+    thisClient.setMessage(message);
+  }
+
+  <span class = "comment">/** The server notifies a client of the other player's move */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> mark(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column, <span class = "keyword">char</span> token)
+      <span class = "keyword">throws</span> RemoteException {
+    thisClient.mark(row, column, token);
+  }
+}
+</pre>
+</body>
+</html>

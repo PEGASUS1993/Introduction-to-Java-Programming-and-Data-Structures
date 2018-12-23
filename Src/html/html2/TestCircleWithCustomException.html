@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCircleWithCustomException.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCircleWithCustomExceptionWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCircleWithCustomException" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestCircleWithCustomException {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">try</span> {
+      <span class = "keyword">new</span> CircleWithCustomException(<span class = "constant">5</span>);
+      <span class = "keyword">new</span> CircleWithCustomException(<span class = "literal">-</span><span class = "constant">5</span>);
+      <span class = "keyword">new</span> CircleWithCustomException(<span class = "constant">0</span>);
+    }
+    <span class = "keyword">catch</span> (InvalidRadiusException ex) {
+      System.out.println(ex);
+    }
+    
+    System.out.println(<span class = "literal">"Number of objects created: "</span> + 
+      CircleWithCustomException.getNumberOfObjects());
+  }
+}
+
+<span class = "keyword">class</span> CircleWithCustomException {
+  <span class = "comment">/** The radius of the circle */</span>
+  <span class = "keyword">private</span> <span class = "keyword">double</span> radius;
+
+  <span class = "comment">/** The number of the objects created */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> numberOfObjects = <span class = "constant">0</span>;  
+
+  <span class = "comment">/** Construct a circle with radius 1 */</span>
+  <span class = "keyword">public</span> CircleWithCustomException() <span class = "keyword">throws</span> InvalidRadiusException {
+    <span class = "keyword">this</span>(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">0</span>);
+  }
+
+  <span class = "comment">/** Construct a circle with a specified radius */</span>
+  <span class = "keyword">public</span> CircleWithCustomException(<span class = "keyword">double</span> newRadius) 
+      <span class = "keyword">throws</span> InvalidRadiusException {
+    setRadius(newRadius);
+    numberOfObjects++;
+  }
+
+  <span class = "comment">/** Return radius */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getRadius() {
+    <span class = "keyword">return</span> radius;
+  }
+
+  <span class = "comment">/** Set a new radius */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setRadius(<span class = "keyword">double</span> newRadius) 
+      <span class = "keyword">throws</span> InvalidRadiusException {
+    <span class = "keyword">if</span> (newRadius &gt;= <span class = "constant">0</span>)
+      radius = newRadius;
+    <span class = "keyword">else</span>
+      <span class = "keyword">throw</span> <span class = "keyword">new</span> InvalidRadiusException(newRadius);
+  }
+
+  <span class = "comment">/** Return numberOfObjects */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfObjects() {
+    <span class = "keyword">return</span> numberOfObjects;
+  }
+
+  <span class = "comment">/** Return the area of this circle */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> findArea() {
+    <span class = "keyword">return</span> radius * radius * <span class = "constant">3</span><span class = "literal">.</span><span class = "constant">14159</span>;
+  }
+}
+</pre>
+</body>
+</html>

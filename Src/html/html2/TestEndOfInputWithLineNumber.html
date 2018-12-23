@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestEndOfInput.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestEndOfInput.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javax.swing.JFileChooser;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javax.swing.JOptionPane;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestEndOfInput <span class = "keyword">extends</span> Application {
+ 12&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) <span class = "keyword">throws</span> Exception {
+ 14&nbsp;&nbsp;    <span class = "comment">// Create a button and place it in the scene</span>
+ 15&nbsp;&nbsp;    Button btOK = <span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>);
+ 16&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(btOK, <span class = "constant">200</span>, <span class = "constant">250</span>);
+ 17&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"MyJavaFX"</span>); <span class = "comment">// Set the stage title</span>
+ 18&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 19&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 20&nbsp;&nbsp;    
+ 21&nbsp;&nbsp;    JOptionPane.showMessageDialog(<span class = "keyword">null</span>, <span class = "literal">"Message"</span>);
+ 22&nbsp;&nbsp;    JFileChooser fileChooser = <span class = "keyword">new</span> JFileChooser();
+ 23&nbsp;&nbsp;    <span class = "keyword">if</span> (fileChooser.showOpenDialog(<span class = "keyword">null</span>)
+ 24&nbsp;&nbsp;        == JFileChooser.APPROVE_OPTION) {
+ 25&nbsp;&nbsp;      <span class = "comment">// Get the selected file</span>
+ 26&nbsp;&nbsp;      java.io.File file = fileChooser.getSelectedFile();
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;      <span class = "comment">// Create a Scanner for the file</span>
+ 29&nbsp;&nbsp;      Scanner input = <span class = "keyword">new</span> Scanner(file);
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;      <span class = "comment">// Read text from the file</span>
+ 32&nbsp;&nbsp;      <span class = "keyword">while</span> (input.hasNext()) {
+ 33&nbsp;&nbsp;        System.out.println(input.nextLine());
+ 34&nbsp;&nbsp;      }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;      <span class = "comment">// Close the file</span>
+ 37&nbsp;&nbsp;      input.close();
+ 38&nbsp;&nbsp;    }
+ 39&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 40&nbsp;&nbsp;      System.out.println(<span class = "literal">"No file selected"</span>);
+ 41&nbsp;&nbsp;    }
+ 42&nbsp;&nbsp;  }
+ 43&nbsp;&nbsp;  
+ 44&nbsp;&nbsp;  <span class = "comment">/**
+ 45&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 46&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 47&nbsp;&nbsp;   */</span>
+ 48&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) { 
+ 49&nbsp;&nbsp;    launch(args);
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

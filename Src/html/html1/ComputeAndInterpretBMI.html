@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeAndInterpretBMI.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ComputeAndInterpretBMI.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeAndInterpretBMI" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeAndInterpretBMI {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    
+    <span class = "comment">// Prompt the user to enter weight in pounds</span>
+    System.out.print(<span class = "literal">"Enter weight in pounds: "</span>);
+    <span class = "keyword">double</span> weight = input.nextDouble();
+    
+    <span class = "comment">// Prompt the user to enter height in inches</span>
+    System.out.print(<span class = "literal">"Enter height in inches: "</span>);
+    <span class = "keyword">double</span> height = input.nextDouble();
+    
+    <span class = "keyword">final</span> <span class = "keyword">double</span> KILOGRAMS_PER_POUND = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">45359237</span>; <span class = "comment">// Constant</span>
+    <span class = "keyword">final</span> <span class = "keyword">double</span> METERS_PER_INCH = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">0254</span>; <span class = "comment">// Constant </span>
+    
+    <span class = "comment">// Compute BMI</span>
+    <span class = "keyword">double</span> weightInKilograms = weight * KILOGRAMS_PER_POUND; 
+    <span class = "keyword">double</span> heightInMeters = height * METERS_PER_INCH; 
+    <span class = "keyword">double</span> bmi = weightInKilograms / 
+      (heightInMeters * heightInMeters);
+
+    <span class = "comment">// Display result</span>
+    System.out.println(<span class = "literal">"BMI is "</span> + bmi);
+    <span class = "keyword">if</span> (bmi &lt; <span class = "constant">18</span><span class = "literal">.</span><span class = "constant">5</span>)
+      System.out.println(<span class = "literal">"Underweight"</span>);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (bmi &lt; <span class = "constant">25</span>)
+      System.out.println(<span class = "literal">"Normal"</span>);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (bmi &lt; <span class = "constant">30</span>)
+      System.out.println(<span class = "literal">"Overweight"</span>);
+    <span class = "keyword">else</span>
+      System.out.println(<span class = "literal">"Obese"</span>);
+  }
+}
+</pre>
+</body>
+</html>

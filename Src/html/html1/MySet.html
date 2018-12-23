@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MySet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MySetWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">interface</span> MySet&lt;E&gt; <span class = "keyword">extends</span> java.lang.Iterable&lt;E&gt; {
+  <span class = "comment">/** Remove all elements from this set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> clear();
+  
+  <span class = "comment">/** Return true if the element is in the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> contains(E e);
+  
+  <span class = "comment">/** Add an element to the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> add(E e);
+
+  <span class = "comment">/** Remove the element from the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(E e);
+
+  <span class = "comment">/** Return true if the set contains no elements */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty();
+
+  <span class = "comment">/** Return the number of elements in the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> size();
+}
+</pre>
+</body>
+</html>

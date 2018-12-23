@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestArrayAndLinkedList.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestArrayAndLinkedListWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestArrayAndLinkedList" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestArrayAndLinkedList {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    List&lt;Integer&gt; arrayList = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    arrayList.add(<span class = "constant">1</span>); <span class = "comment">// 1 is autoboxed to new Integer(1)</span>
+    arrayList.add(<span class = "constant">2</span>);
+    arrayList.add(<span class = "constant">3</span>);
+    arrayList.add(<span class = "constant">1</span>);
+    arrayList.add(<span class = "constant">4</span>);
+    arrayList.add(<span class = "constant">0</span>, <span class = "constant">10</span>);
+    arrayList.add(<span class = "constant">3</span>, <span class = "constant">30</span>);
+
+    System.out.println(<span class = "literal">"A list of integers in the array list:"</span>);
+    System.out.println(arrayList);
+
+    LinkedList&lt;Object&gt; linkedList = <span class = "keyword">new</span> LinkedList&lt;&gt;(arrayList);
+    linkedList.add(<span class = "constant">1</span>, <span class = "literal">"red"</span>);
+    linkedList.removeLast();
+    linkedList.addFirst(<span class = "literal">"green"</span>);
+
+    System.out.println(<span class = "literal">"Display the linked list forward:"</span>); 
+    ListIterator&lt;Object&gt; listIterator = linkedList.listIterator();
+    <span class = "keyword">while</span> (listIterator.hasNext()) {
+      System.out.print(listIterator.next() + <span class = "literal">" "</span>);
+    }
+    System.out.println();
+  
+    System.out.println(<span class = "literal">"Display the linked list backward:"</span>);
+    listIterator = linkedList.listIterator(linkedList.size());
+    <span class = "keyword">while</span> (listIterator.hasPrevious()) {
+      System.out.print(listIterator.previous() + <span class = "literal">" "</span>);
+    }
+  }
+}     
+</pre>
+</body>
+</html>

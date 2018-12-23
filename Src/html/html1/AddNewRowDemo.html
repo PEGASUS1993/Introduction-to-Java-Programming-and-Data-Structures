@@ -1,0 +1,159 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AddNewRowDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AddNewRowDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.beans.property.SimpleBooleanProperty;
+<span class = "keyword">import</span> javafx.beans.property.SimpleDoubleProperty;
+<span class = "keyword">import</span> javafx.beans.property.SimpleStringProperty;
+<span class = "keyword">import</span> javafx.collections.FXCollections;
+<span class = "keyword">import</span> javafx.collections.ObservableList;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.CheckBox;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TableColumn;
+<span class = "keyword">import</span> javafx.scene.control.TableView;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.control.cell.PropertyValueFactory;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.FlowPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> AddNewRowDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    TableView&lt;Country&gt; tableView = <span class = "keyword">new</span> TableView&lt;&gt;();
+    ObservableList&lt;Country&gt; data =
+      FXCollections.observableArrayList(
+        <span class = "keyword">new</span> Country(<span class = "literal">"USA"</span>, <span class = "literal">"Washington DC"</span>, <span class = "constant">280</span>, <span class = "keyword">true</span>),
+        <span class = "keyword">new</span> Country(<span class = "literal">"Canada"</span>, <span class = "literal">"Ottawa"</span>, <span class = "constant">32</span>, <span class = "keyword">true</span>),
+        <span class = "keyword">new</span> Country(<span class = "literal">"United Kingdom"</span>, <span class = "literal">"London"</span>, <span class = "constant">60</span>, <span class = "keyword">true</span>),
+        <span class = "keyword">new</span> Country(<span class = "literal">"Germany"</span>, <span class = "literal">"Berlin"</span>, <span class = "constant">83</span>, <span class = "keyword">true</span>),
+        <span class = "keyword">new</span> Country(<span class = "literal">"France"</span>, <span class = "literal">"Paris"</span>, <span class = "constant">60</span>, <span class = "keyword">true</span>));
+    tableView.setItems(data);
+    
+    TableColumn countryColumn = <span class = "keyword">new</span> TableColumn(<span class = "literal">"Country"</span>);
+    countryColumn.setMinWidth(<span class = "constant">100</span>);
+    countryColumn.setCellValueFactory(
+      <span class = "keyword">new</span> PropertyValueFactory&lt;Country, String&gt;(<span class = "literal">"country"</span>));
+    
+    TableColumn capitalColumn = <span class = "keyword">new</span> TableColumn(<span class = "literal">"Capital"</span>);
+    capitalColumn.setMinWidth(<span class = "constant">100</span>);
+    capitalColumn.setCellValueFactory(
+      <span class = "keyword">new</span> PropertyValueFactory&lt;Country, String&gt;(<span class = "literal">"capital"</span>));
+
+    TableColumn populationColumn = 
+      <span class = "keyword">new</span> TableColumn(<span class = "literal">"Population (million)"</span>);
+    populationColumn.setMinWidth(<span class = "constant">100</span>);
+    populationColumn.setCellValueFactory(
+      <span class = "keyword">new</span> PropertyValueFactory&lt;Country, Double&gt;(<span class = "literal">"population"</span>));
+
+    TableColumn democraticColumn = 
+      <span class = "keyword">new</span> TableColumn(<span class = "literal">"Is Democratic?"</span>);
+    democraticColumn.setMinWidth(<span class = "constant">100</span>);
+    democraticColumn.setCellValueFactory(
+      <span class = "keyword">new</span> PropertyValueFactory&lt;Country, Boolean&gt;(<span class = "literal">"democratic"</span>));
+
+    tableView.getColumns().addAll(countryColumn, capitalColumn,
+      populationColumn, democraticColumn);
+
+    FlowPane flowPane = <span class = "keyword">new</span> FlowPane(<span class = "constant">3</span>, <span class = "constant">3</span>);
+    TextField tfCountry = <span class = "keyword">new</span> TextField();
+    TextField tfCapital = <span class = "keyword">new</span> TextField();
+    TextField tfPopulation = <span class = "keyword">new</span> TextField();
+    CheckBox chkDemocratic = <span class = "keyword">new</span> CheckBox(<span class = "literal">"Is democratic?"</span>);
+    Button btAddRow = <span class = "keyword">new</span> Button(<span class = "literal">"Add new row"</span>);
+    tfCountry.setPrefColumnCount(<span class = "constant">5</span>);
+    tfCapital.setPrefColumnCount(<span class = "constant">5</span>);
+    tfPopulation.setPrefColumnCount(<span class = "constant">5</span>);
+    flowPane.getChildren().addAll(<span class = "keyword">new</span> Label(<span class = "literal">"Country: "</span>),
+      tfCountry, <span class = "keyword">new</span> Label(<span class = "literal">"Capital"</span>), tfCapital, 
+      <span class = "keyword">new</span> Label(<span class = "literal">"Population"</span>), tfPopulation, chkDemocratic, 
+      btAddRow);
+    
+    btAddRow.setOnAction(e -&gt; {
+      data.add(<span class = "keyword">new</span> Country(tfCountry.getText(), tfCapital.getText(), 
+        Double.parseDouble(tfPopulation.getText()), 
+        chkDemocratic.isSelected()));
+      tfCountry.clear();
+      tfCapital.clear();
+      tfPopulation.clear();
+    });
+    
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setCenter(tableView);
+    pane.setBottom(flowPane);
+    
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">500</span>, <span class = "constant">250</span>);  
+    primaryStage.setTitle(<span class = "literal">"AddNewRowDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Country {
+    <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleStringProperty country;
+    <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleStringProperty capital;
+    <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleDoubleProperty population;
+    <span class = "keyword">private</span> <span class = "keyword">final</span> SimpleBooleanProperty democratic;
+
+    <span class = "keyword">private</span> Country(String country, String capital,
+        <span class = "keyword">double</span> population, <span class = "keyword">boolean</span> democratic) {
+      <span class = "keyword">this</span>.country = <span class = "keyword">new</span> SimpleStringProperty(country);
+      <span class = "keyword">this</span>.capital = <span class = "keyword">new</span> SimpleStringProperty(capital);
+      <span class = "keyword">this</span>.population = <span class = "keyword">new</span> SimpleDoubleProperty(population);
+      <span class = "keyword">this</span>.democratic = <span class = "keyword">new</span> SimpleBooleanProperty(democratic);
+    }
+
+    <span class = "keyword">public</span> String getCountry() {
+      <span class = "keyword">return</span> country.get();
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> setCountry(String country) {
+      <span class = "keyword">this</span>.country.set(country);
+    }
+
+    <span class = "keyword">public</span> String getCapital() {
+      <span class = "keyword">return</span> capital.get();
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> setCapital(String capital) {
+      <span class = "keyword">this</span>.capital.set(capital);
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">double</span> getPopulation() {
+      <span class = "keyword">return</span> population.get();
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> setPopulation(<span class = "keyword">double</span> population) {
+      <span class = "keyword">this</span>.population.set(population);
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">boolean</span> isDemocratic() {
+      <span class = "keyword">return</span> democratic.get();
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> setDemocratic(<span class = "keyword">boolean</span> democratic) {
+      <span class = "keyword">this</span>.democratic.set(democratic);
+    }
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   * line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

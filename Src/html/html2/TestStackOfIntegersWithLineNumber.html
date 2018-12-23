@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestStackOfIntegers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestStackOfIntegers.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestStackOfIntegers" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestStackOfIntegers {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    StackOfIntegers stack = <span class = "keyword">new</span> StackOfIntegers();
+  4&nbsp;&nbsp;    
+  5&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">10</span>; i++)
+  6&nbsp;&nbsp;      stack.push(i); <span class = "comment">// Push i to the stack</span>
+  7&nbsp;&nbsp;    
+  8&nbsp;&nbsp;    <span class = "keyword">while</span> (!stack.empty()) <span class = "comment">// Test if stack is empty</span>
+  9&nbsp;&nbsp;      System.out.print(stack.pop() + <span class = "literal">" "</span>); <span class = "comment">// Remove and return from stack</span>
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

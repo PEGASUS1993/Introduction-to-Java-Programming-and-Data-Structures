@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PrintCalendarSkeleton.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PrintCalendarSkeletonWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PrintCalendarSkeleton" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> PrintCalendarSkeleton {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Prompt the user to enter year </span>
+    System.out.print(<span class = "literal">"Enter full year (e.g., 2001): "</span>);
+    <span class = "keyword">int</span> year = input.nextInt();
+
+    <span class = "comment">// Prompt the user to enter month </span>
+    System.out.print(<span class = "literal">"Enter month as number between 1 and 12: "</span>);
+    <span class = "keyword">int</span> month = input.nextInt();
+
+    <span class = "comment">// Print calendar for the month of the year</span>
+    printMonth(year, month);
+  }
+
+  <span class = "comment">/** A stub for printMonth may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printMonth(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+    System.out.print(month + <span class = "literal">" "</span> + year);
+  }
+
+  <span class = "comment">/** A stub for printMonthTitle may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printMonthTitle(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+  }
+
+  <span class = "comment">/** A stub for getMonthBody may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printMonthBody(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+  }
+
+  <span class = "comment">/** A stub for getMonthName may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String getMonthName(<span class = "keyword">int</span> month) {
+    <span class = "keyword">return</span> <span class = "literal">"January"</span>; <span class = "comment">// A dummy value</span>
+  }
+
+  <span class = "comment">/** A stub for getMonthName may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getStartDay(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+    <span class = "keyword">return</span> <span class = "constant">1</span>; <span class = "comment">// A dummy value</span>
+  }
+
+  <span class = "comment">/** A stub for getTotalNumberOfDays may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getTotalNumberOfDays(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+    <span class = "keyword">return</span> <span class = "constant">10000</span>; <span class = "comment">// A dummy value</span>
+  }
+
+  <span class = "comment">/** A stub for getNumberOfDaysInMonth may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfDaysInMonth(<span class = "keyword">int</span> year, <span class = "keyword">int</span> month) {
+    <span class = "keyword">return</span> <span class = "constant">31</span>; <span class = "comment">// A dummy value</span>
+  }
+
+  <span class = "comment">/** A stub for getTotalNumberOfDays may look like this */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isLeapYear(<span class = "keyword">int</span> year) {
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// A dummy value</span>
+  }
+}
+</pre>
+</body>
+</html>

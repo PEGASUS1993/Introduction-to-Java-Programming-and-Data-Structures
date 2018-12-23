@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - InitializationDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "InitializationDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "InitializationDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> InitializationDemo {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "keyword">new</span> InitializationDemo();
+  4&nbsp;&nbsp;  }
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> InitializationDemo() {
+  7&nbsp;&nbsp;    <span class = "keyword">new</span> M();
+  8&nbsp;&nbsp;  }
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;  {
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"(2) InitializationDemo's instance block"</span>);
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "keyword">static</span> {
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"(1) InitializationDemo's static block"</span>);
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;}
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;<span class = "keyword">class</span> M <span class = "keyword">extends</span> N {
+ 20&nbsp;&nbsp;  M() {
+ 21&nbsp;&nbsp;    System.out.println(<span class = "literal">"(8) M's constructor body"</span>);
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  {
+ 25&nbsp;&nbsp;    System.out.println(<span class = "literal">"(7) M's instance initialization block"</span>);
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  <span class = "keyword">static</span> {
+ 29&nbsp;&nbsp;    System.out.println(<span class = "literal">"(4) M's static initialization block"</span>);
+ 30&nbsp;&nbsp;  }
+ 31&nbsp;&nbsp;}
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;<span class = "keyword">class</span> N {
+ 34&nbsp;&nbsp;  N() {
+ 35&nbsp;&nbsp;    System.out.println(<span class = "literal">"(6) N's constructor body"</span>);
+ 36&nbsp;&nbsp;  }
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  {
+ 39&nbsp;&nbsp;    System.out.println(<span class = "literal">"(5) N's instance initialization block"</span>);
+ 40&nbsp;&nbsp;  }
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;  <span class = "keyword">static</span> {
+ 43&nbsp;&nbsp;    System.out.println(<span class = "literal">"(3) N's static initialization block"</span>);
+ 44&nbsp;&nbsp;  }
+ 45&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

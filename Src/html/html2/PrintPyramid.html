@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PrintPyramid.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PrintPyramidWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PrintPyramid" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; 
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> PrintPyramid {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Prompt the user to enter the number of lines</span>
+    System.out.print(<span class = "literal">"Enter the number of lines: "</span>);
+    <span class = "keyword">int</span> numberOfLines = input.nextInt();
+
+    <span class = "keyword">if</span> (numberOfLines &lt; <span class = "constant">1</span> || numberOfLines &gt; <span class = "constant">15</span>) {
+      System.out.println(<span class = "literal">"You must enter a number from 1 to 15"</span>);
+      System.exit(<span class = "constant">0</span>);
+    }
+
+    <span class = "comment">// Print lines</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> row = <span class = "constant">1</span>; row &lt;= numberOfLines; row++) {
+      <span class = "comment">// Print NUMBER_OF_LINES – row) leading spaces</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> column = <span class = "constant">1</span>; column &lt;= numberOfLines - row; column++)
+        System.out.print(<span class = "literal">"   "</span>);
+
+      <span class = "comment">// Print leading numbers row, row – 1, ..., 1</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> num = row; num &gt;= <span class = "constant">1</span>; num--)
+        System.out.print((num &gt;= <span class = "constant">10</span>) ? <span class = "literal">" "</span> + num : <span class = "literal">"  "</span> + num);
+
+      <span class = "comment">// Print ending numbers 2, 3, ..., row – 1, row</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> num = <span class = "constant">2</span>; num &lt;= row; num++)
+        System.out.print((num &gt;= <span class = "constant">10</span>) ? <span class = "literal">" "</span> + num : <span class = "literal">"  "</span> + num);
+
+      <span class = "comment">// Start a new line</span>
+      System.out.println();
+    }
+  }
+}
+</pre>
+</body>
+</html>

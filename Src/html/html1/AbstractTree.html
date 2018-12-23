@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AbstractTree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AbstractTreeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">abstract</span> <span class = "keyword">class</span> AbstractTree&lt;E&gt; <span class = "keyword">implements</span> Tree&lt;E&gt; {
+  @Override <span class = "comment">/** Inorder traversal from the root*/</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> inorder() {
+  }
+
+  @Override <span class = "comment">/** Postorder traversal from the root */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> postorder() {
+  }
+
+  @Override <span class = "comment">/** Preorder traversal from the root */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> preorder() {
+  }
+
+  @Override <span class = "comment">/** Return true if the tree is empty */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> getSize() == <span class = "constant">0</span>;
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Tree24.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Tree24WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.ArrayList;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Tree24&lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">implements</span> Tree&lt;E&gt; {
+  <span class = "keyword">private</span> Tree24Node&lt;E&gt; root;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> size;
+ 
+  <span class = "comment">/** Create a default 2-4 tree */</span>
+  <span class = "keyword">public</span> Tree24() {
+  }
+
+  <span class = "comment">/** Create a 2-4 tree from an array of objects */</span>
+  <span class = "keyword">public</span> Tree24(E[] elements) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; elements.length; i++)
+      insert(elements[i]);     
+  }
+
+  @Override <span class = "comment">/** Search an element in the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> search(E e) {
+    Tree24Node&lt;E&gt; current = root; <span class = "comment">// Start from the root</span>
+
+    <span class = "keyword">while</span> (current != <span class = "keyword">null</span>) {
+      <span class = "keyword">if</span> (matched(e, current)) { <span class = "comment">// Element is in the node</span>
+        <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Element found</span>
+      }
+      <span class = "keyword">else</span> {
+        current = getChildNode(e, current); <span class = "comment">// Search in a subtree</span>
+      }
+    }
+
+    <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// Element is not in the tree</span>
+  }
+
+  <span class = "comment">/** Return true if the element is found in this node */</span>
+  <span class = "keyword">private</span> <span class = "keyword">boolean</span> matched(E e, Tree24Node&lt;E&gt; node) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; node.elements.size(); i++)
+      <span class = "keyword">if</span> (node.elements.get(i).equals(e))
+        <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Element found</span>
+
+    <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// No match in this node</span>
+  }
+
+  <span class = "comment">/** Locate a child node to search element e */</span>
+  <span class = "keyword">private</span> Tree24Node&lt;E&gt; getChildNode(E e, Tree24Node&lt;E&gt; node) {
+    <span class = "keyword">if</span> (node.child.size() == <span class = "constant">0</span>)
+      <span class = "keyword">return</span> <span class = "keyword">null</span>; <span class = "comment">// node is a leaf</span>
+
+    <span class = "keyword">int</span> i = locate(e, node); <span class = "comment">// Locate the insertion point for e</span>
+    <span class = "keyword">return</span> node.child.get(i); <span class = "comment">// Return the child node</span>
+  }
+
+  @Override <span class = "comment">/** Insert element e into the tree
+   *  Return true if the element is inserted successfully
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> insert(E e) {
+    <span class = "keyword">if</span> (root == <span class = "keyword">null</span>)
+      root = <span class = "keyword">new</span> Tree24Node&lt;E&gt;(e); <span class = "comment">// Create a new root for element</span>
+    <span class = "keyword">else</span> {
+      <span class = "comment">// Locate the leaf node for inserting e</span>
+      Tree24Node&lt;E&gt; leafNode = <span class = "keyword">null</span>;
+      Tree24Node&lt;E&gt; current = root;
+      <span class = "keyword">while</span> (current != <span class = "keyword">null</span>)
+        <span class = "keyword">if</span> (matched(e, current)) {
+          <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// Duplicate element found, nothing inserted</span>
+        }
+        <span class = "keyword">else</span> {
+          leafNode = current;
+          current = getChildNode(e, current);
+        }
+
+      <span class = "comment">// Insert the element e into the leaf node</span>
+      insert(e, <span class = "keyword">null</span>, leafNode); <span class = "comment">// The right child of e is null</span>
+    }
+
+    size++; <span class = "comment">// Increase size</span>
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Element inserted</span>
+  }
+
+  <span class = "comment">/** Insert element e into node u */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> insert(E e, Tree24Node&lt;E&gt; rightChildOfe,
+      Tree24Node&lt;E&gt; u) {
+    <span class = "comment">// Get the search path that leads to element e</span>
+    ArrayList&lt;Tree24Node&lt;E&gt;&gt; path = path(e);
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = path.size() - <span class = "constant">1</span>; i &gt;= <span class = "constant">0</span>; i--) {
+      <span class = "keyword">if</span> (u.elements.size() &lt; <span class = "constant">3</span>) { <span class = "comment">// u is a 2-node or 3-node</span>
+        insert23(e, rightChildOfe, u); <span class = "comment">// Insert e to node u</span>
+        <span class = "keyword">break</span>; <span class = "comment">// No further insertion to u's parent needed</span>
+      }
+      <span class = "keyword">else</span> {
+        Tree24Node&lt;E&gt; v = <span class = "keyword">new</span> Tree24Node&lt;E&gt;(); <span class = "comment">// Create a new node</span>
+        E median = split(e, rightChildOfe, u, v); <span class = "comment">// Split u</span>
+
+        <span class = "keyword">if</span> (u == root) {
+          root = <span class = "keyword">new</span> Tree24Node&lt;E&gt;(median); <span class = "comment">// New root</span>
+          root.child.add(u); <span class = "comment">// u is the left child of median</span>
+          root.child.add(v); <span class = "comment">// v is the right child of median</span>
+          <span class = "keyword">break</span>; <span class = "comment">// No further insertion to u's parent needed</span>
+        }
+        <span class = "keyword">else</span> {
+          <span class = "comment">// Use new values for the next iteration in the for loop</span>
+          e = median; <span class = "comment">// Element to be inserted to parent</span>
+          rightChildOfe = v; <span class = "comment">// Right child of the element</span>
+          u = path.get(i - <span class = "constant">1</span>); <span class = "comment">// New node to insert element</span>
+        } 
+      }
+    } 
+  }
+
+  <span class = "comment">/** Insert element to a 2- or 3- and return the insertion point */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> insert23(E e, Tree24Node&lt;E&gt; rightChildOfe,
+      Tree24Node&lt;E&gt; node) {
+    <span class = "keyword">int</span> i = <span class = "keyword">this</span>.locate(e, node); <span class = "comment">// Locate where to insert</span>
+    node.elements.add(i, e); <span class = "comment">// Insert the element into the node</span>
+    <span class = "keyword">if</span> (rightChildOfe != <span class = "keyword">null</span>)
+      node.child.add(i + <span class = "constant">1</span>, rightChildOfe); <span class = "comment">// Insert the child link</span>
+  }
+
+  <span class = "comment">/** Split a 4-node u into u and v and insert e to u or v */</span>
+  <span class = "keyword">private</span> E split(E e, Tree24Node&lt;E&gt; rightChildOfe,
+      Tree24Node&lt;E&gt; u, Tree24Node&lt;E&gt; v) {
+    <span class = "comment">// Move the last element in node u to node v</span>
+    v.elements.add(u.elements.remove(<span class = "constant">2</span>));
+    E median = u.elements.remove(<span class = "constant">1</span>);
+
+    <span class = "comment">// Split children for a non-leaf node</span>
+    <span class = "comment">// Move the last two children in node u to node v</span>
+    <span class = "keyword">if</span> (u.child.size() &gt; <span class = "constant">0</span>) {
+      v.child.add(u.child.remove(<span class = "constant">2</span>));
+      v.child.add(u.child.remove(<span class = "constant">2</span>));
+    }
+
+    <span class = "comment">// Insert e into a 2- or 3- node u or v.</span>
+    <span class = "keyword">if</span> (e.compareTo(median) &lt; <span class = "constant">0</span>)
+      insert23(e, rightChildOfe, u);
+    <span class = "keyword">else</span>
+      insert23(e, rightChildOfe, v);
+
+    <span class = "keyword">return</span> median; <span class = "comment">// Return the median element</span>
+  }
+
+  <span class = "comment">/** Return a search path that leads to element e */</span>
+  <span class = "keyword">private</span> ArrayList&lt;Tree24Node&lt;E&gt;&gt; path(E e) {
+    ArrayList&lt;Tree24Node&lt;E&gt;&gt; list = <span class = "keyword">new</span> ArrayList&lt;Tree24Node&lt;E&gt;&gt;();
+    Tree24Node&lt;E&gt; current = root; <span class = "comment">// Start from the root</span>
+
+    <span class = "keyword">while</span> (current != <span class = "keyword">null</span>) {
+      list.add(current); <span class = "comment">// Add the node to the list</span>
+      <span class = "keyword">if</span> (matched(e, current)) {
+        <span class = "keyword">break</span>; <span class = "comment">// Element found</span>
+      }
+      <span class = "keyword">else</span> {
+        current = getChildNode(e, current);
+      }
+    }
+
+    <span class = "keyword">return</span> list; <span class = "comment">// Return an array of nodes</span>
+  }
+
+  @Override <span class = "comment">/** Delete the specified element from the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> delete(E e) {
+    <span class = "comment">// Locate the node that contains the element e</span>
+    Tree24Node&lt;E&gt; node = root;
+    <span class = "keyword">while</span> (node != <span class = "keyword">null</span>)
+      <span class = "keyword">if</span> (matched(e, node)) {
+        delete(e, node); <span class = "comment">// Delete element e from node</span>
+        size--; <span class = "comment">// After one element deleted</span>
+        <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Element deleted successfully</span>
+      }
+      <span class = "keyword">else</span> {
+        node = getChildNode(e, node); 
+      }
+
+    <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// Element not in the tree</span>
+  }
+
+  <span class = "comment">/** Delete the specified element from the node */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> delete(E e, Tree24Node&lt;E&gt; node) {
+    <span class = "keyword">if</span> (node.child.size() == <span class = "constant">0</span>) { <span class = "comment">// e is in a leaf node</span>
+      <span class = "comment">// Get the path that leads to e from the root</span>
+      ArrayList&lt;Tree24Node&lt;E&gt;&gt; path = path(e);
+
+      node.elements.remove(e); <span class = "comment">// Remove element e</span>
+
+      <span class = "keyword">if</span> (node == root) { <span class = "comment">// Special case</span>
+        <span class = "keyword">if</span> (node.elements.size() == <span class = "constant">0</span>) 
+          root = <span class = "keyword">null</span>; <span class = "comment">// Empty tree</span>
+        <span class = "keyword">return</span>; <span class = "comment">// Done</span>
+      }
+
+      validate(e, node, path); <span class = "comment">// Check underflow node</span>
+    }
+    <span class = "keyword">else</span> { <span class = "comment">// e is in an internal node</span>
+      <span class = "comment">// Locate the rightmost node in the left subtree of the node </span>
+      <span class = "keyword">int</span> index = locate(e, node); <span class = "comment">// Index of e in node</span>
+      Tree24Node&lt;E&gt; current = node.child.get(index);
+      <span class = "keyword">while</span> (current.child.size() &gt; <span class = "constant">0</span>) {
+        current = current.child.get(current.child.size() - <span class = "constant">1</span>);
+      }
+      E rightmostElement =
+        current.elements.get(current.elements.size() - <span class = "constant">1</span>);
+      
+      <span class = "comment">// Get the path that leads to e from the root</span>
+      ArrayList&lt;Tree24Node&lt;E&gt;&gt; path = path(rightmostElement);
+
+      <span class = "comment">// Replace the deleted element with the rightmost element</span>
+      node.elements.set(index, current.elements.remove(
+        current.elements.size() - <span class = "constant">1</span>));
+
+      validate(rightmostElement, current, path); <span class = "comment">// Check underflow</span>
+    }
+  }
+
+  <span class = "comment">/** Perform transfer and confusion operations if necessary */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> validate(E e, Tree24Node&lt;E&gt; u,
+      ArrayList&lt;Tree24Node&lt;E&gt;&gt; path) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = path.size() - <span class = "constant">1</span>; u.elements.size() == <span class = "constant">0</span>; i--) {
+      Tree24Node&lt;E&gt; parentOfu = path.get(i - <span class = "constant">1</span>); <span class = "comment">// Get parent of u</span>
+      <span class = "keyword">int</span> k = locate(e, parentOfu); <span class = "comment">// Index of e in the parent node</span>
+
+      <span class = "comment">// Check two siblings</span>
+      <span class = "keyword">if</span> (k &gt; <span class = "constant">0</span> && parentOfu.child.get(k - <span class = "constant">1</span>).elements.size() &gt; <span class = "constant">1</span>) {
+        leftSiblingTransfer(k, u, parentOfu);
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (k + <span class = "constant">1</span> &lt; parentOfu.child.size() &&
+          parentOfu.child.get(k + <span class = "constant">1</span>).elements.size() &gt; <span class = "constant">1</span>) {          
+        rightSiblingTransfer(k, u, parentOfu);
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (k - <span class = "constant">1</span> &gt;= <span class = "constant">0</span>) { <span class = "comment">// Fusion with a left sibling</span>
+        <span class = "comment">// Get left sibling of node u </span>
+        Tree24Node&lt;E&gt; leftNode = parentOfu.child.get(k - <span class = "constant">1</span>);
+    
+        <span class = "comment">// Perform a fusion with left sibling on node u</span>
+        leftSiblingFusion(k, leftNode, u, parentOfu);  
+
+        <span class = "comment">// Done when root becomes empty</span>
+        <span class = "keyword">if</span> (parentOfu == root && parentOfu.elements.size() == <span class = "constant">0</span>) {
+          root = leftNode;
+          <span class = "keyword">break</span>;
+        }
+
+        u = parentOfu; <span class = "comment">// Back to the loop to check the parent node</span>
+      }
+      <span class = "keyword">else</span> { <span class = "comment">// Fusion with right sibling (right sibling must exist)</span>
+        <span class = "comment">// Get left sibling of node u </span>
+        Tree24Node&lt;E&gt; rightNode = parentOfu.child.get(k + <span class = "constant">1</span>);
+
+        <span class = "comment">// Perform a fusion with right sibling on node u</span>
+        rightSiblingFusion(k, rightNode, u, parentOfu);  
+
+        <span class = "comment">// Done when root becomes empty</span>
+        <span class = "keyword">if</span> (parentOfu == root && parentOfu.elements.size() == <span class = "constant">0</span>) {
+          root = rightNode;
+          <span class = "keyword">break</span>;
+        }
+
+        u = parentOfu; <span class = "comment">// Back to the loop to check the parent node</span>
+      }
+    }
+  }
+
+  <span class = "comment">/** Locate the insertion point of the element in the node */</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> locate(E o, Tree24Node&lt;E&gt; node) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; node.elements.size(); i++) {
+      <span class = "keyword">if</span> (o.compareTo(node.elements.get(i)) &lt;= <span class = "constant">0</span>) {
+        <span class = "keyword">return</span> i;
+      }
+    }
+
+    <span class = "keyword">return</span> node.elements.size();
+  }
+
+  <span class = "comment">/** Perform a transfer with a left sibling */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> leftSiblingTransfer(<span class = "keyword">int</span> k, 
+      Tree24Node&lt;E&gt; u, Tree24Node&lt;E&gt; parentOfu) {
+    <span class = "comment">// Move an element from the parent to u</span>
+    u.elements.add(<span class = "constant">0</span>, parentOfu.elements.get(k - <span class = "constant">1</span>));
+    
+    <span class = "comment">// Move an element from the left node to the parent</span>
+    Tree24Node&lt;E&gt; leftNode = parentOfu.child.get(k - <span class = "constant">1</span>);
+    parentOfu.elements.set(k - <span class = "constant">1</span>,
+      leftNode.elements.remove(leftNode.elements.size() - <span class = "constant">1</span>));
+
+    <span class = "comment">// Move the child link from left sibling to the node</span>
+    <span class = "keyword">if</span> (leftNode.child.size() &gt; <span class = "constant">0</span>)
+      u.child.add(<span class = "constant">0</span>, leftNode.child.remove(
+        leftNode.child.size() - <span class = "constant">1</span>));
+  }
+
+  <span class = "comment">/** Perform a transfer with a right sibling */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> rightSiblingTransfer(<span class = "keyword">int</span> k, 
+      Tree24Node&lt;E&gt; u, Tree24Node&lt;E&gt; parentOfu) {
+    <span class = "comment">// Transfer an element from the parent to u</span>
+    u.elements.add(parentOfu.elements.get(k));
+    
+    <span class = "comment">// Transfer an element from the right node to the parent</span>
+    Tree24Node&lt;E&gt; rightNode = parentOfu.child.get(k + <span class = "constant">1</span>);
+    parentOfu.elements.set(k, rightNode.elements.remove(<span class = "constant">0</span>));
+
+    <span class = "comment">// Move the child link from right sibling to the node</span>
+    <span class = "keyword">if</span> (rightNode.child.size() &gt; <span class = "constant">0</span>)
+      u.child.add(rightNode.child.remove(<span class = "constant">0</span>));
+  }
+
+  <span class = "comment">/** Perform a fusion with a left sibling */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> leftSiblingFusion(<span class = "keyword">int</span> k, Tree24Node&lt;E&gt; leftNode,
+      Tree24Node&lt;E&gt; u, Tree24Node&lt;E&gt; parentOfu) {
+    <span class = "comment">// Transfer an element from the parent to the left sibling    </span>
+    leftNode.elements.add(parentOfu.elements.remove(k - <span class = "constant">1</span>));
+
+    <span class = "comment">// Remove the link to the empty node</span>
+    parentOfu.child.remove(k);
+
+    <span class = "comment">// Adjust child links for non-leaf node</span>
+    <span class = "keyword">if</span> (u.child.size() &gt; <span class = "constant">0</span>)
+      leftNode.child.add(u.child.remove(<span class = "constant">0</span>));
+  }
+  
+  <span class = "comment">/** Perform a fusion with a right sibling */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> rightSiblingFusion(<span class = "keyword">int</span> k, Tree24Node&lt;E&gt; rightNode,
+      Tree24Node&lt;E&gt; u, Tree24Node&lt;E&gt; parentOfu) {
+    <span class = "comment">// Transfer an element from the parent to the right sibling</span>
+    rightNode.elements.add(<span class = "constant">0</span>, parentOfu.elements.remove(k));
+
+    <span class = "comment">// Remove the link to the empty node</span>
+    parentOfu.child.remove(k);
+
+    <span class = "comment">// Adjust child links for non-leaf node</span>
+    <span class = "keyword">if</span> (u.child.size() &gt; <span class = "constant">0</span>)
+      rightNode.child.add(<span class = "constant">0</span>, u.child.remove(<span class = "constant">0</span>));
+  }
+
+  @Override <span class = "comment">/** Get the number of nodes in the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+    <span class = "keyword">return</span> size;
+  }
+
+  @Override <span class = "comment">/** Preorder traversal from the root */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> preorder() {
+    preorder(root);
+  }
+
+  <span class = "comment">/** Preorder traversal from a subtree */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> preorder(Tree24Node&lt;E&gt; root) {
+    <span class = "keyword">if</span> (root == <span class = "keyword">null</span>)<span class = "keyword">return</span>;
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; root.elements.size(); i++)
+      System.out.print(root.elements.get(i) + <span class = "literal">" "</span>);
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; root.child.size(); i++)
+      preorder(root.child.get(i));
+  }
+
+  @Override <span class = "comment">/** Inorder traversal from the root*/</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> inorder() {
+    <span class = "comment">// Left as exercise</span>
+  }
+
+  <span class = "comment">/** Postorder traversal from the root */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> postorder() {
+    <span class = "comment">// Left as exercise</span>
+  }
+
+  @Override <span class = "comment">/** Return true if the tree is empty */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> root == <span class = "keyword">null</span>;
+  }
+  
+  @Override <span class = "comment">/** Remove all elements from the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> clear() {
+    root = <span class = "keyword">null</span>;
+    size = <span class = "constant">0</span>;
+  }
+  
+  @Override <span class = "comment">/** Return an iterator to traverse elements in the tree */</span>
+  <span class = "keyword">public</span> java.util.Iterator&lt;E&gt; iterator() {
+    <span class = "comment">// Left as exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+  
+  <span class = "comment">/** Define a 2-4 tree node */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Tree24Node&lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; {
+    <span class = "comment">// elements has maximum three values</span>
+    ArrayList&lt;E&gt; elements = <span class = "keyword">new</span> ArrayList&lt;E&gt;(<span class = "constant">3</span>);
+    <span class = "comment">// Each has maximum four childres</span>
+    ArrayList&lt;Tree24Node&lt;E&gt;&gt; child 
+      = <span class = "keyword">new</span> ArrayList&lt;Tree24Node&lt;E&gt;&gt;(<span class = "constant">4</span>);
+
+    <span class = "comment">/** Create an empty Tree24 node */</span>
+    Tree24Node() {
+    }
+
+    <span class = "comment">/** Create a Tree24 node with an initial element */</span>
+    Tree24Node(E o) {
+      elements.add(o);
+    }
+  }
+}
+</pre>
+</body>
+</html>

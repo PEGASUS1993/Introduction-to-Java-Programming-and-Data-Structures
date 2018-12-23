@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StreamDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StreamDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StreamDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.stream.Stream;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> StreamDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    String[] names = {<span class = "literal">"John"</span>, <span class = "literal">"Peter"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>, <span class = "literal">"Jen"</span>, 
+      <span class = "literal">"George"</span>, <span class = "literal">"Alan"</span>, <span class = "literal">"Stacy"</span>, <span class = "literal">"Michelle"</span>, <span class = "literal">"john"</span>};
+    
+    <span class = "comment">// Display the first four names sorted</span>
+    Stream.of(names).limit(<span class = "constant">4</span>).sorted()
+      .forEach(e -&gt; System.out.print(e + <span class = "literal">" "</span>));
+
+    <span class = "comment">// Skip four names and display the rest sorted ignore case</span>
+    System.out.println();
+    Stream.of(names).skip(<span class = "constant">4</span>)
+      .sorted((e1, e2) -&gt; e1.compareToIgnoreCase(e2))
+      .forEach(e -&gt; System.out.print(e + <span class = "literal">" "</span>));
+    
+    System.out.println();
+    Stream.of(names).skip(<span class = "constant">4</span>)
+      .sorted(String::compareToIgnoreCase)
+      .forEach(e -&gt; System.out.print(e + <span class = "literal">" "</span>));
+    
+    System.out.println(<span class = "literal">"\nLargest string with length &gt; 4: "</span>
+      + Stream.of(names)
+          .filter(e -&gt; e.length() &gt; <span class = "constant">4</span>)
+          .max(String::compareTo).get());
+    
+    System.out.println(<span class = "literal">"Smallest string alphabetically: "</span>
+      + Stream.of(names).min(String::compareTo).get());
+
+    System.out.println(<span class = "literal">"Stacy is in names? "</span>
+      + Stream.of(names).anyMatch(e -&gt; e.equals(<span class = "literal">"Stacy"</span>)));
+    
+    System.out.println(<span class = "literal">"All names start with a capital letter? "</span>
+      + Stream.of(names)
+              .allMatch(e -&gt; Character.isUpperCase(e.charAt(<span class = "constant">0</span>))));
+
+    System.out.println(<span class = "literal">"No name begins with Ko? "</span>
+      + Stream.of(names).noneMatch(e -&gt; e.startsWith(<span class = "literal">"Ko"</span>)));
+
+    System.out.println(<span class = "literal">"Number of distinct case-insensitive strings: "</span>
+      + Stream.of(names).map(e -&gt; e.toUpperCase())
+          .distinct().count());
+        
+    System.out.println(<span class = "literal">"First element in this stream in lowercase: "</span> 
+      + Stream.of(names).map(String::toLowerCase).findFirst().get());
+
+    System.out.println(<span class = "literal">"Skip 4 and get any element in this stream: "</span> 
+      + Stream.of(names).skip(<span class = "constant">4</span>).sorted().findAny().get());
+    
+    Object[] namesInLowerCase = 
+      Stream.of(names).map(String::toLowerCase).toArray();
+    System.out.println(java.util.Arrays.toString(namesInLowerCase));
+  }
+}
+</pre>
+</body>
+</html>

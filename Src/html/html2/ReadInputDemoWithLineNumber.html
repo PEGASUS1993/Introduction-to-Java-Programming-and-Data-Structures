@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ReadInputDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ReadInputDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ReadInputDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ReadInputDemo {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  6&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a byte value: "</span>);
+  7&nbsp;&nbsp;    <span class = "keyword">byte</span> byteValue = input.nextByte();
+  8&nbsp;&nbsp; 
+  9&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a short value: "</span>);
+ 10&nbsp;&nbsp;    <span class = "keyword">short</span> shortValue = input.nextShort();
+ 11&nbsp;&nbsp; 
+ 12&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter an int value: "</span>);
+ 13&nbsp;&nbsp;    <span class = "keyword">int</span> intValue = input.nextInt();
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a long value: "</span>);
+ 16&nbsp;&nbsp;    <span class = "keyword">long</span> longValue = input.nextLong();
+ 17&nbsp;&nbsp;  
+ 18&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a float value: "</span>);
+ 19&nbsp;&nbsp;    <span class = "keyword">float</span> floatValue = input.nextFloat();
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;    System.out.print(<span class = "literal">"The values you entered are "</span> + 
+ 22&nbsp;&nbsp;      byteValue + <span class = "literal">" "</span> + shortValue + <span class = "literal">" "</span> + intValue +
+ 23&nbsp;&nbsp;      longValue + <span class = "literal">" "</span> + floatValue);
+ 24&nbsp;&nbsp;  }
+ 25&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

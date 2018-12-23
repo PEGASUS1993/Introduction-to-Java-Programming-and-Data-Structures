@@ -1,0 +1,617 @@
+Chapter 20 Lists, Stacks, Queues, and Priority Queues
+
+Section 20.2 Collections
+1. All the concrete classes in the Java Collections Framework implement _____________.
+a. the Cloneable interface
+b. the Serializable interfaces
+c. the Comparable interface
+d. the Comparator interface
+Key:b
+
+#
+2. Which of the following statements are true?
+a. The Collection interface is the root interface for manipulating a collection of objects.
+b. The Collection interface provides the basic operations for adding and removing elements in a collection.
+c. The AbstractCollection class is a convenience class that provides partial implementation for the Collection interface.
+d. Some of the methods in the Collection interface cannot be implemented in the concrete subclass. In this case, the method would throw java.lang.UnsupportedOperationException, a subclass of RuntimeException.
+e. All interfaces and classes in the Collections framework are declared using generic type since JDK 1.5.
+Key:abcde
+
+#
+3. Which of the following methods are in the Collection interface?
+a. clear()
+b. isEmpty()
+c. size()
+d. getSize()
+Key:abc
+
+#
+4. Which of the following methods are in the Collection interface?
+a. add(o: E)
+b. addAll(c: Collection<? extends E>)
+c. contains(o: Object): boolean
+d. containsAll(c: Collection<?>): boolean
+Key:abcd
+
+#
+5. Which of the following methods are in the Collection interface?
+a. remove(o: Object): boolean
+b. removeAll(c: Collection<?>): boolean
+c. delete(o: E): boolean
+d. deleteAll(c: Collection<?>): boolean
+Key:ab
+
+#
+Section 20.3 Iterators
+6. For an instance of Collection, you can obtain its iterator using ________________.
+a. c.getIterator()
+b. c.iterator()
+c. c.iterators()
+d. c.iterable()
+Key:b
+
+#
+7. The iterator() method is defined in the __________ interface.
+a. Iterator
+b. Collection
+c. Iterable
+d. ArrayList
+Key:c
+
+#
+8. The iterator() method returns an instance of the __________ interface.
+a. Iterator
+b. Collection
+c. Iterable
+d. ArrayList
+Key:a
+
+#
+9. You can use a for-each loop to traverse all elements in a container object that implements _____.
+a. Iterator
+b. Collection
+c. Iterable
+d. ArrayList
+Key:c
+
+#
+Section 20.5 Lists
+10. Which of the following statements are true?
+a. java.util.List inherits all the methods from java.util.Collection. Additionally, it contains new methods for manipulating a list.
+b. The AbstractList class provides a partial implementation for the List interface.
+c. ArrayList is a concrete implementation of List using an array. 
+d. LinkedList is a concrete implementation of List using a linked list. LinkedList contains all the methods in List and additional new methods for manipulating a linked list.
+e. ListIterator is a subinterface of Iterator and it provides the methods to support bi-directional traversal of a list.
+Key:abcde
+
+#
+11. Which of the following statements are true?
+a.	An ArrayList can grow automatically.
+b.	An ArrayList can shrink automatically.
+c.	You can reduce the capacity of an ArrayList by invoking the trimToSize() method on the list.
+d.	You can reduce the capacity of a LinkedList by invoking the trimToSize() method on the list.
+Key:ac A LinkedList does not have excess capacity.
+
+#
+12. Which of the following methods are in java.util.List?
+a.	add(int index, E element)
+b.	get(int index)
+c.	set(int index, E element)
+d.	remove(int index)
+e.	subList(int fromIndex, int toIndex)
+Key:abcde
+
+#
+13. Which of the following are true?
+a. You can insert an element anywhere in an arraylist.
+b. You can insert an element anywhere in a linked list.
+c. You can use a linked list to improve efficiency for adding and removing elements at the beginning of a list.
+d. You should use an array list if your application does not require adding and removing elements at the beginning of a list. 
+Key:abcd
+
+#
+14. Suppose list1 is an ArrayList and list2 is a LinkedList. Both contains 1 million double values. Analyze the following code:
+
+A:
+for (int i = 0; i < list1.size(); i++)
+  sum += list1.get(i);
+
+B:
+for (int i = 0; i < list2.size(); i++)
+  sum += list2.get(i);
+
+a. Code fragment A runs faster than code fragment B.
+b. Code fragment B runs faster than code fragment A.
+c. Code fragment A runs as fast as code fragment B.
+Key:a
+
+#
+15. Suppose list is a LinkedList that contains 1 million int values. Analyze the following code:
+
+A:
+for (int i = 0; i < list.size(); i++)
+  sum += list.get(i);
+
+B:
+for (int i: list)
+  sum += i;
+
+a. Code fragment A runs faster than code fragment B.
+b. Code fragment B runs faster than code fragment A.
+c. Code fragment A runs as fast as code fragment B.
+Key:b Becuase code fragment B uses an iterator to traverse the elements in a linked list.
+
+#
+16. Which method do you use to test if an element is in a set or list named x?
+a.	(element instanceof List) || (element instanceof Set)
+b. 	x.in(element)
+c.	x.contain(element)
+d.	x.contains(element)
+e. 	x.include(element)
+Key:d The contains method defined in the Collection interface checks if an element is in the collection (set or list)
+
+#
+17. When you create an ArrayList using ArrayList<String> x = new ArrayList<>(2), ________
+a. two elements are created in the array list.
+b. no elements are currently in the array list.
+c. the array list size is currently 2.
+d. the array list capacity is currently 2.
+Key:bd
+
+#
+18. Suppose ArrayList x contains three strings [Beijing, Singapore, Tokyo]. Which of the following methods will cause runtime errors?
+a. x.get(2)
+b. x.set(3, "New York");
+c. x.get(3)
+d. x.remove(3)
+e. x.size()
+Key:bcd There is no element at index 3.
+
+#
+19. Which method do you use to find the number of elements in a set or list named x?
+a.	x.length()
+b. 	x.count()
+c.	x.counts()
+d.	x.size()
+e. 	x.sizes()
+Key:d The size method defined in the Collection interface returns the number of elements in the collection (set or list)
+
+#
+20. Which method do you use to remove an element from a set or list named x?
+a.	x.delete(element)
+b. 	x.remove(element)
+c.	x.deletes(element)
+d.	x.removes(element)
+e. 	None of the above
+Key:b The remove method defined in the Collection interface removes the element from the collection (set or list)
+
+#
+21. What is the printout of the following code?
+        List<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("D");
+        for (int i = 0; i < list.size(); i++)
+            System.out.print(list.remove(i));
+a.	ABCD
+b. 	AB
+c.	AC
+d.	AD
+e. 	ABC
+Key:c Before the loop, the list is [A, B, C, D]. After invoking list.remove(0), the list becomes [B, C, D] and size becomes 3. Invoking remove(1) now deletes C from the list. The list becomes [B, D]. Now the list size is 2 and i is 2. So the loop ends.
+
+#
+22. Suppose list list1 is [1, 2, 5] and list list2 is [2, 3, 6]. After list1.addAll(list2), list1 is __________.
+a.	[1, 2, 2, 3, 5, 6]
+b. 	[1, 2, 3, 5, 6]
+c.	[1, 5]
+d. 	[2]
+Key:a
+
+#
+23. Suppose list list1 is [1, 2, 5] and list list2 is [2, 3, 6]. After list1.addAll(list2), list2 is __________.
+a.	[1, 2, 2, 3, 5, 6]
+b. 	[1, 2, 3, 5, 6]
+c.	[1, 5]
+d. 	[2]
+e. 	[2, 3, 6]
+Key:e
+
+#
+24. Which of the following statements are correct?
+a. When you create an array using new int[10], an array object is created with ten integers of value 0.
+b. When you create an array using new int[10], an array object is created with no values in the array.
+c. When you create an ArrayList using new ArrayList(), an ArrayList object is created with no elements in the ArrayList object.
+d. When you create an array using int[] x = new int[10], x.length() is 10.
+e. When you create an array using ArrayList x = new ArrayList(10), x.size() is 10.
+Key:acd
+
+#
+25. Suppose a list contains {"red", "green", "red", "green"}. What is the list after the following code?
+
+    list.remove("red");
+
+a.	{"red", "green", "red", "green"}
+b.	{"green", "red", "green"}
+c.	{"green", "green"}
+d.	{"red", "green", "green"}
+Key:b
+
+#
+26. Suppose a list contains {"red", "green", "red", "green"}. What is the list after the following code?
+
+    String element = "red";
+    for (int i = 0; i < list.size(); i++)
+      if (list.get(i).equals(element)) {
+        list.remove(element);
+        i--;
+      }
+
+a.	{"red", "red", "green"}
+b.	{"red", "green"}
+c.	{"green", "green"}
+d.	{"green"}
+e.      {}
+Key:c
+
+#
+27. Suppose a list contains {"red", "green", "red", "green"}. What is the list after the following code?
+
+    String element = "red";
+    for (int i = list.size() - 1; i >= 0; i--)
+      if (list.get(i).equals(element))
+        list.remove(element);
+
+a.	{"red", "red", "green"}
+b.	{"red", "green"}
+c.	{"green", "green"}
+d.	{"green"}
+e.      {}
+Key:c
+
+#
+28. What is the output of the following code?
+
+    ArrayList<Integer> list = new ArrayList<>();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    list.remove(2);
+    System.out.println(list);
+
+a. [1, 2, 3]	
+b. [1, 2]
+c. [1]	
+d. [1, 3]
+e. [2, 3]
+Key:b
+
+#
+29. To remove all the elements in the list in the following code, replace the underlined blank space with __________.
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    ______________<Integer> list = new ArrayList<>();
+    list.add(0);
+    list.add(1);
+    list.add(2);
+
+    for (int i = 0; i < 3; i++) {
+      list.remove(i);
+    }
+    System.out.println(list);
+  }
+}
+
+a. Collection
+b. List
+c. ArrayList
+d. AbstractList
+Key:a If list is declared as Collection<Integer>, list.remove(i) is the same as list.remove(new Integer(i)). If list is declared as List<Integer>, ArrayList<Integer>, or AbstractList<Integer>, list.remove(i) is to remove the element at the index i. The list has three elements and the last index is 2. After removing the first element, the last index becomes 1. After removing another element, the last index becomes 0. You will receive an IndexOutOfBoundsException.
+
+
+#
+Section 20.6 The Comparator Interface
+30. Which of the following statements are true?
+a. The Comparable interface contains the compareTo method with the signature "public int compareTo(E)".
+b. The Comparator interface contains the compare method with the signature "public int compare(E, E)".
+c. A Comparable object can compare this object with the other object.
+d. A Comparator object contains the compare method that compares two objects.
+Key:abcd
+
+#
+31. What is the output of the following code?
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    List<String> list1 = new ArrayList<>();
+    list1.add("Atlanta");
+    list1.add("Macon");
+    list1.add("Savanna");
+    
+    List<String> list2 = new ArrayList<>();
+    list2.add("Atlanta");
+    list2.add("Macon");
+    list2.add("Savanna");
+    
+    List<String> list3 = new ArrayList<>();
+    list3.add("Macon");
+    list3.add("Savanna");
+    list3.add("Atlanta");
+    
+    System.out.println(list1.equals(list2) + " " + list1.equals(list3));
+  }
+}
+a. true true
+b. true false
+c. false false
+d. false true
+Key:b
+
+#
+32. What is the output of the following code?
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {   
+    ArrayList<Student> list = new ArrayList<>();
+    list.add(new Student("Peter", 65));
+    list.add(new Student("Jill", 50));
+    list.add(new Student("Sarah", 34));
+    Collections.sort(list);
+    System.out.print(list + " ");
+
+    Collections.sort(list, new StudentComparator1());
+    System.out.println(list);
+  }
+  
+  static class StudentComparator1 implements Comparator<Student> {
+    public int compare(Student s1, Student s2) {
+      return s1.name.compareTo(s2.name);
+    }
+  }
+  
+  static class Student implements Comparable<Student> {
+    String name;
+    int age;
+    Student(String name, int age) {
+      this.name = name;
+      this.age = age;
+    }
+    
+    public int compareTo(Student s) {
+      return this.age - s.age;
+    }
+    
+    public String toString() {
+      return "[" + name + ", " + age + "]";
+    }
+  }
+}
+a. [[Sarah, 34], [Jill, 50], [Peter, 65]] [[Sarah, 34], [Jill, 50], [Peter, 65]]
+b. [[Jill, 50], [Peter, 65], [Sarah, 34]] [[Jill, 50], [Peter, 65], [Sarah, 34]]
+c. [[Sarah, 34], [Jill, 50], [Peter, 65]] [[Jill, 50], [Peter, 65], [Sarah, 34]]
+d. [[Jill, 50], [Peter, 65], [Sarah, 34]] [[Sarah, 34], [Jill, 50], [Peter, 65]]
+Key:c
+
+#
+Section 20.8 Static Methods for Lists and Collections
+33. Which of the following is correct to sort the elements in a list lst?
+a. lst.sort()
+b. Collections.sort(lst)
+c. Arrays.sort(lst)
+d. new LinkedList<String>(new String[]{"red", "green", "blue"})
+Key: b
+
+#
+34. You can use the methods in the Collections class to
+a. find the maximum object in a collection based on the compareTo method.
+b. find the maximum object in a collection using a Comparator object.
+c. sort a collection.
+d. shuffle a collection.
+e. do a binary search on a collection.
+Key:ab The Collections class has a method to sort a list, shuffle a list, and perform binary search on a list, but not on collection. Note that collection includes set.
+
+#
+35. Which of the following statements are true?
+a. Collections.shuffle(list) returns a new list while the original list is not changed.
+b. Collections.reverse(list) returns a new list while the original list is not changed.
+c. Collections.sort(list) returns a new list while the original list is not changed.
+d. Collections.nCopies(int, Object) returns a new list that consists of n copies of the object.
+Key:d
+
+#
+36. Which of the following statements are true?
+a. Collections.shuffle(list) randomly reorders the elements in the list.
+b. Collections.shuffle(list, Random) randomly reorders the elements in the list with a specified Random object.
+c. If list1 and list2 are identical, the two lists may be different after invoking Collections.sort(list1) and Collections.sort(list2).
+d. If list1 and list2 are identical, the two lists are still identical after invoking Collections.sort(list1, new Random(3)) and Collections.sort(list2, new Random(3)) with the same Random object.
+Key:abcd
+
+#
+37. Which of the following is correct to create a list from an array?
+a. new List<String>({"red", "green", "blue"})
+b. new List<String>(new String[]{"red", "green", "blue"})
+c. Arrays.asList<String>(new String[]{"red", "green", "blue"})
+d. new ArrayList<String>(new String[]{"red", "green", "blue"})
+e. new LinkedList(new String[]{"red", "green", "blue"})
+Key:c
+
+#
+38. To create a set that consists of string elements "red", "green", and "blue", use
+a. new HashSet<String>({"red", "green", "blue"})
+b. new HashSet<String>(new String[]{"red", "green", "blue"})
+c. new HashSet<String>(Arrays.asList(new String[]{"red", "green", "blue"}))
+d. new LinkedHashSet<String>(Arrays.asList(new String[]{"red", "green", "blue"}))
+e. new Set<String>(Arrays.asList(new String[]{"red", "green", "blue"}))
+Key:cd
+
+#
+39. To find a maximum object in an array of strings (e.g., String[] names = {"red", "green", "blue"}), use
+a. Arrays.max(names)
+b. Arrays.sort(names)
+c. Collections.max(names)
+d. Collections.max(Arrays.asList(names))
+e. None of the above
+Key: d
+
+#
+40. You can use the methods in the Arrays class to
+a. find the maximum object in an array based on the compareTo method.
+b. find the maximum object in an array using a Comparator object.
+c. sort an array.
+d. shuffle an array.
+e. do a binary search on an array.
+Key:ce
+
+#
+Section 20.9 The Vector and Stack Classes
+41. Which data type should you use if you want to store duplicate elements and be able to insert or delete elements anywhere efficiently?
+a.	ArrayList
+b. 	LinkedList
+c.	Vector
+d.	Set
+e.	Stack
+Key:b
+
+#
+42. java.util.Vector is a subtype of __________.
+a.	java.util.ArrayList
+b. 	java.util.LinkedList
+c.	java.util.AbstractList
+d.	java.util.Vector
+e.      java.util.List
+Key:ce
+
+#
+43. The methods for modifying element in the ___________ class are synchronized.
+a.	ArrayList
+b. 	LinkedList
+c.	TreeMap
+d.	Vector
+e. 	HashSet
+Key:d
+
+#
+44. java.util.Stack is a subclass of __________.
+a.	java.util.ArrayList
+b. 	java.util.LinkedList
+c.	java.util.AbstractList
+d.	java.util.Vector
+e.      java.util.List
+Key:cde (E) is correct since Vector is a subclass of List.
+
+#
+Section 20.10 Queues and Priority Queues
+45. The __________ method in the Queue interface retrieves and removes the head of this queue, or null if this queue is empty.
+a.	poll()
+b. 	remove()
+c.	peek()
+d.	element()
+Key:a
+
+#
+46. The __________ method in the Queue interface retrieves and removes the head of this queue and throws an exception if this queue is empty.
+a.	poll()
+b. 	remove()
+c.	peek()
+d.	element()
+Key:b
+
+#
+47. The __________ method in the Queue interface retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
+a.	poll()
+b. 	remove()
+c.	peek()
+d.	element()
+Key:c
+
+#
+48. The __________ method in the Queue interface retrieves, but does not remove, the head of this queue, throwing an exception if this queue is empty.
+a.	poll()
+b. 	remove()
+c.	peek()
+d.	element()
+Key:d
+
+#
+49. Which of the following statements are true?
+a.	java.util.LinkedList implements the java.util.Queue interface.
+b. 	java.util.ArrayList implements the java.util.Queue interface.
+c.	java.util.HashSet implements the java.util.Queue interface.
+d.	java.util.LinkedHashSet implements the java.util.Queue interface.
+e. java.util.PriorityQueue implements the java.util.Queue interface.
+Key:ae
+
+#
+50. Which of the following statements are true?
+a. A PriorityQueue orders its elements according to their natural ordering using the Comparable interface if no Comparator is specified.
+b. A PriorityQueue orders its elements according to the Comparator if a Comparator is specified in the constructor.
+c. The priority of a PriorityQueue cannot be changed once a PriorityQueue is created.
+d. The priority of a PriorityQueue cannot be reversed once a PriorityQueue is created.
+Key:ab
+
+#
+51. Analyze the following code:
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    PriorityQueue<Integer> queue =
+      new PriorityQueue<Integer>(
+        Arrays.asList(60, 10, 50, 30, 40, 20));
+    
+    for (int i: queue)
+      System.out.print(i + " ");
+  }
+}
+a. The program displays 60 10 50 30 40 20
+b. The program displays 10 20 30 40 50 60
+c. The program displays 60 50 40 30 20 10
+d. There is no guarantee that the program displays 10 20 30 40 50 60
+Key:d
+
+#
+52. Analyze the following code:
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    PriorityQueue<Integer> queue =
+      new PriorityQueue<Integer>(
+        Arrays.asList(60, 10, 50, 30, 40, 20));
+    
+    while (!queue.isEmpty())
+      System.out.print(queue.poll() + " ");
+  }
+}
+a. The program displays 60 10 50 30 40 20
+b. The program displays 10 20 30 40 50 60
+c. The program displays 60 50 40 30 20 10
+d. There is no guarantee that the program displays 10 20 30 40 50 60
+Key:b
+
+#
+53. What is list after the following code is executed?
+
+ArrayList<Integer> list = new ArrayList<>();
+list.add(1);
+list.add(2);
+list.add(3);
+list.add(4);
+list.add(5);
+list.remove(2);
+System.out.println(list);
+a. [1, 2, 3, 4, 5]
+b. [2, 3, 4, 5]
+c. [1, 3, 4, 5]
+d. [1, 2, 4, 5]
+e. [1, 2, 3, 4]
+Key:d The ArrayList class has two overloaded remove method remove(Object) and remove(int index). The latter is invoked for list.remove(2) to remove the element in the list at index 2.

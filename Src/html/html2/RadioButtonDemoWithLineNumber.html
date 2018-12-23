@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RadioButtonDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RadioButtonDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "RadioButtonDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Insets;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.RadioButton;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ToggleGroup;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.VBox;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> RadioButtonDemo <span class = "keyword">extends</span> CheckBoxDemo {
+  9&nbsp;&nbsp;  @Override <span class = "comment">// Override the getPane() method in the super class</span>
+ 10&nbsp;&nbsp;  <span class = "keyword">protected</span> BorderPane getPane() {
+ 11&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">super</span>.getPane();
+ 12&nbsp;&nbsp;    
+ 13&nbsp;&nbsp;    VBox paneForRadioButtons = <span class = "keyword">new</span> VBox(<span class = "constant">20</span>);
+ 14&nbsp;&nbsp;    paneForRadioButtons.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>)); 
+ 15&nbsp;&nbsp;    paneForRadioButtons.setStyle
+ 16&nbsp;&nbsp;      (<span class = "literal">"-fx-border-width: 2px; -fx-border-color: green"</span>);
+ 17&nbsp;&nbsp;    
+ 18&nbsp;&nbsp;    RadioButton rbRed = <span class = "keyword">new</span> RadioButton(<span class = "literal">"Red"</span>);
+ 19&nbsp;&nbsp;    RadioButton rbGreen = <span class = "keyword">new</span> RadioButton(<span class = "literal">"Green"</span>);
+ 20&nbsp;&nbsp;    RadioButton rbBlue = <span class = "keyword">new</span> RadioButton(<span class = "literal">"Blue"</span>);
+ 21&nbsp;&nbsp;    paneForRadioButtons.getChildren().addAll(rbRed, rbGreen, rbBlue);
+ 22&nbsp;&nbsp;    pane.setLeft(paneForRadioButtons);
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;    ToggleGroup group = <span class = "keyword">new</span> ToggleGroup();
+ 25&nbsp;&nbsp;    rbRed.setToggleGroup(group);
+ 26&nbsp;&nbsp;    rbGreen.setToggleGroup(group);
+ 27&nbsp;&nbsp;    rbBlue.setToggleGroup(group);
+ 28&nbsp;&nbsp;    
+ 29&nbsp;&nbsp;    rbRed.setOnAction(e -&gt; {
+ 30&nbsp;&nbsp;      <span class = "keyword">if</span> (rbRed.isSelected()) {
+ 31&nbsp;&nbsp;        text.setFill(Color.RED);
+ 32&nbsp;&nbsp;      }
+ 33&nbsp;&nbsp;    });
+ 34&nbsp;&nbsp;    
+ 35&nbsp;&nbsp;    rbGreen.setOnAction(e -&gt; {
+ 36&nbsp;&nbsp;      <span class = "keyword">if</span> (rbGreen.isSelected()) {
+ 37&nbsp;&nbsp;        text.setFill(Color.GREEN);
+ 38&nbsp;&nbsp;      }
+ 39&nbsp;&nbsp;    });
+ 40&nbsp;&nbsp;
+ 41&nbsp;&nbsp;    rbBlue.setOnAction(e -&gt; {
+ 42&nbsp;&nbsp;      <span class = "keyword">if</span> (rbBlue.isSelected()) {
+ 43&nbsp;&nbsp;        text.setFill(Color.BLUE);
+ 44&nbsp;&nbsp;      }
+ 45&nbsp;&nbsp;    });
+ 46&nbsp;&nbsp;    
+ 47&nbsp;&nbsp;    <span class = "keyword">return</span> pane;
+ 48&nbsp;&nbsp;  }
+ 49&nbsp;&nbsp;
+ 50&nbsp;&nbsp;  <span class = "comment">/**
+ 51&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 52&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 53&nbsp;&nbsp;   */</span>
+ 54&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 55&nbsp;&nbsp;    launch(args);
+ 56&nbsp;&nbsp;  }
+ 57&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

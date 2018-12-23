@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountOccurrenceOfWords.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountOccurrenceOfWordsWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountOccurrenceOfWords" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CountOccurrenceOfWords {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Set text in a string</span>
+    String text = <span class = "literal">"Good morning. Have a good class. "</span> +
+      <span class = "literal">"Have a good visit. Have fun!"</span>;
+
+    <span class = "comment">// Create a TreeMap to hold words as key and count as value</span>
+    Map&lt;String, Integer&gt; map = <span class = "keyword">new</span> TreeMap&lt;&gt;();
+
+    String[] words = text.split(<span class = "literal">"[\\s+\\p{P}]"</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; words.length; i++) {
+      String key = words[i].toLowerCase();
+      
+      <span class = "keyword">if</span> (key.length() &gt; <span class = "constant">0</span>) {
+        <span class = "keyword">if</span> (!map.containsKey(key)) {
+          map.put(key, <span class = "constant">1</span>);
+        }
+        <span class = "keyword">else</span> {
+          <span class = "keyword">int</span> value = map.get(key);
+          value++;
+          map.put(key, value);
+        }
+      }
+    }
+
+    <span class = "comment">// Display key and value for each entry</span>
+    map.forEach((k, v) -&gt; System.out.println(k + <span class = "literal">"\t"</span> + v));
+  }
+}
+</pre>
+</body>
+</html>

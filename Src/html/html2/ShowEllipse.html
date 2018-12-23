@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowEllipse.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowEllipseWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowEllipse <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> MyEllipse(), <span class = "constant">300</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"ShowEllipse"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+
+<span class = "keyword">class</span> MyEllipse <span class = "keyword">extends</span> Pane {
+  <span class = "keyword">private</span> <span class = "keyword">void</span> paint() {
+    getChildren().clear();
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">16</span>; i++) {
+      <span class = "comment">// Create an ellipse and add it to pane</span>
+      Ellipse e1 = <span class = "keyword">new</span> Ellipse(getWidth() / <span class = "constant">2</span>, getHeight() / <span class = "constant">2</span>, 
+        getWidth() / <span class = "constant">2</span> - <span class = "constant">50</span>, getHeight() / <span class = "constant">2</span> - <span class = "constant">50</span>);
+      e1.setStroke(Color.color(Math.random(), Math.random(),
+        Math.random()));
+      e1.setFill(Color.WHITE);
+      e1.setRotate(i * <span class = "constant">180</span> / <span class = "constant">16</span>);
+      getChildren().add(e1);
+    }
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setWidth(<span class = "keyword">double</span> width) {
+    <span class = "keyword">super</span>.setWidth(width);
+    paint();
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setHeight(<span class = "keyword">double</span> height) {
+    <span class = "keyword">super</span>.setHeight(height);
+    paint();
+  }
+}
+</pre>
+</body>
+</html>

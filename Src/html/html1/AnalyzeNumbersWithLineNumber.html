@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AnalyzeNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AnalyzeNumbers.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "AnalyzeNumbers" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> AnalyzeNumbers {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    java.util.Scanner input = <span class = "keyword">new</span> java.util.Scanner(System.in);
+  4&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter the number of items: "</span>);
+  5&nbsp;&nbsp;    <span class = "keyword">int</span> n = input.nextInt(); 
+  6&nbsp;&nbsp;    <span class = "keyword">double</span>[] numbers = <span class = "keyword">new</span> <span class = "keyword">double</span>[n]; <span class = "comment">// Create an array</span>
+  7&nbsp;&nbsp;    <span class = "keyword">double</span> sum = <span class = "constant">0</span>;
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter the numbers: "</span>);
+ 10&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; n; i++) {
+ 11&nbsp;&nbsp;      numbers[i] = input.nextDouble();
+ 12&nbsp;&nbsp;      sum += numbers[i];
+ 13&nbsp;&nbsp;    }
+ 14&nbsp;&nbsp;    
+ 15&nbsp;&nbsp;    <span class = "keyword">double</span> average = sum / n;
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;    <span class = "keyword">int</span> count = <span class = "constant">0</span>; <span class = "comment">// The numbers of elements above average</span>
+ 18&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; n; i++) 
+ 19&nbsp;&nbsp;      <span class = "keyword">if</span> (numbers[i] &gt; average) <span class = "comment">// Count if number[i] &gt; average</span>
+ 20&nbsp;&nbsp;        count++;
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;    System.out.println(<span class = "literal">"Average is "</span> + average);
+ 23&nbsp;&nbsp;    System.out.println(<span class = "literal">"Number of elements above the average is "</span>
+ 24&nbsp;&nbsp;      + count);
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

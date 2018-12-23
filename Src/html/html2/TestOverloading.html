@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestOverloading.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestOverloadingWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestOverloading" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestOverloading {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    A a = <span class = "keyword">new</span> A();
+    a.p(<span class = "constant">10</span>);
+    a.p(<span class = "constant">10</span><span class = "literal">.</span><span class = "constant">0</span>);
+  }
+}
+
+<span class = "keyword">class</span> B {
+  <span class = "keyword">public</span> <span class = "keyword">void</span> p(<span class = "keyword">double</span> i) {
+    System.out.println(i * <span class = "constant">2</span>);
+  }
+}
+
+<span class = "keyword">class</span> A <span class = "keyword">extends</span> B {
+  <span class = "comment">// This method overloads the method in B</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> p(<span class = "keyword">int</span> i) {
+    System.out.println(i);
+  }
+}
+</pre>
+</body>
+</html>

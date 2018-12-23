@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ParseXML.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ParseXMLWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ParseXML" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.File;
+<span class = "keyword">import</span> javax.xml.parsers.DocumentBuilder;
+<span class = "keyword">import</span> javax.xml.parsers.DocumentBuilderFactory;
+<span class = "keyword">import</span> org.w3c.dom.Document;
+<span class = "keyword">import</span> org.w3c.dom.NamedNodeMap;
+<span class = "keyword">import</span> org.w3c.dom.Node;
+<span class = "keyword">import</span> org.w3c.dom.NodeList;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ParseXML {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+    DocumentBuilder documentBuilder = DocumentBuilderFactory
+        .newInstance().newDocumentBuilder();
+    Document document = documentBuilder.parse(<span class = "literal">"states.xml"</span>);
+
+    System.out.println(<span class = "literal">"Root element :"</span>
+        + document.getDocumentElement().getNodeName());
+
+    <span class = "keyword">if</span> (document.hasChildNodes()) {
+      printNote(document.getChildNodes());
+    }
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printNote(NodeList nodeList) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> count = <span class = "constant">0</span>; count &lt; nodeList.getLength(); count++) {
+
+      Node tempNode = nodeList.item(count);
+
+      <span class = "comment">// make sure it's element node.</span>
+      <span class = "keyword">if</span> (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+
+        <span class = "comment">// get node name and value</span>
+<span class = "comment">//        System.out.println("\nNode Name =" + tempNode.getNodeName()</span>
+<span class = "comment">//            + " [OPEN]");</span>
+<span class = "comment">//        System.out.println("Node Value ="</span>
+<span class = "comment">//            + tempNode.getTextContent());</span>
+
+        <span class = "keyword">if</span> (tempNode.hasAttributes()) {
+
+          <span class = "comment">// get attributes names and values</span>
+          NamedNodeMap nodeMap = tempNode.getAttributes();
+
+          <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; nodeMap.getLength(); i++) {
+            Node node = nodeMap.item(i);
+           <span class = "comment">// System.out.println("attr name : " + node.getNodeName());</span>
+            <span class = "keyword">if</span> (node.getNodeName().equals(<span class = "literal">"name"</span>))
+               <span class = "comment">// System.out.println("attr value : " + node.getNodeValue());</span>
+              System.out.println(node.getNodeValue());
+            <span class = "keyword">else</span> <span class = "keyword">if</span> (node.getNodeName().equals(<span class = "literal">"lat"</span>))
+              System.out.print(<span class = "literal">"  "</span> + node.getNodeValue());
+            <span class = "keyword">else</span> <span class = "keyword">if</span> (node.getNodeName().equals(<span class = "literal">"lng"</span>))
+              System.out.println(<span class = "literal">" "</span> + node.getNodeValue());
+          }
+        }
+
+        <span class = "keyword">if</span> (tempNode.hasChildNodes()) {
+
+          <span class = "comment">// loop again if has child nodes</span>
+          printNote(tempNode.getChildNodes());
+
+        }
+
+<span class = "comment">//        System.out.println("Node Name =" + tempNode.getNodeName()</span>
+<span class = "comment">//            + " [CLOSE]");</span>
+
+      }
+
+    }
+
+  }
+
+}
+</pre>
+</body>
+</html>

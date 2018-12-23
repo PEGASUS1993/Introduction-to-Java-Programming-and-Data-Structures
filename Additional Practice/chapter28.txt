@@ -1,0 +1,182 @@
+Chapter 28 Graphs and Applications
+
+Section 28.2 Basic Graph Terminologies
+1. A ____ is an edge that links a vertex to itself. 
+a. loop
+b. parallel edge
+c. weighted edge
+d. directed edge
+Key:a
+
+#
+2. If two vertices are connected by two or more edges, these edges are called ______. 
+a. loop
+b. parallel edge
+c. weighted edge
+d. directed edge
+Key:b
+
+#
+3. A _________  is the one in which every two pairs of vertices are connected.
+a. complete graph
+b. weighted graph
+c. directed graph
+Key:a
+
+#
+4. What is the number of edges in a complete graph of n vertices?
+a. n
+b. n - 1
+c. n(n-1)/2
+d. n*n
+Key:c
+
+#
+5. What is the number of edges in a tree of n vertices?
+a. n
+b. n - 1
+c. n(n-1)/2
+d. n*n
+Key:b
+
+#
+Section 28.4
+6. Suppose a graph is created in the following code. What is the output of the following code?
+
+    String[] vertices = {"Atlanta", "Dallas", "Chicago", "New York", "Seattle"};
+    
+    int[][] edges = {
+      {0, 1}, {0, 2}, 
+      {1, 0}, {1, 2}, {1, 3}, {1, 4},
+      {2, 0}, {2, 1}, {2, 3}, 
+      {3, 1}, {3, 2}, {3, 4}, 
+      {4, 1}, {4, 3}
+    };
+    
+    Graph<String> graph1 = new UnweightedGraph<>(vertices, edges);
+    System.out.println("The index of vertex Chicago is: " 
+      + graph1.getIndex("Chicago"));
+a. 1
+b. 2
+c. 3
+d. 4
+e. 5
+Key:b
+
+#
+7. Suppose a graph is created in the following code. What is the number of vertices in the graph?
+
+    Integer[] vertices = {0, 1, 2, 3, 4};
+    
+    int[][] edges = {
+      {0, 1}, {0, 2}, 
+      {1, 0}, {1, 2}, {1, 3}, {1, 4},
+      {2, 0}, {2, 1}, {2, 3}, 
+      {3, 1}, {3, 2}, {3, 4}, 
+      {4, 1}, {4, 3}
+    };
+    
+    Graph<Integer> graph1 = new UnweightedGraph<>(vertices, edges);
+    System.out.println("The number of vertices in graph1: " 
+      + graph1.getSize());
+a. 1
+b. 2
+c. 3
+d. 4
+e. 5
+Key:e
+
+#
+8. Suppose a graph is created in the following code. What is the degree of vertex 3 in the graph?
+
+    Integer[] vertices = {0, 1, 2, 3, 4};
+    
+    int[][] edges = {
+      {0, 1}, {0, 2}, 
+      {1, 0}, {1, 2}, {1, 3}, {1, 4},
+      {2, 0}, {2, 1}, {2, 3}, 
+      {3, 1}, {3, 2}, {3, 4}, 
+      {4, 1}, {4, 3}
+    };
+    
+    Graph<Integer> graph1 = new UnweightedGraph<>(vertices, edges);
+    System.out.println("The degree of vertex 3: " 
+      + graph1.getDegree(3));
+a. 1
+b. 2
+c. 3
+d. 4
+e. 5
+Key:c
+
+#
+Section 28.7
+9. The _______ search of a graph first visits a vertex, then it recursively visits all the vertices adjacent to that vertex.
+a. depth-first 
+b. breadth-first
+Key:a
+
+#
+10. The time complexity of the DFS algorithm is O(|E| + |V|).
+a. true
+b. false
+Key:a
+
+#
+11. Suppose a graph is created in the following code. Using the dfs algorithm in the text, what is the output for the path from 4 to 0?
+
+    Integer[] vertices = {0, 1, 2, 3, 4};
+    
+    int[][] edges = {
+      {0, 1}, {0, 2}, 
+      {1, 0}, {1, 2}, {1, 3}, {1, 4},
+      {2, 0}, {2, 1}, {2, 3}, 
+      {3, 1}, {3, 2}, {3, 4}, 
+      {4, 1}, {4, 3}
+    };
+    
+    Graph<Integer> graph1 = new UnweightedGraph<>(vertices, edges);
+    AbstractGraph<Integer>.Tree dfs = graph1.dfs(0); 
+    System.out.println(dfs.getPath(4));
+a. [4, 3, 2, 0]
+b. [4, 3, 1, 0]
+c. [4, 1, 0]
+d. [4, 3, 2, 1, 0]
+e. [4, 1, 2, 0]
+Key:d
+
+#
+Section 28.9
+12. The _______ search of a graph first visits a vertex, then all its adjacent vertices, then all the vertices adjacent to those vertices, and so on.
+a. depth-first 
+b. breadth-first
+Key:b
+
+#
+13. The time complexity of the BFS algorithm is O(|E| + |V|).
+a. true
+b. false
+Key:a
+
+#
+14. Suppose a graph is created in the following code. Using the bfs algorithm in the text, what is the output for the path from 4 to 0?
+
+    Integer[] vertices = {0, 1, 2, 3, 4};
+    
+    int[][] edges = {
+      {0, 1}, {0, 2}, 
+      {1, 0}, {1, 2}, {1, 3}, {1, 4},
+      {2, 0}, {2, 1}, {2, 3}, 
+      {3, 1}, {3, 2}, {3, 4}, 
+      {4, 1}, {4, 3}
+    };
+    
+    Graph<Integer> graph1 = new UnweightedGraph<>(vertices, edges);
+    AbstractGraph<Integer>.Tree bfs = graph1.bfs(0); 
+    System.out.println(bfs.getPath(4));
+a. [4, 3, 2, 0]
+b. [4, 3, 1, 0]
+c. [4, 1, 0]
+d. [4, 3, 2, 1, 0]
+e. [4, 1, 2, 0]
+Key:c

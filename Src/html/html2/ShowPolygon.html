@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowPolygon.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowPolygonWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.collections.ObservableList;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.shape.Polygon;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowPolygon <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> MyPolygon(), <span class = "constant">400</span>, <span class = "constant">400</span>);
+    primaryStage.setTitle(<span class = "literal">"ShowPolygon"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+
+<span class = "keyword">class</span> MyPolygon <span class = "keyword">extends</span> Pane {
+  <span class = "keyword">private</span> <span class = "keyword">void</span> paint() {
+    <span class = "comment">// Create a polygon and place polygon to pane</span>
+    Polygon polygon = <span class = "keyword">new</span> Polygon();
+    polygon.setFill(Color.WHITE);
+    polygon.setStroke(Color.BLACK);
+    ObservableList&lt;Double&gt; list = polygon.getPoints();
+    
+    <span class = "keyword">double</span> centerX = getWidth() / <span class = "constant">2</span>, centerY = getHeight() / <span class = "constant">2</span>;
+    <span class = "keyword">double</span> radius = Math.min(getWidth(), getHeight()) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">4</span>;
+
+    <span class = "comment">// Add points to the polygon list</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">6</span>; i++) {
+      list.add(centerX + radius * Math.cos(<span class = "constant">2</span> * i * Math.PI / <span class = "constant">6</span>)); 
+      list.add(centerY - radius * Math.sin(<span class = "constant">2</span> * i * Math.PI / <span class = "constant">6</span>));
+    }     
+    
+    getChildren().clear();
+    getChildren().add(polygon); 
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setWidth(<span class = "keyword">double</span> width) {
+    <span class = "keyword">super</span>.setWidth(width);
+    paint();
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setHeight(<span class = "keyword">double</span> height) {
+    <span class = "keyword">super</span>.setHeight(height);
+    paint();
+  }
+}
+</pre>
+</body>
+</html>

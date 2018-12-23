@@ -1,0 +1,785 @@
+Chapter 9 Objects and Classes
+
+Section 9.2 Defining Classes for Objects
+1. __________ represents an entity in the real world that can be distinctly identified.
+a. A class
+b. An object
+c. A method
+d. A data field
+Key:b
+
+#
+2. _______ is a construct that defines objects of the same type. 
+a. A class
+b. An object
+c. A method
+d. A data field
+Key:a
+
+#
+3.	An object is an instance of a __________.
+a.	program
+b.	class
+c.	method
+d.	data
+Key:b
+
+#
+4.	The keyword __________ is required to declare a class. 
+a.	public
+b.	private
+c.	class
+d.	All of the above.
+Key:c 
+
+#
+Section 9.4 Constructing Objects Using Constructors
+5. ________ is invoked to create an object.
+a. A constructor
+b. The main method
+c. A method with a return type
+d. A method with the void return type
+Key:a
+
+#
+6. Which of the following statements are true?
+a. A default constructor is provided automatically if no constructors are explicitly declared in the class.
+b. At least one constructor must always be defined explicitly.
+c. Every class has a default constructor.
+d. The default constructor is a no-arg constructor.
+Key:ad
+
+#
+7. Which of the following statements are true?
+a. Multiple constructors can be defined in a class.
+b. Constructors do not have a return type, not even void. 
+c. Constructors must have the same name as the class itself. 
+d. Constructors are invoked using the new operator when an object is created. 
+Key:abcd
+
+#
+8.	 Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    A a = new A();
+    a.print();
+  }
+}
+
+class A {
+  String s;
+
+  A(String s) {
+    this.s = s;
+  }
+
+  void print() {
+    System.out.println(s);
+  }
+}
+a.	The program has a compile error because class A is not a public class.
+b.	The program has a compile error because class A does not have a default constructor.
+c.	The program compiles and runs fine and prints nothing.
+d.	The program would compile and run if you change A a = new A() to A a = new A("5").
+Key:bd
+
+#
+9.	Analyze the following code.
+
+class TempClass {
+  int i;
+  public void TempClass(int j) {
+    int i = j; 
+  }
+}
+
+public class C {
+  public static void main(String[] args) {
+    TempClass temp = new TempClass(2);
+  }
+}
+a. 	The program has a compile error because TempClass does not have a default constructor.
+b.	The program has a compile error because TempClass does not have a constructor with an int argument.
+c.	The program compiles fine, but it does not run because class C is not public.
+d.	The program compiles and runs fine.
+Key:b The program would be fine if the void keyword is removed from public void TempClass(int j).
+
+#
+Section 9.5 Accessing Objects via Reference Variables
+10. Given the declaration Circle x = new Circle(), which of the following statement is most accurate.
+a. x contains an int value.
+b. x contains an object of the Circle type.
+c. x contains a reference to a Circle object.
+d. You can assign an int value to x.
+Key:c x is a reference variable that can reference a Circle object or null if it does not reference any object.
+
+#
+11.	Analyze the following code.
+
+public class Test {
+  int x;
+  
+  public Test(String t) {
+     System.out.println("Test");
+  }
+
+  public static void main(String[] args) {
+    Test test = null;
+    System.out.println(test.x);
+  }
+}
+a.	The program has a compile error because test is not initialized.
+b.	The program has a compile error because x has not been initialized.
+c.	The program has a compile error because you cannot create an object from the class that defines the object.
+d.	The program has a compile error because Test does not have a default constructor.
+e.	The program has a runtime NullPointerException because test is null while executing test.x.
+Key:e
+
+#
+12.	The default value for data field of a boolean type, numeric type, object type is ___________, respectively.
+a. true, 1, Null
+b. false, 0, null
+c. true, 0, null
+d. true, 1, null
+e. false, 1, null
+Key:b
+
+#
+13. Which of the following statements are true?
+a. Local variables do not have default values.
+b. Data fields have default values.
+c. A variable of a primitive type holds a value of the primitive type.
+d. A variable of a reference type holds a reference to where an object is stored in the memory.
+e. You may assign an int value to a reference variable.
+Key:abcd
+
+#
+14.	Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    double radius;
+    final double PI= 3.15169;
+    double area = radius * radius * PI;
+    System.out.println("Area is " + area);
+  }
+}
+a.	The program has compile errors because the variable radius is not initialized.
+b.	The program has a compile error because a constant PI is defined inside a method.
+c.	The program has no compile errors but will get a runtime error because radius is not initialized.
+d.	The program compiles and runs fine.
+Key:a
+
+#
+15.	Analyze the following code.
+
+public class Test {
+  int x;
+
+  public Test(String t) {
+     System.out.println("Test");
+  }
+
+  public static void main(String[] args) {
+    Test test = new Test();
+    System.out.println(test.x);
+  }
+}
+a.	The program has a compile error because System.out.println method cannot be invoked from the constructor. 
+b.	The program has a compile error because x has not been initialized.
+c.	The program has a compile error because you cannot create an object from the class that defines the object.
+d.	The program has a compile error because Test does not have a default constructor.
+Key:d Note that a default no-arg constructor is provided only if no constructors are explicitly defined in the class. In this case, a constructor Test(String t) is already defined. So, there is no default no-arg constructor in the Test class.
+
+#
+16.	Suppose TestSimpleCircle and SimpleCircle in Listing 9.1 are in two separate files named TestSimpleCircle.java and SimpleCircle.java, respectively. What is the outcome of compiling TestsimpleCircle.java and then SimpleCircle.java?
+a.	Only TestSimpleCircle.java compiles.
+b.	Only SimpleCircle.java compiles.
+c.	Both compile fine.
+d.	Neither compiles successfully.
+Key:c
+
+#
+17.	Which of the following statements are correct?
+a. A reference variable is an object.
+b. A reference variable references to an object.
+c. A data field in a class must be of a primitive type.
+d. A data field in a class can be of an object type.
+Key:bd (a) is wrong because a reference variable is not an object, it is a reference that points to an object. (c) is incorrect because a class may have a data field of an object type such as String.
+
+#
+Section 9.6 Using Classes From the Java Library
+18. The java.util.Date class is introduced in this section. Analyze the following code and choose the best answer:
+
+Which of the following code in A or B, or both creates an object of the Date class:
+
+A:
+public class Test {
+  public Test() {
+    new java.util.Date();
+  }
+}
+
+B:
+public class Test {
+  public Test() {
+    java.util.Date date = new java.util.Date();
+  }
+}
+a. A.
+b. B.
+c. Neither
+Key:ab Both (A) and (B) are fine. In A, an object is created without explicit reference. This is known as anonymous object.
+
+#
+19. Which of the following statements are correct?
+a. When creating a Random object, you have to specify the seed or use the default seed.
+b. If two Random objects have the same seed, the sequence of the random numbers obtained from these two objects are identical.
+c. The nextInt() method in the Random class returns the next random int value.
+d. The nextDouble() method in the Random class returns the next random double value.
+Key:abcd
+
+#
+20. To obtain the distance between the points (40, 50) and (5.5, 4.4), use _________.
+a. distance(40, 50, 5.5, 4.4)
+b. new Point2D(40, 50).distance(5.5, 4.4)
+c. new Point2D(40, 50).distance(new Point2D(5.5, 4.4))
+d. new Point2D(5.5, 4.4).distance(40, 50)
+e. new Point2D(5.5, 4.4).distance(new Point2D(40, 50))
+Key:bcde
+
+#
+Section 9.7 Static Variables, Constants, and Methods
+21.	Variables that are shared by every instances of a class are __________.
+a.	public variables
+b.	private variables
+c.	instance variables
+d.	class variables
+Key:d
+
+#
+22. You should add the static keyword in the place of ? in Line ________ in the following code:
+
+1 public class Test { 
+2   private int age;
+3 
+4   public ? int square(int n) { 
+5     return n * n;
+6   }
+7
+8   public ? int getAge() {
+9  }
+10}
+
+a. in line 4
+b. in line 8
+c. in both line 4 and line 8
+d. none
+Key:a The square method should be static because it does not reference any instance data or invoke any instance method. 
+
+#
+23.	A method that is associated with an individual object is called __________.
+a.	a static method
+b.	a class method
+c.	an instance method
+d.	an object method
+Key:c
+
+#
+24.	To declare a constant MAX_LENGTH as a member of the class, you write
+a.	final static MAX_LENGTH = 99.98;
+b.	final static float MAX_LENGTH = 99.98;
+c. 	static double MAX_LENGTH = 99.98;
+d.	final double MAX_LENGTH = 99.98;
+e.	final static double MAX_LENGTH = 99.98;
+Key:e
+
+#
+25.	Analyze the following code.
+
+public class Test {
+  public static void main(String[] args) {
+    int n = 2;
+    xMethod(n);
+           
+    System.out.println("n is " + n);
+  }
+
+  void xMethod(int n) { 
+    n++;
+  }
+}
+a.	The code has a compile error because xMethod does not return a value.
+b.	The code has a compile error because xMethod is not declared static. 
+c.	The code prints n is 1.
+d.	The code prints n is 2.
+e.	The code prints n is 3.
+Key:b
+
+#
+26. What is the output of the second println statement in the main method?
+public class Foo {
+  int i;
+  static int s;
+
+  public static void main(String[] args) {
+    Foo f1 = new Foo();
+    System.out.println("f1.i is " + f1.i + " f1.s is " + f1.s);
+    Foo f2 = new Foo();
+    System.out.println("f2.i is " + f2.i + " f2.s is " + f2.s);
+    Foo f3 = new Foo();
+    System.out.println("f3.i is " + f3.i + " f3.s is " + f3.s);
+  }
+
+  public Foo() {
+    i++;
+    s++;
+  }
+}
+a.	f2.i is 1 f2.s is 1
+b.	f2.i is 1 f2.s is 2
+c.	f2.i is 2 f2.s is 2
+d.	f2.i is 2 f2.s is 1 
+Key:b i is an instance variable and s is static, shared by all objects of the Foo class.
+
+#
+27. What is the output of the third println statement in the main method?	
+public class Foo {
+  int i;
+  static int s;
+
+  public static void main(String[] args) {
+    Foo f1 = new Foo();
+    System.out.println("f1.i is " + f1.i + " f1.s is " + f1.s);
+    Foo f2 = new Foo();
+    System.out.println("f2.i is " + f2.i + " f2.s is " + f2.s);
+    Foo f3 = new Foo();
+    System.out.println("f3.i is " + f3.i + " f3.s is " + f3.s);
+  }
+
+  public Foo() {
+    i++;
+    s++;
+  }
+}
+a.	f3.i is 1 f3.s is 1
+b.	f3.i is 1 f3.s is 2
+c.	f3.i is 1 f3.s is 3
+d.	f3.i is 3 f3.s is 1
+e.      f3.i is 3 f3.s is 3
+Key:c i is an instance variable and s is static, shared by all objects of the Foo class.
+
+#
+28. What code may be filled in the blank without causing syntax or runtime errors:
+
+public class Test {
+  java.util.Date date;
+
+  public static void main(String[] args) {
+    Test test = new Test();
+    System.out.println(_________________);
+  }
+}
+a. test.date
+b. date
+c. test.date.toString()
+d. date.toString()
+Key:a b and d cause compile errors because date is an instance variable and cannot be accessed from static context. c is wrong because test.date is null, causing NullPointerException. 
+
+#
+29.	Suppose the xMethod() is invoked in the following constructor in a class, xMethod() is _________ in the class.
+
+public MyClass() {
+  xMethod();
+}
+
+a.	a static method
+b.	an instance method
+c.	a static method or an instance method
+Key:c
+
+#
+30.	Suppose the xMethod() is invoked from a main method in a class as follows, xMethod() is _________ in the class.
+
+public static void main(String[] args) {
+  xMethod();
+}
+
+a.	a static method
+b.	an instance method
+c.	a static method or an instance method
+Key:a
+
+#
+Section 9.8 Visibility Modifiers
+31.	To prevent a class from being instantiated, _____________________
+a.	don't use any modifiers on the constructor.
+b.      use the public modifier on the constructor.
+c.	use the private modifier on the constructor.
+d.	use the static modifier on the constructor.
+Key:c
+
+#
+32.	Analyze the following code:
+
+public class Test {
+  public static void main(String args[]) {
+    NClass nc = new NClass();
+    nc.t = nc.t++;
+  }
+}
+
+class NClass {
+  int t;
+  private NClass() {
+  }
+}
+a.	The program has a compile error because the NClass class has a private constructor.
+b.	The program does not compile because the parameter list of the main method is wrong.
+c.	The program compiles, but has a runtime error because t has no initial value.
+d.	The program compiles and runs fine.
+Key:a You cannot use the private constructor to create an object.
+
+#
+33.	Analyze the following code:
+
+public class Test {
+  private int t;
+
+  public static void main(String[] args) {
+    int x;
+    System.out.println(t);
+  }
+}
+a.	The variable t is not initialized and therefore causes errors.
+b.	The variable t is private and therefore cannot be accessed in the main method.
+c.	t is non-static and it cannot be referenced in a static context in the main method.
+d.	The variable x is not initialized and therefore causes errors.
+e.	The program compiles and runs fine.
+Key:c
+
+#
+34. Analyze the following code and choose the best answer:
+
+public class Foo {
+  private int x;
+
+  public static void main(String[] args) {
+    Foo foo = new Foo();
+    System.out.println(foo.x);
+  }
+}
+a. Since x is private, it cannot be accessed from an object foo.
+b. Since x is defined in the class Foo, it can be accessed by any method inside the class without using an object. You can write the code to access x without creating an object such as foo in this code.
+c. Since x is an instance variable, it cannot be directly used inside a main method. However, it can be accessed through an object such as foo in this code. 
+d. You cannot create a self-referenced object; that is, foo is created inside the class Foo.
+Key:c (A) is incorrect, since x can be accessed by an object of Foo inside the Foo class. (B) is incorrect because x is non-static, it cannot be accessed in the main method without creating an object. (D) is incorrect, since it is permissible to create an instance of the class within the class. The best choice is (C).
+
+#
+Section 9.9 Data Field Encapsulation
+35. Which of the following statements are true?
+a. Use the private modifier to encapsulate data fields.
+b. Encapsulating data fields makes the program easy to maintain.
+c. Encapsulating data fields makes the program short.
+d. Encapsulating data fields helps prevent programming errors.
+Key:abd
+
+#
+36. Suppose you wish to provide an accessor method for a boolean property finished, what signature of the method should be?
+a. public void getFinished()
+b. public boolean getFinished()
+c. public boolean isFinished()
+d. public void isFinished()
+Key:c
+
+#
+37. 	Which is the advantage of encapsulation?
+a.	Only public methods are needed. 
+b.	Making the class final causes no consequential changes to other code. 
+c.	It changes the implementation without changing a class's contract and causes no consequential changes to other code. 
+d.	It changes a class's contract without changing the implementation and causes no consequential changes to other code. 
+Key:c
+
+#
+Section 9.10 Passing Objects to Methods
+38. When invoking a method with an object argument,  ___________ is passed.
+a. the contents of the object
+b. a copy of the object
+c. the reference of the object
+d. the object is copied, then the reference of the copied object
+Key: c
+
+#
+39. What is the value of myCount.count displayed?
+public class Test {
+  public static void main(String[] args) {
+    Count myCount = new Count();
+    int times = 0;
+
+    for (int i=0; i&lt;100; i++)
+      increment(myCount, times);
+
+    System.out.println(
+      "myCount.count =   " + myCount.count);
+    System.out.println("times = "+ times);
+  }
+
+  public static void increment(Count c, int times) {
+    c.count++;
+    times++;
+  }
+}
+
+class Count {
+  int count;
+
+  Count(int c) {
+    count = c;
+  }
+
+  Count() {
+    count = 1;
+  }
+}
+a.	101
+b.	100
+c.	99
+d.	98
+Key:a
+	
+#
+40.	What is the value of times displayed?
+public class Test {
+  public static void main(String[] args) {
+    Count myCount = new Count();
+    int times = 0;
+
+    for (int i=0; i&lt;100; i++)
+      increment(myCount, times);
+
+    System.out.println(
+      "myCount.count =   " + myCount.count);
+    System.out.println("times = "+ times);
+  }
+
+  public static void increment(Count c, int times) {
+    c.count++;
+    times++;
+  }
+}
+
+class Count {
+  int count;
+
+  Count(int c) {
+    count = c;
+  }
+
+  Count() {
+    count = 1;
+  }
+}
+a.	101
+b.	100
+c.	99
+d.	98
+e.      0
+Key:e 
+
+#
+41. What is the output of the following program?
+
+import java.util.Date;
+
+public class Test {
+  public static void main(String[] args) {
+    Date date = new Date(1234567);
+    m1(date);
+    System.out.print(date.getTime() + " ");
+
+    m2(date);
+    System.out.println(date.getTime());
+  }
+
+  public static void m1(Date date) {
+    date = new Date(7654321);
+  }
+
+  public static void m2(Date date) {
+    date.setTime(7654321);
+  }
+}
+a.	1234567 1234567
+b.	1234567 7654321
+c.	7654321 1234567 
+d.	7654321 7654321 
+Key:b 
+
+#
+Section 9.11 Array of Objects
+42. Given the declaration Circle[] x = new Circle[10], which of the following statement is most accurate?
+a. x contains an array of ten int values.
+b. x contains an array of ten objects of the Circle type.
+c. x contains a reference to an array and each element in the array can hold a reference to a Circle object.
+d. x contains a reference to an array and each element in the array can hold a Circle object.
+Key:c
+
+#
+43. Assume java.util.Date[] dates = new java.util.Date[10], which of the following statements are true?
+a. dates is null.
+b. dates[0] is null.
+c. dates = new java.util.Date[5] is fine, which assigns a new array to dates.
+d. dates = new Date() is fine, which creates a new Date object and assigns to dates.
+Key:bc
+
+#
+Section 9.12 Immutable Objects and Classes
+44. Which of the following statements are true about an immutable object?
+a. The contents of an immutable object cannot be modified.
+b. All properties of an immutable object must be private.
+c. All properties of an immutable object must be of primitive types.
+d. An object type property in an immutable object must also be immutable.
+e. An immutable object contains no mutator methods.
+Key:abde  
+
+#
+Section 9.13 Scope of Variables
+45.	What is the output for the first statement in the main method?
+public class Foo {
+  static int i = 0;
+  static int j = 0;
+
+  public static void main(String[] args) {
+    int i = 2;
+    int k = 3;
+    {
+      int j = 3;
+      System.out.println("i + j is " + i + j);
+    }
+
+    k = i + j;
+    System.out.println("k is " + k);
+    System.out.println("j is " + j);
+  }
+}
+a.	i + j is 5
+b.	i + j is 6
+c.	i + j is 22
+d.	i + j is 23
+Key:d The first + operator in the expression "i + j is " + i + j is evaluated.
+
+#
+46.	What is the output for the second statement in the main method?
+public class Foo {
+  static int i = 0;
+  static int j = 0;
+
+  public static void main(String[] args) {
+    int i = 2;
+    int k = 3;
+    {
+      int j = 3;
+      System.out.println("i + j is " + i + j);
+    }
+
+    k = i + j;
+    System.out.println("k is " + k);
+    System.out.println("j is " + j);
+  }
+}
+a.	k is 0
+b.	k is 1
+c.	k is 2
+d.	k is 3
+Key:c When computing k = i + j, i is 2 and j is 0. 
+
+#
+47. What is the output for the third statement in the main method?
+public class Foo {
+  static int i = 0;
+  static int j = 0;
+
+  public static void main(String[] args) {
+    int i = 2;
+    int k = 3;
+    {
+      int j = 3;
+      System.out.println("i + j is " + i + j);
+    }
+
+    k = i + j;
+    System.out.println("k is " + k);
+    System.out.println("j is " + j);
+  }
+}
+a.	j is 0
+b.	j is 1
+c.	j is 2
+d.	j is 3
+Key:a 
+
+#
+48. You can declare two variables with the same name in __________.
+a.	a method one as a formal parameter and the other as a local variable
+b.	a block
+c.	two nested blocks in a method (two nested blocks means one being inside the other)
+d.	different methods in a class
+Key:d
+
+#
+Section 9.14 The this Keyword
+49. Analyze the following code:
+
+class Circle {
+  private double radius;
+  
+  public Circle(double radius) {
+    radius = radius;  
+  }
+}	
+a.	The program has a compile error because it does not have a main method.
+b.	The program will compile, but you cannot create an object of Circle with a specified radius. The object will always have radius 0.
+c.	The program has a compile error because you cannot assign radius to radius.
+d.	The program does not compile because Circle does not have a default constructor.
+Key:b You have replace radius = radius by this.radius = radius
+
+#
+50. Analyze the following code:
+
+class Test {
+  private double i;
+  
+  public Test(double i) {
+    this.t();
+    this.i = i;  
+  }
+
+  public Test() {
+    System.out.println("Default constructor");
+    this(1);
+  }
+
+  public void t() {
+    System.out.println("Invoking t");
+  }
+}	
+a.	this.t() may be replaced by t().
+b.	this.i may be replaced by i.
+c.	this(1) must be called before System.out.println("Default constructor").
+d.	this(1) must be replaced by this(1.0).
+Key:ac 
+
+#
+51. Which of the following can be placed in the blank line in the following code?
+public class Test {
+  private int id;
+  
+  public void m1() {
+    _____.id = 45;
+  }
+}
+	
+a.	this 
+b.	Test
+Key:a

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for SignedAppletDemo -->
+
+<jnlp spec="1.0+"
+      codebase="file:///c:/book/" 
+      href="SignedAppletDemo.jnlp">
+   <information>
+      <title>SignedAppletDemo Demo</title>
+      <vendor>The Java(tm) Tutorial</vendor>
+      <description>SignedAppletDemo Demo</description>
+      <homepage href="http://www.cs.armstrong.edu/liang"/>
+      <description kind="short">ClickMeApp uses 3 custom classes plus several
+       standard ones</description>
+      <offline-allowed/>
+   </information>
+   <resources>     
+   	<jar href="SSignedApplet.jar"/>   
+	<j2se version="1.6+"
+	      href="http://java.sun.com/products/autodl/j2se"/>
+   </resources>
+   <application-desc main-class="SignedApplet"/>
+</jnlp>

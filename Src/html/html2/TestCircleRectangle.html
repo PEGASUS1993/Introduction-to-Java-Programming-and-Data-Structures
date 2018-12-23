@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCircleRectangle.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCircleRectangleWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCircleRectangle" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestCircleRectangle {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    CircleFromSimpleGeometricObject circle = 
+      <span class = "keyword">new</span> CircleFromSimpleGeometricObject(<span class = "constant">1</span>);
+    System.out.println(<span class = "literal">"A circle "</span> + circle.toString());
+    System.out.println(<span class = "literal">"The color is "</span> + circle.getColor());
+    System.out.println(<span class = "literal">"The radius is "</span> + circle.getRadius());
+    System.out.println(<span class = "literal">"The area is "</span> + circle.getArea());
+    System.out.println(<span class = "literal">"The diameter is "</span> + circle.getDiameter());
+    
+    RectangleFromSimpleGeometricObject rectangle =
+      <span class = "keyword">new</span> RectangleFromSimpleGeometricObject(<span class = "constant">2</span>, <span class = "constant">4</span>);
+    System.out.println(<span class = "literal">"\nA rectangle "</span> + rectangle.toString());
+    System.out.println(<span class = "literal">"The area is "</span> + rectangle.getArea());
+    System.out.println(<span class = "literal">"The perimeter is "</span> + 
+      rectangle.getPerimeter());
+  }
+}
+</pre>
+</body>
+</html>

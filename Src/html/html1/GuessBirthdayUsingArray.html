@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GuessBirthdayUsingArray.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GuessBirthdayUsingArrayWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GuessBirthdayUsingArray" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> GuessBirthdayUsingArray {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span> day = <span class = "constant">0</span>; <span class = "comment">// Day to be determined</span>
+    <span class = "keyword">int</span> answer;
+
+    <span class = "keyword">int</span>[][][] dates = {
+      {{ <span class = "constant">1</span>,  <span class = "constant">3</span>,  <span class = "constant">5</span>,  <span class = "constant">7</span>},
+       { <span class = "constant">9</span>, <span class = "constant">11</span>, <span class = "constant">13</span>, <span class = "constant">15</span>},
+       {<span class = "constant">17</span>, <span class = "constant">19</span>, <span class = "constant">21</span>, <span class = "constant">23</span>},
+       {<span class = "constant">25</span>, <span class = "constant">27</span>, <span class = "constant">29</span>, <span class = "constant">31</span>}},
+      {{ <span class = "constant">2</span>,  <span class = "constant">3</span>,  <span class = "constant">6</span>,  <span class = "constant">7</span>},
+       {<span class = "constant">10</span>, <span class = "constant">11</span>, <span class = "constant">14</span>, <span class = "constant">15</span>},
+       {<span class = "constant">18</span>, <span class = "constant">19</span>, <span class = "constant">22</span>, <span class = "constant">23</span>},
+       {<span class = "constant">26</span>, <span class = "constant">27</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}},
+      {{ <span class = "constant">4</span>,  <span class = "constant">5</span>,  <span class = "constant">6</span>,  <span class = "constant">7</span>},
+       {<span class = "constant">12</span>, <span class = "constant">13</span>, <span class = "constant">14</span>, <span class = "constant">15</span>},
+       {<span class = "constant">20</span>, <span class = "constant">21</span>, <span class = "constant">22</span>, <span class = "constant">23</span>},
+       {<span class = "constant">28</span>, <span class = "constant">29</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}},
+      {{ <span class = "constant">8</span>,  <span class = "constant">9</span>, <span class = "constant">10</span>, <span class = "constant">11</span>},
+       {<span class = "constant">12</span>, <span class = "constant">13</span>, <span class = "constant">14</span>, <span class = "constant">15</span>},
+       {<span class = "constant">24</span>, <span class = "constant">25</span>, <span class = "constant">26</span>, <span class = "constant">27</span>},
+       {<span class = "constant">28</span>, <span class = "constant">29</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}},
+      {{<span class = "constant">16</span>, <span class = "constant">17</span>, <span class = "constant">18</span>, <span class = "constant">19</span>},
+       {<span class = "constant">20</span>, <span class = "constant">21</span>, <span class = "constant">22</span>, <span class = "constant">23</span>},
+       {<span class = "constant">24</span>, <span class = "constant">25</span>, <span class = "constant">26</span>, <span class = "constant">27</span>},
+       {<span class = "constant">28</span>, <span class = "constant">29</span>, <span class = "constant">30</span>, <span class = "constant">31</span>}}};
+    
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">5</span>; i++) {
+      System.out.println(<span class = "literal">"Is your birth day in Set"</span> + (i + <span class = "constant">1</span>) + <span class = "literal">"?"</span>);       
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">4</span>; j++) {
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; <span class = "constant">4</span>; k++)
+          System.out.printf(<span class = "literal">"%4d"</span>, dates[i][j][k]);
+        System.out.println();
+      }
+
+      System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+      answer = input.nextInt();
+
+      <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+        day += dates[i][<span class = "constant">0</span>][<span class = "constant">0</span>];
+    }
+
+    System.out.println(<span class = "literal">"Your birth day is "</span> + day);
+  }
+}
+</pre>
+</body>
+</html>

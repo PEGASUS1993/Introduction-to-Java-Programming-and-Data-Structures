@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowImage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowImageWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowImage <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a pane to hold the image views</span>
+    Pane pane = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+    pane.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>));
+    Image image = <span class = "keyword">new</span> Image(<span class = "literal">"image/us.gif"</span>);
+    pane.getChildren().add(<span class = "keyword">new</span> ImageView(image));
+    
+    ImageView imageView2 = <span class = "keyword">new</span> ImageView(image);
+    imageView2.setFitHeight(<span class = "constant">100</span>);
+    imageView2.setFitWidth(<span class = "constant">100</span>);
+    pane.getChildren().add(imageView2);   
+
+    ImageView imageView3 = <span class = "keyword">new</span> ImageView(image);
+    imageView3.setRotate(<span class = "constant">90</span>);
+    pane.getChildren().add(imageView3);     
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane);
+    primaryStage.setTitle(<span class = "literal">"ShowImage"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

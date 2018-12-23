@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CastingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CastingDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CastingDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> CastingDemo {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create and initialize two objects</span>
+    Object object1 = <span class = "keyword">new</span> CircleFromSimpleGeometricObject(<span class = "constant">1</span>);
+    Object object2 = <span class = "keyword">new</span> RectangleFromSimpleGeometricObject(<span class = "constant">1</span>, <span class = "constant">1</span>);
+
+    <span class = "comment">// Display circle and rectangle</span>
+    displayObject(object1);
+    displayObject(object2);
+  }
+
+  <span class = "comment">/** A method for displaying an object */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> displayObject(Object object) {
+    <span class = "keyword">if</span> (object <span class = "keyword">instanceof</span> CircleFromSimpleGeometricObject) {
+      System.out.println(<span class = "literal">"The circle area is "</span> +
+        ((CircleFromSimpleGeometricObject)object).getArea());
+      System.out.println(<span class = "literal">"The circle diameter is "</span> +
+        ((CircleFromSimpleGeometricObject)object).getDiameter());
+    }
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (object <span class = "keyword">instanceof</span> 
+                  RectangleFromSimpleGeometricObject) {
+      System.out.println(<span class = "literal">"The rectangle area is "</span> +
+        ((RectangleFromSimpleGeometricObject)object).getArea());
+    }
+  }
+}
+</pre>
+</body>
+</html>

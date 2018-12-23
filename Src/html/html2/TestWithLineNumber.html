@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Test.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Test.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">interface</span> A {
+  2&nbsp;&nbsp;  <span class = "comment">/** default method Java 8 */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> doSomething() {
+  4&nbsp;&nbsp;            System.out.println(<span class = "literal">"Do something"</span>);
+  5&nbsp;&nbsp;  }
+  6&nbsp;&nbsp;  <span class = "comment">/** static method Java 8 */</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getAValue() {
+  8&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "constant">0</span>; 
+  9&nbsp;&nbsp;  }
+ 10&nbsp;&nbsp;  <span class = "comment">/** private static method Java 9 */</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getAStaticValue() {
+ 12&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "constant">0</span>; 
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;  <span class = "comment">/** private instance method Java 9 */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> doSomething() {
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

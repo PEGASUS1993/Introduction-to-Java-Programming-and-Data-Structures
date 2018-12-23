@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyPriorityQueue.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyPriorityQueueWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> MyPriorityQueue&lt;E&gt; {
+  <span class = "keyword">private</span> Heap&lt;E&gt; heap; 
+  
+  <span class = "keyword">public</span> MyPriorityQueue() {
+    heap = <span class = "keyword">new</span> Heap&lt;E&gt;();
+  }
+  
+  <span class = "keyword">public</span> MyPriorityQueue(java.util.Comparator&lt;E&gt; c) {
+    heap = <span class = "keyword">new</span> Heap&lt;E&gt;(c);
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> enqueue(E newObject) {
+    heap.add(newObject);
+  }
+
+  <span class = "keyword">public</span> E dequeue() {
+    <span class = "keyword">return</span> heap.remove();
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+    <span class = "keyword">return</span> heap.getSize();
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Test1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Test1WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Test1" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Test1 {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+    WeightedGraph&lt;Character&gt; graph = <span class = "keyword">new</span> WeightedGraph&lt;&gt;();
+    graph.addVertex(<span class = "literal">'U'</span>);
+    graph.addVertex(<span class = "literal">'V'</span>);
+    <span class = "keyword">int</span> indexForU = graph.getIndex(<span class = "literal">'U'</span>);
+    <span class = "keyword">int</span> indexForV = graph.getIndex(<span class = "literal">'V'</span>);
+    System.out.println(<span class = "literal">"indexForU is "</span> + indexForU); 
+    System.out.println(<span class = "literal">"indexForV is "</span> + indexForV); 
+    graph.addEdge(indexForU, indexForV, <span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>);
+    System.out.println(<span class = "literal">"Degree of U is "</span> + 
+      graph.getDegree(indexForU));
+    System.out.println(<span class = "literal">"Degree of V is "</span> + 
+      graph.getDegree(indexForV));
+    System.out.println(<span class = "literal">"Weight of UV is "</span> + 
+      graph.getWeight(indexForU, indexForV));
+  }
+}
+</pre>
+</body>
+</html>

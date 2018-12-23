@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestTV.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestTVWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestTV" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestTV {  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    TV tv1 = <span class = "keyword">new</span> TV(); <span class = "comment">// Create a TV</span>
+    tv1.turnOn(); <span class = "comment">// Turn on tv1</span>
+    tv1.setChannel(<span class = "constant">30</span>);
+    tv1.setVolume(<span class = "constant">3</span>);
+    
+    TV tv2 = <span class = "keyword">new</span> TV();
+    tv2.turnOn();
+    tv2.channelUp();
+    tv2.channelUp();
+    tv2.volumeUp(); <span class = "comment">// Increase tv2 volume up 1 level</span>
+    
+    System.out.println(<span class = "literal">"tv1's channel is "</span> + tv1.channel 
+      + <span class = "literal">" and volume level is "</span> + tv1.volumeLevel);
+    System.out.println(<span class = "literal">"tv2's channel is "</span> + tv2.channel 
+      + <span class = "literal">" and volume level is "</span> + tv2.volumeLevel);
+  }
+}
+</pre>
+</body>
+</html>

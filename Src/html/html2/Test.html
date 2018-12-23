@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Test.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/Test.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">interface</span> A {
+  <span class = "comment">/** default method Java 8 */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> doSomething() {
+            System.out.println(<span class = "literal">"Do something"</span>);
+  }
+  <span class = "comment">/** static method Java 8 */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getAValue() {
+          <span class = "keyword">return</span> <span class = "constant">0</span>; 
+  }
+  <span class = "comment">/** private static method Java 9 */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getAStaticValue() {
+          <span class = "keyword">return</span> <span class = "constant">0</span>; 
+  }
+  <span class = "comment">/** private instance method Java 9 */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> doSomething() {
+  }
+}
+</pre>
+</body>
+</html>

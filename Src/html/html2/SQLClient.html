@@ -1,0 +1,237 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SQLClient.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SQLClientWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.*;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.collections.FXCollections;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.PasswordField;
+<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+<span class = "keyword">import</span> javafx.scene.control.TextArea;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> SQLClient <span class = "keyword">extends</span> Application {
+  <span class = "comment">// Connection to the database</span>
+  <span class = "keyword">private</span> Connection connection;
+
+  <span class = "comment">// Statement to execute SQL commands</span>
+  <span class = "keyword">private</span> Statement statement;
+
+  <span class = "comment">// Text area to enter SQL commands</span>
+  <span class = "keyword">private</span> TextArea tasqlCommand = <span class = "keyword">new</span> TextArea();
+
+  <span class = "comment">// Text area to display results from SQL commands</span>
+  <span class = "keyword">private</span> TextArea taSQLResult = <span class = "keyword">new</span> TextArea();
+
+  <span class = "comment">// DBC info for a database connection</span>
+  <span class = "keyword">private</span> TextField tfUsername = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> PasswordField pfPassword = <span class = "keyword">new</span> PasswordField();
+  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboURL = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboDriver = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+
+  <span class = "keyword">private</span> Button btExecuteSQL = <span class = "keyword">new</span> Button(<span class = "literal">"Execute SQL Command"</span>);
+  <span class = "keyword">private</span> Button btClearSQLCommand = <span class = "keyword">new</span> Button(<span class = "literal">"Clear"</span>);
+  <span class = "keyword">private</span> Button btConnectDB = <span class = "keyword">new</span> Button(<span class = "literal">"Connect to Database"</span>);
+  <span class = "keyword">private</span> Button btClearSQLResult = <span class = "keyword">new</span> Button(<span class = "literal">"Clear Result"</span>);
+  <span class = "keyword">private</span> Label lblConnectionStatus 
+    = <span class = "keyword">new</span> Label(<span class = "literal">"No connection now"</span>);
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    cboURL.getItems().addAll(FXCollections.observableArrayList(
+      <span class = "literal">"jdbc:mysql://localhost/javabook"</span>,
+      <span class = "literal">"jdbc:mysql://liang.armstrong.edu/javabook"</span>,
+      <span class = "literal">"jdbc:odbc:exampleMDBDataSource"</span>,
+      <span class = "literal">"jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl"</span>));
+    cboURL.getSelectionModel().selectFirst();
+    
+    cboDriver.getItems().addAll(FXCollections.observableArrayList(
+      <span class = "literal">"com.mysql.jdbc.Driver"</span>, <span class = "literal">"sun.jdbc.odbc.dbcOdbcDriver"</span>,
+      <span class = "literal">"oracle.jdbc.driver.OracleDriver"</span>));
+    cboDriver.getSelectionModel().selectFirst();
+    
+    <span class = "comment">// Create UI for connecting to the database </span>
+    GridPane gridPane = <span class = "keyword">new</span> GridPane();
+    gridPane.add(cboURL, <span class = "constant">1</span>, <span class = "constant">0</span>);
+    gridPane.add(cboDriver, <span class = "constant">1</span>, <span class = "constant">1</span>);
+    gridPane.add(tfUsername, <span class = "constant">1</span>, <span class = "constant">2</span>);
+    gridPane.add(pfPassword, <span class = "constant">1</span>, <span class = "constant">3</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Database URL"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"JDBC Driver"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Username"</span>), <span class = "constant">0</span>, <span class = "constant">2</span>);
+    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Password"</span>), <span class = "constant">0</span>, <span class = "constant">3</span>);
+    
+    HBox hBoxConnection = <span class = "keyword">new</span> HBox();
+    hBoxConnection.getChildren().addAll(
+      lblConnectionStatus, btConnectDB);
+    hBoxConnection.setAlignment(Pos.CENTER_RIGHT);
+    
+    VBox vBoxConnection = <span class = "keyword">new</span> VBox(<span class = "constant">5</span>);
+    vBoxConnection.getChildren().addAll(
+      <span class = "keyword">new</span> Label(<span class = "literal">"Enter Database Information"</span>),
+      gridPane, hBoxConnection);
+    
+    gridPane.setStyle(<span class = "literal">"-fx-border-color: black;"</span>);
+    
+    HBox hBoxSQLCommand = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+    hBoxSQLCommand.getChildren().addAll(
+      btClearSQLCommand, btExecuteSQL);
+    hBoxSQLCommand.setAlignment(Pos.CENTER_RIGHT);
+    
+    BorderPane borderPaneSqlCommand = <span class = "keyword">new</span> BorderPane();
+    borderPaneSqlCommand.setTop(
+      <span class = "keyword">new</span> Label(<span class = "literal">"Enter an SQL Command"</span>));
+    borderPaneSqlCommand.setCenter(
+      <span class = "keyword">new</span> ScrollPane(tasqlCommand));
+    borderPaneSqlCommand.setBottom(
+      hBoxSQLCommand);
+    
+    HBox hBoxConnectionCommand = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+    hBoxConnectionCommand.getChildren().addAll(
+      vBoxConnection, borderPaneSqlCommand);
+
+    BorderPane borderPaneExecutionResult = <span class = "keyword">new</span> BorderPane();
+    borderPaneExecutionResult.setTop(
+      <span class = "keyword">new</span> Label(<span class = "literal">"SQL Execution Result"</span>));
+    borderPaneExecutionResult.setCenter(taSQLResult);
+    borderPaneExecutionResult.setBottom(btClearSQLResult);
+    
+    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+    borderPane.setTop(hBoxConnectionCommand);
+    borderPane.setCenter(borderPaneExecutionResult);
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">670</span>, <span class = "constant">400</span>);
+    primaryStage.setTitle(<span class = "literal">"SQLClient"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage    </span>
+
+    btConnectDB.setOnAction(e -&gt; connectToDB());
+    btExecuteSQL.setOnAction(e -&gt; executeSQL()); 
+    btClearSQLCommand.setOnAction(e -&gt; tasqlCommand.setText(<span class = "keyword">null</span>));
+    btClearSQLResult.setOnAction(e -&gt; taSQLResult.setText(<span class = "keyword">null</span>));
+  }
+
+  <span class = "comment">/** Connect to DB */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> connectToDB() {
+    <span class = "comment">// Get database information from the user input</span>
+    String driver = cboDriver
+        .getSelectionModel().getSelectedItem();
+    String url = cboURL.getSelectionModel().getSelectedItem();
+    String username = tfUsername.getText().trim();
+    String password = pfPassword.getText().trim();
+
+    <span class = "comment">// Connection to the database</span>
+    <span class = "keyword">try</span> {
+      Class.forName(driver);
+      connection = DriverManager.getConnection(
+        url, username, password);
+      lblConnectionStatus.setText(<span class = "literal">"Connected to "</span> + url);
+    }
+    <span class = "keyword">catch</span> (java.lang.Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  <span class = "comment">/** Execute SQL commands */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> executeSQL() {
+    <span class = "keyword">if</span> (connection == <span class = "keyword">null</span>) {
+      taSQLResult.setText(<span class = "literal">"Please connect to a database first"</span>);
+      <span class = "keyword">return</span>;
+    }
+    <span class = "keyword">else</span> {
+      String sqlCommands = tasqlCommand.getText().trim();
+      String[] commands = sqlCommands.replace(<span class = "literal">'\n'</span>, <span class = "literal">' '</span>).split(<span class = "literal">";"</span>);
+
+      <span class = "keyword">for</span> (String aCommand: commands) {
+        <span class = "keyword">if</span> (aCommand.trim().toUpperCase().startsWith(<span class = "literal">"SELECT"</span>)) {
+          processSQLSelect(aCommand);
+        }
+        <span class = "keyword">else</span> {
+          processSQLNonSelect(aCommand);
+        }
+      }
+    }
+  }
+
+  <span class = "comment">/** Execute SQL SELECT commands */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> processSQLSelect(String sqlCommand) {
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Get a new statement for the current connection</span>
+      statement = connection.createStatement();
+
+      <span class = "comment">// Execute a SELECT SQL command</span>
+      ResultSet resultSet = statement.executeQuery(sqlCommand);
+
+      <span class = "comment">// Find the number of columns in the result set</span>
+      <span class = "keyword">int</span> columnCount = resultSet.getMetaData().getColumnCount();
+      String row = <span class = "literal">""</span>;
+
+      <span class = "comment">// Display column names</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= columnCount; i++) {
+        row += resultSet.getMetaData().getColumnName(i) + <span class = "literal">"\t"</span>;
+      }
+
+      taSQLResult.appendText(row + <span class = "literal">'\n'</span>);
+
+      <span class = "keyword">while</span> (resultSet.next()) {
+        <span class = "comment">// Reset row to empty</span>
+        row = <span class = "literal">""</span>;
+
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= columnCount; i++) {
+          <span class = "comment">// A non-String column is converted to a string</span>
+          row += resultSet.getString(i) + <span class = "literal">"\t"</span>; 
+        }
+
+        taSQLResult.appendText(row + <span class = "literal">'\n'</span>);
+      }
+    }
+    <span class = "keyword">catch</span> (SQLException ex) {
+      taSQLResult.setText(ex.toString());
+    }
+  }
+
+  <span class = "comment">/** Execute SQL DDL, and modification commands */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> processSQLNonSelect(String sqlCommand) {
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Get a new statement for the current connection</span>
+      statement = connection.createStatement();
+
+      <span class = "comment">// Execute a non-SELECT SQL command</span>
+      statement.executeUpdate(sqlCommand);
+
+      taSQLResult.setText(<span class = "literal">"SQL command executed"</span>);
+    }
+    <span class = "keyword">catch</span> (SQLException ex) {
+      taSQLResult.setText(ex.toString());
+    }
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

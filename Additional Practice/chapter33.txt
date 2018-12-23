@@ -1,0 +1,119 @@
+Chapter 33 Networking
+
+Section 33.2 Client/Server Computing
+1.	When creating a server on a port that is already in use, __________.
+a.	java.net.BindException occurs
+b.	the server is created with no problems
+c.	the server is blocked until the port is available
+d.	the server encounters a fatal error and must be terminated
+Key:a	
+
+#
+2.	When creating a client on a server port that is already in use, __________.
+a.	the client can connect to the server regardless of whether the port is in use
+b.	java.net.BindException occurs
+c.	the client is blocked until the port is available
+d.	the client encounters a fatal error and must be terminated
+Key:a	To connect to a client, the server creates a client socket from the ServerSocket. You can create any number of client sockets on the server side to connect to a client on the Internet.
+
+#
+3.	The server listens for a connection request from a client using the following statement:
+a.	Socket s = new Socket(ServerName, port);
+b.	Socket s = serverSocket.accept()
+c.	Socket s = serverSocket.getSocket()
+d.	Socket s = new Socket(ServerName);
+Key:b
+
+#
+4.	The client requests a connection to a server using the following statement:
+a.	Socket s = new Socket(ServerName, port);
+b.	Socket s = serverSocket.accept();
+c.	Socket s = serverSocket.getSocket();
+d.	Socket s = new Socket(ServerName);
+Key:a
+
+#
+5.	When a client requests connection to a server that has not yet started, __________.
+a.	java.net.BindException occurs
+b.	java.net.ConnectionException occurs
+c.	the client is blocked until the server is started
+d.	the client encounters a fatal error and must be terminated
+Key:b
+
+#
+6.	To connect to a server running on the same machine with the client, which of the following can be used for the hostname?
+a.	"localhost"
+b.	"127.0.0.1"
+c.	InetAddress.getLocalHost(),
+d.	"127.127.127.1".
+Key:abc
+
+#
+7.	To create an InputStream on a socket s, you use __________.
+a.	InputStream in = new InputStream(s);
+b.	InputStream in = s.getInputStream();
+c.	InputStream in = s.obtainInputStream();
+d.	InputStream in = s.getStream();
+Key:b
+
+#
+Section 33.3 The InetAddress Class 
+8. ______________ models an IP address, which can be used to find the host name and IP address of the client.
+a. The ServerSocket class
+b. The Socket class
+c. The InetAddress class
+d. The Connection interface
+Key:c
+
+#
+9. You can invoke ______________ on a Socket object, say socket, to obtain an InetAddress object.
+a. socket.InetAddress();
+b. socket.getInetAddress();
+c. socket.obtainInetAddress();
+d. socket.retrieveInetAddress();
+Key:b
+
+#
+10. The ____________ method in the InetAddress class returns the IP address.
+a. getIP()
+b. getIPAddress()
+c. getHostAddress()
+d. getAddress()
+Key:c
+
+#
+Section 33.4 Serving Multiple Clients 
+11. A ServerSocket can connect to ________ clients.
+a. one
+b. two
+c. ten
+d. an unlimited number of
+Key:d
+
+#
+Section 33.5 Applet Clients 
+12. You can obtain the server's hostname by invoking _________ on an applet.
+a. getCodeBase().host()
+b. getCodeBase().getHost()
+c. getCodeBase().hostName()
+d. getCodeBase().getHostName()
+Key:b
+
+#
+Section 33.6 Sending and Receiving Objects 
+13. To obtain an ObjectInputStream from a socket, use ________.
+a. socket.getInputStream()
+b. socket.getObjectStream()
+c. socket.getObjectInputStream()
+d. socket.objectInputStream()
+e. new ObjectInputStream(socket.getInputStream());
+Key:e 
+
+#
+14. To obtain an ObjectOutputStream from a socket, use ________.
+a. socket.getOutputStream()
+b. socket.getObjectStream()
+c. socket.getObjectOutputStream()
+d. socket.objectOutputStream()
+e. new ObjectOutputStream(socket.getOutputStream())
+Key:e 

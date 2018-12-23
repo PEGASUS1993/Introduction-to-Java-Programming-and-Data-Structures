@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountOccurrenceOfLettersInAString.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountOccurrenceOfLettersInAStringWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountOccurrenceOfLettersInAString" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+<span class = "keyword">import</span> java.util.stream.Stream;
+<span class = "keyword">import</span> java.util.stream.Collectors;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CountOccurrenceOfLettersInAString {
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> count = <span class = "constant">0</span>;
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a string: "</span>);
+    String s = input.nextLine();
+    
+    count = <span class = "constant">0</span>; <span class = "comment">// Reset the count for columns</span>
+    System.out.println(<span class = "literal">"The occurrences of each letter are:"</span>);
+    Stream.of(toCharacterArray(s.toCharArray()))
+      .filter(ch -&gt; Character.isLetter(ch))
+      .map(ch -&gt; Character.toUpperCase(ch))
+      .collect(Collectors.groupingBy(e -&gt; e, 
+           TreeMap::new, Collectors.counting()))
+         .forEach((k, v) -&gt; { System.out.print(v + <span class = "literal">" "</span> + k 
+              + (++count % <span class = "constant">10</span> == <span class = "constant">0</span> ? <span class = "literal">"\n"</span> : <span class = "literal">" "</span>));
+         });
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> Character[] toCharacterArray(<span class = "keyword">char</span>[] list) {
+    Character[] result = <span class = "keyword">new</span> Character[list.length];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; result.length; i++) {
+      result[i] = list[i];
+    }
+    <span class = "keyword">return</span> result;
+  }
+}
+</pre>
+</body>
+</html>

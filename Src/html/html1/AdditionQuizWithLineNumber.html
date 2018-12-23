@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AdditionQuiz.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AdditionQuiz.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "AdditionQuiz" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> AdditionQuiz {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "keyword">int</span> number1 = (<span class = "keyword">int</span>)(System.currentTimeMillis() % <span class = "constant">10</span>);
+  6&nbsp;&nbsp;    <span class = "keyword">int</span> number2 = (<span class = "keyword">int</span>)(System.currentTimeMillis() / <span class = "constant">10</span> % <span class = "constant">10</span>);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Create a Scanner</span>
+  9&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    System.out.print(
+ 12&nbsp;&nbsp;      <span class = "literal">"What is "</span> + number1 + <span class = "literal">" + "</span> + number2 + <span class = "literal">"? "</span>);
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;    <span class = "keyword">int</span> answer = input.nextInt();
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    System.out.println(
+ 17&nbsp;&nbsp;      number1 + <span class = "literal">" + "</span> + number2 + <span class = "literal">" = "</span> + answer + <span class = "literal">" is "</span> +
+ 18&nbsp;&nbsp;      (number1 + number2 == answer));
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ReadFileFromURL.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ReadFileFromURLWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ReadFileFromURL" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ReadFileFromURL {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    System.out.print(<span class = "literal">"Enter a URL: "</span>);   
+    String URLString = <span class = "keyword">new</span> Scanner(System.in).next();
+       
+    <span class = "keyword">try</span> {
+      java.net.URL url = <span class = "keyword">new</span> java.net.URL(URLString); 
+      <span class = "keyword">int</span> count = <span class = "constant">0</span>;
+      Scanner input = <span class = "keyword">new</span> Scanner(url.openStream());
+      <span class = "keyword">while</span> (input.hasNext()) {
+        String line = input.nextLine();
+        count += line.length();
+      } 
+      
+      System.out.println(<span class = "literal">"The file size is "</span> + count + <span class = "literal">" characters"</span>);
+    }
+    <span class = "keyword">catch</span> (java.net.MalformedURLException ex) {
+      System.out.println(<span class = "literal">"Invalid URL"</span>);
+    }
+    <span class = "keyword">catch</span> (java.io.IOException ex) {
+      System.out.println(<span class = "literal">"IO Errors"</span>);
+    }
+  }
+}   
+</pre>
+</body>
+</html>

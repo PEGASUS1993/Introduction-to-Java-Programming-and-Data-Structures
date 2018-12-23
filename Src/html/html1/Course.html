@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Course.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CourseWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Course {
+  <span class = "keyword">private</span> String courseName;
+  <span class = "keyword">private</span> String[] students = <span class = "keyword">new</span> String[<span class = "constant">4</span>];
+  <span class = "keyword">private</span> <span class = "keyword">int</span> numberOfStudents;
+    
+  <span class = "keyword">public</span> Course(String courseName) {
+    <span class = "keyword">this</span>.courseName = courseName;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> addStudent(String student) {
+    students[numberOfStudents] = student;
+    numberOfStudents++;
+  }
+  
+  <span class = "keyword">public</span> String[] getStudents() {
+    <span class = "keyword">return</span> students;
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumberOfStudents() {
+    <span class = "keyword">return</span> numberOfStudents;
+  }  
+
+  <span class = "keyword">public</span> String getCourseName() {
+    <span class = "keyword">return</span> courseName;
+  }  
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> dropStudent(String student) {
+    <span class = "comment">// Left as an exercise in Exercise 10.9</span>
+  }
+}
+</pre>
+</body>
+</html>

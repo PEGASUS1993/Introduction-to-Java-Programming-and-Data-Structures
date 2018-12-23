@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - HeapSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "HeapSortWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "HeapSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Comparator;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> HeapSort {
+  <span class = "comment">/** Heap sort method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E&gt; <span class = "keyword">void</span> heapSort(E[] list) {
+    <span class = "comment">// Create a Heap of integers</span>
+    heapSort(list, (e1, e2) -&gt; ((Comparable&lt;E&gt;)e1).compareTo(e2));
+  }
+  
+  <span class = "comment">/** Heap sort method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E&gt; <span class = "keyword">void</span> heapSort(E[] list, Comparator&lt;E&gt; c) {
+    <span class = "comment">// Create a Heap of integers</span>
+    Heap&lt;E&gt; heap = <span class = "keyword">new</span> Heap&lt;&gt;(c);
+
+    <span class = "comment">// Add elements to the heap</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+      heap.add(list[i]);
+
+    <span class = "comment">// Remove elements from the heap</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = list.length - <span class = "constant">1</span>; i &gt;= <span class = "constant">0</span>; i--)
+      list[i] = heap.remove();
+  }
+
+  <span class = "comment">/** A test method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Integer[] list = {<span class = "literal">-</span><span class = "constant">44</span>, <span class = "literal">-</span><span class = "constant">5</span>, <span class = "literal">-</span><span class = "constant">3</span>, <span class = "constant">3</span>, <span class = "constant">3</span>, <span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">4</span>, <span class = "constant">0</span>, <span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">5</span>, <span class = "constant">53</span>}; 
+    heapSort(list);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+      System.out.print(list[i] + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

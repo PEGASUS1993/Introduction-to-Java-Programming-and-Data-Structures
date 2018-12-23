@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DetectEndOfFile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DetectEndOfFile.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DetectEndOfFile" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> DetectEndOfFile { 
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "keyword">try</span> {
+  6&nbsp;&nbsp;      <span class = "keyword">try</span> (DataOutputStream output = 
+  7&nbsp;&nbsp;        <span class = "keyword">new</span> DataOutputStream(<span class = "keyword">new</span> FileOutputStream(<span class = "literal">"test.dat"</span>))) {
+  8&nbsp;&nbsp;        output.writeDouble(<span class = "constant">4</span><span class = "literal">.</span><span class = "constant">5</span>);
+  9&nbsp;&nbsp;        output.writeDouble(<span class = "constant">43</span><span class = "literal">.</span><span class = "constant">25</span>);
+ 10&nbsp;&nbsp;        output.writeDouble(<span class = "constant">3</span><span class = "literal">.</span><span class = "constant">2</span>);
+ 11&nbsp;&nbsp;      }
+ 12&nbsp;&nbsp;      
+ 13&nbsp;&nbsp;      <span class = "keyword">try</span> (DataInputStream input = 
+ 14&nbsp;&nbsp;        <span class = "keyword">new</span> DataInputStream(<span class = "keyword">new</span> FileInputStream(<span class = "literal">"test.dat"</span>))) {
+ 15&nbsp;&nbsp;        <span class = "keyword">while</span> (<span class = "keyword">true</span>) 
+ 16&nbsp;&nbsp;          System.out.println(input.readDouble());
+ 17&nbsp;&nbsp;      }
+ 18&nbsp;&nbsp;    }
+ 19&nbsp;&nbsp;    <span class = "keyword">catch</span> (EOFException ex) {
+ 20&nbsp;&nbsp;      System.out.println(<span class = "literal">"All data were read"</span>);
+ 21&nbsp;&nbsp;    }
+ 22&nbsp;&nbsp;    <span class = "keyword">catch</span> (IOException ex) {
+ 23&nbsp;&nbsp;      ex.printStackTrace();
+ 24&nbsp;&nbsp;    }
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

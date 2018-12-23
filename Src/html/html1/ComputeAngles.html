@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeAngles.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ComputeAngles.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeAngles" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeAngles {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    
+    <span class = "comment">// Prompt the user to enter three points</span>
+    System.out.print(<span class = "literal">"Enter three points: "</span>);
+    <span class = "keyword">double</span> x1 = input.nextDouble();
+    <span class = "keyword">double</span> y1 = input.nextDouble();
+    <span class = "keyword">double</span> x2 = input.nextDouble();
+    <span class = "keyword">double</span> y2 = input.nextDouble();
+    <span class = "keyword">double</span> x3 = input.nextDouble();
+    <span class = "keyword">double</span> y3 = input.nextDouble();
+    
+    <span class = "comment">// Compute three sides</span>
+    <span class = "keyword">double</span> a = Math.sqrt((x2 - x3) * (x2 - x3) 
+      + (y2 - y3) * (y2 - y3));
+    <span class = "keyword">double</span> b = Math.sqrt((x1 - x3) * (x1 - x3) 
+      + (y1 - y3) * (y1 - y3));
+    <span class = "keyword">double</span> c = Math.sqrt((x1 - x2) * (x1 - x2) 
+      + (y1 - y2) * (y1 - y2));
+    
+    <span class = "comment">// Compute three angles</span>
+    <span class = "keyword">double</span> A = Math.toDegrees(Math.acos((a * a - b * b - c * c) 
+      / (<span class = "literal">-</span><span class = "constant">2</span> * b * c)));
+    <span class = "keyword">double</span> B = Math.toDegrees(Math.acos((b * b - a * a - c * c) 
+      / (<span class = "literal">-</span><span class = "constant">2</span> * a * c)));
+    <span class = "keyword">double</span> C = Math.toDegrees(Math.acos((c * c - b * b - a * a) 
+      / (<span class = "literal">-</span><span class = "constant">2</span> * a * b)));
+    
+    <span class = "comment">// Display results</span>
+    System.out.println(<span class = "literal">"The three angles are "</span> + 
+      Math.round(A * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span> + <span class = "literal">" "</span> +
+      Math.round(B * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span> + <span class = "literal">" "</span> + 
+      Math.round(C * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>);
+  }
+}
+</pre>
+</body>
+</html>

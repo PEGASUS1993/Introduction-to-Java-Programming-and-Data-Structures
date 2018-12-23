@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestBFS.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestBFSWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestBFS" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestBFS {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    String[] vertices = {<span class = "literal">"Seattle"</span>, <span class = "literal">"San Francisco"</span>, <span class = "literal">"Los Angeles"</span>,
+      <span class = "literal">"Denver"</span>, <span class = "literal">"Kansas City"</span>, <span class = "literal">"Chicago"</span>, <span class = "literal">"Boston"</span>, <span class = "literal">"New York"</span>,
+      <span class = "literal">"Atlanta"</span>, <span class = "literal">"Miami"</span>, <span class = "literal">"Dallas"</span>, <span class = "literal">"Houston"</span>};
+
+    <span class = "keyword">int</span>[][] edges = {
+      {<span class = "constant">0</span>, <span class = "constant">1</span>}, {<span class = "constant">0</span>, <span class = "constant">3</span>}, {<span class = "constant">0</span>, <span class = "constant">5</span>},
+      {<span class = "constant">1</span>, <span class = "constant">0</span>}, {<span class = "constant">1</span>, <span class = "constant">2</span>}, {<span class = "constant">1</span>, <span class = "constant">3</span>},
+      {<span class = "constant">2</span>, <span class = "constant">1</span>}, {<span class = "constant">2</span>, <span class = "constant">3</span>}, {<span class = "constant">2</span>, <span class = "constant">4</span>}, {<span class = "constant">2</span>, <span class = "constant">10</span>},
+      {<span class = "constant">3</span>, <span class = "constant">0</span>}, {<span class = "constant">3</span>, <span class = "constant">1</span>}, {<span class = "constant">3</span>, <span class = "constant">2</span>}, {<span class = "constant">3</span>, <span class = "constant">4</span>}, {<span class = "constant">3</span>, <span class = "constant">5</span>},
+      {<span class = "constant">4</span>, <span class = "constant">2</span>}, {<span class = "constant">4</span>, <span class = "constant">3</span>}, {<span class = "constant">4</span>, <span class = "constant">5</span>}, {<span class = "constant">4</span>, <span class = "constant">7</span>}, {<span class = "constant">4</span>, <span class = "constant">8</span>}, {<span class = "constant">4</span>, <span class = "constant">10</span>},
+      {<span class = "constant">5</span>, <span class = "constant">0</span>}, {<span class = "constant">5</span>, <span class = "constant">3</span>}, {<span class = "constant">5</span>, <span class = "constant">4</span>}, {<span class = "constant">5</span>, <span class = "constant">6</span>}, {<span class = "constant">5</span>, <span class = "constant">7</span>},
+      {<span class = "constant">6</span>, <span class = "constant">5</span>}, {<span class = "constant">6</span>, <span class = "constant">7</span>},
+      {<span class = "constant">7</span>, <span class = "constant">4</span>}, {<span class = "constant">7</span>, <span class = "constant">5</span>}, {<span class = "constant">7</span>, <span class = "constant">6</span>}, {<span class = "constant">7</span>, <span class = "constant">8</span>},
+      {<span class = "constant">8</span>, <span class = "constant">4</span>}, {<span class = "constant">8</span>, <span class = "constant">7</span>}, {<span class = "constant">8</span>, <span class = "constant">9</span>}, {<span class = "constant">8</span>, <span class = "constant">10</span>}, {<span class = "constant">8</span>, <span class = "constant">11</span>},
+      {<span class = "constant">9</span>, <span class = "constant">8</span>}, {<span class = "constant">9</span>, <span class = "constant">11</span>},
+      {<span class = "constant">10</span>, <span class = "constant">2</span>}, {<span class = "constant">10</span>, <span class = "constant">4</span>}, {<span class = "constant">10</span>, <span class = "constant">8</span>}, {<span class = "constant">10</span>, <span class = "constant">11</span>},
+      {<span class = "constant">11</span>, <span class = "constant">8</span>}, {<span class = "constant">11</span>, <span class = "constant">9</span>}, {<span class = "constant">11</span>, <span class = "constant">10</span>}
+    };
+
+    Graph&lt;String&gt; graph = <span class = "keyword">new</span> UnweightedGraph&lt;&gt;(vertices, edges);
+    UnweightedGraph&lt;String&gt;.SearchTree bfs = 
+      graph.bfs(graph.getIndex(<span class = "literal">"Chicago"</span>)); <span class = "comment">// Get a dfs starting at Chicago</span>
+
+    java.util.List&lt;Integer&gt; searchOrders = bfs.getSearchOrder();
+    System.out.println(bfs.getNumberOfVerticesFound() +
+      <span class = "literal">" vertices are searched in this order:"</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; searchOrders.size(); i++)
+      System.out.println(graph.getVertex(searchOrders.get(i)));
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; searchOrders.size(); i++)
+      <span class = "keyword">if</span> (bfs.getParent(i) != <span class = "literal">-</span><span class = "constant">1</span>)
+        System.out.println(<span class = "literal">"parent of "</span> + graph.getVertex(i) + 
+          <span class = "literal">" is "</span> + graph.getVertex(bfs.getParent(i)));
+  }
+}
+</pre>
+</body>
+</html>

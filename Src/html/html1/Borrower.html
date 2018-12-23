@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Borrower.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BorrowerWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Borrower <span class = "keyword">extends</span> Person1 {
+  <span class = "keyword">private</span> Loan loan;
+
+  <span class = "comment">/** Construct a borrower with default properties */</span>
+  <span class = "keyword">public</span> Borrower() {
+    <span class = "keyword">super</span>();
+  }
+
+  <span class = "comment">/** Create a borrower with specified name and address */</span>
+  <span class = "keyword">public</span> Borrower(Name name, Address address) {
+    <span class = "keyword">super</span>(name, address);
+  }
+
+  <span class = "comment">/** Return loan */</span>
+  <span class = "keyword">public</span> Loan getLoan() {
+    <span class = "keyword">return</span> loan;
+  }
+
+  <span class = "comment">/** Set a new loan */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setLoan(Loan loan) {
+    <span class = "keyword">this</span>.loan = loan;
+  }
+
+  @Override <span class = "comment">/** String representation for borrower */</span>
+  <span class = "keyword">public</span> String toString() {
+    <span class = "keyword">return</span> <span class = "keyword">super</span>.toString() +
+      <span class = "literal">"Monthly payment is "</span> + loan.getMonthlyPayment() + <span class = "literal">'\n'</span> +
+      <span class = "literal">"Total payment is "</span> + loan.getTotalPayment();
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Person1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Person1WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Person1 <span class = "keyword">implements</span> Comparable&lt;Person1&gt; {
+  <span class = "keyword">private</span> Name name;
+  <span class = "keyword">private</span> Address address;
+
+  <span class = "comment">/** Construct a person with default properties */</span>
+  <span class = "keyword">public</span> Person1() {
+    <span class = "keyword">this</span>(<span class = "keyword">new</span> Name(<span class = "literal">"Jill"</span>, <span class = "literal">'S'</span>, <span class = "literal">"Barr"</span>),
+      <span class = "keyword">new</span> Address(<span class = "literal">"100 Main"</span>, <span class = "literal">"Savannah"</span>, <span class = "literal">"GA"</span>, <span class = "literal">"31411"</span>));
+  }
+
+  <span class = "comment">/** Construct a person with specified name and address */</span>
+  <span class = "keyword">public</span> Person1(Name name, Address address) {
+    <span class = "keyword">this</span>.name = name;
+    <span class = "keyword">this</span>.address = address;
+  }
+
+  <span class = "comment">/** Return name */</span>
+  <span class = "keyword">public</span> Name getName() {
+    <span class = "keyword">return</span> name;
+  }
+
+  <span class = "comment">/** Set a new name */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setName(Name name) {
+    <span class = "keyword">this</span>.name = name;
+  }
+
+  <span class = "comment">/** Return address */</span>
+  <span class = "keyword">public</span> Address getAddress() {
+    <span class = "keyword">return</span> address;
+  }
+
+  <span class = "comment">/** Set a new address */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setAddress(Address address) {
+    <span class = "keyword">this</span>.address = address;
+  }
+
+  @Override <span class = "comment">/** Override the toString method */</span>
+  <span class = "keyword">public</span> String toString() {
+    <span class = "keyword">return</span> <span class = "literal">'\n'</span> + name.getFullName() + <span class = "literal">'\n'</span> +
+      address.getFullAddress() + <span class = "literal">'\n'</span>;
+  }
+
+  <span class = "comment">/** Implement compareTo in the Comparable interface */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(Person1 o) {
+    <span class = "keyword">return</span> name.compareTo(o.name);
+  }
+}
+</pre>
+</body>
+</html>

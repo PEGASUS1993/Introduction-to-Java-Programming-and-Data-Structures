@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestBreak.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/TestBreak.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestBreak" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestBreak {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span> sum = <span class = "constant">0</span>;
+    <span class = "keyword">int</span> number = <span class = "constant">0</span>;
+
+    <span class = "keyword">while</span> (number &lt; <span class = "constant">20</span>) {
+      number++;
+      sum += number;
+      <span class = "keyword">if</span> (sum &gt;= <span class = "constant">100</span>) 
+        <span class = "keyword">break</span>;
+    }
+
+    System.out.println(<span class = "literal">"The number is "</span> + number);
+    System.out.println(<span class = "literal">"The sum is "</span> + sum);
+  }
+}
+</pre>
+</body>
+</html>

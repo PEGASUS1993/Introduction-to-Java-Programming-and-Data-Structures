@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowArcResizable.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowArcResizable.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Arc;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.ArcType;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ShowArcResizable <span class = "keyword">extends</span> Application {
+ 11&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 13&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 14&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> MyArcs(), <span class = "constant">300</span>, <span class = "constant">200</span>);
+ 15&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ShowArc"</span>); <span class = "comment">// Set the stage title</span>
+ 16&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 17&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;  
+ 20&nbsp;&nbsp;  <span class = "comment">/**
+ 21&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 22&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 23&nbsp;&nbsp;   */</span>
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 25&nbsp;&nbsp;    launch(args);
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;}
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;<span class = "keyword">class</span> MyArcs <span class = "keyword">extends</span> Pane {
+ 30&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> paint() {  
+ 31&nbsp;&nbsp;    <span class = "keyword">double</span> centerX = getWidth() / <span class = "constant">2</span>;
+ 32&nbsp;&nbsp;    <span class = "keyword">double</span> centerY = getHeight() / <span class = "constant">2</span>;
+ 33&nbsp;&nbsp;    <span class = "keyword">double</span> radiusX = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">8</span> * getWidth() / <span class = "constant">2</span>;
+ 34&nbsp;&nbsp;    <span class = "keyword">double</span> radiusY = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">8</span> * getHeight() / <span class = "constant">2</span>;
+ 35&nbsp;&nbsp;    
+ 36&nbsp;&nbsp;    Arc arc1 = <span class = "keyword">new</span> Arc(centerX, centerY, radiusX, radiusY, <span class = "constant">30</span>, <span class = "constant">35</span>); 
+ 37&nbsp;&nbsp;    arc1.setFill(Color.RED); <span class = "comment">// Set fill color</span>
+ 38&nbsp;&nbsp;    arc1.setType(ArcType.ROUND); <span class = "comment">// Set arc type</span>
+ 39&nbsp;&nbsp;    
+ 40&nbsp;&nbsp;    Arc arc2 = <span class = "keyword">new</span> Arc(centerX, 
+ 41&nbsp;&nbsp;      centerY, radiusX, radiusY, <span class = "constant">30</span> + <span class = "constant">90</span>, <span class = "constant">35</span>);
+ 42&nbsp;&nbsp;    arc2.setFill(Color.WHITE);
+ 43&nbsp;&nbsp;    arc2.setType(ArcType.OPEN);
+ 44&nbsp;&nbsp;    arc2.setStroke(Color.BLACK);
+ 45&nbsp;&nbsp;
+ 46&nbsp;&nbsp;    Arc arc3 = <span class = "keyword">new</span> Arc(centerX, 
+ 47&nbsp;&nbsp;      centerY, radiusX, radiusY, <span class = "constant">30</span> + <span class = "constant">180</span>, <span class = "constant">35</span>);
+ 48&nbsp;&nbsp;    arc3.setFill(Color.WHITE);
+ 49&nbsp;&nbsp;    arc3.setType(ArcType.CHORD);
+ 50&nbsp;&nbsp;    arc3.setStroke(Color.BLACK);
+ 51&nbsp;&nbsp;    getChildren().add(<span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">170</span>, <span class = "literal">"arc3: chord"</span>)); 
+ 52&nbsp;&nbsp;    
+ 53&nbsp;&nbsp;    Arc arc4 = <span class = "keyword">new</span> Arc(centerX, 
+ 54&nbsp;&nbsp;      centerY, radiusX, radiusY, <span class = "constant">30</span> + <span class = "constant">270</span>, <span class = "constant">35</span>);
+ 55&nbsp;&nbsp;    arc4.setFill(Color.GREEN);
+ 56&nbsp;&nbsp;    arc4.setType(ArcType.CHORD);
+ 57&nbsp;&nbsp;    arc4.setStroke(Color.BLACK);
+ 58&nbsp;&nbsp;    getChildren().clear();
+ 59&nbsp;&nbsp; 
+ 60&nbsp;&nbsp;    getChildren().addAll(arc1, arc2, arc3, arc4, 
+ 61&nbsp;&nbsp;      <span class = "keyword">new</span> Text(centerX + radiusX - <span class = "constant">100</span>, 
+ 62&nbsp;&nbsp;        centerY - radiusY, <span class = "literal">"arc1: round"</span>),
+ 63&nbsp;&nbsp;      <span class = "keyword">new</span> Text(centerX - radiusX, centerY - radiusY, <span class = "literal">"arc2: open"</span>),
+ 64&nbsp;&nbsp;      <span class = "keyword">new</span> Text(centerX - radiusX, centerY + radiusY, <span class = "literal">"arc3: chord"</span>),
+ 65&nbsp;&nbsp;      <span class = "keyword">new</span> Text(centerX + radiusX - <span class = "constant">100</span>,
+ 66&nbsp;&nbsp;        centerY + radiusY, <span class = "literal">"arc4: chord"</span>)); 
+ 67&nbsp;&nbsp;  }
+ 68&nbsp;&nbsp;  
+ 69&nbsp;&nbsp;  @Override
+ 70&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setWidth(<span class = "keyword">double</span> width) {
+ 71&nbsp;&nbsp;    <span class = "keyword">super</span>.setWidth(width);
+ 72&nbsp;&nbsp;    paint();
+ 73&nbsp;&nbsp;  }
+ 74&nbsp;&nbsp;  
+ 75&nbsp;&nbsp;  @Override
+ 76&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setHeight(<span class = "keyword">double</span> height) {
+ 77&nbsp;&nbsp;    <span class = "keyword">super</span>.setHeight(height);
+ 78&nbsp;&nbsp;    paint();
+ 79&nbsp;&nbsp;  }
+ 80&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

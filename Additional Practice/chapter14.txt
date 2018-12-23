@@ -1,0 +1,457 @@
+Chapter 14 JavaFX Basics
+
+Section 14.2 JavaFX vs Swing and AWT
+1. Why is JavaFX preferred?
+a. JavaFX is much simpler to learn and use for new Java programmers.
+b. JavaFX provides a multi-touch support for touch-enabled devices such as tablets and smart phones. 
+c. JavaFX has a built-in 3D, animation support, video and audio playback, and runs as a standalone application or from a browser. 
+d. JavaFX incorporates modern GUI technologies to enable you to develop rich Internet applications. 
+Key:abcd
+
+#
+Section 14.3 The Basic Structure of a JavaFX Program
+2. Every JavaFX main class __________.
+a. implements javafx.application.Application
+b. extends javafx.application.Application
+c. overrides start(Stage s) method 
+d. overrides start() method 
+Key:bc
+
+#
+3. Which of the following statements are true?
+a. A primary stage is automatically created when a JavaFX main class is launched.
+b. You can have multiple stages displayed in a JavaFX program.
+c. A stage is displayed by invoking the show() method on the stage. 
+d. A scene is placed in the stage using the addScene method 
+e. A scene is placed in the stage using the setScene method 
+Key:abce
+
+#
+4. What is the output of the following JavaFX program?
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Test extends Application {      
+  public Test() {
+    System.out.println("Test constructor is invoked.");
+  }
+  
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {
+    System.out.println("start method is invoked.");
+  }
+
+  public static void main(String[] args) {
+    System.out.println("launch application.");
+    Application.launch(args);
+  }
+}
+a. launch application. start method is invoked.
+b. start method is invoked. Test constructor is invoked.
+c. Test constructor is invoked. start method is invoked. 
+d. launch application. start method is invoked. Test constructor is invoked.
+e. launch application. Test constructor is invoked. start method is invoked. 
+Key:e
+
+#
+Section 14.4 Panes, UI Controls, and Shapes
+5. Which of the following statements are true?
+a. A Scene is a Node.
+b. A Shape is a Node. 
+c. A Stage is a Node. 
+d. A Control is a Node. 
+e. A Pane is a Node.
+Key:bde
+
+#
+6. Which of the following statements are true?
+a. A Node can be placed in a Pane.
+b. A Node can be placed in a Scene.
+c. A Pane can be placed in a Control.
+d. A Shape can be placed in a Control.
+Key:a
+
+#
+7. Which of the following statements are correct?
+a. new Scene(new Button("OK"));
+b. new Scene(new Circle());
+c. new Scene(new ImageView());
+d. new Scene(new Pane());
+Key:ad
+
+#
+8. To add a circle object into a pane, use _________.
+a. pane.add(circle);
+b. pane.addAll(circle);
+c. pane.getChildren().add(circle);
+d. pane.getChildren().addAll(circle);
+Key:cd
+
+#
+9. Which of the following statements are correct?
+a. Every subclass of Node has a no-arg constructor.
+b. Circle is a subclass of Node.
+c. Button is a subclass of Node.
+d. Pane is a subclass of Node.
+e. Scene is a subclass on Node.
+Key:abcd
+
+#
+Section 14.5 Binding Properties
+10. Which of the following are binding properties?
+a. Integer
+b. Double
+c. IntegerProperty
+d. DoubleProperty
+e. String
+Key:cd
+
+#
+11. Which of the following can be used as a source for a binding properties?
+a. Integer
+b. Double
+c. IntegerProperty
+d. DoubleProperty
+e. String
+Key:cd
+
+#
+12. Suppose a JavaFX class has a binding property named weight of the type DoubleProperty. By convention, which of the following methods are defined in the class?
+a. public double getWeight()
+b. public void setWeight(double v)
+c. public DoubleProperty weightProperty()
+d. public double weightProperty()
+e. public DoubleProperty WeightProperty()
+Key:abc 
+
+#
+13. What is the output of the following code?
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+public class Test {
+  public static void main(String[] args) {       
+    IntegerProperty d1 = new SimpleIntegerProperty(1);
+    IntegerProperty d2 = new SimpleIntegerProperty(2);
+    d1.bind(d2);
+    System.out.print("d1 is " + d1.getValue() 
+      + " and d2 is " + d2.getValue());
+    d2.setValue(3);
+    System.out.println(", d1 is " + d1.getValue() 
+      + " and d2 is " + d2.getValue());
+  }
+}
+
+a. d1 is 2 and d2 is 2, d1 is 3 and d2 is 3
+b. d1 is 2 and d2 is 2, d1 is 2 and d2 is 3
+c. d1 is 1 and d2 is 2, d1 is 1 and d2 is 3
+d. d1 is 1 and d2 is 2, d1 is 3 and d2 is 3
+Key:a
+
+#
+14. What is the output of the following code?
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+public class Test {
+  public static void main(String[] args) {       
+    IntegerProperty d1 = new SimpleIntegerProperty(1);
+    IntegerProperty d2 = new SimpleIntegerProperty(2);
+    d1.bindBidirectional(d2);
+    System.out.print("d1 is " + d1.getValue() 
+      + " and d2 is " + d2.getValue());
+    d1.setValue(3);
+    System.out.println(", d1 is " + d1.getValue() 
+      + " and d2 is " + d2.getValue());
+  }
+}
+
+a. d1 is 2 and d2 is 2, d1 is 3 and d2 is 3
+b. d1 is 2 and d2 is 2, d1 is 2 and d2 is 3
+c. d1 is 1 and d2 is 2, d1 is 1 and d2 is 3
+d. d1 is 1 and d2 is 2, d1 is 3 and d2 is 3
+Key:a
+ 
+#
+Section 14.6 Common Properties and Methods for Nodes
+15. Which of the following statements correctly sets the fill color of circle to black?
+a. circle.setFill(Color.BLACK);
+b. circle.setFill(Color.black);
+c. circle.setStyle("-fx-fill: black");
+d. circle.setStyle("fill: black");
+e. circle.setStyle("-fx-fill-color: black");
+Key:ac
+
+#
+16. Which of the following statements correctly rotates the button 45 degrees counterclockwise?
+a. button.setRotate(45);
+b. button.setRotate(Math.toRadians(45));
+c. button.setRotate(360 - 45);
+d. button.setRotate(-45);
+Key:cd
+
+#
+Section 14.7 The Color Class
+17. Which of the following statements correctly creates a Color object?
+a. new Color(3, 5, 5, 1);
+b. new Color(0.3, 0.5, 0.5, 0.1);
+c. new Color(0.3, 0.5, 0.5);
+d. Color.color(0.3, 0.5, 0.5);
+e. Color.color(0.3, 0.5, 0.5, 0.1);
+Key:bde
+
+#
+Section 14.8 The Font Class
+18. Which of the following statements correctly creates a Font object?
+a. new Font(34);
+b. new Font("Times", 34);
+c. Font.font("Times", 34);
+d. Font.font("Times", FontWeight.NORMAL, 34);
+e. Font.font("Times", FontWeight.NORMAL, FontPosture.ITALIC, 34);
+Key:abcde
+
+#
+19. Which of the following statements are correct?
+a. A Color object is immutable.
+b. A Font object is immutable.
+c. You cannot change the contents in a Color object once it is created.
+d. You cannot change the contents in a Font object once it is created.
+Key:abcd
+
+#
+Section 14.9 The Image and ImageView Classes
+20. Which of the following statements correctly creates an ImageView object?
+a. new ImageView("http://www.cs.armstrong.edu/liang/image/us.gif");
+b. new ImageView(new Image("http://www.cs.armstrong.edu/liang/image/us.gif"));
+c. new ImageView("image/us.gif");
+d. new ImageView(new Image("image/us.gif"));
+Key:abcd
+
+#
+21. Analyze the following code:
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {
+    // Create a pane to hold the image views
+    Pane pane = new HBox(10);
+    pane.setPadding(new Insets(5, 5, 5, 5));
+    Image image = new Image("www.cs.armstrong.edu/liang/image/us.gif");
+    pane.getChildren().addAll(new ImageView(image), new ImageView(image));
+    
+    // Create a scene and place it in the stage
+    Scene scene = new Scene(pane);
+    primaryStage.setTitle("ShowImage"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+  }
+  
+  /**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+a. The program runs fine and displays two images.
+b. new Image("www.cs.armstrong.edu/liang/image/us.gif") must be replaced by new Image("http://www.cs.armstrong.edu/liang/image/us.gif").
+c. The image object cannot be shared by two ImageViews. 
+d. The addAll method needs to be replaced by the add method.
+Key:b
+
+#
+Section 14.10 Layout Panes
+22. To add a node into a pane, use ______.
+a. pane.add(node);
+b. pane.addAll(node);
+c. pane.getChildren().add(node);
+d. pane.getChildren().addAll(node);
+Key:cd
+
+#
+23. To add two nodes node1 and node2 into a pane, use ______.
+a. pane.add(node1, node2);
+b. pane.addAll(node1, node2);
+c. pane.getChildren().add(node1, node2);
+d. pane.getChildren().addAll(node1, node2);
+Key:d
+
+#
+24. To remove a node from the pane, use ______.
+a. pane.remove(node);
+b. pane.removeAll(node);
+c. pane.getChildren().remove(node);
+d. pane.getChildren().removeAll(node);
+Key:cd
+
+#
+25. To remove two nodes node1 and node2 from a pane, use ______.
+a. pane.remove(node1, node2);
+b. pane.removeAll(node1, node2);
+c. pane.getChildren().remove(node1, node2);
+d. pane.getChildren().removeAll(node1, node2);
+Key:d
+
+#
+26. Which of the following statements are correct to create a FlowPane?
+a. new FlowPane()
+b. new FlowPane(4, 5)
+c. new FlowPane(Orientation.VERTICAL);
+d. new FlowPane(4, 5, Orientation.VERTICAL);
+Key:abcd
+
+#
+27. To add a node to the the first row and second column in a GridPane pane, use ________.
+a.	pane.getChildren().add(node, 1, 2);
+b.	pane.add(node, 1, 2);
+c.	pane.getChildren().add(node, 0, 1);
+d.	pane.add(node, 0, 1);
+e.	pane.add(node, 1, 0);
+Key:e
+
+#
+28. To add two nodes node1 and node2 to the the first row in a GridPane pane, use ________.
+a.	pane.add(node1, 0, 0); pane.add(node2, 1, 0);
+b.	pane.add(node1, node2, 0); 
+c.	pane.addRow(0, node1, node2); 
+d.	pane.addRow(1, node1, node2);
+e.	pane.add(node1, 0, 1); pane.add(node2, 1, 1);
+Key:ac
+
+#
+29.	To place a node in the left of a BorderPane p, use ___________.
+a.	p.setEast(node);
+b.	p.placeLeft(node);
+c.	p.setLeft(node);
+d.	p.left(node);
+Key:c
+
+#
+30.	To place two nodes node1 and node2 in a HBox p, use ___________.
+a.	p.add(node1, node2);
+b.	p.addAll(node1, node2);
+c.	p.getChildren().add(node1, node2);
+d.	p.getChildren().addAll(node1, node2);
+Key:d
+
+#
+31. Analyze the following code:
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+
+public class Test extends Application {
+  @Override // Override the start method in the Application class
+  public void start(Stage primaryStage) {
+    HBox pane = new HBox(5);
+    Circle circle = new Circle(50, 200, 200);   
+    pane.getChildren().addAll(circle);
+
+    circle.setCenterX(100);
+    circle.setCenterY(100);
+    circle.setRadius(50);
+    pane.getChildren().addAll(circle);
+
+    // Create a scene and place it in the stage
+    Scene scene = new Scene(pane);
+    primaryStage.setTitle("Test"); // Set the stage title
+    primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.show(); // Display the stage
+  }
+  
+  /**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+a.	The program has a compile error since the circle is added to a pane twice.
+b.	The program has a runtime error since the circle is added to a pane twice.
+c.	The program runs fine and displays one circle.
+d.	The program runs fine and displays two circles.
+Key:a
+
+#
+Section 14.11 Shapes
+32.	The _________ properties are defined in the javafx.scene.shape.Shape class.
+a.	stroke
+b.	strokeWidth
+c.	fill
+d.	centerX 
+Key:abc
+
+#
+33. The _________ properties are defined in the javafx.scene.text.Text class.
+a. text
+b. x
+c. y
+d. underline
+e. strikethrough
+Key:abcde
+
+#
+34. The _________ properties are defined in the javafx.scene.shape.Line class.
+a. x1
+b. x2
+c. y1
+d. y2
+e. strikethrough
+Key:abcd
+
+#
+35. The _________ properties are defined in the javafx.scene.shape.Rectangle class.
+a. width
+b. x
+c. y
+d. height
+e. arcWidth
+Key:abcde
+
+#
+36. The _________ properties are defined in the javafx.scene.shape.Ellipse class.
+a. centerX
+b. centerY
+c. radiusX
+d. radiusY
+Key:abcd
+
+#
+37. To construct a Polygon with three points x1, y1, x2, y2, x3, and y3, use _________.
+a. new Polygon(x1, y1, x2, y2, x3, y3)
+b. new Polygon(x1, y2, x3, y1, y2, y3)
+c. Polygon polygon = new Polygon(); polygon.getPoints().addAll(x1, y1, x2, y2, x3, y3)
+d. Polygon polygon = new Polygon(); polygon.getPoints().addAll(x1, y2, x3, y1, y2, y3)
+Key:ac
+
+#
+38. To construct a Polyline with three points x1, y1, x2, y2, x3, and y3, use _________.
+a. new Polyline(x1, y1, x2, y2, x3, y3)
+b. new Polyline(x1, y2, x3, y1, y2, y3)
+c. Polyline polyline = new Polygon(); polyline.getPoints().addAll(x1, y1, x2, y2, x3, y3)
+d. Polyline polyline = new Polygon(); polyline.getPoints().addAll(x1, y2, x3, y1, y2, y3)
+Key:ac
+
+#
+39. Assume p is a Polygon, to add a point (4, 5) into p, use _______.
+a. p.getPoints().add(4); p.getPoints().add(5); 
+b. p.getPoints().add(4.0); p.getPoints().add(5.0); 
+c. p.getPoints().addAll(4, 5); 
+d. p.getPoints().addAll(4.0, 5.0); 
+Key:bd

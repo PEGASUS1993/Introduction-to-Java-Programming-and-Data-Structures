@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FindNearestPoints.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FindNearestPointsWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "FindNearestPoints" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FindNearestPoints {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter the number of points: "</span>);
+    <span class = "keyword">int</span> numberOfPoints = input.nextInt();
+
+    <span class = "comment">// Create an array to store points</span>
+    <span class = "keyword">double</span>[][] points = <span class = "keyword">new</span> <span class = "keyword">double</span>[numberOfPoints][<span class = "constant">2</span>];
+    System.out.print(<span class = "literal">"Enter "</span> + numberOfPoints + <span class = "literal">" points: "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; points.length; i++) {
+      points[i][<span class = "constant">0</span>] = input.nextDouble();
+      points[i][<span class = "constant">1</span>] = input.nextDouble();
+    }
+
+    <span class = "comment">// p1 and p2 are the indices in the points array</span>
+    <span class = "keyword">int</span> p1 = <span class = "constant">0</span>, p2 = <span class = "constant">1</span>; <span class = "comment">// Initial two points</span>
+    <span class = "keyword">double</span> shortestDistance = distance(points[p1][<span class = "constant">0</span>], points[p1][<span class = "constant">1</span>], 
+      points[p2][<span class = "constant">0</span>], points[p2][<span class = "constant">1</span>]); <span class = "comment">// Initialize shortestDistance</span>
+    
+    <span class = "comment">// Compute distance for every two points</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; points.length; i++) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i + <span class = "constant">1</span>; j &lt; points.length; j++) {
+        <span class = "keyword">double</span> distance = distance(points[i][<span class = "constant">0</span>], points[i][<span class = "constant">1</span>],
+          points[j][<span class = "constant">0</span>], points[j][<span class = "constant">1</span>]); <span class = "comment">// Find distance</span>
+
+        <span class = "keyword">if</span> (shortestDistance &gt; distance) {
+          p1 = i; <span class = "comment">// Update p1</span>
+          p2 = j; <span class = "comment">// Update p2</span>
+          shortestDistance = distance; <span class = "comment">// Update shortestDistance </span>
+        }
+      }
+    }
+
+    <span class = "comment">// Display result</span>
+    System.out.println(<span class = "literal">"The closest two points are "</span> +
+      <span class = "literal">"("</span> + points[p1][<span class = "constant">0</span>] + <span class = "literal">", "</span> + points[p1][<span class = "constant">1</span>] + <span class = "literal">") and ("</span> +
+      points[p2][<span class = "constant">0</span>] + <span class = "literal">", "</span> + points[p2][<span class = "constant">1</span>] + <span class = "literal">")"</span>);
+  }
+
+  <span class = "comment">/** Compute the distance between two points (x1, y1) and (x2, y2)*/</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">double</span> distance(
+      <span class = "keyword">double</span> x1, <span class = "keyword">double</span> y1, <span class = "keyword">double</span> x2, <span class = "keyword">double</span> y2) {
+    <span class = "keyword">return</span> Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+  }
+}
+</pre>
+</body>
+</html>

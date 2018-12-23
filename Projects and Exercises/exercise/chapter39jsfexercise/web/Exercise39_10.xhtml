@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <h:head>
+    <title>Display Four Random Cards</title>
+  </h:head>
+  <h:body>
+    Display Four Random Cards
+    <h:form>   
+      <!-- Use h:panelGrid -->
+      <h:panelGrid columns="4" style="color:green">
+        <h:graphicImage name="#{exercise39_10.imageName1}" library="image/card" width="50" height="70" />
+        <h:graphicImage name="#{exercise39_10.imageName2}" library="image/card" width="50" height="70" />
+        <h:graphicImage name="#{exercise39_10.imageName3}" library="image/card" width="50" height="70" />
+        <h:graphicImage name="#{exercise39_10.imageName4}" library="image/card" width="50" height="70" />
+      </h:panelGrid>
+
+      <!-- Use command button -->
+      <h:commandButton value="Refresh" action ="#{exercise39_10.refresh}"/>
+    </h:form>
+  </h:body>
+</html>

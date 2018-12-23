@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TaskThreadDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TaskThreadDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TaskThreadDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TaskThreadDemo {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "comment">// Create tasks</span>
+  4&nbsp;&nbsp;    Runnable printA = <span class = "keyword">new</span> PrintChar(<span class = "literal">'a'</span>, <span class = "constant">100</span>);
+  5&nbsp;&nbsp;    Runnable printB = <span class = "keyword">new</span> PrintChar(<span class = "literal">'b'</span>, <span class = "constant">100</span>);
+  6&nbsp;&nbsp;    Runnable print100 = <span class = "keyword">new</span> PrintNum(<span class = "constant">100</span>);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Create threads</span>
+  9&nbsp;&nbsp;    Thread thread1 = <span class = "keyword">new</span> Thread(printA);
+ 10&nbsp;&nbsp;    Thread thread2 = <span class = "keyword">new</span> Thread(printB);
+ 11&nbsp;&nbsp;    Thread thread3 = <span class = "keyword">new</span> Thread(print100);
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "comment">// Start threads</span>
+ 14&nbsp;&nbsp;    thread1.start();
+ 15&nbsp;&nbsp;    thread2.start();
+ 16&nbsp;&nbsp;    thread3.start();
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;}
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;<span class = "comment">// The task for printing a specified character in specified times</span>
+ 21&nbsp;&nbsp;<span class = "keyword">class</span> PrintChar <span class = "keyword">implements</span> Runnable {
+ 22&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">char</span> charToPrint; <span class = "comment">// The character to print</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> times; <span class = "comment">// The times to repeat</span>
+ 24&nbsp;&nbsp;
+ 25&nbsp;&nbsp;  <span class = "comment">/** Construct a task with specified character and number of
+ 26&nbsp;&nbsp;   *  times to print the character
+ 27&nbsp;&nbsp;   */</span>
+ 28&nbsp;&nbsp;  <span class = "keyword">public</span> PrintChar(<span class = "keyword">char</span> c, <span class = "keyword">int</span> t) {
+ 29&nbsp;&nbsp;    charToPrint = c;
+ 30&nbsp;&nbsp;    times = t;
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;  @Override <span class = "comment">/** Override the run() method to tell the system
+ 34&nbsp;&nbsp;   *  what the task to perform
+ 35&nbsp;&nbsp;   */</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+ 37&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; times; i++) {
+ 38&nbsp;&nbsp;      System.out.print(charToPrint);
+ 39&nbsp;&nbsp;    }
+ 40&nbsp;&nbsp;  }
+ 41&nbsp;&nbsp;}
+ 42&nbsp;&nbsp;
+ 43&nbsp;&nbsp;<span class = "comment">// The task class for printing number from 1 to n for a given n</span>
+ 44&nbsp;&nbsp;<span class = "keyword">class</span> PrintNum <span class = "keyword">implements</span> Runnable {
+ 45&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> lastNum;
+ 46&nbsp;&nbsp;
+ 47&nbsp;&nbsp;  <span class = "comment">/** Construct a task for printing 1, 2, ... i */</span>
+ 48&nbsp;&nbsp;  <span class = "keyword">public</span> PrintNum(<span class = "keyword">int</span> n) {
+ 49&nbsp;&nbsp;    lastNum = n;
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;  @Override <span class = "comment">/** Tell the thread how to run */</span>
+ 53&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+ 54&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= lastNum; i++) {
+ 55&nbsp;&nbsp;      System.out.print(<span class = "literal">" "</span> + i);
+ 56&nbsp;&nbsp;    }
+ 57&nbsp;&nbsp;  }
+ 58&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

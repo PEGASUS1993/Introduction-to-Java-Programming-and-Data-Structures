@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ButtonIcon.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ButtonIconWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.animation.Animation;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.animation.KeyFrame;
+<span class = "keyword">import</span> javafx.animation.Timeline;
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.util.Duration;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ButtonIcon <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    StackPane pane = <span class = "keyword">new</span> StackPane();
+    ImageView usIcon = <span class = "keyword">new</span> ImageView(<span class = "keyword">new</span> Image(<span class = "literal">"image/usIcon.gif"</span>));
+    Button bt = <span class = "keyword">new</span> Button(<span class = "literal">"Click it"</span>, <span class = "keyword">new</span> Button(<span class = "literal">"TTT"</span>));
+    pane.getChildren().add(bt);
+    bt.setTextFill(Color.RED);
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">250</span>, <span class = "constant">50</span>);
+    primaryStage.setTitle(<span class = "literal">"ButtonIcon"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LabelWithGraphic.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LabelWithGraphicWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.ContentDisplay;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> LabelWithGraphic <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    ImageView us = <span class = "keyword">new</span> ImageView(<span class = "keyword">new</span> Image(<span class = "literal">"image/us.gif"</span>));
+    Label lb1 = <span class = "keyword">new</span> Label(<span class = "literal">"US\n50 States"</span>, us);
+    lb1.setStyle(<span class = "literal">"-fx-border-color: green; -fx-border-width: 2"</span>);
+    lb1.setContentDisplay(ContentDisplay.BOTTOM);
+    lb1.setTextFill(Color.RED);
+    
+    Label lb2 = <span class = "keyword">new</span> Label(<span class = "literal">"Circle"</span>, <span class = "keyword">new</span> Circle(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">25</span>));
+    lb2.setContentDisplay(ContentDisplay.TOP);
+    lb2.setTextFill(Color.ORANGE);
+
+    Label lb3 = <span class = "keyword">new</span> Label(<span class = "literal">"Rectangle"</span>, <span class = "keyword">new</span> Rectangle(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">50</span>, <span class = "constant">25</span>));
+    lb3.setContentDisplay(ContentDisplay.RIGHT);
+    
+    Label lb4 = <span class = "keyword">new</span> Label(<span class = "literal">"Ellipse"</span>, <span class = "keyword">new</span> Ellipse(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">25</span>));
+    lb4.setContentDisplay(ContentDisplay.LEFT);
+
+    Ellipse ellipse = <span class = "keyword">new</span> Ellipse(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">25</span>);
+    ellipse.setStroke(Color.GREEN);
+    ellipse.setFill(Color.WHITE);
+    StackPane stackPane = <span class = "keyword">new</span> StackPane();
+    stackPane.getChildren().addAll(ellipse, <span class = "keyword">new</span> Label(<span class = "literal">"JavaFX"</span>));
+    Label lb5 = <span class = "keyword">new</span> Label(<span class = "literal">"A pane inside a label"</span>, stackPane);
+    lb5.setContentDisplay(ContentDisplay.BOTTOM);
+    
+    HBox pane = <span class = "keyword">new</span> HBox(<span class = "constant">20</span>);
+    pane.getChildren().addAll(lb1, lb2, lb3, lb4, lb5);
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"LabelWithGraphic"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

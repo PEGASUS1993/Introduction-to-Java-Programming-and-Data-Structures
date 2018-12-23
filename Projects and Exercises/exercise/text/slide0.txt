@@ -1,0 +1,5 @@
+Chapter 1
+
+1.1 Introduction
+	
+	You use word processors to write documents, Web browsers to explore the Internet, and email programs to send email over the Internet. Word processors, browsers, and email programs are all examples of software that runs on computers. Software is developed using programming languages. There are many programming languages. So why Java? The answer is that Java enables users to develop and deploy applications on the Internet for servers, desktop computers, and small hand-held devices. The future of computing is being profoundly influenced by the Internet, and Java promises to remain a big part of that future. Java is the Internet programming language.

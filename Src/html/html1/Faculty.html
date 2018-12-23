@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Faculty.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/Faculty.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Faculty" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Faculty <span class = "keyword">extends</span> Employee {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">new</span> Faculty();
+  }
+  
+  <span class = "keyword">public</span> Faculty() {
+    System.out.println(<span class = "literal">"(4) Faculty's no-arg constructor is invoked"</span>);
+  }
+}
+
+<span class = "keyword">class</span> Employee <span class = "keyword">extends</span> Person {
+  <span class = "keyword">public</span> Employee() {
+    <span class = "keyword">this</span>(<span class = "literal">"(2) Invoke Employee’s overloaded constructor"</span>);
+    System.out.println(<span class = "literal">"(3) Employee's no-arg constructor is invoked"</span>);
+  }
+
+  <span class = "keyword">public</span> Employee(String s) {
+    System.out.println(s);
+  }
+}
+
+<span class = "keyword">class</span> Person {
+  <span class = "keyword">public</span> Person() {
+    System.out.println(<span class = "literal">"(1) Person's no-arg constructor is invoked"</span>);
+  }
+}
+</pre>
+</body>
+</html>

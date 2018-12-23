@@ -1,0 +1,62 @@
+1. ________ is the physical aspect of the computer that can be seen.
+a. Hardware
+b. Software
+c. Operating system
+d. Application program
+Answer:a
+
+2. __________ is the brain of a computer. 
+a. Hardware
+b. CPU
+c. Memory
+d. Disk
+Answer:b
+
+3. The speed of CPU is measured in __________. 
+a. megabytes
+b. gigabytes
+c. megahertz
+d. gigahertz
+Answer:cd  
+
+4. Why do computers use zeros and ones?
+a. because combinations of zeros and ones can represent any numbers and characters.
+b. because digital devices have two stable states and it is natural to use one state for 0 and the other for 1.
+c. because binary numbers are simplest.
+d. because binary numbers are the bases upon which all other number systems are built.
+Answer:b
+
+5. One byte has ________ bits.
+a. 4
+b. 8
+c. 12
+d. 16
+Answer:b
+
+6. A 3.5-inch floppy can hold up to _________ bytes.
+a. 0.5 MB.
+b. 1.44 MB.
+c. 10 MB.
+d. 100 MB.
+Answer:b
+
+7. A regular CD-ROM can hold up to _________ bytes.
+a. 100 MB.
+b. 700 MB.
+c. 1 GB.
+d. 10 GB.
+Answer:b
+
+8. ____________ is a device to connect a computer to a local area network (LAN).
+a. regular modem
+b. DSL
+c. Cable modem
+d. NIC
+Answer:d
+
+9. ____________ are instructions to the computer. 
+a. Hardware
+b. Software
+c. Programs
+d. Keyboards
+Answer:bc

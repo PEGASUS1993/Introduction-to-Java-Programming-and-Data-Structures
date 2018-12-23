@@ -1,0 +1,275 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyHashSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyHashSetWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> MyHashSet&lt;E&gt; <span class = "keyword">implements</span> Collection&lt;E&gt; {
+  <span class = "comment">// Define the default hash table size. Must be a power of 2</span>
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class = "constant">4</span>;
+  
+  <span class = "comment">// Define the maximum hash table size. 1 &lt;&lt; 30 is same as 2^30</span>
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> MAXIMUM_CAPACITY = <span class = "constant">1</span> &lt;&lt; <span class = "constant">30</span>; 
+  
+  <span class = "comment">// Current hash table capacity. Capacity is a power of 2</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> capacity;
+  
+  <span class = "comment">// Define default load factor</span>
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">float</span> DEFAULT_MAX_LOAD_FACTOR = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">75f</span>; 
+
+  <span class = "comment">// Specify a load factor threshold used in the hash table</span>
+  <span class = "keyword">private</span> <span class = "keyword">float</span> loadFactorThreshold; 
+  
+  <span class = "comment">// The number of elements in the set</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> size = <span class = "constant">0</span>; 
+  
+  <span class = "comment">// Hash table is an array with each cell that is a linked list</span>
+  <span class = "keyword">private</span> LinkedList&lt;E&gt;[] table;
+
+  <span class = "comment">/** Construct a set with the default capacity and load factor */</span>
+  <span class = "keyword">public</span> MyHashSet() {  
+    <span class = "keyword">this</span>(DEFAULT_INITIAL_CAPACITY, DEFAULT_MAX_LOAD_FACTOR);    
+  }
+  
+  <span class = "comment">/** Construct a set with the specified initial capacity and 
+   * default load factor */</span>
+  <span class = "keyword">public</span> MyHashSet(<span class = "keyword">int</span> initialCapacity) { 
+    <span class = "keyword">this</span>(initialCapacity, DEFAULT_MAX_LOAD_FACTOR);    
+  }
+  
+  <span class = "comment">/** Construct a set with the specified initial capacity 
+   * and load factor */</span>
+  <span class = "keyword">public</span> MyHashSet(<span class = "keyword">int</span> initialCapacity, <span class = "keyword">float</span> loadFactorThreshold) { 
+    <span class = "keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)
+      <span class = "keyword">this</span>.capacity = MAXIMUM_CAPACITY;
+    <span class = "keyword">else</span>
+      <span class = "keyword">this</span>.capacity = trimToPowerOf2(initialCapacity);
+    
+    <span class = "keyword">this</span>.loadFactorThreshold = loadFactorThreshold;    
+    table = <span class = "keyword">new</span> LinkedList[capacity];
+  }
+  
+  @Override <span class = "comment">/** Remove all elements from this set */</span> 
+  <span class = "keyword">public</span> <span class = "keyword">void</span> clear() {
+    size = <span class = "constant">0</span>;
+    removeElements();
+  }
+
+  @Override <span class = "comment">/** Return true if the element is in the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> contains(Object e) {
+    <span class = "keyword">int</span> bucketIndex = hash(e.hashCode());
+    <span class = "keyword">if</span> (table[bucketIndex] != <span class = "keyword">null</span>) {
+      LinkedList&lt;E&gt; bucket = table[bucketIndex]; 
+      <span class = "keyword">return</span> bucket.contains(e);
+    }
+    
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+  
+  @Override <span class = "comment">/** Add an element to the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> add(E e) {
+    <span class = "keyword">if</span> (contains(e)) <span class = "comment">// Duplicate element not stored</span>
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+    
+    <span class = "keyword">if</span> (size + <span class = "constant">1</span> &gt; capacity * loadFactorThreshold) {
+      <span class = "keyword">if</span> (capacity == MAXIMUM_CAPACITY)
+        <span class = "keyword">throw</span> <span class = "keyword">new</span> RuntimeException(<span class = "literal">"Exceeding maximum capacity"</span>);
+    
+      rehash();
+    }
+    
+    <span class = "keyword">int</span> bucketIndex = hash(e.hashCode());
+    
+    <span class = "comment">// Create a linked list for the bucket if it is not created</span>
+    <span class = "keyword">if</span> (table[bucketIndex] == <span class = "keyword">null</span>) {
+      table[bucketIndex] = <span class = "keyword">new</span> LinkedList&lt;E&gt;();
+    }
+
+    <span class = "comment">// Add e to hashTable[index]</span>
+    table[bucketIndex].add(e);
+
+    size++; <span class = "comment">// Increase size</span>
+    
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override <span class = "comment">/** Remove the element from the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(Object e) {
+    <span class = "keyword">if</span> (!contains(e))
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+    
+    <span class = "keyword">int</span> bucketIndex = hash(e.hashCode());
+    
+    <span class = "comment">// Create a linked list for the bucket if it is not created</span>
+    <span class = "keyword">if</span> (table[bucketIndex] != <span class = "keyword">null</span>) {
+      LinkedList&lt;E&gt; bucket = table[bucketIndex]; 
+      bucket.remove(e);
+    }
+
+    size--; <span class = "comment">// Decrease size</span>
+    
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override <span class = "comment">/** Return true if the set contains no elements */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> size == <span class = "constant">0</span>;
+  }
+
+  @Override <span class = "comment">/** Return the number of elements in the set */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> size() {
+    <span class = "keyword">return</span> size;
+  }
+
+  @Override <span class = "comment">/** Return an iterator for the elements in this set */</span>
+  <span class = "keyword">public</span> java.util.Iterator&lt;E&gt; iterator() {
+    <span class = "keyword">return</span> <span class = "keyword">new</span> MyHashSetIterator(<span class = "keyword">this</span>);
+  }
+  
+  <span class = "comment">/** Inner class for iterator */</span>
+  <span class = "keyword">private</span> <span class = "keyword">class</span> MyHashSetIterator <span class = "keyword">implements</span> java.util.Iterator&lt;E&gt; {
+    <span class = "comment">// Store the elements in a list</span>
+    <span class = "keyword">private</span> java.util.ArrayList&lt;E&gt; list;
+    <span class = "keyword">private</span> <span class = "keyword">int</span> current = <span class = "constant">0</span>; <span class = "comment">// Point to the current element in list</span>
+    <span class = "keyword">private</span> MyHashSet&lt;E&gt; set;
+    
+    <span class = "comment">/** Create a list from the set */</span>
+    <span class = "keyword">public</span> MyHashSetIterator(MyHashSet&lt;E&gt; set) {
+      <span class = "keyword">this</span>.set = set;
+      list = setToList();
+    }
+
+    @Override <span class = "comment">/** Next element for traversing? */</span>
+    <span class = "keyword">public</span> <span class = "keyword">boolean</span> hasNext() {
+      <span class = "keyword">return</span> current &lt; list.size();
+    }
+
+    @Override <span class = "comment">/** Get current element and move cursor to the next */</span>
+    <span class = "keyword">public</span> E next() {
+      <span class = "keyword">return</span> list.get(current++);
+    }
+
+    @Override <span class = "comment">/** Remove the element returned by the last next() */</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> remove() {
+      <span class = "comment">// Left as an exercise</span>
+      <span class = "comment">// You need to remove the element from the set</span>
+      <span class = "comment">// You also need to remove it from the list</span>
+    }
+  }  
+  
+  <span class = "comment">/** Hash function */</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> hash(<span class = "keyword">int</span> hashCode) {
+    <span class = "keyword">return</span> hashCode & (capacity - <span class = "constant">1</span>);
+  }
+
+  <span class = "comment">/** Return a power of 2 for initialCapacity */</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> trimToPowerOf2(<span class = "keyword">int</span> initialCapacity) {
+    <span class = "keyword">int</span> capacity = <span class = "constant">1</span>;
+    <span class = "keyword">while</span> (capacity &lt; initialCapacity) {
+      capacity &lt;&lt;= <span class = "constant">1</span>;
+    }
+    
+    <span class = "keyword">return</span> capacity;
+  }
+  
+  <span class = "comment">/** Remove all e from each bucket */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> removeElements() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        table[i].clear();
+      }
+    }
+  }
+  
+  <span class = "comment">/** Rehash the set */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> rehash() {
+    java.util.ArrayList&lt;E&gt; list = setToList(); <span class = "comment">// Copy to a list</span>
+    capacity &lt;&lt;= <span class = "constant">1</span>; <span class = "comment">// Double capacity      </span>
+    table = <span class = "keyword">new</span> LinkedList[capacity]; <span class = "comment">// Create a new hash table</span>
+    size = <span class = "constant">0</span>; <span class = "comment">// Reset size </span>
+    
+    <span class = "keyword">for</span> (E element: list) {
+      add(element); <span class = "comment">// Add from the old table to the new table</span>
+    }
+  }
+
+  <span class = "comment">/** Copy elements in the hash set to an array list */</span>
+  <span class = "keyword">private</span> java.util.ArrayList&lt;E&gt; setToList() {
+    java.util.ArrayList&lt;E&gt; list = <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;();
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        <span class = "keyword">for</span> (E e: table[i]) {
+          list.add(e);
+        }
+      }
+    }  
+    
+    <span class = "keyword">return</span> list;
+  }
+
+  @Override
+  <span class = "keyword">public</span> String toString() {
+    java.util.ArrayList&lt;E&gt; list = setToList();
+    StringBuilder builder = <span class = "keyword">new</span> StringBuilder(<span class = "literal">"["</span>);
+    
+    <span class = "comment">// Add the elements except the last one to the string builder</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.size() - <span class = "constant">1</span>; i++) {
+      builder.append(list.get(i) + <span class = "literal">", "</span>);
+    }
+    
+    <span class = "comment">// Add the last element in the list to the string builder</span>
+    <span class = "keyword">if</span> (list.size() == <span class = "constant">0</span>)
+      builder.append(<span class = "literal">"]"</span>);
+    <span class = "keyword">else</span>
+      builder.append(list.get(list.size() - <span class = "constant">1</span>) + <span class = "literal">"]"</span>);
+    
+    <span class = "keyword">return</span> builder.toString();
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addAll(Collection&lt;? <span class = "keyword">extends</span> E&gt; arg0) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsAll(Collection&lt;?&gt; arg0) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> removeAll(Collection&lt;?&gt; arg0) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> retainAll(Collection&lt;?&gt; arg0) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> Object[] toArray() {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> &lt;T&gt; T[] toArray(T[] arg0) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+}
+</pre>
+</body>
+</html>

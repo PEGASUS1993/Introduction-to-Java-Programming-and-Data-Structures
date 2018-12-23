@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - KnightTourModel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "KnightTourModelWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> KnightTourModel {
+  <span class = "keyword">private</span> UnweightedGraph&lt;Integer&gt; graph; <span class = "comment">// Define a graph</span>
+
+  <span class = "keyword">public</span> KnightTourModel() {
+    <span class = "comment">// (u, v) is an edge if a knight can move from u and v</span>
+    ArrayList&lt;AbstractGraph.Edge&gt; edges = getEdges();
+
+    <span class = "comment">// Create a graph with 64 vertices labeled 0 to 63</span>
+    graph = <span class = "keyword">new</span> UnweightedGraph&lt;Integer&gt;(edges, <span class = "constant">64</span>);
+  }
+
+  <span class = "comment">/** Get a Hamiltonian path starting from vertex v */</span>
+  <span class = "keyword">public</span> List&lt;Integer&gt; getHamiltonianPath(<span class = "keyword">int</span> v) {
+    <span class = "keyword">return</span> graph.getHamiltonianPath(v);
+  }
+
+  <span class = "comment">/** Create edges for the graph */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> ArrayList&lt;AbstractGraph.Edge&gt; getEdges() {
+    ArrayList&lt;AbstractGraph.Edge&gt; edges 
+      = <span class = "keyword">new</span> ArrayList&lt;AbstractGraph.Edge&gt;(); <span class = "comment">// Store edges</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">8</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">8</span>; j++) {
+        <span class = "keyword">int</span> u = i * <span class = "constant">8</span> + j; <span class = "comment">// The vertex label</span>
+
+        <span class = "comment">// Check eight possible edges from u</span>
+        <span class = "keyword">if</span> (i - <span class = "constant">1</span> &gt;= <span class = "constant">0</span> && j - <span class = "constant">2</span> &gt;= <span class = "constant">0</span>) {
+          <span class = "keyword">int</span> v1 = (i - <span class = "constant">1</span>) * <span class = "constant">8</span> + (j - <span class = "constant">2</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v1));
+        }
+
+        <span class = "keyword">if</span> (i - <span class = "constant">2</span> &gt;= <span class = "constant">0</span> && j - <span class = "constant">1</span> &gt;= <span class = "constant">0</span>) {
+          <span class = "keyword">int</span> v2 = (i - <span class = "constant">2</span>) * <span class = "constant">8</span> + (j - <span class = "constant">1</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v2));
+        }
+
+        <span class = "keyword">if</span> (i - <span class = "constant">2</span> &gt;= <span class = "constant">0</span> && j + <span class = "constant">1</span> &lt;= <span class = "constant">7</span>) {
+          <span class = "keyword">int</span> v3 = (i - <span class = "constant">2</span>) * <span class = "constant">8</span> + (j + <span class = "constant">1</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v3));
+        }
+
+        <span class = "keyword">if</span> (i - <span class = "constant">1</span> &gt;= <span class = "constant">0</span> && j + <span class = "constant">2</span> &lt;= <span class = "constant">7</span>) {
+          <span class = "keyword">int</span> v4 = (i - <span class = "constant">1</span>) * <span class = "constant">8</span> + (j + <span class = "constant">2</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v4));
+        }
+
+        <span class = "keyword">if</span> (i + <span class = "constant">1</span> &lt;= <span class = "constant">7</span> && j + <span class = "constant">2</span> &lt;= <span class = "constant">7</span>) {
+          <span class = "keyword">int</span> v5 = (i + <span class = "constant">1</span>) * <span class = "constant">8</span> + (j + <span class = "constant">2</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v5));
+        }
+
+        <span class = "keyword">if</span> (i + <span class = "constant">2</span> &lt;= <span class = "constant">7</span> && j + <span class = "constant">1</span> &lt;= <span class = "constant">7</span>) {
+          <span class = "keyword">int</span> v6 = (i + <span class = "constant">2</span>) * <span class = "constant">8</span> + (j + <span class = "constant">1</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v6));
+        }
+
+        <span class = "keyword">if</span> (i + <span class = "constant">2</span> &lt;= <span class = "constant">7</span> && j - <span class = "constant">1</span> &gt;= <span class = "constant">0</span>) {
+          <span class = "keyword">int</span> v7 = (i + <span class = "constant">2</span>) * <span class = "constant">8</span> + (j - <span class = "constant">1</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v7));
+        }
+
+        <span class = "keyword">if</span> (i + <span class = "constant">1</span> &lt;= <span class = "constant">7</span> && j - <span class = "constant">2</span> &gt;= <span class = "constant">0</span>) {
+          <span class = "keyword">int</span> v8 = (i + <span class = "constant">1</span>) * <span class = "constant">8</span> + (j - <span class = "constant">2</span>);
+          edges.add(<span class = "keyword">new</span> AbstractGraph.Edge(u, v8));
+        }
+      }
+    
+    <span class = "keyword">return</span> edges;
+  }
+} 
+</pre>
+</body>
+</html>

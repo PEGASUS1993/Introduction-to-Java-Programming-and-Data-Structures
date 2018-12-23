@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Hexadecimal2Decimal.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Hexadecimal2DecimalWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Hexadecimal2Decimal" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Hexadecimal2Decimal {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Prompt the user to enter a string</span>
+    System.out.print(<span class = "literal">"Enter a hex number: "</span>);
+    String hex = input.nextLine();
+    
+    <span class = "keyword">int</span> decimalValue = <span class = "constant">0</span>;
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; hex.length(); i++) {
+      <span class = "keyword">int</span> decimal = <span class = "constant">0</span>;
+      <span class = "keyword">if</span> (hex.charAt(i) &lt;= <span class = "literal">'F'</span> && hex.charAt(i) &gt;= <span class = "literal">'A'</span>)
+        decimal = hex.charAt(i) - <span class = "literal">'A'</span> + <span class = "constant">10</span>;
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (Character.isDigit(hex.charAt(i)))
+        decimal = hex.charAt(i) - <span class = "literal">'0'</span>;
+      <span class = "keyword">else</span> {
+        System.out.println(<span class = "literal">"Wrong input"</span>);
+        System.exit(<span class = "constant">1</span>);
+      }
+      
+      decimalValue = decimalValue * <span class = "constant">16</span> + decimal;
+    }
+
+
+    System.out.println(<span class = "literal">"The decimal value for hex number "</span>
+      + hex + <span class = "literal">" is "</span> + decimalValue);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> hexCharToDecimal(<span class = "keyword">char</span> ch) {
+    <span class = "keyword">if</span> (ch &gt;= <span class = "literal">'A'</span> && ch &lt;= <span class = "literal">'F'</span>)
+      <span class = "keyword">return</span> <span class = "constant">10</span> + ch - <span class = "literal">'A'</span>;
+    <span class = "keyword">else</span> <span class = "comment">// ch is '0', '1', ..., or '9'</span>
+      <span class = "keyword">return</span> ch - <span class = "literal">'0'</span>;
+  }
+}
+</pre>
+</body>
+</html>

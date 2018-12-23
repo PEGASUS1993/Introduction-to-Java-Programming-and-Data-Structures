@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CheckSudokuSolution.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CheckSudokuSolutionWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CheckSudokuSolution" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CheckSudokuSolution {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Read a Sudoku solution</span>
+    <span class = "keyword">int</span>[][] grid = readASolution();
+
+    System.out.println(isValid(grid) ? <span class = "literal">"Valid solution"</span> 
+      : <span class = "literal">"Invalid solution"</span>);
+  }
+
+  <span class = "comment">/** Read a Sudoku solution from the console */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[][] readASolution() {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    System.out.println(<span class = "literal">"Enter a Sudoku puzzle solution:"</span>);
+    <span class = "keyword">int</span>[][] grid = <span class = "keyword">new</span> <span class = "keyword">int</span>[<span class = "constant">9</span>][<span class = "constant">9</span>];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++)
+        grid[i][j] = input.nextInt();
+
+    <span class = "keyword">return</span> grid;
+  }
+
+  <span class = "comment">/** Check whether a solution is valid */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isValid(<span class = "keyword">int</span>[][] grid) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++)
+        <span class = "keyword">if</span> (grid[i][j] &lt; <span class = "constant">1</span> || grid[i][j] &gt; <span class = "constant">9</span> 
+            || !isValid(i, j, grid))
+          <span class = "keyword">return</span> <span class = "keyword">false</span>;
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// The solution is valid</span>
+  }
+
+  <span class = "comment">/** Check whether grid[i][j] is valid in the grid */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isValid(<span class = "keyword">int</span> i, <span class = "keyword">int</span> j, <span class = "keyword">int</span>[][] grid) {
+    <span class = "comment">// Check whether grid[i][j] is valid at the i's row</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> column = <span class = "constant">0</span>; column &lt; <span class = "constant">9</span>; column++)
+      <span class = "keyword">if</span> (column != j && grid[i][column] == grid[i][j])
+        <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "comment">// Check whether grid[i][j] is valid at the j's column</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> row = <span class = "constant">0</span>; row &lt; <span class = "constant">9</span>; row++)
+      <span class = "keyword">if</span> (row != i && grid[row][j] == grid[i][j])
+        <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "comment">// Check whether grid[i][j] is valid in the 3 by 3 box</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> row = (i / <span class = "constant">3</span>) * <span class = "constant">3</span>; row &lt; (i / <span class = "constant">3</span>) * <span class = "constant">3</span> + <span class = "constant">3</span>; row++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> col = (j / <span class = "constant">3</span>) * <span class = "constant">3</span>; col &lt; (j / <span class = "constant">3</span>) * <span class = "constant">3</span> + <span class = "constant">3</span>; col++)
+        <span class = "keyword">if</span> (!(row == i && col == j) && grid[row][col] == grid[i][j])
+          <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// The current value at grid[i][j] is valid</span>
+  }
+}
+</pre>
+</body>
+</html>

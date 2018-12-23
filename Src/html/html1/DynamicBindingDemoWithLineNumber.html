@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DynamicBindingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DynamicBindingDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DynamicBindingDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> DynamicBindingDemo {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    m(<span class = "keyword">new</span> GraduateStudent());
+  4&nbsp;&nbsp;    m(<span class = "keyword">new</span> Student());
+  5&nbsp;&nbsp;    m(<span class = "keyword">new</span> Person());
+  6&nbsp;&nbsp;    m(<span class = "keyword">new</span> Object());
+  7&nbsp;&nbsp;  }
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> m(Object x) {
+ 10&nbsp;&nbsp;    System.out.println(x.toString());
+ 11&nbsp;&nbsp;  }
+ 12&nbsp;&nbsp;}
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;<span class = "keyword">class</span> GraduateStudent <span class = "keyword">extends</span> Student {
+ 15&nbsp;&nbsp;}
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;<span class = "keyword">class</span> Student <span class = "keyword">extends</span> Person {
+ 18&nbsp;&nbsp;  @Override 
+ 19&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 20&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"Student"</span>;
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;}
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;<span class = "keyword">class</span> Person <span class = "keyword">extends</span> Object {
+ 25&nbsp;&nbsp;  @Override 
+ 26&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 27&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"Person"</span>;
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestFileClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestFileClass.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestFileClass" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestFileClass {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    java.io.File file = <span class = "keyword">new</span> java.io.File(<span class = "literal">"image/us.gif"</span>);
+  4&nbsp;&nbsp;    System.out.println(<span class = "literal">"Does it exist? "</span> + file.exists());
+  5&nbsp;&nbsp;    System.out.println(<span class = "literal">"The file has "</span> + file.length() + <span class = "literal">" bytes"</span>);
+  6&nbsp;&nbsp;    System.out.println(<span class = "literal">"Can it be read? "</span> + file.canRead());
+  7&nbsp;&nbsp;    System.out.println(<span class = "literal">"Can it be written? "</span> + file.canWrite());
+  8&nbsp;&nbsp;    System.out.println(<span class = "literal">"Is it a directory? "</span> + file.isDirectory());
+  9&nbsp;&nbsp;    System.out.println(<span class = "literal">"Is it a file? "</span> + file.isFile());
+ 10&nbsp;&nbsp;    System.out.println(<span class = "literal">"Is it absolute? "</span> + file.isAbsolute());
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"Is it hidden? "</span> + file.isHidden());
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"Absolute path is "</span> +
+ 13&nbsp;&nbsp;      file.getAbsolutePath());
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"Last modified on "</span> +
+ 15&nbsp;&nbsp;      <span class = "keyword">new</span> java.util.Date(file.lastModified()));
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

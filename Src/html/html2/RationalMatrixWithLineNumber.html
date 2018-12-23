@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RationalMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RationalMatrix.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> RationalMatrix <span class = "keyword">extends</span> GenericMatrix&lt;Rational&gt; {
+  2&nbsp;&nbsp;  @Override <span class = "comment">/** Add two rational numbers */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">protected</span> Rational add(Rational r1, Rational r2) {
+  4&nbsp;&nbsp;    <span class = "keyword">return</span> r1.add(r2);
+  5&nbsp;&nbsp;  }
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  @Override <span class = "comment">/** Multiply two rational numbers */</span>
+  8&nbsp;&nbsp;  <span class = "keyword">protected</span> Rational multiply(Rational r1, Rational r2) {
+  9&nbsp;&nbsp;    <span class = "keyword">return</span> r1.multiply(r2);
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  @Override <span class = "comment">/** Specify zero for a Rational number */</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">protected</span> Rational zero() {
+ 14&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> Rational(<span class = "constant">0</span>,<span class = "constant">1</span>);
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

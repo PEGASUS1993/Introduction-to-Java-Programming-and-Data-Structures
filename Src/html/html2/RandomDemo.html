@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RandomDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RandomDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "RandomDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> RandomDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Random object with seed 3</span>
+    java.util.Random generator1 = <span class = "keyword">new</span> java.util.Random(<span class = "constant">3</span>);
+    System.out.print(<span class = "literal">"From generator1: "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">10</span>; i++)
+      System.out.print(generator1.nextInt(<span class = "constant">1000</span>) + <span class = "literal">" "</span>);
+  
+    java.util.Random generator2 = <span class = "keyword">new</span> java.util.Random(<span class = "constant">3</span>);
+    System.out.print(<span class = "literal">"\nFrom generator2: "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">10</span>; i++)
+      System.out.print(generator2.nextInt(<span class = "constant">1000</span>) + <span class = "literal">" "</span>);
+  }
+}
+</pre>
+</body>
+</html>

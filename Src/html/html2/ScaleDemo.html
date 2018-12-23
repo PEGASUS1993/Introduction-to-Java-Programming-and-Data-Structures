@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ScaleDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ScaleDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.shape.Line;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.scene.shape.Polyline;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ScaleDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {  
+    <span class = "comment">// Create a polyline to draw a sine curve</span>
+    Polyline polyline = <span class = "keyword">new</span> Polyline();
+    <span class = "keyword">for</span> (<span class = "keyword">double</span> angle = <span class = "literal">-</span><span class = "constant">360</span>; angle &lt;= <span class = "constant">360</span>; angle++) {
+      polyline.getPoints().addAll(
+        angle, Math.sin(Math.toRadians(angle)));
+    }
+    polyline.setTranslateY(<span class = "constant">100</span>);
+    polyline.setTranslateX(<span class = "constant">200</span>);
+    polyline.setScaleX(<span class = "constant">0</span><span class = "literal">.</span><span class = "constant">5</span>);
+    polyline.setScaleY(<span class = "constant">50</span>); 
+    polyline.setStrokeWidth(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">0</span> / <span class = "constant">25</span>);
+    
+    <span class = "comment">// Draw x-axis </span>
+    Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">420</span>, <span class = "constant">100</span>);
+    Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">420</span>, <span class = "constant">100</span>, <span class = "constant">400</span>, <span class = "constant">90</span>);
+    Line line3 = <span class = "keyword">new</span> Line(<span class = "constant">420</span>, <span class = "constant">100</span>, <span class = "constant">400</span>, <span class = "constant">110</span>);
+
+    <span class = "comment">// Draw y-axis</span>
+    Line line4 = <span class = "keyword">new</span> Line(<span class = "constant">200</span>, <span class = "constant">10</span>, <span class = "constant">200</span>, <span class = "constant">200</span>);
+    Line line5 = <span class = "keyword">new</span> Line(<span class = "constant">200</span>, <span class = "constant">10</span>, <span class = "constant">190</span>, <span class = "constant">30</span>);
+    Line line6 = <span class = "keyword">new</span> Line(<span class = "constant">200</span>, <span class = "constant">10</span>, <span class = "constant">210</span>, <span class = "constant">30</span>);
+
+    <span class = "comment">// Draw x, y axis labels</span>
+    Text text1 = <span class = "keyword">new</span> Text(<span class = "constant">380</span>, <span class = "constant">70</span>, <span class = "literal">"X"</span>);
+    Text text2 = <span class = "keyword">new</span> Text(<span class = "constant">220</span>, <span class = "constant">20</span>, <span class = "literal">"Y"</span>);    
+    
+    <span class = "comment">// Add nodes to a pane</span>
+    Pane pane = <span class = "keyword">new</span> Pane();
+    pane.getChildren().addAll(polyline, line1, line2, line3, line4,
+      line5, line6, text1, text2);
+
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">200</span>);           
+    primaryStage.setTitle(<span class = "literal">"ScaleDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">// Lauch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

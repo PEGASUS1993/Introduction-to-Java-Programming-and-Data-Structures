@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PrimeNumberMethod.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/PrimeNumberMethod.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "PrimeNumberMethod" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> PrimeNumberMethod {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    System.out.println(<span class = "literal">"The first 50 prime numbers are \n"</span>);
+    printPrimeNumbers(<span class = "constant">50</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printPrimeNumbers(<span class = "keyword">int</span> numberOfPrimes) {
+    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_OF_PRIMES_PER_LINE = <span class = "constant">10</span>; <span class = "comment">// Display 10 per line</span>
+    <span class = "keyword">int</span> count = <span class = "constant">0</span>; <span class = "comment">// Count the number of prime numbers</span>
+    <span class = "keyword">int</span> number = <span class = "constant">2</span>; <span class = "comment">// A number to be tested for primeness</span>
+
+    <span class = "comment">// Repeatedly find prime numbers</span>
+    <span class = "keyword">while</span> (count &lt; numberOfPrimes) {
+      <span class = "comment">// Print the prime number and increase the count</span>
+      <span class = "keyword">if</span> (isPrime(number)) {
+        count++; <span class = "comment">// Increase the count</span>
+
+        <span class = "keyword">if</span> (count % NUMBER_OF_PRIMES_PER_LINE == <span class = "constant">0</span>) {
+          <span class = "comment">// Print the number and advance to the new line</span>
+          System.out.printf(<span class = "literal">"%<span class = "literal">-</span>5d\n"</span>, number);
+        }
+        <span class = "keyword">else</span>
+          System.out.printf(<span class = "literal">"%<span class = "literal">-</span>5d"</span>, number);
+      }
+
+      <span class = "comment">// Check if the next number is prime</span>
+      number++;
+    }
+  }
+
+  <span class = "comment">/** Check whether number is prime */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isPrime(<span class = "keyword">int</span> number) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> divisor = <span class = "constant">2</span>; divisor &lt;= number / <span class = "constant">2</span>; divisor++) {
+      <span class = "keyword">if</span> (number % divisor == <span class = "constant">0</span>) { <span class = "comment">// If true, number is not prime</span>
+        <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// number is not a prime</span>
+      }
+    }
+
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// number is prime</span>
+  }
+}
+</pre>
+</body>
+</html>

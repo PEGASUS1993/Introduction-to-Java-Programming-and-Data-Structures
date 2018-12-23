@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountKeywords.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountKeywordsWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountKeywords" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CountKeywords {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {  
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a Java source file: "</span>);
+    String filename = input.nextLine();
+
+    File file = <span class = "keyword">new</span> File(filename);
+    <span class = "keyword">if</span> (file.exists()) {
+      System.out.println(<span class = "literal">"The number of keywords in "</span> + filename 
+        + <span class = "literal">" is "</span> + countKeywords(file));
+    }
+    <span class = "keyword">else</span> {
+      System.out.println(<span class = "literal">"File "</span> + filename + <span class = "literal">" does not exist"</span>);
+    }    
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> countKeywords(File file) <span class = "keyword">throws</span> Exception {  
+    <span class = "comment">// Array of all Java keywords + true, false and null</span>
+    String[] keywordString = {<span class = "literal">"abstract"</span>, <span class = "literal">"assert"</span>, <span class = "literal">"boolean"</span>, 
+        <span class = "literal">"break"</span>, <span class = "literal">"byte"</span>, <span class = "literal">"case"</span>, <span class = "literal">"catch"</span>, <span class = "literal">"char"</span>, <span class = "literal">"class"</span>, <span class = "literal">"const"</span>,
+        <span class = "literal">"continue"</span>, <span class = "literal">"default"</span>, <span class = "literal">"do"</span>, <span class = "literal">"double"</span>, <span class = "literal">"else"</span>, <span class = "literal">"enum"</span>,
+        <span class = "literal">"extends"</span>, <span class = "literal">"for"</span>, <span class = "literal">"final"</span>, <span class = "literal">"finally"</span>, <span class = "literal">"float"</span>, <span class = "literal">"goto"</span>,
+        <span class = "literal">"if"</span>, <span class = "literal">"implements"</span>, <span class = "literal">"import"</span>, <span class = "literal">"instanceof"</span>, <span class = "literal">"int"</span>, 
+        <span class = "literal">"interface"</span>, <span class = "literal">"long"</span>, <span class = "literal">"native"</span>, <span class = "literal">"new"</span>, <span class = "literal">"package"</span>, <span class = "literal">"private"</span>,
+        <span class = "literal">"protected"</span>, <span class = "literal">"public"</span>, <span class = "literal">"return"</span>, <span class = "literal">"short"</span>, <span class = "literal">"static"</span>, 
+        <span class = "literal">"strictfp"</span>, <span class = "literal">"super"</span>, <span class = "literal">"switch"</span>, <span class = "literal">"synchronized"</span>, <span class = "literal">"this"</span>,
+        <span class = "literal">"throw"</span>, <span class = "literal">"throws"</span>, <span class = "literal">"transient"</span>, <span class = "literal">"try"</span>, <span class = "literal">"void"</span>, <span class = "literal">"volatile"</span>,
+        <span class = "literal">"while"</span>, <span class = "literal">"true"</span>, <span class = "literal">"false"</span>, <span class = "literal">"null"</span>};
+
+    Set&lt;String&gt; keywordSet = 
+      <span class = "keyword">new</span> HashSet&lt;&gt;(Arrays.asList(keywordString));
+    <span class = "keyword">int</span> count = <span class = "constant">0</span>;    
+
+    Scanner input = <span class = "keyword">new</span> Scanner(file);
+
+    <span class = "keyword">while</span> (input.hasNext()) {
+      String word = input.next();
+      <span class = "keyword">if</span> (keywordSet.contains(word)) 
+        count++;
+    }
+
+    <span class = "keyword">return</span> count;
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RotateDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RotateDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> RotateDemo <span class = "keyword">extends</span> Application {
+  9&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 11&nbsp;&nbsp;    Pane pane = <span class = "keyword">new</span> Pane();
+ 12&nbsp;&nbsp;    java.util.Random random = <span class = "keyword">new</span> java.util.Random();
+ 13&nbsp;&nbsp;    <span class = "comment">// The radius of the circle for anchoring rectangles</span>
+ 14&nbsp;&nbsp;    <span class = "keyword">double</span> radius = <span class = "constant">90</span>; 
+ 15&nbsp;&nbsp;    <span class = "keyword">double</span> width = <span class = "constant">20</span>; <span class = "comment">// Width of the rectangle</span>
+ 16&nbsp;&nbsp;    <span class = "keyword">double</span> height = <span class = "constant">40</span>; <span class = "comment">// Height of the rectangle</span>
+ 17&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">8</span>; i++) {
+ 18&nbsp;&nbsp;      <span class = "comment">// Center of a rectangle</span>
+ 19&nbsp;&nbsp;      <span class = "keyword">double</span> x = <span class = "constant">150</span> + radius * Math.cos(i * <span class = "constant">2</span> * Math.PI / <span class = "constant">8</span>);
+ 20&nbsp;&nbsp;      <span class = "keyword">double</span> y = <span class = "constant">150</span> + radius * Math.sin(i * <span class = "constant">2</span> * Math.PI / <span class = "constant">8</span>);              
+ 21&nbsp;&nbsp;      Rectangle rectangle = <span class = "keyword">new</span> Rectangle(
+ 22&nbsp;&nbsp;        x - width / <span class = "constant">2</span>, y - height / <span class = "constant">2</span>, width, height);  
+ 23&nbsp;&nbsp;      rectangle.setFill(Color.WHITE);
+ 24&nbsp;&nbsp;      rectangle.setStroke(Color.color(random.nextDouble(), 
+ 25&nbsp;&nbsp;        random.nextDouble(), random.nextDouble()));
+ 26&nbsp;&nbsp;      rectangle.setRotate(i * <span class = "constant">360</span> / <span class = "constant">8</span>); <span class = "comment">// Rotate the rectangle</span>
+ 27&nbsp;&nbsp;      pane.getChildren().add(rectangle);
+ 28&nbsp;&nbsp;    }
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">300</span>);           
+ 31&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"RotateDemo"</span>); <span class = "comment">// Set the window title</span>
+ 32&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 33&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 34&nbsp;&nbsp;  }
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;  <span class = "comment">// Lauch the program from command-line</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 38&nbsp;&nbsp;    launch(args);
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

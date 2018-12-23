@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ReadData.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ReadData.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ReadData" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; 
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ReadData {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+    <span class = "comment">// Create a File instance</span>
+    java.io.File file = <span class = "keyword">new</span> java.io.File(<span class = "literal">"scores.txt"</span>);
+
+    <span class = "comment">// Create a Scanner for the file</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(file);
+
+    <span class = "comment">// Read data from a file</span>
+    <span class = "keyword">while</span> (input.hasNext()) {
+      String firstName = input.next();
+      String mi = input.next();
+      String lastName = input.next();
+      <span class = "keyword">int</span> score = input.nextInt();
+      System.out.println(
+        firstName + <span class = "literal">" "</span> + mi + <span class = "literal">" "</span> + lastName + <span class = "literal">" "</span> + score);
+    }
+
+    <span class = "comment">// Close the file</span>
+    input.close();
+  }
+}
+</pre>
+</body>
+</html>

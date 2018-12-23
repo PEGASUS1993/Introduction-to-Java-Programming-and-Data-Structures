@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LargeFactorial.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LargeFactorial.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "LargeFactorial" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.math.*;
+  3&nbsp;&nbsp;
+  4&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> LargeFactorial {
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  6&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  7&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter an integer: "</span>);
+  8&nbsp;&nbsp;    <span class = "keyword">int</span> n = input.nextInt();
+  9&nbsp;&nbsp;    System.out.println(n + <span class = "literal">"! is \n"</span> + factorial(n));
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> BigInteger factorial(<span class = "keyword">long</span> n) {
+ 13&nbsp;&nbsp;    BigInteger result = BigInteger.ONE; <span class = "comment">// Assign 1 to result</span>
+ 14&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= n; i++) <span class = "comment">// Multiply each i</span>
+ 15&nbsp;&nbsp;      result = result.multiply(<span class = "keyword">new</span> BigInteger(i+<span class = "literal">""</span>));
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;    <span class = "keyword">return</span> result;
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

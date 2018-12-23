@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FindGrade.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FindGrade.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextField;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.VBox;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> java.sql.*;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> FindGrade <span class = "keyword">extends</span> Application {
+ 12&nbsp;&nbsp;  <span class = "comment">// Statement for executing queries</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">private</span> Statement stmt;
+ 14&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfSSN = <span class = "keyword">new</span> TextField();
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfCourseId = <span class = "keyword">new</span> TextField();
+ 16&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblStatus = <span class = "keyword">new</span> Label();
+ 17&nbsp;&nbsp;  
+ 18&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 19&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 20&nbsp;&nbsp;    <span class = "comment">// Initialize database connection and create a Statement object</span>
+ 21&nbsp;&nbsp;    initializeDB();
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;    Button btShowGrade = <span class = "keyword">new</span> Button(<span class = "literal">"Show Grade"</span>);
+ 24&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+ 25&nbsp;&nbsp;    hBox.getChildren().addAll(<span class = "keyword">new</span> Label(<span class = "literal">"SSN"</span>), tfSSN, 
+ 26&nbsp;&nbsp;      <span class = "keyword">new</span> Label(<span class = "literal">"Course ID"</span>), tfCourseId, (btShowGrade));
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">10</span>);
+ 29&nbsp;&nbsp;    vBox.getChildren().addAll(hBox, lblStatus);
+ 30&nbsp;&nbsp;    
+ 31&nbsp;&nbsp;    tfSSN.setPrefColumnCount(<span class = "constant">6</span>);
+ 32&nbsp;&nbsp;    tfCourseId.setPrefColumnCount(<span class = "constant">6</span>);
+ 33&nbsp;&nbsp;    btShowGrade.setOnAction(e -&gt; showGrade());
+ 34&nbsp;&nbsp;    
+ 35&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 36&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(vBox, <span class = "constant">420</span>, <span class = "constant">80</span>);
+ 37&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"FindGrade"</span>); <span class = "comment">// Set the stage title</span>
+ 38&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 39&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+ 40&nbsp;&nbsp;  }
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> initializeDB() {
+ 43&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 44&nbsp;&nbsp;      <span class = "comment">// Load the JDBC driver</span>
+ 45&nbsp;&nbsp;      Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+ 46&nbsp;&nbsp;<span class = "comment">//      Class.forName("oracle.jdbc.driver.OracleDriver");</span>
+ 47&nbsp;&nbsp;      System.out.println(<span class = "literal">"Driver loaded"</span>);
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;      <span class = "comment">// Establish a connection</span>
+ 50&nbsp;&nbsp;      Connection connection = DriverManager.getConnection
+ 51&nbsp;&nbsp;        (<span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+ 52&nbsp;&nbsp;<span class = "comment">//    ("jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl",</span>
+ 53&nbsp;&nbsp;<span class = "comment">//     "scott", "tiger");</span>
+ 54&nbsp;&nbsp;      System.out.println(<span class = "literal">"Database connected"</span>);
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;      <span class = "comment">// Create a statement</span>
+ 57&nbsp;&nbsp;      stmt = connection.createStatement();
+ 58&nbsp;&nbsp;    }
+ 59&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+ 60&nbsp;&nbsp;      ex.printStackTrace();
+ 61&nbsp;&nbsp;    }
+ 62&nbsp;&nbsp;  }
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> showGrade() {
+ 65&nbsp;&nbsp;    String ssn = tfSSN.getText();
+ 66&nbsp;&nbsp;    String courseId = tfCourseId.getText();
+ 67&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 68&nbsp;&nbsp;      String queryString = <span class = "literal">"select firstName, mi, "</span> +
+ 69&nbsp;&nbsp;        <span class = "literal">"lastName, title, grade from Student, Enrollment, Course "</span> +
+ 70&nbsp;&nbsp;        <span class = "literal">"where Student.ssn = <span class = "literal">'" + ssn + "'</span> and Enrollment.courseId "</span>
+ 71&nbsp;&nbsp;        + <span class = "literal">"= <span class = "literal">'" + courseId +
+ 72&nbsp;&nbsp;        "'</span> and Enrollment.courseId = Course.courseId "</span> +
+ 73&nbsp;&nbsp;        <span class = "literal">" and Enrollment.ssn = Student.ssn"</span>;
+ 74&nbsp;&nbsp;
+ 75&nbsp;&nbsp;      ResultSet rset = stmt.executeQuery(queryString);
+ 76&nbsp;&nbsp;
+ 77&nbsp;&nbsp;      <span class = "keyword">if</span> (rset.next()) {
+ 78&nbsp;&nbsp;        String lastName = rset.getString(<span class = "constant">1</span>);
+ 79&nbsp;&nbsp;        String mi = rset.getString(<span class = "constant">2</span>);
+ 80&nbsp;&nbsp;        String firstName = rset.getString(<span class = "constant">3</span>);
+ 81&nbsp;&nbsp;        String title = rset.getString(<span class = "constant">4</span>);
+ 82&nbsp;&nbsp;        String grade = rset.getString(<span class = "constant">5</span>);
+ 83&nbsp;&nbsp;
+ 84&nbsp;&nbsp;        <span class = "comment">// Display result in a label</span>
+ 85&nbsp;&nbsp;        lblStatus.setText(firstName + <span class = "literal">" "</span> + mi +
+ 86&nbsp;&nbsp;          <span class = "literal">" "</span> + lastName + <span class = "literal">"'s grade on course "</span> + title + <span class = "literal">" is "</span> +
+ 87&nbsp;&nbsp;          grade);
+ 88&nbsp;&nbsp;      } <span class = "keyword">else</span> {
+ 89&nbsp;&nbsp;        lblStatus.setText(<span class = "literal">"Not found"</span>);
+ 90&nbsp;&nbsp;      }
+ 91&nbsp;&nbsp;    }
+ 92&nbsp;&nbsp;    <span class = "keyword">catch</span> (SQLException ex) {
+ 93&nbsp;&nbsp;      ex.printStackTrace();
+ 94&nbsp;&nbsp;    }
+ 95&nbsp;&nbsp;  }
+ 96&nbsp;&nbsp;
+ 97&nbsp;&nbsp;  <span class = "comment">/**
+ 98&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 99&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+100&nbsp;&nbsp;   */</span>
+101&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+102&nbsp;&nbsp;    launch(args);
+103&nbsp;&nbsp;  }
+104&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

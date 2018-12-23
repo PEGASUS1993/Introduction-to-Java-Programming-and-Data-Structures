@@ -1,0 +1,726 @@
+Chapter 7 Single-Dimensional Arrays
+
+Sections 7.2 Array Basics
+1.	What is the representation of the third element in an array called a?
+a.	a[2]
+b.	a(2)
+c.	a[3]
+d.	a(3)
+Key:a
+
+#
+2.	If you declare an array double[] list = {3.4, 2.0, 3.5, 5.5}, list[1] is ________.
+a.	3.4
+b.	2.0
+c.	3.5
+d.	5.5
+e.      undefined
+Key:b
+
+#
+3.	Which of the following is incorrect?
+a.	int[] a = new int[2];
+b.	int a[] = new int[2];
+c.	int[] a = new int(2);
+d.	int a = new int[2];
+e.      int a() = new int[2];
+Key:cde
+
+#
+4. If you declare an array double[] list = {3.4, 2.0, 3.5, 5.5}, the highest index in array list is __________.
+
+a. 0
+b. 1
+c. 2
+d. 3
+e. 4
+Key:d
+
+#
+5. How many elements are in array double[] list = new double[5]?
+
+a. 4
+b. 5
+c. 6
+d. 0
+Key:b
+
+#
+6.	What is the correct term for numbers[99]?
+a.	index
+b.	index variable
+c.	indexed variable
+d.	array variable
+e.      array
+Key:c
+
+#
+7.	Suppose int i = 5, which of the following can be used as an index for array double[] t = new double[100]?
+a.	i
+b.	(int)(Math.random() * 100))
+c.	i + 10
+d.	i + 6.5
+e.      Math.random() * 100
+Key:abc
+
+#
+8.	Analyze the following code.
+
+public class Test {
+  public static void main(String[] args) {
+    int[] x = new int[3];
+    System.out.println("x[0] is " + x[0]);
+  }
+}
+a.	The program has a compile error because the size of the array wasn't specified when declaring the array.
+b.	The program has a runtime error because the array elements are not initialized.
+c.	The program runs fine and displays x[0] is 0.
+d.	The program has a runtime error because the array element x[0] is not defined.
+Key:c
+
+#
+9.	Which of the following statements is valid?
+a.	int i = new int(30);
+b.	double d[] = new double[30];
+c.	int[] i = {3, 4, 3, 2};
+d.	char[] c = new char();
+e.	char[] c = new char[4]{'a', 'b', 'c', 'd'};
+Key:bc e would be corrected if it is char[] c = new char[]{'a', 'b', 'c', 'd'};
+
+#
+10.	How can you initialize an array of two characters to 'a' and 'b'?
+a.	char[] charArray = new char[2]; charArray = {'a', 'b'};
+b.	char[2] charArray = {'a', 'b'};
+c.	char[] charArray = {'a', 'b'};
+d.	char[] charArray = new char[]{'a', 'b'};
+Key:cd
+
+#
+11. 	What would be the result of attempting to compile and run the following code?
+
+public class Test {
+  public static void main(String[] args) {
+    double[] x = new double[]{1, 2, 3};
+    System.out.println("Value is " + x[1]);
+  }
+} 
+a.	The program has a compile error because the syntax new double[]{1, 2, 3} is wrong and it should be replaced by {1, 2, 3}.
+b.	The program has a compile error because the syntax new double[]{1, 2, 3} is wrong and it should be replaced by new double[3]{1, 2, 3};
+c.	The program has a compile error because the syntax new double[]{1, 2, 3} is wrong and it should be replaced by new double[]{1.0, 2.0, 3.0};
+d.	The program compiles and runs fine and the output "Value is 1.0" is printed. 
+e.	The program compiles and runs fine and the output "Value is 2.0" is printed. 
+Key:e new double[]{1, 2, 3} is correct. This is the syntax I have not covered in this edition, but will be covered in the future edition. In this question, double[] x = new double[]{1, 2, 3} is equivalent to double[] x = {1, 2, 3};
+
+#
+12. Assume int[] t = {1, 2, 3, 4}. What is t.length?
+a.	0
+b.	3 
+c.	4
+d.      5
+Key:c
+
+#
+13. What is the output of the following code?
+
+double[] myList = {1, 5, 5, 5, 5, 1};
+double max = myList[0];
+int indexOfMax = 0;
+for (int i = 1; i < myList.length; i++) {
+  if (myList[i] > max) {
+    max = myList[i];
+    indexOfMax = i;
+  }
+}
+System.out.println(indexOfMax);
+a.	0
+b.	1 
+c.	2
+d.      3
+e.      4
+Key:b
+
+#
+14. Analyze the following code:
+
+public class Test { 
+  public static void main(String[] args) { 
+    int[] x = new int[5]; 
+    int i;
+    for (i = 0; i < x.length; i++)
+      x[i] = i;
+    System.out.println(x[i]);
+  }
+}
+a.	The program displays 0 1 2 3 4.
+b.	The program displays 4. 
+c.	The program has a runtime error because the last statement in the main method causes ArrayIndexOutOfBoundsException.
+d.	The program has a compile error because i is not defined in the last statement in the main method.
+Key:c After the for loop i is 5. x[5] is out of bounds.
+
+#
+15. Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    double[] x = {2.5, 3, 4};
+    for (double value: x)
+      System.out.print(value + " ");
+  }
+}
+a.	The program displays 2.5, 3, 4
+b.	The program displays 2.5 3 4
+c.	The program displays 2.5 3.0 4.0
+d.	The program displays 2.5, 3.0 4.0
+e. The program has a syntax error because value is undefined.
+Key:c
+
+#
+16. What is the output of the following code?
+
+     int[] myList = {1, 2, 3, 4, 5, 6};
+
+     for (int i = myList.length - 2; i >= 0; i--) {
+       myList[i + 1] = myList[i];
+     }
+
+     for (int e: myList) 
+       System.out.print(e + " ");
+
+a.	1 2 3 4 5 6 
+b.	6 1 2 3 4 5 
+c.	6 2 3 4 5 1
+d.      1 1 2 3 4 5 
+e.      2 3 4 5 6 1 
+Key:d
+
+#
+17. What is output of the following code:
+
+public class Test { 
+  public static void main(String[] args) { 
+    int[] x = {120, 200, 016}; 
+    for (int i = 0; i < x.length; i++)
+      System.out.print(x[i] + " ");
+  }
+}
+a.	120 200 16 
+b.	120 200 14  
+c.	120 200 20 
+d.	016 is a compile error. It should be written as 16.
+Key:b 016 is an octal number. The prefix 0 indicates that a number is in octal.
+
+#
+18. What is output of the following code:
+
+public class Test { 
+  public static void main(String[] args) {
+    int list[] = {1, 2, 3, 4, 5, 6};
+
+    for (int i = 1; i < list.length; i++)
+      list[i] = list[i - 1];
+    
+    for (int i = 0; i < list.length; i++)
+      System.out.print(list[i] + " ");
+  }
+}
+a.	1 2 3 4 5 6
+b.	2 3 4 5 6 6
+c.	2 3 4 5 6 1
+d.	1 1 1 1 1 1
+Key:d
+
+#
+19. Which of the following is correct?
+a. String[] list = new String{"red", "yellow", "green"};
+b. String[] list = new String[]{"red", "yellow", "green"};
+c. String[] list = {"red", "yellow", "green"};
+d. String list = {"red", "yellow", "green"};
+e. String list = new String{"red", "yellow", "green"};
+Key:bc
+
+#
+Section 7.5 Copying Arrays
+20. In the following code, what is the output for list2?
+
+public class Test {
+  public static void main(String[] args) {
+    int[] list1 = {1, 2, 3};
+    int[] list2 = {1, 2, 3};
+    list2 = list1;
+    list1[0] = 0; list1[1] = 1; list2[2] = 2;
+
+    for (int i = 0; i < list2.length; i++)
+      System.out.print(list2[i] + " ");
+  }
+}
+a. 1 2 3
+b. 1 1 1
+c. 0 1 2
+d. 0 1 3
+Key:c
+
+#
+21. In the following code, what is the output for list1?
+
+public class Test {
+  public static void main(String[] args) {
+    int[] list1 = {1, 2, 3};
+    int[] list2 = {1, 2, 3};
+    list2 = list1;
+    list1[0] = 0; list1[1] = 1; list2[2] = 2;
+
+    for (int i = 0; i < list1.length; i++)
+      System.out.print(list1[i] + " ");
+  }
+}
+a. 1 2 3
+b. 1 1 1
+c. 0 1 2
+d. 0 1 3
+Key:c
+
+#
+22. Analyze the following code:
+
+public class Test { 
+  public static void main(String[] args) { 
+    int[] x = {1, 2, 3, 4}; 
+    int[] y = x;
+
+    x = new int[2];
+
+    for (int i = 0; i < y.length; i++)
+      System.out.print(y[i] + " ");
+  }
+}
+a.	The program displays 1 2 3 4
+b.	The program displays 0 0
+c.	The program displays 0 0 3 4
+d.	The program displays 0 0 0 0
+Key:a
+
+#
+23. Analyze the following code:
+
+public class Test { 
+  public static void main(String[] args) { 
+    int[] x = {1, 2, 3, 4}; 
+    int[] y = x;
+
+    x = new int[2];
+
+    for (int i = 0; i < x.length; i++)
+      System.out.print(x[i] + " ");
+  }
+}
+a.	The program displays 1 2 3 4
+b.	The program displays 0 0
+c.	The program displays 0 0 3 4
+d.	The program displays 0 0 0 0
+Key:b
+
+#
+24. Analyze the following code:
+
+public class Test { 
+  public static void main(String[] args) { 
+    final int[] x = {1, 2, 3, 4}; 
+    int[] y = x;
+
+    x = new int[2];
+
+    for (int i = 0; i < y.length; i++)
+      System.out.print(y[i] + " ");
+  }
+}
+a. The program displays 1 2 3 4
+b. The program displays 0 0
+c. The program has a compile error on the statement x = new int[2], because x is final and cannot be changed.
+d. The elements in the array x cannot be changed, because x is final.
+Key:c The value stored in x is final, but the values in the array are not final. x is a constant reference variable that points to an array with four elements Because it is a constant, you cannot create a new reference variable x that points to a different array, but you can change the value of the elements in the array, e.g. x[1] could be changed to 10 instead of 2.
+
+#
+25. Analyze the following code.
+
+int[] list = new int[5];
+list = new int[6];
+a. The code has compile errors because the variable list cannot be changed once it is assigned.
+b. The code has runtime errors because the variable list cannot be changed once it is assigned.
+c. The code can compile and run fine. The second line assigns a new array to list.
+d. The code has compile errors because you cannot assign a different size array to list.
+Key:c
+
+#
+26. Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    int[] a = new int[4];
+    a[1] = 1;
+    a = new int[2];   
+    System.out.println("a[1] is " + a[1]);
+  }
+}
+a. The program has a compile error because new int[2] is assigned to a.
+b. The program has a runtime error because a[1] is not initialized.
+c. The program displays a[1] is 0.
+d. The program displays a[1] is 1.
+Key:c After executing the statement a = new int[2], a refers to int[2]. The default value for a[0] and a[1] is 0.
+
+#
+27. The __________ method copies the sourceArray to the targetArray.
+a.      System.copyArrays(sourceArray, 0, targetArray, 0, sourceArray.length);
+b. System.copyarrays(sourceArray, 0, targetArray, 0, sourceArray.length);
+c.	System.arrayCopy(sourceArray, 0, targetArray, 0, sourceArray.length);
+d.	System.arraycopy(sourceArray, 0, targetArray, 0, sourceArray.length);
+Key:d
+
+#
+Section 7.6 Passing Arrays to Methods
+28.	When you pass an array to a method, the method receives __________.
+a.	a copy of the array
+b.	a copy of the first element
+c.	the reference of the array
+d.	the length of the array
+Key:c
+
+#
+29.	Show the output of the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    int[] x = {1, 2, 3, 4, 5};
+    increase(x);
+
+    int[] y = {1, 2, 3, 4, 5};
+    increase(y[0]);
+
+    System.out.println(x[0] + " " + y[0]);
+  }
+
+  public static void increase(int[] x) {
+    for (int i = 0; i < x.length; i++)
+      x[i]++;
+  }
+
+  public static void increase(int y) {
+    y++;
+  }
+}
+a.	0 0
+b.	1 1
+c.	2 2
+d.	2 1
+e.      1 2
+Key:d Invoking increase(x) passes the reference of the array to the method. Invoking increase(y[0]) passes the value 1 to the method. The value y[0] outside the method is not changed. 
+
+#
+30.	Do the following two programs produce the same result?
+
+Program I:
+public class Test {
+  public static void main(String[] args) {
+    int[] list = {1, 2, 3, 4, 5};
+    reverse(list);
+    for (int i = 0; i < list.length; i++)
+      System.out.print(list[i] + " ");
+  }
+
+  public static void reverse(int[] list) {
+    int[] newList = new int[list.length];
+
+    for (int i = 0; i < list.length; i++)
+      newList[i] = list[list.length - 1 - i];
+
+    list = newList;
+  }
+}
+
+Program II:
+public class Test {
+  public static void main(String[] args) {
+    int[] oldList = {1, 2, 3, 4, 5};
+    reverse(oldList);
+    for (int i = 0; i < oldList.length; i++)
+      System.out.print(oldList[i] + " ");
+  }
+
+  public static void reverse(int[] list) {
+    int[] newList = new int[list.length];
+
+    for (int i = 0; i < list.length; i++)
+      newList[i] = list[list.length - 1 - i];
+
+    list = newList;
+  }
+}
+a.	Yes
+b.	No
+Key:a 
+
+#
+31.	Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    int[] oldList = {1, 2, 3, 4, 5};
+    reverse(oldList);
+    for (int i = 0; i < oldList.length; i++)
+      System.out.print(oldList[i] + " ");
+  }
+
+  public static void reverse(int[] list) {
+    int[] newList = new int[list.length];
+
+    for (int i = 0; i < list.length; i++)
+      newList[i] = list[list.length - 1 - i];
+
+    list = newList;
+  }
+}
+a.	The program displays 1 2 3 4 5.
+b.	The program displays 1 2 3 4 5 and then raises an ArrayIndexOutOfBoundsException.
+c.	The program displays 5 4 3 2 1.
+d.	The program displays 5 4 3 2 1 and then raises an ArrayIndexOutOfBoundsException.
+Key:a The contents of the array oldList have not been changed as result of invoking the reverse method. 
+
+#
+32. Analyze the following code:
+
+public class Test1 { 
+  public static void main(String[] args) {
+    xMethod(new double[]{3, 3});
+    xMethod(new double[5]);
+    xMethod(new double[3]{1, 2, 3});
+  }
+
+  public static void xMethod(double[] a) { 
+    System.out.println(a.length);
+  }
+}
+a. The program has a compile error because xMethod(new double[]{3, 3}) is incorrect.
+b. The program has a compile error because xMethod(new double[5]) is incorrect.
+c. The program has a compile error because xMethod(new double[3]{1, 2, 3}) is incorrect.
+d. The program has a runtime error because a is null.
+Key:c new double[3]{1, 2, 3} should be replaced by new double[]{1, 2, 3}) (anonymous array).
+
+#
+33. The JVM stores the array in an area of memory, called _______, which is used for dynamic memory allocation where blocks of memory are allocated and freed in an arbitrary order.
+a. stack
+b. heap
+c. memory block
+d. dynamic memory
+key:b
+
+#
+Section 7.7 Returning an Array from a Method
+34. When you return an array from a method, the method returns __________.
+a.	a copy of the array
+b.	a copy of the first element
+c.	the reference of the array
+d.	the length of the array
+Key:c
+
+#
+35. Suppose a method p has the following heading:
+
+public static int[] p()
+
+What return statement may be used in p()?
+
+a.	return 1;
+b.	return {1, 2, 3};
+c.	return int[]{1, 2, 3};
+d.	return new int[]{1, 2, 3};
+Key:d
+
+#
+36. The reverse method is defined in the textbook. What is list1 after executing the following statements?
+
+int[] list1 = {1, 2, 3, 4, 5, 6};
+list1 = reverse(list1);
+
+a. list1 is 1 2 3 4 5 6
+b. list1 is 6 5 4 3 2 1
+c. list1 is 0 0 0 0 0 0
+d. list1 is 6 6 6 6 6 6
+key:b
+
+#
+37. The reverse method is defined in this section. What is list1 after executing the following statements?
+
+int[] list1 = {1, 2, 3, 4, 5, 6};
+int[] list2 = reverse(list1);
+
+a. list1 is 1 2 3 4 5 6
+b. list1 is 6 5 4 3 2 1
+c. list1 is 0 0 0 0 0 0
+d. list1 is 6 6 6 6 6 6
+key:a
+
+#
+Section 7.9 Variable-Length Argument Lists
+38. Which of the following declarations are correct?
+
+a. public static void print(String... strings, double... numbers)
+b. public static void print(double... numbers, String name)
+c. public static double... print(double d1, double d2)
+d. public static void print(double... numbers)
+e. public static void print(int n, double... numbers)
+Key:de Only one variable-length parameter may be specified in a method and this parameter must be the last parameter. The method return type cannot be a variable-length parameter.
+
+#
+39. Which of the following statements are correct to invoke the printMax method in Listing 7.5 in the textbook?
+
+a. printMax(1, 2, 2, 1, 4);
+b. printMax(new double[]{1, 2, 3});
+c. printMax(1.0, 2.0, 2.0, 1.0, 4.0);
+d. printMax(new int[]{1, 2, 3});
+Key:abc The last one printMax(new int[]{1, 2, 3}); is incorrect, because the array must of the double[] type.
+
+#
+Section 7.10 Searching Arrays
+40. For the binarySearch method in Section 7.10.2, what is low and high after the first iteration of the while loop when invoking binarySearch(new int[]{1, 4, 6, 8, 10, 15, 20}, 11)?
+a. low is 0 and high is 6
+b. low is 5 and high is 5
+c. low is 3 and high is 6
+d. low is 5 and high is 4
+e. low is 6 and high is 5
+key:d
+
+#
+41. If a key is not in the list, the binarySearch method returns _________.
+a. insertion point
+b. insertion point - 1
+c. -(insertion point + 1)
+d. -insertion point
+key:c
+
+#
+Section 7.11 Sorting Arrays
+42. Use the selectionSort method presented in this section to answer this question. Assume list is {3.1, 3.1, 2.5, 6.4, 2.1}, what is the content of list after the first iteration of the outer loop in the method?
+
+a.	3.1, 3.1, 2.5, 6.4, 2.1
+b.	2.5, 3.1, 3.1, 6.4, 2.1
+c.	2.1, 2.5, 3.1, 3.1, 6.4 
+d.	3.1, 3.1, 2.5, 2.1, 6.4
+e.      2.1, 3.1, 2.5, 6.4, 3.1
+Key:e
+
+#
+43. Use the selectionSort method presented in this section to answer this question. What is list1 after executing the following statements?
+
+double[] list1 = {3.1, 3.1, 2.5, 6.4};
+selectionSort(list1);
+
+a.	list1 is 3.1, 3.1, 2.5, 6.4
+b.	list1 is 2.5 3.1, 3.1, 6.4
+c.	list1 is 6.4, 3.1, 3.1, 2.5
+d.	list1 is 3.1, 2.5, 3.1, 6.4
+Key:b
+
+#
+Section 7.12 The Arrays Class
+44. The __________ method sorts the array scores of the double[] type.
+a.	java.util.Arrays(scores)
+b.	java.util.Arrays.sorts(scores)
+c.	java.util.Arrays.sort(scores)
+d.	Njava.util.Arrays.sortArray(scores)
+Key:c
+
+#
+45. Assume int[] scores = {1, 20, 30, 40, 50}, what value does java.util.Arrays.binarySearch(scores, 30) return?
+a.	0
+b.	-1
+c.	1
+d.	2
+e.	-2
+Key:d 
+
+#
+46. Assume int[] scores = {1, 20, 30, 40, 50}, what value does java.util.Arrays.binarySearch(scores, 3) return?
+a.	0
+b.	-1
+c.	1
+d.	2
+e.	-2
+Key:e The binarySearch method returns the index of the search key if it is contained in the list. Otherwise, it returns –insertion point - 1. The insertion point is the point at which the key would be inserted into the list. In this case the insertion point is 1. Note that the array index starts from 0.
+
+#
+47. Assume int[] scores = {1, 20, 30, 40, 50}, what is the output of System.out.println(java.util.Arrays.toString(scores))?
+a.	{1, 20, 30, 40, 50}
+b.	[1, 20, 30, 40, 50]
+c.	{1 20 30 40 50}
+d.	[1 20 30 40 50]
+Key:b
+
+#
+Section 7.13 Command-Line Arguments
+48.	How can you get the word "abc" in the main method from the following call?
+
+java Test "+" 3 "abc" 2
+a.	args[0]
+b.	args[1]
+c.	args[2]
+d.	args[3]
+Key:c
+
+#
+49. Given the following program:
+
+public class Test {
+  public static void main(String[] args) {
+    for (int i = 0; i < args.length; i++) {
+      System.out.print(args[i] + " ");
+    }
+  }
+}
+
+What is the output, if you run the program using 
+
+java Test 1 2 3
+
+a.	3
+b.	1
+c.	1 2 3
+d.	1 2
+Key:c
+
+#
+50. 	Which code fragment would correctly identify the number of arguments passed via the command line to a Java application, excluding the name of the class that is being invoked?
+a.	int count = args.length; 
+b.	int count = args.length - 1; 
+c.	int count = 0; while (args[count] != null) count ++; 
+d.	int count=0; while (!(args[count].equals(""))) count ++; 
+Key:a
+
+#
+51. 	Which correctly creates an array of five empty Strings?
+a.	String[] a = new String [5]; 
+b.	String[] a = {"", "", "", "", ""}; 
+c.	String[5] a; 
+d.	String[ ] a = new String [5]; for (int i = 0; i &lt; 5; a[i++] = null); 
+Key:b
+
+#
+52. Identify the problems in the following code.
+
+public class Test {
+  public static void main(String argv[]) {
+    System.out.println("argv.length is " + argv.length);
+  }
+} 
+a. The program has a compile error because String argv[] is wrong and it should be replaced by String[] args.
+b. The program has a compile error because String args[] is wrong and it should be replaced by String args[].
+c. If you run this program without passing any arguments, the program would have a runtime error because argv is null.
+d. If you run this program without passing any arguments, the program would display argv.length is 0.
+Key:d The parameter for the main method is an array of String. The declaration String argv[] is correct. When you run the program without passing arguments, argv is new String[0]. Thus, argv.length is 0. See the NOTE box in the section, "Passing Arguments to Java Programs."
+
+#
+53. Which of the following is the correct header of the main method?
+a. public static void main(String[] args)
+b. public static void main(String args[])
+c. public static void main(String[] x)
+d. public static void main(String x[])
+e. static void main(String[] args)
+Key:abcd e is incorrect because the main method must be public.

@@ -1,0 +1,25 @@
+Chapter 39 JavaServer Faces
+
+1.	____ completely separates Web UI from Java code so the application developed using JSF is easy to debug and maintain.
+a.	Java servlet
+b.	JSP
+c.	JSF
+d.	PHP
+e. JavaScript
+Key:c
+
+#
+2.	You can use NetBeans 6 to develop _______ applications.
+a.	Java servlet
+b.	JSP
+c.	JSF
+d.	PHP
+Key:abc
+
+#
+3. Which of the following are JSF life-cycle methods?
+a. init()
+b. preprocess()
+c. prerender()
+d. destroy()
+Key:abcd

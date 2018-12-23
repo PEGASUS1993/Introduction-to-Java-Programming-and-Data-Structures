@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ContextMenuDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ContextMenuDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ContextMenu;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.MenuItem;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ContextMenuDemo <span class = "keyword">extends</span> Application {   
+ 10&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 12&nbsp;&nbsp;    ContextMenu contextMenu = <span class = "keyword">new</span> ContextMenu();       
+ 13&nbsp;&nbsp;    MenuItem menuItemNew = <span class = "keyword">new</span> MenuItem(<span class = "literal">"New"</span>,
+ 14&nbsp;&nbsp;      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/new.gif"</span>));
+ 15&nbsp;&nbsp;    MenuItem menuItemOpen = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Open"</span>,
+ 16&nbsp;&nbsp;      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/open.gif"</span>));
+ 17&nbsp;&nbsp;    MenuItem menuItemPrint = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Print"</span>,
+ 18&nbsp;&nbsp;      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/print.gif"</span>));
+ 19&nbsp;&nbsp;    MenuItem menuItemExit = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Exit"</span>);
+ 20&nbsp;&nbsp;    contextMenu.getItems().addAll(menuItemNew, menuItemOpen,
+ 21&nbsp;&nbsp;      menuItemPrint, menuItemExit);
+ 22&nbsp;&nbsp;   
+ 23&nbsp;&nbsp;    Pane pane = <span class = "keyword">new</span> Pane();
+ 24&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+ 25&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ContextMenuDemo"</span>); <span class = "comment">// Set the window title</span>
+ 26&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 27&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 28&nbsp;&nbsp;    
+ 29&nbsp;&nbsp;    pane.setOnMousePressed(
+ 30&nbsp;&nbsp;      e -&gt; contextMenu.show(pane, e.getScreenX(), e.getScreenY()));
+ 31&nbsp;&nbsp;    
+ 32&nbsp;&nbsp;    menuItemNew.setOnAction(e -&gt; System.out.println(<span class = "literal">"New"</span>));
+ 33&nbsp;&nbsp;    menuItemOpen.setOnAction(e -&gt; System.out.println(<span class = "literal">"Open"</span>));
+ 34&nbsp;&nbsp;    menuItemPrint.setOnAction(e -&gt; System.out.println(<span class = "literal">"Print"</span>));
+ 35&nbsp;&nbsp;    menuItemExit.setOnAction(e -&gt; System.exit(<span class = "constant">0</span>));
+ 36&nbsp;&nbsp;  }
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  <span class = "comment">/**
+ 39&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 40&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 41&nbsp;&nbsp;   * line.
+ 42&nbsp;&nbsp;   */</span>
+ 43&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 44&nbsp;&nbsp;    launch(args);
+ 45&nbsp;&nbsp;  }
+ 46&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

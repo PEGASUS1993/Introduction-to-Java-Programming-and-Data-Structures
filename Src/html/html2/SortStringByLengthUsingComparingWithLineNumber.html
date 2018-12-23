@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SortStringByLengthUsingComparing.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SortStringByLengthUsingComparing.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SortStringByLengthUsingComparing" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SortStringByLengthUsingComparing {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Loan[] list = {<span class = "keyword">new</span> Loan(<span class = "constant">5</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">10</span>, <span class = "constant">100</span>), <span class = "keyword">new</span> Loan(<span class = "constant">5</span>, <span class = "constant">10</span>, <span class = "constant">1000</span>)};
+  6&nbsp;&nbsp;    Arrays.sort(list, Comparator.comparing(Loan::getLoanAmount).
+  7&nbsp;&nbsp;        reversed());
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;    
+ 11&nbsp;&nbsp;    
+ 12&nbsp;&nbsp;    String[] cities = {<span class = "literal">"Atlanta"</span>, <span class = "literal">"Savannah"</span>, <span class = "literal">"New York"</span>, <span class = "literal">"Dallas"</span>};
+ 13&nbsp;&nbsp;    java.util.Arrays.sort(cities, 
+ 14&nbsp;&nbsp;        Comparator.comparing(String::length));
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    <span class = "keyword">for</span> (String s : cities) {
+ 17&nbsp;&nbsp;      System.out.print(s + <span class = "literal">" "</span>);
+ 18&nbsp;&nbsp;    }
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> MyComparator <span class = "keyword">implements</span>
+ 22&nbsp;&nbsp;      java.util.Comparator&lt;String&gt; {
+ 23&nbsp;&nbsp;    @Override
+ 24&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> compare(String s1, String s2) {
+ 25&nbsp;&nbsp;      <span class = "keyword">return</span> s1.length() - s2.length();
+ 26&nbsp;&nbsp;    }
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

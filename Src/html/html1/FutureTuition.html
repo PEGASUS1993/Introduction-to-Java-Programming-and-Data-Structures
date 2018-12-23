@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FutureTuition.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/FutureTuition.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "FutureTuition" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> FutureTuition {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) { 
+    <span class = "keyword">double</span> tuition = <span class = "constant">10000</span>;   <span class = "comment">// Year 0</span>
+    <span class = "keyword">int</span> year = <span class = "constant">0</span>;
+    <span class = "keyword">while</span> (tuition &lt; <span class = "constant">20000</span>) {
+      tuition = tuition * <span class = "constant">1</span><span class = "literal">.</span><span class = "constant">07</span>;
+      year++;
+    }
+  
+    System.out.println(<span class = "literal">"Tuition will be doubled in "</span> 
+      + year + <span class = "literal">" years"</span>);
+    System.out.printf(<span class = "literal">"Tuition will be $%<span class = "literal">.</span>2f in %1d years"</span>,  
+      tuition, year);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TwoNumbers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TwoNumbers.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TwoNumbers {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> number1;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> number2;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;  <span class = "comment">/** Create new random numbers with number1 &gt;= number2 */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setNewNumbers() {
+  7&nbsp;&nbsp;    <span class = "comment">// Generate two random single-digit integers</span>
+  8&nbsp;&nbsp;    number1 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">100</span>);
+  9&nbsp;&nbsp;    number2 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">100</span>);
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    <span class = "comment">// If number1 &lt; number2, swap number1 with number2</span>
+ 12&nbsp;&nbsp;    <span class = "keyword">if</span> (number1 &lt; number2) {
+ 13&nbsp;&nbsp;      <span class = "keyword">int</span> temp = number1;
+ 14&nbsp;&nbsp;      number1 = number2;
+ 15&nbsp;&nbsp;      number2 = temp;
+ 16&nbsp;&nbsp;    }
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;  <span class = "comment">/** Return the first number */</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumber1() {
+ 21&nbsp;&nbsp;    <span class = "keyword">return</span> number1;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  <span class = "comment">/** Return the second number */</span>
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumber2() {
+ 26&nbsp;&nbsp;    <span class = "keyword">return</span> number2;
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

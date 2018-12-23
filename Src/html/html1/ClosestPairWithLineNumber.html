@@ -1,0 +1,231 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ClosestPair.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ClosestPair.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ClosestPair" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "comment">/** This program works, but the design is not good. Redesign it */</span>
+  4&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ClosestPair {
+  5&nbsp;&nbsp;  <span class = "comment">// Each row in points represents a point</span>
+  6&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">double</span>[][] points;
+  7&nbsp;&nbsp;  Point p1, p2;
+  8&nbsp;&nbsp;  
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 10&nbsp;&nbsp;    <span class = "keyword">double</span>[][] points = <span class = "keyword">new</span> <span class = "keyword">double</span>[<span class = "constant">500</span>][<span class = "constant">2</span>];
+ 11&nbsp;&nbsp;    
+ 12&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; points.length; i++) {
+ 13&nbsp;&nbsp;      points[i][<span class = "constant">0</span>] = Math.random() * <span class = "constant">100</span>;
+ 14&nbsp;&nbsp;      points[i][<span class = "constant">1</span>] = Math.random() * <span class = "constant">100</span>;      
+ 15&nbsp;&nbsp;    }
+ 16&nbsp;&nbsp;    
+ 17&nbsp;&nbsp;    ClosestPair closestPair = <span class = "keyword">new</span> ClosestPair(points);
+ 18&nbsp;&nbsp;    System.out.println(<span class = "literal">"shortest distance is "</span> + 
+ 19&nbsp;&nbsp;      closestPair.getMinimumDistance());
+ 20&nbsp;&nbsp;    System.out.print(<span class = "literal">"("</span> + closestPair.p1.x + <span class = "literal">", "</span> + 
+ 21&nbsp;&nbsp;      closestPair.p1.y + <span class = "literal">") to "</span>);
+ 22&nbsp;&nbsp;    System.out.println(<span class = "literal">"("</span> + closestPair.p2.x + <span class = "literal">", "</span> + 
+ 23&nbsp;&nbsp;      closestPair.p2.y + <span class = "literal">")"</span>); 
+ 24&nbsp;&nbsp;  }
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  ClosestPair() {
+ 27&nbsp;&nbsp;  }   
+ 28&nbsp;&nbsp;  
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> ClosestPair(<span class = "keyword">double</span>[][] points) {
+ 30&nbsp;&nbsp;    setPoints(points);
+ 31&nbsp;&nbsp;  } 
+ 32&nbsp;&nbsp;  
+ 33&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setPoints(<span class = "keyword">double</span>[][] points) {
+ 34&nbsp;&nbsp;    <span class = "keyword">this</span>.points = points;
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;  
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> getMinimumDistance() {    
+ 38&nbsp;&nbsp;    Point[] pointsOrderedOnX = <span class = "keyword">new</span> Point[points.length];
+ 39&nbsp;&nbsp;    
+ 40&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnX.length; i++)
+ 41&nbsp;&nbsp;      pointsOrderedOnX[i] = <span class = "keyword">new</span> Point(points[i][<span class = "constant">0</span>], points[i][<span class = "constant">1</span>]);
+ 42&nbsp;&nbsp;    
+ 43&nbsp;&nbsp;    Arrays.sort(pointsOrderedOnX);
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;    <span class = "comment">// Locate the identical points if exists</span>
+ 46&nbsp;&nbsp;    <span class = "keyword">if</span> (checkIdentical(pointsOrderedOnX))
+ 47&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">0</span>; <span class = "comment">// The distance between the identical points is 0</span>
+ 48&nbsp;&nbsp;    
+ 49&nbsp;&nbsp;    Point[] pointsOrderedOnY = pointsOrderedOnX.clone();
+ 50&nbsp;&nbsp;    Arrays.sort(pointsOrderedOnY, <span class = "keyword">new</span> CompareY());
+ 51&nbsp;&nbsp;    
+ 52&nbsp;&nbsp;    <span class = "keyword">return</span> distance(pointsOrderedOnX, <span class = "constant">0</span>, 
+ 53&nbsp;&nbsp;        pointsOrderedOnX.length - <span class = "constant">1</span>, pointsOrderedOnY);
+ 54&nbsp;&nbsp;  }
+ 55&nbsp;&nbsp;  
+ 56&nbsp;&nbsp;  <span class = "comment">/** Locate the identical points if exist */</span>
+ 57&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> checkIdentical(Point[] pointsOrderedOnX) {
+ 58&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnX.length - <span class = "constant">1</span>; i++) {
+ 59&nbsp;&nbsp;      <span class = "keyword">if</span> (pointsOrderedOnX[i].compareTo(pointsOrderedOnX[i + <span class = "constant">1</span>]) == <span class = "constant">0</span>) {
+ 60&nbsp;&nbsp;        p1 = pointsOrderedOnX[i];
+ 61&nbsp;&nbsp;        p2 = pointsOrderedOnX[i + <span class = "constant">1</span>];
+ 62&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "keyword">true</span>;        
+ 63&nbsp;&nbsp;      }
+ 64&nbsp;&nbsp;    }
+ 65&nbsp;&nbsp;    
+ 66&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 67&nbsp;&nbsp;  }
+ 68&nbsp;&nbsp;
+ 69&nbsp;&nbsp;  <span class = "comment">/** Return the distance of the closest pair of points in 
+ 70&nbsp;&nbsp;   *  pointsOrderedOnY. 
+ 71&nbsp;&nbsp;   *  pointsOrderedOnX[low..high] and pointsOrderedOnY contain the 
+ 72&nbsp;&nbsp;   *  same points. */</span>
+ 73&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> distance(
+ 74&nbsp;&nbsp;      Point[] pointsOrderedOnX, <span class = "keyword">int</span> low, <span class = "keyword">int</span> high,
+ 75&nbsp;&nbsp;      Point[] pointsOrderedOnY) {
+ 76&nbsp;&nbsp;    <span class = "keyword">if</span> (low &gt;= high) <span class = "comment">// Zero or one point in the set</span>
+ 77&nbsp;&nbsp;      <span class = "keyword">return</span> Double.MAX_VALUE;
+ 78&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (low + <span class = "constant">1</span> == high) {
+ 79&nbsp;&nbsp;      <span class = "comment">// Two points in the set</span>
+ 80&nbsp;&nbsp;      p1 = pointsOrderedOnX[low];
+ 81&nbsp;&nbsp;      p2 = pointsOrderedOnX[high];
+ 82&nbsp;&nbsp;      <span class = "keyword">return</span> distance(pointsOrderedOnX[low], pointsOrderedOnX[high]);
+ 83&nbsp;&nbsp;    }
+ 84&nbsp;&nbsp;
+ 85&nbsp;&nbsp;    <span class = "comment">// Divide the points into two sets in pointsOrderedOnX.</span>
+ 86&nbsp;&nbsp;    <span class = "comment">// Store the points p into pointsOrderedOnYL if </span>
+ 87&nbsp;&nbsp;    <span class = "comment">//   p.x &lt;= pointsOrderedOnX[mid]. Otherwise, store it into</span>
+ 88&nbsp;&nbsp;    <span class = "comment">// pointsOrderedOnYR. The points in pointsOrderedOnYL and </span>
+ 89&nbsp;&nbsp;    <span class = "comment">// pointsOrderedOnYL are ordered on their y-coordinates    </span>
+ 90&nbsp;&nbsp;    <span class = "keyword">int</span> mid = (low + high) / <span class = "constant">2</span>;
+ 91&nbsp;&nbsp;    Point[] pointsOrderedOnYL = <span class = "keyword">new</span> Point[mid - low + <span class = "constant">1</span>];
+ 92&nbsp;&nbsp;    Point[] pointsOrderedOnYR = <span class = "keyword">new</span> Point[high - mid];
+ 93&nbsp;&nbsp;    <span class = "keyword">int</span> j1 = <span class = "constant">0</span>; <span class = "keyword">int</span> j2 = <span class = "constant">0</span>;
+ 94&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnY.length; i++) {
+ 95&nbsp;&nbsp;      <span class = "keyword">if</span> (pointsOrderedOnY[i].compareTo(pointsOrderedOnX[mid]) &lt;= <span class = "constant">0</span>)
+ 96&nbsp;&nbsp;        pointsOrderedOnYL[j1++] = pointsOrderedOnY[i];
+ 97&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 98&nbsp;&nbsp;        pointsOrderedOnYR[j2++] = pointsOrderedOnY[i];
+ 99&nbsp;&nbsp;    }
+100&nbsp;&nbsp;
+101&nbsp;&nbsp;    <span class = "comment">// Recursively find the distance of the closest pair in the left</span>
+102&nbsp;&nbsp;    <span class = "comment">// half and the right half</span>
+103&nbsp;&nbsp;    <span class = "keyword">double</span> d1 = distance(
+104&nbsp;&nbsp;      pointsOrderedOnX, low, mid, pointsOrderedOnYL);
+105&nbsp;&nbsp;    <span class = "keyword">double</span> d2 = distance(
+106&nbsp;&nbsp;      pointsOrderedOnX, mid + <span class = "constant">1</span>, high, pointsOrderedOnYR);
+107&nbsp;&nbsp;    <span class = "keyword">double</span> d = Math.min(d1, d2);
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;    <span class = "comment">// stripL: the points in pointsOrderedOnYL within the strip d</span>
+110&nbsp;&nbsp;    <span class = "keyword">int</span> count = <span class = "constant">0</span>;
+111&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnYL.length; i++)
+112&nbsp;&nbsp;      <span class = "keyword">if</span> (pointsOrderedOnYL[i].x &gt;= pointsOrderedOnX[mid].x - d)
+113&nbsp;&nbsp;        count++;
+114&nbsp;&nbsp;    Point[] stripL = <span class = "keyword">new</span> Point[count];
+115&nbsp;&nbsp;    count = <span class = "constant">0</span>;
+116&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnYL.length; i++)
+117&nbsp;&nbsp;      <span class = "keyword">if</span> (pointsOrderedOnYL[i].x &gt;= pointsOrderedOnX[mid].x - d)
+118&nbsp;&nbsp;        stripL[count++] = pointsOrderedOnYL[i];
+119&nbsp;&nbsp;
+120&nbsp;&nbsp;    <span class = "comment">// stripR: the points in pointsOrderedOnYR within the strip d</span>
+121&nbsp;&nbsp;    count = <span class = "constant">0</span>;
+122&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnYR.length; i++)
+123&nbsp;&nbsp;      <span class = "keyword">if</span> (pointsOrderedOnYR[i].x &lt;= pointsOrderedOnX[mid].x + d)
+124&nbsp;&nbsp;        count++;
+125&nbsp;&nbsp;    Point[] stripR = <span class = "keyword">new</span> Point[count];
+126&nbsp;&nbsp;    count = <span class = "constant">0</span>;
+127&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; pointsOrderedOnYR.length; i++)
+128&nbsp;&nbsp;      <span class = "keyword">if</span> (pointsOrderedOnYR[i].x &lt;= pointsOrderedOnX[mid].x + d)
+129&nbsp;&nbsp;        stripR[count++] = pointsOrderedOnYR[i];
+130&nbsp;&nbsp;
+131&nbsp;&nbsp;    <span class = "comment">// Find the closest pair for a point in stripL and </span>
+132&nbsp;&nbsp;    <span class = "comment">// a point in stripR</span>
+133&nbsp;&nbsp;    <span class = "keyword">double</span> d3 = d;
+134&nbsp;&nbsp;    <span class = "keyword">int</span> j = <span class = "constant">0</span>;
+135&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; stripL.length; i++) {
+136&nbsp;&nbsp;      <span class = "keyword">while</span> (j &lt; stripR.length && stripL[i].y &gt; stripR[j].y + d)
+137&nbsp;&nbsp;        j++;
+138&nbsp;&nbsp;
+139&nbsp;&nbsp;      <span class = "comment">// Compare a point in stripL with six points in stripR</span>
+140&nbsp;&nbsp;      <span class = "keyword">int</span> k = j; <span class = "comment">// Start from r1 up in stripR</span>
+141&nbsp;&nbsp;      <span class = "keyword">while</span> (k &lt; stripR.length && stripR[k].y &lt;= stripL[i].y + d) {
+142&nbsp;&nbsp;        <span class = "keyword">if</span> (d3 &gt; distance(stripL[i], stripR[k])) {
+143&nbsp;&nbsp;          d3 = distance(stripL[i], stripR[k]);
+144&nbsp;&nbsp;          p1 = stripL[i];
+145&nbsp;&nbsp;          p2 = stripR[k];
+146&nbsp;&nbsp;        }
+147&nbsp;&nbsp;        k++;
+148&nbsp;&nbsp;      }
+149&nbsp;&nbsp;    }
+150&nbsp;&nbsp;
+151&nbsp;&nbsp;    <span class = "keyword">return</span> Math.min(d, d3);
+152&nbsp;&nbsp;  }
+153&nbsp;&nbsp;
+154&nbsp;&nbsp;  <span class = "comment">/** Compute the distance between two points p1 and p2 */</span>
+155&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">double</span> distance(Point p1, Point p2) {
+156&nbsp;&nbsp;    <span class = "keyword">return</span> distance(p1.x, p1.y, p2.x, p2.y);
+157&nbsp;&nbsp;  }
+158&nbsp;&nbsp;
+159&nbsp;&nbsp;  <span class = "comment">/** Compute the distance between two points (x1, y1) and (x2, y2) */</span>
+160&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">double</span> distance(
+161&nbsp;&nbsp;      <span class = "keyword">double</span> x1, <span class = "keyword">double</span> y1, <span class = "keyword">double</span> x2, <span class = "keyword">double</span> y2) {
+162&nbsp;&nbsp;    <span class = "keyword">return</span> Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+163&nbsp;&nbsp;  }
+164&nbsp;&nbsp;
+165&nbsp;&nbsp;  <span class = "comment">/** Define a class for a point with x- and y- coordinates */</span>
+166&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">class</span> Point <span class = "keyword">implements</span> Comparable&lt;Point&gt; {
+167&nbsp;&nbsp;    <span class = "keyword">double</span> x;
+168&nbsp;&nbsp;    <span class = "keyword">double</span> y;
+169&nbsp;&nbsp;
+170&nbsp;&nbsp;    Point(<span class = "keyword">double</span> x, <span class = "keyword">double</span> y) {
+171&nbsp;&nbsp;      <span class = "keyword">this</span>.x = x;
+172&nbsp;&nbsp;      <span class = "keyword">this</span>.y = y;
+173&nbsp;&nbsp;    }
+174&nbsp;&nbsp;
+175&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(Point p2) {
+176&nbsp;&nbsp;      <span class = "keyword">if</span> (<span class = "keyword">this</span>.x &lt; p2.x)
+177&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+178&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (<span class = "keyword">this</span>.x == p2.x) {
+179&nbsp;&nbsp;        <span class = "comment">// Secondary order on y-coordinates</span>
+180&nbsp;&nbsp;        <span class = "keyword">if</span> (<span class = "keyword">this</span>.y &lt; p2.y)
+181&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+182&nbsp;&nbsp;        <span class = "keyword">else</span> <span class = "keyword">if</span> (<span class = "keyword">this</span>.y == p2.y)
+183&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "constant">0</span>;
+184&nbsp;&nbsp;        <span class = "keyword">else</span>
+185&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "constant">1</span>;
+186&nbsp;&nbsp;      } 
+187&nbsp;&nbsp;      <span class = "keyword">else</span>
+188&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "constant">1</span>;
+189&nbsp;&nbsp;    }
+190&nbsp;&nbsp;  }
+191&nbsp;&nbsp;  
+192&nbsp;&nbsp;  <span class = "comment">/** A comparator for comparing points on their y-coordinates. 
+193&nbsp;&nbsp;   * If y-coordinates are the same, compare their x-coordinator. */</span>
+194&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">class</span> CompareY <span class = "keyword">implements</span> java.util.Comparator&lt;Point&gt; {
+195&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> compare(Point p1, Point p2) {
+196&nbsp;&nbsp;      <span class = "keyword">if</span> (p1.y &lt; p2.y)
+197&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+198&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (p1.y == p2.y) {
+199&nbsp;&nbsp;        <span class = "comment">// Secondary order on x-coordinates</span>
+200&nbsp;&nbsp;        <span class = "keyword">if</span> (p1.x &lt; p2.x)
+201&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+202&nbsp;&nbsp;        <span class = "keyword">else</span> <span class = "keyword">if</span> (p1.x == p2.x)
+203&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "constant">0</span>;
+204&nbsp;&nbsp;        <span class = "keyword">else</span>
+205&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "constant">1</span>;
+206&nbsp;&nbsp;      } 
+207&nbsp;&nbsp;      <span class = "keyword">else</span>
+208&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "constant">1</span>;
+209&nbsp;&nbsp;    }
+210&nbsp;&nbsp;  }
+211&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

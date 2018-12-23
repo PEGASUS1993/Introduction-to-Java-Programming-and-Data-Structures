@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CircleWithPrivateDataFields.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CircleWithPrivateDataFieldsWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> CircleWithPrivateDataFields {
+  <span class = "comment">/** The radius of the circle */</span>
+  <span class = "keyword">private</span> <span class = "keyword">double</span> radius = <span class = "constant">1</span>;
+
+  <span class = "comment">/** The number of the objects created */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> numberOfObjects = <span class = "constant">0</span>;
+
+  <span class = "comment">/** Construct a circle with radius 1 */</span>
+  <span class = "keyword">public</span> CircleWithPrivateDataFields() {
+    numberOfObjects++;
+  }
+
+  <span class = "comment">/** Construct a circle with a specified radius */</span>
+  <span class = "keyword">public</span> CircleWithPrivateDataFields(<span class = "keyword">double</span> newRadius) {
+    radius = newRadius;
+    numberOfObjects++;
+  }
+
+  <span class = "comment">/** Return radius */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getRadius() {
+    <span class = "keyword">return</span> radius;
+  }
+
+  <span class = "comment">/** Set a new radius */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setRadius(<span class = "keyword">double</span> newRadius) {
+    radius = (newRadius &gt;= <span class = "constant">0</span>) ? newRadius : <span class = "constant">0</span>;
+  }
+
+  <span class = "comment">/** Return numberOfObjects */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfObjects() {
+    <span class = "keyword">return</span> numberOfObjects;
+  }
+
+  <span class = "comment">/** Return the area of this circle */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getArea() {
+    <span class = "keyword">return</span> radius * radius * Math.PI;
+  }
+}
+</pre>
+</body>
+</html>

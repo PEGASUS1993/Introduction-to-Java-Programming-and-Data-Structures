@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericSort.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GenericSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GenericSort {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "comment">// Create an Integer array</span>
+  4&nbsp;&nbsp;    Integer[] intArray = {<span class = "keyword">new</span> Integer(<span class = "constant">2</span>), <span class = "keyword">new</span> Integer(<span class = "constant">4</span>),
+  5&nbsp;&nbsp;      <span class = "keyword">new</span> Integer(<span class = "constant">3</span>)};
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;    <span class = "comment">// Create a Double array</span>
+  8&nbsp;&nbsp;    Double[] doubleArray = {<span class = "keyword">new</span> Double(<span class = "constant">3</span><span class = "literal">.</span><span class = "constant">4</span>), <span class = "keyword">new</span> Double(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">3</span>),
+  9&nbsp;&nbsp;      <span class = "keyword">new</span> Double(<span class = "literal">-</span><span class = "constant">22</span><span class = "literal">.</span><span class = "constant">1</span>)};
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    <span class = "comment">// Create a Character array</span>
+ 12&nbsp;&nbsp;    Character[] charArray = {<span class = "keyword">new</span> Character(<span class = "literal">'a'</span>),
+ 13&nbsp;&nbsp;      <span class = "keyword">new</span> Character(<span class = "literal">'J'</span>), <span class = "keyword">new</span> Character(<span class = "literal">'r'</span>)};
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    <span class = "comment">// Create a String array</span>
+ 16&nbsp;&nbsp;    String[] stringArray = {<span class = "literal">"Tom"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>};
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    <span class = "comment">// Sort the arrays</span>
+ 19&nbsp;&nbsp;    sort(intArray);
+ 20&nbsp;&nbsp;    sort(doubleArray);
+ 21&nbsp;&nbsp;    sort(charArray);
+ 22&nbsp;&nbsp;    sort(stringArray);
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;    <span class = "comment">// Display the sorted arrays</span>
+ 25&nbsp;&nbsp;    System.out.print(<span class = "literal">"Sorted Integer objects: "</span>);
+ 26&nbsp;&nbsp;    printList(intArray);
+ 27&nbsp;&nbsp;    System.out.print(<span class = "literal">"Sorted Double objects: "</span>);
+ 28&nbsp;&nbsp;    printList(doubleArray);
+ 29&nbsp;&nbsp;    System.out.print(<span class = "literal">"Sorted Character objects: "</span>);
+ 30&nbsp;&nbsp;    printList(charArray);
+ 31&nbsp;&nbsp;    System.out.print(<span class = "literal">"Sorted String objects: "</span>);
+ 32&nbsp;&nbsp;    printList(stringArray);
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "comment">/** Sort an array of comparable objects */</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">void</span> sort(E[] list) {
+ 37&nbsp;&nbsp;    E currentMin;
+ 38&nbsp;&nbsp;    <span class = "keyword">int</span> currentMinIndex;
+ 39&nbsp;&nbsp;
+ 40&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length - <span class = "constant">1</span>; i++) {
+ 41&nbsp;&nbsp;      <span class = "comment">// Find the minimum in the list[i..list.length-1]</span>
+ 42&nbsp;&nbsp;      currentMin = list[i];
+ 43&nbsp;&nbsp;      currentMinIndex = i;
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i + <span class = "constant">1</span>; j &lt; list.length; j++) {
+ 46&nbsp;&nbsp;        <span class = "keyword">if</span> (currentMin.compareTo(list[j]) &gt; <span class = "constant">0</span>) {
+ 47&nbsp;&nbsp;          currentMin = list[j];
+ 48&nbsp;&nbsp;          currentMinIndex = j;
+ 49&nbsp;&nbsp;        }
+ 50&nbsp;&nbsp;      }
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;      <span class = "comment">// Swap list[i] with list[currentMinIndex] if necessary;</span>
+ 53&nbsp;&nbsp;      <span class = "keyword">if</span> (currentMinIndex != i) {
+ 54&nbsp;&nbsp;        list[currentMinIndex] = list[i];
+ 55&nbsp;&nbsp;        list[i] = currentMin;
+ 56&nbsp;&nbsp;      }
+ 57&nbsp;&nbsp;    }
+ 58&nbsp;&nbsp;  }
+ 59&nbsp;&nbsp;
+ 60&nbsp;&nbsp;  <span class = "comment">/** Print an array of objects */</span>
+ 61&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printList(Object[] list) {
+ 62&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+ 63&nbsp;&nbsp;      System.out.print(list[i] + <span class = "literal">" "</span>);
+ 64&nbsp;&nbsp;    System.out.println();
+ 65&nbsp;&nbsp;  }
+ 66&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestBinarySearch.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestBinarySearchWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestBinarySearch" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestBinarySearch {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+	  <span class = "keyword">int</span>[] list = {<span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">7</span>, <span class = "constant">10</span>, <span class = "constant">11</span>, <span class = "constant">45</span>, <span class = "constant">50</span>, <span class = "constant">59</span>, <span class = "constant">60</span>, <span class = "constant">66</span>, <span class = "constant">69</span>, <span class = "constant">70</span>, <span class = "constant">79</span>};
+	  <span class = "keyword">int</span> i = BinarySearch.binarySearch(list, <span class = "constant">2</span>); <span class = "comment">// Returns 0</span>
+	  System.out.println(i);
+
+	  <span class = "keyword">int</span> j = BinarySearch.binarySearch(list, <span class = "constant">11</span>); <span class = "comment">// Returns 4</span>
+	  System.out.println(j);
+	  <span class = "keyword">int</span> k = BinarySearch.binarySearch(list, <span class = "constant">12</span>); <span class = "comment">// Returns –6</span>
+	  System.out.println(k);
+	  <span class = "keyword">int</span> l = BinarySearch.binarySearch(list, <span class = "constant">1</span>); <span class = "comment">// Returns –1</span>
+	  System.out.println(l);
+	  <span class = "keyword">int</span> m = BinarySearch.binarySearch(list, <span class = "constant">3</span>); <span class = "comment">// Returns –2	  </span>
+	  System.out.println(l);
+  }
+}
+</pre>
+</body>
+</html>

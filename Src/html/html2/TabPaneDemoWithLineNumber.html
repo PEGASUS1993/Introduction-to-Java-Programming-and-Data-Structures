@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TabPaneDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TabPaneDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Tab;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TabPane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Line;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TabPaneDemo <span class = "keyword">extends</span> Application {   
+ 13&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 15&nbsp;&nbsp;    TabPane tabPane = <span class = "keyword">new</span> TabPane();
+ 16&nbsp;&nbsp;    Tab tab1 = <span class = "keyword">new</span> Tab(<span class = "literal">"Line"</span>);
+ 17&nbsp;&nbsp;    StackPane pane1 = <span class = "keyword">new</span> StackPane();
+ 18&nbsp;&nbsp;    pane1.getChildren().add(<span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">80</span>, <span class = "constant">80</span>));
+ 19&nbsp;&nbsp;    tab1.setContent(pane1);
+ 20&nbsp;&nbsp;    Tab tab2 = <span class = "keyword">new</span> Tab(<span class = "literal">"Rectangle"</span>);
+ 21&nbsp;&nbsp;    tab2.setContent(<span class = "keyword">new</span> Rectangle(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">200</span>, <span class = "constant">200</span>));
+ 22&nbsp;&nbsp;    Tab tab3 = <span class = "keyword">new</span> Tab(<span class = "literal">"Circle"</span>);
+ 23&nbsp;&nbsp;    tab3.setContent(<span class = "keyword">new</span> Circle(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">20</span>));    
+ 24&nbsp;&nbsp;    Tab tab4 = <span class = "keyword">new</span> Tab(<span class = "literal">"Ellipse"</span>);
+ 25&nbsp;&nbsp;    tab4.setContent(<span class = "keyword">new</span> Ellipse(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">80</span>));
+ 26&nbsp;&nbsp;    tabPane.getTabs().addAll(tab1, tab2, tab3, tab4);
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(tabPane, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+ 29&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"DisplayFigure"</span>); <span class = "comment">// Set the window title</span>
+ 30&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 31&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 32&nbsp;&nbsp;  }
+ 33&nbsp;&nbsp;
+ 34&nbsp;&nbsp;  <span class = "comment">/**
+ 35&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 36&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 37&nbsp;&nbsp;   * line.
+ 38&nbsp;&nbsp;   */</span>
+ 39&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 40&nbsp;&nbsp;    launch(args);
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

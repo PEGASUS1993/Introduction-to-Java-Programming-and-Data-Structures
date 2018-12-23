@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Copy.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CopyWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Copy" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Copy {
+  <span class = "comment">/** Main method
+     @param args[0] for sourcefile 
+     @param args[1] for target file
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> IOException { 
+    <span class = "comment">// Check command-line parameter usage</span>
+    <span class = "keyword">if</span> (args.length != <span class = "constant">2</span>) { 
+      System.out.println(
+        <span class = "literal">"Usage: java Copy sourceFile targetfile"</span>);
+      System.exit(<span class = "constant">1</span>);
+    }
+
+    <span class = "comment">// Check if source file exists</span>
+    File sourceFile = <span class = "keyword">new</span> File(args[<span class = "constant">0</span>]);
+    <span class = "keyword">if</span> (!sourceFile.exists()) {
+       System.out.println(<span class = "literal">"Source file "</span> + args[<span class = "constant">0</span>] 
+         + <span class = "literal">" does not exist"</span>);
+       System.exit(<span class = "constant">2</span>);
+    }
+
+    <span class = "comment">// Check if target file exists</span>
+    File targetFile = <span class = "keyword">new</span> File(args[<span class = "constant">1</span>]);
+    <span class = "keyword">if</span> (targetFile.exists()) {
+      System.out.println(<span class = "literal">"Target file "</span> + args[<span class = "constant">1</span>] 
+        + <span class = "literal">" already exists"</span>);
+      System.exit(<span class = "constant">3</span>);
+    }
+
+    <span class = "keyword">try</span> (
+      <span class = "comment">// Create an input stream</span>
+      BufferedInputStream input = 
+        <span class = "keyword">new</span> BufferedInputStream(<span class = "keyword">new</span> FileInputStream(sourceFile));
+  
+      <span class = "comment">// Create an output stream</span>
+      BufferedOutputStream output = 
+        <span class = "keyword">new</span> BufferedOutputStream(<span class = "keyword">new</span> FileOutputStream(targetFile));
+    ) {
+      <span class = "comment">// Continuously read a byte from input and write it to output</span>
+      <span class = "keyword">int</span> r, numberOfBytesCopied = <span class = "constant">0</span>;
+      <span class = "keyword">while</span> ((r = input.read()) != <span class = "literal">-</span><span class = "constant">1</span>) {
+        output.write((<span class = "keyword">byte</span>)r);
+        numberOfBytesCopied++;
+      }
+
+      <span class = "comment">// Display the file size</span>
+      System.out.println(numberOfBytesCopied + <span class = "literal">" bytes copied"</span>);
+    }
+  }
+}
+</pre>
+</body>
+</html>

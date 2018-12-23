@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - UseTaxClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "UseTaxClassWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "UseTaxClass" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> UseTaxClass {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Tax tax1 = <span class = "keyword">new</span> Tax(<span class = "literal">"John Doe"</span>, Tax.MARRIED_FILE_JOINT, <span class = "constant">78525</span><span class = "literal">.</span><span class = "constant">16</span>);
+    System.out.println(<span class = "literal">"The tax for "</span> + tax1.getTaxPayer() + <span class = "literal">" is "</span>
+      + tax1.getTax() + <span class = "literal">"\n with filing status "</span> + tax1.getStatus() +
+      <span class = "literal">" and income "</span> + tax1.getIncome());
+    
+    Tax tax2 = <span class = "keyword">new</span> Tax(<span class = "literal">"Peter King"</span>, Tax.MARRIED_FILE_SEPARATE, 
+      <span class = "constant">78525</span><span class = "literal">.</span><span class = "constant">16</span>);
+    System.out.println(<span class = "literal">"The tax for "</span> + tax2.getTaxPayer() + <span class = "literal">" is "</span>
+      + tax2.getTax() + <span class = "literal">"\n with filing status "</span> + tax2.getStatus() +
+      <span class = "literal">" and income "</span> + tax2.getIncome()); 
+
+    System.out.println(<span class = "literal">"The tax is "</span> + Tax.getTax(Tax.SINGLE, <span class = "constant">40000</span>) 
+      + <span class = "literal">" for a single filer with $40000 income"</span>); 
+  }
+}
+</pre>
+</body>
+</html>

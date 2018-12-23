@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCallableStatement.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCallableStatementWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCallableStatement" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestCallableStatement {
+  <span class = "comment">/** Creates new form TestTableEditor */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+    Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+    Connection connection = DriverManager.getConnection(
+      <span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+<span class = "comment">//    Class.forName("oracle.jdbc.driver.OracleDriver");</span>
+<span class = "comment">//    Connection connection = DriverManager.getConnection(</span>
+<span class = "comment">//      "jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl",</span>
+<span class = "comment">//      "scott", "tiger");</span>
+
+    <span class = "comment">// Create a callable statement</span>
+    CallableStatement callableStatement = connection.prepareCall(
+      <span class = "literal">"{? = call studentFound(?, ?)}"</span>);
+
+    java.util.Scanner input = <span class = "keyword">new</span> java.util.Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter student's first name: "</span>);
+    String firstName = input.nextLine();
+    System.out.print(<span class = "literal">"Enter student's last name: "</span>);
+    String lastName = input.nextLine();
+
+    callableStatement.setString(<span class = "constant">2</span>, firstName);
+    callableStatement.setString(<span class = "constant">3</span>, lastName);
+    callableStatement.registerOutParameter(<span class = "constant">1</span>, Types.INTEGER);
+    callableStatement.execute();
+
+    <span class = "keyword">if</span> (callableStatement.getInt(<span class = "constant">1</span>) &gt;= <span class = "constant">1</span>)
+      System.out.println(firstName + <span class = "literal">" "</span> + lastName +
+        <span class = "literal">" is in the database"</span>);
+    <span class = "keyword">else</span>
+      System.out.println(firstName + <span class = "literal">" "</span> + lastName +
+        <span class = "literal">" is not in the database"</span>);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestEdible.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestEdibleWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestEdible" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestEdible {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Object[] objects = {<span class = "keyword">new</span> Tiger(), <span class = "keyword">new</span> Chicken(), <span class = "keyword">new</span> Apple()};
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; objects.length; i++) {
+      <span class = "keyword">if</span> (objects[i] <span class = "keyword">instanceof</span> Edible)
+        System.out.println(((Edible)objects[i]).howToEat());
+
+      <span class = "keyword">if</span> (objects[i] <span class = "keyword">instanceof</span> Animal) {
+        System.out.println(((Animal)objects[i]).sound());
+      }
+    }
+  }
+}
+
+<span class = "keyword">abstract</span> <span class = "keyword">class</span> Animal {
+  <span class = "keyword">private</span> <span class = "keyword">double</span> weight;
+  
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getWeight() {
+    <span class = "keyword">return</span> weight;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setWeight(<span class = "keyword">double</span> weight) {
+    <span class = "keyword">this</span>.weight = weight;
+  }
+  
+  <span class = "comment">/** Return animal sound */</span>
+  <span class = "keyword">public</span> <span class = "keyword">abstract</span> String sound();
+}
+
+<span class = "keyword">class</span> Chicken <span class = "keyword">extends</span> Animal <span class = "keyword">implements</span> Edible {
+  @Override
+  <span class = "keyword">public</span> String howToEat() {
+    <span class = "keyword">return</span> <span class = "literal">"Chicken: Fry it"</span>;
+  }
+    
+  @Override
+  <span class = "keyword">public</span> String sound() {
+    <span class = "keyword">return</span> <span class = "literal">"Chicken: cock-a-doodle-doo"</span>;
+  }
+}
+
+<span class = "keyword">class</span> Tiger <span class = "keyword">extends</span> Animal {
+  @Override
+  <span class = "keyword">public</span> String sound() {
+    <span class = "keyword">return</span> <span class = "literal">"Tiger: RROOAARR"</span>;
+  }
+}
+
+<span class = "keyword">abstract</span> <span class = "keyword">class</span> Fruit <span class = "keyword">implements</span> Edible {
+  <span class = "comment">// Data fields, constructors, and methods omitted here</span>
+}
+
+<span class = "keyword">class</span> Apple <span class = "keyword">extends</span> Fruit {
+  @Override
+  <span class = "keyword">public</span> String howToEat() {
+    <span class = "keyword">return</span> <span class = "literal">"Apple: Make apple cider"</span>;
+  }
+}
+
+<span class = "keyword">class</span> Orange <span class = "keyword">extends</span> Fruit {
+  @Override
+  <span class = "keyword">public</span> String howToEat() {
+    <span class = "keyword">return</span> <span class = "literal">"Orange: Make orange juice"</span>;
+  }
+}
+</pre>
+</body>
+</html>

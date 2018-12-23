@@ -1,0 +1,312 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TicTacToeClient.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TicTacToeClient.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.net.*;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Date;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Platform;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextArea;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+ 14&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+ 15&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Line;
+ 16&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TicTacToeClient <span class = "keyword">extends</span> Application 
+ 19&nbsp;&nbsp;    <span class = "keyword">implements</span> TicTacToeConstants {
+ 20&nbsp;&nbsp;  <span class = "comment">// Indicate whether the player has the turn</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">boolean</span> myTurn = <span class = "keyword">false</span>;
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;  <span class = "comment">// Indicate the token for the player</span>
+ 24&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">char</span> myToken = <span class = "literal">' '</span>;
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  <span class = "comment">// Indicate the token for the other player</span>
+ 27&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">char</span> otherToken = <span class = "literal">' '</span>;
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "comment">// Create and initialize cells</span>
+ 30&nbsp;&nbsp;  <span class = "keyword">private</span> Cell[][] cell =  <span class = "keyword">new</span> Cell[<span class = "constant">3</span>][<span class = "constant">3</span>];
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;  <span class = "comment">// Create and initialize a title label</span>
+ 33&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblTitle = <span class = "keyword">new</span> Label();
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "comment">// Create and initialize a status label</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblStatus = <span class = "keyword">new</span> Label();
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  <span class = "comment">// Indicate selected row and column by the current move</span>
+ 39&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> rowSelected;
+ 40&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> columnSelected;
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;  <span class = "comment">// Input and output streams from/to server</span>
+ 43&nbsp;&nbsp;  <span class = "keyword">private</span> DataInputStream fromServer;
+ 44&nbsp;&nbsp;  <span class = "keyword">private</span> DataOutputStream toServer;
+ 45&nbsp;&nbsp;
+ 46&nbsp;&nbsp;  <span class = "comment">// Continue to play?</span>
+ 47&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">boolean</span> continueToPlay = <span class = "keyword">true</span>;
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;  <span class = "comment">// Wait for the player to mark a cell</span>
+ 50&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">boolean</span> waiting = <span class = "keyword">true</span>;
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;  <span class = "comment">// Host name or ip</span>
+ 53&nbsp;&nbsp;  <span class = "keyword">private</span> String host = <span class = "literal">"localhost"</span>;
+ 54&nbsp;&nbsp;
+ 55&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 56&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 57&nbsp;&nbsp;    <span class = "comment">// Pane to hold cell</span>
+ 58&nbsp;&nbsp;    GridPane pane = <span class = "keyword">new</span> GridPane(); 
+ 59&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+ 60&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+ 61&nbsp;&nbsp;        pane.add(cell[i][j] = <span class = "keyword">new</span> Cell(i, j), j, i);
+ 62&nbsp;&nbsp;
+ 63&nbsp;&nbsp;    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+ 64&nbsp;&nbsp;    borderPane.setTop(lblTitle);
+ 65&nbsp;&nbsp;    borderPane.setCenter(pane);
+ 66&nbsp;&nbsp;    borderPane.setBottom(lblStatus);
+ 67&nbsp;&nbsp;    
+ 68&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 69&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">320</span>, <span class = "constant">350</span>);
+ 70&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"TicTacToeClient"</span>); <span class = "comment">// Set the stage title</span>
+ 71&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 72&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+ 73&nbsp;&nbsp;
+ 74&nbsp;&nbsp;    <span class = "comment">// Connect to the server</span>
+ 75&nbsp;&nbsp;    connectToServer();
+ 76&nbsp;&nbsp;  }
+ 77&nbsp;&nbsp;
+ 78&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> connectToServer() {
+ 79&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 80&nbsp;&nbsp;      <span class = "comment">// Create a socket to connect to the server</span>
+ 81&nbsp;&nbsp;      Socket socket = <span class = "keyword">new</span> Socket(host, <span class = "constant">8000</span>);
+ 82&nbsp;&nbsp;
+ 83&nbsp;&nbsp;      <span class = "comment">// Create an input stream to receive data from the server</span>
+ 84&nbsp;&nbsp;      fromServer = <span class = "keyword">new</span> DataInputStream(socket.getInputStream());
+ 85&nbsp;&nbsp;
+ 86&nbsp;&nbsp;      <span class = "comment">// Create an output stream to send data to the server</span>
+ 87&nbsp;&nbsp;      toServer = <span class = "keyword">new</span> DataOutputStream(socket.getOutputStream());
+ 88&nbsp;&nbsp;    }
+ 89&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+ 90&nbsp;&nbsp;      ex.printStackTrace();
+ 91&nbsp;&nbsp;    }
+ 92&nbsp;&nbsp;
+ 93&nbsp;&nbsp;    <span class = "comment">// Control the game on a separate thread</span>
+ 94&nbsp;&nbsp;    <span class = "keyword">new</span> Thread(() -&gt; {
+ 95&nbsp;&nbsp;      <span class = "keyword">try</span> {
+ 96&nbsp;&nbsp;        <span class = "comment">// Get notification from the server</span>
+ 97&nbsp;&nbsp;        <span class = "keyword">int</span> player = fromServer.readInt();
+ 98&nbsp;&nbsp;  
+ 99&nbsp;&nbsp;        <span class = "comment">// Am I player 1 or 2?</span>
+100&nbsp;&nbsp;        <span class = "keyword">if</span> (player == PLAYER1) {
+101&nbsp;&nbsp;          myToken = <span class = "literal">'X'</span>;
+102&nbsp;&nbsp;          otherToken = <span class = "literal">'O'</span>;
+103&nbsp;&nbsp;          Platform.runLater(() -&gt; {
+104&nbsp;&nbsp;            lblTitle.setText(<span class = "literal">"Player 1 with token <span class = "literal">'X'</span>"</span>);
+105&nbsp;&nbsp;            lblStatus.setText(<span class = "literal">"Waiting for player 2 to join"</span>);
+106&nbsp;&nbsp;          });
+107&nbsp;&nbsp;  
+108&nbsp;&nbsp;          <span class = "comment">// Receive startup notification from the server</span>
+109&nbsp;&nbsp;          fromServer.readInt(); <span class = "comment">// Whatever read is ignored</span>
+110&nbsp;&nbsp;  
+111&nbsp;&nbsp;          <span class = "comment">// The other player has joined</span>
+112&nbsp;&nbsp;          Platform.runLater(() -&gt; 
+113&nbsp;&nbsp;            lblStatus.setText(<span class = "literal">"Player 2 has joined. I start first"</span>));
+114&nbsp;&nbsp;  
+115&nbsp;&nbsp;          <span class = "comment">// It is my turn</span>
+116&nbsp;&nbsp;          myTurn = <span class = "keyword">true</span>;
+117&nbsp;&nbsp;        }
+118&nbsp;&nbsp;        <span class = "keyword">else</span> <span class = "keyword">if</span> (player == PLAYER2) {
+119&nbsp;&nbsp;          myToken = <span class = "literal">'O'</span>;
+120&nbsp;&nbsp;          otherToken = <span class = "literal">'X'</span>;
+121&nbsp;&nbsp;          Platform.runLater(() -&gt; {
+122&nbsp;&nbsp;            lblTitle.setText(<span class = "literal">"Player 2 with token <span class = "literal">'O'</span>"</span>);
+123&nbsp;&nbsp;            lblStatus.setText(<span class = "literal">"Waiting for player 1 to move"</span>);
+124&nbsp;&nbsp;          });
+125&nbsp;&nbsp;        }
+126&nbsp;&nbsp;  
+127&nbsp;&nbsp;        <span class = "comment">// Continue to play</span>
+128&nbsp;&nbsp;        <span class = "keyword">while</span> (continueToPlay) {      
+129&nbsp;&nbsp;          <span class = "keyword">if</span> (player == PLAYER1) {
+130&nbsp;&nbsp;            waitForPlayerAction(); <span class = "comment">// Wait for player 1 to move</span>
+131&nbsp;&nbsp;            sendMove(); <span class = "comment">// Send the move to the server</span>
+132&nbsp;&nbsp;            receiveInfoFromServer(); <span class = "comment">// Receive info from the server</span>
+133&nbsp;&nbsp;          }
+134&nbsp;&nbsp;          <span class = "keyword">else</span> <span class = "keyword">if</span> (player == PLAYER2) {
+135&nbsp;&nbsp;            receiveInfoFromServer(); <span class = "comment">// Receive info from the server</span>
+136&nbsp;&nbsp;            waitForPlayerAction(); <span class = "comment">// Wait for player 2 to move</span>
+137&nbsp;&nbsp;            sendMove(); <span class = "comment">// Send player 2's move to the server</span>
+138&nbsp;&nbsp;          }
+139&nbsp;&nbsp;        }
+140&nbsp;&nbsp;      }
+141&nbsp;&nbsp;      <span class = "keyword">catch</span> (Exception ex) {
+142&nbsp;&nbsp;        ex.printStackTrace();
+143&nbsp;&nbsp;      }
+144&nbsp;&nbsp;    }).start();
+145&nbsp;&nbsp;  }
+146&nbsp;&nbsp;
+147&nbsp;&nbsp;  <span class = "comment">/** Wait for the player to mark a cell */</span>
+148&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> waitForPlayerAction() <span class = "keyword">throws</span> InterruptedException {
+149&nbsp;&nbsp;    <span class = "keyword">while</span> (waiting) {
+150&nbsp;&nbsp;      Thread.sleep(<span class = "constant">100</span>);
+151&nbsp;&nbsp;    }
+152&nbsp;&nbsp;
+153&nbsp;&nbsp;    waiting = <span class = "keyword">true</span>;
+154&nbsp;&nbsp;  }
+155&nbsp;&nbsp;
+156&nbsp;&nbsp;  <span class = "comment">/** Send this player's move to the server */</span>
+157&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> sendMove() <span class = "keyword">throws</span> IOException {
+158&nbsp;&nbsp;    toServer.writeInt(rowSelected); <span class = "comment">// Send the selected row</span>
+159&nbsp;&nbsp;    toServer.writeInt(columnSelected); <span class = "comment">// Send the selected column</span>
+160&nbsp;&nbsp;  }
+161&nbsp;&nbsp;
+162&nbsp;&nbsp;  <span class = "comment">/** Receive info from the server */</span>
+163&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> receiveInfoFromServer() <span class = "keyword">throws</span> IOException {
+164&nbsp;&nbsp;    <span class = "comment">// Receive game status</span>
+165&nbsp;&nbsp;    <span class = "keyword">int</span> status = fromServer.readInt();
+166&nbsp;&nbsp;
+167&nbsp;&nbsp;    <span class = "keyword">if</span> (status == PLAYER1_WON) {
+168&nbsp;&nbsp;      <span class = "comment">// Player 1 won, stop playing</span>
+169&nbsp;&nbsp;      continueToPlay = <span class = "keyword">false</span>;
+170&nbsp;&nbsp;      <span class = "keyword">if</span> (myToken == <span class = "literal">'X'</span>) {
+171&nbsp;&nbsp;        Platform.runLater(() -&gt; lblStatus.setText(<span class = "literal">"I won! (X)"</span>));
+172&nbsp;&nbsp;      }
+173&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (myToken == <span class = "literal">'O'</span>) {
+174&nbsp;&nbsp;        Platform.runLater(() -&gt; 
+175&nbsp;&nbsp;          lblStatus.setText(<span class = "literal">"Player 1 (X) has won!"</span>));
+176&nbsp;&nbsp;        receiveMove();
+177&nbsp;&nbsp;      }
+178&nbsp;&nbsp;    }
+179&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (status == PLAYER2_WON) {
+180&nbsp;&nbsp;      <span class = "comment">// Player 2 won, stop playing</span>
+181&nbsp;&nbsp;      continueToPlay = <span class = "keyword">false</span>;
+182&nbsp;&nbsp;      <span class = "keyword">if</span> (myToken == <span class = "literal">'O'</span>) {
+183&nbsp;&nbsp;        Platform.runLater(() -&gt; lblStatus.setText(<span class = "literal">"I won! (O)"</span>));
+184&nbsp;&nbsp;      }
+185&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (myToken == <span class = "literal">'X'</span>) {
+186&nbsp;&nbsp;        Platform.runLater(() -&gt; 
+187&nbsp;&nbsp;          lblStatus.setText(<span class = "literal">"Player 2 (O) has won!"</span>));
+188&nbsp;&nbsp;        receiveMove();
+189&nbsp;&nbsp;      }
+190&nbsp;&nbsp;    }
+191&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (status == DRAW) {
+192&nbsp;&nbsp;      <span class = "comment">// No winner, game is over</span>
+193&nbsp;&nbsp;      continueToPlay = <span class = "keyword">false</span>;
+194&nbsp;&nbsp;      Platform.runLater(() -&gt; 
+195&nbsp;&nbsp;        lblStatus.setText(<span class = "literal">"Game is over, no winner!"</span>));
+196&nbsp;&nbsp;
+197&nbsp;&nbsp;      <span class = "keyword">if</span> (myToken == <span class = "literal">'O'</span>) {
+198&nbsp;&nbsp;        receiveMove();
+199&nbsp;&nbsp;      }
+200&nbsp;&nbsp;    }
+201&nbsp;&nbsp;    <span class = "keyword">else</span> {
+202&nbsp;&nbsp;      receiveMove();
+203&nbsp;&nbsp;      Platform.runLater(() -&gt; lblStatus.setText(<span class = "literal">"My turn"</span>));
+204&nbsp;&nbsp;      myTurn = <span class = "keyword">true</span>; <span class = "comment">// It is my turn</span>
+205&nbsp;&nbsp;    }
+206&nbsp;&nbsp;  }
+207&nbsp;&nbsp;
+208&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> receiveMove() <span class = "keyword">throws</span> IOException {
+209&nbsp;&nbsp;    <span class = "comment">// Get the other player's move</span>
+210&nbsp;&nbsp;    <span class = "keyword">int</span> row = fromServer.readInt();
+211&nbsp;&nbsp;    <span class = "keyword">int</span> column = fromServer.readInt();
+212&nbsp;&nbsp;    Platform.runLater(() -&gt; cell[row][column].setToken(otherToken));
+213&nbsp;&nbsp;  }
+214&nbsp;&nbsp;
+215&nbsp;&nbsp;  <span class = "comment">// An inner class for a cell</span>
+216&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">class</span> Cell <span class = "keyword">extends</span> Pane {
+217&nbsp;&nbsp;    <span class = "comment">// Indicate the row and column of this cell in the board</span>
+218&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> row;
+219&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> column;
+220&nbsp;&nbsp;
+221&nbsp;&nbsp;    <span class = "comment">// Token used for this cell</span>
+222&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">char</span> token = <span class = "literal">' '</span>;
+223&nbsp;&nbsp;
+224&nbsp;&nbsp;    <span class = "keyword">public</span> Cell(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column) {
+225&nbsp;&nbsp;      <span class = "keyword">this</span>.row = row;
+226&nbsp;&nbsp;      <span class = "keyword">this</span>.column = column;
+227&nbsp;&nbsp;      <span class = "keyword">this</span>.setPrefSize(<span class = "constant">2000</span>, <span class = "constant">2000</span>); <span class = "comment">// What happens without this?</span>
+228&nbsp;&nbsp;      setStyle(<span class = "literal">"-fx-border-color: black"</span>); <span class = "comment">// Set cell's border</span>
+229&nbsp;&nbsp;      <span class = "keyword">this</span>.setOnMouseClicked(e -&gt; handleMouseClick());  
+230&nbsp;&nbsp;    }
+231&nbsp;&nbsp;
+232&nbsp;&nbsp;    <span class = "comment">/** Return token */</span>
+233&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">char</span> getToken() {
+234&nbsp;&nbsp;      <span class = "keyword">return</span> token;
+235&nbsp;&nbsp;    }
+236&nbsp;&nbsp;
+237&nbsp;&nbsp;    <span class = "comment">/** Set a new token */</span>
+238&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> setToken(<span class = "keyword">char</span> c) {
+239&nbsp;&nbsp;      token = c;
+240&nbsp;&nbsp;      repaint();
+241&nbsp;&nbsp;    }
+242&nbsp;&nbsp;
+243&nbsp;&nbsp;    <span class = "keyword">protected</span> <span class = "keyword">void</span> repaint() {
+244&nbsp;&nbsp;      <span class = "keyword">if</span> (token == <span class = "literal">'X'</span>) {
+245&nbsp;&nbsp;        Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, 
+246&nbsp;&nbsp;          <span class = "keyword">this</span>.getWidth() - <span class = "constant">10</span>, <span class = "keyword">this</span>.getHeight() - <span class = "constant">10</span>);
+247&nbsp;&nbsp;        line1.endXProperty().bind(<span class = "keyword">this</span>.widthProperty().subtract(<span class = "constant">10</span>));
+248&nbsp;&nbsp;        line1.endYProperty().bind(<span class = "keyword">this</span>.heightProperty().subtract(<span class = "constant">10</span>));
+249&nbsp;&nbsp;        Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "keyword">this</span>.getHeight() - <span class = "constant">10</span>, 
+250&nbsp;&nbsp;          <span class = "keyword">this</span>.getWidth() - <span class = "constant">10</span>, <span class = "constant">10</span>);
+251&nbsp;&nbsp;        line2.startYProperty().bind(
+252&nbsp;&nbsp;          <span class = "keyword">this</span>.heightProperty().subtract(<span class = "constant">10</span>));
+253&nbsp;&nbsp;        line2.endXProperty().bind(<span class = "keyword">this</span>.widthProperty().subtract(<span class = "constant">10</span>));
+254&nbsp;&nbsp;        
+255&nbsp;&nbsp;        <span class = "comment">// Add the lines to the pane</span>
+256&nbsp;&nbsp;        <span class = "keyword">this</span>.getChildren().addAll(line1, line2); 
+257&nbsp;&nbsp;      }
+258&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (token == <span class = "literal">'O'</span>) {
+259&nbsp;&nbsp;        Ellipse ellipse = <span class = "keyword">new</span> Ellipse(<span class = "keyword">this</span>.getWidth() / <span class = "constant">2</span>, 
+260&nbsp;&nbsp;          <span class = "keyword">this</span>.getHeight() / <span class = "constant">2</span>, <span class = "keyword">this</span>.getWidth() / <span class = "constant">2</span> - <span class = "constant">10</span>, 
+261&nbsp;&nbsp;          <span class = "keyword">this</span>.getHeight() / <span class = "constant">2</span> - <span class = "constant">10</span>);
+262&nbsp;&nbsp;        ellipse.centerXProperty().bind(
+263&nbsp;&nbsp;          <span class = "keyword">this</span>.widthProperty().divide(<span class = "constant">2</span>));
+264&nbsp;&nbsp;        ellipse.centerYProperty().bind(
+265&nbsp;&nbsp;            <span class = "keyword">this</span>.heightProperty().divide(<span class = "constant">2</span>));
+266&nbsp;&nbsp;        ellipse.radiusXProperty().bind(
+267&nbsp;&nbsp;            <span class = "keyword">this</span>.widthProperty().divide(<span class = "constant">2</span>).subtract(<span class = "constant">10</span>));        
+268&nbsp;&nbsp;        ellipse.radiusYProperty().bind(
+269&nbsp;&nbsp;            <span class = "keyword">this</span>.heightProperty().divide(<span class = "constant">2</span>).subtract(<span class = "constant">10</span>));   
+270&nbsp;&nbsp;        ellipse.setStroke(Color.BLACK);
+271&nbsp;&nbsp;        ellipse.setFill(Color.WHITE);
+272&nbsp;&nbsp;        
+273&nbsp;&nbsp;        getChildren().add(ellipse); <span class = "comment">// Add the ellipse to the pane</span>
+274&nbsp;&nbsp;      }
+275&nbsp;&nbsp;    }
+276&nbsp;&nbsp;
+277&nbsp;&nbsp;    <span class = "comment">/* Handle a mouse click event */</span>
+278&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">void</span> handleMouseClick() {
+279&nbsp;&nbsp;      <span class = "comment">// If cell is not occupied and the player has the turn</span>
+280&nbsp;&nbsp;      <span class = "keyword">if</span> (token == <span class = "literal">' '</span> && myTurn) {
+281&nbsp;&nbsp;        setToken(myToken);  <span class = "comment">// Set the player's token in the cell</span>
+282&nbsp;&nbsp;        myTurn = <span class = "keyword">false</span>;
+283&nbsp;&nbsp;        rowSelected = row;
+284&nbsp;&nbsp;        columnSelected = column;
+285&nbsp;&nbsp;        lblStatus.setText(<span class = "literal">"Waiting for the other player to move"</span>);
+286&nbsp;&nbsp;        waiting = <span class = "keyword">false</span>; <span class = "comment">// Just completed a successful move</span>
+287&nbsp;&nbsp;      }
+288&nbsp;&nbsp;    }
+289&nbsp;&nbsp;  }
+290&nbsp;&nbsp;
+291&nbsp;&nbsp;  <span class = "comment">/**
+292&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+293&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+294&nbsp;&nbsp;   */</span>
+295&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+296&nbsp;&nbsp;    launch(args);
+297&nbsp;&nbsp;  }
+298&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

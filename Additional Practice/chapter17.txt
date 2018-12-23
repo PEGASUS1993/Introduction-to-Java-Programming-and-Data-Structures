@@ -1,0 +1,242 @@
+Chapter 17 Binary I/O
+
+Section 17.2 How is I/O Handled in Java?
+1. Which of the following statements are true?
+a. A File object encapsulates the properties of a file or a path, but does not contain the methods for reading/writing.
+b. You can use the PrintWriter class for outputting text to a file.
+c. You can use the Scanner class for reading text from a file.
+d. An input object is also called an input stream.
+e. An output object is also called an output stream.
+Key:abcde
+
+#
+Section 17.3 Text I/O vs. Binary I/O
+2. Which of the following statements are true?
+a. Text I/O is built upon binary I/O to provide a level of abstraction for character encoding and decoding.
+b. Text I/O involves encoding and decoding.
+c. Binary I/O does not require conversions.
+d. Binary I/O is more efficient than text I/O, because binary I/O does not require encoding and decoding.
+e. Binary files are independent of the encoding scheme on the host machine and thus are portable. 
+Key:abcde
+
+#
+Section 17.4 Binary I/O Classes
+3.	Which method can you use to find out the number of the bytes in a file using InputStream?
+a.	length()
+b.	available()
+c.	size()
+d.	getSize()
+Key:b
+
+#
+4. Which of the following statements are true?
+a. All methods in FileInputStream/FileOutputStream are inherited from InputStream/OutputStream.
+b. You can create a FileInputStream/FileOutputStream from a File object or a file name using FileInputStream/FileOutputStream constructors.
+c. The return value -1 from the read() method signifies the end of file.
+d. A java.io.FileNotFoundException would occur if you attempt to create a FileInputStream with a nonexistent file.
+e. A java.io.FileNotFoundException would occur if you attempt to create a FileOutputStream with a nonexistent file.
+Key:abcd
+
+#
+5. To append data to an existing file, use _____________ to construct a FileOutputStream for file out.dat.
+a. new FileOutputStream("out.dat")
+b. new FileOutputStream("out.dat", false)
+c. new FileOutputStream("out.dat", true)
+d. new FileOutputStream(true, "out.dat")
+Key:c
+
+#		
+6.	What does the following code do?
+
+FileInputStream fis = new FileInputStream("test.dat");
+a.	It creates a new file named test.dat if it does not exist and opens the file so you can write to it.
+b.	It creates a new file named test.dat if it does not exist and opens the file so you can write to it and read from it.
+c.	It creates a new file named test.dat regardless of whether it exists or not and opens the file so you can write to it.
+d.	It creates a new file named test.dat regardless of whether it exists or not and opens the file so you can write to it and read from it.
+e. It creates a FileInputStream for test.dat if test.dat exists.
+Key:e
+
+#		
+7.	Which type of exception occurs when creating a DataInputStream for a nonexistent file?
+a.	FileNotExist
+b.	FileNotExistException
+c.	FileNotFound
+d.	FileNotFoundException
+Key:d
+
+#		
+8.	Which of the following statements is correct to create a DataOutputStream to write to a file named out.dat?
+a.	DataOutputStream outfile = new DataOutputStream(new File("out.dat"));
+b.	DataOutputStream outfile =  new DataOutputStream(new FileOutputStream("out.dat"));
+c.	DataOutputStream outfile = new DataOutputStream(FileOutputStream("out.dat"));
+d.	DataOutputStream outfile =  new DataOutputStream("out.dat");
+Key:b
+
+#
+9. After the following program is finished, how many bytes are written to the file t.dat?
+
+import java.io.*;
+
+public class Test {
+  public static void main(String[] args) throws IOException {
+    DataOutputStream output = new DataOutputStream(
+      new FileOutputStream("t.dat"));
+    output.writeShort(1234);
+    output.writeShort(5678);
+    output.close();
+  }
+}
+a. 2 bytes.
+b. 4 bytes.
+c. 8 bytes.
+d. 16 bytes.
+Key:b Each short number takes 2 bytes. So total is 4 bytes.
+
+#
+10. After the following program is finished, how many bytes are written to the file t.dat?
+
+import java.io.*;
+
+public class Test {
+  public static void main(String[] args) throws IOException {
+    DataOutputStream output = new DataOutputStream(
+      new FileOutputStream("t.dat"));
+    output.writeChar('A');
+    output.close();
+  }
+}
+a. 2 bytes.
+b. 4 bytes.
+c. 8 bytes.
+d. none of the above.
+Key:a Two bytes of Unicode for 'A' is written
+
+#
+11. After the following program is finished, how many bytes are written to the file t.dat?
+
+import java.io.*;
+
+public class Test {
+  public static void main(String[] args) throws IOException {
+    DataOutputStream output = new DataOutputStream(
+      new FileOutputStream("t.dat"));
+    output.writeChars("ABCD");
+    output.close();
+  }
+}
+a. 2 bytes.
+b. 4 bytes.
+c. 8 bytes.
+d. 12 bytes.
+e. 16 bytes.
+Key:c Two bytes of Unicode for each character is written to output.
+
+#
+12. After the following program is finished, how many bytes are written to the file t.dat?
+
+import java.io.*;
+
+public class Test {
+  public static void main(String[] args) throws IOException {
+    DataOutputStream output = new DataOutputStream(
+      new FileOutputStream("t.dat"));
+    output.writeUTFString("ABCD");
+    output.close();
+  }
+}
+a. 2 bytes.
+b. 4 bytes.
+c. 6 bytes.
+d. 8 bytes.
+e. 10 bytes.
+Key:c "ABCD" are ASCII code, so each takes one byte in UTF. Total is 6 because the first two bytes stores the number of characters in the string.
+
+#
+13. Which of the following statements are true?
+a. All files are stored in binary format. So, all files are essentially binary files.
+b. Text I/O is built upon binary I/O to provide a level of abstraction for character encoding and decoding. 
+c. Encoding and decoding are automatically performed by text I/O. 
+d. For binary input, you need to know exactly how data were written in order to read them in correct type and order. 
+Key:abcd
+
+#
+Section 17.6 Object I/O 
+14. Which of the following statements are true?
+a. ObjectInputStream/ObjectOutputStream enables you to perform I/O for objects in addition for primitive type values and strings.
+b. Since ObjectInputStream/ObjectOutputStream contains all the functions of DataInputStream/DataOutputStream, you can replace DataInputStream/DataOutputStream completely by ObjectInputStream/ObjectOutputStream. 
+c. To write an object, the object must be serializable.
+d. The Serializable interface does not contain any methods. So it is a mark interface.
+e. If all the elements in an array is serializable, the array is serializable too.
+Key:abcde
+
+#
+15. The Loan class given in the text does not implement java.io.Serializable. Analyze the following code.
+
+public class Foo implements java.io.Serializable {  
+  private int v1;
+  private static double v2;
+  private Loan v3 = new Loan();  
+}
+a. An instance of Foo can be serialized because Foo implements Serializable.
+b. An instance of Foo cannot be serialized because Foo contains a non-serializable instance variable v3.
+c. If you mark v3 as transient, an instance of Foo is serializable.
+Key:bc An object may not be serialized even though its class implements java.io.Serializable, because it may contain non-serializable instance variables.
+
+#
+16. Which of the following statements is not true?
+
+a. A static variable is not serialized.
+b. A transient variable is not serialized.
+c. An object must be an instance of Serializable or Externalizable for it to be serialized.
+d. The methods in an object are serialized.
+e. All of the above are true.
+Key:d
+
+#		
+Section 17.7 Random Access Files 
+17.	To create a file, you can use __________.
+a.	FileOutputStream
+b.	FileWriter
+c.	RandomAccessFile
+d.	All of the above.
+Key:d
+
+#		
+18.	Which of the following is the legal mode for creating a new RandomAccessFile stream?
+a.	"w"
+b.	'r'
+c.	"rw"
+d.	"rwx"
+Key:c
+
+#		
+19.	What happens if the file test.dat does not exist when you attempt to compile and run the following code?
+
+import java.io.*;
+
+class Test  {
+  public static void main(String[] args) {
+    try {
+      RandomAccessFile raf =
+        new RandomAccessFile("test.dat", "r");
+      int i = raf.readInt();
+    }
+    catch(IOException ex) {
+      System.out.println("IO exception");
+    }
+  }
+}
+a.	The program does not compile because raf is not created correctly.
+b.	The program does not compile because readInt() is not implemented in RandomAccessFile.
+c.	The program compiles, but throws IOException because the file test.dat doesn't exist. The program displays IO exception.
+d.	The program compiles and runs fine, but nothing is displayed on the console.
+Key:c The problem is in line: new RandomAccessFile("test.dat", "r"); Because the file does not exist, you cannot open it for reading.
+
+#
+20. With which I/O class can you append or update a file?
+
+a. RandomAccessFile(), 
+b. OutputStream() 
+c. DataOutputStream() 
+d. None of the above
+Key:a

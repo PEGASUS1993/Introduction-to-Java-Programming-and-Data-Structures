@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MediaDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MediaDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Slider;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Region;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.media.Media;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.media.MediaPlayer;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.media.MediaView;
+ 14&nbsp;&nbsp;<span class = "keyword">import</span> javafx.util.Duration;
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MediaDemo <span class = "keyword">extends</span> Application {
+ 17&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">final</span> String MEDIA_URL = 
+ 18&nbsp;&nbsp;    <span class = "literal">"https://liveexample.pearsoncmg.com/common/sample.mp4"</span>;
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 22&nbsp;&nbsp;    Media media = <span class = "keyword">new</span> Media(MEDIA_URL);
+ 23&nbsp;&nbsp;    MediaPlayer mediaPlayer = <span class = "keyword">new</span> MediaPlayer(media);
+ 24&nbsp;&nbsp;    MediaView mediaView = <span class = "keyword">new</span> MediaView(mediaPlayer);
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;    Button playButton = <span class = "keyword">new</span> Button(<span class = "literal">"&gt;"</span>);
+ 27&nbsp;&nbsp;    playButton.setOnAction(e -&gt; {
+ 28&nbsp;&nbsp;      <span class = "keyword">if</span> (playButton.getText().equals(<span class = "literal">"&gt;"</span>)) {
+ 29&nbsp;&nbsp;        mediaPlayer.play();
+ 30&nbsp;&nbsp;        playButton.setText(<span class = "literal">"||"</span>);
+ 31&nbsp;&nbsp;      } <span class = "keyword">else</span> {
+ 32&nbsp;&nbsp;        mediaPlayer.pause();
+ 33&nbsp;&nbsp;        playButton.setText(<span class = "literal">"&gt;"</span>);
+ 34&nbsp;&nbsp;      }
+ 35&nbsp;&nbsp;    });
+ 36&nbsp;&nbsp;
+ 37&nbsp;&nbsp;    Button rewindButton = <span class = "keyword">new</span> Button(<span class = "literal">"&lt;&lt;"</span>);
+ 38&nbsp;&nbsp;    rewindButton.setOnAction(e -&gt; mediaPlayer.seek(Duration.ZERO));
+ 39&nbsp;&nbsp;    
+ 40&nbsp;&nbsp;    Slider slVolume = <span class = "keyword">new</span> Slider();
+ 41&nbsp;&nbsp;    slVolume.setPrefWidth(<span class = "constant">150</span>);
+ 42&nbsp;&nbsp;    slVolume.setMaxWidth(Region.USE_PREF_SIZE);
+ 43&nbsp;&nbsp;    slVolume.setMinWidth(<span class = "constant">30</span>);
+ 44&nbsp;&nbsp;    slVolume.setValue(<span class = "constant">50</span>);
+ 45&nbsp;&nbsp;    mediaPlayer.volumeProperty().bind(
+ 46&nbsp;&nbsp;      slVolume.valueProperty().divide(<span class = "constant">100</span>));
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+ 49&nbsp;&nbsp;    hBox.setAlignment(Pos.CENTER);
+ 50&nbsp;&nbsp;    hBox.getChildren().addAll(playButton, rewindButton,
+ 51&nbsp;&nbsp;      <span class = "keyword">new</span> Label(<span class = "literal">"Volume"</span>), slVolume);
+ 52&nbsp;&nbsp;
+ 53&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+ 54&nbsp;&nbsp;    pane.setCenter(mediaView);
+ 55&nbsp;&nbsp;    pane.setBottom(hBox);
+ 56&nbsp;&nbsp;
+ 57&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 58&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">650</span>, <span class = "constant">500</span>);
+ 59&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"MediaDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 60&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 61&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage    </span>
+ 62&nbsp;&nbsp;  }
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;  <span class = "comment">/**
+ 65&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 66&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 67&nbsp;&nbsp;   */</span>
+ 68&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 69&nbsp;&nbsp;    launch(args);
+ 70&nbsp;&nbsp;  }
+ 71&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RBTree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RBTree.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.ArrayList;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> RBTree&lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">extends</span> BST&lt;E&gt; {
+  4&nbsp;&nbsp;  <span class = "comment">/** Create a default RB tree */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> RBTree() {
+  6&nbsp;&nbsp;  }
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;  <span class = "comment">/** Create an RB tree from an array of elements */</span>
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> RBTree(E[] elements) {
+ 10&nbsp;&nbsp;    <span class = "keyword">super</span>(elements);
+ 11&nbsp;&nbsp;  }
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;  @Override <span class = "comment">/** Override createNewNode to create an RBTreeNode */</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">protected</span> RBTreeNode&lt;E&gt; createNewNode(E e) {
+ 15&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> RBTreeNode&lt;E&gt;(e);
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;  @Override <span class = "comment">/** Override the insert method to 
+ 19&nbsp;&nbsp;    balance the tree if necessary */</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> insert(E e) {
+ 21&nbsp;&nbsp;    <span class = "keyword">boolean</span> successful = <span class = "keyword">super</span>.insert(e);
+ 22&nbsp;&nbsp;    <span class = "keyword">if</span> (!successful)
+ 23&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// e is already in the tree</span>
+ 24&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 25&nbsp;&nbsp;      ensureRBTree(e); 
+ 26&nbsp;&nbsp;    }
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// e is inserted</span>
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  <span class = "comment">/** Ensure that the tree is a red-black tree */</span>
+ 32&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> ensureRBTree(E e) {
+ 33&nbsp;&nbsp;    <span class = "comment">// Get the path that leads to element e from the root </span>
+ 34&nbsp;&nbsp;    ArrayList&lt;TreeNode&lt;E&gt;&gt; path = path(e);
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;    <span class = "keyword">int</span> i = path.size() - <span class = "constant">1</span>; <span class = "comment">// Index to the current node in the path</span>
+ 37&nbsp;&nbsp;    
+ 38&nbsp;&nbsp;    <span class = "comment">// u is the last node in the path. u contains element e</span>
+ 39&nbsp;&nbsp;    RBTreeNode&lt;E&gt; u = (RBTreeNode&lt;E&gt;)(path.get(i));
+ 40&nbsp;&nbsp;        
+ 41&nbsp;&nbsp;    <span class = "comment">// v is the parent of of u, if exists</span>
+ 42&nbsp;&nbsp;    RBTreeNode&lt;E&gt; v = (u == root) ? <span class = "keyword">null</span> : 
+ 43&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)(path.get(i - <span class = "constant">1</span>));
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;    u.setRed(); <span class = "comment">// It is OK to set u red    </span>
+ 46&nbsp;&nbsp;          
+ 47&nbsp;&nbsp;    <span class = "keyword">if</span> (u == root) <span class = "comment">// If e is inserted as the root, set root black</span>
+ 48&nbsp;&nbsp;      u.setBlack();
+ 49&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (v.isRed()) 
+ 50&nbsp;&nbsp;      fixDoubleRed(u, v, path, i); <span class = "comment">// Fix double red violation at u</span>
+ 51&nbsp;&nbsp;  }
+ 52&nbsp;&nbsp;  
+ 53&nbsp;&nbsp;  <span class = "comment">/** Fix double red violation at node u */</span>
+ 54&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> fixDoubleRed(RBTreeNode&lt;E&gt; u, RBTreeNode&lt;E&gt; v, 
+ 55&nbsp;&nbsp;      ArrayList&lt;TreeNode&lt;E&gt;&gt; path, <span class = "keyword">int</span> i) {          
+ 56&nbsp;&nbsp;    <span class = "comment">// w is the grandparent of u</span>
+ 57&nbsp;&nbsp;    RBTreeNode&lt;E&gt; w = (RBTreeNode&lt;E&gt;)(path.get(i - <span class = "constant">2</span>));
+ 58&nbsp;&nbsp;    RBTreeNode&lt;E&gt; parentOfw = (w == root) ? <span class = "keyword">null</span> : 
+ 59&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)path.get(i - <span class = "constant">3</span>);
+ 60&nbsp;&nbsp;
+ 61&nbsp;&nbsp;    <span class = "comment">// Get v's sibling named x</span>
+ 62&nbsp;&nbsp;    RBTreeNode&lt;E&gt; x = (w.left == v) ? 
+ 63&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)(w.right) : (RBTreeNode&lt;E&gt;)(w.left);
+ 64&nbsp;&nbsp;    
+ 65&nbsp;&nbsp;    <span class = "keyword">if</span> (x == <span class = "keyword">null</span> || x.isBlack()) {
+ 66&nbsp;&nbsp;      <span class = "comment">// Case 1: v's sibling x is black</span>
+ 67&nbsp;&nbsp;      <span class = "keyword">if</span> (w.left == v && v.left == u) {
+ 68&nbsp;&nbsp;        <span class = "comment">// Case 1.1: u &lt; v &lt; w, Restructure and recolor nodes</span>
+ 69&nbsp;&nbsp;        restructureRecolor(u, v, w, w, parentOfw);
+ 70&nbsp;&nbsp;    
+ 71&nbsp;&nbsp;        w.left = v.right; <span class = "comment">// v.right is y3 in Figure 11.7</span>
+ 72&nbsp;&nbsp;        v.right = w;
+ 73&nbsp;&nbsp;      }
+ 74&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (w.left == v && v.right == u) {
+ 75&nbsp;&nbsp;        <span class = "comment">// Case 1.2: v &lt; u &lt; w, Restructure and recolor nodes</span>
+ 76&nbsp;&nbsp;        restructureRecolor(v, u, w, w, parentOfw);
+ 77&nbsp;&nbsp;        v.right = u.left;
+ 78&nbsp;&nbsp;        w.left = u.right;
+ 79&nbsp;&nbsp;        u.left = v;
+ 80&nbsp;&nbsp;        u.right = w;
+ 81&nbsp;&nbsp;      }
+ 82&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (w.right == v && v.right == u) {
+ 83&nbsp;&nbsp;        <span class = "comment">// Case 1.3: w &lt; v &lt; u, Restructure and recolor nodes</span>
+ 84&nbsp;&nbsp;        restructureRecolor(w, v, u, w, parentOfw);
+ 85&nbsp;&nbsp;        w.right = v.left;
+ 86&nbsp;&nbsp;        v.left = w;
+ 87&nbsp;&nbsp;      }
+ 88&nbsp;&nbsp;      <span class = "keyword">else</span> {
+ 89&nbsp;&nbsp;        <span class = "comment">// Case 1.4: w &lt; u &lt; v, Restructure and recolor nodes</span>
+ 90&nbsp;&nbsp;        restructureRecolor(w, u, v, w, parentOfw);
+ 91&nbsp;&nbsp;        w.right = u.left;
+ 92&nbsp;&nbsp;        v.left = u.right;
+ 93&nbsp;&nbsp;        u.left = w;
+ 94&nbsp;&nbsp;        u.right = v;
+ 95&nbsp;&nbsp;      }
+ 96&nbsp;&nbsp;    }
+ 97&nbsp;&nbsp;    <span class = "keyword">else</span> { <span class = "comment">// Case 2: v's sibling x is red </span>
+ 98&nbsp;&nbsp;      <span class = "comment">// Recolor nodes</span>
+ 99&nbsp;&nbsp;      w.setRed();
+100&nbsp;&nbsp;      u.setRed();
+101&nbsp;&nbsp;      ((RBTreeNode&lt;E&gt;)(w.left)).setBlack(); 
+102&nbsp;&nbsp;      ((RBTreeNode&lt;E&gt;)(w.right)).setBlack();
+103&nbsp;&nbsp;      
+104&nbsp;&nbsp;      <span class = "keyword">if</span> (w == root) {
+105&nbsp;&nbsp;        w.setBlack();     
+106&nbsp;&nbsp;      }
+107&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (((RBTreeNode&lt;E&gt;)parentOfw).isRed()) {  
+108&nbsp;&nbsp;        <span class = "comment">// Propagate along the path to fix new double red violation</span>
+109&nbsp;&nbsp;        u = w;
+110&nbsp;&nbsp;        v = (RBTreeNode&lt;E&gt;)parentOfw;
+111&nbsp;&nbsp;        fixDoubleRed(u, v, path, i - <span class = "constant">2</span>); <span class = "comment">// i – 2 propagates upward</span>
+112&nbsp;&nbsp;      }
+113&nbsp;&nbsp;    }
+114&nbsp;&nbsp;  }
+115&nbsp;&nbsp;
+116&nbsp;&nbsp;  <span class = "comment">/** Connect b with parentOfw and recolor a, b, c for a &lt; b &lt; c */</span>
+117&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> restructureRecolor(RBTreeNode&lt;E&gt; a, RBTreeNode&lt;E&gt; b, 
+118&nbsp;&nbsp;      RBTreeNode&lt;E&gt; c, RBTreeNode&lt;E&gt; w, RBTreeNode&lt;E&gt; parentOfw) {
+119&nbsp;&nbsp;    <span class = "keyword">if</span> (parentOfw == <span class = "keyword">null</span>)
+120&nbsp;&nbsp;      root = b;
+121&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (parentOfw.left == w)
+122&nbsp;&nbsp;      parentOfw.left = b;
+123&nbsp;&nbsp;    <span class = "keyword">else</span>
+124&nbsp;&nbsp;      parentOfw.right = b;
+125&nbsp;&nbsp;
+126&nbsp;&nbsp;    b.setBlack(); <span class = "comment">// b becomes the root in the subtree</span>
+127&nbsp;&nbsp;    a.setRed(); <span class = "comment">// a becomes the left child of b</span>
+128&nbsp;&nbsp;    c.setRed(); <span class = "comment">// c becomes the right child of b</span>
+129&nbsp;&nbsp;  }      
+130&nbsp;&nbsp;  
+131&nbsp;&nbsp;  @Override <span class = "comment">/** Delete an element from the RBTree.
+132&nbsp;&nbsp;   * Return true if the element is deleted successfully
+133&nbsp;&nbsp;   * Return false if the element is not in the tree */</span>
+134&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> delete(E e) {
+135&nbsp;&nbsp;    <span class = "comment">// Locate the node to be deleted</span>
+136&nbsp;&nbsp;    TreeNode&lt;E&gt; current = root;
+137&nbsp;&nbsp;    <span class = "keyword">while</span> (current != <span class = "keyword">null</span>) {
+138&nbsp;&nbsp;      <span class = "keyword">if</span> (e.compareTo(current.element) &lt; <span class = "constant">0</span>) {
+139&nbsp;&nbsp;        current = current.left;
+140&nbsp;&nbsp;      }
+141&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (e.compareTo(current.element) &gt; <span class = "constant">0</span>) {
+142&nbsp;&nbsp;        current = current.right;
+143&nbsp;&nbsp;      }
+144&nbsp;&nbsp;      <span class = "keyword">else</span>
+145&nbsp;&nbsp;        <span class = "keyword">break</span>; <span class = "comment">// Element is in the tree pointed by current</span>
+146&nbsp;&nbsp;    }
+147&nbsp;&nbsp;
+148&nbsp;&nbsp;    <span class = "keyword">if</span> (current == <span class = "keyword">null</span>)
+149&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// Element is not in the tree</span>
+150&nbsp;&nbsp;
+151&nbsp;&nbsp;    java.util.ArrayList&lt;TreeNode&lt;E&gt;&gt; path;
+152&nbsp;&nbsp;
+153&nbsp;&nbsp;    <span class = "comment">// current node is an internal node </span>
+154&nbsp;&nbsp;    <span class = "keyword">if</span> (current.left != <span class = "keyword">null</span> && current.right != <span class = "keyword">null</span>) {
+155&nbsp;&nbsp;      <span class = "comment">// Locate the rightmost node in the left subtree of current</span>
+156&nbsp;&nbsp;      TreeNode&lt;E&gt; rightMost = current.left;
+157&nbsp;&nbsp;      <span class = "keyword">while</span> (rightMost.right != <span class = "keyword">null</span>) {
+158&nbsp;&nbsp;        rightMost = rightMost.right; <span class = "comment">// Keep going to the right</span>
+159&nbsp;&nbsp;      }
+160&nbsp;&nbsp;
+161&nbsp;&nbsp;      path = path(rightMost.element); <span class = "comment">// Get path before replacement</span>
+162&nbsp;&nbsp;
+163&nbsp;&nbsp;      <span class = "comment">// Replace the element in current by the element in rightMost</span>
+164&nbsp;&nbsp;      current.element = rightMost.element;
+165&nbsp;&nbsp;    }
+166&nbsp;&nbsp;    <span class = "keyword">else</span>
+167&nbsp;&nbsp;      path = path(e); <span class = "comment">// Get path to current node</span>
+168&nbsp;&nbsp;
+169&nbsp;&nbsp;    <span class = "comment">// Delete the last node in the path and propagate if needed</span>
+170&nbsp;&nbsp;    deleteLastNodeInPath(path);
+171&nbsp;&nbsp;    
+172&nbsp;&nbsp;    size--; <span class = "comment">// After one element deleted</span>
+173&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Element deleted</span>
+174&nbsp;&nbsp;  }
+175&nbsp;&nbsp;
+176&nbsp;&nbsp;  <span class = "comment">/** Delete the last node from the path. */</span>
+177&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> deleteLastNodeInPath(ArrayList&lt;TreeNode&lt;E&gt;&gt; path) {
+178&nbsp;&nbsp;    <span class = "keyword">int</span> i = path.size() - <span class = "constant">1</span>; <span class = "comment">// Index to the node in the path</span>
+179&nbsp;&nbsp;    <span class = "comment">// u is the last node in the path</span>
+180&nbsp;&nbsp;    RBTreeNode&lt;E&gt; u = (RBTreeNode&lt;E&gt;)(path.get(i));
+181&nbsp;&nbsp;    RBTreeNode&lt;E&gt; parentOfu = (u == root) ? <span class = "keyword">null</span> :
+182&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)(path.get(i - <span class = "constant">1</span>));
+183&nbsp;&nbsp;    RBTreeNode&lt;E&gt; grandparentOfu = (parentOfu == <span class = "keyword">null</span> ||
+184&nbsp;&nbsp;      parentOfu == root) ? <span class = "keyword">null</span> :
+185&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)(path.get(i - <span class = "constant">2</span>));
+186&nbsp;&nbsp;    RBTreeNode&lt;E&gt; childOfu = (u.left == <span class = "keyword">null</span>) ?
+187&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)(u.right) : (RBTreeNode&lt;E&gt;)(u.left);
+188&nbsp;&nbsp;
+189&nbsp;&nbsp;    <span class = "comment">// Delete node u. Connect childOfu with parentOfu</span>
+190&nbsp;&nbsp;    connectNewParent(parentOfu, u, childOfu);
+191&nbsp;&nbsp;    
+192&nbsp;&nbsp;    <span class = "comment">// Recolor the nodes and fix double black if needed</span>
+193&nbsp;&nbsp;    <span class = "keyword">if</span> (childOfu == root || u.isRed())
+194&nbsp;&nbsp;      <span class = "keyword">return</span>; <span class = "comment">// Done if childOfu is root or if u is red </span>
+195&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (childOfu != <span class = "keyword">null</span> && childOfu.isRed()) 
+196&nbsp;&nbsp;      childOfu.setBlack(); <span class = "comment">// Set it black, done</span>
+197&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "comment">// u is black, childOfu is null or black</span>
+198&nbsp;&nbsp;      <span class = "comment">// Fix double black on parentOfu</span>
+199&nbsp;&nbsp;      fixDoubleBlack(grandparentOfu, parentOfu, childOfu, path, i);
+200&nbsp;&nbsp;  }
+201&nbsp;&nbsp;
+202&nbsp;&nbsp;  <span class = "comment">/** Fix the double black problem at node parent */</span>
+203&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> fixDoubleBlack(
+204&nbsp;&nbsp;      RBTreeNode&lt;E&gt; grandparent, RBTreeNode&lt;E&gt; parent, 
+205&nbsp;&nbsp;      RBTreeNode&lt;E&gt; db, ArrayList&lt;TreeNode&lt;E&gt;&gt; path, <span class = "keyword">int</span> i) {
+206&nbsp;&nbsp;    <span class = "comment">// Obtain y, y1, and y2</span>
+207&nbsp;&nbsp;    RBTreeNode&lt;E&gt; y = (parent.right == db) ? 
+208&nbsp;&nbsp;      (RBTreeNode&lt;E&gt;)(parent.left) : (RBTreeNode&lt;E&gt;)(parent.right);
+209&nbsp;&nbsp;    RBTreeNode&lt;E&gt; y1 = (RBTreeNode&lt;E&gt;)(y.left);
+210&nbsp;&nbsp;    RBTreeNode&lt;E&gt; y2 = (RBTreeNode&lt;E&gt;)(y.right);
+211&nbsp;&nbsp;
+212&nbsp;&nbsp;    <span class = "keyword">if</span> (y.isBlack() && y1 != <span class = "keyword">null</span> && y1.isRed()) {
+213&nbsp;&nbsp;      <span class = "keyword">if</span> (parent.right == db) {
+214&nbsp;&nbsp;        <span class = "comment">// Case 1.1: y is a left black sibling and y1 is red</span>
+215&nbsp;&nbsp;        connectNewParent(grandparent, parent, y);
+216&nbsp;&nbsp;        recolor(parent, y, y1); <span class = "comment">// Adjust colors</span>
+217&nbsp;&nbsp;
+218&nbsp;&nbsp;        <span class = "comment">// Adjust child links</span>
+219&nbsp;&nbsp;        parent.left = y.right;
+220&nbsp;&nbsp;        y.right = parent;
+221&nbsp;&nbsp;      }
+222&nbsp;&nbsp;      <span class = "keyword">else</span> {
+223&nbsp;&nbsp;        <span class = "comment">// Case 1.3: y is a right black sibling and y1 is red        </span>
+224&nbsp;&nbsp;        connectNewParent(grandparent, parent, y1);
+225&nbsp;&nbsp;        recolor(parent, y1, y); <span class = "comment">// Adjust colors</span>
+226&nbsp;&nbsp;
+227&nbsp;&nbsp;        <span class = "comment">// Adjust child links</span>
+228&nbsp;&nbsp;        parent.right = y1.left;
+229&nbsp;&nbsp;        y.left = y1.right;
+230&nbsp;&nbsp;        y1.left = parent;
+231&nbsp;&nbsp;        y1.right = y;
+232&nbsp;&nbsp;      }
+233&nbsp;&nbsp;    }
+234&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (y.isBlack() && y2 != <span class = "keyword">null</span> && y2.isRed()) {
+235&nbsp;&nbsp;      <span class = "keyword">if</span> (parent.right == db) {
+236&nbsp;&nbsp;        <span class = "comment">// Case 1.2: y is a left black sibling and y2 is red</span>
+237&nbsp;&nbsp;        connectNewParent(grandparent, parent, y2);
+238&nbsp;&nbsp;        recolor(parent, y2, y); <span class = "comment">// Adjust colors</span>
+239&nbsp;&nbsp;
+240&nbsp;&nbsp;        <span class = "comment">// Adjust child links</span>
+241&nbsp;&nbsp;        y.right = y2.left;
+242&nbsp;&nbsp;        parent.left = y2.right;
+243&nbsp;&nbsp;        y2.left = y;
+244&nbsp;&nbsp;        y2.right = parent;
+245&nbsp;&nbsp;      }
+246&nbsp;&nbsp;      <span class = "keyword">else</span> {
+247&nbsp;&nbsp;        <span class = "comment">// Case 1.4: y is a right black sibling and y2 is red        </span>
+248&nbsp;&nbsp;        connectNewParent(grandparent, parent, y);
+249&nbsp;&nbsp;        recolor(parent, y, y2); <span class = "comment">// Adjust colors</span>
+250&nbsp;&nbsp;
+251&nbsp;&nbsp;        <span class = "comment">// Adjust child links</span>
+252&nbsp;&nbsp;        y.left = parent;
+253&nbsp;&nbsp;        parent.right = y1;
+254&nbsp;&nbsp;      }
+255&nbsp;&nbsp;    }
+256&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (y.isBlack()) { 
+257&nbsp;&nbsp;      <span class = "comment">// Case 2: y is black and y's children are black or null</span>
+258&nbsp;&nbsp;      y.setRed(); <span class = "comment">// Change y to red</span>
+259&nbsp;&nbsp;      <span class = "keyword">if</span> (parent.isRed())
+260&nbsp;&nbsp;        parent.setBlack(); <span class = "comment">// Done</span>
+261&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (parent != root) {
+262&nbsp;&nbsp;        <span class = "comment">// Propagate double black to the parent node</span>
+263&nbsp;&nbsp;        <span class = "comment">// Fix new appearance of double black recursively</span>
+264&nbsp;&nbsp;        db = parent;
+265&nbsp;&nbsp;        parent = grandparent;
+266&nbsp;&nbsp;        grandparent = 
+267&nbsp;&nbsp;          (i &gt;= <span class = "constant">3</span>) ? (RBTreeNode&lt;E&gt;)(path.get(i - <span class = "constant">3</span>)) : <span class = "keyword">null</span>;
+268&nbsp;&nbsp;        fixDoubleBlack(grandparent, parent, db, path, i - <span class = "constant">1</span>);
+269&nbsp;&nbsp;      }
+270&nbsp;&nbsp;    }
+271&nbsp;&nbsp;    <span class = "keyword">else</span> { <span class = "comment">// y.isRed()</span>
+272&nbsp;&nbsp;      <span class = "keyword">if</span> (parent.right == db) {       
+273&nbsp;&nbsp;        <span class = "comment">// Case 3.1: y is a left red child of parent</span>
+274&nbsp;&nbsp;        parent.left = y2;
+275&nbsp;&nbsp;        y.right = parent;
+276&nbsp;&nbsp;      }
+277&nbsp;&nbsp;      <span class = "keyword">else</span> {
+278&nbsp;&nbsp;        <span class = "comment">// Case 3.2: y is a right red child of parent</span>
+279&nbsp;&nbsp;        parent.right = y.left;
+280&nbsp;&nbsp;        y.left = parent;
+281&nbsp;&nbsp;      } 
+282&nbsp;&nbsp;      
+283&nbsp;&nbsp;      parent.setRed(); <span class = "comment">// Color parent red</span>
+284&nbsp;&nbsp;      y.setBlack(); <span class = "comment">// Color y black</span>
+285&nbsp;&nbsp;      connectNewParent(grandparent, parent, y); <span class = "comment">// y is new parent</span>
+286&nbsp;&nbsp;      fixDoubleBlack(y, parent, db, path, i - <span class = "constant">1</span>); 
+287&nbsp;&nbsp;    }
+288&nbsp;&nbsp;  }
+289&nbsp;&nbsp;
+290&nbsp;&nbsp;  <span class = "comment">/** Recolor parent, newParent, and c. Case 1 removal */</span>
+291&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> recolor(RBTreeNode&lt;E&gt; parent, 
+292&nbsp;&nbsp;      RBTreeNode&lt;E&gt; newParent, RBTreeNode&lt;E&gt; c) {
+293&nbsp;&nbsp;    <span class = "comment">// Retain the parent's color for newParent</span>
+294&nbsp;&nbsp;    <span class = "keyword">if</span> (parent.isRed())
+295&nbsp;&nbsp;      newParent.setRed(); 
+296&nbsp;&nbsp;    <span class = "keyword">else</span>
+297&nbsp;&nbsp;      newParent.setBlack();
+298&nbsp;&nbsp;    
+299&nbsp;&nbsp;    <span class = "comment">// c and parent become the children of newParent, set them black</span>
+300&nbsp;&nbsp;    parent.setBlack();  
+301&nbsp;&nbsp;    c.setBlack();
+302&nbsp;&nbsp;  }
+303&nbsp;&nbsp;
+304&nbsp;&nbsp;  <span class = "comment">/** Connect newParent with grandParent */</span>   
+305&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> connectNewParent(RBTreeNode&lt;E&gt; grandparent,
+306&nbsp;&nbsp;      RBTreeNode&lt;E&gt; parent, RBTreeNode&lt;E&gt; newParent) {
+307&nbsp;&nbsp;    <span class = "keyword">if</span> (parent == root) {
+308&nbsp;&nbsp;      root = newParent;
+309&nbsp;&nbsp;      <span class = "keyword">if</span> (root != <span class = "keyword">null</span>)
+310&nbsp;&nbsp;        newParent.setBlack();
+311&nbsp;&nbsp;    }
+312&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (grandparent.left == parent)
+313&nbsp;&nbsp;      grandparent.left = newParent;
+314&nbsp;&nbsp;    <span class = "keyword">else</span>
+315&nbsp;&nbsp;      grandparent.right = newParent;
+316&nbsp;&nbsp;  }
+317&nbsp;&nbsp;
+318&nbsp;&nbsp;  @Override <span class = "comment">/** Preorder traversal from a subtree */</span>
+319&nbsp;&nbsp;  <span class = "keyword">protected</span> <span class = "keyword">void</span> preorder(TreeNode&lt;E&gt; root) {
+320&nbsp;&nbsp;    <span class = "keyword">if</span> (root == <span class = "keyword">null</span>) <span class = "keyword">return</span>;
+321&nbsp;&nbsp;    System.out.print(root.element +
+322&nbsp;&nbsp;      (((RBTreeNode&lt;E&gt;)root).isRed() ? <span class = "literal">" (red) "</span> : <span class = "literal">" (black) "</span>));
+323&nbsp;&nbsp;    preorder(root.left);
+324&nbsp;&nbsp;    preorder(root.right);
+325&nbsp;&nbsp;  }
+326&nbsp;&nbsp;
+327&nbsp;&nbsp;  <span class = "comment">/** RBTreeNode is TreeNode plus color indicator */</span>
+328&nbsp;&nbsp;  <span class = "keyword">protected</span> <span class = "keyword">static</span> <span class = "keyword">class</span> RBTreeNode&lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; <span class = "keyword">extends</span>
+329&nbsp;&nbsp;      BST.TreeNode&lt;E&gt; {
+330&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">boolean</span> red = <span class = "keyword">true</span>; <span class = "comment">// Indicate node color</span>
+331&nbsp;&nbsp;
+332&nbsp;&nbsp;    <span class = "keyword">public</span> RBTreeNode(E e) {
+333&nbsp;&nbsp;      <span class = "keyword">super</span>(e);
+334&nbsp;&nbsp;    }
+335&nbsp;&nbsp;
+336&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">boolean</span> isRed() {
+337&nbsp;&nbsp;      <span class = "keyword">return</span> red;
+338&nbsp;&nbsp;    }
+339&nbsp;&nbsp;
+340&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">boolean</span> isBlack() {
+341&nbsp;&nbsp;      return!red;
+342&nbsp;&nbsp;    }
+343&nbsp;&nbsp;
+344&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> setBlack() {
+345&nbsp;&nbsp;      red = <span class = "keyword">false</span>;
+346&nbsp;&nbsp;    }
+347&nbsp;&nbsp;
+348&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> setRed() {
+349&nbsp;&nbsp;      red = <span class = "keyword">true</span>;
+350&nbsp;&nbsp;    }
+351&nbsp;&nbsp;
+352&nbsp;&nbsp;    <span class = "keyword">int</span> blackHeight;
+353&nbsp;&nbsp;  }
+354&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyHashMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyHashMapWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.LinkedList;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> MyHashMap&lt;K, V&gt; <span class = "keyword">implements</span> MyMap&lt;K, V&gt; {
+  <span class = "comment">// Define the default hash table size. Must be a power of 2</span>
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class = "constant">4</span>;
+  
+  <span class = "comment">// Define the maximum hash table size. 1 &lt;&lt; 30 is same as 2^30</span>
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> MAXIMUM_CAPACITY = <span class = "constant">1</span> &lt;&lt; <span class = "constant">30</span>; 
+  
+  <span class = "comment">// Current hash table capacity. Capacity is a power of 2</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> capacity;
+  
+  <span class = "comment">// Define default load factor</span>
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">float</span> DEFAULT_MAX_LOAD_FACTOR = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">75f</span>; 
+
+  <span class = "comment">// Specify a load factor used in the hash table</span>
+  <span class = "keyword">private</span> <span class = "keyword">float</span> loadFactorThreshold; 
+     
+  <span class = "comment">// The number of entries in the map</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> size = <span class = "constant">0</span>; 
+  
+  <span class = "comment">// Hash table is an array with each cell that is a linked list</span>
+  LinkedList&lt;MyMap.Entry&lt;K,V&gt;&gt;[] table;
+
+  <span class = "comment">/** Construct a map with the default capacity and load factor */</span>
+  <span class = "keyword">public</span> MyHashMap() {  
+    <span class = "keyword">this</span>(DEFAULT_INITIAL_CAPACITY, DEFAULT_MAX_LOAD_FACTOR);    
+  }
+  
+  <span class = "comment">/** Construct a map with the specified initial capacity and 
+   * default load factor */</span>
+  <span class = "keyword">public</span> MyHashMap(<span class = "keyword">int</span> initialCapacity) { 
+    <span class = "keyword">this</span>(initialCapacity, DEFAULT_MAX_LOAD_FACTOR);    
+  }
+  
+  <span class = "comment">/** Construct a map with the specified initial capacity 
+   * and load factor */</span>
+  <span class = "keyword">public</span> MyHashMap(<span class = "keyword">int</span> initialCapacity, <span class = "keyword">float</span> loadFactorThreshold) { 
+    <span class = "keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)
+      <span class = "keyword">this</span>.capacity = MAXIMUM_CAPACITY;
+    <span class = "keyword">else</span>
+      <span class = "keyword">this</span>.capacity = trimToPowerOf2(initialCapacity);
+    
+    <span class = "keyword">this</span>.loadFactorThreshold = loadFactorThreshold;    
+    table = <span class = "keyword">new</span> LinkedList[capacity];
+  }
+  
+  @Override <span class = "comment">/** Remove all of the entries from this map */</span> 
+  <span class = "keyword">public</span> <span class = "keyword">void</span> clear() {
+    size = <span class = "constant">0</span>;
+    removeEntries();
+  }
+
+  @Override <span class = "comment">/** Return true if the specified key is in the map */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsKey(K key) {    
+    <span class = "keyword">if</span> (get(key) != <span class = "keyword">null</span>)
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+  
+  @Override <span class = "comment">/** Return true if this map contains the value */</span> 
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsValue(V value) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[i]; 
+        <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+          <span class = "keyword">if</span> (entry.getValue().equals(value)) 
+            <span class = "keyword">return</span> <span class = "keyword">true</span>;
+      }
+    }
+    
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+  
+  @Override <span class = "comment">/** Return a set of entries in the map */</span>
+  <span class = "keyword">public</span> java.util.Set&lt;MyMap.Entry&lt;K,V&gt;&gt; entrySet() {
+    java.util.Set&lt;MyMap.Entry&lt;K, V&gt;&gt; set = 
+      <span class = "keyword">new</span> java.util.HashSet&lt;&gt;();
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[i]; 
+        <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+          set.add(entry); 
+      }
+    }
+    
+    <span class = "keyword">return</span> set;
+  }
+
+  @Override <span class = "comment">/** Return the value that matches the specified key */</span>
+  <span class = "keyword">public</span> V get(K key) {
+    <span class = "keyword">int</span> bucketIndex = hash(key.hashCode());
+    <span class = "keyword">if</span> (table[bucketIndex] != <span class = "keyword">null</span>) {
+      LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[bucketIndex]; 
+      <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+        <span class = "keyword">if</span> (entry.getKey().equals(key)) 
+          <span class = "keyword">return</span> entry.getValue();
+    }
+    
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+  
+  @Override <span class = "comment">/** Return true if this map contains no entries */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> size == <span class = "constant">0</span>;
+  }  
+  
+  @Override <span class = "comment">/** Return a set consisting of the keys in this map */</span>
+  <span class = "keyword">public</span> java.util.Set&lt;K&gt; keySet() {
+    java.util.Set&lt;K&gt; set = <span class = "keyword">new</span> java.util.HashSet&lt;&gt;();
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[i]; 
+        <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+          set.add(entry.getKey()); 
+      }
+    }
+    
+    <span class = "keyword">return</span> set;
+  }
+      
+  @Override <span class = "comment">/** Add an entry (key, value) into the map */</span>
+  <span class = "keyword">public</span> V put(K key, V value) {
+    <span class = "keyword">if</span> (get(key) != <span class = "keyword">null</span>) { <span class = "comment">// The key is already in the map</span>
+      <span class = "keyword">int</span> bucketIndex = hash(key.hashCode());
+      LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[bucketIndex]; 
+      <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+        <span class = "keyword">if</span> (entry.getKey().equals(key)) {
+          V oldValue = entry.getValue();
+          <span class = "comment">// Replace old value with new value</span>
+          entry.value = value; 
+          <span class = "comment">// Return the old value for the key</span>
+          <span class = "keyword">return</span> oldValue;
+        }
+    }
+  
+    <span class = "comment">// Check load factor</span>
+    <span class = "keyword">if</span> (size &gt;= capacity * loadFactorThreshold) {
+      <span class = "keyword">if</span> (capacity == MAXIMUM_CAPACITY)
+        <span class = "keyword">throw</span> <span class = "keyword">new</span> RuntimeException(<span class = "literal">"Exceeding maximum capacity"</span>);
+      
+      rehash();
+    }
+    
+    <span class = "keyword">int</span> bucketIndex = hash(key.hashCode());
+    
+    <span class = "comment">// Create a linked list for the bucket if it is not created</span>
+    <span class = "keyword">if</span> (table[bucketIndex] == <span class = "keyword">null</span>) {
+      table[bucketIndex] = <span class = "keyword">new</span> LinkedList&lt;Entry&lt;K, V&gt;&gt;();
+    }
+
+    <span class = "comment">// Add a new entry (key, value) to hashTable[index]</span>
+    table[bucketIndex].add(<span class = "keyword">new</span> MyMap.Entry&lt;K, V&gt;(key, value));
+
+    size++; <span class = "comment">// Increase size</span>
+    
+    <span class = "keyword">return</span> value;  
+  } 
+ 
+  @Override <span class = "comment">/** Remove the entries for the specified key */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> remove(K key) {
+    <span class = "keyword">int</span> bucketIndex = hash(key.hashCode());
+    
+    <span class = "comment">// Remove the first entry that matches the key from a bucket</span>
+    <span class = "keyword">if</span> (table[bucketIndex] != <span class = "keyword">null</span>) {
+      LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[bucketIndex]; 
+      <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+        <span class = "keyword">if</span> (entry.getKey().equals(key)) {
+          bucket.remove(entry);
+          size--; <span class = "comment">// Decrease size</span>
+          <span class = "keyword">break</span>; <span class = "comment">// Remove just one entry that matches the key</span>
+        }
+    }
+  }
+  
+  @Override <span class = "comment">/** Return the number of entries in this map */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> size() {
+    <span class = "keyword">return</span> size;
+  }
+  
+  @Override <span class = "comment">/** Return a set consisting of the values in this map */</span>
+  <span class = "keyword">public</span> java.util.Set&lt;V&gt; values() {
+    java.util.Set&lt;V&gt; set = <span class = "keyword">new</span> java.util.HashSet&lt;&gt;();
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        LinkedList&lt;Entry&lt;K, V&gt;&gt; bucket = table[i]; 
+        <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: bucket)
+          set.add(entry.getValue()); 
+      }
+    }
+    
+    <span class = "keyword">return</span> set;
+  }
+  
+  <span class = "comment">/** Hash function */</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> hash(<span class = "keyword">int</span> hashCode) {
+    <span class = "keyword">return</span> supplementalHash(hashCode) & (capacity - <span class = "constant">1</span>);
+  }
+  
+  <span class = "comment">/** Ensure the hashing is evenly distributed */</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> supplementalHash(<span class = "keyword">int</span> h) {
+    h ^= (h &gt;&gt;&gt; <span class = "constant">20</span>) ^ (h &gt;&gt;&gt; <span class = "constant">12</span>);
+    <span class = "keyword">return</span> h ^ (h &gt;&gt;&gt; <span class = "constant">7</span>) ^ (h &gt;&gt;&gt; <span class = "constant">4</span>);
+  }
+
+  <span class = "comment">/** Return a power of 2 for initialCapacity */</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> trimToPowerOf2(<span class = "keyword">int</span> initialCapacity) {
+    <span class = "keyword">int</span> capacity = <span class = "constant">1</span>;
+    <span class = "keyword">while</span> (capacity &lt; initialCapacity) {
+      capacity &lt;&lt;= <span class = "constant">1</span>;
+    }
+    
+    <span class = "keyword">return</span> capacity;
+  }
+  
+  <span class = "comment">/** Remove all entries from each bucket */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> removeEntries() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span>) {
+        table[i].clear();
+      }
+    }
+  }
+  
+  <span class = "comment">/** Rehash the map */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> rehash() {
+    java.util.Set&lt;Entry&lt;K, V&gt;&gt; set = entrySet(); <span class = "comment">// Get entries</span>
+    capacity &lt;&lt;= <span class = "constant">1</span>; <span class = "comment">// Double capacity    </span>
+    table = <span class = "keyword">new</span> LinkedList[capacity]; <span class = "comment">// Create a new hash table</span>
+    size = <span class = "constant">0</span>; <span class = "comment">// Reset size to 0</span>
+    
+    <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: set) {
+      put(entry.getKey(), entry.getValue()); <span class = "comment">// Store to new table</span>
+    }
+  }
+
+  @Override
+  <span class = "keyword">public</span> String toString() {
+    StringBuilder builder = <span class = "keyword">new</span> StringBuilder(<span class = "literal">"["</span>);
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; capacity; i++) {
+      <span class = "keyword">if</span> (table[i] != <span class = "keyword">null</span> && table[i].size() &gt; <span class = "constant">0</span>) 
+        <span class = "keyword">for</span> (Entry&lt;K, V&gt; entry: table[i])
+          builder.append(entry);
+    }
+    
+    builder.append(<span class = "literal">"]"</span>);
+    <span class = "keyword">return</span> builder.toString();
+  }
+}
+</pre>
+</body>
+</html>

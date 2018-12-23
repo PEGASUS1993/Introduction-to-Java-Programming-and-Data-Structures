@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - EvaluateExpression.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EvaluateExpression.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "EvaluateExpression" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Stack;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> EvaluateExpression {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Check number of arguments passed</span>
+  6&nbsp;&nbsp;    <span class = "keyword">if</span> (args.length != <span class = "constant">1</span>) {
+  7&nbsp;&nbsp;      System.out.println(
+  8&nbsp;&nbsp;        <span class = "literal">"Usage: java EvaluateExpression \"expression\""</span>);
+  9&nbsp;&nbsp;      System.exit(<span class = "constant">1</span>);
+ 10&nbsp;&nbsp;    }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 13&nbsp;&nbsp;      System.out.println(evaluateExpression(args[<span class = "constant">0</span>]));
+ 14&nbsp;&nbsp;    }
+ 15&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+ 16&nbsp;&nbsp;      System.out.println(<span class = "literal">"Wrong expression: "</span> + args[<span class = "constant">0</span>]);
+ 17&nbsp;&nbsp;    }
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Evaluate an expression */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> evaluateExpression(String expression) {
+ 22&nbsp;&nbsp;    <span class = "comment">// Create operandStack to store operands</span>
+ 23&nbsp;&nbsp;    Stack&lt;Integer&gt; operandStack = <span class = "keyword">new</span> Stack&lt;&gt;();
+ 24&nbsp;&nbsp;  
+ 25&nbsp;&nbsp;    <span class = "comment">// Create operatorStack to store operators</span>
+ 26&nbsp;&nbsp;    Stack&lt;Character&gt; operatorStack = <span class = "keyword">new</span> Stack&lt;&gt;();
+ 27&nbsp;&nbsp;  
+ 28&nbsp;&nbsp;    <span class = "comment">// Insert blanks around (, ), +, -, /, and *</span>
+ 29&nbsp;&nbsp;    expression = insertBlanks(expression);
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;    <span class = "comment">// Extract operands and operators</span>
+ 32&nbsp;&nbsp;    String[] tokens = expression.split(<span class = "literal">" "</span>);
+ 33&nbsp;&nbsp;
+ 34&nbsp;&nbsp;    <span class = "comment">// Phase 1: Scan tokens</span>
+ 35&nbsp;&nbsp;    <span class = "keyword">for</span> (String token: tokens) {
+ 36&nbsp;&nbsp;      <span class = "keyword">if</span> (token.length() == <span class = "constant">0</span>) <span class = "comment">// Blank space</span>
+ 37&nbsp;&nbsp;        <span class = "keyword">continue</span>; <span class = "comment">// Back to the while loop to extract the next token</span>
+ 38&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.charAt(<span class = "constant">0</span>) == <span class = "literal">'+'</span> || token.charAt(<span class = "constant">0</span>) == <span class = "literal">'-'</span>) {
+ 39&nbsp;&nbsp;        <span class = "comment">// Process all +, -, *, / in the top of the operator stack </span>
+ 40&nbsp;&nbsp;        <span class = "keyword">while</span> (!operatorStack.isEmpty() &&
+ 41&nbsp;&nbsp;          (operatorStack.peek() == <span class = "literal">'+'</span> || 
+ 42&nbsp;&nbsp;           operatorStack.peek() == <span class = "literal">'-'</span> ||
+ 43&nbsp;&nbsp;           operatorStack.peek() == <span class = "literal">'*'</span> ||
+ 44&nbsp;&nbsp;           operatorStack.peek() == <span class = "literal">'/'</span>)) {
+ 45&nbsp;&nbsp;          processAnOperator(operandStack, operatorStack);
+ 46&nbsp;&nbsp;        }
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;        <span class = "comment">// Push the + or - operator into the operator stack</span>
+ 49&nbsp;&nbsp;        operatorStack.push(token.charAt(<span class = "constant">0</span>));
+ 50&nbsp;&nbsp;      }
+ 51&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.charAt(<span class = "constant">0</span>) == <span class = "literal">'*'</span> || token.charAt(<span class = "constant">0</span>) == <span class = "literal">'/'</span>) {
+ 52&nbsp;&nbsp;        <span class = "comment">// Process all *, / in the top of the operator stack </span>
+ 53&nbsp;&nbsp;        <span class = "keyword">while</span> (!operatorStack.isEmpty() &&
+ 54&nbsp;&nbsp;          (operatorStack.peek() == <span class = "literal">'*'</span> ||
+ 55&nbsp;&nbsp;          operatorStack.peek() == <span class = "literal">'/'</span>)) {
+ 56&nbsp;&nbsp;          processAnOperator(operandStack, operatorStack);
+ 57&nbsp;&nbsp;        }
+ 58&nbsp;&nbsp;
+ 59&nbsp;&nbsp;        <span class = "comment">// Push the * or / operator into the operator stack</span>
+ 60&nbsp;&nbsp;        operatorStack.push(token.charAt(<span class = "constant">0</span>));
+ 61&nbsp;&nbsp;      }
+ 62&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.trim().charAt(<span class = "constant">0</span>) == <span class = "literal">'('</span>) {
+ 63&nbsp;&nbsp;        operatorStack.push(<span class = "literal">'('</span>); <span class = "comment">// Push '(' to stack</span>
+ 64&nbsp;&nbsp;      }
+ 65&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (token.trim().charAt(<span class = "constant">0</span>) == <span class = "literal">')'</span>) {
+ 66&nbsp;&nbsp;        <span class = "comment">// Process all the operators in the stack until seeing '('</span>
+ 67&nbsp;&nbsp;        <span class = "keyword">while</span> (operatorStack.peek() != <span class = "literal">'('</span>) {
+ 68&nbsp;&nbsp;          processAnOperator(operandStack, operatorStack);
+ 69&nbsp;&nbsp;        }
+ 70&nbsp;&nbsp;        
+ 71&nbsp;&nbsp;        operatorStack.pop(); <span class = "comment">// Pop the '(' symbol from the stack</span>
+ 72&nbsp;&nbsp;      }
+ 73&nbsp;&nbsp;      <span class = "keyword">else</span> { <span class = "comment">// An operand scanned</span>
+ 74&nbsp;&nbsp;        <span class = "comment">// Push an operand to the stack</span>
+ 75&nbsp;&nbsp;        operandStack.push(<span class = "keyword">new</span> Integer(token));
+ 76&nbsp;&nbsp;      }
+ 77&nbsp;&nbsp;    }
+ 78&nbsp;&nbsp;
+ 79&nbsp;&nbsp;    <span class = "comment">// Phase 2: process all the remaining operators in the stack </span>
+ 80&nbsp;&nbsp;    <span class = "keyword">while</span> (!operatorStack.isEmpty()) {
+ 81&nbsp;&nbsp;      processAnOperator(operandStack, operatorStack);
+ 82&nbsp;&nbsp;    }
+ 83&nbsp;&nbsp;
+ 84&nbsp;&nbsp;    <span class = "comment">// Return the result</span>
+ 85&nbsp;&nbsp;    <span class = "keyword">return</span> operandStack.pop();
+ 86&nbsp;&nbsp;  }
+ 87&nbsp;&nbsp;
+ 88&nbsp;&nbsp;  <span class = "comment">/** Process one operator: Take an operator from operatorStack and
+ 89&nbsp;&nbsp;   *  apply it on the operands in the operandStack */</span>
+ 90&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> processAnOperator(
+ 91&nbsp;&nbsp;      Stack&lt;Integer&gt; operandStack, Stack&lt;Character&gt; operatorStack) {
+ 92&nbsp;&nbsp;    <span class = "keyword">char</span> op = operatorStack.pop();
+ 93&nbsp;&nbsp;    <span class = "keyword">int</span> op1 = operandStack.pop();
+ 94&nbsp;&nbsp;    <span class = "keyword">int</span> op2 = operandStack.pop();
+ 95&nbsp;&nbsp;    <span class = "keyword">if</span> (op == <span class = "literal">'+'</span>) 
+ 96&nbsp;&nbsp;      operandStack.push(op2 + op1);
+ 97&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (op == <span class = "literal">'-'</span>) 
+ 98&nbsp;&nbsp;      operandStack.push(op2 - op1);
+ 99&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (op == <span class = "literal">'*'</span>) 
+100&nbsp;&nbsp;      operandStack.push(op2 * op1);
+101&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (op == <span class = "literal">'/'</span>) 
+102&nbsp;&nbsp;      operandStack.push(op2 / op1);
+103&nbsp;&nbsp;  }
+104&nbsp;&nbsp;  
+105&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> String insertBlanks(String s) {
+106&nbsp;&nbsp;    String result = <span class = "literal">""</span>;
+107&nbsp;&nbsp;    
+108&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; s.length(); i++) {
+109&nbsp;&nbsp;      <span class = "keyword">if</span> (s.charAt(i) == <span class = "literal">'('</span> || s.charAt(i) == <span class = "literal">')'</span> || 
+110&nbsp;&nbsp;          s.charAt(i) == <span class = "literal">'+'</span> || s.charAt(i) == <span class = "literal">'-'</span> ||
+111&nbsp;&nbsp;          s.charAt(i) == <span class = "literal">'*'</span> || s.charAt(i) == <span class = "literal">'/'</span>)
+112&nbsp;&nbsp;        result += <span class = "literal">" "</span> + s.charAt(i) + <span class = "literal">" "</span>;
+113&nbsp;&nbsp;      <span class = "keyword">else</span>
+114&nbsp;&nbsp;        result += s.charAt(i);
+115&nbsp;&nbsp;    }
+116&nbsp;&nbsp;    
+117&nbsp;&nbsp;    <span class = "keyword">return</span> result;
+118&nbsp;&nbsp;  }
+119&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

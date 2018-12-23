@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DescriptionPane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DescriptionPane.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Insets;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ContentDisplay;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextArea;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Font;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> DescriptionPane <span class = "keyword">extends</span> BorderPane {
+ 11&nbsp;&nbsp;  <span class = "comment">/** Label for displaying an image and a title */</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblImageTitle = <span class = "keyword">new</span> Label();
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "comment">/** Text area for displaying text */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> TextArea taDescription = <span class = "keyword">new</span> TextArea();
+ 16&nbsp;&nbsp;  
+ 17&nbsp;&nbsp;  <span class = "keyword">public</span> DescriptionPane() {
+ 18&nbsp;&nbsp;    <span class = "comment">// Center the icon and text and place the text under the icon</span>
+ 19&nbsp;&nbsp;    lblImageTitle.setContentDisplay(ContentDisplay.TOP);
+ 20&nbsp;&nbsp;    lblImageTitle.setPrefSize(<span class = "constant">200</span>,  <span class = "constant">100</span>);
+ 21&nbsp;&nbsp;    
+ 22&nbsp;&nbsp;    <span class = "comment">// Set the font in the label and the text field</span>
+ 23&nbsp;&nbsp;    lblImageTitle.setFont(<span class = "keyword">new</span> Font(<span class = "literal">"SansSerif"</span>, <span class = "constant">16</span>));
+ 24&nbsp;&nbsp;    taDescription.setFont(<span class = "keyword">new</span> Font(<span class = "literal">"Serif"</span>, <span class = "constant">14</span>));
+ 25&nbsp;&nbsp;    
+ 26&nbsp;&nbsp;    taDescription.setWrapText(<span class = "keyword">true</span>);
+ 27&nbsp;&nbsp;    taDescription.setEditable(<span class = "keyword">false</span>);
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;    <span class = "comment">// Create a scroll pane to hold the text area</span>
+ 30&nbsp;&nbsp;    ScrollPane scrollPane = <span class = "keyword">new</span> ScrollPane(taDescription);
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;    <span class = "comment">// Place label and scroll pane in the border pane</span>
+ 33&nbsp;&nbsp;    setLeft(lblImageTitle);
+ 34&nbsp;&nbsp;    setCenter(scrollPane);
+ 35&nbsp;&nbsp;    setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>));
+ 36&nbsp;&nbsp;  }
+ 37&nbsp;&nbsp;  
+ 38&nbsp;&nbsp;  <span class = "comment">/** Set the title */</span>
+ 39&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setTitle(String title) {
+ 40&nbsp;&nbsp;    lblImageTitle.setText(title);
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;
+ 43&nbsp;&nbsp;  <span class = "comment">/** Set the image view */</span>
+ 44&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setImageView(ImageView icon) {
+ 45&nbsp;&nbsp;    lblImageTitle.setGraphic(icon);
+ 46&nbsp;&nbsp;  }
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;  <span class = "comment">/** Set the text description */</span>
+ 49&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setDescription(String text) {
+ 50&nbsp;&nbsp;    taDescription.setText(text);
+ 51&nbsp;&nbsp;  }
+ 52&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

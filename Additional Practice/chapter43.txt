@@ -1,0 +1,17 @@
+Chapter 43 Red-Black Trees
+
+1. Which of the following statements are correct?
+a. A red-black tree is a binary search tree.
+b. All leaf nodes are colored black in a red-black tree. 
+c. All leaf nodes are colored red in a red-black tree.
+d. All external nodes are leaf nodes. 
+e. All leaf nodes are external nodes. 
+Key:ae
+
+#
+2. Which of the following statements are correct?
+a. The black depth of a node is defined as the number of black nodes in a path from the node to the root.
+b. The root is black.
+c. Two adjacent nodes cannot be both red.
+d. All external nodes have the same black depth.
+Key:abcd

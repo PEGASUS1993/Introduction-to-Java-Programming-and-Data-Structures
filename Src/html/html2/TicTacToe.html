@@ -1,0 +1,181 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TicTacToe.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TicTacToeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Line;
+<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TicTacToe <span class = "keyword">extends</span> Application {
+  <span class = "comment">// Indicate which player has a turn, initially it is the X player</span>
+  <span class = "keyword">private</span> <span class = "keyword">char</span> whoseTurn = <span class = "literal">'X'</span>;
+
+  <span class = "comment">// Create and initialize cell</span>
+  <span class = "keyword">private</span> Cell[][] cell =  <span class = "keyword">new</span> Cell[<span class = "constant">3</span>][<span class = "constant">3</span>];
+
+  <span class = "comment">// Create and initialize a status label</span>
+  <span class = "keyword">private</span> Label lblStatus = <span class = "keyword">new</span> Label(<span class = "literal">"X's turn to play"</span>);
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Pane to hold cell</span>
+    GridPane pane = <span class = "keyword">new</span> GridPane(); 
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+        pane.add(cell[i][j] = <span class = "keyword">new</span> Cell(), j, i);
+
+    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+    borderPane.setCenter(pane);
+    borderPane.setBottom(lblStatus);
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+    primaryStage.setTitle(<span class = "literal">"TicTacToe"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+  }
+
+  <span class = "comment">/** Determine if the cell are all occupied */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isFull() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+        <span class = "keyword">if</span> (cell[i][j].getToken() == <span class = "literal">' '</span>)
+          <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  <span class = "comment">/** Determine if the player with the specified token wins */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isWon(<span class = "keyword">char</span> token) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+      <span class = "keyword">if</span> (cell[i][<span class = "constant">0</span>].getToken() == token
+          && cell[i][<span class = "constant">1</span>].getToken() == token
+          && cell[i][<span class = "constant">2</span>].getToken() == token) {
+        <span class = "keyword">return</span> <span class = "keyword">true</span>;
+      }
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+      <span class = "keyword">if</span> (cell[<span class = "constant">0</span>][j].getToken() ==  token
+          && cell[<span class = "constant">1</span>][j].getToken() == token
+          && cell[<span class = "constant">2</span>][j].getToken() == token) {
+        <span class = "keyword">return</span> <span class = "keyword">true</span>;
+      }
+
+    <span class = "keyword">if</span> (cell[<span class = "constant">0</span>][<span class = "constant">0</span>].getToken() == token 
+        && cell[<span class = "constant">1</span>][<span class = "constant">1</span>].getToken() == token        
+        && cell[<span class = "constant">2</span>][<span class = "constant">2</span>].getToken() == token) {
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    }
+
+    <span class = "keyword">if</span> (cell[<span class = "constant">0</span>][<span class = "constant">2</span>].getToken() == token
+        && cell[<span class = "constant">1</span>][<span class = "constant">1</span>].getToken() == token
+        && cell[<span class = "constant">2</span>][<span class = "constant">0</span>].getToken() == token) {
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    }
+
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  <span class = "comment">// An inner class for a cell</span>
+  <span class = "keyword">public</span> <span class = "keyword">class</span> Cell <span class = "keyword">extends</span> Pane {
+    <span class = "comment">// Token used for this cell</span>
+    <span class = "keyword">private</span> <span class = "keyword">char</span> token = <span class = "literal">' '</span>;
+
+    <span class = "keyword">public</span> Cell() {
+      setStyle(<span class = "literal">"-fx-border-color: black"</span>); 
+      <span class = "keyword">this</span>.setPrefSize(<span class = "constant">800</span>, <span class = "constant">800</span>);
+      <span class = "keyword">this</span>.setOnMouseClicked(e -&gt; handleMouseClick());
+    }
+
+    <span class = "comment">/** Return token */</span>
+    <span class = "keyword">public</span> <span class = "keyword">char</span> getToken() {
+      <span class = "keyword">return</span> token;
+    }
+
+    <span class = "comment">/** Set a new token */</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> setToken(<span class = "keyword">char</span> c) {
+      token = c;
+      
+      <span class = "keyword">if</span> (token == <span class = "literal">'X'</span>) {
+        Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, 
+          <span class = "keyword">this</span>.getWidth() - <span class = "constant">10</span>, <span class = "keyword">this</span>.getHeight() - <span class = "constant">10</span>);
+        line1.endXProperty().bind(<span class = "keyword">this</span>.widthProperty().subtract(<span class = "constant">10</span>));
+        line1.endYProperty().bind(<span class = "keyword">this</span>.heightProperty().subtract(<span class = "constant">10</span>));
+        Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "keyword">this</span>.getHeight() - <span class = "constant">10</span>, 
+          <span class = "keyword">this</span>.getWidth() - <span class = "constant">10</span>, <span class = "constant">10</span>);
+        line2.startYProperty().bind(
+          <span class = "keyword">this</span>.heightProperty().subtract(<span class = "constant">10</span>));
+        line2.endXProperty().bind(<span class = "keyword">this</span>.widthProperty().subtract(<span class = "constant">10</span>));
+        
+        <span class = "comment">// Add the lines to the pane</span>
+        <span class = "keyword">this</span>.getChildren().addAll(line1, line2); 
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (token == <span class = "literal">'O'</span>) {
+        Ellipse ellipse = <span class = "keyword">new</span> Ellipse(<span class = "keyword">this</span>.getWidth() / <span class = "constant">2</span>, 
+          <span class = "keyword">this</span>.getHeight() / <span class = "constant">2</span>, <span class = "keyword">this</span>.getWidth() / <span class = "constant">2</span> - <span class = "constant">10</span>, 
+          <span class = "keyword">this</span>.getHeight() / <span class = "constant">2</span> - <span class = "constant">10</span>);
+        ellipse.centerXProperty().bind(
+          <span class = "keyword">this</span>.widthProperty().divide(<span class = "constant">2</span>));
+        ellipse.centerYProperty().bind(
+            <span class = "keyword">this</span>.heightProperty().divide(<span class = "constant">2</span>));
+        ellipse.radiusXProperty().bind(
+            <span class = "keyword">this</span>.widthProperty().divide(<span class = "constant">2</span>).subtract(<span class = "constant">10</span>));        
+        ellipse.radiusYProperty().bind(
+            <span class = "keyword">this</span>.heightProperty().divide(<span class = "constant">2</span>).subtract(<span class = "constant">10</span>));   
+        ellipse.setStroke(Color.BLACK);
+        ellipse.setFill(Color.WHITE);
+        
+        getChildren().add(ellipse); <span class = "comment">// Add the ellipse to the pane</span>
+      }
+    }
+
+    <span class = "comment">/* Handle a mouse click event */</span>
+    <span class = "keyword">private</span> <span class = "keyword">void</span> handleMouseClick() {
+      <span class = "comment">// If cell is empty and game is not over</span>
+      <span class = "keyword">if</span> (token == <span class = "literal">' '</span> && whoseTurn != <span class = "literal">' '</span>) {
+        setToken(whoseTurn); <span class = "comment">// Set token in the cell</span>
+
+        <span class = "comment">// Check game status</span>
+        <span class = "keyword">if</span> (isWon(whoseTurn)) {
+          lblStatus.setText(whoseTurn + <span class = "literal">" won! The game is over"</span>);
+          whoseTurn = <span class = "literal">' '</span>; <span class = "comment">// Game is over</span>
+        }
+        <span class = "keyword">else</span> <span class = "keyword">if</span> (isFull()) {
+          lblStatus.setText(<span class = "literal">"Draw! The game is over"</span>);
+          whoseTurn = <span class = "literal">' '</span>; <span class = "comment">// Game is over</span>
+        }
+        <span class = "keyword">else</span> {
+          <span class = "comment">// Change the turn</span>
+          whoseTurn = (whoseTurn == <span class = "literal">'X'</span>) ? <span class = "literal">'O'</span> : <span class = "literal">'X'</span>;
+          <span class = "comment">// Display whose turn</span>
+          lblStatus.setText(whoseTurn + <span class = "literal">"'s turn"</span>);
+        }
+      }
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

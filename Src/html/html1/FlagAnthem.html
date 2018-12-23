@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FlagAnthem.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FlagAnthemWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.collections.FXCollections;
+<span class = "keyword">import</span> javafx.collections.ObservableList;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.media.Media;
+<span class = "keyword">import</span> javafx.scene.media.MediaPlayer;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FlagAnthem <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> NUMBER_OF_NATIONS = <span class = "constant">7</span>;
+  <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> String URLBase =
+    <span class = "literal">"https://liveexample.pearsoncmg.com/common"</span>;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> currentIndex = <span class = "constant">0</span>;
+    
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    Image[] images = <span class = "keyword">new</span> Image[NUMBER_OF_NATIONS];
+    MediaPlayer[] mp = <span class = "keyword">new</span> MediaPlayer[NUMBER_OF_NATIONS];
+
+    <span class = "comment">// Load images and audio</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; NUMBER_OF_NATIONS; i++) {
+      images[i] = <span class = "keyword">new</span> Image(URLBase + <span class = "literal">"/image/flag"</span> + i + <span class = "literal">".gif"</span>);
+      mp[i] = <span class = "keyword">new</span> MediaPlayer(<span class = "keyword">new</span> Media(
+        URLBase + <span class = "literal">"/audio/anthem/anthem"</span> + i + <span class = "literal">".mp3"</span>));
+    }
+
+    Button btPlayPause = <span class = "keyword">new</span> Button(<span class = "literal">"||"</span>);
+    btPlayPause.setOnAction(e -&gt; {
+      <span class = "keyword">if</span> (btPlayPause.getText().equals(<span class = "literal">"&gt;"</span>)) {
+        btPlayPause.setText(<span class = "literal">"||"</span>);
+        mp[currentIndex].play();
+      } 
+      <span class = "keyword">else</span> {
+        btPlayPause.setText(<span class = "literal">"&gt;"</span>);
+        mp[currentIndex].pause();
+      }
+    });
+
+    ImageView imageView = <span class = "keyword">new</span> ImageView(images[currentIndex]);   
+    ComboBox&lt;String&gt; cboNation = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+    ObservableList&lt;String&gt; items = FXCollections.observableArrayList
+      (<span class = "literal">"Denmark"</span>, <span class = "literal">"Germany"</span>, <span class = "literal">"China"</span>, <span class = "literal">"India"</span>, <span class = "literal">"Norway"</span>, <span class = "literal">"UK"</span>, <span class = "literal">"US"</span>);
+    cboNation.getItems().addAll(items);
+    cboNation.setValue(items.get(<span class = "constant">0</span>));
+    cboNation.setOnAction(e -&gt; {
+      mp[currentIndex].stop();
+      currentIndex = items.indexOf(cboNation.getValue());
+      imageView.setImage(images[currentIndex]);
+      mp[currentIndex].play();
+      btPlayPause.setText(<span class = "literal">"||"</span>);
+    });
+
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+    hBox.getChildren().addAll(btPlayPause, 
+      <span class = "keyword">new</span> Label(<span class = "literal">"Select a nation: "</span>), cboNation);
+    hBox.setAlignment(Pos.CENTER);
+
+    <span class = "comment">// Create a pane to hold nodes </span>
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setCenter(imageView);
+    pane.setBottom(hBox);
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">350</span>, <span class = "constant">270</span>);
+    primaryStage.setTitle(<span class = "literal">"FlagAnthem"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+    mp[currentIndex].play(); <span class = "comment">// Play the current selected anthem</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

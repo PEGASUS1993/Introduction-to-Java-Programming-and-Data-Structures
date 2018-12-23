@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestMyHashSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestMyHashSetWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestMyHashSet" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestMyHashSet {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a MyHashSet</span>
+    java.util.Collection&lt;String&gt; set = <span class = "keyword">new</span> MyHashSet&lt;&gt;();
+    set.add(<span class = "literal">"Smith"</span>);
+    set.add(<span class = "literal">"Anderson"</span>);
+    set.add(<span class = "literal">"Lewis"</span>);
+    set.add(<span class = "literal">"Cook"</span>);
+    set.add(<span class = "literal">"Smith"</span>); <span class = "comment">// Add Smith to set</span>
+
+    System.out.println(<span class = "literal">"Elements in set: "</span> + set);
+    System.out.println(<span class = "literal">"Number of elements in set: "</span> + set.size());
+    System.out.println(<span class = "literal">"Is Smith in set? "</span> + set.contains(<span class = "literal">"Smith"</span>));
+
+    set.remove(<span class = "literal">"Smith"</span>);
+    System.out.print(<span class = "literal">"Names in set in uppercase are "</span>);
+    <span class = "keyword">for</span> (String s: set)
+      System.out.print(s.toUpperCase() + <span class = "literal">" "</span>);
+
+    set.clear();
+    System.out.println(<span class = "literal">"\nElements in set: "</span> + set);
+  }
+}
+</pre>
+</body>
+</html>

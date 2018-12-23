@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericStack.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericStackWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> GenericStack&lt;E&gt; {
+  <span class = "keyword">private</span> java.util.ArrayList&lt;E&gt; list = <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;();
+
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+    <span class = "keyword">return</span> list.size();
+  }
+
+  <span class = "keyword">public</span> E peek() {
+    <span class = "keyword">return</span> list.get(getSize() - <span class = "constant">1</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> push(E o) {
+    list.add(o);
+  }
+
+  <span class = "keyword">public</span> E pop() {
+    E o = list.get(getSize() - <span class = "constant">1</span>);
+    list.remove(getSize() - <span class = "constant">1</span>);
+    <span class = "keyword">return</span> o;
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> list.isEmpty();
+  }
+  
+  @Override
+  <span class = "keyword">public</span> String toString() {
+    <span class = "keyword">return</span> <span class = "literal">"stack: "</span> + list.toString();
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestArrayList.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestArrayList.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestArrayList" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.ArrayList;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestArrayList {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a list to store cities</span>
+  6&nbsp;&nbsp;    ArrayList&lt;String&gt; cityList = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Add some cities in the list</span>
+  9&nbsp;&nbsp;    cityList.add(<span class = "literal">"London"</span>);
+ 10&nbsp;&nbsp;    <span class = "comment">// cityList now contains [London]</span>
+ 11&nbsp;&nbsp;    cityList.add(<span class = "literal">"Denver"</span>);
+ 12&nbsp;&nbsp;    <span class = "comment">// cityList now contains [London, Denver]</span>
+ 13&nbsp;&nbsp;    cityList.add(<span class = "literal">"Paris"</span>);
+ 14&nbsp;&nbsp;    <span class = "comment">// cityList now contains [London, Denver, Paris]</span>
+ 15&nbsp;&nbsp;    cityList.add(<span class = "literal">"Miami"</span>);
+ 16&nbsp;&nbsp;    <span class = "comment">// cityList now contains [London, Denver, Paris, Miami]</span>
+ 17&nbsp;&nbsp;    cityList.add(<span class = "literal">"Seoul"</span>);
+ 18&nbsp;&nbsp;    <span class = "comment">// contains [London, Denver, Paris, Miami, Seoul]</span>
+ 19&nbsp;&nbsp;    cityList.add(<span class = "literal">"Tokyo"</span>);
+ 20&nbsp;&nbsp;    <span class = "comment">// contains [London, Denver, Paris, Miami, Seoul, Tokyo]</span>
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;    System.out.println(<span class = "literal">"List size? "</span> + cityList.size()); 
+ 23&nbsp;&nbsp;    System.out.println(<span class = "literal">"Is Miami in the list? "</span> +
+ 24&nbsp;&nbsp;      cityList.contains(<span class = "literal">"Miami"</span>)); 
+ 25&nbsp;&nbsp;    System.out.println(<span class = "literal">"The location of Denver in the list? "</span>
+ 26&nbsp;&nbsp;      + cityList.indexOf(<span class = "literal">"Denver"</span>)); 
+ 27&nbsp;&nbsp;    System.out.println(<span class = "literal">"Is the list empty? "</span> +
+ 28&nbsp;&nbsp;      cityList.isEmpty()); <span class = "comment">// Print false</span>
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;    <span class = "comment">// Insert a new city at index 2</span>
+ 31&nbsp;&nbsp;    cityList.add(<span class = "constant">2</span>, <span class = "literal">"Xian"</span>);
+ 32&nbsp;&nbsp;    <span class = "comment">// contains [London, Denver, Xian, Paris, Miami, Seoul, Tokyo]</span>
+ 33&nbsp;&nbsp;
+ 34&nbsp;&nbsp;    <span class = "comment">// Remove a city from the list</span>
+ 35&nbsp;&nbsp;    cityList.remove(<span class = "literal">"Miami"</span>);
+ 36&nbsp;&nbsp;    <span class = "comment">// contains [London, Denver, Xian, Paris, Seoul, Tokyo]</span>
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;    <span class = "comment">// Remove a city at index 1</span>
+ 39&nbsp;&nbsp;    cityList.remove(<span class = "constant">1</span>);
+ 40&nbsp;&nbsp;    <span class = "comment">// contains [London, Xian, Paris, Seoul, Tokyo]</span>
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;    <span class = "comment">// Display the contents in the list</span>
+ 43&nbsp;&nbsp;    System.out.println(cityList.toString());
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;    <span class = "comment">// Display the contents in the list in reverse order</span>
+ 46&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = cityList.size() - <span class = "constant">1</span>; i &gt;= <span class = "constant">0</span>; i--)
+ 47&nbsp;&nbsp;      System.out.print(cityList.get(i) + <span class = "literal">" "</span>);
+ 48&nbsp;&nbsp;    System.out.println();
+ 49&nbsp;&nbsp;    
+ 50&nbsp;&nbsp;    <span class = "comment">// Create a list to store two circles</span>
+ 51&nbsp;&nbsp;    ArrayList&lt;Circle&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+ 52&nbsp;&nbsp;    
+ 53&nbsp;&nbsp;    <span class = "comment">// Add two circles</span>
+ 54&nbsp;&nbsp;    list.add(<span class = "keyword">new</span> Circle(<span class = "constant">2</span>));
+ 55&nbsp;&nbsp;    list.add(<span class = "keyword">new</span> Circle(<span class = "constant">3</span>));
+ 56&nbsp;&nbsp;    
+ 57&nbsp;&nbsp;    <span class = "comment">// Display the area of the first circle in the list</span>
+ 58&nbsp;&nbsp;    System.out.println(<span class = "literal">"The area of the circle? "</span> +
+ 59&nbsp;&nbsp;      list.get(<span class = "constant">0</span>).getArea());
+ 60&nbsp;&nbsp;  }
+ 61&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

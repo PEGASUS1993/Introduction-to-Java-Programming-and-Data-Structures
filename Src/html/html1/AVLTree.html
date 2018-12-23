@@ -1,0 +1,283 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AVLTree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "AVLTreeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> AVLTree&lt;E&gt; <span class = "keyword">extends</span> BST&lt;E&gt; {
+  <span class = "comment">/** Create an empty AVL tree using a natural comparator*/</span>
+  <span class = "keyword">public</span> AVLTree() { <span class = "comment">// super() is implicitly called</span>
+  }
+
+  <span class = "comment">/** Create a BST with a specified comparator */</span>
+  <span class = "keyword">public</span> AVLTree(java.util.Comparator&lt;E&gt; c) {
+    <span class = "keyword">super</span>(c);
+  }
+
+  <span class = "comment">/** Create an AVL tree from an array of objects */</span>
+  <span class = "keyword">public</span> AVLTree(E[] objects) {
+    <span class = "keyword">super</span>(objects);
+  }
+
+  @Override <span class = "comment">/** Override createNewNode to create an AVLTreeNode */</span>
+  <span class = "keyword">protected</span> AVLTreeNode&lt;E&gt; createNewNode(E e) {
+    <span class = "keyword">return</span> <span class = "keyword">new</span> AVLTreeNode&lt;E&gt;(e);
+  }
+
+  @Override <span class = "comment">/** Insert an element and rebalance if necessary */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> insert(E e) {
+    <span class = "keyword">boolean</span> successful = <span class = "keyword">super</span>.insert(e);
+    <span class = "keyword">if</span> (!successful)
+      <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// e is already in the tree</span>
+    <span class = "keyword">else</span> {
+      balancePath(e); <span class = "comment">// Balance from e to the root if necessary</span>
+    }
+
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// e is inserted</span>
+  }
+
+  <span class = "comment">/** Update the height of a specified node */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> updateHeight(AVLTreeNode&lt;E&gt; node) {
+    <span class = "keyword">if</span> (node.left == <span class = "keyword">null</span> && node.right == <span class = "keyword">null</span>) <span class = "comment">// node is a leaf</span>
+      node.height = <span class = "constant">0</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (node.left == <span class = "keyword">null</span>) <span class = "comment">// node has no left subtree</span>
+      node.height = <span class = "constant">1</span> + ((AVLTreeNode&lt;E&gt;)(node.right)).height;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (node.right == <span class = "keyword">null</span>) <span class = "comment">// node has no right subtree</span>
+      node.height = <span class = "constant">1</span> + ((AVLTreeNode&lt;E&gt;)(node.left)).height;
+    <span class = "keyword">else</span>
+      node.height = <span class = "constant">1</span> +
+        Math.max(((AVLTreeNode&lt;E&gt;)(node.right)).height,
+        ((AVLTreeNode&lt;E&gt;)(node.left)).height);
+  }
+
+  <span class = "comment">/** Balance the nodes in the path from the specified
+   * node to the root if necessary
+   */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> balancePath(E e) {
+    java.util.ArrayList&lt;TreeNode&lt;E&gt;&gt; path = path(e);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = path.size() - <span class = "constant">1</span>; i &gt;= <span class = "constant">0</span>; i--) {
+      AVLTreeNode&lt;E&gt; A = (AVLTreeNode&lt;E&gt;)(path.get(i));
+      updateHeight(A);
+      AVLTreeNode&lt;E&gt; parentOfA = (A == root) ? <span class = "keyword">null</span> :
+        (AVLTreeNode&lt;E&gt;)(path.get(i - <span class = "constant">1</span>));
+
+      <span class = "keyword">switch</span> (balanceFactor(A)) {
+        <span class = "keyword">case</span> <span class = "literal">-</span>2:
+          <span class = "keyword">if</span> (balanceFactor((AVLTreeNode&lt;E&gt;)A.left) &lt;= <span class = "constant">0</span>) {
+            balanceLL(A, parentOfA); <span class = "comment">// Perform LL rotation</span>
+          }
+          <span class = "keyword">else</span> {
+            balanceLR(A, parentOfA); <span class = "comment">// Perform LR rotation</span>
+          }
+          <span class = "keyword">break</span>;
+        <span class = "keyword">case</span> <span class = "literal">+</span>2:
+          <span class = "keyword">if</span> (balanceFactor((AVLTreeNode&lt;E&gt;)A.right) &gt;= <span class = "constant">0</span>) {
+            balanceRR(A, parentOfA); <span class = "comment">// Perform RR rotation</span>
+          }
+          <span class = "keyword">else</span> {
+            balanceRL(A, parentOfA); <span class = "comment">// Perform RL rotation</span>
+          }
+      }
+    }
+  }
+
+  <span class = "comment">/** Return the balance factor of the node */</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span> balanceFactor(AVLTreeNode&lt;E&gt; node) {
+    <span class = "keyword">if</span> (node.right == <span class = "keyword">null</span>) <span class = "comment">// node has no right subtree</span>
+      <span class = "keyword">return</span> -node.height;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (node.left == <span class = "keyword">null</span>) <span class = "comment">// node has no left subtree</span>
+      <span class = "keyword">return</span> +node.height;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> ((AVLTreeNode&lt;E&gt;)node.right).height -
+        ((AVLTreeNode&lt;E&gt;)node.left).height;
+  }
+
+  <span class = "comment">/** Balance LL (see Figure 26.3) */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> balanceLL(TreeNode&lt;E&gt; A, TreeNode&lt;E&gt; parentOfA) {
+    TreeNode&lt;E&gt; B = A.left; <span class = "comment">// A is left-heavy and B is left-heavy</span>
+
+    <span class = "keyword">if</span> (A == root) {
+      root = B;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">if</span> (parentOfA.left == A) {
+        parentOfA.left = B;
+      }
+      <span class = "keyword">else</span> {
+        parentOfA.right = B;
+      }
+    }
+
+    A.left = B.right; <span class = "comment">// Make T2 the left subtree of A</span>
+    B.right = A; <span class = "comment">// Make A the left child of B</span>
+    updateHeight((AVLTreeNode&lt;E&gt;)A);
+    updateHeight((AVLTreeNode&lt;E&gt;)B);
+  }
+
+  <span class = "comment">/** Balance LR (see Figure 26.5) */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> balanceLR(TreeNode&lt;E&gt; A, TreeNode&lt;E&gt; parentOfA) {
+    TreeNode&lt;E&gt; B = A.left; <span class = "comment">// A is left-heavy</span>
+    TreeNode&lt;E&gt; C = B.right; <span class = "comment">// B is right-heavy</span>
+
+    <span class = "keyword">if</span> (A == root) {
+      root = C;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">if</span> (parentOfA.left == A) {
+        parentOfA.left = C;
+      }
+      <span class = "keyword">else</span> {
+        parentOfA.right = C;
+      }
+    }
+
+    A.left = C.right; <span class = "comment">// Make T3 the left subtree of A</span>
+    B.right = C.left; <span class = "comment">// Make T2 the right subtree of B</span>
+    C.left = B;
+    C.right = A;
+
+    <span class = "comment">// Adjust heights</span>
+    updateHeight((AVLTreeNode&lt;E&gt;)A);
+    updateHeight((AVLTreeNode&lt;E&gt;)B);
+    updateHeight((AVLTreeNode&lt;E&gt;)C);
+  }
+
+  <span class = "comment">/** Balance RR (see Figure 26.4) */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> balanceRR(TreeNode&lt;E&gt; A, TreeNode&lt;E&gt; parentOfA) {
+    TreeNode&lt;E&gt; B = A.right; <span class = "comment">// A is right-heavy and B is right-heavy</span>
+
+    <span class = "keyword">if</span> (A == root) {
+      root = B;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">if</span> (parentOfA.left == A) {
+        parentOfA.left = B;
+      }
+      <span class = "keyword">else</span> {
+        parentOfA.right = B;
+      }
+    }
+
+    A.right = B.left; <span class = "comment">// Make T2 the right subtree of A</span>
+    B.left = A;
+    updateHeight((AVLTreeNode&lt;E&gt;)A);
+    updateHeight((AVLTreeNode&lt;E&gt;)B);
+  }
+
+  <span class = "comment">/** Balance RL (see Figure 26.6) */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> balanceRL(TreeNode&lt;E&gt; A, TreeNode&lt;E&gt; parentOfA) {
+    TreeNode&lt;E&gt; B = A.right; <span class = "comment">// A is right-heavy</span>
+    TreeNode&lt;E&gt; C = B.left; <span class = "comment">// B is left-heavy</span>
+
+    <span class = "keyword">if</span> (A == root) {
+      root = C;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">if</span> (parentOfA.left == A) {
+        parentOfA.left = C;
+      }
+      <span class = "keyword">else</span> {
+        parentOfA.right = C;
+      }
+    }
+
+    A.right = C.left; <span class = "comment">// Make T2 the right subtree of A</span>
+    B.left = C.right; <span class = "comment">// Make T3 the left subtree of B</span>
+    C.left = A;
+    C.right = B;
+
+    <span class = "comment">// Adjust heights</span>
+    updateHeight((AVLTreeNode&lt;E&gt;)A);
+    updateHeight((AVLTreeNode&lt;E&gt;)B);
+    updateHeight((AVLTreeNode&lt;E&gt;)C);
+  }
+
+  @Override <span class = "comment">/** Delete an element from the binary tree.
+   * Return true if the element is deleted successfully
+   * Return false if the element is not in the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> delete(E element) {
+    <span class = "keyword">if</span> (root == <span class = "keyword">null</span>)
+      <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// Element is not in the tree</span>
+
+    <span class = "comment">// Locate the node to be deleted and also locate its parent node</span>
+    TreeNode&lt;E&gt; parent = <span class = "keyword">null</span>;
+    TreeNode&lt;E&gt; current = root;
+    <span class = "keyword">while</span> (current != <span class = "keyword">null</span>) {
+      <span class = "keyword">if</span> (c.compare(element, current.element) &lt; <span class = "constant">0</span>) {
+        parent = current;
+        current = current.left;
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (c.compare(element, current.element) &gt; <span class = "constant">0</span>) {
+        parent = current;
+        current = current.right;
+      }
+      <span class = "keyword">else</span>
+        <span class = "keyword">break</span>; <span class = "comment">// Element is in the tree pointed by current</span>
+    }
+
+    <span class = "keyword">if</span> (current == <span class = "keyword">null</span>)
+      <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// Element is not in the tree</span>
+
+    <span class = "comment">// Case 1: current has no left children (See Figure 23.6)</span>
+    <span class = "keyword">if</span> (current.left == <span class = "keyword">null</span>) {
+      <span class = "comment">// Connect the parent with the right child of the current node</span>
+      <span class = "keyword">if</span> (parent == <span class = "keyword">null</span>) {
+        root = current.right;
+      }
+      <span class = "keyword">else</span> {
+        <span class = "keyword">if</span> (c.compare(element, parent.element) &lt; <span class = "constant">0</span>)
+          parent.left = current.right;
+        <span class = "keyword">else</span>
+          parent.right = current.right;
+
+        <span class = "comment">// Balance the tree if necessary</span>
+        balancePath(parent.element);
+      }
+    }
+    <span class = "keyword">else</span> {
+      <span class = "comment">// Case 2: The current node has a left child</span>
+      <span class = "comment">// Locate the rightmost node in the left subtree of</span>
+      <span class = "comment">// the current node and also its parent</span>
+      TreeNode&lt;E&gt; parentOfRightMost = current;
+      TreeNode&lt;E&gt; rightMost = current.left;
+
+      <span class = "keyword">while</span> (rightMost.right != <span class = "keyword">null</span>) {
+        parentOfRightMost = rightMost;
+        rightMost = rightMost.right; <span class = "comment">// Keep going to the right</span>
+      }
+
+      <span class = "comment">// Replace the element in current by the element in rightMost</span>
+      current.element = rightMost.element;
+
+      <span class = "comment">// Eliminate rightmost node</span>
+      <span class = "keyword">if</span> (parentOfRightMost.right == rightMost)
+        parentOfRightMost.right = rightMost.left;
+      <span class = "keyword">else</span>
+        <span class = "comment">// Special case: parentOfRightMost is current</span>
+        parentOfRightMost.left = rightMost.left; 
+      
+      <span class = "comment">// Balance the tree if necessary</span>
+      balancePath(parentOfRightMost.element);
+    }
+
+    size--;
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// Element inserted</span>
+  }
+
+  <span class = "comment">/** AVLTreeNode is TreeNode plus height */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">static</span> <span class = "keyword">class</span> AVLTreeNode&lt;E&gt; <span class = "keyword">extends</span> BST.TreeNode&lt;E&gt; {
+    <span class = "keyword">protected</span> <span class = "keyword">int</span> height = <span class = "constant">0</span>; <span class = "comment">// New data field</span>
+
+    <span class = "keyword">public</span> AVLTreeNode(E o) {
+      <span class = "keyword">super</span>(o);
+    }
+  }
+}
+</pre>
+</body>
+</html>

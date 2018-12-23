@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FileNotFoundExceptionDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FileNotFoundExceptionDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "FileNotFoundExceptionDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FileNotFoundExceptionDemo { 
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner inputFromConsole = <span class = "keyword">new</span> Scanner(System.in);   
+    <span class = "comment">// Prompt the user to enter a file name</span>
+    System.out.print(<span class = "literal">"Enter a filename: "</span>);
+    String filename = inputFromConsole.nextLine();
+    
+    <span class = "keyword">try</span> {
+      Scanner inputFromFile = <span class = "keyword">new</span> Scanner(<span class = "keyword">new</span> File(filename));
+      System.out.println(<span class = "literal">"File "</span> + filename + <span class = "literal">" exists "</span>); 
+      <span class = "comment">// Processing file ...</span>
+    }
+    <span class = "keyword">catch</span> (FileNotFoundException ex) {
+      System.out.println(<span class = "literal">"Exception: "</span> +  filename + <span class = "literal">" not found"</span>);
+    }
+  }
+}
+</pre>
+</body>
+</html>

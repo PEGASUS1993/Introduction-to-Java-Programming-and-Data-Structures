@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CheckBoxDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CheckBoxDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CheckBoxDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.scene.control.CheckBox;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.scene.text.Font;
+<span class = "keyword">import</span> javafx.scene.text.FontPosture;
+<span class = "keyword">import</span> javafx.scene.text.FontWeight;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CheckBoxDemo <span class = "keyword">extends</span> ButtonDemo {
+  @Override <span class = "comment">// Override the getPane() method in the super class</span>
+  <span class = "keyword">protected</span> BorderPane getPane() {
+    BorderPane pane = <span class = "keyword">super</span>.getPane();
+
+    Font fontBoldItalic = Font.font(<span class = "literal">"Times New Roman"</span>, 
+      FontWeight.BOLD, FontPosture.ITALIC, <span class = "constant">20</span>);
+    Font fontBold = Font.font(<span class = "literal">"Times New Roman"</span>, 
+      FontWeight.BOLD, FontPosture.REGULAR, <span class = "constant">20</span>);
+    Font fontItalic = Font.font(<span class = "literal">"Times New Roman"</span>, 
+      FontWeight.NORMAL, FontPosture.ITALIC, <span class = "constant">20</span>);
+    Font fontNormal = Font.font(<span class = "literal">"Times New Roman"</span>, 
+      FontWeight.NORMAL, FontPosture.REGULAR, <span class = "constant">20</span>);
+    
+    text.setFont(fontNormal);
+    
+    VBox paneForCheckBoxes = <span class = "keyword">new</span> VBox(<span class = "constant">20</span>);
+    paneForCheckBoxes.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>)); 
+    paneForCheckBoxes.setStyle(<span class = "literal">"-fx-border-color: green"</span>);
+    CheckBox chkBold = <span class = "keyword">new</span> CheckBox(<span class = "literal">"Bold"</span>);
+    CheckBox chkItalic = <span class = "keyword">new</span> CheckBox(<span class = "literal">"Italic"</span>);
+    paneForCheckBoxes.getChildren().addAll(chkBold, chkItalic);
+    pane.setRight(paneForCheckBoxes);
+
+    EventHandler&lt;ActionEvent&gt; handler = e -&gt; { 
+      <span class = "keyword">if</span> (chkBold.isSelected() && chkItalic.isSelected()) {
+        text.setFont(fontBoldItalic); <span class = "comment">// Both check boxes checked</span>
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (chkBold.isSelected()) {
+        text.setFont(fontBold); <span class = "comment">// The Bold check box checked</span>
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (chkItalic.isSelected()) {
+        text.setFont(fontItalic); <span class = "comment">// The Italic check box checked</span>
+      }      
+      <span class = "keyword">else</span> {
+        text.setFont(fontNormal); <span class = "comment">// Both check boxes unchecked</span>
+      }
+    };
+    
+    chkBold.setOnAction(handler);
+    chkItalic.setOnAction(handler);
+    
+    <span class = "keyword">return</span> pane; <span class = "comment">// Return a new pane</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

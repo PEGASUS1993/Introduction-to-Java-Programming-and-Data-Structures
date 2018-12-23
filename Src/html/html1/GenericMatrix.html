@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericMatrix.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericMatrixWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">abstract</span> <span class = "keyword">class</span> GenericMatrix&lt;E <span class = "keyword">extends</span> Number&gt; {
+  <span class = "comment">/** Abstract method for adding two elements of the matrices */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">abstract</span> E add(E o1, E o2);
+
+  <span class = "comment">/** Abstract method for multiplying two elements of the matrices */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">abstract</span> E multiply(E o1, E o2);
+
+  <span class = "comment">/** Abstract method for defining zero for the matrix element */</span>
+  <span class = "keyword">protected</span> <span class = "keyword">abstract</span> E zero();
+
+  <span class = "comment">/** Add two matrices */</span>
+  <span class = "keyword">public</span> E[][] addMatrix(E[][] matrix1, E[][] matrix2) {
+    <span class = "comment">// Check bounds of the two matrices</span>
+    <span class = "keyword">if</span> ((matrix1.length != matrix2.length) ||
+        (matrix1[<span class = "constant">0</span>].length != matrix2[<span class = "constant">0</span>].length)) {
+      <span class = "keyword">throw</span> <span class = "keyword">new</span> RuntimeException(
+        <span class = "literal">"The matrices do not have the same size"</span>);
+    }
+
+    E[][] result =
+      (E[][])<span class = "keyword">new</span> Number[matrix1.length][matrix1[<span class = "constant">0</span>].length];
+
+    <span class = "comment">// Perform addition</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; result.length; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; result[i].length; j++) {
+        result[i][j] = add(matrix1[i][j], matrix2[i][j]);
+      }
+
+    <span class = "keyword">return</span> result;
+  }
+
+  <span class = "comment">/** Multiply two matrices */</span>
+  <span class = "keyword">public</span> E[][] multiplyMatrix(E[][] matrix1, E[][] matrix2) {
+    <span class = "comment">// Check bounds</span>
+    <span class = "keyword">if</span> (matrix1[<span class = "constant">0</span>].length != matrix2.length) {
+      <span class = "keyword">throw</span> <span class = "keyword">new</span> RuntimeException(
+        <span class = "literal">"The matrices do not have compatible size"</span>);
+    }
+
+    <span class = "comment">// Create result matrix</span>
+    E[][] result =
+      (E[][])<span class = "keyword">new</span> Number[matrix1.length][matrix2[<span class = "constant">0</span>].length];
+
+    <span class = "comment">// Perform multiplication of two matrices</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; result.length; i++) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; result[<span class = "constant">0</span>].length; j++) {
+        result[i][j] = zero();
+
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; matrix1[<span class = "constant">0</span>].length; k++) {
+          result[i][j] = add(result[i][j],
+            multiply(matrix1[i][k], matrix2[k][j]));
+        }
+      }
+    }
+
+    <span class = "keyword">return</span> result;
+  }
+
+  <span class = "comment">/** Print matrices, the operator, and their operation result */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printResult(
+      Number[][] m1, Number[][] m2, Number[][] m3, <span class = "keyword">char</span> op) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; m1.length; i++) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; m1[<span class = "constant">0</span>].length; j++)
+        System.out.print(<span class = "literal">" "</span> + m1[i][j]);
+
+      <span class = "keyword">if</span> (i == m1.length / <span class = "constant">2</span>)
+        System.out.print(<span class = "literal">"  "</span> + op + <span class = "literal">"  "</span>);
+      <span class = "keyword">else</span>
+        System.out.print(<span class = "literal">"     "</span>);
+
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; m2.length; j++)
+        System.out.print(<span class = "literal">" "</span> + m2[i][j]);
+
+      <span class = "keyword">if</span> (i == m1.length / <span class = "constant">2</span>)
+        System.out.print(<span class = "literal">"  =  "</span>);
+      <span class = "keyword">else</span>
+        System.out.print(<span class = "literal">"     "</span>);
+
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; m3.length; j++)
+        System.out.print(m3[i][j] + <span class = "literal">" "</span>);
+
+      System.out.println();
+    }
+  }
+}
+</pre>
+</body>
+</html>

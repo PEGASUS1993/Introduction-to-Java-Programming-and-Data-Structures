@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BTView.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BTViewWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.scene.shape.Line;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> BTView <span class = "keyword">extends</span> Pane {
+  <span class = "keyword">private</span> BST&lt;Integer&gt; tree = <span class = "keyword">new</span> BST&lt;&gt;();
+  <span class = "keyword">private</span> <span class = "keyword">double</span> radius = <span class = "constant">15</span>; <span class = "comment">// Tree node radius</span>
+  <span class = "keyword">private</span> <span class = "keyword">double</span> vGap = <span class = "constant">50</span>; <span class = "comment">// Gap between two levels in a tree</span>
+
+  BTView(BST&lt;Integer&gt; tree) {
+    <span class = "keyword">this</span>.tree = tree;
+    setStatus(<span class = "literal">"Tree is empty"</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setStatus(String msg) {
+    getChildren().add(<span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">20</span>, msg));
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> displayTree() {
+    <span class = "keyword">this</span>.getChildren().clear(); <span class = "comment">// Clear the pane</span>
+    <span class = "keyword">if</span> (tree.getRoot() != <span class = "keyword">null</span>) {
+      <span class = "comment">// Display tree recursively    </span>
+      displayTree(tree.getRoot(), getWidth() / <span class = "constant">2</span>, vGap,
+        getWidth() / <span class = "constant">4</span>);
+    }
+  }
+
+  <span class = "comment">/** Display a subtree rooted at position (x, y) */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> displayTree(BST.TreeNode&lt;Integer&gt; root,
+      <span class = "keyword">double</span> x, <span class = "keyword">double</span> y, <span class = "keyword">double</span> hGap) {
+    <span class = "keyword">if</span> (root.left != <span class = "keyword">null</span>) {
+      <span class = "comment">// Draw a line to the left node</span>
+      getChildren().add(<span class = "keyword">new</span> Line(x - hGap, y + vGap, x, y));
+      <span class = "comment">// Draw the left subtree recursively</span>
+      displayTree(root.left, x - hGap, y + vGap, hGap / <span class = "constant">2</span>);
+    }
+
+    <span class = "keyword">if</span> (root.right != <span class = "keyword">null</span>) {
+      <span class = "comment">// Draw a line to the right node</span>
+      getChildren().add(<span class = "keyword">new</span> Line(x + hGap, y + vGap, x, y));
+      <span class = "comment">// Draw the right subtree recursively</span>
+      displayTree(root.right, x + hGap, y + vGap, hGap / <span class = "constant">2</span>);
+    }
+    
+    <span class = "comment">// Display a node</span>
+    Circle circle = <span class = "keyword">new</span> Circle(x, y, radius);
+    circle.setFill(Color.WHITE);
+    circle.setStroke(Color.BLACK);
+    getChildren().addAll(circle,
+      <span class = "keyword">new</span> Text(x - <span class = "constant">4</span>, y + <span class = "constant">4</span>, root.element + <span class = "literal">""</span>));
+  }
+}
+</pre>
+</body>
+</html>

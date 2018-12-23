@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StrokeDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StrokeDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.*;
+  8&nbsp;&nbsp;  
+  9&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> StrokeDemo <span class = "keyword">extends</span> Application {
+ 10&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) { 
+ 12&nbsp;&nbsp;    Rectangle rectangle1 = <span class = "keyword">new</span> Rectangle(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "constant">70</span>, <span class = "constant">120</span>);
+ 13&nbsp;&nbsp;    rectangle1.setFill(Color.WHITE);
+ 14&nbsp;&nbsp;    rectangle1.setStrokeWidth(<span class = "constant">15</span>);
+ 15&nbsp;&nbsp;    rectangle1.setStroke(Color.ORANGE);
+ 16&nbsp;&nbsp;      
+ 17&nbsp;&nbsp;    Rectangle rectangle2 = <span class = "keyword">new</span> Rectangle(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "constant">70</span>, <span class = "constant">120</span>);
+ 18&nbsp;&nbsp;    rectangle2.setFill(Color.WHITE);
+ 19&nbsp;&nbsp;    rectangle2.setStrokeWidth(<span class = "constant">15</span>);
+ 20&nbsp;&nbsp;    rectangle2.setStroke(Color.ORANGE);
+ 21&nbsp;&nbsp;    rectangle2.setTranslateX(<span class = "constant">100</span>);
+ 22&nbsp;&nbsp;    rectangle2.setStrokeLineJoin(StrokeLineJoin.BEVEL);
+ 23&nbsp;&nbsp;       
+ 24&nbsp;&nbsp;    Rectangle rectangle3 = <span class = "keyword">new</span> Rectangle(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "constant">70</span>, <span class = "constant">120</span>);
+ 25&nbsp;&nbsp;    rectangle3.setFill(Color.WHITE);
+ 26&nbsp;&nbsp;    rectangle3.setStrokeWidth(<span class = "constant">15</span>);
+ 27&nbsp;&nbsp;    rectangle3.setStroke(Color.ORANGE);
+ 28&nbsp;&nbsp;    rectangle3.setTranslateX(<span class = "constant">200</span>);
+ 29&nbsp;&nbsp;    rectangle3.setStrokeLineJoin(StrokeLineJoin.ROUND);
+ 30&nbsp;&nbsp;         
+ 31&nbsp;&nbsp;    Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">320</span>, <span class = "constant">20</span>, <span class = "constant">420</span>, <span class = "constant">20</span>);
+ 32&nbsp;&nbsp;    line1.setStrokeLineCap(StrokeLineCap.BUTT);
+ 33&nbsp;&nbsp;    line1.setStrokeWidth(<span class = "constant">20</span>);
+ 34&nbsp;&nbsp;      
+ 35&nbsp;&nbsp;    Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">320</span>, <span class = "constant">70</span>, <span class = "constant">420</span>, <span class = "constant">70</span>);
+ 36&nbsp;&nbsp;    line2.setStrokeLineCap(StrokeLineCap.ROUND);
+ 37&nbsp;&nbsp;    line2.setStrokeWidth(<span class = "constant">20</span>);
+ 38&nbsp;&nbsp;     
+ 39&nbsp;&nbsp;    Line line3 = <span class = "keyword">new</span> Line(<span class = "constant">320</span>, <span class = "constant">120</span>, <span class = "constant">420</span>, <span class = "constant">120</span>);
+ 40&nbsp;&nbsp;    line3.setStrokeLineCap(StrokeLineCap.SQUARE);
+ 41&nbsp;&nbsp;    line3.setStrokeWidth(<span class = "constant">20</span>);
+ 42&nbsp;&nbsp;  
+ 43&nbsp;&nbsp;    Line line4 = <span class = "keyword">new</span> Line(<span class = "constant">460</span>, <span class = "constant">20</span>, <span class = "constant">560</span>, <span class = "constant">120</span>);
+ 44&nbsp;&nbsp;    line4.getStrokeDashArray().addAll(<span class = "constant">10</span><span class = "literal">.</span><span class = "constant">0</span>, <span class = "constant">20</span><span class = "literal">.</span><span class = "constant">0</span>, <span class = "constant">30</span><span class = "literal">.</span><span class = "constant">0</span>, <span class = "constant">40</span><span class = "literal">.</span><span class = "constant">0</span>);
+ 45&nbsp;&nbsp;    
+ 46&nbsp;&nbsp;    Pane pane = <span class = "keyword">new</span> Pane();
+ 47&nbsp;&nbsp;    pane.getChildren().addAll(rectangle1, rectangle2, rectangle3,
+ 48&nbsp;&nbsp;    line1, line2, line3, line4);
+ 49&nbsp;&nbsp;  
+ 50&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">610</span>, <span class = "constant">180</span>);           
+ 51&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"StrokeDemo"</span>); <span class = "comment">// Set the window title</span>
+ 52&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 53&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 54&nbsp;&nbsp;  }
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;  <span class = "comment">// Launch the program from command-line</span>
+ 57&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 58&nbsp;&nbsp;    launch(args);
+ 59&nbsp;&nbsp;  }
+ 60&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

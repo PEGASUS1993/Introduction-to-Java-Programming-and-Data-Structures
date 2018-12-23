@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TrafficLight.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TrafficLight.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">enum</span> TrafficLight {
+  2&nbsp;&nbsp;  RED (<span class = "literal">"Please stop"</span>), GREEN (<span class = "literal">"Please go"</span>), 
+  3&nbsp;&nbsp;  YELLOW (<span class = "literal">"Please caution"</span>);
+  4&nbsp;&nbsp;  
+  5&nbsp;&nbsp;  <span class = "keyword">private</span> String description;
+  6&nbsp;&nbsp;  
+  7&nbsp;&nbsp;  <span class = "keyword">private</span> TrafficLight(String description) {
+  8&nbsp;&nbsp;    <span class = "keyword">this</span>.description = description;
+  9&nbsp;&nbsp;  }
+ 10&nbsp;&nbsp;  
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> String getDescription() {
+ 12&nbsp;&nbsp;    <span class = "keyword">return</span> description;
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

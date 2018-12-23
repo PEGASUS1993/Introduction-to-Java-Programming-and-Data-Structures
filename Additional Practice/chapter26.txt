@@ -1,0 +1,65 @@
+Chapter 26 AVL Trees 
+
+Section 26.1 Introduction
+1. The _________ of a node is the height of its right subtree minus the height of its left subtree.
+a. balance factor
+b. depth
+c. length
+d. degree
+Key:a
+
+#
+2. The balance factor of every node in an AVL tree may be _________.
+a. 0
+b. 1
+c. -1
+d. 2
+Key:abc
+
+#
+3. A __________ (with no duplicate elements) has the property that for every node in the tree the value of any node in its left subtree is less than the value of the node and the value of any node in its right subtree is greater than the value of the node. 
+a. binary tree
+b. binary search tree 
+c. AVL tree
+d. binary heap
+Key:bc
+
+#
+Sections 26.2-26.9
+4. The time complexity for insertion, deletion, and search is O(logn) for a ___________.
+a. binary tree
+b. binary search tree 
+c. AVL tree
+d. binary heap
+Key:c
+
+#
+5. In a ________, the element j to be removed is always at the root.
+a. binary tree
+b. binary search tree 
+c. AVL tree
+d. binary heap
+Key:d
+
+#
+6. In a ________, the element just inserted is always at the leaf.
+a. binary search tree 
+b. AVL tree
+c. binary heap
+Key:a
+
+#
+7. The average time-complexity for insertion, deletion, and search in a ________ is O(logn).
+a. binary search tree 
+b. AVL tree
+c. binary heap
+Key:b
+
+#
+8. What is the preorder traversal of the elements in a AVL tree after inserting 3, 4, 45, 21, 92, 12 in this order?
+a. 3 4 12 21 92 45
+b. 3 4 12 21 45 92
+c. 45 4 3 21 12 92
+d. 45 21 12 92 3 4
+e. 21 4 3 12 45 92
+Key:e

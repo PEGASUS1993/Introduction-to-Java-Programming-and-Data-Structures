@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MathQuiz.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MathQuizWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> MathQuiz {
+  <span class = "keyword">private</span> String user;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> totalCount;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> correctCount;
+
+  <span class = "comment">/** Construct a MathQuiz object with the specified user */</span>
+  <span class = "keyword">public</span> MathQuiz(String user) {
+    <span class = "keyword">this</span>.user = user;
+  }
+
+  <span class = "comment">/** Construct a default MathQuiz object */</span>
+  <span class = "keyword">public</span> MathQuiz() {
+    user = <span class = "literal">""</span>; <span class = "comment">// Anonymous user</span>
+  }
+
+  <span class = "comment">/** Return the user for the test */</span>
+  <span class = "keyword">public</span> String getUser() {
+    <span class = "keyword">return</span> user;
+  }
+
+  <span class = "comment">/** Return the total number of the questions */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getTotalCount() {
+    <span class = "keyword">return</span> totalCount;
+  }
+
+  <span class = "comment">/** Return the number of the correct answers */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getCorrectCount() {
+    <span class = "keyword">return</span> correctCount;
+  }
+
+  <span class = "comment">/** Increase the total number of the questions */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> increaseTotalCount() {
+    totalCount++;
+  }
+
+  <span class = "comment">/** Increase the number of the correct answers */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> increaseCorrectCount() {
+    correctCount++;
+  }
+}
+</pre>
+</body>
+</html>

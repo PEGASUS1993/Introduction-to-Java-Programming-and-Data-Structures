@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestComparator.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestComparatorWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestComparator" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Comparator;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestComparator {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    GeometricObject g1 = <span class = "keyword">new</span> Rectangle(<span class = "constant">5</span>, <span class = "constant">5</span>);
+    GeometricObject g2 = <span class = "keyword">new</span> Circle(<span class = "constant">5</span>);
+
+    GeometricObject g = 
+      max(g1, g2, <span class = "keyword">new</span> GeometricObjectComparator());
+    
+    System.out.println(<span class = "literal">"The area of the larger object is "</span> + 
+      g.getArea());
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> GeometricObject max(GeometricObject g1, 
+      GeometricObject g2, Comparator&lt;GeometricObject&gt; c) {
+  	<span class = "keyword">return</span> c.compare(g1, g2) &gt; <span class = "constant">0</span> ? g1 : g2;
+  }
+}
+</pre>
+</body>
+</html>

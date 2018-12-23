@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Day of Week</title>
+    </h:head>
+    <h:body>
+        <h3>Day of Week Calculator</h3>
+        <h:outputText style="color:red; font-weight:bold;" value="#{dowBean.errorStatus}"/>
+
+        <h:form>
+            <h:panelGrid  style="horizontal-align: center; border: 1px groove maroon">
+                <h:panelGrid columns="7">
+                    <h:outputLabel value="Day"/>
+
+                    <h:selectOneMenu value="#{dowBean.day}">
+                        <f:selectItems value="#{dowBean.dayMap}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Month"/>
+
+                    <h:selectOneMenu value="#{dowBean.month}">
+                        <f:selectItems value="#{dowBean.monthMap}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Year"/>
+                    <h:inputText id="yearInput" value="#{dowBean.year}" size="4"/>
+
+                    <h:commandButton value="Get Day of Week" 
+                                     action="#{dowBean.getDayOfWeek()}"/>
+                </h:panelGrid>
+
+                <h:panelGrid columns="4">
+                    <h:outputLabel value="Day of the Week"/>
+                    <h:inputText id="dayOfWeekOutput"
+                                 size="10"
+                                 value="#{dowBean.dayOfWeekOut}"/>
+
+                    <h:outputLabel value="Time"/>
+                    <h:inputText id="timeOutput"
+                                 size="8"
+                                 value="#{dowBean.timeOut}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

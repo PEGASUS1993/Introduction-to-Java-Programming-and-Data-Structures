@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ResourceBundleDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ResourceBundleDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+<span class = "keyword">import</span> java.text.NumberFormat;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ResourceBundleDemo <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> ResourceBundle res 
+    = ResourceBundle.getBundle(<span class = "literal">"MyResource"</span>);
+  
+  <span class = "comment">// Create labels</span>
+  <span class = "keyword">private</span> Label lblInterestRate =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Annual_Interest_Rate"</span>));
+  <span class = "keyword">private</span> Label lblNumberOfYears =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Number_Of_Years"</span>));
+  <span class = "keyword">private</span> Label lblLoanAmount = 
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Loan_Amount"</span>));
+  <span class = "keyword">private</span> Label lblMonthlyPayment =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Monthly_Payment"</span>));
+  <span class = "keyword">private</span> Label lblTotalPayment =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Total_Payment"</span>));
+  <span class = "keyword">private</span> Label lblPayment =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Payment"</span>));
+  <span class = "keyword">private</span> Label lblChooseALocale =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Choose_a_Locale"</span>));
+  <span class = "keyword">private</span> Label lblEnterInterestRate =
+    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Enter_Interest_Rate"</span>));
+  
+  <span class = "comment">// Combo box for selecting available locales</span>
+  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboLocale = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+
+  <span class = "comment">// Text fields for interest rate, year, and loan amount</span>
+  <span class = "keyword">private</span> TextField tfInterestRate = <span class = "keyword">new</span> TextField(<span class = "literal">"6<span class = "literal">.</span>75"</span>);
+  <span class = "keyword">private</span> TextField tfNumberOfYears = <span class = "keyword">new</span> TextField(<span class = "literal">"15"</span>);
+  <span class = "keyword">private</span> TextField tfLoanAmount = <span class = "keyword">new</span> TextField(<span class = "literal">"107000"</span>);
+  <span class = "keyword">private</span> TextField tfFormattedInterestRate = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfFormattedNumberOfYears = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfFormattedLoanAmount = <span class = "keyword">new</span> TextField();
+
+  <span class = "comment">// Text fields for monthly payment and total payment</span>
+  <span class = "keyword">private</span> TextField tfTotalPayment = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfMonthlyPayment = <span class = "keyword">new</span> TextField();
+
+  <span class = "comment">// Compute button</span>
+  <span class = "keyword">private</span> Button btCompute = <span class = "keyword">new</span> Button(<span class = "literal">"Compute"</span>);
+
+  <span class = "comment">// Current locale</span>
+  <span class = "keyword">private</span> Locale locale = Locale.getDefault();
+
+  <span class = "comment">// Declare locales to store available locales</span>
+  <span class = "keyword">private</span> Locale locales[] = Calendar.getAvailableLocales();
+
+  <span class = "comment">/** Initialize the combo box */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> initializeComboBox() {
+    <span class = "comment">// Add locale names to the combo box</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; locales.length; i++)
+      cboLocale.getItems().add(locales[i].getDisplayName());
+  }
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    initializeComboBox();
+    
+    <span class = "comment">// Pane to hold the combo box for selecting locales</span>
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+    hBox.getChildren().addAll(lblChooseALocale, cboLocale);
+
+    <span class = "comment">// Pane to hold the input</span>
+    GridPane gridPane = <span class = "keyword">new</span> GridPane();
+    gridPane.add(lblInterestRate, <span class = "constant">0</span>, <span class = "constant">0</span>);
+    gridPane.add(tfInterestRate, <span class = "constant">1</span>, <span class = "constant">0</span>);
+    gridPane.add(tfFormattedInterestRate, <span class = "constant">2</span>, <span class = "constant">0</span>);
+    gridPane.add(lblNumberOfYears, <span class = "constant">0</span>, <span class = "constant">1</span>);
+    gridPane.add(tfNumberOfYears, <span class = "constant">1</span>, <span class = "constant">1</span>);
+    gridPane.add(tfFormattedNumberOfYears, <span class = "constant">2</span>, <span class = "constant">1</span>);
+    gridPane.add(lblLoanAmount, <span class = "constant">0</span>, <span class = "constant">2</span>);
+    gridPane.add(tfLoanAmount, <span class = "constant">1</span>, <span class = "constant">2</span>);
+    gridPane.add(tfFormattedLoanAmount, <span class = "constant">2</span>, <span class = "constant">2</span>);
+
+    <span class = "comment">// Pane to hold the output</span>
+    GridPane gridPaneOutput = <span class = "keyword">new</span> GridPane();
+    gridPaneOutput.add(lblMonthlyPayment, <span class = "constant">0</span>, <span class = "constant">0</span>);
+    gridPaneOutput.add(tfMonthlyPayment, <span class = "constant">1</span>, <span class = "constant">0</span>);
+    gridPaneOutput.add(lblTotalPayment, <span class = "constant">0</span>, <span class = "constant">1</span>);
+    gridPaneOutput.add(tfTotalPayment, <span class = "constant">1</span>, <span class = "constant">1</span>);
+
+    <span class = "comment">// Set text field alignment</span>
+    tfFormattedInterestRate.setAlignment(Pos.BASELINE_RIGHT);
+    tfFormattedNumberOfYears.setAlignment(Pos.BASELINE_RIGHT);
+    tfFormattedLoanAmount.setAlignment(Pos.BASELINE_RIGHT);
+    tfTotalPayment.setAlignment(Pos.BASELINE_RIGHT);
+    tfMonthlyPayment.setAlignment(Pos.BASELINE_RIGHT);
+
+    <span class = "comment">// Set editable false</span>
+    tfFormattedInterestRate.setEditable(<span class = "keyword">false</span>);
+    tfFormattedNumberOfYears.setEditable(<span class = "keyword">false</span>);
+    tfFormattedLoanAmount.setEditable(<span class = "keyword">false</span>);
+    tfTotalPayment.setEditable(<span class = "keyword">false</span>);
+    tfMonthlyPayment.setEditable(<span class = "keyword">false</span>);
+
+    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">5</span>);
+    vBox.getChildren().addAll(hBox, lblEnterInterestRate, 
+      gridPane, lblPayment, gridPaneOutput, btCompute);
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(vBox, <span class = "constant">400</span>, <span class = "constant">300</span>);
+    primaryStage.setTitle(<span class = "literal">"ResourceBundleDemo"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+
+    <span class = "comment">// Register listeners</span>
+    cboLocale.setOnAction(e -&gt; {
+      locale = locales[cboLocale
+        .getSelectionModel().getSelectedIndex()];
+      updateStrings();
+      computeLoan();
+    });
+
+    btCompute.setOnAction(e -&gt; computeLoan());
+  }
+
+  <span class = "comment">/** Compute payments and display results locale-sensitive format */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> computeLoan() {
+    <span class = "comment">// Retrieve input from user</span>
+    <span class = "keyword">double</span> loan = <span class = "keyword">new</span> Double(tfLoanAmount.getText()).doubleValue();
+    <span class = "keyword">double</span> interestRate =
+      <span class = "keyword">new</span> Double(tfInterestRate.getText()).doubleValue() / <span class = "constant">1240</span>;
+    <span class = "keyword">int</span> numberOfYears =
+      <span class = "keyword">new</span> Integer(tfNumberOfYears.getText()).intValue();
+
+    <span class = "comment">// Calculate payments</span>
+    <span class = "keyword">double</span> monthlyPayment = loan * interestRate/
+     (<span class = "constant">1</span> - (Math.pow(<span class = "constant">1</span> / (<span class = "constant">1</span> + interestRate), numberOfYears * <span class = "constant">12</span>)));
+    <span class = "keyword">double</span> totalPayment = monthlyPayment * numberOfYears * <span class = "constant">12</span>;
+
+    <span class = "comment">// Get formatters</span>
+    NumberFormat percentFormatter =
+      NumberFormat.getPercentInstance(locale);
+    NumberFormat currencyForm =
+      NumberFormat.getCurrencyInstance(locale);
+    NumberFormat numberForm = NumberFormat.getNumberInstance(locale);
+    percentFormatter.setMinimumFractionDigits(<span class = "constant">2</span>);
+
+    <span class = "comment">// Display formatted input</span>
+    tfFormattedInterestRate.setText(
+      percentFormatter.format(interestRate * <span class = "constant">12</span>));
+    tfFormattedNumberOfYears.setText
+      (numberForm.format(numberOfYears));
+    tfFormattedLoanAmount.setText(currencyForm.format(loan));
+
+    <span class = "comment">// Display results in currency format</span>
+    tfMonthlyPayment.setText(currencyForm.format(monthlyPayment));
+    tfTotalPayment.setText(currencyForm.format(totalPayment));
+  }
+
+  <span class = "comment">/** Update resource strings */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> updateStrings() {
+    res = ResourceBundle.getBundle(<span class = "literal">"MyResource"</span>, locale);
+    lblInterestRate.setText(res.getString(<span class = "literal">"Annual_Interest_Rate"</span>));
+    lblNumberOfYears.setText(res.getString(<span class = "literal">"Number_Of_Years"</span>));
+    lblLoanAmount.setText(res.getString(<span class = "literal">"Loan_Amount"</span>));
+    lblTotalPayment.setText(res.getString(<span class = "literal">"Total_Payment"</span>));
+    lblMonthlyPayment.setText(res.getString(<span class = "literal">"Monthly_Payment"</span>));
+    btCompute.setText(res.getString(<span class = "literal">"Compute"</span>));
+    lblChooseALocale.setText(res.getString(<span class = "literal">"Choose_a_Locale"</span>));
+    lblEnterInterestRate.setText(
+      res.getString(<span class = "literal">"Enter_Interest_Rate"</span>));
+    lblPayment.setText(res.getString(<span class = "literal">"Payment"</span>));
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

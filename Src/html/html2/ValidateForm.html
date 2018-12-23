@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ValidateForm.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ValidateFormWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">package</span> jsf2demo;
+
+<span class = "keyword">import</span> javax.enterprise.context.RequestScoped;
+<span class = "keyword">import</span> javax.inject.Named;
+
+@Named
+@RequestScoped
+<span class = "keyword">public</span> <span class = "keyword">class</span> ValidateForm {
+  <span class = "keyword">private</span> String name;
+  <span class = "keyword">private</span> String ssn;
+  <span class = "keyword">private</span> String ageString;
+  <span class = "keyword">private</span> String heightString;
+  
+  <span class = "keyword">public</span> String getName() {
+    <span class = "keyword">return</span> name;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setName(String name) {
+    <span class = "keyword">this</span>.name = name;
+  }
+  
+  <span class = "keyword">public</span> String getSsn() {
+    <span class = "keyword">return</span> ssn;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setSsn(String ssn) {
+    <span class = "keyword">this</span>.ssn = ssn;
+  }
+  
+  <span class = "keyword">public</span> String getAgeString() {
+    <span class = "keyword">return</span> ageString;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setAgeString(String ageString) {
+    <span class = "keyword">this</span>.ageString = ageString;
+  }
+  
+  <span class = "keyword">public</span> String getHeightString() {
+    <span class = "keyword">return</span> heightString;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setHeightString(String heightString) {
+    <span class = "keyword">this</span>.heightString = heightString;
+  }
+  
+  <span class = "keyword">public</span> String getResponse() {
+    <span class = "keyword">if</span> (name == <span class = "keyword">null</span> || ssn == <span class = "keyword">null</span> || ageString == <span class = "keyword">null</span> 
+            || heightString == <span class = "keyword">null</span>) {
+      <span class = "keyword">return</span> <span class = "literal">""</span>;
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">return</span> <span class = "literal">"You entered "</span> +
+        <span class = "literal">" Name: "</span> + name +
+        <span class = "literal">" SSN: "</span> + ssn +
+        <span class = "literal">" Age: "</span> + ageString +
+        <span class = "literal">" Heihgt: "</span> + heightString;
+    }
+  }
+}
+</pre>
+</body>
+</html>

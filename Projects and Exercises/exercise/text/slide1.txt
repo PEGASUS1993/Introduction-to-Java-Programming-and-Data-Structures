@@ -1,0 +1,4 @@
+Chapter 2
+
+2.1 Introduction
+In the preceding chapter, you learned how to create, compile, and run a Java program. In this chapter, you will be introduced to Java primitive data types and related subjects, such as variables, constants, data types, operators, and expressions. You will learn how to write programs using primitive data types, input and output, and simple calculations.

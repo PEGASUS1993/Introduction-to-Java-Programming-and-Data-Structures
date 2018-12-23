@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FindGradeUsingPreparedStatement.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "FindGradeUsingPreparedStatementWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> java.sql.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FindGradeUsingPreparedStatement <span class = "keyword">extends</span> Application {
+  <span class = "comment">// PreparedStatement for executing queries</span>
+  <span class = "keyword">private</span> PreparedStatement preparedStatement;
+  <span class = "keyword">private</span> TextField tfSSN = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> TextField tfCourseId = <span class = "keyword">new</span> TextField();
+  <span class = "keyword">private</span> Label lblStatus = <span class = "keyword">new</span> Label();
+  
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Initialize database connection and create a Statement object</span>
+    initializeDB();
+
+    Button btShowGrade = <span class = "keyword">new</span> Button(<span class = "literal">"Show Grade"</span>);
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+    hBox.getChildren().addAll(<span class = "keyword">new</span> Label(<span class = "literal">"SSN"</span>), tfSSN, 
+      <span class = "keyword">new</span> Label(<span class = "literal">"Course ID"</span>), tfCourseId, (btShowGrade));
+
+    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">10</span>);
+    vBox.getChildren().addAll(hBox, lblStatus);
+    
+    tfSSN.setPrefColumnCount(<span class = "constant">6</span>);
+    tfCourseId.setPrefColumnCount(<span class = "constant">6</span>);
+    btShowGrade.setOnAction(e -&gt; showGrade());
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(vBox, <span class = "constant">420</span>, <span class = "constant">80</span>);
+    primaryStage.setTitle(<span class = "literal">"FindGrade"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> initializeDB() {
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Load the JDBC driver</span>
+      Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+<span class = "comment">//      Class.forName("oracle.jdbc.driver.OracleDriver");</span>
+      System.out.println(<span class = "literal">"Driver loaded"</span>);
+
+      <span class = "comment">// Establish a connection</span>
+      Connection connection = DriverManager.getConnection
+        (<span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+<span class = "comment">//    ("jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl",</span>
+<span class = "comment">//     "scott", "tiger");</span>
+      System.out.println(<span class = "literal">"Database connected"</span>);
+
+      String queryString = <span class = "literal">"select firstName, mi, "</span> +
+        <span class = "literal">"lastName, title, grade from Student, Enrollment, Course "</span> +
+        <span class = "literal">"where Student.ssn = ? and Enrollment.courseId = ? "</span> +
+        <span class = "literal">"and Enrollment.courseId = Course.courseId"</span>;
+
+      <span class = "comment">// Create a statement</span>
+      preparedStatement = connection.prepareStatement(queryString);
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> showGrade() {
+    String ssn = tfSSN.getText();
+    String courseId = tfCourseId.getText();
+    <span class = "keyword">try</span> {
+      preparedStatement.setString(<span class = "constant">1</span>, ssn);
+      preparedStatement.setString(<span class = "constant">2</span>, courseId);
+      ResultSet rset = preparedStatement.executeQuery();
+
+      <span class = "keyword">if</span> (rset.next()) {
+        String lastName = rset.getString(<span class = "constant">1</span>);
+        String mi = rset.getString(<span class = "constant">2</span>);
+        String firstName = rset.getString(<span class = "constant">3</span>);
+        String title = rset.getString(<span class = "constant">4</span>);
+        String grade = rset.getString(<span class = "constant">5</span>);
+
+        <span class = "comment">// Display result in a label</span>
+        lblStatus.setText(firstName + <span class = "literal">" "</span> + mi +
+          <span class = "literal">" "</span> + lastName + <span class = "literal">"'s grade on course "</span> + title + <span class = "literal">" is "</span> +
+          grade);
+      } <span class = "keyword">else</span> {
+        lblStatus.setText(<span class = "literal">"Not found"</span>);
+      }
+    }
+    <span class = "keyword">catch</span> (SQLException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

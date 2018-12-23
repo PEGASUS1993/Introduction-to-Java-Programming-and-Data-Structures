@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - EightQueens.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EightQueensWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> EightQueens <span class = "keyword">extends</span> Application {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> SIZE = <span class = "constant">8</span>; <span class = "comment">// The size of the chess board</span>
+  <span class = "comment">// queens are placed at (i, queens[i])</span>
+  <span class = "comment">// -1 indicates that no queen is currently placed in the ith row</span>
+  <span class = "comment">// Initially, place a queen at (0, 0) in the 0th row</span>
+  <span class = "keyword">private</span> <span class = "keyword">int</span>[] queens = {<span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">1</span>}; 
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    search(); <span class = "comment">// Search for a solution </span>
+        
+    <span class = "comment">// Display chess board</span>
+    GridPane chessBoard = <span class = "keyword">new</span> GridPane();
+    chessBoard.setAlignment(Pos.CENTER);
+    Label[][] labels = <span class = "keyword">new</span> Label[SIZE][SIZE];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; SIZE; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; SIZE; j++) {
+        chessBoard.add(labels[i][j] = <span class = "keyword">new</span> Label(), j, i);
+        labels[i][j].setStyle(<span class = "literal">"-fx-border-color: black"</span>);
+        labels[i][j].setPrefSize(<span class = "constant">55</span>, <span class = "constant">55</span>);
+      }
+
+    <span class = "comment">// Display queens</span>
+    Image image = <span class = "keyword">new</span> Image(<span class = "literal">"image/queen.jpg"</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; SIZE; i++)
+      labels[i][queens[i]].setGraphic(<span class = "keyword">new</span> ImageView(image));
+      
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(chessBoard, <span class = "constant">55</span> * SIZE, <span class = "constant">55</span> * SIZE);
+    primaryStage.setTitle(<span class = "literal">"EightQueens"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/** Search for a solution */</span>
+  <span class = "keyword">private</span> <span class = "keyword">boolean</span> search() {
+    <span class = "comment">// k is the current row to be considered</span>
+    <span class = "comment">// We are looking for a position in the kth row to place a queen</span>
+    <span class = "keyword">int</span> k = <span class = "constant">0</span>;
+    <span class = "keyword">while</span> (k &gt;= <span class = "constant">0</span> && k &lt; SIZE) {
+      <span class = "comment">// Find a position to place a queen in the kth row</span>
+      <span class = "keyword">int</span> j = findPosition(k);
+      <span class = "keyword">if</span> (j &lt; <span class = "constant">0</span>) {
+        queens[k] = <span class = "literal">-</span><span class = "constant">1</span>;
+        k--; <span class = "comment">// Backtrack to the previous row</span>
+      } <span class = "keyword">else</span> {
+        queens[k] = j;
+        k++;
+      }
+    }
+    
+    <span class = "keyword">if</span> (k == <span class = "literal">-</span><span class = "constant">1</span>)
+      <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// No solution</span>
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// A solution is found</span>
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">int</span> findPosition(<span class = "keyword">int</span> k) {
+    <span class = "keyword">int</span> start = queens[k] + <span class = "constant">1</span>; <span class = "comment">// Search for a new placement</span>
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> j = start; j &lt; SIZE; j++) {
+      <span class = "keyword">if</span> (isValid(k, j))
+        <span class = "keyword">return</span> j; <span class = "comment">// (k, j) is the place to put the queen now</span>
+    }
+
+    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+  }
+  
+  <span class = "comment">/** Return true if a queen can be placed at (row, column) */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isValid(<span class = "keyword">int</span> row, <span class = "keyword">int</span> column) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= row; i++)
+      <span class = "keyword">if</span> (queens[row - i] == column <span class = "comment">// Check column</span>
+        || queens[row - i] == column - i <span class = "comment">// Check upleft diagonal</span>
+        || queens[row - i] == column + i) <span class = "comment">// Check upright diagonal</span>
+        <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// There is a conflict</span>
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// No conflict</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

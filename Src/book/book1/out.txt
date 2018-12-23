@@ -1,0 +1,4 @@
+Enter an integer: You entered the integer 5
+Enter a double value: You entered the double value 23.55
+Enter a string without space: You entered the string Java
+Enter a boolean: You entered the boolean true

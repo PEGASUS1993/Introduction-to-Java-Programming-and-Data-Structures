@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Loan.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Loan.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Loan {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">double</span> annualInterestRate;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> numberOfYears;
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">double</span> loanAmount;
+  5&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.Date loanDate;
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  <span class = "comment">/** Default constructor */</span>
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> Loan() {
+  9&nbsp;&nbsp;    <span class = "keyword">this</span>(<span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">1</span>, <span class = "constant">1000</span>);
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  <span class = "comment">/** Construct a loan with specified annual interest rate,
+ 13&nbsp;&nbsp;      number of years, and loan amount
+ 14&nbsp;&nbsp;    */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> Loan(<span class = "keyword">double</span> annualInterestRate, <span class = "keyword">int</span> numberOfYears,
+ 16&nbsp;&nbsp;      <span class = "keyword">double</span> loanAmount) {
+ 17&nbsp;&nbsp;    <span class = "keyword">this</span>.annualInterestRate = annualInterestRate;
+ 18&nbsp;&nbsp;    <span class = "keyword">this</span>.numberOfYears = numberOfYears;
+ 19&nbsp;&nbsp;    <span class = "keyword">this</span>.loanAmount = loanAmount;
+ 20&nbsp;&nbsp;    loanDate = <span class = "keyword">new</span> java.util.Date();
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;  <span class = "comment">/** Return annualInterestRate */</span>
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> getAnnualInterestRate() {
+ 25&nbsp;&nbsp;    <span class = "keyword">return</span> annualInterestRate;
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  <span class = "comment">/** Set a new annualInterestRate */</span>
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setAnnualInterestRate(<span class = "keyword">double</span> annualInterestRate) {
+ 30&nbsp;&nbsp;    <span class = "keyword">this</span>.annualInterestRate = annualInterestRate;
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;  <span class = "comment">/** Return numberOfYears */</span>
+ 34&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumberOfYears() {
+ 35&nbsp;&nbsp;    <span class = "keyword">return</span> numberOfYears;
+ 36&nbsp;&nbsp;  }
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  <span class = "comment">/** Set a new numberOfYears */</span>
+ 39&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setNumberOfYears(<span class = "keyword">int</span> numberOfYears) {
+ 40&nbsp;&nbsp;    <span class = "keyword">this</span>.numberOfYears = numberOfYears;
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;
+ 43&nbsp;&nbsp;  <span class = "comment">/** Return loanAmount */</span>
+ 44&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> getLoanAmount() {
+ 45&nbsp;&nbsp;    <span class = "keyword">return</span> loanAmount;
+ 46&nbsp;&nbsp;  }
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;  <span class = "comment">/** Set a newloanAmount */</span>
+ 49&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setLoanAmount(<span class = "keyword">double</span> loanAmount) {
+ 50&nbsp;&nbsp;    <span class = "keyword">this</span>.loanAmount = loanAmount;
+ 51&nbsp;&nbsp;  }
+ 52&nbsp;&nbsp;
+ 53&nbsp;&nbsp;  <span class = "comment">/** Find monthly payment */</span>
+ 54&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> getMonthlyPayment() {
+ 55&nbsp;&nbsp;    <span class = "keyword">double</span> monthlyInterestRate = annualInterestRate / <span class = "constant">1200</span>;
+ 56&nbsp;&nbsp;    <span class = "keyword">double</span> monthlyPayment = loanAmount * monthlyInterestRate / (<span class = "constant">1</span> -
+ 57&nbsp;&nbsp;      (<span class = "constant">1</span> / Math.pow(<span class = "constant">1</span> + monthlyInterestRate, numberOfYears * <span class = "constant">12</span>)));
+ 58&nbsp;&nbsp;    <span class = "keyword">return</span> monthlyPayment;    
+ 59&nbsp;&nbsp;  }
+ 60&nbsp;&nbsp;
+ 61&nbsp;&nbsp;  <span class = "comment">/** Find total payment */</span>
+ 62&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> getTotalPayment() {
+ 63&nbsp;&nbsp;    <span class = "keyword">double</span> totalPayment = getMonthlyPayment() * numberOfYears * <span class = "constant">12</span>;
+ 64&nbsp;&nbsp;    <span class = "keyword">return</span> totalPayment;    
+ 65&nbsp;&nbsp;  }
+ 66&nbsp;&nbsp;
+ 67&nbsp;&nbsp;  <span class = "comment">/** Return loan date */</span>
+ 68&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Date getLoanDate() {
+ 69&nbsp;&nbsp;    <span class = "keyword">return</span> loanDate;
+ 70&nbsp;&nbsp;  }
+ 71&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

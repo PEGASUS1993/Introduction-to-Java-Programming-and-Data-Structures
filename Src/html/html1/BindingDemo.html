@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BindingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BindingDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "BindingDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.beans.property.DoubleProperty;
+<span class = "keyword">import</span> javafx.beans.property.SimpleDoubleProperty;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> BindingDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {       
+    DoubleProperty d1 = <span class = "keyword">new</span> SimpleDoubleProperty(<span class = "constant">1</span>);
+    DoubleProperty d2 = <span class = "keyword">new</span> SimpleDoubleProperty(<span class = "constant">2</span>);
+    d1.bind(d2); <span class = "comment">// Bind d1 with d2</span>
+    System.out.println(<span class = "literal">"d1 is "</span> + d1.getValue() 
+      + <span class = "literal">" and d2 is "</span> + d2.getValue());
+    d2.setValue(<span class = "constant">70</span><span class = "literal">.</span><span class = "constant">2</span>);
+    System.out.println(<span class = "literal">"d1 is "</span> + d1.getValue() 
+      + <span class = "literal">" and d2 is "</span> + d2.getValue());
+  }
+}
+</pre>
+</body>
+</html>

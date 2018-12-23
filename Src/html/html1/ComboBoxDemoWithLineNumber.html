@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComboBoxDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ComboBoxDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.collections.FXCollections;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.collections.ObservableList;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ComboBoxDemo <span class = "keyword">extends</span> Application {
+ 12&nbsp;&nbsp;  <span class = "comment">// Declare an array of Strings for flag titles</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">private</span> String[] flagTitles = {<span class = "literal">"Canada"</span>, <span class = "literal">"China"</span>, <span class = "literal">"Denmark"</span>, 
+ 14&nbsp;&nbsp;    <span class = "literal">"France"</span>, <span class = "literal">"Germany"</span>, <span class = "literal">"India"</span>, <span class = "literal">"Norway"</span>, <span class = "literal">"United Kingdom"</span>,
+ 15&nbsp;&nbsp;    <span class = "literal">"United States of America"</span>};
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "comment">// Declare an ImageView array for the national flags of 9 countries</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">private</span> ImageView[] flagImage = {<span class = "keyword">new</span> ImageView(<span class = "literal">"image/ca.gif"</span>),
+ 19&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/china.gif"</span>), 
+ 20&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/denmark.gif"</span>), 
+ 21&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/fr.gif"</span>), 
+ 22&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/germany.gif"</span>),
+ 23&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/india.gif"</span>), 
+ 24&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/norway.gif"</span>),
+ 25&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/uk.gif"</span>), <span class = "keyword">new</span> ImageView(<span class = "literal">"image/us.gif"</span>)};
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;  <span class = "comment">// Declare an array of strings for flag descriptions</span>
+ 28&nbsp;&nbsp;  <span class = "keyword">private</span> String[] flagDescription = <span class = "keyword">new</span> String[<span class = "constant">9</span>];
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;  <span class = "comment">// Declare and create a description pane</span>
+ 31&nbsp;&nbsp;  <span class = "keyword">private</span> DescriptionPane descriptionPane = <span class = "keyword">new</span> DescriptionPane();
+ 32&nbsp;&nbsp;
+ 33&nbsp;&nbsp;  <span class = "comment">// Create a combo box for selecting countries</span>
+ 34&nbsp;&nbsp;  <span class = "keyword">private</span> ComboBox&lt;String&gt; cbo = <span class = "keyword">new</span> ComboBox&lt;&gt;(); <span class = "comment">// flagTitles</span>
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 38&nbsp;&nbsp;    <span class = "comment">// Set text description</span>
+ 39&nbsp;&nbsp;    flagDescription[<span class = "constant">0</span>] = <span class = "literal">"The Canadian national flag ..."</span>;
+ 40&nbsp;&nbsp;    flagDescription[<span class = "constant">1</span>] = <span class = "literal">"Description for China ... "</span>;
+ 41&nbsp;&nbsp;    flagDescription[<span class = "constant">2</span>] = <span class = "literal">"Description for Denmark ... "</span>;
+ 42&nbsp;&nbsp;    flagDescription[<span class = "constant">3</span>] = <span class = "literal">"Description for France ... "</span>;
+ 43&nbsp;&nbsp;    flagDescription[<span class = "constant">4</span>] = <span class = "literal">"Description for Germany ... "</span>;
+ 44&nbsp;&nbsp;    flagDescription[<span class = "constant">5</span>] = <span class = "literal">"Description for India ... "</span>;
+ 45&nbsp;&nbsp;    flagDescription[<span class = "constant">6</span>] = <span class = "literal">"Description for Norway ... "</span>;
+ 46&nbsp;&nbsp;    flagDescription[<span class = "constant">7</span>] = <span class = "literal">"Description for UK ... "</span>;
+ 47&nbsp;&nbsp;    flagDescription[<span class = "constant">8</span>] = <span class = "literal">"Description for US ... "</span>;
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;    <span class = "comment">// Set the first country (Canada) for display</span>
+ 50&nbsp;&nbsp;    setDisplay(<span class = "constant">0</span>);
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;    <span class = "comment">// Add combo box and description pane to the border pane</span>
+ 53&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+ 54&nbsp;&nbsp;      
+ 55&nbsp;&nbsp;    BorderPane paneForComboBox = <span class = "keyword">new</span> BorderPane();
+ 56&nbsp;&nbsp;    paneForComboBox.setLeft(<span class = "keyword">new</span> Label(<span class = "literal">"Select a country: "</span>));
+ 57&nbsp;&nbsp;    paneForComboBox.setCenter(cbo);
+ 58&nbsp;&nbsp;    pane.setTop(paneForComboBox);
+ 59&nbsp;&nbsp;    cbo.setPrefWidth(<span class = "constant">400</span>);
+ 60&nbsp;&nbsp;    cbo.setValue(<span class = "literal">"Canada"</span>);
+ 61&nbsp;&nbsp;    
+ 62&nbsp;&nbsp;    ObservableList&lt;String&gt; items = 
+ 63&nbsp;&nbsp;      FXCollections.observableArrayList(flagTitles);
+ 64&nbsp;&nbsp;    cbo.getItems().addAll(items); 
+ 65&nbsp;&nbsp;    pane.setCenter(descriptionPane);
+ 66&nbsp;&nbsp;    
+ 67&nbsp;&nbsp;    <span class = "comment">// Display the selected country</span>
+ 68&nbsp;&nbsp;    cbo.setOnAction(e -&gt; setDisplay(items.indexOf(cbo.getValue())));
+ 69&nbsp;&nbsp;    
+ 70&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 71&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+ 72&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ComboBoxDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 73&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 74&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 75&nbsp;&nbsp;  }
+ 76&nbsp;&nbsp;
+ 77&nbsp;&nbsp;  <span class = "comment">/** Set display information on the description pane */</span>
+ 78&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setDisplay(<span class = "keyword">int</span> index) {
+ 79&nbsp;&nbsp;    descriptionPane.setTitle(flagTitles[index]);
+ 80&nbsp;&nbsp;    descriptionPane.setImageView(flagImage[index]);
+ 81&nbsp;&nbsp;    descriptionPane.setDescription(flagDescription[index]);
+ 82&nbsp;&nbsp;  }
+ 83&nbsp;&nbsp;
+ 84&nbsp;&nbsp;  <span class = "comment">/**
+ 85&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 86&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 87&nbsp;&nbsp;   */</span>
+ 88&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 89&nbsp;&nbsp;    launch(args);
+ 90&nbsp;&nbsp;  }
+ 91&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

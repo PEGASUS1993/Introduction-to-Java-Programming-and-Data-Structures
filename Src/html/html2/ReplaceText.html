@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ReplaceText.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ReplaceTextWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ReplaceText" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ReplaceText {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+    <span class = "comment">// Check command line parameter usage</span>
+    <span class = "keyword">if</span> (args.length != <span class = "constant">4</span>) {
+      System.out.println(
+        <span class = "literal">"Usage: java ReplaceText sourceFile targetFile oldStr newStr"</span>);
+      System.exit(<span class = "constant">1</span>);
+    }
+
+    <span class = "comment">// Check if source file exists</span>
+    File sourceFile = <span class = "keyword">new</span> File(args[<span class = "constant">0</span>]);
+    <span class = "keyword">if</span> (!sourceFile.exists()) {
+      System.out.println(<span class = "literal">"Source file "</span> + args[<span class = "constant">0</span>] + <span class = "literal">" does not exist"</span>);
+      System.exit(<span class = "constant">2</span>);
+    }
+
+    <span class = "comment">// Check if target file exists</span>
+    File targetFile = <span class = "keyword">new</span> File(args[<span class = "constant">1</span>]);
+    <span class = "keyword">if</span> (targetFile.exists()) {
+      System.out.println(<span class = "literal">"Target file "</span> + args[<span class = "constant">1</span>] + <span class = "literal">" already exists"</span>);
+      System.exit(<span class = "constant">3</span>);
+    }
+
+    <span class = "keyword">try</span> (
+      <span class = "comment">// Create input and output files</span>
+      Scanner input = <span class = "keyword">new</span> Scanner(sourceFile);
+      PrintWriter output = <span class = "keyword">new</span> PrintWriter(targetFile);
+    ) {        
+      <span class = "keyword">while</span> (input.hasNext()) {
+        String s1 = input.nextLine();
+        String s2 = s1.replaceAll(args[<span class = "constant">2</span>], args[<span class = "constant">3</span>]);
+        output.println(s2);
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StringMatchBoyerMoore.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StringMatchBoyerMooreWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "StringMatchBoyerMoore" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> StringMatchBoyerMoore {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    java.util.Scanner input = <span class = "keyword">new</span> java.util.Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a string text: "</span>);
+    String text = input.nextLine();
+    System.out.print(<span class = "literal">"Enter a string pattern: "</span>);
+    String pattern = input.nextLine();
+    
+    <span class = "keyword">int</span> index = match(text, pattern);
+    <span class = "keyword">if</span> (index &gt;= <span class = "constant">0</span>)
+      System.out.println(<span class = "literal">"matched at index "</span> + index);
+    <span class = "keyword">else</span>
+      System.out.println(<span class = "literal">"unmatched"</span>);   
+	}
+
+  <span class = "comment">// Return the index of the first match. -1 otherwise.</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> match(String text, String pattern) {
+    <span class = "keyword">int</span> i = pattern.length() - <span class = "constant">1</span>;
+    <span class = "keyword">while</span> (i &lt; text.length()) {
+      <span class = "keyword">int</span> k = i;
+      <span class = "keyword">int</span> j = pattern.length() - <span class = "constant">1</span>;
+      <span class = "keyword">while</span> (j &gt;= <span class = "constant">0</span>) {
+        <span class = "keyword">if</span> (text.charAt(k) == pattern.charAt(j)) {
+          k--; j--;
+        }
+        <span class = "keyword">else</span> {
+          <span class = "keyword">break</span>;
+        }
+      }
+    	
+      <span class = "keyword">if</span> (j &lt; <span class = "constant">0</span>)
+        <span class = "keyword">return</span> i - pattern.length() + <span class = "constant">1</span>; <span class = "comment">// A match found</span>
+    	
+      <span class = "keyword">int</span> u = findLastIndex(text.charAt(k), j - <span class = "constant">1</span>, pattern);
+      <span class = "keyword">if</span> (u &gt;= <span class = "constant">0</span>) { <span class = "comment">// text[k] is in the remaining part of the pattern</span>
+        i = k + pattern.length() - <span class = "constant">1</span> - u;
+      }
+      <span class = "keyword">else</span> { <span class = "comment">// text[k] is not in the remaining part of the pattern</span>
+        i = k + pattern.length();
+      }
+    }
+
+    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+  }
+	
+  <span class = "comment">// Return the index of the last element in pattern[0 .. j] </span>
+  <span class = "comment">// that matches ch. -1 otherwise.</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> findLastIndex(<span class = "keyword">char</span> ch, <span class = "keyword">int</span> j, String pattern) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> k = j; k &gt;= <span class = "constant">0</span>; k--) {
+      <span class = "keyword">if</span> (ch == pattern.charAt(k)) {
+        <span class = "keyword">return</span> k;
+      }
+    }
+    
+    <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+  }
+}
+</pre>
+</body>
+</html>

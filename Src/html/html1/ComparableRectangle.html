@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComparableRectangle.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ComparableRectangleWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComparableRectangle <span class = "keyword">extends</span> Rectangle 
+    <span class = "keyword">implements</span> Comparable&lt;ComparableRectangle&gt; {
+  <span class = "comment">/** Construct a ComparableRectangle with specified properties */</span>
+  <span class = "keyword">public</span> ComparableRectangle(<span class = "keyword">double</span> width, <span class = "keyword">double</span> height) {
+    <span class = "keyword">super</span>(width, height);
+  }
+
+  @Override <span class = "comment">// Implement the compareTo method defined in Comparable </span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(ComparableRectangle o) {
+    <span class = "keyword">if</span> (getArea() &gt; o.getArea())
+      <span class = "keyword">return</span> <span class = "constant">1</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (getArea() &lt; o.getArea())
+      <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "constant">0</span>;
+  }
+  
+  @Override <span class = "comment">// Implement the toString method in GeometricObject</span>
+  <span class = "keyword">public</span> String toString() {
+    <span class = "keyword">return</span> <span class = "literal">"Width: "</span> + getWidth() + <span class = "literal">" Height: "</span> + getHeight() +
+      <span class = "literal">" Area: "</span> + getArea();
+  }
+}
+</pre>
+</body>
+</html>

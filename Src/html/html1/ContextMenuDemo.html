@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ContextMenuDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ContextMenuDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.ContextMenu;
+<span class = "keyword">import</span> javafx.scene.control.MenuItem;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ContextMenuDemo <span class = "keyword">extends</span> Application {   
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    ContextMenu contextMenu = <span class = "keyword">new</span> ContextMenu();       
+    MenuItem menuItemNew = <span class = "keyword">new</span> MenuItem(<span class = "literal">"New"</span>,
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/new.gif"</span>));
+    MenuItem menuItemOpen = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Open"</span>,
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/open.gif"</span>));
+    MenuItem menuItemPrint = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Print"</span>,
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/print.gif"</span>));
+    MenuItem menuItemExit = <span class = "keyword">new</span> MenuItem(<span class = "literal">"Exit"</span>);
+    contextMenu.getItems().addAll(menuItemNew, menuItemOpen,
+      menuItemPrint, menuItemExit);
+   
+    Pane pane = <span class = "keyword">new</span> Pane();
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+    primaryStage.setTitle(<span class = "literal">"ContextMenuDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+    
+    pane.setOnMousePressed(
+      e -&gt; contextMenu.show(pane, e.getScreenX(), e.getScreenY()));
+    
+    menuItemNew.setOnAction(e -&gt; System.out.println(<span class = "literal">"New"</span>));
+    menuItemOpen.setOnAction(e -&gt; System.out.println(<span class = "literal">"Open"</span>));
+    menuItemPrint.setOnAction(e -&gt; System.out.println(<span class = "literal">"Print"</span>));
+    menuItemExit.setOnAction(e -&gt; System.exit(<span class = "constant">0</span>));
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   * line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

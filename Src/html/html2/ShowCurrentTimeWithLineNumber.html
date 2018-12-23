@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowCurrentTime.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowCurrentTime.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ShowCurrentTime" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ShowCurrentTime {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "comment">// Obtain the total milliseconds since midnight, Jan 1, 1970</span>
+  4&nbsp;&nbsp;    <span class = "keyword">long</span> totalMilliseconds = System.currentTimeMillis();
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;    <span class = "comment">// Obtain the total seconds since midnight, Jan 1, 1970</span>
+  7&nbsp;&nbsp;    <span class = "keyword">long</span> totalSeconds = totalMilliseconds / <span class = "constant">1000</span>;
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    <span class = "comment">// Compute the current second in the minute in the hour</span>
+ 10&nbsp;&nbsp;    <span class = "keyword">long</span> currentSecond = totalSeconds % <span class = "constant">60</span>;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "comment">// Obtain the total minutes</span>
+ 13&nbsp;&nbsp;    <span class = "keyword">long</span> totalMinutes = totalSeconds / <span class = "constant">60</span>;
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    <span class = "comment">// Compute the current minute in the hour</span>
+ 16&nbsp;&nbsp;    <span class = "keyword">long</span> currentMinute = totalMinutes % <span class = "constant">60</span>;
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    <span class = "comment">// Obtain the total hours</span>
+ 19&nbsp;&nbsp;    <span class = "keyword">long</span> totalHours = totalMinutes / <span class = "constant">60</span>;
+ 20&nbsp;&nbsp;
+ 21&nbsp;&nbsp;    <span class = "comment">// Compute the current hour</span>
+ 22&nbsp;&nbsp;    <span class = "keyword">long</span> currentHour = totalHours % <span class = "constant">24</span>;
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;    <span class = "comment">// Display results</span>
+ 25&nbsp;&nbsp;    System.out.println(<span class = "literal">"Current time is "</span> + currentHour + <span class = "literal">":"</span>
+ 26&nbsp;&nbsp;      + currentMinute + <span class = "literal">":"</span> + currentSecond + <span class = "literal">" GMT"</span>);
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

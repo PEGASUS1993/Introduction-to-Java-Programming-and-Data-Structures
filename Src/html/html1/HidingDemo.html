@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - HidingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "HidingDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "HidingDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> HidingDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    A x = <span class = "keyword">new</span> B();
+
+    <span class = "comment">// Access instance data field i</span>
+    System.out.println(<span class = "literal">"(1) x.i is "</span> + x.i);
+    System.out.println(<span class = "literal">"(2) (B)x.i is "</span> + ((B)x).i);
+
+    <span class = "comment">// Access static data field j</span>
+    System.out.println(<span class = "literal">"(3) x.j is "</span> + x.j);
+    System.out.println(<span class = "literal">"(4) ((B)x).j is "</span> + ((B)x).j);
+
+    <span class = "comment">// Invoke static method m1</span>
+    System.out.println(<span class = "literal">"(5) x.m1() is "</span> + x.m1());
+    System.out.println(<span class = "literal">"(6) ((B)x).m1() is "</span> + ((B)x).m1());
+
+    <span class = "comment">// Invoke instance method m2</span>
+    System.out.println(<span class = "literal">"(7) x.m2() is "</span> + x.m2());
+    System.out.println(<span class = "literal">"(8) x.m3() is "</span> + x.m3());
+  }
+}
+
+<span class = "keyword">class</span> A {
+  <span class = "keyword">public</span> <span class = "keyword">int</span> i = <span class = "constant">1</span>;
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> j = <span class = "constant">11</span>;
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String m1() {
+    <span class = "keyword">return</span> <span class = "literal">"A's static m1"</span>;
+  }
+
+  <span class = "keyword">public</span> String m2() {
+    <span class = "keyword">return</span> <span class = "literal">"A's instance m2"</span>;
+  }
+
+  <span class = "keyword">public</span> String m3() {
+    <span class = "keyword">return</span> <span class = "literal">"A's instance m3"</span>;
+  }
+}
+
+<span class = "keyword">class</span> B <span class = "keyword">extends</span> A {
+  <span class = "keyword">public</span> <span class = "keyword">int</span> i = <span class = "constant">2</span>;
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> j = <span class = "constant">12</span>;
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> String m1() {
+    <span class = "keyword">return</span> <span class = "literal">"B's static m1"</span>;
+  }
+
+  <span class = "keyword">public</span> String m2() {
+    <span class = "keyword">return</span> <span class = "literal">"B's instance m2"</span>;
+  }
+}
+</pre>
+</body>
+</html>

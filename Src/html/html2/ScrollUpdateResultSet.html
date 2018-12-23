@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ScrollUpdateResultSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ScrollUpdateResultSetWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ScrollUpdateResultSet" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ScrollUpdateResultSet {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args)
+      <span class = "keyword">throws</span> SQLException, ClassNotFoundException {
+    <span class = "comment">// Load the JDBC driver</span>
+    Class.forName(<span class = "literal">"oracle.jdbc.driver.OracleDriver"</span>);
+    System.out.println(<span class = "literal">"Driver loaded"</span>);
+    
+    <span class = "comment">// Connect to a database</span>
+    Connection connection = DriverManager.getConnection
+      (<span class = "literal">"jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl"</span>, 
+       <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+    connection.setAutoCommit(<span class = "keyword">true</span>);
+    System.out.println(<span class = "literal">"Database connected"</span>);
+
+    <span class = "comment">// Get a new statement for the current connection</span>
+    Statement statement = connection.createStatement(
+      ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    
+    <span class = "comment">// Get ResultSet</span>
+    ResultSet resultSet = statement.executeQuery
+      (<span class = "literal">"select state, capital from StateCapital"</span>);
+
+    System.out.println(<span class = "literal">"Before update "</span>);
+    displayResultSet(resultSet);
+
+    <span class = "comment">// Update the second row</span>
+    resultSet.absolute(<span class = "constant">2</span>); <span class = "comment">// Move cursor to the second row    </span>
+    resultSet.updateString(<span class = "literal">"state"</span>, <span class = "literal">"New S"</span>); <span class = "comment">// Update the column</span>
+    resultSet.updateString(<span class = "literal">"capital"</span>, <span class = "literal">"New C"</span>); <span class = "comment">// Update the column</span>
+    resultSet.updateRow(); <span class = "comment">// Update the row in the data source</span>
+
+    <span class = "comment">// Insert after the last row</span>
+    resultSet.last();
+    resultSet.moveToInsertRow(); <span class = "comment">// Move cursor to the insert row</span>
+    resultSet.updateString(<span class = "literal">"state"</span>, <span class = "literal">"Florida"</span>); 
+    resultSet.updateString(<span class = "literal">"capital"</span>, <span class = "literal">"Tallahassee"</span>); 
+    resultSet.insertRow(); <span class = "comment">// Insert the row</span>
+    resultSet.moveToCurrentRow(); <span class = "comment">// Move the cursor to the current row    </span>
+
+    <span class = "comment">// Delete fourth row</span>
+    resultSet.absolute(<span class = "constant">4</span>); <span class = "comment">// Move cursor to the 5th row</span>
+    resultSet.deleteRow(); <span class = "comment">// Delete the second row</span>
+
+    System.out.println(<span class = "literal">"After update "</span>);
+    resultSet = statement.executeQuery
+      (<span class = "literal">"select state, capital from StateCapital"</span>);
+    displayResultSet(resultSet);
+
+    <span class = "comment">// Close the connection</span>
+    resultSet.close();
+  }
+  
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> displayResultSet(ResultSet resultSet) 
+      <span class = "keyword">throws</span> SQLException {
+    ResultSetMetaData rsMetaData = resultSet.getMetaData();
+    resultSet.beforeFirst();
+    <span class = "keyword">while</span> (resultSet.next()) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= rsMetaData.getColumnCount(); i++)
+        System.out.printf(<span class = "literal">"%<span class = "literal">-</span>12s\t"</span>, resultSet.getObject(i));
+      System.out.println();
+    }
+  }
+} 
+</pre>
+</body>
+</html>

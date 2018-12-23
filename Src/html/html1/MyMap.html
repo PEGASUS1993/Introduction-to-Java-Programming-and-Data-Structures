@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyMapWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">interface</span> MyMap&lt;K, V&gt; {
+  <span class = "comment">/** Remove all of the entries from this map */</span> 
+  <span class = "keyword">public</span> <span class = "keyword">void</span> clear();
+  
+  <span class = "comment">/** Return true if the specified key is in the map */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsKey(K key);
+  
+  <span class = "comment">/** Return true if this map contains the specified value */</span> 
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsValue(V value);
+
+  <span class = "comment">/** Return a set of entries in the map */</span>
+  <span class = "keyword">public</span> java.util.Set&lt;Entry&lt;K, V&gt;&gt; entrySet();
+
+  <span class = "comment">/** Return the first value that matches the specified key */</span>
+  <span class = "keyword">public</span> V get(K key);
+  
+  <span class = "comment">/** Return true if this map contains no entries */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty();
+
+  <span class = "comment">/** Return a set consisting of the keys in this map */</span>
+  <span class = "keyword">public</span> java.util.Set&lt;K&gt; keySet();
+  
+  <span class = "comment">/** Add an entry (key, value) into the map */</span>
+  <span class = "keyword">public</span> V put(K key, V value);
+
+  <span class = "comment">/** Remove the entries for the specified key */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> remove(K key);
+
+  <span class = "comment">/** Return the number of mappings in this map */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> size();
+
+  <span class = "comment">/** Return a set consisting of the values in this map */</span>
+  <span class = "keyword">public</span> java.util.Set&lt;V&gt; values();
+  
+  <span class = "comment">/** Define inner class for Entry */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Entry&lt;K, V&gt; {
+    K key;
+    V value;
+    
+    <span class = "keyword">public</span> Entry(K key, V value) {
+      <span class = "keyword">this</span>.key = key;
+      <span class = "keyword">this</span>.value = value;
+    }
+    
+    <span class = "keyword">public</span> K getKey() {
+      <span class = "keyword">return</span> key;
+    }
+    
+    <span class = "keyword">public</span> V getValue() {
+      <span class = "keyword">return</span> value;
+    }
+    
+    @Override
+    <span class = "keyword">public</span> String toString() {
+      <span class = "keyword">return</span> <span class = "literal">"["</span> + key + <span class = "literal">", "</span> + value + <span class = "literal">"]"</span>;
+    }
+  }
+}    
+</pre>
+</body>
+</html>

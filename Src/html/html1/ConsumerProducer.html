@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ConsumerProducer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ConsumerProducerWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ConsumerProducer" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.concurrent.*;
+<span class = "keyword">import</span> java.util.concurrent.locks.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ConsumerProducer {
+  <span class = "keyword">private</span> <span class = "keyword">static</span> Buffer buffer = <span class = "keyword">new</span> Buffer();
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a thread pool with two threads</span>
+    ExecutorService executor = Executors.newFixedThreadPool(<span class = "constant">2</span>);
+    executor.execute(<span class = "keyword">new</span> ProducerTask());
+    executor.execute(<span class = "keyword">new</span> ConsumerTask());
+    executor.shutdown();
+  }
+
+  <span class = "comment">// A task for adding an int to the buffer</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">class</span> ProducerTask <span class = "keyword">implements</span> Runnable {
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      <span class = "keyword">try</span> {
+        <span class = "keyword">int</span> i = <span class = "constant">1</span>;
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          System.out.println(<span class = "literal">"Producer writes "</span> + i);
+          buffer.write(i++); <span class = "comment">// Add a value to the buffer</span>
+          <span class = "comment">// Put the thread into sleep</span>
+          Thread.sleep((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10000</span>));
+        }
+      } 
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+
+  <span class = "comment">// A task for reading and deleting an int from the buffer</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">class</span> ConsumerTask <span class = "keyword">implements</span> Runnable {
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      <span class = "keyword">try</span> {
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          System.out.println(<span class = "literal">"\t\t\tConsumer reads "</span> + buffer.read());
+          <span class = "comment">// Put the thread into sleep</span>
+          Thread.sleep((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10000</span>));
+        }
+      } 
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+
+  <span class = "comment">// An inner class for buffer</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Buffer {
+    <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> CAPACITY = <span class = "constant">1</span>; <span class = "comment">// buffer size</span>
+    <span class = "keyword">private</span> java.util.LinkedList&lt;Integer&gt; queue =
+      <span class = "keyword">new</span> java.util.LinkedList&lt;&gt;();
+
+    <span class = "comment">// Create a new lock</span>
+    <span class = "keyword">private</span> <span class = "keyword">static</span> Lock lock = <span class = "keyword">new</span> ReentrantLock();
+
+    <span class = "comment">// Create two conditions</span>
+    <span class = "keyword">private</span> <span class = "keyword">static</span> Condition notEmpty = lock.newCondition();
+    <span class = "keyword">private</span> <span class = "keyword">static</span> Condition notFull = lock.newCondition();
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> write(<span class = "keyword">int</span> value) {
+      lock.lock(); <span class = "comment">// Acquire the lock</span>
+      <span class = "keyword">try</span> {
+        <span class = "keyword">while</span> (queue.size() == CAPACITY) {
+          System.out.println(<span class = "literal">"Wait for notFull condition"</span>);
+          notFull.await();
+        }
+
+        queue.offer(value);
+        notEmpty.signal(); <span class = "comment">// Signal notEmpty condition</span>
+      } 
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+        ex.printStackTrace();
+      } 
+      <span class = "keyword">finally</span> {
+        lock.unlock(); <span class = "comment">// Release the lock</span>
+      }
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">int</span> read() {
+      <span class = "keyword">int</span> value = <span class = "constant">0</span>;
+      lock.lock(); <span class = "comment">// Acquire the lock</span>
+      <span class = "keyword">try</span> {
+        <span class = "keyword">while</span> (queue.isEmpty()) {
+          System.out.println(<span class = "literal">"\t\t\tWait for notEmpty condition"</span>);
+          notEmpty.await();
+        }
+
+        value = queue.remove();
+        notFull.signal(); <span class = "comment">// Signal notFull condition</span>
+      } 
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+        ex.printStackTrace();
+      } 
+      <span class = "keyword">finally</span> {
+        lock.unlock(); <span class = "comment">// Release the lock</span>
+        <span class = "keyword">return</span> value;
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

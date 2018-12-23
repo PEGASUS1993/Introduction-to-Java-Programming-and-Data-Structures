@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CreateLargeFile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CreateLargeFile.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CreateLargeFile" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CreateLargeFile {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+  5&nbsp;&nbsp;    DataOutputStream output = <span class = "keyword">new</span> DataOutputStream(
+  6&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedOutputStream(
+  7&nbsp;&nbsp;      <span class = "keyword">new</span> FileOutputStream(<span class = "literal">"largedata.dat"</span>)));
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; 2_000_000; i++)
+ 10&nbsp;&nbsp;      output.writeInt((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">1000000</span>));
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    output.close();
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;    <span class = "comment">// Display first 100 numbers</span>
+ 15&nbsp;&nbsp;    DataInputStream input = <span class = "keyword">new</span> DataInputStream(
+ 16&nbsp;&nbsp;      <span class = "keyword">new</span> BufferedInputStream(<span class = "keyword">new</span> FileInputStream(<span class = "literal">"largedata.dat"</span>)));
+ 17&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">100</span>; i++)
+ 18&nbsp;&nbsp;      System.out.print(input.readInt() + <span class = "literal">" "</span>);
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;    input.close();
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

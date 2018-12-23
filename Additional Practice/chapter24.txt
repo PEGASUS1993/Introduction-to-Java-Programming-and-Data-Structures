@@ -1,0 +1,210 @@
+Chapter 24 Implementing Lists, Stacks, Queues, and Priority Queues
+
+Section 24.3 Array Lists
+1. ________ is a data structure to store data in sequential order. 
+a. A list
+b. A set
+c. A tree
+d. A stack
+e. A queue
+Key:a
+
+#
+2. Which of the following operations are supported by a list?
+a. Retrieve an element from this list.
+b. Insert a new element to this list.
+c. Delete an element from this list.
+d. Find how many elements are in this list.
+e. Find whether an element is in this list.
+Key:abcde
+
+#
+3. Which of the following statements are true?
+a. MyArrayList and MyLinkedList are two concrete implementations of MyList.
+b. MyArrayList is implemented using an array. The array is dynamically created. If the capacity of the array is exceeded, create a new larger array and copy all the elements from the current array to the new array. 
+c. MyLinkedList is implemented using a linked structure.
+d. A linked structure consists of nodes. Each node is dynamically created to hold an element. All the nodes are linked together to form a list. 
+e. MyAbstractList partially implements MyList.
+Key:abcde
+
+#
+4. In the implementation of MyArrayList, which of the following are true?
+a. size indicates the number of elements in the list.
+b. capacity is the length of the array used to store the elements in the list.
+c. capacity is always greater than size.
+d. size is reduced by 1 if an element is deleted from the list.
+e. capacity is reduced by 1 if an element is deleted from the list.
+Key:abd (C) is not correct because capacity may equal to size.
+
+#
+5. In the implementation of MyArrayList, which of the following are true?
+a. size never reduces.
+b. capacity never reduces.
+c. Inside MyArrayList, a regular array is used to store elements.
+d. size is not declared in MyArrayList, but declared in MyAbstractList as protected.
+e. If the current capacity equals to size, capacity is doubled when a new element is added to MyArrayList 
+Key:bcde
+
+#
+Section 24.4 Linked Lists
+6. In the implementation of MyLinkedList, which of the following are true?
+a. MyLinkedList contains all the methods defined in MyList. Additionally, MyLinkedList defines several new methods that are appropriate for processing a linked list.
+b. MyArrayList does not introduce new methods. All the methods in MyArrayList are defined in MyList. 
+c. You can use a linked list to improve efficiency for adding and removing an element anywhere in a list.
+d. You should use an array list if your application does not require adding and removing an element anywhere in a list. 
+Key:abcd
+
+#
+7. In the implementation of MyLinkedList, which of the following are true?
+a. Node is defined as an inner class inside MyLinkedList.
+b. Node is defined as a static inner class inside MyLinkedList because it does not reference any instance data fields in MyLinkedList.
+c. Node has a property named next that links to the node after this node.
+d. Node has a property named element that stores an element.
+Key:abcd
+
+#
+8. In the implementation of MyLinkedList, which of the following are true?
+a. MyLinkedList has a capacity property.
+b. MyLinkedList has the properties named first and last to point to the nodes in a linked list.
+c. If a linked list is empty, first is null and last is null.
+d. If a linked list contains one element, first points to the node and last is null.
+e. last.next is always null.
+Key:bce (D) is partially wrong, last and first points to the same node if a linked list contains one node.
+
+#
+9. ArrayList is more efficient than LinkedList for the following operations:
+a. Insert/delete an element in the middle of the list.
+b. Insert/delete an element in the beginning of the list.
+c. Insert/delete an element at the end of the list.
+d. Retrieve an element given the index.
+Key:d 
+
+#
+10. LinkedList is more efficient than ArrayList for the following operations:
+a. Insert/delete an element in the middle of the list.
+b. Insert/delete an element in the beginning of the listc. Insert/delete an element at the end of the list.
+d. Retrieve an element given the index.
+Key:ab 
+
+#
+11. Suppose list1 is an MyArrayList and list2 is a MyLinkedList. Both contains 1 million double values. Analyze the following code:
+
+A:
+while (list1.size() > 0)
+  list1.remove(0);
+
+B:
+while (list2.size() > 0)
+  list2.remove(0);
+
+a. Code fragment A runs faster than code fragment B.
+b. Code fragment B runs faster than code fragment A.
+c. Code fragment A runs as fast as code fragment B.
+Key:b
+
+#
+12. Suppose list1 is an MyArrayList and list2 is a MyLinkedList. Both contains 1 million double values. Analyze the following code:
+
+A:
+while (list1.size() > 0)
+  list1.remove(size() - 1);
+
+B:
+while (list2.size() > 0)
+  list2.remove(size() - 1);
+
+a. Code fragment A runs faster than code fragment B.
+b. Code fragment B runs faster than code fragment A.
+c. Code fragment A runs as fast as code fragment B.
+Key:c
+
+#
+13. Suppose list1 is an MyArrayList and list2 is a MyLinkedList. Both contains 1 million double values. Analyze the following code:
+
+A:
+for (int i = 0; i < 100000; i++)
+  list1.add(0, i);
+
+B:
+for (int i = 0; i < 100000; i++)
+  list2.add(0, i);
+
+a. Code fragment A runs faster than code fragment B.
+b. Code fragment B runs faster than code fragment A.
+c. Code fragment A runs as fast as code fragment B.
+Key:b
+
+#
+14. Suppose list1 is an MyArrayList and list2 is a MyLinkedList. Both contains 1 million double values. Analyze the following code:
+
+A:
+for (int i = 0; i < 100000; i++)
+  list1.add(i);
+
+B:
+for (int i = 0; i < 100000; i++)
+  list2.add(i);
+
+a. Code fragment A runs faster than code fragment B.
+b. Code fragment B runs faster than code fragment A.
+c. Code fragment A runs as fast as code fragment B.
+Key:c
+
+#
+15. Suppose list1 is a MyArrayList and list2 is a MyLinkedList. Both contains 1 million double values. Analyze the following code:
+
+A:
+for (int i = 0; i < list1.size(); i++)
+  sum += list1.get(i);
+
+B:
+for (int i = 0; i < list2.size(); i++)
+  sum += list2.get(i);
+
+a. Code fragment A is more efficient that code fragment B.
+b. Code fragment B is more efficient that code fragment A.
+c. Code fragment A is as efficient as code fragment B.
+Key:a
+
+#
+Section 24.5 Stacks and Queues
+16. Which of the following are true?
+a. A stack can be viewed as a special type of list, where the elements are accessed, inserted, and deleted only from the end, called the top, of the stack.
+b. A queue represents a waiting list. A queue can be viewed as a special type of list, where the elements are inserted into the end (tail) of the queue, and are accessed and deleted from the beginning (head) of the queue. 
+c. Since the insertion and deletion operations on a stack are made only at the end of the stack, using an array list to implement a stack is more efficient than a linked list. 
+d. Since deletions are made at the beginning of the list, it is more efficient to implement a queue using a linked list than an array list.
+Key:abcd
+
+#
+17. In the implementation of MyStack and MyQueue, which of the following are true?
+a. MyStack contains all the methods defined in MyArrayList.
+b. MyQueue contains all the methods defined in MyLinkedList.
+c. MyStack contains an array list for storing elements.
+d. MyQueue contains a linked list for storing elements.
+Key:cd
+
+#
+Section 24.6 Priority Queues
+18. Which data structure is appropriate to store patients in an emergency room?
+a. Stack
+b. Queue
+c. Priority Queue
+d. Linked List
+Key:c
+
+#
+19. Which data structure is appropriate to store customers in a clinic for taking flu shots?
+a. Stack
+b. Queue
+c. Priority Queue
+d. Array List
+e. Linked List
+Key:b
+
+#
+20. Suppose the rule of the party is that the participants who arrive later will leave earlier. Which data structure is appropriate to store the participants?
+a. Stack
+b. Queue
+c. Array List
+d. Linked List
+Key:a

@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Figure9_1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Figure9_1WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.*;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Figure9_1 <span class = "keyword">extends</span> Application { 
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">8</span>);
+    hBox.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>));
+    
+    ComboBox&lt;String&gt; cb = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+    cb.getItems().addAll(<span class = "literal">"Freshman"</span>, <span class = "literal">"Sophmore"</span>);
+    
+    TextField tf = <span class = "keyword">new</span> TextField();
+    tf.setPrefColumnCount(<span class = "constant">9</span>);
+    
+    hBox.getChildren().addAll(<span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>), <span class = "keyword">new</span> Button(<span class = "literal">"Cancel"</span>), 
+        <span class = "keyword">new</span> Label(<span class = "literal">"Enter Your Name:"</span>), tf, <span class = "keyword">new</span> CheckBox(<span class = "literal">"Bold"</span>),
+        <span class = "keyword">new</span> CheckBox(<span class = "literal">"Italic"</span>), <span class = "keyword">new</span> RadioButton(<span class = "literal">"Red"</span>), <span class = "keyword">new</span> RadioButton(<span class = "literal">"Yellow"</span>),
+        cb);
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(hBox, <span class = "constant">650</span>, <span class = "constant">100</span>);
+    primaryStage.setTitle(<span class = "literal">"Show GUI"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

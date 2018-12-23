@@ -1,0 +1,54 @@
+Chapter 42 2-4 Trees and B-Trees
+
+1. Which of the following statements are correct?
+a. All leaf nodes are on the same level in a 2-4 tree.
+b. In a 2-4 tree, a node may have one, two, or three elements. 
+c. An interior 2-node contains one element and two children.
+d. An interior 3-node contains two elements and three children. 
+e. An interior 4-node contains three elements and four children. 
+Key:abcde
+
+#
+2. How many elements can a root of a 2-4 tree have?
+a. 0
+b. 1 
+c. 2
+d. 3
+e. 4
+Key:bcd
+
+#
+3. How many elements can an interior node of a 2-4 tree have?
+a. 0
+b. 1 
+c. 2
+d. 3
+e. 4
+Key:bcd
+
+#
+4. How many elements can a leaf node of a 2-4 tree have?
+a. 0
+b. 1 
+c. 2
+d. 3
+e. 4
+Key:bcd
+
+#
+5. In a B-tree of order 6, how many elements can the root have?
+a. 0
+b. 1 
+c. 2
+d. 5
+e. 6
+Key:bcd
+
+#
+6. In a B-tree of order 6, how many elements can a non-root have?
+a. 0
+b. 3 
+c. 4
+d. 5
+e. 6
+Key:bcd

@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Name.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "NameWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">final</span> <span class = "keyword">class</span> Name <span class = "keyword">implements</span> Comparable {
+  <span class = "keyword">private</span> String firstName;
+  <span class = "keyword">private</span> <span class = "keyword">char</span> mi;
+  <span class = "keyword">private</span> String lastName;
+
+  <span class = "comment">/** Construct a name with firstName, mi, and lastName */</span>
+  <span class = "keyword">public</span> Name(String firstName, <span class = "keyword">char</span> mi, String lastName) {
+    <span class = "keyword">this</span>.firstName = firstName;
+    <span class = "keyword">this</span>.mi = mi;
+    <span class = "keyword">this</span>.lastName = lastName;
+  }
+
+  <span class = "comment">/** Return firstName */</span>
+  <span class = "keyword">public</span> String getFirstName() {
+    <span class = "keyword">return</span> firstName;
+  }
+
+  <span class = "comment">/** Return middle name initial */</span>
+  <span class = "keyword">public</span> <span class = "keyword">char</span> getMi() {
+    <span class = "keyword">return</span> mi;
+  }
+
+  <span class = "comment">/** Return lastName */</span>
+  <span class = "keyword">public</span> String getLastname() {
+    <span class = "keyword">return</span> lastName;
+  }
+
+  <span class = "comment">/** Obtain full name */</span>
+  <span class = "keyword">public</span> String getFullName() {
+    <span class = "keyword">return</span> firstName + <span class = "literal">' '</span> + mi + <span class = "literal">' '</span> + lastName;
+  }
+
+  <span class = "comment">/** Implement compareTo in the Comparable interface */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(Object o) {
+    <span class = "keyword">if</span> (!lastName.equals(((Name)o).lastName)) {
+      <span class = "keyword">return</span> lastName.compareTo(((Name)o).lastName);
+    }
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (!firstName.equals(((Name)o).firstName)) {
+      <span class = "keyword">return</span> firstName.compareTo(((Name)o).firstName);
+    }
+    <span class = "keyword">else</span> {
+      <span class = "keyword">return</span> mi - ((Name)o).mi;
+    }
+  }
+}
+</pre>
+</body>
+</html>

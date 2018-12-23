@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ResourceBundleDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ResourceBundleDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.text.NumberFormat;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextField;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.VBox;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ResourceBundleDemo <span class = "keyword">extends</span> Application {
+ 16&nbsp;&nbsp;  <span class = "keyword">private</span> ResourceBundle res 
+ 17&nbsp;&nbsp;    = ResourceBundle.getBundle(<span class = "literal">"MyResource"</span>);
+ 18&nbsp;&nbsp;  
+ 19&nbsp;&nbsp;  <span class = "comment">// Create labels</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblInterestRate =
+ 21&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Annual_Interest_Rate"</span>));
+ 22&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblNumberOfYears =
+ 23&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Number_Of_Years"</span>));
+ 24&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblLoanAmount = 
+ 25&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Loan_Amount"</span>));
+ 26&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblMonthlyPayment =
+ 27&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Monthly_Payment"</span>));
+ 28&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblTotalPayment =
+ 29&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Total_Payment"</span>));
+ 30&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblPayment =
+ 31&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Payment"</span>));
+ 32&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblChooseALocale =
+ 33&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Choose_a_Locale"</span>));
+ 34&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblEnterInterestRate =
+ 35&nbsp;&nbsp;    <span class = "keyword">new</span> Label(res.getString(<span class = "literal">"Enter_Interest_Rate"</span>));
+ 36&nbsp;&nbsp;  
+ 37&nbsp;&nbsp;  <span class = "comment">// Combo box for selecting available locales</span>
+ 38&nbsp;&nbsp;  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboLocale = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+ 39&nbsp;&nbsp;
+ 40&nbsp;&nbsp;  <span class = "comment">// Text fields for interest rate, year, and loan amount</span>
+ 41&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfInterestRate = <span class = "keyword">new</span> TextField(<span class = "literal">"6<span class = "literal">.</span>75"</span>);
+ 42&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfNumberOfYears = <span class = "keyword">new</span> TextField(<span class = "literal">"15"</span>);
+ 43&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfLoanAmount = <span class = "keyword">new</span> TextField(<span class = "literal">"107000"</span>);
+ 44&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfFormattedInterestRate = <span class = "keyword">new</span> TextField();
+ 45&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfFormattedNumberOfYears = <span class = "keyword">new</span> TextField();
+ 46&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfFormattedLoanAmount = <span class = "keyword">new</span> TextField();
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;  <span class = "comment">// Text fields for monthly payment and total payment</span>
+ 49&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfTotalPayment = <span class = "keyword">new</span> TextField();
+ 50&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfMonthlyPayment = <span class = "keyword">new</span> TextField();
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;  <span class = "comment">// Compute button</span>
+ 53&nbsp;&nbsp;  <span class = "keyword">private</span> Button btCompute = <span class = "keyword">new</span> Button(<span class = "literal">"Compute"</span>);
+ 54&nbsp;&nbsp;
+ 55&nbsp;&nbsp;  <span class = "comment">// Current locale</span>
+ 56&nbsp;&nbsp;  <span class = "keyword">private</span> Locale locale = Locale.getDefault();
+ 57&nbsp;&nbsp;
+ 58&nbsp;&nbsp;  <span class = "comment">// Declare locales to store available locales</span>
+ 59&nbsp;&nbsp;  <span class = "keyword">private</span> Locale locales[] = Calendar.getAvailableLocales();
+ 60&nbsp;&nbsp;
+ 61&nbsp;&nbsp;  <span class = "comment">/** Initialize the combo box */</span>
+ 62&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> initializeComboBox() {
+ 63&nbsp;&nbsp;    <span class = "comment">// Add locale names to the combo box</span>
+ 64&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; locales.length; i++)
+ 65&nbsp;&nbsp;      cboLocale.getItems().add(locales[i].getDisplayName());
+ 66&nbsp;&nbsp;  }
+ 67&nbsp;&nbsp;
+ 68&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 69&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 70&nbsp;&nbsp;    initializeComboBox();
+ 71&nbsp;&nbsp;    
+ 72&nbsp;&nbsp;    <span class = "comment">// Pane to hold the combo box for selecting locales</span>
+ 73&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+ 74&nbsp;&nbsp;    hBox.getChildren().addAll(lblChooseALocale, cboLocale);
+ 75&nbsp;&nbsp;
+ 76&nbsp;&nbsp;    <span class = "comment">// Pane to hold the input</span>
+ 77&nbsp;&nbsp;    GridPane gridPane = <span class = "keyword">new</span> GridPane();
+ 78&nbsp;&nbsp;    gridPane.add(lblInterestRate, <span class = "constant">0</span>, <span class = "constant">0</span>);
+ 79&nbsp;&nbsp;    gridPane.add(tfInterestRate, <span class = "constant">1</span>, <span class = "constant">0</span>);
+ 80&nbsp;&nbsp;    gridPane.add(tfFormattedInterestRate, <span class = "constant">2</span>, <span class = "constant">0</span>);
+ 81&nbsp;&nbsp;    gridPane.add(lblNumberOfYears, <span class = "constant">0</span>, <span class = "constant">1</span>);
+ 82&nbsp;&nbsp;    gridPane.add(tfNumberOfYears, <span class = "constant">1</span>, <span class = "constant">1</span>);
+ 83&nbsp;&nbsp;    gridPane.add(tfFormattedNumberOfYears, <span class = "constant">2</span>, <span class = "constant">1</span>);
+ 84&nbsp;&nbsp;    gridPane.add(lblLoanAmount, <span class = "constant">0</span>, <span class = "constant">2</span>);
+ 85&nbsp;&nbsp;    gridPane.add(tfLoanAmount, <span class = "constant">1</span>, <span class = "constant">2</span>);
+ 86&nbsp;&nbsp;    gridPane.add(tfFormattedLoanAmount, <span class = "constant">2</span>, <span class = "constant">2</span>);
+ 87&nbsp;&nbsp;
+ 88&nbsp;&nbsp;    <span class = "comment">// Pane to hold the output</span>
+ 89&nbsp;&nbsp;    GridPane gridPaneOutput = <span class = "keyword">new</span> GridPane();
+ 90&nbsp;&nbsp;    gridPaneOutput.add(lblMonthlyPayment, <span class = "constant">0</span>, <span class = "constant">0</span>);
+ 91&nbsp;&nbsp;    gridPaneOutput.add(tfMonthlyPayment, <span class = "constant">1</span>, <span class = "constant">0</span>);
+ 92&nbsp;&nbsp;    gridPaneOutput.add(lblTotalPayment, <span class = "constant">0</span>, <span class = "constant">1</span>);
+ 93&nbsp;&nbsp;    gridPaneOutput.add(tfTotalPayment, <span class = "constant">1</span>, <span class = "constant">1</span>);
+ 94&nbsp;&nbsp;
+ 95&nbsp;&nbsp;    <span class = "comment">// Set text field alignment</span>
+ 96&nbsp;&nbsp;    tfFormattedInterestRate.setAlignment(Pos.BASELINE_RIGHT);
+ 97&nbsp;&nbsp;    tfFormattedNumberOfYears.setAlignment(Pos.BASELINE_RIGHT);
+ 98&nbsp;&nbsp;    tfFormattedLoanAmount.setAlignment(Pos.BASELINE_RIGHT);
+ 99&nbsp;&nbsp;    tfTotalPayment.setAlignment(Pos.BASELINE_RIGHT);
+100&nbsp;&nbsp;    tfMonthlyPayment.setAlignment(Pos.BASELINE_RIGHT);
+101&nbsp;&nbsp;
+102&nbsp;&nbsp;    <span class = "comment">// Set editable false</span>
+103&nbsp;&nbsp;    tfFormattedInterestRate.setEditable(<span class = "keyword">false</span>);
+104&nbsp;&nbsp;    tfFormattedNumberOfYears.setEditable(<span class = "keyword">false</span>);
+105&nbsp;&nbsp;    tfFormattedLoanAmount.setEditable(<span class = "keyword">false</span>);
+106&nbsp;&nbsp;    tfTotalPayment.setEditable(<span class = "keyword">false</span>);
+107&nbsp;&nbsp;    tfMonthlyPayment.setEditable(<span class = "keyword">false</span>);
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">5</span>);
+110&nbsp;&nbsp;    vBox.getChildren().addAll(hBox, lblEnterInterestRate, 
+111&nbsp;&nbsp;      gridPane, lblPayment, gridPaneOutput, btCompute);
+112&nbsp;&nbsp;
+113&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+114&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(vBox, <span class = "constant">400</span>, <span class = "constant">300</span>);
+115&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ResourceBundleDemo"</span>); <span class = "comment">// Set the stage title</span>
+116&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+117&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+118&nbsp;&nbsp;
+119&nbsp;&nbsp;    <span class = "comment">// Register listeners</span>
+120&nbsp;&nbsp;    cboLocale.setOnAction(e -&gt; {
+121&nbsp;&nbsp;      locale = locales[cboLocale
+122&nbsp;&nbsp;        .getSelectionModel().getSelectedIndex()];
+123&nbsp;&nbsp;      updateStrings();
+124&nbsp;&nbsp;      computeLoan();
+125&nbsp;&nbsp;    });
+126&nbsp;&nbsp;
+127&nbsp;&nbsp;    btCompute.setOnAction(e -&gt; computeLoan());
+128&nbsp;&nbsp;  }
+129&nbsp;&nbsp;
+130&nbsp;&nbsp;  <span class = "comment">/** Compute payments and display results locale-sensitive format */</span>
+131&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> computeLoan() {
+132&nbsp;&nbsp;    <span class = "comment">// Retrieve input from user</span>
+133&nbsp;&nbsp;    <span class = "keyword">double</span> loan = <span class = "keyword">new</span> Double(tfLoanAmount.getText()).doubleValue();
+134&nbsp;&nbsp;    <span class = "keyword">double</span> interestRate =
+135&nbsp;&nbsp;      <span class = "keyword">new</span> Double(tfInterestRate.getText()).doubleValue() / <span class = "constant">1240</span>;
+136&nbsp;&nbsp;    <span class = "keyword">int</span> numberOfYears =
+137&nbsp;&nbsp;      <span class = "keyword">new</span> Integer(tfNumberOfYears.getText()).intValue();
+138&nbsp;&nbsp;
+139&nbsp;&nbsp;    <span class = "comment">// Calculate payments</span>
+140&nbsp;&nbsp;    <span class = "keyword">double</span> monthlyPayment = loan * interestRate/
+141&nbsp;&nbsp;     (<span class = "constant">1</span> - (Math.pow(<span class = "constant">1</span> / (<span class = "constant">1</span> + interestRate), numberOfYears * <span class = "constant">12</span>)));
+142&nbsp;&nbsp;    <span class = "keyword">double</span> totalPayment = monthlyPayment * numberOfYears * <span class = "constant">12</span>;
+143&nbsp;&nbsp;
+144&nbsp;&nbsp;    <span class = "comment">// Get formatters</span>
+145&nbsp;&nbsp;    NumberFormat percentFormatter =
+146&nbsp;&nbsp;      NumberFormat.getPercentInstance(locale);
+147&nbsp;&nbsp;    NumberFormat currencyForm =
+148&nbsp;&nbsp;      NumberFormat.getCurrencyInstance(locale);
+149&nbsp;&nbsp;    NumberFormat numberForm = NumberFormat.getNumberInstance(locale);
+150&nbsp;&nbsp;    percentFormatter.setMinimumFractionDigits(<span class = "constant">2</span>);
+151&nbsp;&nbsp;
+152&nbsp;&nbsp;    <span class = "comment">// Display formatted input</span>
+153&nbsp;&nbsp;    tfFormattedInterestRate.setText(
+154&nbsp;&nbsp;      percentFormatter.format(interestRate * <span class = "constant">12</span>));
+155&nbsp;&nbsp;    tfFormattedNumberOfYears.setText
+156&nbsp;&nbsp;      (numberForm.format(numberOfYears));
+157&nbsp;&nbsp;    tfFormattedLoanAmount.setText(currencyForm.format(loan));
+158&nbsp;&nbsp;
+159&nbsp;&nbsp;    <span class = "comment">// Display results in currency format</span>
+160&nbsp;&nbsp;    tfMonthlyPayment.setText(currencyForm.format(monthlyPayment));
+161&nbsp;&nbsp;    tfTotalPayment.setText(currencyForm.format(totalPayment));
+162&nbsp;&nbsp;  }
+163&nbsp;&nbsp;
+164&nbsp;&nbsp;  <span class = "comment">/** Update resource strings */</span>
+165&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> updateStrings() {
+166&nbsp;&nbsp;    res = ResourceBundle.getBundle(<span class = "literal">"MyResource"</span>, locale);
+167&nbsp;&nbsp;    lblInterestRate.setText(res.getString(<span class = "literal">"Annual_Interest_Rate"</span>));
+168&nbsp;&nbsp;    lblNumberOfYears.setText(res.getString(<span class = "literal">"Number_Of_Years"</span>));
+169&nbsp;&nbsp;    lblLoanAmount.setText(res.getString(<span class = "literal">"Loan_Amount"</span>));
+170&nbsp;&nbsp;    lblTotalPayment.setText(res.getString(<span class = "literal">"Total_Payment"</span>));
+171&nbsp;&nbsp;    lblMonthlyPayment.setText(res.getString(<span class = "literal">"Monthly_Payment"</span>));
+172&nbsp;&nbsp;    btCompute.setText(res.getString(<span class = "literal">"Compute"</span>));
+173&nbsp;&nbsp;    lblChooseALocale.setText(res.getString(<span class = "literal">"Choose_a_Locale"</span>));
+174&nbsp;&nbsp;    lblEnterInterestRate.setText(
+175&nbsp;&nbsp;      res.getString(<span class = "literal">"Enter_Interest_Rate"</span>));
+176&nbsp;&nbsp;    lblPayment.setText(res.getString(<span class = "literal">"Payment"</span>));
+177&nbsp;&nbsp;  }
+178&nbsp;&nbsp;  
+179&nbsp;&nbsp;  <span class = "comment">/**
+180&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+181&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+182&nbsp;&nbsp;   */</span>
+183&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+184&nbsp;&nbsp;    launch(args);
+185&nbsp;&nbsp;  }
+186&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

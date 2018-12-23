@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MultipleStageDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MultipleStageDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MultipleStageDemo <span class = "keyword">extends</span> Application {
+  7&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+  9&nbsp;&nbsp;    <span class = "comment">// Create a scene and place a button in the scene</span>
+ 10&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>), <span class = "constant">200</span>, <span class = "constant">250</span>);
+ 11&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"MyJavaFX"</span>); <span class = "comment">// Set the stage title</span>
+ 12&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 13&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    Stage stage = <span class = "keyword">new</span> Stage(); <span class = "comment">// Create a new stage</span>
+ 16&nbsp;&nbsp;    stage.setTitle(<span class = "literal">"Second Stage"</span>); <span class = "comment">// Set the stage title</span>
+ 17&nbsp;&nbsp;    <span class = "comment">// Set a scene with a button in the stage</span>
+ 18&nbsp;&nbsp;    stage.setScene(<span class = "keyword">new</span> Scene(<span class = "keyword">new</span> Button(<span class = "literal">"New Stage"</span>), <span class = "constant">200</span>, <span class = "constant">250</span>));        
+ 19&nbsp;&nbsp;    stage.show(); <span class = "comment">// Display the stage</span>
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;  
+ 22&nbsp;&nbsp;  <span class = "comment">/**
+ 23&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 24&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 25&nbsp;&nbsp;   */</span>
+ 26&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 27&nbsp;&nbsp;    launch(args);
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

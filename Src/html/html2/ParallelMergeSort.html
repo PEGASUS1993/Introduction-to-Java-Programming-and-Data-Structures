@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ParallelMergeSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ParallelMergeSortWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ParallelMergeSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.concurrent.RecursiveAction;
+<span class = "keyword">import</span> java.util.concurrent.ForkJoinPool;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ParallelMergeSort {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">final</span> <span class = "keyword">int</span> SIZE = <span class = "constant">7000000</span>;
+    <span class = "keyword">int</span>[] list1 = <span class = "keyword">new</span> <span class = "keyword">int</span>[SIZE];
+    <span class = "keyword">int</span>[] list2 = <span class = "keyword">new</span> <span class = "keyword">int</span>[SIZE];
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list1.length; i++)
+      list1[i] = list2[i] = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10000000</span>);
+
+    <span class = "keyword">long</span> startTime = System.currentTimeMillis();
+    parallelMergeSort(list1); <span class = "comment">// Invoke parallel merge sort</span>
+    <span class = "keyword">long</span> endTime = System.currentTimeMillis();
+    System.out.println(<span class = "literal">"\nParallel time with "</span>
+      + Runtime.getRuntime().availableProcessors() + 
+      <span class = "literal">" processors is "</span> + (endTime - startTime) + <span class = "literal">" milliseconds"</span>);
+
+    startTime = System.currentTimeMillis();
+    MergeSort.mergeSort(list2); <span class = "comment">// MergeSort is in Listing 24.5</span>
+    endTime = System.currentTimeMillis();
+    System.out.println(<span class = "literal">"\nSequential time is "</span> + 
+      (endTime - startTime) + <span class = "literal">" milliseconds"</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> parallelMergeSort(<span class = "keyword">int</span>[] list) {
+    RecursiveAction mainTask = <span class = "keyword">new</span> SortTask(list);
+    ForkJoinPool pool = <span class = "keyword">new</span> ForkJoinPool();
+    pool.invoke(mainTask);
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">class</span> SortTask <span class = "keyword">extends</span> RecursiveAction {
+    <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">int</span> THRESHOLD = <span class = "constant">500</span>;
+    <span class = "keyword">private</span> <span class = "keyword">int</span>[] list;
+
+    SortTask(<span class = "keyword">int</span>[] list) {
+      <span class = "keyword">this</span>.list = list;
+    }
+
+    @Override
+    <span class = "keyword">protected</span> <span class = "keyword">void</span> compute() {
+      <span class = "keyword">if</span> (list.length &lt; THRESHOLD)
+        java.util.Arrays.sort(list);
+      <span class = "keyword">else</span> {
+        <span class = "comment">// Obtain the first half</span>
+        <span class = "keyword">int</span>[] firstHalf = <span class = "keyword">new</span> <span class = "keyword">int</span>[list.length / <span class = "constant">2</span>];
+        System.arraycopy(list, <span class = "constant">0</span>, firstHalf, <span class = "constant">0</span>, list.length / <span class = "constant">2</span>);
+
+        <span class = "comment">// Obtain the second half</span>
+        <span class = "keyword">int</span> secondHalfLength = list.length - list.length / <span class = "constant">2</span>;
+        <span class = "keyword">int</span>[] secondHalf = <span class = "keyword">new</span> <span class = "keyword">int</span>[secondHalfLength];
+        System.arraycopy(list, list.length / <span class = "constant">2</span>, 
+          secondHalf, <span class = "constant">0</span>, secondHalfLength);
+
+        <span class = "comment">// Recursively sort the two halves</span>
+        invokeAll(<span class = "keyword">new</span> SortTask(firstHalf), 
+          <span class = "keyword">new</span> SortTask(secondHalf));
+
+        <span class = "comment">// Merge firstHalf with secondHalf into list</span>
+        MergeSort.merge(firstHalf, secondHalf, list);
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

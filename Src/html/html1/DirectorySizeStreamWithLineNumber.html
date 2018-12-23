@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - DirectorySizeStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "DirectorySizeStream.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "DirectorySizeStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.File;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.nio.file.Files;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> DirectorySizeStream {
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+  7&nbsp;&nbsp;    <span class = "comment">// Prompt the user to enter a directory or a file</span>
+  8&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a directory or a file: "</span>);
+  9&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+ 10&nbsp;&nbsp;    String directory = input.nextLine();
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "comment">// Display the size</span>
+ 13&nbsp;&nbsp;    System.out.println(getSize(<span class = "keyword">new</span> File(directory)) + <span class = "literal">" bytes"</span>);
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">long</span> getSize(File file) {
+ 17&nbsp;&nbsp;    <span class = "keyword">if</span> (file.isFile()) {
+ 18&nbsp;&nbsp;      <span class = "keyword">return</span> file.length();
+ 19&nbsp;&nbsp;    } 
+ 20&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 21&nbsp;&nbsp;      <span class = "keyword">try</span> {
+ 22&nbsp;&nbsp;        <span class = "keyword">return</span> Files.list(file.toPath()).parallel().
+ 23&nbsp;&nbsp;          mapToLong(e -&gt; getSize(e.toFile())).sum();
+ 24&nbsp;&nbsp;      } <span class = "keyword">catch</span> (Exception ex) {
+ 25&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "constant">0</span>; 
+ 26&nbsp;&nbsp;      }
+ 27&nbsp;&nbsp;    }
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

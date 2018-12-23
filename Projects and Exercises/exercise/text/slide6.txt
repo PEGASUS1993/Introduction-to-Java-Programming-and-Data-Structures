@@ -1,0 +1,6 @@
+Chapter 7
+
+7.1 Introduction
+
+Programming in procedural languages like C, Pascal, BASIC, Ada, and COBOL involves choosing data structures, designing algorithms, and translating algorithms into code. An object-oriented language like Java combines the power of procedural languages with an added dimension that provides more flexibility, modularity, clarity, and reusability through abstraction, encapsulation, inheritance, and polymorphism.
+

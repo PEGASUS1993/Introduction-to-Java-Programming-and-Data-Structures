@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ButtonInPane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ButtonInPane.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ButtonInPane <span class = "keyword">extends</span> Application {
+  8&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 10&nbsp;&nbsp;    <span class = "comment">// Create a scene and place a button in the scene</span>
+ 11&nbsp;&nbsp;    StackPane pane = <span class = "keyword">new</span> StackPane();
+ 12&nbsp;&nbsp;    pane.getChildren().add(<span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>));    
+ 13&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">200</span>, <span class = "constant">50</span>);
+ 14&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"Button in a pane"</span>); <span class = "comment">// Set the stage title</span>
+ 15&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 16&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;  
+ 19&nbsp;&nbsp;  <span class = "comment">/**
+ 20&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 21&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 22&nbsp;&nbsp;   */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 24&nbsp;&nbsp;    launch(args);
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

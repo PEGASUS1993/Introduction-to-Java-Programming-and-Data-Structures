@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SetListPerformanceTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SetListPerformanceTest.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SetListPerformanceTest" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SetListPerformanceTest {
+  4&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> N = <span class = "constant">5000</span>;
+  5&nbsp;&nbsp;  
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {  
+  7&nbsp;&nbsp;    <span class = "comment">// Add numbers 0, 1, 2, ..., N - 1 to the array list</span>
+  8&nbsp;&nbsp;    List&lt;Integer&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+  9&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; N; i++)
+ 10&nbsp;&nbsp;      list.add(i);
+ 11&nbsp;&nbsp;    Collections.shuffle(list); <span class = "comment">// Shuffle the array list</span>
+ 12&nbsp;&nbsp;    
+ 13&nbsp;&nbsp;    <span class = "comment">// Create a hash set, and test its performance</span>
+ 14&nbsp;&nbsp;    Collection&lt;Integer&gt; set1 = <span class = "keyword">new</span> HashSet&lt;&gt;(list);
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"Member test time for hash set is "</span> +
+ 16&nbsp;&nbsp;      getTestTime(set1) + <span class = "literal">" milliseconds"</span>);
+ 17&nbsp;&nbsp;    System.out.println(<span class = "literal">"Remove element time for hash set is "</span> +
+ 18&nbsp;&nbsp;      getRemoveTime(set1) + <span class = "literal">" milliseconds"</span>);
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    <span class = "comment">// Create a linked hash set, and test its performance</span>
+ 21&nbsp;&nbsp;    Collection&lt;Integer&gt; set2 = <span class = "keyword">new</span> LinkedHashSet&lt;&gt;(list);
+ 22&nbsp;&nbsp;    System.out.println(<span class = "literal">"Member test time for linked hash set is "</span> +
+ 23&nbsp;&nbsp;      getTestTime(set2) + <span class = "literal">" milliseconds"</span>);
+ 24&nbsp;&nbsp;    System.out.println(<span class = "literal">"Remove element time for linked hash set is "</span>
+ 25&nbsp;&nbsp;      + getRemoveTime(set2) + <span class = "literal">" milliseconds"</span>);
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;    <span class = "comment">// Create a tree set, and test its performance</span>
+ 28&nbsp;&nbsp;    Collection&lt;Integer&gt; set3 = <span class = "keyword">new</span> TreeSet&lt;&gt;(list);
+ 29&nbsp;&nbsp;    System.out.println(<span class = "literal">"Member test time for tree set is "</span> +
+ 30&nbsp;&nbsp;      getTestTime(set3) + <span class = "literal">" milliseconds"</span>);
+ 31&nbsp;&nbsp;    System.out.println(<span class = "literal">"Remove element time for tree set is "</span> +
+ 32&nbsp;&nbsp;      getRemoveTime(set3) + <span class = "literal">" milliseconds"</span>);
+ 33&nbsp;&nbsp;
+ 34&nbsp;&nbsp;    <span class = "comment">// Create an array list, and test its performance</span>
+ 35&nbsp;&nbsp;    Collection&lt;Integer&gt; list1 = <span class = "keyword">new</span> ArrayList&lt;&gt;(list);
+ 36&nbsp;&nbsp;    System.out.println(<span class = "literal">"Member test time for array list is "</span> +
+ 37&nbsp;&nbsp;      getTestTime(list1) + <span class = "literal">" milliseconds"</span>);
+ 38&nbsp;&nbsp;    System.out.println(<span class = "literal">"Remove element time for array list is "</span> +
+ 39&nbsp;&nbsp;      getRemoveTime(list1) + <span class = "literal">" milliseconds"</span>);
+ 40&nbsp;&nbsp;
+ 41&nbsp;&nbsp;    <span class = "comment">// Create a linked list, and test its performance</span>
+ 42&nbsp;&nbsp;    Collection&lt;Integer&gt; list2 = <span class = "keyword">new</span> LinkedList&lt;&gt;(list);
+ 43&nbsp;&nbsp;    System.out.println(<span class = "literal">"Member test time for linked list is "</span> +
+ 44&nbsp;&nbsp;      getTestTime(list2) + <span class = "literal">" milliseconds"</span>);
+ 45&nbsp;&nbsp;    System.out.println(<span class = "literal">"Remove element time for linked list is "</span> +
+ 46&nbsp;&nbsp;      getRemoveTime(list2) + <span class = "literal">" milliseconds"</span>);
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;
+ 49&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">long</span> getTestTime(Collection&lt;Integer&gt; c) {
+ 50&nbsp;&nbsp;    <span class = "keyword">long</span> startTime = System.currentTimeMillis();
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;    <span class = "comment">// Test if a number is in the collection</span>
+ 53&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; N; i++)
+ 54&nbsp;&nbsp;      c.contains((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">2</span> * N));
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;    <span class = "keyword">return</span> System.currentTimeMillis() - startTime; 
+ 57&nbsp;&nbsp;  }
+ 58&nbsp;&nbsp;  
+ 59&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">long</span> getRemoveTime(Collection&lt;Integer&gt; c) {
+ 60&nbsp;&nbsp;    <span class = "keyword">long</span> startTime = System.currentTimeMillis();
+ 61&nbsp;&nbsp;
+ 62&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; N; i++)
+ 63&nbsp;&nbsp;      c.remove(i);
+ 64&nbsp;&nbsp;
+ 65&nbsp;&nbsp;    <span class = "keyword">return</span> System.currentTimeMillis() - startTime; 
+ 66&nbsp;&nbsp;  }
+ 67&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,5 @@
+Chapter 6
+
+6.1 Introduction
+
+Often you will have to store a large number of values during the execution of a program. Suppose, for instance, that you want to read one hundred numbers, compute their average, and find out how many numbers are above the average. Your program first reads the numbers and computes their average, and then compares each number with the average to determine whether it is above the average. The numbers must all be stored in variables in order to accomplish this task. You have to declare one hundred variables and repeatedly write almost identical code one hundred times. From the standpoint of practicality, it is impossible to write a program this way. An efficient, organized approach is needed. Java and all other high-level languages provide a data structure, the array, which stores a fixed-size sequential collection of elements of the same type.  

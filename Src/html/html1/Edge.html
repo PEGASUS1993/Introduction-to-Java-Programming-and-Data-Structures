@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Edge.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EdgeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Edge {
+  <span class = "keyword">int</span> u;
+  <span class = "keyword">int</span> v;
+
+  <span class = "keyword">public</span> Edge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v) {
+    <span class = "keyword">this</span>.u = u;
+    <span class = "keyword">this</span>.v = v;
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> equals(Object o) {
+    <span class = "keyword">return</span> u == ((Edge)o).u && v == ((Edge)o).v;
+  }
+}
+</pre>
+</body>
+</html>

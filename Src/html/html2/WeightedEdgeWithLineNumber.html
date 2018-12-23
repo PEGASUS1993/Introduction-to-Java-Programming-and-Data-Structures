@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WeightedEdge.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WeightedEdge.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> WeightedEdge <span class = "keyword">extends</span> Edge
+  2&nbsp;&nbsp;    <span class = "keyword">implements</span> Comparable&lt;WeightedEdge&gt; {
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> weight; <span class = "comment">// The weight on edge (u, v)</span>
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;  <span class = "comment">/** Create a weighted edge on (u, v) */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> WeightedEdge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v, <span class = "keyword">double</span> weight) {
+  7&nbsp;&nbsp;    <span class = "keyword">super</span>(u, v);
+  8&nbsp;&nbsp;    <span class = "keyword">this</span>.weight = weight;
+  9&nbsp;&nbsp;  }
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;  @Override <span class = "comment">/** Compare two edges on weights */</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(WeightedEdge edge) {
+ 13&nbsp;&nbsp;    <span class = "keyword">if</span> (weight &gt; edge.weight) {
+ 14&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">1</span>;
+ 15&nbsp;&nbsp;    }
+ 16&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (weight == edge.weight) {
+ 17&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">0</span>;
+ 18&nbsp;&nbsp;    }
+ 19&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 20&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+ 21&nbsp;&nbsp;    }
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeChange.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ComputeChange.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeChange" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeChange {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {   
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Receive the amount </span>
+    System.out.print(
+      <span class = "literal">"Enter an amount in double, for example 11<span class = "literal">.</span>56: "</span>);
+    <span class = "keyword">double</span> amount = input.nextDouble();
+
+    <span class = "keyword">int</span> remainingAmount = (<span class = "keyword">int</span>)(amount * <span class = "constant">100</span>);
+
+    <span class = "comment">// Find the number of one dollars</span>
+    <span class = "keyword">int</span> numberOfOneDollars = remainingAmount / <span class = "constant">100</span>;
+    remainingAmount = remainingAmount % <span class = "constant">100</span>;
+
+    <span class = "comment">// Find the number of quarters in the remaining amount</span>
+    <span class = "keyword">int</span> numberOfQuarters = remainingAmount / <span class = "constant">25</span>;
+    remainingAmount = remainingAmount % <span class = "constant">25</span>;
+
+    <span class = "comment">// Find the number of dimes in the remaining amount</span>
+    <span class = "keyword">int</span> numberOfDimes = remainingAmount / <span class = "constant">10</span>;
+    remainingAmount = remainingAmount % <span class = "constant">10</span>;
+
+    <span class = "comment">// Find the number of nickels in the remaining amount</span>
+    <span class = "keyword">int</span> numberOfNickels = remainingAmount / <span class = "constant">5</span>;
+    remainingAmount = remainingAmount % <span class = "constant">5</span>;
+
+    <span class = "comment">// Find the number of pennies in the remaining amount</span>
+    <span class = "keyword">int</span> numberOfPennies = remainingAmount;
+
+    <span class = "comment">// Display results</span>
+    System.out.println(<span class = "literal">"Your amount "</span> + amount + <span class = "literal">" consists of"</span>); 
+    System.out.println(<span class = "literal">"    "</span> + numberOfOneDollars + <span class = "literal">" dollars"</span>);
+    System.out.println(<span class = "literal">"    "</span> + numberOfQuarters + <span class = "literal">" quarters "</span>);
+    System.out.println(<span class = "literal">"    "</span> + numberOfDimes + <span class = "literal">" dimes"</span>); 
+    System.out.println(<span class = "literal">"    "</span> + numberOfNickels + <span class = "literal">" nickels"</span>);
+    System.out.println(<span class = "literal">"    "</span> + numberOfPennies + <span class = "literal">" pennies"</span>);
+  }
+}
+</pre>
+</body>
+</html>

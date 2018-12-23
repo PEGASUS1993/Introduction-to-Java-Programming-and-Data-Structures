@@ -1,0 +1,255 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TicTacToeServer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TicTacToeServerWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> java.net.*;
+<span class = "keyword">import</span> java.util.Date;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.application.Platform;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+<span class = "keyword">import</span> javafx.scene.control.TextArea;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TicTacToeServer <span class = "keyword">extends</span> Application 
+    <span class = "keyword">implements</span> TicTacToeConstants {
+  <span class = "keyword">private</span> <span class = "keyword">int</span> sessionNo = <span class = "constant">1</span>; <span class = "comment">// Number a session</span>
+  
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    TextArea taLog = <span class = "keyword">new</span> TextArea();
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> ScrollPane(taLog), <span class = "constant">450</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"TicTacToeServer"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+
+    <span class = "keyword">new</span> Thread( () -&gt; {
+      <span class = "keyword">try</span> {
+        <span class = "comment">// Create a server socket</span>
+        ServerSocket serverSocket = <span class = "keyword">new</span> ServerSocket(<span class = "constant">8000</span>);
+        Platform.runLater(() -&gt; taLog.appendText(<span class = "keyword">new</span> Date() +
+          <span class = "literal">": Server started at socket 8000\n"</span>));
+  
+        <span class = "comment">// Ready to create a session for every two players</span>
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          Platform.runLater(() -&gt; taLog.appendText(<span class = "keyword">new</span> Date() +
+            <span class = "literal">": Wait for players to join session "</span> + sessionNo + <span class = "literal">'\n'</span>));
+  
+          <span class = "comment">// Connect to player 1</span>
+          Socket player1 = serverSocket.accept();
+  
+          Platform.runLater(() -&gt; {
+            taLog.appendText(<span class = "keyword">new</span> Date() + <span class = "literal">": Player 1 joined session "</span> 
+              + sessionNo + <span class = "literal">'\n'</span>);
+            taLog.appendText(<span class = "literal">"Player 1's IP address"</span> +
+              player1.getInetAddress().getHostAddress() + <span class = "literal">'\n'</span>);
+          });
+  
+          <span class = "comment">// Notify that the player is Player 1</span>
+          <span class = "keyword">new</span> DataOutputStream(
+            player1.getOutputStream()).writeInt(PLAYER1);
+  
+          <span class = "comment">// Connect to player 2</span>
+          Socket player2 = serverSocket.accept();
+  
+          Platform.runLater(() -&gt; {
+            taLog.appendText(<span class = "keyword">new</span> Date() +
+              <span class = "literal">": Player 2 joined session "</span> + sessionNo + <span class = "literal">'\n'</span>);
+            taLog.appendText(<span class = "literal">"Player 2's IP address"</span> +
+              player2.getInetAddress().getHostAddress() + <span class = "literal">'\n'</span>);
+          });
+  
+          <span class = "comment">// Notify that the player is Player 2</span>
+          <span class = "keyword">new</span> DataOutputStream(
+            player2.getOutputStream()).writeInt(PLAYER2);
+  
+          <span class = "comment">// Display this session and increment session number</span>
+          Platform.runLater(() -&gt; 
+            taLog.appendText(<span class = "keyword">new</span> Date() + 
+              <span class = "literal">": Start a thread for session "</span> + sessionNo++ + <span class = "literal">'\n'</span>));
+  
+          <span class = "comment">// Launch a new thread for this session of two players</span>
+          <span class = "keyword">new</span> Thread(<span class = "keyword">new</span> HandleASession(player1, player2)).start();
+        }
+      }
+      <span class = "keyword">catch</span>(IOException ex) {
+        ex.printStackTrace();
+      }
+    }).start();
+  }
+
+  <span class = "comment">// Define the thread class for handling a new session for two players</span>
+  <span class = "keyword">class</span> HandleASession <span class = "keyword">implements</span> Runnable, TicTacToeConstants {
+    <span class = "keyword">private</span> Socket player1;
+    <span class = "keyword">private</span> Socket player2;
+  
+    <span class = "comment">// Create and initialize cells</span>
+    <span class = "keyword">private</span> <span class = "keyword">char</span>[][] cell =  <span class = "keyword">new</span> <span class = "keyword">char</span>[<span class = "constant">3</span>][<span class = "constant">3</span>];
+  
+    <span class = "keyword">private</span> DataInputStream fromPlayer1;
+    <span class = "keyword">private</span> DataOutputStream toPlayer1;
+    <span class = "keyword">private</span> DataInputStream fromPlayer2;
+    <span class = "keyword">private</span> DataOutputStream toPlayer2;
+  
+    <span class = "comment">// Continue to play</span>
+    <span class = "keyword">private</span> <span class = "keyword">boolean</span> continueToPlay = <span class = "keyword">true</span>;
+  
+    <span class = "comment">/** Construct a thread */</span>
+    <span class = "keyword">public</span> HandleASession(Socket player1, Socket player2) {
+      <span class = "keyword">this</span>.player1 = player1;
+      <span class = "keyword">this</span>.player2 = player2;
+  
+      <span class = "comment">// Initialize cells</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+          cell[i][j] = <span class = "literal">' '</span>;
+    }
+  
+    <span class = "comment">/** Implement the run() method for the thread */</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      <span class = "keyword">try</span> {
+        <span class = "comment">// Create data input and output streams</span>
+        DataInputStream fromPlayer1 = <span class = "keyword">new</span> DataInputStream(
+          player1.getInputStream());
+        DataOutputStream toPlayer1 = <span class = "keyword">new</span> DataOutputStream(
+          player1.getOutputStream());
+        DataInputStream fromPlayer2 = <span class = "keyword">new</span> DataInputStream(
+          player2.getInputStream());
+        DataOutputStream toPlayer2 = <span class = "keyword">new</span> DataOutputStream(
+          player2.getOutputStream());
+  
+        <span class = "comment">// Write anything to notify player 1 to start</span>
+        <span class = "comment">// This is just to let player 1 know to start</span>
+        toPlayer1.writeInt(<span class = "constant">1</span>);
+  
+        <span class = "comment">// Continuously serve the players and determine and report</span>
+        <span class = "comment">// the game status to the players</span>
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          <span class = "comment">// Receive a move from player 1</span>
+          <span class = "keyword">int</span> row = fromPlayer1.readInt();
+          <span class = "keyword">int</span> column = fromPlayer1.readInt();
+          cell[row][column] = <span class = "literal">'X'</span>;
+  
+          <span class = "comment">// Check if Player 1 wins</span>
+          <span class = "keyword">if</span> (isWon(<span class = "literal">'X'</span>)) {
+            toPlayer1.writeInt(PLAYER1_WON);
+            toPlayer2.writeInt(PLAYER1_WON);
+            sendMove(toPlayer2, row, column);
+            <span class = "keyword">break</span>; <span class = "comment">// Break the loop</span>
+          }
+          <span class = "keyword">else</span> <span class = "keyword">if</span> (isFull()) { <span class = "comment">// Check if all cells are filled</span>
+            toPlayer1.writeInt(DRAW);
+            toPlayer2.writeInt(DRAW);
+            sendMove(toPlayer2, row, column);
+            <span class = "keyword">break</span>;
+          }
+          <span class = "keyword">else</span> {
+            <span class = "comment">// Notify player 2 to take the turn</span>
+            toPlayer2.writeInt(CONTINUE);
+  
+            <span class = "comment">// Send player 1's selected row and column to player 2</span>
+            sendMove(toPlayer2, row, column);
+          }
+  
+          <span class = "comment">// Receive a move from Player 2</span>
+          row = fromPlayer2.readInt();
+          column = fromPlayer2.readInt();
+          cell[row][column] = <span class = "literal">'O'</span>;
+  
+          <span class = "comment">// Check if Player 2 wins</span>
+          <span class = "keyword">if</span> (isWon(<span class = "literal">'O'</span>)) {
+            toPlayer1.writeInt(PLAYER2_WON);
+            toPlayer2.writeInt(PLAYER2_WON);
+            sendMove(toPlayer1, row, column);
+            <span class = "keyword">break</span>;
+          }
+          <span class = "keyword">else</span> {
+            <span class = "comment">// Notify player 1 to take the turn</span>
+            toPlayer1.writeInt(CONTINUE);
+  
+            <span class = "comment">// Send player 2's selected row and column to player 1</span>
+            sendMove(toPlayer1, row, column);
+          }
+        }
+      }
+      <span class = "keyword">catch</span>(IOException ex) {
+        ex.printStackTrace();
+      }
+    }
+  
+    <span class = "comment">/** Send the move to other player */</span>
+    <span class = "keyword">private</span> <span class = "keyword">void</span> sendMove(DataOutputStream out, <span class = "keyword">int</span> row, <span class = "keyword">int</span> column)
+        <span class = "keyword">throws</span> IOException {
+      out.writeInt(row); <span class = "comment">// Send row index</span>
+      out.writeInt(column); <span class = "comment">// Send column index</span>
+    }
+  
+    <span class = "comment">/** Determine if the cells are all occupied */</span>
+    <span class = "keyword">private</span> <span class = "keyword">boolean</span> isFull() {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+        <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+          <span class = "keyword">if</span> (cell[i][j] == <span class = "literal">' '</span>)
+            <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// At least one cell is not filled</span>
+  
+      <span class = "comment">// All cells are filled</span>
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    }
+  
+    <span class = "comment">/** Determine if the player with the specified token wins */</span>
+    <span class = "keyword">private</span> <span class = "keyword">boolean</span> isWon(<span class = "keyword">char</span> token) {
+      <span class = "comment">// Check all rows</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">3</span>; i++)
+        <span class = "keyword">if</span> ((cell[i][<span class = "constant">0</span>] == token)
+            && (cell[i][<span class = "constant">1</span>] == token)
+            && (cell[i][<span class = "constant">2</span>] == token)) {
+          <span class = "keyword">return</span> <span class = "keyword">true</span>;
+        }
+  
+      <span class = "comment">/** Check all columns */</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">3</span>; j++)
+        <span class = "keyword">if</span> ((cell[<span class = "constant">0</span>][j] == token)
+            && (cell[<span class = "constant">1</span>][j] == token)
+            && (cell[<span class = "constant">2</span>][j] == token)) {
+          <span class = "keyword">return</span> <span class = "keyword">true</span>;
+        }
+  
+      <span class = "comment">/** Check major diagonal */</span>
+      <span class = "keyword">if</span> ((cell[<span class = "constant">0</span>][<span class = "constant">0</span>] == token)
+          && (cell[<span class = "constant">1</span>][<span class = "constant">1</span>] == token)
+          && (cell[<span class = "constant">2</span>][<span class = "constant">2</span>] == token)) {
+        <span class = "keyword">return</span> <span class = "keyword">true</span>;
+      }
+  
+      <span class = "comment">/** Check subdiagonal */</span>
+      <span class = "keyword">if</span> ((cell[<span class = "constant">0</span>][<span class = "constant">2</span>] == token)
+          && (cell[<span class = "constant">1</span>][<span class = "constant">1</span>] == token)
+          && (cell[<span class = "constant">2</span>][<span class = "constant">0</span>] == token)) {
+        <span class = "keyword">return</span> <span class = "keyword">true</span>;
+      }
+  
+      <span class = "comment">/** All checked, but no winner */</span>
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+    }
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - House.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "House.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> House <span class = "keyword">implements</span> Cloneable, Comparable&lt;House&gt; {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> id;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">double</span> area;
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.Date whenBuilt;
+  5&nbsp;&nbsp;  
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> House(<span class = "keyword">int</span> id, <span class = "keyword">double</span> area) {
+  7&nbsp;&nbsp;    <span class = "keyword">this</span>.id = id;
+  8&nbsp;&nbsp;    <span class = "keyword">this</span>.area = area;
+  9&nbsp;&nbsp;    whenBuilt = <span class = "keyword">new</span> java.util.Date();
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;  
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getId() {
+ 13&nbsp;&nbsp;    <span class = "keyword">return</span> id;
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;  
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">double</span> getArea() {
+ 17&nbsp;&nbsp;    <span class = "keyword">return</span> area;
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Date getWhenBuilt() {
+ 21&nbsp;&nbsp;    <span class = "keyword">return</span> whenBuilt;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  @Override <span class = "comment">/** Override the protected clone method defined in 
+ 25&nbsp;&nbsp;    the Object class, and strengthen its accessibility */</span>
+ 26&nbsp;&nbsp;  <span class = "keyword">public</span> Object clone() {
+ 27&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 28&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">super</span>.clone();
+ 29&nbsp;&nbsp;    }
+ 30&nbsp;&nbsp;    <span class = "keyword">catch</span> (CloneNotSupportedException ex) {
+ 31&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">null</span>;
+ 32&nbsp;&nbsp;    }
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  @Override <span class = "comment">// Implement the compareTo method defined in Comparable</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(House o) {
+ 37&nbsp;&nbsp;    <span class = "keyword">if</span> (area &gt; o.area)
+ 38&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">1</span>;
+ 39&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (area &lt; o.area)
+ 40&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+ 41&nbsp;&nbsp;    <span class = "keyword">else</span>
+ 42&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "constant">0</span>;
+ 43&nbsp;&nbsp;  }  
+ 44&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

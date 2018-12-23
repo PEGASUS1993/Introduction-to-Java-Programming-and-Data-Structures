@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SplitPaneDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SplitPaneDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Orientation;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.RadioButton;
+<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+<span class = "keyword">import</span> javafx.scene.control.SplitPane;
+<span class = "keyword">import</span> javafx.scene.control.TextArea;
+<span class = "keyword">import</span> javafx.scene.control.ToggleGroup;
+<span class = "keyword">import</span> javafx.scene.image.Image;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+<span class = "keyword">import</span> javafx.scene.layout.VBox;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> SplitPaneDemo <span class = "keyword">extends</span> Application {
+  <span class = "keyword">private</span> Image usImage = <span class = "keyword">new</span> Image(
+    <span class = "literal">"https://liveexample.pearsoncmg.com/common/image/us.gif"</span>);
+  <span class = "keyword">private</span> Image ukImage = <span class = "keyword">new</span> Image(
+    <span class = "literal">"https://liveexample.pearsoncmg.com/common/image/uk.gif"</span>);
+  <span class = "keyword">private</span> Image caImage = <span class = "keyword">new</span> Image(
+    <span class = "literal">"https://liveexample.pearsoncmg.com/common/image/ca.gif"</span>);
+  <span class = "keyword">private</span> String usDescription = <span class = "literal">"Description for US ..."</span>;
+  <span class = "keyword">private</span> String ukDescription = <span class = "literal">"Description for UK ..."</span>;
+  <span class = "keyword">private</span> String caDescription = <span class = "literal">"Description for CA ..."</span>;
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    VBox vBox = <span class = "keyword">new</span> VBox(<span class = "constant">10</span>);
+    RadioButton rbUS = <span class = "keyword">new</span> RadioButton(<span class = "literal">"US"</span>); 
+    RadioButton rbUK = <span class = "keyword">new</span> RadioButton(<span class = "literal">"UK"</span>); 
+    RadioButton rbCA = <span class = "keyword">new</span> RadioButton(<span class = "literal">"CA"</span>);            
+    vBox.getChildren().addAll(rbUS, rbUK, rbCA);
+    
+    SplitPane content = <span class = "keyword">new</span> SplitPane();
+    content.setOrientation(Orientation.VERTICAL);
+    ImageView imageView = <span class = "keyword">new</span> ImageView(usImage);
+    StackPane imagePane = <span class = "keyword">new</span> StackPane();
+    imagePane.getChildren().add(imageView);
+    TextArea taDescription = <span class = "keyword">new</span> TextArea();   
+    taDescription.setText(usDescription);
+    content.getItems().addAll(
+      imagePane, <span class = "keyword">new</span> ScrollPane(taDescription));
+        
+    SplitPane sp = <span class = "keyword">new</span> SplitPane();
+    sp.getItems().addAll(vBox, content);
+
+    Scene scene = <span class = "keyword">new</span> Scene(sp, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+    primaryStage.setTitle(<span class = "literal">"SplitPaneDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+    
+    <span class = "comment">// Group radio buttons</span>
+    ToggleGroup group = <span class = "keyword">new</span> ToggleGroup();
+    rbUS.setToggleGroup(group);
+    rbUK.setToggleGroup(group);
+    rbCA.setToggleGroup(group);
+
+    rbUS.setSelected(<span class = "keyword">true</span>);
+    rbUS.setOnAction(e -&gt; {
+      imageView.setImage(usImage);
+      taDescription.setText(usDescription);
+    });
+    
+    rbUK.setOnAction(e -&gt; {
+      imageView.setImage(ukImage);
+      taDescription.setText(ukDescription);
+    });
+        
+    rbCA.setOnAction(e -&gt; {
+      imageView.setImage(caImage);
+      taDescription.setText(caDescription);
+    });
+  }
+
+  <span class = "comment">// Launch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

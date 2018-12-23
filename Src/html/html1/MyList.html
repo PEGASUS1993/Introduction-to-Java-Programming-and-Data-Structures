@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyList.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyListWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Collection;
+
+<span class = "keyword">public</span> <span class = "keyword">interface</span> MyList&lt;E&gt; <span class = "keyword">extends</span> Collection&lt;E&gt; {
+  <span class = "comment">/** Add a new element at the specified index in this list */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> add(<span class = "keyword">int</span> index, E e);
+
+  <span class = "comment">/** Return the element from this list at the specified index */</span>
+  <span class = "keyword">public</span> E get(<span class = "keyword">int</span> index);
+
+  <span class = "comment">/** Return the index of the first matching element in this list.
+   *  Return -1 if no match. */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> indexOf(Object e);
+
+  <span class = "comment">/** Return the index of the last matching element in this list
+   *  Return -1 if no match. */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> lastIndexOf(E e);
+
+  <span class = "comment">/** Remove the element at the specified position in this list
+   *  Shift any subsequent elements to the left.
+   *  Return the element that was removed from the list. */</span>
+  <span class = "keyword">public</span> E remove(<span class = "keyword">int</span> index);
+
+  <span class = "comment">/** Replace the element at the specified position in this list
+   *  with the specified element and returns the new set. */</span>
+  <span class = "keyword">public</span> E set(<span class = "keyword">int</span> index, E e);
+  
+  @Override <span class = "comment">/** Add a new element at the end of this list */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> add(E e) {
+    add(size(), e);
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override <span class = "comment">/** Return true if this list contains no elements */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> size() == <span class = "constant">0</span>;
+  }
+
+  @Override <span class = "comment">/** Remove the first occurrence of the element e 
+   *  from this list. Shift any subsequent elements to the left.
+   *  Return true if the element is removed. */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> remove(Object e) {
+    <span class = "keyword">if</span> (indexOf(e) &gt;= <span class = "constant">0</span>) {
+      remove(indexOf(e));
+      <span class = "keyword">return</span> <span class = "keyword">true</span>;
+    }
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> containsAll(Collection&lt;?&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> addAll(Collection&lt;? <span class = "keyword">extends</span> E&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> removeAll(Collection&lt;?&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> retainAll(Collection&lt;?&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">true</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> Object[] toArray() {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> &lt;T&gt; T[] toArray(T[] array) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+}
+</pre>
+</body>
+</html>

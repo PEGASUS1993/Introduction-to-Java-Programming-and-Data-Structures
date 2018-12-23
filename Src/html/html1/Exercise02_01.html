@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Exercise02_01.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Exercise02_01WithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Exercise02_01" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Exercise02_01 {
+  <span class = "comment">// Main method</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    java.util.Scanner input = <span class = "keyword">new</span> java.util.Scanner(System.in);
+    <span class = "comment">// Enter a temperature in Celsius</span>
+    System.out.print(<span class = "literal">"Enter a temperature in Celsius: "</span>);
+    <span class = "keyword">double</span> celsius = input.nextDouble();
+
+    <span class = "comment">// Convert it to Fahrenheit</span>
+    <span class = "keyword">double</span> fahrenheit = (<span class = "constant">9</span><span class = "literal">.</span><span class = "constant">0</span> / <span class = "constant">5</span>) * celsius + <span class = "constant">32</span>;
+
+    <span class = "comment">// Display the result</span>
+    System.out.println(celsius + <span class = "literal">" Celsius is "</span> +
+      fahrenheit + <span class = "literal">" Fahrenheit"</span>);
+  }
+}
+</pre>
+</body>
+</html>

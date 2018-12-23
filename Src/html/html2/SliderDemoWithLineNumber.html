@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SliderDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SliderDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Orientation;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Slider;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SliderDemo <span class = "keyword">extends</span> Application {
+ 11&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 13&nbsp;&nbsp;    Text text = <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">20</span>, <span class = "literal">"JavaFX Programming"</span>);
+ 14&nbsp;&nbsp;    
+ 15&nbsp;&nbsp;    Slider slHorizontal = <span class = "keyword">new</span> Slider();
+ 16&nbsp;&nbsp;    slHorizontal.setShowTickLabels(<span class = "keyword">true</span>);
+ 17&nbsp;&nbsp;    slHorizontal.setShowTickMarks(<span class = "keyword">true</span>);    
+ 18&nbsp;&nbsp;    
+ 19&nbsp;&nbsp;    Slider slVertical = <span class = "keyword">new</span> Slider();
+ 20&nbsp;&nbsp;    slVertical.setOrientation(Orientation.VERTICAL);
+ 21&nbsp;&nbsp;    slVertical.setShowTickLabels(<span class = "keyword">true</span>);
+ 22&nbsp;&nbsp;    slVertical.setShowTickMarks(<span class = "keyword">true</span>);
+ 23&nbsp;&nbsp;    slVertical.setValue(<span class = "constant">100</span>);
+ 24&nbsp;&nbsp;    
+ 25&nbsp;&nbsp;    <span class = "comment">// Create a text in a pane</span>
+ 26&nbsp;&nbsp;    Pane paneForText = <span class = "keyword">new</span> Pane();
+ 27&nbsp;&nbsp;    paneForText.getChildren().add(text);
+ 28&nbsp;&nbsp;    
+ 29&nbsp;&nbsp;    <span class = "comment">// Create a border pane to hold text and scroll bars</span>
+ 30&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+ 31&nbsp;&nbsp;    pane.setCenter(paneForText);
+ 32&nbsp;&nbsp;    pane.setBottom(slHorizontal);
+ 33&nbsp;&nbsp;    pane.setRight(slVertical);
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;    slHorizontal.valueProperty().addListener(ov -&gt; 
+ 36&nbsp;&nbsp;      text.setX(slHorizontal.getValue() * paneForText.getWidth() /
+ 37&nbsp;&nbsp;        slHorizontal.getMax()));
+ 38&nbsp;&nbsp;    
+ 39&nbsp;&nbsp;    slVertical.valueProperty().addListener(ov -&gt; 
+ 40&nbsp;&nbsp;      text.setY((slVertical.getMax() - slVertical.getValue()) 
+ 41&nbsp;&nbsp;        * paneForText.getHeight() / slVertical.getMax()));
+ 42&nbsp;&nbsp;    
+ 43&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 44&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+ 45&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"SliderDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 46&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 47&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage   </span>
+ 48&nbsp;&nbsp;  }
+ 49&nbsp;&nbsp;
+ 50&nbsp;&nbsp;  <span class = "comment">/**
+ 51&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 52&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 53&nbsp;&nbsp;   */</span>
+ 54&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 55&nbsp;&nbsp;    launch(args);
+ 56&nbsp;&nbsp;  }
+ 57&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

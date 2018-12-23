@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PathDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PathDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.*;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> PathDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    Pane pane = <span class = "keyword">new</span> Pane();
+    
+    <span class = "comment">// Create a Path</span>
+    Path path = <span class = "keyword">new</span> Path();
+    path.getElements().add(<span class = "keyword">new</span> MoveTo(<span class = "constant">50</span><span class = "literal">.</span><span class = "constant">0</span>, <span class = "constant">50</span><span class = "literal">.</span><span class = "constant">0</span>)); 
+    path.getElements().add(<span class = "keyword">new</span> HLineTo(<span class = "constant">150</span><span class = "literal">.</span><span class = "constant">5</span>)); 
+    path.getElements().add(<span class = "keyword">new</span> VLineTo(<span class = "constant">100</span><span class = "literal">.</span><span class = "constant">5</span>));
+    path.getElements().add(<span class = "keyword">new</span> LineTo(<span class = "constant">200</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">150</span><span class = "literal">.</span><span class = "constant">5</span>));
+    
+    ArcTo arcTo = <span class = "keyword">new</span> ArcTo(<span class = "constant">45</span>, <span class = "constant">45</span>, <span class = "constant">0</span>, <span class = "constant">250</span>, <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">5</span>, 
+      <span class = "keyword">false</span>, <span class = "keyword">true</span>);
+    path.getElements().add(arcTo);
+
+    path.getElements().add(<span class = "keyword">new</span> QuadCurveTo(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">350</span>, <span class = "constant">100</span>));
+    path.getElements().add(
+      <span class = "keyword">new</span> CubicCurveTo(<span class = "constant">250</span>, <span class = "constant">100</span>, <span class = "constant">350</span>, <span class = "constant">250</span>, <span class = "constant">450</span>, <span class = "constant">10</span>));
+    
+    path.getElements().add(<span class = "keyword">new</span> ClosePath());
+    
+    pane.getChildren().add(path);
+    path.setFill(<span class = "keyword">null</span>);
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+    primaryStage.setTitle(<span class = "literal">"PathDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">// Launch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

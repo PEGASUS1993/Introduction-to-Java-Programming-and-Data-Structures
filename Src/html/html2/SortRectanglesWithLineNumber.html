@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SortRectangles.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SortRectangles.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SortRectangles" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SortRectangles {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    ComparableRectangle[] rectangles = {
+  4&nbsp;&nbsp;      <span class = "keyword">new</span> ComparableRectangle(<span class = "constant">3</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">5</span><span class = "literal">.</span><span class = "constant">4</span>), 
+  5&nbsp;&nbsp;      <span class = "keyword">new</span> ComparableRectangle(<span class = "constant">13</span><span class = "literal">.</span><span class = "constant">24</span>, <span class = "constant">55</span><span class = "literal">.</span><span class = "constant">4</span>),
+  6&nbsp;&nbsp;      <span class = "keyword">new</span> ComparableRectangle(<span class = "constant">7</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">35</span><span class = "literal">.</span><span class = "constant">4</span>),
+  7&nbsp;&nbsp;      <span class = "keyword">new</span> ComparableRectangle(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">4</span>, <span class = "constant">25</span><span class = "literal">.</span><span class = "constant">4</span>)};
+  8&nbsp;&nbsp;    java.util.Arrays.sort(rectangles);
+  9&nbsp;&nbsp;    <span class = "keyword">for</span> (Rectangle rectangle: rectangles) {
+ 10&nbsp;&nbsp;      System.out.print(rectangle + <span class = "literal">" "</span>); 
+ 11&nbsp;&nbsp;      System.out.println();
+ 12&nbsp;&nbsp;    }
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

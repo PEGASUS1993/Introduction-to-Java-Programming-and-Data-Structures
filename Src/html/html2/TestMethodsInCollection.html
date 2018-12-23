@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestMethodsInCollection.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestMethodsInCollectionWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestMethodsInCollection" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestMethodsInCollection {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create set1</span>
+    java.util.Set&lt;String&gt; set1 = <span class = "keyword">new</span> java.util.HashSet&lt;&gt;();
+
+    <span class = "comment">// Add strings to set1</span>
+    set1.add(<span class = "literal">"London"</span>);
+    set1.add(<span class = "literal">"Paris"</span>);
+    set1.add(<span class = "literal">"New York"</span>);
+    set1.add(<span class = "literal">"San Francisco"</span>);
+    set1.add(<span class = "literal">"Beijing"</span>);
+
+    System.out.println(<span class = "literal">"set1 is "</span> + set1);
+    System.out.println(set1.size() + <span class = "literal">" elements in set1"</span>);
+
+    <span class = "comment">// Delete a string from set1</span>
+    set1.remove(<span class = "literal">"London"</span>); <span class = "comment">// Remove "London" from set1</span>
+    System.out.println(<span class = "literal">"\nset1 is "</span> + set1);
+    System.out.println(set1.size() + <span class = "literal">" elements in set1"</span>);
+
+    <span class = "comment">// Create set2</span>
+    java.util.Set&lt;String&gt; set2 = <span class = "keyword">new</span> java.util.HashSet&lt;&gt;();
+
+    <span class = "comment">// Add strings to set2</span>
+    set2.add(<span class = "literal">"London"</span>);
+    set2.add(<span class = "literal">"Shanghai"</span>);
+    set2.add(<span class = "literal">"Paris"</span>);
+    System.out.println(<span class = "literal">"\nset2 is "</span> + set2);
+    System.out.println(set2.size() + <span class = "literal">" elements in set2"</span>);
+
+    System.out.println(<span class = "literal">"\nIs Taipei in set2? "</span>
+      + set2.contains(<span class = "literal">"Taipei"</span>));
+
+    set1.addAll(set2); <span class = "comment">// Add all elements in set2 to set1</span>
+    System.out.println(<span class = "literal">"\nAfter adding set2 to set1, set1 is "</span>
+      + set1);
+
+    set1.removeAll(set2); <span class = "comment">// Remove all elements in set2 from set1</span>
+    System.out.println(<span class = "literal">"After removing set2 from set1, set1 is "</span>
+      + set1);
+
+    set1.retainAll(set2); <span class = "comment">// Retain all elements in set2 in set1</span>
+    System.out.println(<span class = "literal">"After retaining common elements in set1 "</span>
+      + <span class = "literal">"and set2, set1 is "</span> + set1);
+  }
+}
+</pre>
+</body>
+</html>

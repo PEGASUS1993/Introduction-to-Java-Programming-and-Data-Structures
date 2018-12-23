@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowBorderPane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowBorderPaneWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowBorderPane <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a border pane </span>
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+
+    <span class = "comment">// Place nodes in the pane</span>
+    pane.setTop(<span class = "keyword">new</span> CustomPane(<span class = "literal">"Top"</span>)); 
+    pane.setRight(<span class = "keyword">new</span> CustomPane(<span class = "literal">"Right"</span>));
+    pane.setBottom(<span class = "keyword">new</span> CustomPane(<span class = "literal">"Bottom"</span>));
+    pane.setLeft(<span class = "keyword">new</span> CustomPane(<span class = "literal">"Left"</span>));
+    pane.setCenter(<span class = "keyword">new</span> CustomPane(<span class = "literal">"Center"</span>)); 
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane);
+    primaryStage.setTitle(<span class = "literal">"ShowBorderPane"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+} 
+
+<span class = "comment">// Define a custom pane to hold a label in the center of the pane</span>
+<span class = "keyword">class</span> CustomPane <span class = "keyword">extends</span> StackPane {
+  <span class = "keyword">public</span> CustomPane(String title) {
+    getChildren().add(<span class = "keyword">new</span> Label(title));
+    setStyle(<span class = "literal">"-fx-border-color: red"</span>);
+    setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">11</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">12</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">13</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">14</span><span class = "literal">.</span><span class = "constant">5</span>));
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TreePerformanceTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TreePerformanceTestWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TreePerformanceTest" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TreePerformanceTest {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">final</span> <span class = "keyword">int</span> TEST_SIZE = <span class = "constant">500000</span>; <span class = "comment">// Tree size used in the test</span>
+
+    <span class = "comment">// Create an AVL tree</span>
+    Tree&lt;Integer&gt; tree1 = <span class = "keyword">new</span> AVLTree&lt;Integer&gt;();
+    System.out.println(<span class = "literal">"AVL tree time: "</span> +
+      getTime(tree1, TEST_SIZE) + <span class = "literal">" milliseconds"</span>);
+
+    <span class = "comment">// Create a 2-4 tree</span>
+    Tree&lt;Integer&gt; tree2 = <span class = "keyword">new</span> Tree24&lt;Integer&gt;();
+    System.out.println(<span class = "literal">"2<span class = "literal">-</span>4 tree time: "</span>
+      + getTime(tree2, TEST_SIZE) + <span class = "literal">" milliseconds"</span>);
+
+    <span class = "comment">// Create a red-black tree</span>
+    Tree&lt;Integer&gt; tree3 = <span class = "keyword">new</span> RBTree&lt;Integer&gt;();
+    System.out.println(<span class = "literal">"RB tree time: "</span>
+      + getTime(tree3, TEST_SIZE) + <span class = "literal">" milliseconds"</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">long</span> getTime(Tree&lt;Integer&gt; tree, <span class = "keyword">int</span> testSize) {
+    <span class = "keyword">long</span> startTime = System.currentTimeMillis(); <span class = "comment">// Start time</span>
+
+    <span class = "comment">// Create a list to store distinct integers</span>
+    java.util.List&lt;Integer&gt; list = <span class = "keyword">new</span> java.util.ArrayList&lt;Integer&gt;();
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; testSize; i++)
+      list.add(i);
+
+    java.util.Collections.shuffle(list); <span class = "comment">// Shuffle the list</span>
+
+    <span class = "comment">// Insert elements in the list to the tree</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; testSize; i++)
+      tree.insert(list.get(i));
+
+    java.util.Collections.shuffle(list); <span class = "comment">// Shuffle the list</span>
+
+    <span class = "comment">// Delete elements in the list from the tree</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; testSize; i++)
+      tree.delete(list.get(i));
+
+    <span class = "comment">// Return elapse time</span>
+    <span class = "keyword">return</span> System.currentTimeMillis() - startTime;
+  }
+}
+</pre>
+</body>
+</html>

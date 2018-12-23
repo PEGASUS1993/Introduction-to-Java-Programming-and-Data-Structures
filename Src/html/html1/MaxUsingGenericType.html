@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MaxUsingGenericType.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MaxUsingGenericTypeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> MaxUsingGenericType {
+  <span class = "comment">/** Return the maximum between two objects */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> &lt;E <span class = "keyword">extends</span> Comparable&lt;E&gt;&gt; E max(E o1, E o2) {
+    <span class = "keyword">if</span> (o1.compareTo(o2) &gt; <span class = "constant">0</span>)
+      <span class = "keyword">return</span> o1;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> o2;
+  }
+}
+</pre>
+</body>
+</html>

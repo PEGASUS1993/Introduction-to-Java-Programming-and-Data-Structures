@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - AdditionQuiz.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/AdditionQuiz.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "AdditionQuiz" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> AdditionQuiz {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span> number1 = (<span class = "keyword">int</span>)(System.currentTimeMillis() % <span class = "constant">10</span>);
+    <span class = "keyword">int</span> number2 = (<span class = "keyword">int</span>)(System.currentTimeMillis() / <span class = "constant">10</span> % <span class = "constant">10</span>);
+
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    System.out.print(
+      <span class = "literal">"What is "</span> + number1 + <span class = "literal">" + "</span> + number2 + <span class = "literal">"? "</span>);
+
+    <span class = "keyword">int</span> answer = input.nextInt();
+
+    System.out.println(
+      number1 + <span class = "literal">" + "</span> + number2 + <span class = "literal">" = "</span> + answer + <span class = "literal">" is "</span> +
+      (number1 + number2 == answer));
+  }
+}
+</pre>
+</body>
+</html>

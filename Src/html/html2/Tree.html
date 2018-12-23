@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Tree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TreeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Collection;
+
+<span class = "keyword">public</span> <span class = "keyword">interface</span> Tree&lt;E&gt; <span class = "keyword">extends</span> Collection&lt;E&gt; {
+  <span class = "comment">/** Return true if the element is in the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> search(E e);
+
+  <span class = "comment">/** Insert element e into the binary tree
+   * Return true if the element is inserted successfully */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> insert(E e);
+
+  <span class = "comment">/** Delete the specified element from the tree
+   * Return true if the element is deleted successfully */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> delete(E e);
+  
+  <span class = "comment">/** Get the number of elements in the tree */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize();
+  
+  <span class = "comment">/** Inorder traversal from the root*/</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> inorder() {
+  }
+
+  <span class = "comment">/** Postorder traversal from the root */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> postorder() {
+  }
+
+  <span class = "comment">/** Preorder traversal from the root */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">void</span> preorder() {
+  }
+  
+  @Override <span class = "comment">/** Return true if the tree is empty */</span>
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> isEmpty() {
+    <span class = "keyword">return</span> <span class = "keyword">this</span>.size() == <span class = "constant">0</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> contains(Object e) {
+    <span class = "keyword">return</span> search((E)e);
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> add(E e) {
+    <span class = "keyword">return</span> insert(e);
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> remove(Object e) {
+    <span class = "keyword">return</span> delete((E)e);
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">int</span> size() {
+    <span class = "keyword">return</span> getSize();
+  }
+  
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> containsAll(Collection&lt;?&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> addAll(Collection&lt;? <span class = "keyword">extends</span> E&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> removeAll(Collection&lt;?&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> <span class = "keyword">boolean</span> retainAll(Collection&lt;?&gt; c) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">false</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> Object[] toArray() {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+
+  @Override
+  <span class = "keyword">public</span> <span class = "keyword">default</span> &lt;T&gt; T[] toArray(T[] array) {
+    <span class = "comment">// Left as an exercise</span>
+    <span class = "keyword">return</span> <span class = "keyword">null</span>;
+  }
+}
+</pre>
+</body>
+</html>

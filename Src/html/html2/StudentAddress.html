@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StudentAddress.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StudentAddressWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> StudentAddress <span class = "keyword">implements</span> java.io.Serializable {
+  <span class = "keyword">private</span> String name;
+  <span class = "keyword">private</span> String street;
+  <span class = "keyword">private</span> String city;
+  <span class = "keyword">private</span> String state;
+  <span class = "keyword">private</span> String zip;
+
+  <span class = "keyword">public</span> StudentAddress(String name, String street, String city,
+    String state, String zip) {
+    <span class = "keyword">this</span>.name = name;
+    <span class = "keyword">this</span>.street = street;
+    <span class = "keyword">this</span>.city = city;
+    <span class = "keyword">this</span>.state = state;
+    <span class = "keyword">this</span>.zip = zip;
+  }
+
+  <span class = "keyword">public</span> String getName() {
+    <span class = "keyword">return</span> name;
+  }
+
+  <span class = "keyword">public</span> String getStreet() {
+    <span class = "keyword">return</span> street;
+  }
+
+  <span class = "keyword">public</span> String getCity() {
+    <span class = "keyword">return</span> city;
+  }
+
+  <span class = "keyword">public</span> String getState() {
+    <span class = "keyword">return</span> state;
+  }
+
+  <span class = "keyword">public</span> String getZip() {
+    <span class = "keyword">return</span> zip;
+  }
+}
+</pre>
+</body>
+</html>

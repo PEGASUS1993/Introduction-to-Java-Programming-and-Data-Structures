@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StudentServerInterface.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StudentServerInterfaceWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.rmi.*;
+
+<span class = "keyword">public</span> <span class = "keyword">interface</span> StudentServerInterface <span class = "keyword">extends</span> Remote {
+  <span class = "comment">/**
+   * Return the score for specified the name
+   * @param   name   the student name
+   * @return  an double score or –1 if the student is not found
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> findScore(String name) <span class = "keyword">throws</span> RemoteException;
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ReadDataWithAutoClose.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ReadDataWithAutoClose.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ReadDataWithAutoClose" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner; 
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ReadDataWithAutoClose {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a File instance</span>
+  6&nbsp;&nbsp;    java.io.File file = <span class = "keyword">new</span> java.io.File(<span class = "literal">"scores.txt"</span>);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "keyword">try</span> (
+  9&nbsp;&nbsp;      <span class = "comment">// Create a Scanner for the file</span>
+ 10&nbsp;&nbsp;      Scanner input = <span class = "keyword">new</span> Scanner(file);
+ 11&nbsp;&nbsp;    ) {
+ 12&nbsp;&nbsp;      <span class = "comment">// Read data from a file</span>
+ 13&nbsp;&nbsp;      <span class = "keyword">while</span> (input.hasNext()) {
+ 14&nbsp;&nbsp;        String firstName = input.next();
+ 15&nbsp;&nbsp;        String mi = input.next();
+ 16&nbsp;&nbsp;        String lastName = input.next();
+ 17&nbsp;&nbsp;        <span class = "keyword">int</span> score = input.nextInt();
+ 18&nbsp;&nbsp;        System.out.println(
+ 19&nbsp;&nbsp;          firstName + <span class = "literal">" "</span> + mi + <span class = "literal">" "</span> + lastName + <span class = "literal">" "</span> + score);
+ 20&nbsp;&nbsp;      }
+ 21&nbsp;&nbsp;    }
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

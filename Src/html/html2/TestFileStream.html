@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestFileStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestFileStreamWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestFileStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestFileStream {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> IOException {
+    <span class = "keyword">try</span> (
+      <span class = "comment">// Create an output stream to the file</span>
+      FileOutputStream output = <span class = "keyword">new</span> FileOutputStream(<span class = "literal">"temp.dat"</span>);
+    ) {
+      <span class = "comment">// Output values to the file</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= <span class = "constant">10</span>; i++)
+        output.write(i);
+    }
+
+    <span class = "keyword">try</span> (
+      <span class = "comment">// Create an input stream for the file</span>
+      FileInputStream input = <span class = "keyword">new</span> FileInputStream(<span class = "literal">"temp.dat"</span>);
+    ) {
+      <span class = "comment">// Read values from the file</span>
+      <span class = "keyword">int</span> value;
+      <span class = "keyword">while</span> ((value = input.read()) != <span class = "literal">-</span><span class = "constant">1</span>)
+        System.out.print(value + <span class = "literal">" "</span>);
+    }
+  }
+}
+</pre>
+</body>
+</html>

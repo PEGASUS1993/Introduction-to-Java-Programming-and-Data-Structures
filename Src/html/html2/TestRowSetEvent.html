@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestRowSetEvent.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestRowSetEventWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestRowSetEvent" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.sql.*;
+<span class = "keyword">import</span> javax.sql.*;
+<span class = "keyword">import</span> com.sun.rowset.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestRowSetEvent {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args)
+      <span class = "keyword">throws</span> SQLException, ClassNotFoundException {
+    <span class = "comment">// Load the JDBC driver</span>
+    Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+    System.out.println(<span class = "literal">"Driver loaded"</span>);
+
+    <span class = "comment">// Create a row set</span>
+    RowSet rowSet = <span class = "keyword">new</span> JdbcRowSetImpl();
+    rowSet.addRowSetListener(<span class = "keyword">new</span> RowSetListener() {
+      <span class = "keyword">public</span> <span class = "keyword">void</span> cursorMoved(RowSetEvent e) {
+        System.out.println(<span class = "literal">"Cursor moved"</span>);
+      }
+      
+      <span class = "keyword">public</span> <span class = "keyword">void</span> rowChanged(RowSetEvent e) {
+        System.out.println(<span class = "literal">"Row changed"</span>);
+      }
+      
+      <span class = "keyword">public</span> <span class = "keyword">void</span> rowSetChanged(RowSetEvent e) {
+        System.out.println(<span class = "literal">"row set changed"</span>);
+      }
+    });
+
+    <span class = "comment">// Set RowSet properties</span>
+    rowSet.setUrl(<span class = "literal">"jdbc:mysql://localhost/javabook"</span>);
+    rowSet.setUsername(<span class = "literal">"scott"</span>);
+    rowSet.setPassword(<span class = "literal">"tiger"</span>);
+    rowSet.setCommand(<span class = "literal">"select * from Student"</span>);
+    rowSet.execute(); 
+
+    rowSet.last(); <span class = "comment">// Cursor moved</span>
+    rowSet.updateString(<span class = "literal">"lastName"</span>, <span class = "literal">"Yao"</span>); <span class = "comment">// Update column</span>
+    rowSet.updateRow(); <span class = "comment">// Row updated</span>
+    
+    <span class = "comment">// Close the connection</span>
+    rowSet.close();
+  }
+}
+</pre>
+</body>
+</html>

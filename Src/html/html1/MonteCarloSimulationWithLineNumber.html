@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MonteCarloSimulation.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MonteCarloSimulation.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "MonteCarloSimulation" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MonteCarloSimulation {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_OF_TRIALS = <span class = "constant">10000000</span>;
+  4&nbsp;&nbsp;    <span class = "keyword">int</span> numberOfHits = <span class = "constant">0</span>;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; NUMBER_OF_TRIALS; i++) {
+  7&nbsp;&nbsp;      <span class = "keyword">double</span> x = Math.random() * <span class = "constant">2</span><span class = "literal">.</span><span class = "constant">0</span> - <span class = "constant">1</span>;
+  8&nbsp;&nbsp;      <span class = "keyword">double</span> y = Math.random() * <span class = "constant">2</span><span class = "literal">.</span><span class = "constant">0</span>  - <span class = "constant">1</span>;
+  9&nbsp;&nbsp;      <span class = "keyword">if</span> (x * x + y * y &lt;= <span class = "constant">1</span>)
+ 10&nbsp;&nbsp;        numberOfHits++;
+ 11&nbsp;&nbsp;    }
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "keyword">double</span> pi = <span class = "constant">4</span><span class = "literal">.</span><span class = "constant">0</span> * numberOfHits / NUMBER_OF_TRIALS;
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"PI is "</span> + pi);
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

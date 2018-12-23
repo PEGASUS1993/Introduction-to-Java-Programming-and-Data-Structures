@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TranslationDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TranslationDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TranslationDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    Pane pane = <span class = "keyword">new</span> Pane();
+
+    <span class = "keyword">double</span> x = <span class = "constant">10</span>; 
+    <span class = "keyword">double</span> y = <span class = "constant">10</span>;
+    java.util.Random random = <span class = "keyword">new</span> java.util.Random();
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">10</span>; i++) {
+      Rectangle rectangle = <span class = "keyword">new</span> Rectangle(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">50</span>, <span class = "constant">60</span>);  
+      rectangle.setFill(Color.WHITE);
+      rectangle.setStroke(Color.color(random.nextDouble(), 
+        random.nextDouble(), random.nextDouble()));
+      rectangle.setTranslateX(x += <span class = "constant">20</span>);
+      rectangle.setTranslateY(y += <span class = "constant">5</span>);
+      pane.getChildren().add(rectangle);
+    }
+
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+    primaryStage.setTitle(<span class = "literal">"TranslationDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">// Lauch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

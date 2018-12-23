@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GenericStack.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GenericStack.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GenericStack&lt;E&gt; {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.ArrayList&lt;E&gt; list = <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;();
+  3&nbsp;&nbsp;
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+  5&nbsp;&nbsp;    <span class = "keyword">return</span> list.size();
+  6&nbsp;&nbsp;  }
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> E peek() {
+  9&nbsp;&nbsp;    <span class = "keyword">return</span> list.get(getSize() - <span class = "constant">1</span>);
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> push(E o) {
+ 13&nbsp;&nbsp;    list.add(o);
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> E pop() {
+ 17&nbsp;&nbsp;    E o = list.get(getSize() - <span class = "constant">1</span>);
+ 18&nbsp;&nbsp;    list.remove(getSize() - <span class = "constant">1</span>);
+ 19&nbsp;&nbsp;    <span class = "keyword">return</span> o;
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+ 23&nbsp;&nbsp;    <span class = "keyword">return</span> list.isEmpty();
+ 24&nbsp;&nbsp;  }
+ 25&nbsp;&nbsp;  
+ 26&nbsp;&nbsp;  @Override
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 28&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"stack: "</span> + list.toString();
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

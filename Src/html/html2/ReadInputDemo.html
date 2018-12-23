@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ReadInputDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ReadInputDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ReadInputDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ReadInputDemo {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a byte value: "</span>);
+    <span class = "keyword">byte</span> byteValue = input.nextByte();
+ 
+    System.out.print(<span class = "literal">"Enter a short value: "</span>);
+    <span class = "keyword">short</span> shortValue = input.nextShort();
+ 
+    System.out.print(<span class = "literal">"Enter an int value: "</span>);
+    <span class = "keyword">int</span> intValue = input.nextInt();
+
+    System.out.print(<span class = "literal">"Enter a long value: "</span>);
+    <span class = "keyword">long</span> longValue = input.nextLong();
+  
+    System.out.print(<span class = "literal">"Enter a float value: "</span>);
+    <span class = "keyword">float</span> floatValue = input.nextFloat();
+
+    System.out.print(<span class = "literal">"The values you entered are "</span> + 
+      byteValue + <span class = "literal">" "</span> + shortValue + <span class = "literal">" "</span> + intValue +
+      longValue + <span class = "literal">" "</span> + floatValue);
+  }
+}
+</pre>
+</body>
+</html>

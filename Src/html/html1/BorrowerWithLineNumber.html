@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Borrower.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Borrower.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Borrower <span class = "keyword">extends</span> Person1 {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> Loan loan;
+  3&nbsp;&nbsp;
+  4&nbsp;&nbsp;  <span class = "comment">/** Construct a borrower with default properties */</span>
+  5&nbsp;&nbsp;  <span class = "keyword">public</span> Borrower() {
+  6&nbsp;&nbsp;    <span class = "keyword">super</span>();
+  7&nbsp;&nbsp;  }
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;  <span class = "comment">/** Create a borrower with specified name and address */</span>
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> Borrower(Name name, Address address) {
+ 11&nbsp;&nbsp;    <span class = "keyword">super</span>(name, address);
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "comment">/** Return loan */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> Loan getLoan() {
+ 16&nbsp;&nbsp;    <span class = "keyword">return</span> loan;
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;  <span class = "comment">/** Set a new loan */</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setLoan(Loan loan) {
+ 21&nbsp;&nbsp;    <span class = "keyword">this</span>.loan = loan;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  @Override <span class = "comment">/** String representation for borrower */</span>
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 26&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">super</span>.toString() +
+ 27&nbsp;&nbsp;      <span class = "literal">"Monthly payment is "</span> + loan.getMonthlyPayment() + <span class = "literal">'\n'</span> +
+ 28&nbsp;&nbsp;      <span class = "literal">"Total payment is "</span> + loan.getTotalPayment();
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

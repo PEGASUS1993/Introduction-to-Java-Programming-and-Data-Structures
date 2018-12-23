@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - RandomCharacter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RandomCharacter.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> RandomCharacter {
+  2&nbsp;&nbsp;  <span class = "comment">/** Generate a random character between ch1 and ch2 */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomCharacter(<span class = "keyword">char</span> ch1, <span class = "keyword">char</span> ch2) {
+  4&nbsp;&nbsp;    <span class = "keyword">return</span> (<span class = "keyword">char</span>)(ch1 + Math.random() * (ch2 - ch1 + <span class = "constant">1</span>));
+  5&nbsp;&nbsp;  }
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;  <span class = "comment">/** Generate a random lowercase letter */</span>
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomLowerCaseLetter() {
+  9&nbsp;&nbsp;    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'a'</span>, <span class = "literal">'z'</span>);
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;  <span class = "comment">/** Generate a random uppercase letter */</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomUpperCaseLetter() {
+ 14&nbsp;&nbsp;    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'A'</span>, <span class = "literal">'Z'</span>);
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "comment">/** Generate a random digit character */</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomDigitCharacter() {
+ 19&nbsp;&nbsp;    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'0'</span>, <span class = "literal">'9'</span>);
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "comment">/** Generate a random character */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">char</span> getRandomCharacter() {
+ 24&nbsp;&nbsp;    <span class = "keyword">return</span> getRandomCharacter(<span class = "literal">'\u0000'</span>, <span class = "literal">'\uFFFF'</span>);
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

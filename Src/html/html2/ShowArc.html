@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowArc.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowArcWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.Group;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.shape.Arc;
+<span class = "keyword">import</span> javafx.scene.shape.ArcType;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowArc <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    Arc arc1 = <span class = "keyword">new</span> Arc(<span class = "constant">150</span>, <span class = "constant">100</span>, <span class = "constant">80</span>, <span class = "constant">80</span>, <span class = "constant">30</span>, <span class = "constant">35</span>); <span class = "comment">// Create an arc</span>
+    arc1.setFill(Color.RED); <span class = "comment">// Set fill color</span>
+    arc1.setType(ArcType.ROUND); <span class = "comment">// Set arc type</span>
+    
+    Arc arc2 = <span class = "keyword">new</span> Arc(<span class = "constant">150</span>, <span class = "constant">100</span>, <span class = "constant">80</span>, <span class = "constant">80</span>, <span class = "constant">30</span> + <span class = "constant">90</span>, <span class = "constant">35</span>);
+    arc2.setFill(Color.WHITE);
+    arc2.setType(ArcType.OPEN);
+    arc2.setStroke(Color.BLACK);
+
+    Arc arc3 = <span class = "keyword">new</span> Arc(<span class = "constant">150</span>, <span class = "constant">100</span>, <span class = "constant">80</span>, <span class = "constant">80</span>, <span class = "constant">30</span> + <span class = "constant">180</span>, <span class = "constant">35</span>);
+    arc3.setFill(Color.WHITE);
+    arc3.setType(ArcType.CHORD);
+    arc3.setStroke(Color.BLACK);
+    
+    Arc arc4 = <span class = "keyword">new</span> Arc(<span class = "constant">150</span>, <span class = "constant">100</span>, <span class = "constant">80</span>, <span class = "constant">80</span>, <span class = "constant">30</span> + <span class = "constant">270</span>, <span class = "constant">35</span>);
+    arc4.setFill(Color.GREEN);
+    arc4.setType(ArcType.CHORD);
+    arc4.setStroke(Color.BLACK);
+    
+    <span class = "comment">// Create a group and add nodes to the group</span>
+    Group group = <span class = "keyword">new</span> Group();
+    group.getChildren().addAll(<span class = "keyword">new</span> Text(<span class = "constant">210</span>, <span class = "constant">40</span>, <span class = "literal">"arc1: round"</span>), 
+      arc1, <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">40</span>, <span class = "literal">"arc2: open"</span>), arc2,
+      <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">170</span>, <span class = "literal">"arc3: chord"</span>), arc3, 
+      <span class = "keyword">new</span> Text(<span class = "constant">210</span>, <span class = "constant">170</span>, <span class = "literal">"arc4: chord"</span>), arc4);      
+
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> BorderPane(group), <span class = "constant">300</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"ShowArc"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BinarySearchDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BinarySearchDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "BinarySearchDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> BinarySearchDemo {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    <span class = "keyword">int</span>[] list = {<span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">7</span>, <span class = "constant">10</span>, <span class = "constant">11</span>, <span class = "constant">45</span>, <span class = "constant">50</span>, <span class = "constant">59</span>, <span class = "constant">60</span>, <span class = "constant">66</span>, <span class = "constant">69</span>, <span class = "constant">70</span>, <span class = "constant">79</span>};
+  4&nbsp;&nbsp;    System.out.println(<span class = "literal">"1. Index is "</span> +
+  5&nbsp;&nbsp;      java.util.Arrays.binarySearch(list, <span class = "constant">11</span>));
+  6&nbsp;&nbsp;    System.out.println(<span class = "literal">"2. Index is "</span> +
+  7&nbsp;&nbsp;      java.util.Arrays.binarySearch(list, <span class = "constant">12</span>));
+  8&nbsp;&nbsp;		  
+  9&nbsp;&nbsp;    <span class = "keyword">char</span>[] chars = {<span class = "literal">'a'</span>, <span class = "literal">'c'</span>, <span class = "literal">'g'</span>, <span class = "literal">'x'</span>, <span class = "literal">'y'</span>, <span class = "literal">'z'</span>};
+ 10&nbsp;&nbsp;    System.out.println(<span class = "literal">"3. Index is "</span> +
+ 11&nbsp;&nbsp;      java.util.Arrays.binarySearch(chars, <span class = "literal">'a'</span>));
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"4. Index is "</span> +
+ 13&nbsp;&nbsp;      java.util.Arrays.binarySearch(chars, <span class = "literal">'t'</span>));
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

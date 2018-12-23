@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Course.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Course.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Course {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> String courseName;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> String[] students = <span class = "keyword">new</span> String[<span class = "constant">4</span>];
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> numberOfStudents;
+  5&nbsp;&nbsp;    
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> Course(String courseName) {
+  7&nbsp;&nbsp;    <span class = "keyword">this</span>.courseName = courseName;
+  8&nbsp;&nbsp;  }
+  9&nbsp;&nbsp;  
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> addStudent(String student) {
+ 11&nbsp;&nbsp;    students[numberOfStudents] = student;
+ 12&nbsp;&nbsp;    numberOfStudents++;
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;  
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> String[] getStudents() {
+ 16&nbsp;&nbsp;    <span class = "keyword">return</span> students;
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumberOfStudents() {
+ 20&nbsp;&nbsp;    <span class = "keyword">return</span> numberOfStudents;
+ 21&nbsp;&nbsp;  }  
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> String getCourseName() {
+ 24&nbsp;&nbsp;    <span class = "keyword">return</span> courseName;
+ 25&nbsp;&nbsp;  }  
+ 26&nbsp;&nbsp;  
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> dropStudent(String student) {
+ 28&nbsp;&nbsp;    <span class = "comment">// Left as an exercise in Exercise 10.9</span>
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeAngles.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ComputeAngles.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeAngles" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeAngles {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  6&nbsp;&nbsp;    
+  7&nbsp;&nbsp;    <span class = "comment">// Prompt the user to enter three points</span>
+  8&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter three points: "</span>);
+  9&nbsp;&nbsp;    <span class = "keyword">double</span> x1 = input.nextDouble();
+ 10&nbsp;&nbsp;    <span class = "keyword">double</span> y1 = input.nextDouble();
+ 11&nbsp;&nbsp;    <span class = "keyword">double</span> x2 = input.nextDouble();
+ 12&nbsp;&nbsp;    <span class = "keyword">double</span> y2 = input.nextDouble();
+ 13&nbsp;&nbsp;    <span class = "keyword">double</span> x3 = input.nextDouble();
+ 14&nbsp;&nbsp;    <span class = "keyword">double</span> y3 = input.nextDouble();
+ 15&nbsp;&nbsp;    
+ 16&nbsp;&nbsp;    <span class = "comment">// Compute three sides</span>
+ 17&nbsp;&nbsp;    <span class = "keyword">double</span> a = Math.sqrt((x2 - x3) * (x2 - x3) 
+ 18&nbsp;&nbsp;      + (y2 - y3) * (y2 - y3));
+ 19&nbsp;&nbsp;    <span class = "keyword">double</span> b = Math.sqrt((x1 - x3) * (x1 - x3) 
+ 20&nbsp;&nbsp;      + (y1 - y3) * (y1 - y3));
+ 21&nbsp;&nbsp;    <span class = "keyword">double</span> c = Math.sqrt((x1 - x2) * (x1 - x2) 
+ 22&nbsp;&nbsp;      + (y1 - y2) * (y1 - y2));
+ 23&nbsp;&nbsp;    
+ 24&nbsp;&nbsp;    <span class = "comment">// Compute three angles</span>
+ 25&nbsp;&nbsp;    <span class = "keyword">double</span> A = Math.toDegrees(Math.acos((a * a - b * b - c * c) 
+ 26&nbsp;&nbsp;      / (<span class = "literal">-</span><span class = "constant">2</span> * b * c)));
+ 27&nbsp;&nbsp;    <span class = "keyword">double</span> B = Math.toDegrees(Math.acos((b * b - a * a - c * c) 
+ 28&nbsp;&nbsp;      / (<span class = "literal">-</span><span class = "constant">2</span> * a * c)));
+ 29&nbsp;&nbsp;    <span class = "keyword">double</span> C = Math.toDegrees(Math.acos((c * c - b * b - a * a) 
+ 30&nbsp;&nbsp;      / (<span class = "literal">-</span><span class = "constant">2</span> * a * b)));
+ 31&nbsp;&nbsp;    
+ 32&nbsp;&nbsp;    <span class = "comment">// Display results</span>
+ 33&nbsp;&nbsp;    System.out.println(<span class = "literal">"The three angles are "</span> + 
+ 34&nbsp;&nbsp;      Math.round(A * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span> + <span class = "literal">" "</span> +
+ 35&nbsp;&nbsp;      Math.round(B * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span> + <span class = "literal">" "</span> + 
+ 36&nbsp;&nbsp;      Math.round(C * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>);
+ 37&nbsp;&nbsp;  }
+ 38&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

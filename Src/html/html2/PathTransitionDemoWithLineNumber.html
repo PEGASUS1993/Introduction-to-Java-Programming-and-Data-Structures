@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - PathTransitionDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "PathTransitionDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.PathTransition;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.animation.Timeline;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.util.Duration;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> PathTransitionDemo <span class = "keyword">extends</span> Application {
+ 13&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 15&nbsp;&nbsp;    <span class = "comment">// Create a pane </span>
+ 16&nbsp;&nbsp;    Pane pane = <span class = "keyword">new</span> Pane();
+ 17&nbsp;&nbsp;    
+ 18&nbsp;&nbsp;    <span class = "comment">// Create a rectangle</span>
+ 19&nbsp;&nbsp;    Rectangle rectangle = <span class = "keyword">new</span> Rectangle (<span class = "constant">0</span>, <span class = "constant">0</span>, <span class = "constant">25</span>, <span class = "constant">50</span>);
+ 20&nbsp;&nbsp;    rectangle.setFill(Color.ORANGE);
+ 21&nbsp;&nbsp;    
+ 22&nbsp;&nbsp;    <span class = "comment">// Create a circle</span>
+ 23&nbsp;&nbsp;    Circle circle = <span class = "keyword">new</span> Circle(<span class = "constant">125</span>, <span class = "constant">100</span>, <span class = "constant">50</span>);
+ 24&nbsp;&nbsp;    circle.setFill(Color.WHITE);
+ 25&nbsp;&nbsp;    circle.setStroke(Color.BLACK);
+ 26&nbsp;&nbsp;    
+ 27&nbsp;&nbsp;    <span class = "comment">// Add circle and rectangle to the pane</span>
+ 28&nbsp;&nbsp;    pane.getChildren().add(circle);
+ 29&nbsp;&nbsp;    pane.getChildren().add(rectangle);
+ 30&nbsp;&nbsp;    
+ 31&nbsp;&nbsp;    <span class = "comment">// Create a path transition </span>
+ 32&nbsp;&nbsp;    PathTransition pt = <span class = "keyword">new</span> PathTransition();
+ 33&nbsp;&nbsp;    pt.setDuration(Duration.millis(<span class = "constant">4000</span>));
+ 34&nbsp;&nbsp;    pt.setPath(circle);
+ 35&nbsp;&nbsp;    pt.setNode(rectangle);
+ 36&nbsp;&nbsp;    pt.setOrientation(
+ 37&nbsp;&nbsp;      PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+ 38&nbsp;&nbsp;    pt.setCycleCount(Timeline.INDEFINITE);
+ 39&nbsp;&nbsp;    pt.setAutoReverse(<span class = "keyword">true</span>);
+ 40&nbsp;&nbsp;    pt.play(); <span class = "comment">// Start animation </span>
+ 41&nbsp;&nbsp;    
+ 42&nbsp;&nbsp;    circle.setOnMousePressed(e -&gt; pt.pause());
+ 43&nbsp;&nbsp;    circle.setOnMouseReleased(e -&gt; pt.play());
+ 44&nbsp;&nbsp;    
+ 45&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 46&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">250</span>, <span class = "constant">200</span>);
+ 47&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"PathTransitionDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 48&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 49&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;  
+ 52&nbsp;&nbsp;  <span class = "comment">/**
+ 53&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 54&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 55&nbsp;&nbsp;   */</span>
+ 56&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 57&nbsp;&nbsp;    launch(args);
+ 58&nbsp;&nbsp;  }
+ 59&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

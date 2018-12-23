@@ -1,0 +1,141 @@
+Chapter 35 Advanced Database Programming
+
+Section 35.3 Batch Processing
+1. To add the SQL statement "insert into T values (100, 'Smith')" into the batch into a Statement stmt, use 
+a. stmt.add("insert into T values (100, 'Smith')");
+b. stmt.add('insert into T values (100, 'Smith')');
+c. stmt.addBatch("insert into T values (100, 'Smith')");
+d. stmt.addBatch('insert into T values (100, 'Smith')');
+Key:c
+
+#
+2. Invoking executeBatch() returns ________.
+a. an int value indicating how many SQL statements in the batch have been executed successfully.
+b. a ResultSet 
+c. an array of counts, each of which counts the number of the rows affected by the SQL command.
+d. an int value indicating how many rows are effected by the batch execution.
+Key:c
+
+#
+Section 35.4 Scrollable and Updateable Result Set
+3. To obtain a scrollable or updateable result set, you must first create a statement using which of the following?
+a. Statement statement = connection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY); 
+b. Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY); 
+c. Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE); 
+d. Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE); 
+Key:c
+
+#
+4. In a scrollable and updateable result set, you can use ___________ methods on a result set.
+a. first()
+b. last()
+c. insertRow()
+d. deleteRow()
+e. updateRow()
+Key:abcde
+
+#
+Section 35.5 RowSet, JdbcRowSet, and CachedRowSet 
+5. RowSet is an extension of _______.
+a. Connection
+b. Statement
+c. ResultSet
+d. CLOB
+Key:c
+
+#
+6. You can use a RowSet to __________.
+a. set a database URL
+b. set a database username
+c. set a database password
+d. set a SQL query statement
+Key:abcd
+
+#
+7. You may create a RowSet using __________.
+a. new RowSet()
+b. new JdbcRowSet()
+c. new CachedRowSet()
+d. new JdbcRowSetImpl()
+e. new CachedRowSetImpl()
+Key:de
+
+#
+8. To move the cursor to the 2nd row in a RowSet, use _________.
+a. next(2)
+b. first()
+c. next()
+d. absolute(2)
+e. last()
+Key:d
+
+#
+9. To update a String column in a RowSet, use _________.
+a. updateString("newValue")
+b. updateString("columnName", "newValue")
+c. updateString("newValue", "columnName")
+d. updateObject("newValue", "columnName")
+Key:b
+
+#
+10. To commit the changes in a CachedRowSet, use ___________.
+a. commint()
+b. acceptChanges()
+c. acceptUpdates()
+d. refresh()
+Key:b
+
+#
+Section 35.6 RowSetTableModel
+11. For a JTable to be synchronized with a JDBC RowSet, you may create a table model with the following features:
+a. The model should extend AbstractTableModel and implement getRowCount(), getColumnCount(), and getValueAt(int row, int column).
+b. The model should implement RowSetListener and the methods rowSetChanged(RowSetEvent e), rowChanged(RowSetEvent e), cursorMoved(RowSetEvent e).
+c. You should invoke fireTableStructureChanged() method from rowSetChanged(RowSetEvent e) and rowChanged(RowSetEvent e) to synchronize changes in the RowSet with the the JTable
+Key:abc
+
+#
+12. The index of row and column in JTable is 0-based. The index of row and column in RowSet is 1-based.
+a. true
+b. false
+Key:a
+
+#
+Section 35.7 Storing and Retrieving Images in JDBC
+13. You can store images in a database using data type _______.
+a. varchar2
+b. varchar
+c. BLOB
+d. CLOB
+Key:c
+
+#
+14. You can store large text in a database using data type _______.
+a. varchar2
+b. varchar
+c. BLOB
+d. CLOB
+Key:d
+
+#
+15. You can store large text in a database using data type _______.
+a. varchar2
+b. varchar
+c. BLOB
+d. CLOB
+Key:d
+
+#
+16. To get binary data from a column, use _____________ in Statement.
+a. getBlob()
+b. getBinaryStream()
+c. getBinaryData()
+d. getData()
+Key:a
+
+#
+17. To set binary data to a column, use _____________ in Statement.
+a. setBlob()
+b. setBinaryStream()
+c. setBinaryData()
+d. setData()
+Key:b

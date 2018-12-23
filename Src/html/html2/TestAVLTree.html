@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestAVLTree.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestAVLTreeWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestAVLTree" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestAVLTree {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create an AVL tree</span>
+    AVLTree&lt;Integer&gt; tree = <span class = "keyword">new</span> AVLTree&lt;&gt;(<span class = "keyword">new</span> Integer[]{<span class = "constant">25</span>, 
+      <span class = "constant">20</span>, <span class = "constant">5</span>});
+    System.out.print(<span class = "literal">"After inserting 25, 20, 5:"</span>);
+    printTree(tree);
+
+    tree.insert(<span class = "constant">34</span>);
+    tree.insert(<span class = "constant">50</span>); <span class = "comment">// Insert 50 to the tree</span>
+    System.out.print(<span class = "literal">"\nAfter inserting 34, 50:"</span>);
+    printTree(tree);
+
+    tree.insert(<span class = "constant">30</span>);
+    System.out.print(<span class = "literal">"\nAfter inserting 30"</span>);
+    printTree(tree);
+
+    tree.insert(<span class = "constant">10</span>);
+    System.out.print(<span class = "literal">"\nAfter inserting 10"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">34</span>);
+    tree.delete(<span class = "constant">30</span>);
+    tree.delete(<span class = "constant">50</span>);
+    System.out.print(<span class = "literal">"\nAfter removing 34, 30, 50:"</span>);
+    printTree(tree);
+
+    tree.delete(<span class = "constant">5</span>); <span class = "comment">// Delete 5 from the tree</span>
+    System.out.print(<span class = "literal">"\nAfter removing 5:"</span>);
+    printTree(tree);
+    
+    System.out.print(<span class = "literal">"\nTraverse the elements in the tree: "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> e: tree) {
+      System.out.print(e + <span class = "literal">" "</span>);
+    }
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printTree(BST tree) {
+    <span class = "comment">// Traverse tree</span>
+    System.out.print(<span class = "literal">"\nInorder (sorted): "</span>);
+    tree.inorder();
+    System.out.print(<span class = "literal">"\nPostorder: "</span>);
+    tree.postorder();
+    System.out.print(<span class = "literal">"\nPreorder: "</span>);
+    tree.preorder();
+    System.out.print(<span class = "literal">"\nThe number of nodes is "</span> + tree.getSize());
+    System.out.println();
+  }
+}
+</pre>
+</body>
+</html>

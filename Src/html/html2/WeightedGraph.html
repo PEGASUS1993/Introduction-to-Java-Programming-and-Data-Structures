@@ -1,0 +1,239 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WeightedGraph.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WeightedGraphWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> WeightedGraph&lt;V&gt; <span class = "keyword">extends</span> UnweightedGraph&lt;V&gt; {
+  <span class = "comment">/** Construct an empty */</span>
+  <span class = "keyword">public</span> WeightedGraph() {
+  }
+  
+  <span class = "comment">/** Construct a WeightedGraph from vertices and edged in arrays */</span>
+  <span class = "keyword">public</span> WeightedGraph(V[] vertices, <span class = "keyword">int</span>[][] edges) {
+    createWeightedGraph(java.util.Arrays.asList(vertices), edges);
+  }
+
+  <span class = "comment">/** Construct a WeightedGraph from vertices and edges in list */</span>
+  <span class = "keyword">public</span> WeightedGraph(<span class = "keyword">int</span>[][] edges, <span class = "keyword">int</span> numberOfVertices) {
+    List&lt;V&gt; vertices = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numberOfVertices; i++)
+      vertices.add((V)(<span class = "keyword">new</span> Integer(i)));
+    
+    createWeightedGraph(vertices, edges);
+  }
+
+  <span class = "comment">/** Construct a WeightedGraph for vertices 0, 1, 2 and edge list */</span>
+  <span class = "keyword">public</span> WeightedGraph(List&lt;V&gt; vertices, List&lt;WeightedEdge&gt; edges) {
+    createWeightedGraph(vertices, edges);
+  }
+
+  <span class = "comment">/** Construct a WeightedGraph from vertices 0, 1, and edge array */</span>
+  <span class = "keyword">public</span> WeightedGraph(List&lt;WeightedEdge&gt; edges,
+      <span class = "keyword">int</span> numberOfVertices) {
+    List&lt;V&gt; vertices = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; numberOfVertices; i++)
+      vertices.add((V)(<span class = "keyword">new</span> Integer(i)));
+    
+    createWeightedGraph(vertices, edges);
+  }
+
+  <span class = "comment">/** Create adjacency lists from edge arrays */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> createWeightedGraph(List&lt;V&gt; vertices, <span class = "keyword">int</span>[][] edges) {
+    <span class = "keyword">this</span>.vertices = vertices;     
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; vertices.size(); i++) {
+      neighbors.add(<span class = "keyword">new</span> ArrayList&lt;Edge&gt;()); <span class = "comment">// Create a list for vertices</span>
+    }
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; edges.length; i++) {
+      neighbors.get(edges[i][<span class = "constant">0</span>]).add(
+        <span class = "keyword">new</span> WeightedEdge(edges[i][<span class = "constant">0</span>], edges[i][<span class = "constant">1</span>], edges[i][<span class = "constant">2</span>]));
+    }
+  }
+
+  <span class = "comment">/** Create adjacency lists from edge lists */</span>
+  <span class = "keyword">private</span> <span class = "keyword">void</span> createWeightedGraph(
+      List&lt;V&gt; vertices, List&lt;WeightedEdge&gt; edges) {
+    <span class = "keyword">this</span>.vertices = vertices;     
+
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; vertices.size(); i++) {
+      neighbors.add(<span class = "keyword">new</span> ArrayList&lt;Edge&gt;()); <span class = "comment">// Create a list for vertices</span>
+    }
+
+    <span class = "keyword">for</span> (WeightedEdge edge: edges) {      
+      neighbors.get(edge.u).add(edge); <span class = "comment">// Add an edge into the list</span>
+    }
+  }
+
+  <span class = "comment">/** Return the weight on the edge (u, v) */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getWeight(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v) <span class = "keyword">throws</span> Exception {
+    <span class = "keyword">for</span> (Edge edge : neighbors.get(u)) {
+      <span class = "keyword">if</span> (edge.v == v) {
+        <span class = "keyword">return</span> ((WeightedEdge)edge).weight;
+      }
+    }
+    
+    <span class = "keyword">throw</span> <span class = "keyword">new</span> Exception(<span class = "literal">"Edge does not exit"</span>);
+  }
+  
+  <span class = "comment">/** Display edges with weights */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> printWeightedEdges() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; getSize(); i++) {
+      System.out.print(getVertex(i) + <span class = "literal">" ("</span> + i + <span class = "literal">"): "</span>);
+      <span class = "keyword">for</span> (Edge edge : neighbors.get(i)) {
+        System.out.print(<span class = "literal">"("</span> + edge.u +
+          <span class = "literal">", "</span> + edge.v + <span class = "literal">", "</span> + ((WeightedEdge)edge).weight + <span class = "literal">") "</span>);
+      }
+      System.out.println();
+    }
+  }
+ 
+  <span class = "comment">/** Add an edge (u, v, weight) to the graph. */</span>  
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v, <span class = "keyword">double</span> weight) {
+    <span class = "keyword">return</span> addEdge(<span class = "keyword">new</span> WeightedEdge(u, v, weight));
+  }
+
+  <span class = "comment">/** Get a minimum spanning tree rooted at vertex 0 */</span>
+  <span class = "keyword">public</span> MST getMinimumSpanningTree() {
+    <span class = "keyword">return</span> getMinimumSpanningTree(<span class = "constant">0</span>);
+  }
+  
+  <span class = "comment">/** Get a minimum spanning tree rooted at a specified vertex */</span>
+  <span class = "keyword">public</span> MST getMinimumSpanningTree(<span class = "keyword">int</span> startingVertex) {
+    <span class = "comment">// cost[v] stores the cost by adding v to the tree</span>
+    <span class = "keyword">double</span>[] cost = <span class = "keyword">new</span> <span class = "keyword">double</span>[getSize()];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; cost.length; i++) {
+      cost[i] = Double.POSITIVE_INFINITY; <span class = "comment">// Initial cost </span>
+    }
+    cost[startingVertex] = <span class = "constant">0</span>; <span class = "comment">// Cost of source is 0</span>
+
+    <span class = "keyword">int</span>[] parent = <span class = "keyword">new</span> <span class = "keyword">int</span>[getSize()]; <span class = "comment">// Parent of a vertex</span>
+    parent[startingVertex] = <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// startingVertex is the root</span>
+    <span class = "keyword">double</span> totalWeight = <span class = "constant">0</span>; <span class = "comment">// Total weight of the tree thus far</span>
+
+    List&lt;Integer&gt; T = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class = "comment">// Expand T</span>
+    <span class = "keyword">while</span> (T.size() &lt; getSize()) {
+      <span class = "comment">// Find smallest cost u in V - T </span>
+      <span class = "keyword">int</span> u = <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Vertex to be determined</span>
+      <span class = "keyword">double</span> currentMinCost = Double.POSITIVE_INFINITY;
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; getSize(); i++) {
+        <span class = "keyword">if</span> (!T.contains(i) && cost[i] &lt; currentMinCost) {
+          currentMinCost = cost[i];
+          u = i;
+        }
+      }
+
+      <span class = "keyword">if</span> (u == <span class = "literal">-</span><span class = "constant">1</span>) <span class = "keyword">break</span>; <span class = "keyword">else</span> T.add(u); <span class = "comment">// Add a new vertex to T</span>
+      totalWeight += cost[u]; <span class = "comment">// Add cost[u] to the tree</span>
+
+      <span class = "comment">// Adjust cost[v] for v that is adjacent to u and v in V - T</span>
+      <span class = "keyword">for</span> (Edge e : neighbors.get(u)) {
+        <span class = "keyword">if</span> (!T.contains(e.v) && cost[e.v] &gt; ((WeightedEdge)e).weight) {
+          cost[e.v] = ((WeightedEdge)e).weight;
+          parent[e.v] = u; 
+        }
+      }
+    } <span class = "comment">// End of while</span>
+
+    <span class = "keyword">return</span> <span class = "keyword">new</span> MST(startingVertex, parent, T, totalWeight);
+  }
+
+  <span class = "comment">/** MST is an inner class in WeightedGraph */</span>
+  <span class = "keyword">public</span> <span class = "keyword">class</span> MST <span class = "keyword">extends</span> SearchTree {
+    <span class = "keyword">private</span> <span class = "keyword">double</span> totalWeight; <span class = "comment">// Total weight of all edges in the tree</span>
+
+    <span class = "keyword">public</span> MST(<span class = "keyword">int</span> root, <span class = "keyword">int</span>[] parent, List&lt;Integer&gt; searchOrder,
+        <span class = "keyword">double</span> totalWeight) {
+      <span class = "keyword">super</span>(root, parent, searchOrder);
+      <span class = "keyword">this</span>.totalWeight = totalWeight;
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">double</span> getTotalWeight() {
+      <span class = "keyword">return</span> totalWeight;
+    }
+  }
+
+  <span class = "comment">/** Find single source shortest paths */</span>
+  <span class = "keyword">public</span> ShortestPathTree getShortestPath(<span class = "keyword">int</span> sourceVertex) {
+    <span class = "comment">// cost[v] stores the cost of the path from v to the source</span>
+    <span class = "keyword">double</span>[] cost = <span class = "keyword">new</span> <span class = "keyword">double</span>[getSize()];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; cost.length; i++) {
+      cost[i] = Double.POSITIVE_INFINITY; <span class = "comment">// Initial cost set to infinity</span>
+    }
+    cost[sourceVertex] = <span class = "constant">0</span>; <span class = "comment">// Cost of source is 0</span>
+
+    <span class = "comment">// parent[v] stores the previous vertex of v in the path</span>
+    <span class = "keyword">int</span>[] parent = <span class = "keyword">new</span> <span class = "keyword">int</span>[getSize()];
+    parent[sourceVertex] = <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// The parent of source is set to -1</span>
+    
+    <span class = "comment">// T stores the vertices whose path found so far</span>
+    List&lt;Integer&gt; T = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class = "comment">// Expand T</span>
+    <span class = "keyword">while</span> (T.size() &lt; getSize()) {
+      <span class = "comment">// Find smallest cost v in V - T </span>
+      <span class = "keyword">int</span> u = <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Vertex to be determined</span>
+      <span class = "keyword">double</span> currentMinCost = Double.POSITIVE_INFINITY;
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; getSize(); i++) {
+        <span class = "keyword">if</span> (!T.contains(i) && cost[i] &lt; currentMinCost) {
+          currentMinCost = cost[i];
+          u = i;
+        }
+      }
+      
+      <span class = "keyword">if</span> (u == <span class = "literal">-</span><span class = "constant">1</span>) <span class = "keyword">break</span>; <span class = "keyword">else</span> T.add(u); <span class = "comment">// Add a new vertex to T</span>
+      
+      <span class = "comment">// Adjust cost[v] for v that is adjacent to u and v in V - T</span>
+      <span class = "keyword">for</span> (Edge e : neighbors.get(u)) {
+        <span class = "keyword">if</span> (!T.contains(e.v) 
+            && cost[e.v] &gt; cost[u] + ((WeightedEdge)e).weight) {
+          cost[e.v] = cost[u] + ((WeightedEdge)e).weight;
+          parent[e.v] = u; 
+        }
+      }
+    } <span class = "comment">// End of while</span>
+
+    <span class = "comment">// Create a ShortestPathTree</span>
+    <span class = "keyword">return</span> <span class = "keyword">new</span> ShortestPathTree(sourceVertex, parent, T, cost);
+  }
+
+  <span class = "comment">/** ShortestPathTree is an inner class in WeightedGraph */</span>
+  <span class = "keyword">public</span> <span class = "keyword">class</span> ShortestPathTree <span class = "keyword">extends</span> SearchTree {
+    <span class = "keyword">private</span> <span class = "keyword">double</span>[] cost; <span class = "comment">// cost[v] is the cost from v to source</span>
+
+    <span class = "comment">/** Construct a path */</span>
+    <span class = "keyword">public</span> ShortestPathTree(<span class = "keyword">int</span> source, <span class = "keyword">int</span>[] parent, 
+        List&lt;Integer&gt; searchOrder, <span class = "keyword">double</span>[] cost) {
+      <span class = "keyword">super</span>(source, parent, searchOrder);
+      <span class = "keyword">this</span>.cost = cost;
+    }
+
+    <span class = "comment">/** Return the cost for a path from the root to vertex v */</span>
+    <span class = "keyword">public</span> <span class = "keyword">double</span> getCost(<span class = "keyword">int</span> v) {
+      <span class = "keyword">return</span> cost[v];
+    }
+
+    <span class = "comment">/** Print paths from all vertices to the source */</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> printAllPaths() {
+      System.out.println(<span class = "literal">"All shortest paths from "</span> +
+        vertices.get(getRoot()) + <span class = "literal">" are:"</span>);
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; cost.length; i++) {
+        printPath(i); <span class = "comment">// Print a path from i to the source</span>
+        System.out.println(<span class = "literal">"(cost: "</span> + cost[i] + <span class = "literal">")"</span>); <span class = "comment">// Path cost</span>
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

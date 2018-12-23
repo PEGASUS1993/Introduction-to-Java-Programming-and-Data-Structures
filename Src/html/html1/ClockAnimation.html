@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ClockAnimation.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ClockAnimationWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.animation.KeyFrame;
+<span class = "keyword">import</span> javafx.animation.Timeline;
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.util.Duration;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ClockAnimation <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    ClockPane clock = <span class = "keyword">new</span> ClockPane(); <span class = "comment">// Create a clock</span>
+
+    <span class = "comment">// Create a handler for animation</span>
+    EventHandler&lt;ActionEvent&gt; eventHandler = e -&gt; {
+      clock.setCurrentTime(); <span class = "comment">// Set a new clock time</span>
+    };
+    
+    <span class = "comment">// Create an animation for a running clock</span>
+    Timeline animation = <span class = "keyword">new</span> Timeline(
+      <span class = "keyword">new</span> KeyFrame(Duration.millis(<span class = "constant">1000</span>), eventHandler));
+    animation.setCycleCount(Timeline.INDEFINITE);
+    animation.play(); <span class = "comment">// Start animation</span>
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(clock, <span class = "constant">250</span>, <span class = "constant">250</span>);
+    primaryStage.setTitle(<span class = "literal">"ClockAnimation"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

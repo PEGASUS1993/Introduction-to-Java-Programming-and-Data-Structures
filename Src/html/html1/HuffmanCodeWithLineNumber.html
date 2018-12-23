@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - HuffmanCode.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "HuffmanCode.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "HuffmanCode" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> HuffmanCode {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  6&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter a text: "</span>);
+  7&nbsp;&nbsp;    String text = input.nextLine();
+  8&nbsp;&nbsp;    
+  9&nbsp;&nbsp;    <span class = "keyword">int</span>[] counts = getCharacterFrequency(text); <span class = "comment">// Count frequency</span>
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    System.out.printf(<span class = "literal">"%<span class = "literal">-</span>15s%<span class = "literal">-</span>15s%<span class = "literal">-</span>15s%<span class = "literal">-</span>15s\n"</span>,
+ 12&nbsp;&nbsp;      <span class = "literal">"ASCII Code"</span>, <span class = "literal">"Character"</span>, <span class = "literal">"Frequency"</span>, <span class = "literal">"Code"</span>);  
+ 13&nbsp;&nbsp;    
+ 14&nbsp;&nbsp;    Tree tree = getHuffmanTree(counts); <span class = "comment">// Create a Huffman tree</span>
+ 15&nbsp;&nbsp;    String[] codes = getCode(tree.root); <span class = "comment">// Get codes</span>
+ 16&nbsp;&nbsp;        
+ 17&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; codes.length; i++)
+ 18&nbsp;&nbsp;      <span class = "keyword">if</span> (counts[i] != <span class = "constant">0</span>) <span class = "comment">// (char)i is not in text if counts[i] is 0</span>
+ 19&nbsp;&nbsp;        System.out.printf(<span class = "literal">"%<span class = "literal">-</span>15d%<span class = "literal">-</span>15s%<span class = "literal">-</span>15d%<span class = "literal">-</span>15s\n"</span>, 
+ 20&nbsp;&nbsp;          i, (<span class = "keyword">char</span>)i + <span class = "literal">""</span>, counts[i], codes[i]);
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;  
+ 23&nbsp;&nbsp;  <span class = "comment">/** Get Huffman codes for the characters 
+ 24&nbsp;&nbsp;   * This method is called once after a Huffman tree is built
+ 25&nbsp;&nbsp;   */</span>
+ 26&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> String[] getCode(Tree.Node root) {
+ 27&nbsp;&nbsp;    <span class = "keyword">if</span> (root == <span class = "keyword">null</span>) <span class = "keyword">return</span> <span class = "keyword">null</span>;    
+ 28&nbsp;&nbsp;    String[] codes = <span class = "keyword">new</span> String[<span class = "constant">128</span>];
+ 29&nbsp;&nbsp;    assignCode(root, codes);
+ 30&nbsp;&nbsp;    <span class = "keyword">return</span> codes;
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;  
+ 33&nbsp;&nbsp;  <span class = "comment">/* Recursively get codes to the leaf node */</span>
+ 34&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">void</span> assignCode(Tree.Node root, String[] codes) {
+ 35&nbsp;&nbsp;    <span class = "keyword">if</span> (root.left != <span class = "keyword">null</span>) {
+ 36&nbsp;&nbsp;      root.left.code = root.code + <span class = "literal">"0"</span>;
+ 37&nbsp;&nbsp;      assignCode(root.left, codes);
+ 38&nbsp;&nbsp;      
+ 39&nbsp;&nbsp;      root.right.code = root.code + <span class = "literal">"1"</span>;
+ 40&nbsp;&nbsp;      assignCode(root.right, codes);
+ 41&nbsp;&nbsp;    }
+ 42&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 43&nbsp;&nbsp;      codes[(<span class = "keyword">int</span>)root.element] = root.code;
+ 44&nbsp;&nbsp;    }
+ 45&nbsp;&nbsp;  }
+ 46&nbsp;&nbsp;  
+ 47&nbsp;&nbsp;  <span class = "comment">/** Get a Huffman tree from the codes */</span>  
+ 48&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> Tree getHuffmanTree(<span class = "keyword">int</span>[] counts) {
+ 49&nbsp;&nbsp;    <span class = "comment">// Create a heap to hold trees</span>
+ 50&nbsp;&nbsp;    Heap&lt;Tree&gt; heap = <span class = "keyword">new</span> Heap&lt;&gt;(); <span class = "comment">// Defined in Listing 24.10</span>
+ 51&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; counts.length; i++) {
+ 52&nbsp;&nbsp;      <span class = "keyword">if</span> (counts[i] &gt; <span class = "constant">0</span>)
+ 53&nbsp;&nbsp;        heap.add(<span class = "keyword">new</span> Tree(counts[i], (<span class = "keyword">char</span>)i)); <span class = "comment">// A leaf node tree</span>
+ 54&nbsp;&nbsp;    }
+ 55&nbsp;&nbsp;    
+ 56&nbsp;&nbsp;    <span class = "keyword">while</span> (heap.getSize() &gt; <span class = "constant">1</span>) { 
+ 57&nbsp;&nbsp;      Tree t1 = heap.remove(); <span class = "comment">// Remove the smallest weight tree</span>
+ 58&nbsp;&nbsp;      Tree t2 = heap.remove(); <span class = "comment">// Remove the next smallest weight </span>
+ 59&nbsp;&nbsp;      heap.add(<span class = "keyword">new</span> Tree(t1, t2)); <span class = "comment">// Combine two trees</span>
+ 60&nbsp;&nbsp;    }
+ 61&nbsp;&nbsp;
+ 62&nbsp;&nbsp;    <span class = "keyword">return</span> heap.remove(); <span class = "comment">// The final tree</span>
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;  
+ 65&nbsp;&nbsp;  <span class = "comment">/** Get the frequency of the characters */</span>
+ 66&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[] getCharacterFrequency(String text) {
+ 67&nbsp;&nbsp;    <span class = "keyword">int</span>[] counts = <span class = "keyword">new</span> <span class = "keyword">int</span>[<span class = "constant">128</span>]; <span class = "comment">// 128 ASCII characters</span>
+ 68&nbsp;&nbsp;    
+ 69&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; text.length(); i++)
+ 70&nbsp;&nbsp;      counts[(<span class = "keyword">int</span>)text.charAt(i)]++; <span class = "comment">// Count the character in text</span>
+ 71&nbsp;&nbsp;    
+ 72&nbsp;&nbsp;    <span class = "keyword">return</span> counts;
+ 73&nbsp;&nbsp;  }
+ 74&nbsp;&nbsp;  
+ 75&nbsp;&nbsp;  <span class = "comment">/** Define a Huffman coding tree */</span>
+ 76&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Tree <span class = "keyword">implements</span> Comparable&lt;Tree&gt; {
+ 77&nbsp;&nbsp;    Node root; <span class = "comment">// The root of the tree</span>
+ 78&nbsp;&nbsp;
+ 79&nbsp;&nbsp;    <span class = "comment">/** Create a tree with two subtrees */</span>
+ 80&nbsp;&nbsp;    <span class = "keyword">public</span> Tree(Tree t1, Tree t2) {
+ 81&nbsp;&nbsp;      root = <span class = "keyword">new</span> Node();
+ 82&nbsp;&nbsp;      root.left = t1.root;
+ 83&nbsp;&nbsp;      root.right = t2.root;
+ 84&nbsp;&nbsp;      root.weight = t1.root.weight + t2.root.weight;
+ 85&nbsp;&nbsp;    }
+ 86&nbsp;&nbsp;    
+ 87&nbsp;&nbsp;    <span class = "comment">/** Create a tree containing a leaf node */</span>
+ 88&nbsp;&nbsp;    <span class = "keyword">public</span> Tree(<span class = "keyword">int</span> weight, <span class = "keyword">char</span> element) {
+ 89&nbsp;&nbsp;      root = <span class = "keyword">new</span> Node(weight, element);
+ 90&nbsp;&nbsp;    }
+ 91&nbsp;&nbsp;    
+ 92&nbsp;&nbsp;    @Override <span class = "comment">/** Compare trees based on their weights */</span>
+ 93&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">int</span> compareTo(Tree t) {
+ 94&nbsp;&nbsp;      <span class = "keyword">if</span> (root.weight &lt; t.root.weight) <span class = "comment">// Purposely reverse the order</span>
+ 95&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "constant">1</span>;
+ 96&nbsp;&nbsp;      <span class = "keyword">else</span> <span class = "keyword">if</span> (root.weight == t.root.weight)
+ 97&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "constant">0</span>;
+ 98&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 99&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "literal">-</span><span class = "constant">1</span>;
+100&nbsp;&nbsp;    }
+101&nbsp;&nbsp;
+102&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">class</span> Node {
+103&nbsp;&nbsp;      <span class = "keyword">char</span> element; <span class = "comment">// Stores the character for a leaf node</span>
+104&nbsp;&nbsp;      <span class = "keyword">int</span> weight; <span class = "comment">// weight of the subtree rooted at this node</span>
+105&nbsp;&nbsp;      Node left; <span class = "comment">// Reference to the left subtree</span>
+106&nbsp;&nbsp;      Node right; <span class = "comment">// Reference to the right subtree</span>
+107&nbsp;&nbsp;      String code = <span class = "literal">""</span>; <span class = "comment">// The code of this node from the root</span>
+108&nbsp;&nbsp;
+109&nbsp;&nbsp;      <span class = "comment">/** Create an empty node */</span>
+110&nbsp;&nbsp;      <span class = "keyword">public</span> Node() {
+111&nbsp;&nbsp;      }
+112&nbsp;&nbsp;      
+113&nbsp;&nbsp;      <span class = "comment">/** Create a node with the specified weight and character */</span>
+114&nbsp;&nbsp;      <span class = "keyword">public</span> Node(<span class = "keyword">int</span> weight, <span class = "keyword">char</span> element) {
+115&nbsp;&nbsp;        <span class = "keyword">this</span>.weight = weight;
+116&nbsp;&nbsp;        <span class = "keyword">this</span>.element = element;
+117&nbsp;&nbsp;      }
+118&nbsp;&nbsp;    }
+119&nbsp;&nbsp;  }  
+120&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

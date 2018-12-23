@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BSTAnimation.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BSTAnimationWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> BSTAnimation <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    BST&lt;Integer&gt; tree = <span class = "keyword">new</span> BST&lt;&gt;(); <span class = "comment">// Create a tree</span>
+
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    BTView view = <span class = "keyword">new</span> BTView(tree); <span class = "comment">// Create a View</span>
+    pane.setCenter(view);
+
+    TextField tfKey = <span class = "keyword">new</span> TextField();
+    tfKey.setPrefColumnCount(<span class = "constant">3</span>);
+    tfKey.setAlignment(Pos.BASELINE_RIGHT);
+    Button btInsert = <span class = "keyword">new</span> Button(<span class = "literal">"Insert"</span>);
+    Button btDelete = <span class = "keyword">new</span> Button(<span class = "literal">"Delete"</span>);
+    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">5</span>);
+    hBox.getChildren().addAll(<span class = "keyword">new</span> Label(<span class = "literal">"Enter a key: "</span>),
+      tfKey, btInsert, btDelete);
+    hBox.setAlignment(Pos.CENTER);
+    pane.setBottom(hBox);
+
+    btInsert.setOnAction(e -&gt; {
+      <span class = "keyword">int</span> key = Integer.parseInt(tfKey.getText());
+      <span class = "keyword">if</span> (tree.search(key)) { <span class = "comment">// key is in the tree already</span>
+        view.displayTree();
+        view.setStatus(key + <span class = "literal">" is already in the tree"</span>);
+      } 
+      <span class = "keyword">else</span> {
+        tree.insert(key); <span class = "comment">// Insert a new key</span>
+        view.displayTree();
+        view.setStatus(key + <span class = "literal">" is inserted in the tree"</span>);
+      }
+    });
+
+    btDelete.setOnAction(e -&gt; {
+      <span class = "keyword">int</span> key = Integer.parseInt(tfKey.getText());
+      <span class = "keyword">if</span> (!tree.search(key)) { <span class = "comment">// key is not in the tree</span>
+        view.displayTree();
+        view.setStatus(key + <span class = "literal">" is not in the tree"</span>);
+      } 
+      <span class = "keyword">else</span> {
+        tree.delete(key); <span class = "comment">// Delete a key</span>
+        view.displayTree();
+        view.setStatus(key + <span class = "literal">" is deleted from the tree"</span>);
+      }
+    });
+
+    <span class = "comment">// Create a scene and place the pane in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">250</span>);
+    primaryStage.setTitle(<span class = "literal">"BSTAnimation"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

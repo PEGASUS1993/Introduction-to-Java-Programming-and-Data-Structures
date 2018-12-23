@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestRationalClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestRationalClass.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestRationalClass" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestRationalClass {
+  2&nbsp;&nbsp;  <span class = "comment">/** Main method */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  4&nbsp;&nbsp;    <span class = "comment">// Create and initialize two rational numbers r1 and r2.</span>
+  5&nbsp;&nbsp;    Rational r1 = <span class = "keyword">new</span> Rational(<span class = "constant">4</span>, <span class = "constant">2</span>);
+  6&nbsp;&nbsp;    Rational r2 = <span class = "keyword">new</span> Rational(<span class = "constant">2</span>, <span class = "constant">3</span>);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Display results</span>
+  9&nbsp;&nbsp;    System.out.println(r1 + <span class = "literal">" + "</span> + r2 + <span class = "literal">" = "</span> + r1.add(r2));
+ 10&nbsp;&nbsp;    System.out.println(r1 + <span class = "literal">" - "</span> + r2 + <span class = "literal">" = "</span> + r1.subtract(r2));
+ 11&nbsp;&nbsp;    System.out.println(r1 + <span class = "literal">" * "</span> + r2 + <span class = "literal">" = "</span> + r1.multiply(r2));
+ 12&nbsp;&nbsp;    System.out.println(r1 + <span class = "literal">" / "</span> + r2 + <span class = "literal">" = "</span> + r1.divide(r2));
+ 13&nbsp;&nbsp;    System.out.println(r2 + <span class = "literal">" is "</span> + r2.doubleValue());
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

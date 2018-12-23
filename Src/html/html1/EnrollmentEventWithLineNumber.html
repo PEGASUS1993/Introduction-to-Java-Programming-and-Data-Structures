@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - EnrollmentEvent.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "EnrollmentEvent.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> EnrollmentEvent <span class = "keyword">extends</span> java.util.EventObject {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> String studentToEnroll;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> enrollmentCap;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;  <span class = "comment">/** Construct a EnrollmentEvent */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> EnrollmentEvent(Object source, String studentToEnroll,
+  7&nbsp;&nbsp;      <span class = "keyword">int</span> enrollmentCap) {
+  8&nbsp;&nbsp;    <span class = "keyword">super</span>(source);
+  9&nbsp;&nbsp;    <span class = "keyword">this</span>.studentToEnroll = studentToEnroll;
+ 10&nbsp;&nbsp;    <span class = "keyword">this</span>.enrollmentCap = enrollmentCap;
+ 11&nbsp;&nbsp;  }
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> String getStudentToEnroll() {
+ 14&nbsp;&nbsp;    <span class = "keyword">return</span> studentToEnroll;
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">long</span> getEnrollmentCap() {
+ 18&nbsp;&nbsp;    <span class = "keyword">return</span> enrollmentCap;
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

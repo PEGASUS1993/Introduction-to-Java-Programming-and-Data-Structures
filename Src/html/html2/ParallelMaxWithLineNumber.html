@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ParallelMax.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ParallelMax.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ParallelMax" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.concurrent.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ParallelMax {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a list</span>
+  6&nbsp;&nbsp;    <span class = "keyword">final</span> <span class = "keyword">int</span> N = <span class = "constant">9000000</span>;
+  7&nbsp;&nbsp;    <span class = "keyword">int</span>[] list = <span class = "keyword">new</span> <span class = "keyword">int</span>[N];
+  8&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+  9&nbsp;&nbsp;      list[i] = i;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    <span class = "keyword">long</span> startTime = System.currentTimeMillis();
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nThe maximal number is "</span> + max(list));
+ 13&nbsp;&nbsp;    <span class = "keyword">long</span> endTime = System.currentTimeMillis();
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"Number of processors is "</span> + 
+ 15&nbsp;&nbsp;      Runtime.getRuntime().availableProcessors()); 
+ 16&nbsp;&nbsp;    System.out.println(<span class = "literal">"Time with "</span> + (endTime - startTime) 
+ 17&nbsp;&nbsp;      + <span class = "literal">" milliseconds"</span>); 
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;  
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> max(<span class = "keyword">int</span>[] list) {
+ 21&nbsp;&nbsp;    RecursiveTask&lt;Integer&gt; task = <span class = "keyword">new</span> MaxTask(list, <span class = "constant">0</span>, list.length);
+ 22&nbsp;&nbsp;    ForkJoinPool pool = <span class = "keyword">new</span> ForkJoinPool();
+ 23&nbsp;&nbsp;    <span class = "keyword">return</span> pool.invoke(task);
+ 24&nbsp;&nbsp;  }
+ 25&nbsp;&nbsp; 
+ 26&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">class</span> MaxTask <span class = "keyword">extends</span> RecursiveTask&lt;Integer&gt; {
+ 27&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">final</span> <span class = "keyword">static</span> <span class = "keyword">int</span> THRESHOLD = <span class = "constant">1000</span>;
+ 28&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span>[] list;
+ 29&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> low;
+ 30&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> high;
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;    <span class = "keyword">public</span> MaxTask(<span class = "keyword">int</span>[] list, <span class = "keyword">int</span> low, <span class = "keyword">int</span> high) {
+ 33&nbsp;&nbsp;      <span class = "keyword">this</span>.list = list;
+ 34&nbsp;&nbsp;      <span class = "keyword">this</span>.low = low;
+ 35&nbsp;&nbsp;      <span class = "keyword">this</span>.high = high;
+ 36&nbsp;&nbsp;    }
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;    @Override
+ 39&nbsp;&nbsp;    <span class = "keyword">public</span> Integer compute() {
+ 40&nbsp;&nbsp;      <span class = "keyword">if</span> (high - low &lt; THRESHOLD) {
+ 41&nbsp;&nbsp;        <span class = "keyword">int</span> max = list[<span class = "constant">0</span>];
+ 42&nbsp;&nbsp;        <span class = "keyword">for</span> (<span class = "keyword">int</span> i = low; i &lt; high; i++)
+ 43&nbsp;&nbsp;          <span class = "keyword">if</span> (list[i] &gt; max)
+ 44&nbsp;&nbsp;            max = list[i];
+ 45&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "keyword">new</span> Integer(max);
+ 46&nbsp;&nbsp;      } 
+ 47&nbsp;&nbsp;      <span class = "keyword">else</span> {
+ 48&nbsp;&nbsp;        <span class = "keyword">int</span> mid = (low + high) / <span class = "constant">2</span>;
+ 49&nbsp;&nbsp;        RecursiveTask&lt;Integer&gt; left = <span class = "keyword">new</span> MaxTask(list, low, mid);
+ 50&nbsp;&nbsp;        RecursiveTask&lt;Integer&gt; right = <span class = "keyword">new</span> MaxTask(list, mid, high);
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;        right.fork();
+ 53&nbsp;&nbsp;        left.fork(); 
+ 54&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "keyword">new</span> Integer(Math.max(left.join().intValue(), 
+ 55&nbsp;&nbsp;          right.join().intValue()));
+ 56&nbsp;&nbsp;      }
+ 57&nbsp;&nbsp;    }
+ 58&nbsp;&nbsp;  }
+ 59&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCircleWithPrivateDataFields.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCircleWithPrivateDataFieldsWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCircleWithPrivateDataFields" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestCircleWithPrivateDataFields {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Circle with radius 5.0</span>
+    CircleWithPrivateDataFields myCircle = 
+      <span class = "keyword">new</span> CircleWithPrivateDataFields(<span class = "constant">5</span><span class = "literal">.</span><span class = "constant">0</span>);
+    System.out.println(<span class = "literal">"The area of the circle of radius "</span>
+      + myCircle.getRadius() + <span class = "literal">" is "</span> + myCircle.getArea());
+
+    <span class = "comment">// Increase myCircle's radius by 10%</span>
+    myCircle.setRadius(myCircle.getRadius() * <span class = "constant">1</span><span class = "literal">.</span><span class = "constant">1</span>);
+    System.out.println(<span class = "literal">"The area of the circle of radius "</span>
+      + myCircle.getRadius() + <span class = "literal">" is "</span> + myCircle.getArea());
+    
+    System.out.println(<span class = "literal">"The number of objects created is "</span>
+      + CircleWithPrivateDataFields.getNumberOfObjects());
+  }
+}
+</pre>
+</body>
+</html>

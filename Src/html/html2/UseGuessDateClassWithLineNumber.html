@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - UseGuessDateClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "UseGuessDateClass.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "UseGuessDateClass" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner; 
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> UseGuessDateClass {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "keyword">int</span> date = <span class = "constant">0</span>; <span class = "comment">// Date to be determined</span>
+  6&nbsp;&nbsp;    <span class = "keyword">int</span> answer;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Create a Scanner</span>
+  9&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">5</span>; i++) {
+ 12&nbsp;&nbsp;      System.out.println(<span class = "literal">"Is your birth date in Set"</span> + (i + <span class = "constant">1</span>) + <span class = "literal">"?"</span>);       
+ 13&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">4</span>; j++) {
+ 14&nbsp;&nbsp;        <span class = "keyword">for</span> (<span class = "keyword">int</span> k = <span class = "constant">0</span>; k &lt; <span class = "constant">4</span>; k++)
+ 15&nbsp;&nbsp;          System.out.print(GuessDate.getValue(i, j, k) + <span class = "literal">"  "</span>);
+ 16&nbsp;&nbsp;        System.out.println();
+ 17&nbsp;&nbsp;      }
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;      System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+ 20&nbsp;&nbsp;      answer = input.nextInt();
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;      <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+ 23&nbsp;&nbsp;        date += GuessDate.getValue(i, <span class = "constant">0</span>, <span class = "constant">0</span>);
+ 24&nbsp;&nbsp;    }
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;    System.out.println(<span class = "literal">"Your birth date is "</span> + date);
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

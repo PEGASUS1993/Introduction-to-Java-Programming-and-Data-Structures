@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestObjectStreamForArray.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestObjectStreamForArrayWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestObjectStreamForArray" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestObjectStreamForArray {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args)
+      <span class = "keyword">throws</span> ClassNotFoundException, IOException {
+    <span class = "keyword">int</span>[] numbers = {<span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">5</span>};
+    String[] strings = {<span class = "literal">"John"</span>, <span class = "literal">"Susan"</span>, <span class = "literal">"Kim"</span>};
+
+    <span class = "keyword">try</span> ( <span class = "comment">// Create an output stream for file array.dat</span>
+      ObjectOutputStream output = <span class = "keyword">new</span> ObjectOutputStream(<span class = "keyword">new</span> 
+        FileOutputStream(<span class = "literal">"array.dat"</span>, <span class = "keyword">true</span>));
+    ) {
+      <span class = "comment">// Write arrays to the object output stream</span>
+      output.writeObject(numbers);
+      output.writeObject(strings);
+    }
+
+    <span class = "keyword">try</span> ( <span class = "comment">// Create an input stream for file array.dat</span>
+      ObjectInputStream input =
+        <span class = "keyword">new</span> ObjectInputStream(<span class = "keyword">new</span> FileInputStream(<span class = "literal">"array.dat"</span>));
+    ) {
+      <span class = "keyword">int</span>[] newNumbers = (<span class = "keyword">int</span>[])(input.readObject());
+      String[] newStrings = (String[])(input.readObject());
+  
+      <span class = "comment">// Display arrays</span>
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; newNumbers.length; i++)
+        System.out.print(newNumbers[i] + <span class = "literal">" "</span>);
+      System.out.println();
+  
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; newStrings.length; i++)
+        System.out.print(newStrings[i] + <span class = "literal">" "</span>);
+    }
+  }
+}
+</pre>
+</body>
+</html>

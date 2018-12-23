@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestWeightedGraph.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestWeightedGraph.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestWeightedGraph" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestWeightedGraph {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    String[] vertices = {<span class = "literal">"Seattle"</span>, <span class = "literal">"San Francisco"</span>, <span class = "literal">"Los Angeles"</span>,
+  4&nbsp;&nbsp;      <span class = "literal">"Denver"</span>, <span class = "literal">"Kansas City"</span>, <span class = "literal">"Chicago"</span>, <span class = "literal">"Boston"</span>, <span class = "literal">"New York"</span>,
+  5&nbsp;&nbsp;      <span class = "literal">"Atlanta"</span>, <span class = "literal">"Miami"</span>, <span class = "literal">"Dallas"</span>, <span class = "literal">"Houston"</span>};
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;    <span class = "keyword">int</span>[][] edges = {
+  8&nbsp;&nbsp;      {<span class = "constant">0</span>, <span class = "constant">1</span>, <span class = "constant">807</span>}, {<span class = "constant">0</span>, <span class = "constant">3</span>, <span class = "constant">1331</span>}, {<span class = "constant">0</span>, <span class = "constant">5</span>, <span class = "constant">2097</span>},
+  9&nbsp;&nbsp;      {<span class = "constant">1</span>, <span class = "constant">0</span>, <span class = "constant">807</span>}, {<span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">381</span>}, {<span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">1267</span>},
+ 10&nbsp;&nbsp;      {<span class = "constant">2</span>, <span class = "constant">1</span>, <span class = "constant">381</span>}, {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">1015</span>}, {<span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">1663</span>}, {<span class = "constant">2</span>, <span class = "constant">10</span>, <span class = "constant">1435</span>},
+ 11&nbsp;&nbsp;      {<span class = "constant">3</span>, <span class = "constant">0</span>, <span class = "constant">1331</span>}, {<span class = "constant">3</span>, <span class = "constant">1</span>, <span class = "constant">1267</span>}, {<span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">1015</span>}, {<span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">599</span>}, 
+ 12&nbsp;&nbsp;        {<span class = "constant">3</span>, <span class = "constant">5</span>, <span class = "constant">1003</span>},
+ 13&nbsp;&nbsp;      {<span class = "constant">4</span>, <span class = "constant">2</span>, <span class = "constant">1663</span>}, {<span class = "constant">4</span>, <span class = "constant">3</span>, <span class = "constant">599</span>}, {<span class = "constant">4</span>, <span class = "constant">5</span>, <span class = "constant">533</span>}, {<span class = "constant">4</span>, <span class = "constant">7</span>, <span class = "constant">1260</span>},
+ 14&nbsp;&nbsp;        {<span class = "constant">4</span>, <span class = "constant">8</span>, <span class = "constant">864</span>}, {<span class = "constant">4</span>, <span class = "constant">10</span>, <span class = "constant">496</span>},
+ 15&nbsp;&nbsp;      {<span class = "constant">5</span>, <span class = "constant">0</span>, <span class = "constant">2097</span>}, {<span class = "constant">5</span>, <span class = "constant">3</span>, <span class = "constant">1003</span>}, {<span class = "constant">5</span>, <span class = "constant">4</span>, <span class = "constant">533</span>}, 
+ 16&nbsp;&nbsp;        {<span class = "constant">5</span>, <span class = "constant">6</span>, <span class = "constant">983</span>}, {<span class = "constant">5</span>, <span class = "constant">7</span>, <span class = "constant">787</span>},
+ 17&nbsp;&nbsp;      {<span class = "constant">6</span>, <span class = "constant">5</span>, <span class = "constant">983</span>}, {<span class = "constant">6</span>, <span class = "constant">7</span>, <span class = "constant">214</span>},
+ 18&nbsp;&nbsp;      {<span class = "constant">7</span>, <span class = "constant">4</span>, <span class = "constant">1260</span>}, {<span class = "constant">7</span>, <span class = "constant">5</span>, <span class = "constant">787</span>}, {<span class = "constant">7</span>, <span class = "constant">6</span>, <span class = "constant">214</span>}, {<span class = "constant">7</span>, <span class = "constant">8</span>, <span class = "constant">888</span>},
+ 19&nbsp;&nbsp;      {<span class = "constant">8</span>, <span class = "constant">4</span>, <span class = "constant">864</span>}, {<span class = "constant">8</span>, <span class = "constant">7</span>, <span class = "constant">888</span>}, {<span class = "constant">8</span>, <span class = "constant">9</span>, <span class = "constant">661</span>}, 
+ 20&nbsp;&nbsp;        {<span class = "constant">8</span>, <span class = "constant">10</span>, <span class = "constant">781</span>}, {<span class = "constant">8</span>, <span class = "constant">11</span>, <span class = "constant">810</span>},
+ 21&nbsp;&nbsp;      {<span class = "constant">9</span>, <span class = "constant">8</span>, <span class = "constant">661</span>}, {<span class = "constant">9</span>, <span class = "constant">11</span>, <span class = "constant">1187</span>},
+ 22&nbsp;&nbsp;      {<span class = "constant">10</span>, <span class = "constant">2</span>, <span class = "constant">1435</span>}, {<span class = "constant">10</span>, <span class = "constant">4</span>, <span class = "constant">496</span>}, {<span class = "constant">10</span>, <span class = "constant">8</span>, <span class = "constant">781</span>}, {<span class = "constant">10</span>, <span class = "constant">11</span>, <span class = "constant">239</span>},
+ 23&nbsp;&nbsp;      {<span class = "constant">11</span>, <span class = "constant">8</span>, <span class = "constant">810</span>}, {<span class = "constant">11</span>, <span class = "constant">9</span>, <span class = "constant">1187</span>}, {<span class = "constant">11</span>, <span class = "constant">10</span>, <span class = "constant">239</span>}
+ 24&nbsp;&nbsp;    };
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;    WeightedGraph&lt;String&gt; graph1 = 
+ 27&nbsp;&nbsp;      <span class = "keyword">new</span> WeightedGraph&lt;&gt;(vertices, edges);
+ 28&nbsp;&nbsp;    System.out.println(<span class = "literal">"The number of vertices in graph1: "</span> 
+ 29&nbsp;&nbsp;      + graph1.getSize());
+ 30&nbsp;&nbsp;    System.out.println(<span class = "literal">"The vertex with index 1 is "</span> 
+ 31&nbsp;&nbsp;      + graph1.getVertex(<span class = "constant">1</span>));
+ 32&nbsp;&nbsp;    System.out.println(<span class = "literal">"The index for Miami is "</span> + 
+ 33&nbsp;&nbsp;      graph1.getIndex(<span class = "literal">"Miami"</span>));
+ 34&nbsp;&nbsp;    System.out.println(<span class = "literal">"The edges for graph1:"</span>);
+ 35&nbsp;&nbsp;    graph1.printWeightedEdges();
+ 36&nbsp;&nbsp;
+ 37&nbsp;&nbsp;    edges = <span class = "keyword">new</span> <span class = "keyword">int</span>[][] {
+ 38&nbsp;&nbsp;      {<span class = "constant">0</span>, <span class = "constant">1</span>, <span class = "constant">2</span>}, {<span class = "constant">0</span>, <span class = "constant">3</span>, <span class = "constant">8</span>}, 
+ 39&nbsp;&nbsp;      {<span class = "constant">1</span>, <span class = "constant">0</span>, <span class = "constant">2</span>}, {<span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">7</span>}, {<span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">3</span>},
+ 40&nbsp;&nbsp;      {<span class = "constant">2</span>, <span class = "constant">1</span>, <span class = "constant">7</span>}, {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">4</span>}, {<span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">5</span>},
+ 41&nbsp;&nbsp;      {<span class = "constant">3</span>, <span class = "constant">0</span>, <span class = "constant">8</span>}, {<span class = "constant">3</span>, <span class = "constant">1</span>, <span class = "constant">3</span>}, {<span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">4</span>}, {<span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">6</span>},
+ 42&nbsp;&nbsp;      {<span class = "constant">4</span>, <span class = "constant">2</span>, <span class = "constant">5</span>}, {<span class = "constant">4</span>, <span class = "constant">3</span>, <span class = "constant">6</span>}
+ 43&nbsp;&nbsp;    };
+ 44&nbsp;&nbsp;    WeightedGraph&lt;Integer&gt; graph2 = <span class = "keyword">new</span> WeightedGraph&lt;&gt;(edges, <span class = "constant">5</span>);
+ 45&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nThe edges for graph2:"</span>);
+ 46&nbsp;&nbsp;    graph2.printWeightedEdges();
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

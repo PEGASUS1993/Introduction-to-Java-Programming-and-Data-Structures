@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestBooleanOperators.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestBooleanOperators.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestBooleanOperators" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner; 
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestBooleanOperators {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a Scanner</span>
+  6&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Receive an input</span>
+  9&nbsp;&nbsp;    System.out.print(<span class = "literal">"Enter an integer: "</span>);
+ 10&nbsp;&nbsp;    <span class = "keyword">int</span> number = input.nextInt();
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    <span class = "keyword">if</span> (number % <span class = "constant">2</span> == <span class = "constant">0</span> && number % <span class = "constant">3</span> == <span class = "constant">0</span>)
+ 13&nbsp;&nbsp;      System.out.println(number + <span class = "literal">" is divisible by 2 and 3."</span>);
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    <span class = "keyword">if</span> (number % <span class = "constant">2</span> == <span class = "constant">0</span> || number % <span class = "constant">3</span> == <span class = "constant">0</span>)
+ 16&nbsp;&nbsp;      System.out.println(number + <span class = "literal">" is divisible by 2 or 3."</span>);
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    <span class = "keyword">if</span> (number % <span class = "constant">2</span> == <span class = "constant">0</span> ^ number % <span class = "constant">3</span> == <span class = "constant">0</span>)
+ 19&nbsp;&nbsp;      System.out.println(number + 
+ 20&nbsp;&nbsp;        <span class = "literal">" divisible by 2 or 3, but not both."</span>);
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LambdaHandlerDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LambdaHandlerDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.ActionEvent;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.EventHandler;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> LambdaHandlerDemo <span class = "keyword">extends</span> Application {
+ 14&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 16&nbsp;&nbsp;    Text text = <span class = "keyword">new</span> Text(<span class = "constant">40</span>, <span class = "constant">40</span>, <span class = "literal">"Programming is fun"</span>);
+ 17&nbsp;&nbsp;    Pane pane = <span class = "keyword">new</span> Pane(text);
+ 18&nbsp;&nbsp;    
+ 19&nbsp;&nbsp;    <span class = "comment">// Hold four buttons in an HBox</span>
+ 20&nbsp;&nbsp;    Button btUp = <span class = "keyword">new</span> Button(<span class = "literal">"Up"</span>);
+ 21&nbsp;&nbsp;    Button btDown = <span class = "keyword">new</span> Button(<span class = "literal">"Down"</span>);
+ 22&nbsp;&nbsp;    Button btLeft = <span class = "keyword">new</span> Button(<span class = "literal">"Left"</span>);
+ 23&nbsp;&nbsp;    Button btRight = <span class = "keyword">new</span> Button(<span class = "literal">"Right"</span>);
+ 24&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(btUp, btDown, btLeft, btRight);
+ 25&nbsp;&nbsp;    hBox.setSpacing(<span class = "constant">10</span>);
+ 26&nbsp;&nbsp;    hBox.setAlignment(Pos.CENTER);
+ 27&nbsp;&nbsp;    
+ 28&nbsp;&nbsp;    BorderPane borderPane = <span class = "keyword">new</span> BorderPane(pane);
+ 29&nbsp;&nbsp;    borderPane.setBottom(hBox);
+ 30&nbsp;&nbsp;    
+ 31&nbsp;&nbsp;    <span class = "comment">// Create and register the handler</span>
+ 32&nbsp;&nbsp;    btUp.setOnAction((ActionEvent e) -&gt; {
+ 33&nbsp;&nbsp;        text.setY(text.getY() &gt; <span class = "constant">10</span> ? text.getY() - <span class = "constant">5</span> : <span class = "constant">10</span>);
+ 34&nbsp;&nbsp;    });
+ 35&nbsp;&nbsp;
+ 36&nbsp;&nbsp;    btDown.setOnAction((e) -&gt; {
+ 37&nbsp;&nbsp;      text.setY(text.getY() &lt; pane.getHeight() ? 
+ 38&nbsp;&nbsp;        text.getY() + <span class = "constant">5</span> : pane.getHeight());
+ 39&nbsp;&nbsp;    });
+ 40&nbsp;&nbsp;    
+ 41&nbsp;&nbsp;    btLeft.setOnAction(e -&gt; {
+ 42&nbsp;&nbsp;      text.setX(text.getX() &gt; <span class = "constant">0</span> ? text.getX() - <span class = "constant">5</span> : <span class = "constant">0</span>);
+ 43&nbsp;&nbsp;    });
+ 44&nbsp;&nbsp;    
+ 45&nbsp;&nbsp;    btRight.setOnAction(e -&gt;
+ 46&nbsp;&nbsp;      text.setX(text.getX() &lt; pane.getWidth() - 100?
+ 47&nbsp;&nbsp;        text.getX() + <span class = "constant">5</span> : pane.getWidth() - <span class = "constant">100</span>)
+ 48&nbsp;&nbsp;    );
+ 49&nbsp;&nbsp;
+ 50&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 51&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">400</span>, <span class = "constant">350</span>);
+ 52&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"AnonymousHandlerDemo"</span>); <span class = "comment">// Set title</span>
+ 53&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 54&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 55&nbsp;&nbsp;  }
+ 56&nbsp;&nbsp;  
+ 57&nbsp;&nbsp;  <span class = "comment">/**
+ 58&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 59&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 60&nbsp;&nbsp;   */</span>
+ 61&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 62&nbsp;&nbsp;    launch(args);
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

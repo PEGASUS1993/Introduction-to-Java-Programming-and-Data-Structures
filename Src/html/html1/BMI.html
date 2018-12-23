@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BMI.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BMIWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> BMI {
+  <span class = "keyword">private</span> String name;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> age;
+  <span class = "keyword">private</span> <span class = "keyword">double</span> weight; <span class = "comment">// in pounds</span>
+  <span class = "keyword">private</span> <span class = "keyword">double</span> height; <span class = "comment">// in inches</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">double</span> KILOGRAMS_PER_POUND = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">45359237</span>; 
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">double</span> METERS_PER_INCH = <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">0254</span>;  
+  
+  <span class = "keyword">public</span> BMI(String name, <span class = "keyword">int</span> age, <span class = "keyword">double</span> weight, <span class = "keyword">double</span> height) {
+    <span class = "keyword">this</span>.name = name;
+    <span class = "keyword">this</span>.age = age;
+    <span class = "keyword">this</span>.weight = weight;
+    <span class = "keyword">this</span>.height = height;
+  }
+  
+  <span class = "keyword">public</span> BMI(String name, <span class = "keyword">double</span> weight, <span class = "keyword">double</span> height) {
+    <span class = "keyword">this</span>(name, <span class = "constant">20</span>, weight, height);
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getBMI() {
+    <span class = "keyword">double</span> bmi = weight * KILOGRAMS_PER_POUND / 
+      ((height * METERS_PER_INCH) * (height * METERS_PER_INCH));
+    <span class = "keyword">return</span> Math.round(bmi * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>;
+  }
+  
+  <span class = "keyword">public</span> String getStatus() {
+    <span class = "keyword">double</span> bmi = getBMI();
+    <span class = "keyword">if</span> (bmi &lt; <span class = "constant">18</span><span class = "literal">.</span><span class = "constant">5</span>)
+      <span class = "keyword">return</span> <span class = "literal">"Underweight"</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (bmi &lt; <span class = "constant">25</span>)
+      <span class = "keyword">return</span> <span class = "literal">"Normal"</span>;
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (bmi &lt; <span class = "constant">30</span>)
+      <span class = "keyword">return</span> <span class = "literal">"Overweight"</span>;
+    <span class = "keyword">else</span>
+      <span class = "keyword">return</span> <span class = "literal">"Obese"</span>;
+  }
+  
+  <span class = "keyword">public</span> String getName() {
+    <span class = "keyword">return</span> name;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getAge() {
+    <span class = "keyword">return</span> age;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getWeight() {
+    <span class = "keyword">return</span> weight;
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getHeight() {
+    <span class = "keyword">return</span> height;
+  }
+}
+</pre>
+</body>
+</html>

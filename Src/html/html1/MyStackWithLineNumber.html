@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyStack.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyStack.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.ArrayList;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MyStack {
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> ArrayList&lt;Object&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+  7&nbsp;&nbsp;    <span class = "keyword">return</span> list.isEmpty();
+  8&nbsp;&nbsp;  }
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+ 11&nbsp;&nbsp;    <span class = "keyword">return</span> list.size();
+ 12&nbsp;&nbsp;  }
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "keyword">public</span> Object peek() {
+ 15&nbsp;&nbsp;    <span class = "keyword">return</span> list.get(getSize() - <span class = "constant">1</span>);
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> Object pop() {
+ 19&nbsp;&nbsp;    Object o = list.get(getSize() - <span class = "constant">1</span>);
+ 20&nbsp;&nbsp;    list.remove(getSize() - <span class = "constant">1</span>);
+ 21&nbsp;&nbsp;    <span class = "keyword">return</span> o;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> push(Object o) {
+ 25&nbsp;&nbsp;    list.add(o);
+ 26&nbsp;&nbsp;  }
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  @Override <span class = "comment">/** Override the toString in the Object class */</span>
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 30&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"stack: "</span> + list.toString();
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

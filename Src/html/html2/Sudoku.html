@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Sudoku.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SudokuWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "Sudoku" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Sudoku { 
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Read a Sudoku puzzle</span>
+    <span class = "keyword">int</span>[][] grid = readAPuzzle();
+
+    <span class = "keyword">if</span> (!isValid(grid))
+      System.out.println(<span class = "literal">"Invalid input"</span>);
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (search(grid)) {
+      System.out.println(<span class = "literal">"The solution is found:"</span>);
+      printGrid(grid);
+    }   
+    <span class = "keyword">else</span>
+      System.out.println(<span class = "literal">"No solution"</span>);
+  }
+  
+  <span class = "comment">/** Read a Sudoku puzzle from the keyboard */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[][] readAPuzzle() {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    System.out.println(<span class = "literal">"Enter a Sudoku puzzle:"</span>);
+    <span class = "keyword">int</span>[][] grid = <span class = "keyword">new</span> <span class = "keyword">int</span>[<span class = "constant">9</span>][<span class = "constant">9</span>];
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++) 
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++)
+        grid[i][j] = input.nextInt();
+    
+    <span class = "keyword">return</span> grid;
+  }
+
+  <span class = "comment">/** Obtain a list of free cells from the puzzle */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span>[][] getFreeCellList(<span class = "keyword">int</span>[][] grid) {
+    <span class = "comment">// Determine the number of free cells </span>
+    <span class = "keyword">int</span> numberOfFreeCells = <span class = "constant">0</span>;   
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++) 
+        <span class = "keyword">if</span> (grid[i][j] == <span class = "constant">0</span>) 
+          numberOfFreeCells++;
+    
+    <span class = "comment">// Store free cell positions into freeCellList </span>
+    <span class = "keyword">int</span>[][] freeCellList = <span class = "keyword">new</span> <span class = "keyword">int</span>[numberOfFreeCells][<span class = "constant">2</span>];
+    <span class = "keyword">int</span> count = <span class = "constant">0</span>;
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++) 
+        <span class = "keyword">if</span> (grid[i][j] == <span class = "constant">0</span>) {
+          freeCellList[count][<span class = "constant">0</span>] = i;
+          freeCellList[count++][<span class = "constant">1</span>] = j;
+        }
+    
+    <span class = "keyword">return</span> freeCellList;
+  }
+
+  <span class = "comment">/** Print the values in the grid */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printGrid(<span class = "keyword">int</span>[][] grid) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++) {
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++)
+        System.out.print(grid[i][j] + <span class = "literal">" "</span>);
+      System.out.println();
+    }
+  }
+
+  <span class = "comment">/** Search for a solution */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> search(<span class = "keyword">int</span>[][] grid) {
+    <span class = "keyword">int</span>[][] freeCellList = getFreeCellList(grid); <span class = "comment">// Free cells</span>
+    <span class = "keyword">if</span> (freeCellList.length == <span class = "constant">0</span>) 
+      <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// "No free cells");</span>
+    
+    <span class = "keyword">int</span> k = <span class = "constant">0</span>; <span class = "comment">// Start from the first free cell      </span>
+    <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+      <span class = "keyword">int</span> i = freeCellList[k][<span class = "constant">0</span>];
+      <span class = "keyword">int</span> j = freeCellList[k][<span class = "constant">1</span>];
+      <span class = "keyword">if</span> (grid[i][j] == <span class = "constant">0</span>) 
+        grid[i][j] = <span class = "constant">1</span>; <span class = "comment">// Fill the free cell with number 1</span>
+
+      <span class = "keyword">if</span> (isValid(i, j, grid)) {
+        <span class = "keyword">if</span> (k + <span class = "constant">1</span> == freeCellList.length) { <span class = "comment">// No more free cells </span>
+          <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// A solution is found</span>
+        }
+        <span class = "keyword">else</span> { <span class = "comment">// Move to the next free cell</span>
+          k++;
+        }
+      }
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (grid[i][j] &lt; <span class = "constant">9</span>) {
+        <span class = "comment">// Fill the free cell with the next possible value</span>
+        grid[i][j] = grid[i][j] + <span class = "constant">1</span>; 
+      }
+      <span class = "keyword">else</span> { <span class = "comment">// free cell grid[i][j] is 9, backtrack</span>
+        <span class = "keyword">while</span> (grid[i][j] == <span class = "constant">9</span>) {
+          <span class = "keyword">if</span> (k == <span class = "constant">0</span>) {
+            <span class = "keyword">return</span> <span class = "keyword">false</span>; <span class = "comment">// No possible value</span>
+          }
+          grid[i][j] = <span class = "constant">0</span>; <span class = "comment">// Reset to free cell</span>
+          k--; <span class = "comment">// Backtrack to the preceding free cell</span>
+          i = freeCellList[k][<span class = "constant">0</span>];
+          j = freeCellList[k][<span class = "constant">1</span>];
+        }
+
+        <span class = "comment">// Fill the free cell with the next possible value, </span>
+        <span class = "comment">// search continues from this free cell at k</span>
+        grid[i][j] = grid[i][j] + <span class = "constant">1</span>; 
+      }
+    }
+  }
+
+  <span class = "comment">/** Check whether grid[i][j] is valid in the grid */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isValid(<span class = "keyword">int</span> i, <span class = "keyword">int</span> j, <span class = "keyword">int</span>[][] grid) {
+    <span class = "comment">// Check whether grid[i][j] is valid at the i's row</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> column = <span class = "constant">0</span>; column &lt; <span class = "constant">9</span>; column++)
+      <span class = "keyword">if</span> (column != j && grid[i][column] == grid[i][j])
+        <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "comment">// Check whether grid[i][j] is valid at the j's column</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> row = <span class = "constant">0</span>; row &lt; <span class = "constant">9</span>; row++)
+      <span class = "keyword">if</span> (row != i && grid[row][j] == grid[i][j])
+        <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "comment">// Check whether grid[i][j] is valid in the 3 by 3 box</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> row = (i / <span class = "constant">3</span>) * <span class = "constant">3</span>; row &lt; (i / <span class = "constant">3</span>) * <span class = "constant">3</span> + <span class = "constant">3</span>; row++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> col = (j / <span class = "constant">3</span>) * <span class = "constant">3</span>; col &lt; (j / <span class = "constant">3</span>) * <span class = "constant">3</span> + <span class = "constant">3</span>; col++)
+        <span class = "keyword">if</span> (!(row == i && col == j) && grid[row][col] == grid[i][j])
+          <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// The current value at grid[i][j] is valid</span>
+  }
+
+  <span class = "comment">/** Check whether the fixed cells are valid in the grid */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> isValid(<span class = "keyword">int</span>[][] grid) {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">9</span>; i++)
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">0</span>; j &lt; <span class = "constant">9</span>; j++)
+        <span class = "keyword">if</span> (grid[i][j] &lt; <span class = "constant">0</span> || grid[i][j] &gt; <span class = "constant">9</span> ||
+           (grid[i][j] != <span class = "constant">0</span> && !isValid(i, j, grid))) 
+          <span class = "keyword">return</span> <span class = "keyword">false</span>;
+
+    <span class = "keyword">return</span> <span class = "keyword">true</span>; <span class = "comment">// The fixed cells are valid</span>
+  }
+}
+</pre>
+</body>
+</html>

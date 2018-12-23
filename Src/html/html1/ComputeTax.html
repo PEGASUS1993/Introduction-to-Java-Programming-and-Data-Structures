@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ComputeTax.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/ComputeTax.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ComputeTax" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; 
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ComputeTax {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Prompt the user to enter filing status</span>
+    System.out.print(<span class = "literal">"(0-single filer, 1-married jointly or "</span> +
+      <span class = "literal">"qualifying widow(er), 2-married separately, 3-head of "</span> +
+      <span class = "literal">"household) Enter the filing status: "</span>);
+    
+    <span class = "keyword">int</span> status = input.nextInt();
+
+    <span class = "comment">// Prompt the user to enter taxable income</span>
+    System.out.print(<span class = "literal">"Enter the taxable income: "</span>);
+    <span class = "keyword">double</span> income = input.nextDouble();
+
+    <span class = "comment">// Compute tax</span>
+    <span class = "keyword">double</span> tax = <span class = "constant">0</span>;
+
+    <span class = "keyword">if</span> (status == <span class = "constant">0</span>) { <span class = "comment">// Compute tax for single filers</span>
+      <span class = "keyword">if</span> (income &lt;= <span class = "constant">8350</span>)
+        tax = income * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span>;
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (income &lt;= <span class = "constant">33950</span>)
+        tax = <span class = "constant">8350</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span> + (income - <span class = "constant">8350</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">15</span>;
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (income &lt;= <span class = "constant">82250</span>)
+        tax = <span class = "constant">8350</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span> + (<span class = "constant">33950</span> - <span class = "constant">8350</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">15</span> +
+          (income - <span class = "constant">33950</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">25</span>;
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (income &lt;= <span class = "constant">171550</span>)
+        tax = <span class = "constant">8350</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span> + (<span class = "constant">33950</span> - <span class = "constant">8350</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">15</span> +
+          (<span class = "constant">82250</span> - <span class = "constant">33950</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">25</span> + (income - <span class = "constant">82250</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">28</span>;
+      <span class = "keyword">else</span> <span class = "keyword">if</span> (income &lt;= <span class = "constant">372950</span>)
+        tax = <span class = "constant">8350</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span> + (<span class = "constant">33950</span> - <span class = "constant">8350</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">15</span> +
+          (<span class = "constant">82250</span> - <span class = "constant">33950</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">25</span> + (<span class = "constant">171550</span> - <span class = "constant">82250</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">28</span> +
+          (income - <span class = "constant">171550</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">33</span>;
+      <span class = "keyword">else</span>
+        tax = <span class = "constant">8350</span> * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">10</span> + (<span class = "constant">33950</span> - <span class = "constant">8350</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">15</span> +
+          (<span class = "constant">82250</span> - <span class = "constant">33950</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">25</span> + (<span class = "constant">171550</span> - <span class = "constant">82250</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">28</span> +
+          (<span class = "constant">372950</span> - <span class = "constant">171550</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">33</span> + (income - <span class = "constant">372950</span>) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">35</span>;
+    }
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (status == <span class = "constant">1</span>) { <span class = "comment">// Compute tax for married file jointly</span>
+      <span class = "comment">// Left as exercise in Programming Exercise 3.13</span>
+    }
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (status == <span class = "constant">2</span>) { <span class = "comment">// Compute tax for married separately</span>
+      <span class = "comment">// Left as exercise in Programming Exercise 3.13</span>
+    }
+    <span class = "keyword">else</span> <span class = "keyword">if</span> (status == <span class = "constant">3</span>) { <span class = "comment">// Compute tax for head of household</span>
+      <span class = "comment">// Left as exercise in Programming Exercise 3.13</span>
+    }
+    <span class = "keyword">else</span> {
+      System.out.println(<span class = "literal">"Error: invalid status"</span>);
+      System.exit(<span class = "constant">1</span>);
+    }
+
+    <span class = "comment">// Display the result</span>
+    System.out.println(<span class = "literal">"Tax is "</span> + (<span class = "keyword">int</span>)(tax * <span class = "constant">100</span>) / <span class = "constant">100</span><span class = "literal">.</span><span class = "constant">0</span>);
+  }
+}
+</pre>
+</body>
+</html>

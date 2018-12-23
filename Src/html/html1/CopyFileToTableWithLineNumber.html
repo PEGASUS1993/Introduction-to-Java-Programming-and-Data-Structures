@@ -1,0 +1,239 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CopyFileToTable.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CopyFileToTable.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.File;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.io.FileNotFoundException;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.io.IOException;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> java.sql.*;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.collections.FXCollections;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+ 13&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.PasswordField;
+ 14&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.SplitPane;
+ 15&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextArea;
+ 16&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextField;
+ 17&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+ 18&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+ 19&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+ 20&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.VBox;
+ 21&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CopyFileToTable <span class = "keyword">extends</span> Application {
+ 24&nbsp;&nbsp;  <span class = "comment">// Text file info</span>
+ 25&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfFilename = <span class = "keyword">new</span> TextField();
+ 26&nbsp;&nbsp;  <span class = "keyword">private</span> TextArea taFile = <span class = "keyword">new</span> TextArea();
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;  <span class = "comment">// JDBC and table info</span>
+ 29&nbsp;&nbsp;  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboURL = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+ 30&nbsp;&nbsp;  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboDriver = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+ 31&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfUsername = <span class = "keyword">new</span> TextField();
+ 32&nbsp;&nbsp;  <span class = "keyword">private</span> PasswordField pfPassword = <span class = "keyword">new</span> PasswordField();
+ 33&nbsp;&nbsp;  <span class = "keyword">private</span> TextField tfTableName = <span class = "keyword">new</span> TextField();
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "keyword">private</span> Button btViewFile = <span class = "keyword">new</span> Button(<span class = "literal">"View File"</span>);
+ 36&nbsp;&nbsp;  <span class = "keyword">private</span> Button btCopy = <span class = "keyword">new</span> Button(<span class = "literal">"Copy"</span>);
+ 37&nbsp;&nbsp;  <span class = "keyword">private</span> Label lblStatus = <span class = "keyword">new</span> Label();
+ 38&nbsp;&nbsp;
+ 39&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 40&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 41&nbsp;&nbsp;    cboURL.getItems().addAll(FXCollections.observableArrayList(
+ 42&nbsp;&nbsp;      <span class = "literal">"jdbc:mysql://localhost/javabook"</span>,
+ 43&nbsp;&nbsp;      <span class = "literal">"jdbc:mysql://liang.armstrong.edu/javabook"</span>,
+ 44&nbsp;&nbsp;      <span class = "literal">"jdbc:odbc:exampleMDBDataSource"</span>,
+ 45&nbsp;&nbsp;      <span class = "literal">"jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl"</span>));
+ 46&nbsp;&nbsp;    cboURL.getSelectionModel().selectFirst();
+ 47&nbsp;&nbsp;    
+ 48&nbsp;&nbsp;    cboDriver.getItems().addAll(FXCollections.observableArrayList(
+ 49&nbsp;&nbsp;      <span class = "literal">"com.mysql.jdbc.Driver"</span>, <span class = "literal">"sun.jdbc.odbc.dbcOdbcDriver"</span>,
+ 50&nbsp;&nbsp;      <span class = "literal">"oracle.jdbc.driver.OracleDriver"</span>));
+ 51&nbsp;&nbsp;    cboDriver.getSelectionModel().selectFirst();
+ 52&nbsp;&nbsp;    
+ 53&nbsp;&nbsp;    <span class = "comment">// Create UI for connecting to the database </span>
+ 54&nbsp;&nbsp;    GridPane gridPane = <span class = "keyword">new</span> GridPane();
+ 55&nbsp;&nbsp;    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"JDBC Driver"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+ 56&nbsp;&nbsp;    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Database URL"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+ 57&nbsp;&nbsp;    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Username"</span>), <span class = "constant">0</span>, <span class = "constant">2</span>);
+ 58&nbsp;&nbsp;    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Password"</span>), <span class = "constant">0</span>, <span class = "constant">3</span>);
+ 59&nbsp;&nbsp;    gridPane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Table Name"</span>), <span class = "constant">0</span>, <span class = "constant">4</span>);
+ 60&nbsp;&nbsp;    gridPane.add(cboURL, <span class = "constant">1</span>, <span class = "constant">0</span>);
+ 61&nbsp;&nbsp;    gridPane.add(cboDriver, <span class = "constant">1</span>, <span class = "constant">1</span>);
+ 62&nbsp;&nbsp;    gridPane.add(tfUsername, <span class = "constant">1</span>, <span class = "constant">2</span>);
+ 63&nbsp;&nbsp;    gridPane.add(pfPassword, <span class = "constant">1</span>, <span class = "constant">3</span>);
+ 64&nbsp;&nbsp;    gridPane.add(tfTableName, <span class = "constant">1</span>, <span class = "constant">4</span>);
+ 65&nbsp;&nbsp;    
+ 66&nbsp;&nbsp;    HBox hBoxConnection = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+ 67&nbsp;&nbsp;    hBoxConnection.getChildren().addAll(lblStatus, btCopy);
+ 68&nbsp;&nbsp;    hBoxConnection.setAlignment(Pos.CENTER_RIGHT);
+ 69&nbsp;&nbsp;
+ 70&nbsp;&nbsp;    VBox vBoxConnection = <span class = "keyword">new</span> VBox(<span class = "constant">5</span>);
+ 71&nbsp;&nbsp;    vBoxConnection.getChildren().addAll(
+ 72&nbsp;&nbsp;      <span class = "keyword">new</span> Label(<span class = "literal">"Target Database Table"</span>),
+ 73&nbsp;&nbsp;      gridPane, hBoxConnection);
+ 74&nbsp;&nbsp;    
+ 75&nbsp;&nbsp;    gridPane.setStyle(<span class = "literal">"-fx-border-color: black;"</span>);
+ 76&nbsp;&nbsp;
+ 77&nbsp;&nbsp;    BorderPane borderPaneFileName = <span class = "keyword">new</span> BorderPane();
+ 78&nbsp;&nbsp;    borderPaneFileName.setLeft(<span class = "keyword">new</span> Label(<span class = "literal">"Filename"</span>));
+ 79&nbsp;&nbsp;    borderPaneFileName.setCenter(tfFilename);
+ 80&nbsp;&nbsp;    borderPaneFileName.setRight(btViewFile);
+ 81&nbsp;&nbsp;            
+ 82&nbsp;&nbsp;    BorderPane borderPaneFileContent = <span class = "keyword">new</span> BorderPane();
+ 83&nbsp;&nbsp;    borderPaneFileContent.setTop(borderPaneFileName);
+ 84&nbsp;&nbsp;    borderPaneFileContent.setCenter(taFile);
+ 85&nbsp;&nbsp;    
+ 86&nbsp;&nbsp;    BorderPane borderPaneFileSource = <span class = "keyword">new</span> BorderPane();
+ 87&nbsp;&nbsp;    borderPaneFileSource.setTop(<span class = "keyword">new</span> Label(<span class = "literal">"Source Text File"</span>));
+ 88&nbsp;&nbsp;    borderPaneFileSource.setCenter(borderPaneFileContent);
+ 89&nbsp;&nbsp;                
+ 90&nbsp;&nbsp;    SplitPane sp = <span class = "keyword">new</span> SplitPane();
+ 91&nbsp;&nbsp;    sp.getItems().addAll(borderPaneFileSource, vBoxConnection);
+ 92&nbsp;&nbsp;    
+ 93&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 94&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(sp, <span class = "constant">680</span>, <span class = "constant">230</span>);
+ 95&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"CopyFileToTable"</span>); <span class = "comment">// Set the stage title</span>
+ 96&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 97&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage    </span>
+ 98&nbsp;&nbsp;
+ 99&nbsp;&nbsp;    btViewFile.setOnAction(e -&gt; showFile());
+100&nbsp;&nbsp;    btCopy.setOnAction(e -&gt; {
+101&nbsp;&nbsp;        <span class = "keyword">try</span> {
+102&nbsp;&nbsp;          copyFile();
+103&nbsp;&nbsp;        }
+104&nbsp;&nbsp;        <span class = "keyword">catch</span> (Exception ex) {
+105&nbsp;&nbsp;          lblStatus.setText(ex.toString());
+106&nbsp;&nbsp;        }
+107&nbsp;&nbsp;    });
+108&nbsp;&nbsp;  }
+109&nbsp;&nbsp;
+110&nbsp;&nbsp;  <span class = "comment">/** Display the file in the text area */</span>
+111&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> showFile() {
+112&nbsp;&nbsp;    Scanner input = <span class = "keyword">null</span>;
+113&nbsp;&nbsp;    <span class = "keyword">try</span> {
+114&nbsp;&nbsp;      <span class = "comment">// Use a Scanner to read text from the file</span>
+115&nbsp;&nbsp;      input = <span class = "keyword">new</span> Scanner(<span class = "keyword">new</span> File(tfFilename.getText().trim()));
+116&nbsp;&nbsp;
+117&nbsp;&nbsp;      <span class = "comment">// Read a line and append the line to the text area</span>
+118&nbsp;&nbsp;      <span class = "keyword">while</span> (input.hasNext()) 
+119&nbsp;&nbsp;        taFile.appendText(input.nextLine() + <span class = "literal">'\n'</span>);
+120&nbsp;&nbsp;    }
+121&nbsp;&nbsp;    <span class = "keyword">catch</span> (FileNotFoundException ex) {
+122&nbsp;&nbsp;      System.out.println(<span class = "literal">"File not found: "</span> + tfFilename.getText());
+123&nbsp;&nbsp;    }
+124&nbsp;&nbsp;    <span class = "keyword">catch</span> (IOException ex) {
+125&nbsp;&nbsp;      ex.printStackTrace();
+126&nbsp;&nbsp;    }
+127&nbsp;&nbsp;    <span class = "keyword">finally</span> {
+128&nbsp;&nbsp;      <span class = "keyword">if</span> (input != <span class = "keyword">null</span>) input.close();
+129&nbsp;&nbsp;    }
+130&nbsp;&nbsp;  }
+131&nbsp;&nbsp;
+132&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> copyFile() <span class = "keyword">throws</span> Exception {
+133&nbsp;&nbsp;    <span class = "comment">// Load the JDBC driver</span>
+134&nbsp;&nbsp;    Class.forName(cboDriver.getSelectionModel()
+135&nbsp;&nbsp;      .getSelectedItem().trim());
+136&nbsp;&nbsp;    System.out.println(<span class = "literal">"Driver loaded"</span>);
+137&nbsp;&nbsp;
+138&nbsp;&nbsp;    <span class = "comment">// Establish a connection</span>
+139&nbsp;&nbsp;    Connection conn = DriverManager.getConnection(
+140&nbsp;&nbsp;      cboURL.getSelectionModel().getSelectedItem().trim(),
+141&nbsp;&nbsp;      tfUsername.getText().trim(),
+142&nbsp;&nbsp;      String.valueOf(pfPassword.getText()).trim());
+143&nbsp;&nbsp;    System.out.println(<span class = "literal">"Database connected"</span>);
+144&nbsp;&nbsp;
+145&nbsp;&nbsp;    <span class = "comment">// Read each line from the text file and insert it to the table</span>
+146&nbsp;&nbsp;    insertRows(conn);
+147&nbsp;&nbsp;  }
+148&nbsp;&nbsp;
+149&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> insertRows(Connection connection) {
+150&nbsp;&nbsp;    <span class = "comment">// Build the SQL INSERT statement</span>
+151&nbsp;&nbsp;    String sqlInsert = <span class = "literal">"insert into "</span> + tfTableName.getText()
+152&nbsp;&nbsp;      + <span class = "literal">" values ("</span>;
+153&nbsp;&nbsp;
+154&nbsp;&nbsp;    <span class = "comment">// Use a Scanner to read text from the file</span>
+155&nbsp;&nbsp;    Scanner input = <span class = "keyword">null</span>;
+156&nbsp;&nbsp;
+157&nbsp;&nbsp;    <span class = "comment">// Get file name from the text field</span>
+158&nbsp;&nbsp;    String filename = tfFilename.getText().trim();
+159&nbsp;&nbsp;
+160&nbsp;&nbsp;    <span class = "keyword">try</span> {
+161&nbsp;&nbsp;      <span class = "comment">// Create a scanner</span>
+162&nbsp;&nbsp;      input = <span class = "keyword">new</span> Scanner(<span class = "keyword">new</span> File(filename));
+163&nbsp;&nbsp;
+164&nbsp;&nbsp;      <span class = "comment">// Create a statement</span>
+165&nbsp;&nbsp;      Statement statement = connection.createStatement();
+166&nbsp;&nbsp;
+167&nbsp;&nbsp;      System.out.println(<span class = "literal">"Driver major version? "</span> +
+168&nbsp;&nbsp;        connection.getMetaData().getDriverMajorVersion());
+169&nbsp;&nbsp;
+170&nbsp;&nbsp;      <span class = "comment">// Determine if batchUpdatesSupported is supported </span>
+171&nbsp;&nbsp;      <span class = "keyword">boolean</span> batchUpdatesSupported = <span class = "keyword">false</span>;
+172&nbsp;&nbsp;
+173&nbsp;&nbsp;      <span class = "keyword">try</span> {
+174&nbsp;&nbsp;        <span class = "keyword">if</span> (connection.getMetaData().supportsBatchUpdates()) {
+175&nbsp;&nbsp;          batchUpdatesSupported = <span class = "keyword">true</span>;
+176&nbsp;&nbsp;          System.out.println(<span class = "literal">"batch updates supported"</span>);
+177&nbsp;&nbsp;        }
+178&nbsp;&nbsp;        <span class = "keyword">else</span> {
+179&nbsp;&nbsp;          System.out.println(<span class = "literal">"The driver "</span> +
+180&nbsp;&nbsp;            <span class = "literal">"does not support batch updates"</span>);
+181&nbsp;&nbsp;        }
+182&nbsp;&nbsp;      }
+183&nbsp;&nbsp;      <span class = "keyword">catch</span> (UnsupportedOperationException ex) {
+184&nbsp;&nbsp;        System.out.println(<span class = "literal">"The operation is not supported"</span>);
+185&nbsp;&nbsp;      }
+186&nbsp;&nbsp;
+187&nbsp;&nbsp;      <span class = "comment">// Determine if the driver is capable of batch updates</span>
+188&nbsp;&nbsp;      <span class = "keyword">if</span> (batchUpdatesSupported) {
+189&nbsp;&nbsp;        <span class = "comment">// Read a line and add the insert table command to the batch</span>
+190&nbsp;&nbsp;        <span class = "keyword">while</span> (input.hasNext()) {
+191&nbsp;&nbsp;          statement.addBatch(sqlInsert + input.nextLine() + <span class = "literal">")"</span>);
+192&nbsp;&nbsp;        }
+193&nbsp;&nbsp;
+194&nbsp;&nbsp;        statement.executeBatch();
+195&nbsp;&nbsp;
+196&nbsp;&nbsp;        lblStatus.setText(<span class = "literal">"Batch updates completed"</span>);
+197&nbsp;&nbsp;      }
+198&nbsp;&nbsp;      <span class = "keyword">else</span> {
+199&nbsp;&nbsp;        <span class = "comment">// Read a line and execute insert table command</span>
+200&nbsp;&nbsp;        <span class = "keyword">while</span> (input.hasNext()) {
+201&nbsp;&nbsp;          statement.executeUpdate(sqlInsert + input.nextLine() + <span class = "literal">")"</span>);
+202&nbsp;&nbsp;        }
+203&nbsp;&nbsp;
+204&nbsp;&nbsp;        lblStatus.setText(<span class = "literal">"Single row update completed"</span>);
+205&nbsp;&nbsp;      }
+206&nbsp;&nbsp;    }
+207&nbsp;&nbsp;    <span class = "keyword">catch</span> (SQLException ex) {
+208&nbsp;&nbsp;      System.out.println(ex);
+209&nbsp;&nbsp;    }
+210&nbsp;&nbsp;    <span class = "keyword">catch</span> (FileNotFoundException ex) {
+211&nbsp;&nbsp;      System.out.println(<span class = "literal">"File not found: "</span> + filename);
+212&nbsp;&nbsp;    }
+213&nbsp;&nbsp;    <span class = "keyword">finally</span> {
+214&nbsp;&nbsp;      <span class = "keyword">if</span> (input != <span class = "keyword">null</span>) input.close();
+215&nbsp;&nbsp;    }
+216&nbsp;&nbsp;  }
+217&nbsp;&nbsp;
+218&nbsp;&nbsp;  <span class = "comment">/**
+219&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+220&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+221&nbsp;&nbsp;   */</span>
+222&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+223&nbsp;&nbsp;    launch(args);
+224&nbsp;&nbsp;  }
+225&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

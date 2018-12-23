@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BallPane.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BallPaneWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.animation.KeyFrame;
+<span class = "keyword">import</span> javafx.animation.Timeline;
+<span class = "keyword">import</span> javafx.beans.property.DoubleProperty;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.util.Duration;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> BallPane <span class = "keyword">extends</span> Pane {
+  <span class = "keyword">public</span> <span class = "keyword">final</span> <span class = "keyword">double</span> radius = <span class = "constant">20</span>;
+  <span class = "keyword">private</span> <span class = "keyword">double</span> x = radius, y = radius;
+  <span class = "keyword">private</span> <span class = "keyword">double</span> dx = <span class = "constant">1</span>, dy = <span class = "constant">1</span>;
+  <span class = "keyword">private</span> Circle circle = <span class = "keyword">new</span> Circle(x, y, radius);
+  <span class = "keyword">private</span> Timeline animation;
+
+  <span class = "keyword">public</span> BallPane() {
+    circle.setFill(Color.GREEN); <span class = "comment">// Set ball color</span>
+    getChildren().add(circle); <span class = "comment">// Place a ball into this pane</span>
+
+    <span class = "comment">// Create an animation for moving the ball</span>
+    animation = <span class = "keyword">new</span> Timeline(
+      <span class = "keyword">new</span> KeyFrame(Duration.millis(<span class = "constant">50</span>), e -&gt; moveBall()));
+    animation.setCycleCount(Timeline.INDEFINITE);
+    animation.play(); <span class = "comment">// Start animation</span>
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> play() {
+    animation.play();
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> pause() {
+    animation.pause();
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> increaseSpeed() {
+    animation.setRate(animation.getRate() + <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">1</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">void</span> decreaseSpeed() {
+    animation.setRate(
+      animation.getRate() &gt; <span class = "constant">0</span> ? animation.getRate() - <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">1</span> : <span class = "constant">0</span>);
+  }
+
+  <span class = "keyword">public</span> DoubleProperty rateProperty() {
+    <span class = "keyword">return</span> animation.rateProperty();
+  }
+  
+  <span class = "keyword">protected</span> <span class = "keyword">void</span> moveBall() {
+    <span class = "comment">// Check boundaries</span>
+    <span class = "keyword">if</span> (x &lt; radius || x &gt; getWidth() - radius) {
+      dx *= <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Change ball move direction</span>
+    }
+    <span class = "keyword">if</span> (y &lt; radius || y &gt; getHeight() - radius) {
+      dy *= <span class = "literal">-</span><span class = "constant">1</span>; <span class = "comment">// Change ball move direction</span>
+    }
+
+    <span class = "comment">// Adjust ball position</span>
+    x += dx;
+    y += dy;
+    circle.setCenterX(x);
+    circle.setCenterY(y);
+  }
+}
+</pre>
+</body>
+</html>

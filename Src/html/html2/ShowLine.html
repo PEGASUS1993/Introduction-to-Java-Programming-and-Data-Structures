@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowLine.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowLineWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.shape.Line;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowLine <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> LinePane(), <span class = "constant">200</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"ShowLine"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+}
+
+<span class = "keyword">class</span> LinePane <span class = "keyword">extends</span> Pane {
+  <span class = "keyword">public</span> LinePane() {
+    Line line1 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>);
+    line1.endXProperty().bind(widthProperty().subtract(<span class = "constant">10</span>));
+    line1.endYProperty().bind(heightProperty().subtract(<span class = "constant">10</span>));
+    line1.setStrokeWidth(<span class = "constant">5</span>);
+    line1.setStroke(Color.GREEN);
+    getChildren().add(line1);
+    
+    Line line2 = <span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>);
+    line2.startXProperty().bind(widthProperty().subtract(<span class = "constant">10</span>));
+    line2.endYProperty().bind(heightProperty().subtract(<span class = "constant">10</span>));
+    line2.setStrokeWidth(<span class = "constant">5</span>);
+    line2.setStroke(Color.GREEN);
+    getChildren().add(line2);
+  }
+}
+</pre>
+</body>
+</html>

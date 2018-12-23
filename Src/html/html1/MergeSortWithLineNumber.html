@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MergeSort.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MergeSort.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "MergeSort" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MergeSort {
+  2&nbsp;&nbsp;  <span class = "comment">/** The method for sorting the numbers */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> mergeSort(<span class = "keyword">int</span>[] list) {
+  4&nbsp;&nbsp;    <span class = "keyword">if</span> (list.length &gt; <span class = "constant">1</span>) {
+  5&nbsp;&nbsp;      <span class = "comment">// Merge sort the first half</span>
+  6&nbsp;&nbsp;      <span class = "keyword">int</span>[] firstHalf = <span class = "keyword">new</span> <span class = "keyword">int</span>[list.length / <span class = "constant">2</span>];
+  7&nbsp;&nbsp;      System.arraycopy(list, <span class = "constant">0</span>, firstHalf, <span class = "constant">0</span>, list.length / <span class = "constant">2</span>);
+  8&nbsp;&nbsp;      mergeSort(firstHalf);
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;      <span class = "comment">// Merge sort the second half</span>
+ 11&nbsp;&nbsp;      <span class = "keyword">int</span> secondHalfLength = list.length - list.length / <span class = "constant">2</span>;
+ 12&nbsp;&nbsp;      <span class = "keyword">int</span>[] secondHalf = <span class = "keyword">new</span> <span class = "keyword">int</span>[secondHalfLength];
+ 13&nbsp;&nbsp;      System.arraycopy(list, list.length / <span class = "constant">2</span>,
+ 14&nbsp;&nbsp;        secondHalf, <span class = "constant">0</span>, secondHalfLength);
+ 15&nbsp;&nbsp;      mergeSort(secondHalf);
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;      <span class = "comment">// Merge firstHalf with secondHalf into list</span>
+ 18&nbsp;&nbsp;      merge(firstHalf, secondHalf, list);
+ 19&nbsp;&nbsp;    }
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "comment">/** Merge two sorted lists */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> merge(<span class = "keyword">int</span>[] list1, <span class = "keyword">int</span>[] list2, <span class = "keyword">int</span>[] temp) {
+ 24&nbsp;&nbsp;    <span class = "keyword">int</span> current1 = <span class = "constant">0</span>; <span class = "comment">// Current index in list1</span>
+ 25&nbsp;&nbsp;    <span class = "keyword">int</span> current2 = <span class = "constant">0</span>; <span class = "comment">// Current index in list2</span>
+ 26&nbsp;&nbsp;    <span class = "keyword">int</span> current3 = <span class = "constant">0</span>; <span class = "comment">// Current index in temp</span>
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;    <span class = "keyword">while</span> (current1 &lt; list1.length && current2 &lt; list2.length) {
+ 29&nbsp;&nbsp;      <span class = "keyword">if</span> (list1[current1] &lt; list2[current2])
+ 30&nbsp;&nbsp;        temp[current3++] = list1[current1++];
+ 31&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 32&nbsp;&nbsp;        temp[current3++] = list2[current2++];
+ 33&nbsp;&nbsp;    }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;    <span class = "keyword">while</span> (current1 &lt; list1.length)
+ 36&nbsp;&nbsp;      temp[current3++] = list1[current1++];
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;    <span class = "keyword">while</span> (current2 &lt; list2.length)
+ 39&nbsp;&nbsp;      temp[current3++] = list2[current2++];
+ 40&nbsp;&nbsp;  }
+ 41&nbsp;&nbsp;
+ 42&nbsp;&nbsp;  <span class = "comment">/** A test method */</span>
+ 43&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 44&nbsp;&nbsp;    <span class = "keyword">int</span>[] list = {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">5</span>, <span class = "constant">6</span>, <span class = "constant">1</span>, <span class = "literal">-</span><span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">14</span>, <span class = "constant">12</span>};
+ 45&nbsp;&nbsp;    mergeSort(list);
+ 46&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; list.length; i++)
+ 47&nbsp;&nbsp;      System.out.print(list[i] + <span class = "literal">" "</span>);
+ 48&nbsp;&nbsp;  }
+ 49&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

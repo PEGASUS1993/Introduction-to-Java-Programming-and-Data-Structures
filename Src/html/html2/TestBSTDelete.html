@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestBSTDelete.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestBSTDeleteWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestBSTDelete" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestBSTDelete {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    BST&lt;String&gt; tree = <span class = "keyword">new</span> BST&lt;&gt;();
+    tree.insert(<span class = "literal">"George"</span>);
+    tree.insert(<span class = "literal">"Michael"</span>);
+    tree.insert(<span class = "literal">"Tom"</span>);
+    tree.insert(<span class = "literal">"Adam"</span>);
+    tree.insert(<span class = "literal">"Jones"</span>);
+    tree.insert(<span class = "literal">"Peter"</span>);
+    tree.insert(<span class = "literal">"Daniel"</span>);
+    printTree(tree);
+
+    System.out.println(<span class = "literal">"\nAfter delete George:"</span>);
+    tree.delete(<span class = "literal">"George"</span>);
+    printTree(tree);
+
+    System.out.println(<span class = "literal">"\nAfter delete Adam:"</span>);
+    tree.delete(<span class = "literal">"Adam"</span>); <span class = "comment">// Delete Adam from the tree</span>
+    printTree(tree);
+
+    System.out.println(<span class = "literal">"\nAfter delete Michael:"</span>);
+    tree.delete(<span class = "literal">"Michael"</span>);
+    printTree(tree);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> printTree(BST&lt;String&gt; tree) {
+    <span class = "comment">// Traverse tree</span>
+    System.out.print(<span class = "literal">"Inorder (sorted): "</span>);
+    tree.inorder();
+    System.out.print(<span class = "literal">"\nPostorder: "</span>);
+    tree.postorder();
+    System.out.print(<span class = "literal">"\nPreorder: "</span>);
+    tree.preorder();
+    System.out.print(<span class = "literal">"\nThe number of nodes is "</span> + tree.size());
+    System.out.println();
+  }
+}
+</pre>
+</body>
+</html>

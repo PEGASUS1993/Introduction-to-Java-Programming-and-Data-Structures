@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CountLettersUsingStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CountLettersUsingStreamWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "CountLettersUsingStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Random;
+<span class = "keyword">import</span> java.util.TreeMap;
+<span class = "keyword">import</span> java.util.stream.Collectors;
+<span class = "keyword">import</span> java.util.stream.Stream;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CountLettersUsingStream {
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">int</span> count = <span class = "constant">0</span>;
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Random random = <span class = "keyword">new</span> Random();
+    Object[] chars = random.ints(<span class = "constant">100</span>, (<span class = "keyword">int</span>)<span class = "literal">'a'</span>, (<span class = "keyword">int</span>)<span class = "literal">'z'</span> + <span class = "constant">1</span>).
+      mapToObj(e -&gt; (<span class = "keyword">char</span>)e).toArray();
+    
+    System.out.println(<span class = "literal">"The lowercase letters are:"</span>);
+    Stream.of(chars).forEach(e -&gt; {
+        System.out.print(e + (++count % <span class = "constant">20</span> == <span class = "constant">0</span> ? <span class = "literal">"\n"</span> : <span class = "literal">" "</span>));
+    });
+    
+    count = <span class = "constant">0</span>; <span class = "comment">// Reset the count for columns</span>
+    System.out.println(<span class = "literal">"\nThe occurrences of each letter are:"</span>);
+    Stream.of(chars).collect(Collectors.groupingBy(e -&gt; e, 
+      TreeMap::new, Collectors.counting())).forEach((k, v) -&gt; {
+        System.out.print(v + <span class = "literal">" "</span> + k 
+          + (++count % <span class = "constant">10</span> == <span class = "constant">0</span> ? <span class = "literal">"\n"</span> : <span class = "literal">" "</span>));
+      });
+  }
+}
+</pre>
+</body>
+</html>

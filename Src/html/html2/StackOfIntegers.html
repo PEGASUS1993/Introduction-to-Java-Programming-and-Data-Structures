@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - StackOfIntegers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "StackOfIntegersWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> StackOfIntegers {
+  <span class = "keyword">private</span> <span class = "keyword">int</span>[] elements;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> size;
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">final</span> <span class = "keyword">int</span> DEFAULT_CAPACITY = <span class = "constant">16</span>;
+
+  <span class = "comment">/** Construct a stack with the default capacity 16 */</span>
+  <span class = "keyword">public</span> StackOfIntegers() {
+    <span class = "keyword">this</span>(DEFAULT_CAPACITY);
+  }
+
+  <span class = "comment">/** Construct a stack with the specified maximum capacity */</span>
+  <span class = "keyword">public</span> StackOfIntegers(<span class = "keyword">int</span> capacity) {
+    elements = <span class = "keyword">new</span> <span class = "keyword">int</span>[capacity];
+  }
+
+  <span class = "comment">/** Push a new integer into the top of the stack */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> push(<span class = "keyword">int</span> value) {
+    <span class = "keyword">if</span> (size &gt;= elements.length) {
+      <span class = "keyword">int</span>[] temp = <span class = "keyword">new</span> <span class = "keyword">int</span>[elements.length * <span class = "constant">2</span>];
+      System.arraycopy(elements, <span class = "constant">0</span>, temp, <span class = "constant">0</span>, elements.length);
+      elements = temp;
+    }
+
+    elements[size++] = value;
+  }
+
+  <span class = "comment">/** Return and remove the top element from the stack */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> pop() {
+    <span class = "keyword">return</span> elements[--size];
+  }
+
+  <span class = "comment">/** Return the top element from the stack */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> peek() {
+    <span class = "keyword">return</span> elements[size - <span class = "constant">1</span>];
+  }
+
+  <span class = "comment">/** Test whether the stack is empty */</span>
+  <span class = "keyword">public</span> <span class = "keyword">boolean</span> empty() {
+    <span class = "keyword">return</span> size == <span class = "constant">0</span>;
+  }
+
+  <span class = "comment">/** Return the number of elements in the stack */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+    <span class = "keyword">return</span> size;
+  }
+}
+</pre>
+</body>
+</html>

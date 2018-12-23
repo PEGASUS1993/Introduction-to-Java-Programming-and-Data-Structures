@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - HidingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "HidingDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "HidingDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> HidingDemo {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    A x = <span class = "keyword">new</span> B();
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;    <span class = "comment">// Access instance data field i</span>
+  6&nbsp;&nbsp;    System.out.println(<span class = "literal">"(1) x.i is "</span> + x.i);
+  7&nbsp;&nbsp;    System.out.println(<span class = "literal">"(2) (B)x.i is "</span> + ((B)x).i);
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;    <span class = "comment">// Access static data field j</span>
+ 10&nbsp;&nbsp;    System.out.println(<span class = "literal">"(3) x.j is "</span> + x.j);
+ 11&nbsp;&nbsp;    System.out.println(<span class = "literal">"(4) ((B)x).j is "</span> + ((B)x).j);
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;    <span class = "comment">// Invoke static method m1</span>
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"(5) x.m1() is "</span> + x.m1());
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"(6) ((B)x).m1() is "</span> + ((B)x).m1());
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;    <span class = "comment">// Invoke instance method m2</span>
+ 18&nbsp;&nbsp;    System.out.println(<span class = "literal">"(7) x.m2() is "</span> + x.m2());
+ 19&nbsp;&nbsp;    System.out.println(<span class = "literal">"(8) x.m3() is "</span> + x.m3());
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;}
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;<span class = "keyword">class</span> A {
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> i = <span class = "constant">1</span>;
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> j = <span class = "constant">11</span>;
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> String m1() {
+ 28&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"A's static m1"</span>;
+ 29&nbsp;&nbsp;  }
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  <span class = "keyword">public</span> String m2() {
+ 32&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"A's instance m2"</span>;
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "keyword">public</span> String m3() {
+ 36&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"A's instance m3"</span>;
+ 37&nbsp;&nbsp;  }
+ 38&nbsp;&nbsp;}
+ 39&nbsp;&nbsp;
+ 40&nbsp;&nbsp;<span class = "keyword">class</span> B <span class = "keyword">extends</span> A {
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> i = <span class = "constant">2</span>;
+ 42&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">int</span> j = <span class = "constant">12</span>;
+ 43&nbsp;&nbsp;
+ 44&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> String m1() {
+ 45&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"B's static m1"</span>;
+ 46&nbsp;&nbsp;  }
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;  <span class = "keyword">public</span> String m2() {
+ 49&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"B's instance m2"</span>;
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

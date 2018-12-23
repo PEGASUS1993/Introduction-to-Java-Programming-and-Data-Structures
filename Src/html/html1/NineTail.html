@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - NineTail.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "NineTailWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "NineTail" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> NineTail {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Prompt the user to enter nine coins H and T's</span>
+    System.out.print(<span class = "literal">"Enter the initial nine coins Hs and Ts: "</span>);
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    String s = input.nextLine(); 
+    <span class = "keyword">char</span>[] initialNode = s.toCharArray();
+
+    NineTailModel model = <span class = "keyword">new</span> NineTailModel();
+    java.util.List&lt;Integer&gt; path =
+      model.getShortestPath(NineTailModel.getIndex(initialNode));
+
+    System.out.println(<span class = "literal">"The steps to flip the coins are "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; path.size(); i++)
+      NineTailModel.printNode(
+        NineTailModel.getNode(path.get(i)));  
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCircleRectangle.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCircleRectangle.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCircleRectangle" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestCircleRectangle {
+  2&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  3&nbsp;&nbsp;    CircleFromSimpleGeometricObject circle = 
+  4&nbsp;&nbsp;      <span class = "keyword">new</span> CircleFromSimpleGeometricObject(<span class = "constant">1</span>);
+  5&nbsp;&nbsp;    System.out.println(<span class = "literal">"A circle "</span> + circle.toString());
+  6&nbsp;&nbsp;    System.out.println(<span class = "literal">"The color is "</span> + circle.getColor());
+  7&nbsp;&nbsp;    System.out.println(<span class = "literal">"The radius is "</span> + circle.getRadius());
+  8&nbsp;&nbsp;    System.out.println(<span class = "literal">"The area is "</span> + circle.getArea());
+  9&nbsp;&nbsp;    System.out.println(<span class = "literal">"The diameter is "</span> + circle.getDiameter());
+ 10&nbsp;&nbsp;    
+ 11&nbsp;&nbsp;    RectangleFromSimpleGeometricObject rectangle =
+ 12&nbsp;&nbsp;      <span class = "keyword">new</span> RectangleFromSimpleGeometricObject(<span class = "constant">2</span>, <span class = "constant">4</span>);
+ 13&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nA rectangle "</span> + rectangle.toString());
+ 14&nbsp;&nbsp;    System.out.println(<span class = "literal">"The area is "</span> + rectangle.getArea());
+ 15&nbsp;&nbsp;    System.out.println(<span class = "literal">"The perimeter is "</span> + 
+ 16&nbsp;&nbsp;      rectangle.getPerimeter());
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

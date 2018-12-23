@@ -1,0 +1,517 @@
+Chapter 21 Sets and Maps
+
+Section 21.2 Sets
+1. Which of the data types below does not allow duplicates?
+a.	Set
+b.	List
+c.      Vector
+d.      Stack
+e.	LinkedList
+Key:a
+
+#
+2. Which of the following data types does not implement the Collection interface?
+a.	HashSet
+b. 	TreeSet
+c.	ArrayList
+d. 	LinkedList
+e.	Map
+Key:e
+
+#
+3. Which of the data types below could be used to store elements in their natural order based on the compareTo method?
+a.	HashSet
+b. 	TreeSet
+c.	LinkedHashSet
+d. 	Collection
+e.      Set
+Key:b	
+
+#
+4. If two objects o1 and o2 are equal, what are the values for o1.equals(o2) and o1.hashCode() == o2.hashCode()?
+a.	true true
+b. 	true false
+c.	false true
+d. 	false false
+Key:a
+
+#
+5. What is the output for the following code?
+
+import java.util.*;
+public class Test {
+  public static void main(String[] args) {
+    Set<A> set = new HashSet<A>();
+    set.add(new A());
+    set.add(new A());
+    set.add(new A());
+    set.add(new A());
+    System.out.println(set);
+  }
+}
+
+class A  {
+  int r = 1;
+
+  public String toString() {
+    return r + "";
+  }
+
+  public boolean equals(Object o) {
+    return this.r == ((A)o).r;
+  }
+
+  public int hashCode() {
+    return r;
+  }
+}
+
+a.	[1]
+b. 	[1, 1]
+c.	[1, 1, 1]
+d. 	[1, 1, 1, 1]
+Key:a
+
+#
+6. What is the output of the following code?
+import java.util.*;
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    Set<String> set1 = new HashSet<>();
+    set1.add("Atlanta");
+    set1.add("Macon");
+    set1.add("Savanna");
+    
+    Set<String> set2 = new HashSet<>();
+    set2.add("Atlanta");
+    set2.add("Macon");
+    set2.add("Savanna");
+    
+    Set<String> set3 = new HashSet<>();
+    set3.add("Macon");
+    set3.add("Savanna");
+    set3.add("Atlanta");
+    
+    System.out.println(set1.equals(set2) + " " + set1.equals(set3));
+  }
+}
+a. true true
+b. true false
+c. false false
+d. false true
+Key:a
+
+#
+7. What is the output for the following code?
+
+import java.util.*;
+public class Test {
+  public static void main(String[] args) {
+    Set<A> set = new HashSet<>();
+    set.add(new A());
+    set.add(new A());
+    set.add(new A());
+    set.add(new A());
+    System.out.println(set);
+  }
+}
+
+class A  {
+  int r = 1;
+
+  public String toString() {
+    return r + "";
+  }
+
+  public int hashCode() {
+    return r;
+  }
+}
+
+a.	[1]
+b. 	[1, 1]
+c.	[1, 1, 1]
+d. 	[1, 1, 1, 1]
+Key:d
+
+#
+8. What is the output for the following code?
+
+import java.util.*;
+public class Test {
+  public static void main(String[] args) {
+    Set<A> set = new HashSet<>();
+    set.add(new A());
+    set.add(new A());
+    set.add(new A());
+    set.add(new A());
+    System.out.println(set);
+  }
+}
+
+class A  {
+  int r = 1;
+
+  public String toString() {
+    return r + "";
+  }
+
+  public boolean equals(Object o) {
+    return this.r == ((A)o).r;
+  }
+}
+
+a.	[1]
+b. 	[1, 1]
+c.	[1, 1, 1]
+d. 	[1, 1, 1, 1]
+Key:d	
+
+#
+9. Which of the following data types have iterators?
+a.	HashSet
+b. 	TreeSet
+c.	ArrayList
+d. 	LinkedList
+e.	LinkedHashSet
+Key:abcde The Collection interface has the iterator() method to return an iterator from a collection.
+
+#
+10. To get an iterator from a set, you may use the __________ method.
+a.	getIterator
+b. 	findIterator
+c.	iterator
+d. 	iterators
+Key:c
+
+#
+11. Suppose set s1 is [1, 2, 5] and set s2 is [2, 3, 6]. After s1.addAll(s2), s1 is __________.
+a.	[1, 2, 2, 3, 5, 6]
+b. 	[1, 2, 3, 5, 6]
+c.	[1, 5]
+d. 	[2]
+Key:b
+
+#
+12. Suppose set s1 is [1, 2, 5] and set s2 is [2, 3, 6]. After s1.addAll(s2), s2 is __________.
+a.	[1, 2, 2, 3, 5, 6]
+b. 	[1, 2, 3, 5, 6]
+c.	[1, 5]
+d. 	[2, 3, 6]
+e.      [2]
+Key:d
+
+#
+13. Suppose set s1 is [1, 2, 5] and set s2 is [2, 3, 6]. After s1.removeAll(s2), s1 is __________.
+a.	[1, 2, 2, 3, 5, 6]
+b. 	[1, 2, 3, 5, 6]
+c.	[1, 5]
+d. 	[2]
+Key:c
+
+#
+14. Suppose set s1 is [1, 2, 5] and set s2 is [2, 3, 6]. After s1.retainAll(s2), s1 is __________.
+a.	[1, 2, 2, 3, 5, 6]
+b. 	[1, 2, 3, 5, 6]
+c.	[1, 5]
+d. 	[2]
+Key:d
+
+#
+15. The output of the following code is ____________.
+
+    LinkedHashSet<String> set1 = new LinkedHashSet<>();
+    set1.add("New York");
+    LinkedHashSet<String> set2 = (LinkedHashSet<String>)(set1.clone());
+    set1.add("Atlanta");
+    set2.add("Dallas");
+    System.out.println(set2);
+a. [New York]
+b. [New York, Atlanta]
+c. [New York, Atlanta, Dallas]
+d. [New York, Dallas]
+Key:d 
+
+#
+16. The output of the following code is ____________.
+
+    LinkedHashSet<String> set1 = new LinkedHashSet<>();
+    set1.add("New York");
+    LinkedHashSet<String> set2 = set1;
+    set1.add("Atlanta");
+    set2.add("Dallas");
+    System.out.println(set2);
+a. [New York]
+b. [New York, Atlanta]
+c. [New York, Atlanta, Dallas]
+d. [New York, Dallas]
+Key:c 
+
+#
+17. Analyze the following code:
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    HashSet<String> set1 = new HashSet<>();
+    set1.add("red");
+    Set<String> set2 = set1.clone();  
+  }
+}
+a. Line 5 is wrong because a HashSet object cannot be cloned.
+b. Line 5 has a compile error because set1.clone() returns an Object. You have to cast it to Set in order to compile it.
+c. The program will be fine if set1.clone() is replaced by (Set<String>)set1.clone()
+d. The program will be fine if set1.clone() is replaced by (Set<String>)(set1.clone())
+e. The program will be fine if set1.clone() is replaced by (HashSet<String>)(set1.clone())
+Key:bde
+
+#
+18. Analyze the following code:
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) {
+    Set<String> set1 = new HashSet<>();
+    set1.add("red");
+    Set set2 = set1.clone();  
+  }
+}
+a. Line 5 is wrong because the declared type for set1 is Set and the clone method is not defined Set.
+b. The program will be fine if set1.clone() is replaced by (HashSet)set1.clone()
+c. The program will be fine if set1.clone() is replaced by (Set)((HashSet)set1).clone()
+d. The program will be fine if set1.clone() is replaced by (HashSet)((HashSet)set1).clone()
+e. The program will be fine if set1.clone() is replaced by (LinkedHashSet)((HashSet)set1).clone()
+Key:acd For (E), the program will compile fine, but will get a runtime ClassCastException because set1 is a HashSet, not a LinkedHashSet.
+
+#
+19. If you want to store non-duplicated objects in the order in which they are inserted, you should use ____________.
+a.	HashSet
+b. 	LinkedHashSet
+c.	TreeSet
+d.	ArrayList
+e. 	LinkedList
+Key:b
+
+#
+20. Which of the following statements are true?
+a. All the methods in HashSet are inherited from the Collection interface.
+b. All the methods in TreeSet are inherited from the Collection interface.
+c. All the methods in LinkedHashSet are inherited from the Collection interface.
+d. All the methods in Set are inherited from the Collection interface.
+e. All the concrete classes of Collection have at least two constructors. One is the no-arg constructor that constructs an empty collection. The other constructs instances from a collection. 
+Key:acd TreeSet has the first(), last(), headSet(toElement), and tailSet(fromElement) methods.
+
+#
+21. Which of the following is correct to perform the set union of two sets s1 and s2?
+a.	s1.union(s2)
+b. 	s1 + s2
+c.	s1.addAll(s2)
+d.	s1.add(s2)
+Key:c
+
+#
+22. Which of the following is correct to perform the set difference of two sets s1 and s2?
+a.	s1.difference(s2)
+b. 	s1 - s2
+c.	s1.subtract(s2)
+d.	s1.removeAll(s2)
+Key:d
+
+#
+23. Which of the following is correct to perform the set intersection of two sets s1 and s2?
+a.	s1.intersect(s2)
+b. 	s1.join(s2)
+c.	s1.retainAll(s2) 
+d.	s1.intersection(s2)
+Key:c
+
+#
+24. Analyze the following code.
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) throws Exception {
+    Set<String> set = new TreeSet<>();
+    
+    set.add("Red");
+    set.add("Green");
+    set.add("Blue");
+    
+    System.out.println(set.first());
+  }
+}
+a.	The program displays Red
+b. 	The program displays Blue
+c.	The program displays Green
+d.	The program may display Red, Blue, or Green.
+e. The program cannot compile, because the first() method is not defined in Set.
+Key:e first() is defined in TreeSet. To compile this program, replace Set set = new TreeSet() with TreeSet set = new TreeSet().
+
+#
+25. Analyze the following code.
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) throws Exception {
+    TreeSet<String> set = new TreeSet<>();
+    
+    set.add("Red");
+    set.add("Green");
+    set.add("Blue");
+    
+    System.out.println(set.last());
+  }
+}
+a.	The program displays Red
+b. 	The program displays Blue
+c.	The program displays Green
+d.	The program may display Red, Blue, or Green.
+e. The program cannot compile, because the last() method is not defined in Set.
+Key:a
+
+#
+26. Analyze the following code.
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) throws Exception {
+    TreeSet<String> set = new TreeSet<>();
+    
+    set.add("Red");
+    set.add("Yellow");
+    set.add("Green");
+    set.add("Blue");
+    SortedSet temp = set.headSet("Purple");
+    
+    System.out.println(temp.first());
+  }
+}
+a.	The program displays Red
+b. 	The program displays Blue
+c.	The program displays Green
+d.	The program displays Yellow
+e. The program displays Purple
+Key:b
+
+#
+27. Analyze the following code.
+
+import java.util.*;
+
+public class Test {
+  public static void main(String[] args) throws Exception {
+    TreeSet<String> set = new TreeSet<>();
+    
+    set.add("Red");
+    set.add("Yellow");
+    set.add("Green");
+    set.add("Blue");
+    SortedSet temp = set.tailSet("Purple");
+    
+    System.out.println(temp.first());
+  }
+}
+a.	The program displays Red
+b. 	The program displays Blue
+c.	The program displays Green
+d.	The program displays Yellow
+e. The program displays Purple
+Key:a
+
+#
+Section 21.5 Maps
+28. To empty a Collection or a Map, you use the __________ method.
+a.	empty
+b. 	clear
+c.	zero
+d.	setEmpty
+Key:b
+
+#
+29. The Collection interface is the base interface for _____________.
+a. Set
+b. List
+c. ArrayList
+d. LinkedList
+e. Map
+Key:abcd The Collection is not the base interface for Map.
+
+#
+30. The Map is the base interface for _____________.
+a. TreeMap
+b. HashMap
+c. LinkedHashMap
+d. ArrayList
+e. LinkedList
+Key:abc
+
+#
+31. Which of the following are correct methods in Map?
+a. put(Object key, Object value)
+b. put(Object value, Object key)
+c. get(Object key)
+d. get(int index)
+Key:ac
+
+#
+32. Which of the following are correct methods in Map?
+a. containsKey(Object key)
+b. containsValue(Object value)
+c. remove(Object key)
+d. remove(int index)
+e. isEmpty()
+Key:abce
+
+#
+33. The elements in ________ are sorted.
+a.	TreeSet
+b. 	List
+c.	TreeMap
+d.	HashSet
+e.	LinkedHashSet
+Key:ac
+
+#
+34.  Suppose your program frequently tests whether a student is in a soccer team, what is the best data structure to store the students in a soccer team?
+a. ArrayList
+b. HashSet
+c. TreeSet
+c. LinkedList
+e. Vector
+Key:b
+
+#
+35.  Suppose your program frequently tests whether a student is in a soccer team and also need to know the student’s information such as phone number, address, and age, what is the best data structure to store the students in a soccer team?
+a. ArrayList
+b. HashMap
+c. TreeMap
+d. LinkedList
+e. HashSet
+Key:b
+
+#
+36. Analyze the following code:
+
+public class Test {
+  public static void main(String[] args) {
+    Map<String, String> map = new HashMap<>();
+    map.put("123", "John Smith");
+    map.put("111", "George Smith");
+    map.put("123", "Steve Yao");
+    map.put("222", "Steve Yao");
+  }
+}
+a. After all the four entries are added to the map, "123" is a key that corresponds to the value "John Smith".
+b. After all the four entries are added to the map, "123" is a key that corresponds to the value "Steve Yao".
+c. After all the four entries are added to the map, "Steve Yao" is a key that corresponds to the value "222".
+d. After all the four entries are added to the map, "John Smith" is a key that corresponds to the value "123".
+e. A runtime error occurs because two entries with the same key "123" are added to the map.
+Key:b The signature of the put method is put(key, value). So the first parameter in the put method is the key. When a new entry with the same key is added to the map, the existing entry with the same key is replaced by the new entry.

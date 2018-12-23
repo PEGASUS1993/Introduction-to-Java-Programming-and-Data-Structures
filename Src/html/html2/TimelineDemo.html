@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TimelineDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TimelineDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.animation.Animation;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.animation.KeyFrame;
+<span class = "keyword">import</span> javafx.animation.Timeline;
+<span class = "keyword">import</span> javafx.event.ActionEvent;
+<span class = "keyword">import</span> javafx.event.EventHandler;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.util.Duration;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TimelineDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    StackPane pane = <span class = "keyword">new</span> StackPane();
+    Text text = <span class = "keyword">new</span> Text(<span class = "constant">20</span>, <span class = "constant">50</span>, <span class = "literal">"Programming is fun"</span>);
+    text.setFill(Color.RED);
+    pane.getChildren().add(text); <span class = "comment">// Place text into the stack pane</span>
+
+    <span class = "comment">// Create a handler for changing text</span>
+    EventHandler&lt;ActionEvent&gt; eventHandler = e -&gt; {
+      <span class = "keyword">if</span> (text.getText().length() != <span class = "constant">0</span>) {
+        text.setText(<span class = "literal">""</span>);
+      }
+      <span class = "keyword">else</span> {
+        text.setText(<span class = "literal">"Programming is fun"</span>);
+      }
+    };
+    
+    <span class = "comment">// Create an animation for alternating text</span>
+    Timeline animation = <span class = "keyword">new</span> Timeline(
+      <span class = "keyword">new</span> KeyFrame(Duration.millis(<span class = "constant">500</span>), eventHandler));
+    animation.setCycleCount(Timeline.INDEFINITE);
+    animation.play(); <span class = "comment">// Start animation</span>
+
+    <span class = "comment">// Pause and resume animation</span>
+    text.setOnMouseClicked(e -&gt; {
+      <span class = "keyword">if</span> (animation.getStatus() == Animation.Status.PAUSED) {
+        animation.play();
+      }
+      <span class = "keyword">else</span> {
+        animation.pause();
+      }
+    });
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">250</span>, <span class = "constant">50</span>);
+    primaryStage.setTitle(<span class = "literal">"TimelineDemo"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

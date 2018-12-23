@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WebCrawler.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WebCrawlerWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "WebCrawler" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+<span class = "keyword">import</span> java.util.ArrayList;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> WebCrawler {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+    System.out.print(<span class = "literal">"Enter a URL: "</span>);
+    String url = input.nextLine(); 
+    crawler(url); <span class = "comment">// Traverse the Web from the a starting url</span>
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> crawler(String startingURL) {
+    ArrayList&lt;String&gt; listOfPendingURLs = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    ArrayList&lt;String&gt; listOfTraversedURLs = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    
+    listOfPendingURLs.add(startingURL);
+    <span class = "keyword">while</span> (!listOfPendingURLs.isEmpty() && 
+        listOfTraversedURLs.size() &lt;= <span class = "constant">100</span>) {
+      String urlString = listOfPendingURLs.remove(<span class = "constant">0</span>);
+      listOfTraversedURLs.add(urlString);
+      System.out.println(<span class = "literal">"Crawl "</span> + urlString);
+
+      <span class = "keyword">for</span> (String s: getSubURLs(urlString)) {
+        <span class = "keyword">if</span> (!listOfTraversedURLs.contains(s) && 
+        		!listOfPendingURLs.contains(s))
+          listOfPendingURLs.add(s);
+      }
+    }
+  }
+  
+  <span class = "keyword">public</span> <span class = "keyword">static</span> ArrayList&lt;String&gt; getSubURLs(String urlString) {
+    ArrayList&lt;String&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class = "keyword">try</span> {
+      java.net.URL url = <span class = "keyword">new</span> java.net.URL(urlString); 
+      Scanner input = <span class = "keyword">new</span> Scanner(url.openStream());
+      <span class = "keyword">int</span> current = <span class = "constant">0</span>;
+      <span class = "keyword">while</span> (input.hasNext()) {
+        String line = input.nextLine();
+        current = line.indexOf(<span class = "literal">"http:"</span>, current);
+        <span class = "keyword">while</span> (current &gt; <span class = "constant">0</span>) {
+          <span class = "keyword">int</span> endIndex = line.indexOf(<span class = "literal">"\""</span>, current);
+          <span class = "keyword">if</span> (endIndex &gt; <span class = "constant">0</span>) { <span class = "comment">// Ensure that a correct URL is found</span>
+            list.add(line.substring(current, endIndex)); 
+            current = line.indexOf(<span class = "literal">"http:"</span>, endIndex);
+          }
+          <span class = "keyword">else</span> 
+            current = <span class = "literal">-</span><span class = "constant">1</span>;
+        }
+      } 
+    }
+    <span class = "keyword">catch</span> (Exception ex) {
+      System.out.println(<span class = "literal">"Error: "</span> + ex.getMessage());
+    }
+    
+    <span class = "keyword">return</span> list;
+  }
+}
+</pre>
+</body>
+</html>

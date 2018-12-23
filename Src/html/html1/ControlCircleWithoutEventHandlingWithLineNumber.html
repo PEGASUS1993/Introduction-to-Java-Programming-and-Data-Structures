@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ControlCircleWithoutEventHandling.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ControlCircleWithoutEventHandling.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ControlCircleWithoutEventHandling <span class = "keyword">extends</span> Application {
+ 13&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 15&nbsp;&nbsp;    StackPane pane = <span class = "keyword">new</span> StackPane();
+ 16&nbsp;&nbsp;    Circle circle = <span class = "keyword">new</span> Circle(<span class = "constant">50</span>);
+ 17&nbsp;&nbsp;    circle.setStroke(Color.BLACK);
+ 18&nbsp;&nbsp;    circle.setFill(Color.WHITE);
+ 19&nbsp;&nbsp;    pane.getChildren().add(circle);
+ 20&nbsp;&nbsp;    
+ 21&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox();
+ 22&nbsp;&nbsp;    hBox.setSpacing(<span class = "constant">10</span>);
+ 23&nbsp;&nbsp;    hBox.setAlignment(Pos.CENTER);
+ 24&nbsp;&nbsp;    Button btEnlarge = <span class = "keyword">new</span> Button(<span class = "literal">"Enlarge"</span>);
+ 25&nbsp;&nbsp;    Button btShrink = <span class = "keyword">new</span> Button(<span class = "literal">"Shrink"</span>);
+ 26&nbsp;&nbsp;    hBox.getChildren().add(btEnlarge);
+ 27&nbsp;&nbsp;    hBox.getChildren().add(btShrink);
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+ 30&nbsp;&nbsp;    borderPane.setCenter(pane);
+ 31&nbsp;&nbsp;    borderPane.setBottom(hBox);
+ 32&nbsp;&nbsp;    BorderPane.setAlignment(hBox, Pos.CENTER);
+ 33&nbsp;&nbsp;    
+ 34&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 35&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">200</span>, <span class = "constant">150</span>);
+ 36&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ControlCircle"</span>); <span class = "comment">// Set the stage title</span>
+ 37&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 38&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;  
+ 41&nbsp;&nbsp;  <span class = "comment">/**
+ 42&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 43&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 44&nbsp;&nbsp;   */</span>
+ 45&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 46&nbsp;&nbsp;    launch(args);
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

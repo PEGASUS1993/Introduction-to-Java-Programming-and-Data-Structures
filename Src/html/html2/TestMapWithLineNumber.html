@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestMap.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestMap" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestMap {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a HashMap</span>
+  6&nbsp;&nbsp;    Map&lt;String, Integer&gt; hashMap = <span class = "keyword">new</span> HashMap&lt;&gt;();
+  7&nbsp;&nbsp;    hashMap.put(<span class = "literal">"Smith"</span>, <span class = "constant">30</span>);
+  8&nbsp;&nbsp;    hashMap.put(<span class = "literal">"Anderson"</span>, <span class = "constant">31</span>);
+  9&nbsp;&nbsp;    hashMap.put(<span class = "literal">"Lewis"</span>, <span class = "constant">29</span>);
+ 10&nbsp;&nbsp;    hashMap.put(<span class = "literal">"Cook"</span>, <span class = "constant">29</span>);
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;    System.out.println(<span class = "literal">"Display entries in HashMap"</span>);
+ 13&nbsp;&nbsp;    System.out.println(hashMap + <span class = "literal">"\n"</span>);
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    <span class = "comment">// Create a TreeMap from the preceding HashMap</span>
+ 16&nbsp;&nbsp;    Map&lt;String, Integer&gt; treeMap = <span class = "keyword">new</span> TreeMap&lt;&gt;(hashMap);
+ 17&nbsp;&nbsp;    System.out.println(<span class = "literal">"Display entries in ascending order of key"</span>);
+ 18&nbsp;&nbsp;    System.out.println(treeMap);
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;    <span class = "comment">// Create a LinkedHashMap</span>
+ 21&nbsp;&nbsp;    Map&lt;String, Integer&gt; linkedHashMap =
+ 22&nbsp;&nbsp;      <span class = "keyword">new</span> LinkedHashMap&lt;&gt;(<span class = "constant">16</span>, <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">75f</span>, <span class = "keyword">true</span>);
+ 23&nbsp;&nbsp;    linkedHashMap.put(<span class = "literal">"Smith"</span>, <span class = "constant">30</span>);
+ 24&nbsp;&nbsp;    linkedHashMap.put(<span class = "literal">"Anderson"</span>, <span class = "constant">31</span>);
+ 25&nbsp;&nbsp;    linkedHashMap.put(<span class = "literal">"Lewis"</span>, <span class = "constant">29</span>);
+ 26&nbsp;&nbsp;    linkedHashMap.put(<span class = "literal">"Cook"</span>, <span class = "constant">29</span>);
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;    <span class = "comment">// Display the age for Lewis</span>
+ 29&nbsp;&nbsp;    System.out.println(<span class = "literal">"\nThe age for "</span> + <span class = "literal">"Lewis is "</span> +
+ 30&nbsp;&nbsp;      linkedHashMap.get(<span class = "literal">"Lewis"</span>));
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;    System.out.println(<span class = "literal">"Display entries in LinkedHashMap"</span>);
+ 33&nbsp;&nbsp;    System.out.println(linkedHashMap);
+ 34&nbsp;&nbsp;    
+ 35&nbsp;&nbsp;    <span class = "comment">// Display each entry with name and age</span>
+ 36&nbsp;&nbsp;    System.out.print(<span class = "literal">"\nNames and ages are "</span>);
+ 37&nbsp;&nbsp;    treeMap.forEach(
+ 38&nbsp;&nbsp;      (name, age) -&gt; System.out.print(name + <span class = "literal">": "</span> + age + <span class = "literal">" "</span>));
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

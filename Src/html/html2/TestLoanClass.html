@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestLoanClass.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestLoanClassWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestLoanClass" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestLoanClass {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Enter yearly interest rate</span>
+    System.out.print(
+      <span class = "literal">"Enter annual interest rate, for example, 8<span class = "literal">.</span>25: "</span>);
+    <span class = "keyword">double</span> annualInterestRate = input.nextDouble();
+
+    <span class = "comment">// Enter number of years</span>
+    System.out.print(<span class = "literal">"Enter number of years as an integer: "</span>);
+    <span class = "keyword">int</span> numberOfYears = input.nextInt();
+
+    <span class = "comment">// Enter loan amount</span>
+    System.out.print(<span class = "literal">"Enter loan amount, for example, 120000<span class = "literal">.</span>95: "</span>);
+    <span class = "keyword">double</span> loanAmount =  input.nextDouble();
+
+    <span class = "comment">// Create Loan object</span>
+    Loan loan =
+      <span class = "keyword">new</span> Loan(annualInterestRate, numberOfYears, loanAmount);
+
+    <span class = "comment">// Display loan date, monthly payment, and total payment</span>
+    System.out.printf(<span class = "literal">"The loan was created on %s\n"</span> +
+      <span class = "literal">"The monthly payment is %<span class = "literal">.</span>2f\nThe total payment is %<span class = "literal">.</span>2f\n"</span>,
+      loan.getLoanDate().toString(), loan.getMonthlyPayment(), 
+      loan.getTotalPayment());
+  }
+}
+</pre>
+</body>
+</html>

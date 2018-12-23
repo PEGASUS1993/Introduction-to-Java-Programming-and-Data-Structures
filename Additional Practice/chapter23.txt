@@ -1,0 +1,211 @@
+Chapter 23 Sorting
+
+Section 23.2 Insertion Sort
+
+1. The best-time complexity for insertion sort is _____________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:c
+
+#
+2. The worst-time complexity for insertion sort is _____________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:e
+
+#
+Section 23.3 Bubble Sort
+3. Suppose a list is {2, 9, 5, 4, 8, 1}. After the first pass of bubble sort, the list becomes
+a.	2, 9, 5, 4, 8, 1
+b.	2, 9, 5, 4, 1, 8
+c.	2, 5, 9, 4, 8, 1
+d.	2, 5, 4, 8, 1, 9
+e.      2, 1, 5, 4, 8, 9
+Key:d
+
+#
+4. The best-time complexity for bubble sort is _____________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:c
+
+#
+5. The worst-time complexity for bubble sort is _____________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:e
+
+#
+Section 23.4 Merge Sort
+6. The time to merge two sorted lists of size n is _________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:c
+
+#
+7. The worst-time complexity for merge sort is _________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:d
+
+#
+8. The average-time complexity for merge sort is _________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:d
+
+#
+Section 23.5 Quick Sort
+9. What is correct about a pivot?
+a. A pivot divides a list into two sublists of equal size.
+b. A pivot can be chosen arbitrarily.
+c. A pivot divides a list into two sublists, the elements in the first list are no larger than the pivot and the elements in the second list are larger than the pivot.
+d. You should always choose a pivot that divides the list evenly.
+Key:bc
+
+#
+10. Suppose you choose the first element as a pivot in the list {5 2 9 3 8 4 0 1 6 7}. Using the partition algorithm in the book, what is the new list after the partition?
+a. 5 2 9 3 8 4 0 1 6 7
+b. 4 2 3 0 1 5 6 7 9 8
+c. 4 2 1 3 0 5 8 9 6 7
+d. 2 3 4 0 1 5 9 8 6 7
+e. 2 3 4 0 1 5 6 7 8 9
+Key:c
+
+#
+11. The worst-time complexity for quick sort is _________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:e
+
+#
+12. The average-time complexity for quick sort is _________.
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:d
+
+#
+13. Using the partition algorithm to partition an array {5, 8, 10, 3, 4, 19, 2} for a quick sort, what is the resulting array after the partition?
+a. {5, 8, 10, 3, 4, 19, 2} 
+b. {2, 3, 4, 5, 8, 10, 19} 
+c. {2, 3, 4, 5, 10, 19, 8} 
+d. {3, 2, 4, 5, 10, 19, 8} 
+e. {3, 2, 4, 5, 8, 10, 19} 
+Key:d
+
+#
+Section 23.6 Heap Sort
+14. Which of the following statements are true?
+a. A heap is a complete binary tree.
+b. Each node is greater than or equal to any of its children.
+c. A binary tree is complete if every level of the tree is full except that the last level may not be full and all the leaves on the last level are placed left-most.
+d. A heap is a full binary tree.
+Key:abc
+
+#
+15. To remove the root, you need to start a process by first placing _______ to the place of the root and move it down to maintain the heap property.
+a. one of the root's children
+b. the larger child of the root
+c. the smaller child of the root
+d. the last node in the heap
+Key:d
+
+#
+16. To add a new node, you need to start a process by first placing it as _______ and move it up to maintain the heap property.
+a. the new root
+b. the last node in the heap
+c. the left child of the root
+d. the right child of the root
+Key:b
+
+#
+17. A heap is represented using an array. Is the array {1 2 4 5 9 3} a heap?
+a. Yes
+b. No
+Key:b
+
+#
+18. A heap is represented using an array. Is the array {64 42 59 32 39 44} a heap?
+a. Yes
+b. No
+Key:a
+
+#
+19. The worst-time complexity for heap sort is _________
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:d
+
+#
+20. The average-time complexity for heap sort is _________
+a. O(1)
+b. O(logn)
+c. O(n)
+d. O(nlogn)
+e. O(n*n)
+Key:d
+
+#
+21. Suppose a heap is stored in an array list as follows: {100, 55, 92, 23, 33, 81}. The parent of 81 is _______.
+a. 100
+b. 55 
+c. 92
+d. 23
+e. 33
+Key:c
+
+#
+22. Suppose a heap is stored in an array list as follows: {100, 55, 92, 23, 33, 81}. After inserting 103, what is the content of the array list?
+a. {100, 55, 92, 23, 33, 81, 103}
+b. {100, 55, 103, 23, 33, 92, 81}
+c. {103, 55, 92, 23, 33, 81, 92}
+d. {103, 55, 100, 23, 33, 81, 92}
+e. {103, 55, 92, 23, 33, 81, 100}
+Key:d
+
+#
+Section 23.7 Bucket Sort and Radix Sort
+23. The most efficient algorithm for sorting integer keys is __________.
+a. quick sort
+b. merge sort
+c. heap sort
+d. radix sort
+Key:d
+
+#
+24. The __________ algorithm does not compare keys.
+a. quick sort
+b. merge sort
+c. heap sort
+d. radix sort
+Key:d

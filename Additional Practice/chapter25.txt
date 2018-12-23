@@ -1,0 +1,165 @@
+Chapter 25 Binary Search Trees
+
+Section 25.2 Binary Search Trees
+1. A __________ (with no duplicate elements) has the property that for every node in the tree the value of any node in its left subtree is less than the value of the node and the value of any node in its right subtree is greater than the value of the node. 
+a. binary tree
+b. binary search tree 
+c. list
+d. linked list
+Key:b
+
+#
+2. The ________ of a path is the number of the edges in the path. 
+a. length
+b. depth
+c. height
+d. degree
+Key:a
+
+#
+3. The _______ of a node is the length of the path from the root to the node. 
+a. length
+b. depth
+c. height
+d. degree
+Key:b
+
+#
+4. The _______ of a nonempty tree is the length of the path from the root node to its furthest leaf + 1.
+a. length
+b. depth
+c. height
+d. degree
+Key:c
+
+#
+5. The ________ is to visit the left subtree of the current node first, then the current node itself, and finally the right subtree of the current node. 
+a. inorder traversal
+b. preorder traversal
+c. postorder traversal
+d. breadth-first traversal 
+Key:a
+
+#
+6. The _________ is to visit the left subtree of the current node first, then the right subtree of the current node, and finally the current node itself. 
+a. inorder traversal
+b. preorder traversal
+c. postorder traversal
+d. breadth-first traversal 
+Key:c
+
+#
+7. The _________ is to visit the current node first, then the left subtree of the current node, and finally the right subtree of the current node. 
+a. inorder traversal
+b. preorder traversal
+c. postorder traversal
+d. breadth-first traversal 
+Key:b
+
+#
+8. The _________ is to visit the nodes level by level. First visit the root, then all children of the root from left to right, then grandchildren of the root from left to right, and so on.
+a. inorder traversal
+b. preorder traversal
+c. postorder traversal
+d. breadth-first traversal 
+Key:d
+
+#
+9. In the implementation of BST, which of the following are true?
+a. Node is defined as an inner class inside BST.
+b. Node is defined as a static inner class inside BST because it does not reference any instance data fields in BST.
+c. Node has a property named left that links to the left subtree and a property named right that links to the right subtree and a property named right 
+d. BST contains a property named root. If tree is empty, root is null.
+Key:abcd
+
+#
+10. A new element is always inserted into a leaf node.
+a. True
+b. False
+Key:a
+
+#
+Section 25.3 Deleting Elements from a BST
+11. The time complexity for searching an element in a binary search tree is _______.
+a. O(n)
+b. O(logn)
+c. O(nlogn)
+d. O(n^2)
+Key:a
+
+#
+12. The time complexity for inserting an element into a binary search tree is _______.
+a. O(n)
+b. O(logn)
+c. O(nlogn)
+d. O(n^2)
+Key:a
+
+#
+13. The time complexity for deleing an element into a binary search tree is _______.
+a. O(n)
+b. O(logn)
+c. O(nlogn)
+d. O(n^2)
+Key:a
+
+#
+Section 25.5 Iterators
+14. True or False? You can traverse the elements in a BST using a for-each loop.
+a. True
+b. False
+Key:a
+
+#
+Section 25.6 Case Study: Data Compression
+15. A Huffman tree is constructed using the ____________ algorithm.
+a. dynamic programming
+b. divide-and-conquer
+c. greedy
+d. back-tracking
+Key:c
+
+#
+16. Suppose the keys 3, 4, 45, 21, 92, 12 are inserted into a BST in this order. What is the inorder traversal of the elements?
+a. 3 4 12 21 45 92
+b. 3 4 45 21 12 92
+c. 12 21 92 45 4 3
+d. 4 45 21 12 92 3
+e. 4 21 12 92 45 3
+Key:a
+
+#
+17. Suppose the keys 3, 4, 45, 21, 92, 12 are inserted into a BST in this order. What is the preorder traversal of the elements?
+a. 3 4 12 21 45 92
+b. 3 4 45 21 12 92
+c. 12 21 92 45 4 3
+d. 4 45 21 12 92 3
+e. 4 21 12 92 45 3
+Key:b
+
+#
+18. Suppose the keys 3, 4, 45, 21, 92, 12 are inserted into a BST in this order. What is the postorder traversal of the elements?
+a. 3 4 12 21 45 92
+b. 3 4 45 21 12 92
+c. 12 21 92 45 4 3
+d. 4 45 21 12 92 3
+e. 4 21 12 92 45 3
+Key:c
+
+#
+19. Suppose the keys 3, 4, 45, 21, 92, 12 are inserted into a BST in this order. What is the preorder traversal of the elements after inserting 2 into the tree?
+a. 3 2 4 12 21 45 92
+b. 3 2 4 45 21 12 92
+c. 12 2 21 92 45 4 3
+d. 4 2 45 21 12 92 3
+e. 4 2 21 12 92 45 3
+Key:b
+
+#
+20. Suppose the keys 3, 4, 45, 21, 92, 12 are inserted into a BST in this order. What is the preorder traversal of the elements after deleting 45 from the tree?
+a. 3 4 12 21 92
+b. 3 4 21 12 92
+c. 12 21 92 45 4 3
+d. 4 21 12 92 3
+e. 4 21 12 92 3
+Key:b

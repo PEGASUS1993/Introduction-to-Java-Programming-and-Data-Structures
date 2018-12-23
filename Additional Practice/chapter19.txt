@@ -1,0 +1,291 @@
+Chapter 19 Generics
+
+Section 19.2 Motivations and Benefits
+1. Which of the following statements is correct?
+a. Generics can help detect type errors at compile time, thus make programs more robust.
+b. Generics can make programs easy to read.
+c. Generics can avoid cumbersome castings.
+d. Generics can make programs run faster.
+Key:abc
+
+#
+2. Fill in the code in Comparable______ c = new Date();
+a. <String>
+b. <?>
+c. <Date>
+d. <E>
+Key:c
+
+#
+3. Which of the following statements is correct?
+a. Comparable<String> c = new String("abc");
+b. Comparable<String> c = "abc";
+c. Comparable<String> c = new Date();
+d. Comparable<Object> c = new Date();
+Key:ab
+
+#
+4. Suppose List list = new ArrayList(). Which of the following operations are correct?
+a. list.add("Red");
+b. list.add(new Integer(100));
+c. list.add(new java.util.Date());
+d. list.add(new ArrayList());
+Key:abcd
+
+#
+5. Suppose List<String> list = new ArrayList<String>. Which of the following operations are correct?
+a. list.add("Red");
+b. list.add(new Integer(100));
+c. list.add(new java.util.Date());
+d. list.add(new ArrayList());
+Key:a
+
+#
+6. Suppose ArrayList<Double>list = new ArrayList<>(). Which of the following statements are correct?
+a. list.add(5.5); // 5.5 is automatically converted to new Double(5.5)
+b. list.add(3.0); // 3.0 is automatically converted to new Double(3.0)
+c. Double doubleObject = list.get(0); // No casting is needed
+d. double d = list.get(1); // Automatically converted to double
+Key:abcd
+
+#
+Section 19.3 Declaring Generic Classes and Interfaces
+7. To declare a class named A with a generic type, use
+a. public class A<E> { ... }
+b. public class A<E, F> { ... }
+c. public class A(E) { ... }
+d. public class A(E, F) { ... }
+Key:a
+
+#
+8. To declare a class named A with two generic types, use
+a. public class A<E> { ... }
+b. public class A<E, F> { ... }
+c. public class A(E) { ... }
+d. public class A(E, F) { ... }
+Key:b
+
+#
+9. To declare an interface named A with a generic type, use
+a. public interface A<E> { ... }
+b. public interface A<E, F> { ... }
+c. public interface A(E) { ... }
+d. public interface A(E, F) { ... }
+Key:a
+
+#
+10. To declare an interface named A with two generic types, use
+a. public interface A<E> { ... }
+b. public interface A<E, F> { ... }
+c. public interface A(E) { ... }
+d. public interface A(E, F) { ... }
+Key:b
+
+#
+11. To create a list to store integers, use
+a. ArrayList<Object> list = new ArrayList<>();
+b. ArrayList<Integer> list = new ArrayList<>();
+c. ArrayList<int> list = new ArrayList<int>();
+d. ArrayList<Number> list = new ArrayList<>();
+Key:b
+
+#
+Section 19.4 Generic Methods
+12. The method header is left blank in the following code. Fill in the header.
+public class GenericMethodDemo {
+  public static void main(String[] args ) {
+    Integer[] integers = {1, 2, 3, 4, 5};
+    String[] strings = {"London", "Paris", "New York", "Austin"};
+
+    print(integers);
+    print(strings);
+  }
+
+  __________________________________________ {
+    for (int i = 0; i < list.length; i++) 
+      System.out.print(list[i] + " ");
+    System.out.println();
+  }
+}
+a. public static void print(Integer[] list)
+b. public static void print(String[] list)
+c. public static void print(int[] list)
+d. public static void print(Object[] list)
+e. public static <E> void print(E[] list)
+Key:de
+
+#
+13. To create a generic type bounded by Number, use
+a. <E extends Number>
+b. <E extends Object>
+c. <E>
+d. <E extends Integer>
+Key:a
+
+#
+Section 19.6 Raw Type and Backward Compatibility
+14. Which of the following declarations use raw type?
+a. ArrayList<Object> list = new ArrayList<>(); 
+b. ArrayList<String> list = new ArrayList<>(); 
+c. ArrayList<Integer> list = new ArrayList<>(); 
+d. ArrayList list = new ArrayList(); 
+Key:d
+
+#
+15. If you use the javac command to compile a program that contains raw type, what would the compiler do?
+a. report syntax error
+b. report warning and generate a class file
+c. report warning without generating a class file 
+d. no error and generate a class file
+e. report warning and generate a class file if no other errors in the program.
+Key:e For javac, a class file is generated even if the program has compile warnings.
+
+#
+16. If you use the javac –Xlint:unchecked command to compile a program that contains raw type, what would the compiler do?
+a. report compile error
+b. report warning and generate a class file
+c. report warning without generating a class file 
+d. no error and generate a class file
+Key:b
+
+#
+Section 19.7 Wildcards
+17. Is ArrayList<Integer> a subclass of ArrayList<Object>? 
+a. Yes
+b. No
+Key:b
+
+#
+18. Is ArrayList<Integer> a subclass of ArrayList<?>? 
+a. Yes
+b. No
+Key:a
+
+#
+19. Is ArrayList<Integer> a subclass of ArrayList<? extends Number>? 
+a. Yes
+b. No
+Key:a
+
+#
+20. Is ArrayList<Number> a subclass of ArrayList<? extends Number>? 
+a. Yes
+b. No
+Key:a
+
+#
+21. Is ArrayList<?> same as ArrayList<? extends Object>? 
+a. Yes
+b. No
+Key:a
+
+#
+22. Does <? super Number> represent a superclass of Number? 
+a. Yes
+b. No
+Key:a
+
+#
+23. Which of the following can be used to replace YYYYYYYY in the following code? 
+
+public class WildCardDemo3 {
+  public static void main(String[] args) {
+    GenericStack<String> stack1 = new GenericStack<>();
+    GenericStack<Object> stack2 = new GenericStack<>();
+    stack2.push("Java");
+    stack2.push(2);
+    stack1.push("Sun");
+    add(stack1, stack2);
+    WildCardDemo2.print(stack2);
+  }
+
+  public static <T> void add(GenericStack<T> stack1,
+      GenericStack<YYYYYYYY> stack2) {
+    while (!stack1.isEmpty())
+      stack2.push(stack1.pop());
+  }
+}
+
+a. ? super Object
+b. ? super T
+c. ? extends T
+d. ? extends Object
+Key:b
+
+#
+24. Which of the following can be used to replace YYYYYYYY in the following code? 
+
+public class WildCardDemo3 {
+  public static void main(String[] args) {
+    GenericStack<String> stack1 = new GenericStack<>();
+    GenericStack<Object> stack2 = new GenericStack<>();
+    stack2.push("Java");
+    stack2.push(2);
+    stack1.push("Sun");
+    add(stack1, stack2);
+    WildCardDemo2.print(stack2);
+  }
+
+  public static <T> void YYYYYYYY {
+    while (!stack1.isEmpty())
+      stack2.push(stack1.pop());
+  }
+}
+
+a. add(GenericStack<T> stack1, GenericStack<T> stack2)
+b. add(GenericStack<? extends T> stack1, GenericStack<T> stack2)
+c. add(GenericStack<T> stack1, GenericStack<? super T> stack2)
+d. add(GenericStack<T> stack1, GenericStack<Object> stack2)
+Key:bc
+
+#
+Section 19.8 Erasure and Restrictions on Generics
+25. ArrayList<String> and ArrayList<Integer> are two types. Does the JVM load two classes ArrayList<String> and ArrayList<Integer>? 
+a. Yes
+b. No
+Key:b The JVM loads just one ArrayList.
+
+#
+26. Which of the following statements are true?
+a. Generic type information is present at compile time.
+b. Generic type information is not present at runtime.
+c. You cannot create an instance using a generic class type parameter.
+d. You cannot create an array using a generic class type parameter.
+e. You cannot create an array using a generic class.
+Key:abcde
+ 
+#
+27. If E is a generic type for a class, can E be referenced from a static method?
+a. Yes
+b. No
+Key:b It is illegal to refer to a generic type parameter for a class in a static method or initializer, because generic type for a class belongs to a specific instantiation of the class.
+
+#
+28. Fill in the most appropriate code in the blanks in the MyInt class?
+
+public class MyInt implements _______ {
+  int id;
+
+  public MyInt(int id) {
+    this.id = id;
+  }
+
+  public String toString() {
+    return String.valueOf(id);
+  }
+
+  public int compareTo(_______ arg0) {
+    if (id > arg0.id)
+      return 1;
+    else if (id < arg0.id)
+      return -1;
+    else
+      return 0;
+  }
+}
+
+a. Comparable / Object
+b. Comparable<MyInt> / MyInt
+c. Comparable<MyInt> / Object
+d. Comparable / MyInt
+Key:b

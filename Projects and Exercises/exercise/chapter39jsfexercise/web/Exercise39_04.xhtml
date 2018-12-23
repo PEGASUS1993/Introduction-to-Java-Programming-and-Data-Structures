@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <h:head>
+    <title>Exercise39_04</title>
+  </h:head>
+  <h:body>
+    <h:form>
+      <h3>Compute Loan Payment</h3>
+      <h:panelGrid columns="2">
+        <h:outputLabel value="Loan Amount: "/>
+        <h:inputText id="loanAmount" value="#{exercise39_04.loanAmount}" />
+        <h:outputLabel value="Ammual Interest Rate "/>
+        <h:inputText id="annualInterestRate" value="#{exercise39_04.annualInterestRate}" />
+        <h:outputLabel value="Number of Years"/>
+        <h:inputText id="numberOfYears" value="#{exercise39_04.numberOfYears}" />
+      </h:panelGrid>
+
+      <!-- Use command button -->
+      <h:commandButton value="Compute Loan Payment" action = "Exercise39_04a"/> 
+      <h:commandButton value="Reset" action = "#{exercise39_04.clear()}"/>
+    </h:form>
+  </h:body>
+</html>

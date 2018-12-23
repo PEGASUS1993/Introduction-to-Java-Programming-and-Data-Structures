@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowRectangle.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowRectangleWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Group;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ShowRectangle <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {       
+    <span class = "comment">// Create rectangles </span>
+    Rectangle r1 = <span class = "keyword">new</span> Rectangle(<span class = "constant">25</span>, <span class = "constant">10</span>, <span class = "constant">60</span>, <span class = "constant">30</span>);
+    r1.setStroke(Color.BLACK);
+    r1.setFill(Color.WHITE);    
+    Rectangle r2 = <span class = "keyword">new</span> Rectangle(<span class = "constant">25</span>, <span class = "constant">50</span>, <span class = "constant">60</span>, <span class = "constant">30</span>);    
+    Rectangle r3 = <span class = "keyword">new</span> Rectangle(<span class = "constant">25</span>, <span class = "constant">90</span>, <span class = "constant">60</span>, <span class = "constant">30</span>);
+    r3.setArcWidth(<span class = "constant">15</span>);
+    r3.setArcHeight(<span class = "constant">25</span>);    
+    
+    <span class = "comment">// Create a group and add nodes to the group</span>
+    Group group = <span class = "keyword">new</span> Group();
+    group.getChildren().addAll(<span class = "keyword">new</span> Text(<span class = "constant">10</span>, <span class = "constant">27</span>, <span class = "literal">"r1"</span>), r1, 
+      <span class = "keyword">new</span> Text(<span class = "constant">10</span>, <span class = "constant">67</span>, <span class = "literal">"r2"</span>), r2, <span class = "keyword">new</span> Text(<span class = "constant">10</span>, <span class = "constant">107</span>, <span class = "literal">"r3"</span>), r3);
+    
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">4</span>; i++) {
+      Rectangle r = <span class = "keyword">new</span> Rectangle(<span class = "constant">100</span>, <span class = "constant">50</span>, <span class = "constant">100</span>, <span class = "constant">30</span>);
+      r.setRotate(i * <span class = "constant">360</span> / <span class = "constant">8</span>);
+      r.setStroke(Color.color(Math.random(), Math.random(), 
+        Math.random()));
+      r.setFill(Color.WHITE);
+      group.getChildren().add(r);
+    }
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> BorderPane(group), <span class = "constant">250</span>, <span class = "constant">150</span>);
+    primaryStage.setTitle(<span class = "literal">"ShowRectangle"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+  
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

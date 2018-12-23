@@ -1,0 +1,120 @@
+Chapter 40 Remote Method Invocation
+
+Section 40.2 RMI Basics
+1.	RMI is about _______________.
+a.	passing primitive data between a server and a client
+b.	passing objects between a server and a client
+c.	accessing remote objects and invoking methods from remote objects.
+d.	java.lang.Cloneable
+Key:c
+
+#
+2.	A remote object must be an instance of ______________.
+a.	java.rmi.RemoteObject
+b.	java.rmi.Remote
+c.	java.io.Serializable
+d.	java.lang.Cloneable
+Key:b
+
+#
+3. ____________ is a subinterface of java.rmi.Remote that defines the methods for the server object.
+a. Server object interface
+b. Server implementation
+c. RMI Registry
+d. Server stub
+e. Server Skeleton
+Key:a
+
+#
+4. ____________is a class that implements the remote object interface.
+a. Server object interface
+b. Server implementation
+c. RMI Registry
+d. Server stub
+e. Server Skeleton
+Key:b
+
+#
+5. ____________is a utility that registers remote objects and provides naming services for locating objects.
+a. Server object interface
+b. Server implementation
+c. RMI Registry
+d. Server stub
+e. Server Skeleton
+Key:c
+
+#
+6. ___________ is an object that resides on the client host and serves as a surrogate for the remote server object.
+a. Server object interface
+b. Server implementation
+c. RMI Registry
+d. Server stub
+e. Server Skeleton
+Key:d
+
+#
+7. ___________ is an object that resides on the server host, communicates with the stub and the actual server object.
+a. Server object interface
+b. Server implementation
+c. RMI Registry
+d. Server stub
+e. Server Skeleton
+Key:e
+
+#
+8. Which of the following statements are true when passing arguments in a remote method call.
+a. Primitive data types, such as char, int, double, or boolean, are passed by value like a local call. 
+b. Local object types, such as java.lang.String, are also passed by value, but this is completely different from passing an object parameter in a local call. Any object can be used as a parameter in a remote call as long as it is serializable. The stub serializes the object parameter and sends it in a stream across the network. The skeleton deserializes the stream into an object. 
+c. Remote object types are passed differently from local objects. When a client invokes a remote method with a parameter of a remote object type, the stub of the remote object is passed. The server receives the stub and manipulates the parameter through it.
+d. When a client invokes a remote method with parameters, passing the parameters is handled by the stub and the skeleton. 
+Key:abcd
+
+#
+9. __________ provides the naming services for the server to register the object and for the client to locate the object. 
+a. Server object interface
+b. Server implementation
+c. RMI Registry
+d. Server stub
+e. Server Skeleton
+Key:c
+
+#
+10. Each remote object has a unique name identified by an URL with the protocol rmi as follows:
+a. rmi://host:port/name
+b. //host:port/name
+c. http://host:port/name
+d. http://host/name
+Key:b
+
+#
+Section 40.3 Developing RMI Applications
+11. To register a remote object o with a name t at port 7000 on host panda.armstrong.edu, use 
+a. Naming.bind("rmi://panda.armstrong.edu:7000/t", o); 
+b. Naming.rebind("rmi://panda.armstrong.edu:7000/t", o); 
+c. Name.rebind("rmi://panda.armstrong.edu:7000/t", o); 
+d. Name.bind("rmi://panda.armstrong.edu:7000/t", o);
+Key:ab (A) and (B) are both fine. (B) rebinds the object if the name is already in use.
+
+#
+12. To locate a remote object with a name t at port 7000 on host panda.armstrong.edu, use 
+a. Remote remoteObj = Naming.lookup("rmi://panda.armstrong.edu:7000/t");
+b. Remote remoteObj = Name.lookup("rmi://panda.armstrong.edu:7000/t");
+c. Remote remoteObj = Name.lookup("//panda.armstrong.edu:7000/t");
+d. Remote remoteObj = Name.lookup("http://panda.armstrong.edu:7000/t");
+Key:a
+
+#
+13. To start an RMI registry, use ____________ from the command window.
+a. start rmiregistry
+b. start rmiregistry 7000
+c. rmiregistry
+d. rmiregistry 7000
+Key:ab (A) start an RMI registry at port 1099 and (B) starts an RMI registry at port 7000.
+
+#
+14. Assume that the file named policy contains the permission for registering a remote object with an RMI registry. To run the program (e.g., RegisterWithRMIServer) that registers a remote object with an RMI registry, use the command _________ from the command window. 
+a. java –Djava.security.policy=policy RegisterWithRMIServer
+b. java RegisterWithRMIServer java –Djava.security.policy=policy 
+c. java RegisterWithRMIServer
+d. java –Dpolicy=policy RegisterWithRMIServer
+Key:a

@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ControlCircleWithLambdaExpression.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ControlCircleWithLambdaExpression.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.ActionEvent;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.event.EventHandler;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Button;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ControlCircleWithLambdaExpression <span class = "keyword">extends</span> Application {
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> CirclePane circlePane = <span class = "keyword">new</span> CirclePane();
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 19&nbsp;&nbsp;    <span class = "comment">// Hold two buttons in an HBox</span>
+ 20&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox();
+ 21&nbsp;&nbsp;    hBox.setSpacing(<span class = "constant">10</span>);
+ 22&nbsp;&nbsp;    hBox.setAlignment(Pos.CENTER);
+ 23&nbsp;&nbsp;    Button btEnlarge = <span class = "keyword">new</span> Button(<span class = "literal">"Enlarge"</span>);
+ 24&nbsp;&nbsp;    Button btShrink = <span class = "keyword">new</span> Button(<span class = "literal">"Shrink"</span>);
+ 25&nbsp;&nbsp;    hBox.getChildren().add(btEnlarge);
+ 26&nbsp;&nbsp;    hBox.getChildren().add(btShrink);
+ 27&nbsp;&nbsp;    
+ 28&nbsp;&nbsp;    <span class = "comment">// Create and register the handler</span>
+ 29&nbsp;&nbsp;    btEnlarge.setOnAction((ActionEvent e) -&gt;  circlePane.enlarge());
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+ 32&nbsp;&nbsp;    borderPane.setCenter(circlePane);
+ 33&nbsp;&nbsp;    borderPane.setBottom(hBox);
+ 34&nbsp;&nbsp;    BorderPane.setAlignment(hBox, Pos.CENTER);
+ 35&nbsp;&nbsp;    
+ 36&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 37&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">200</span>, <span class = "constant">150</span>);
+ 38&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ControlCircle"</span>); <span class = "comment">// Set the stage title</span>
+ 39&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 40&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;  
+ 43&nbsp;&nbsp;  <span class = "comment">/**
+ 44&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 45&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 46&nbsp;&nbsp;   */</span>
+ 47&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 48&nbsp;&nbsp;    launch(args);
+ 49&nbsp;&nbsp;  }
+ 50&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

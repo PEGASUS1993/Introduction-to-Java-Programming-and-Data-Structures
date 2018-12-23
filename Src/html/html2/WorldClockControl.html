@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - WorldClockControl.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "WorldClockControlWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.control.ComboBox;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.GridPane;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> WorldClockControl <span class = "keyword">extends</span> BorderPane {
+  <span class = "comment">// Obtain all available locales and time zone ids</span>
+  <span class = "keyword">private</span> Locale[] availableLocales = Locale.getAvailableLocales();
+  <span class = "keyword">private</span> String[] availableTimeZones = TimeZone.getAvailableIDs();
+
+  <span class = "comment">// Comboxes to display available locales and time zones</span>
+  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboLocales = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+  <span class = "keyword">private</span> ComboBox&lt;String&gt; cboTimeZones = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+
+  <span class = "comment">// Create a clock</span>
+  <span class = "keyword">private</span> WorldClock clock = <span class = "keyword">new</span> WorldClock();
+
+  <span class = "keyword">public</span> WorldClockControl() {
+    <span class = "comment">// Initialize cboLocales with all available locales</span>
+    setAvailableLocales();
+
+    <span class = "comment">// Initialize cboTimeZones with all available time zones</span>
+    setAvailableTimeZones();
+
+    <span class = "comment">// Initialize locale and time zone</span>
+    clock.setLocale(
+      availableLocales[cboLocales.getSelectionModel()
+        .getSelectedIndex()]);
+    clock.setTimeZone(TimeZone.getTimeZone(
+      availableTimeZones[cboTimeZones.getSelectionModel()
+        .getSelectedIndex()]));
+
+    GridPane pane = <span class = "keyword">new</span> GridPane();
+    pane.setHgap(<span class = "constant">5</span>);
+    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Locale"</span>), <span class = "constant">0</span>, <span class = "constant">0</span>);
+    pane.add(<span class = "keyword">new</span> Label(<span class = "literal">"Time Zone"</span>), <span class = "constant">0</span>, <span class = "constant">1</span>);
+    pane.add(cboLocales, <span class = "constant">1</span>, <span class = "constant">0</span>);
+    pane.add(cboTimeZones, <span class = "constant">1</span>, <span class = "constant">1</span>);
+
+    setTop(pane);
+    setCenter(clock);
+    BorderPane.setAlignment(pane, Pos.CENTER);
+    BorderPane.setAlignment(clock, Pos.CENTER);
+
+    cboLocales.setOnAction(e -&gt;
+      clock.setLocale(availableLocales[cboLocales.
+        getSelectionModel().getSelectedIndex()]));
+    cboTimeZones.setOnAction(e -&gt;
+      clock.setTimeZone(TimeZone.getTimeZone(
+        availableTimeZones[cboTimeZones.
+          getSelectionModel().getSelectedIndex()])));
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> setAvailableLocales() {
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; availableLocales.length; i++) 
+      cboLocales.getItems().add(availableLocales[i]
+       .getDisplayName() + <span class = "literal">" "</span> + availableLocales[i].toString());
+
+    cboLocales.getSelectionModel().selectFirst();
+  }
+
+  <span class = "keyword">private</span> <span class = "keyword">void</span> setAvailableTimeZones() {
+    <span class = "comment">// Sort time zones</span>
+    Arrays.sort(availableTimeZones);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; availableTimeZones.length; i++) {
+      cboTimeZones.getItems().add(availableTimeZones[i]);
+    }
+    cboTimeZones.getSelectionModel().selectFirst();
+  }
+}
+</pre>
+</body>
+</html>

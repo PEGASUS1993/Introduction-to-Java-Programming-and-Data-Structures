@@ -1,0 +1,181 @@
+Chapter 22 Developing Efficient Algorithms 
+
+Section 22.2 Measuring Algorithm Efficiency Using Big O Notation
+1. Analyzing algorithm efficiency is ________.
+a. to measure their actual execution time
+b. to estimate their execution time
+c. to estimate their growth function
+Key:c
+
+#
+2. An input that results in the shortest execution time is called the _____________.
+a. best-case input
+b. worst-case input
+c. average-case input
+Key:a
+
+#
+3. Why is the analysis often for the worst case?
+a. Best-case is not representative.
+b. Worst-case is not representative, but worst-case analysis is very useful. You can show that the algorithm will never be slower than the worst-case.
+c. Average-case analysis is ideal, but difficult to perform, because it is hard to determine the relative probabilities and distributions of various input instances for many problems.
+Key:abc
+
+#
+4. Which of the following complexity is O(nlogn)?
+a.	300n + 400n*n
+b.	23nlogn + 50
+c.	45n + 45nlogn + 503
+d.	n*n*n + nlogn
+Key:bc
+
+#
+5. On an average, linear search searches 
+a.	the whole list
+b.	half of the list
+c.	just one element in the list
+d.	one fourth of the list
+Key:b
+
+#
+Section 22.3 Examples: Determining Big O
+6. What is the number of iterations in the following loop:
+
+ int count = 5;
+ while (count < n) {
+   count = count + 3;
+ }
+
+a. n - 5
+b. n - 3
+c. n / 3 - 1
+d. (n - 5) / 3 
+e. the ceiling of (n - 5) / 3 
+Key:e 
+
+#
+Section 22.4 Analyzing Algorithm Time Complexity
+7. For a sorted list of 1024 elements, a binary search takes at most _______ comparisons.
+a.	11
+b.	100
+c.	512
+d.	6
+Key:a
+
+#
+8. O(1) is ________.
+a. constant time
+b. logarithmic time
+c. linear time
+d. log-linear time
+Key:a
+
+#
+9. The time complexity for the Towers of Honoi algorithm in the text is ________.
+a. O(n)
+b. O(n^2)
+c. O(n^3)
+d. O(2^n)
+Key:d
+
+#
+10. The time complexity for the selection sort algorithm in the text is ________.
+a. O(nlogn)
+b. O(n^2)
+c. O(logn)
+d. O(2^n)
+Key:b
+
+#
+11. The time complexity for the insertion sort algorithm in the text is ________.
+a. O(nlogn)
+b. O(n^2)
+c. O(logn)
+d. O(2^n)
+Key:b
+
+#
+Section 22.5 Finding Fibonacci Numbers using Dynamic Programming
+12. ______________ approach is the process of solving subproblems, then combining the solutions of the subproblems to obtain an overall solution. This naturally leads to a recursive solution. However, it would be inefficient to use recursion, because the subproblems overlap. The key idea behind dynamic programming is to solve each subproblem only once and store the results for subproblems for later use to avoid redundant computing of the subproblems.
+a. Divide-and-conquer
+b. Dynamic programming
+c. Brutal-force
+d. Backtracking
+Key:b
+
+#
+13. The time complexity for the recursive Fibnacci algorithm in the text is ________.
+a. O(nlogn)
+b. O(n^2)
+c. O(logn)
+d. O(2^n)
+Key:d
+
+#
+14. The time complexity for the algorithm using the dynamic programming approach is ________.
+a. O(n)
+b. O(n^2)
+c. O(logn)
+d. O(2^n)
+Key:a
+
+#
+Section 22.6 Finding Greatest Common Divisors Using Euclid’s Algorithm
+15. The time complexity for the Euclid’s algorithm is ________.
+a. O(n)
+b. O(n^2)
+c. O(logn)
+d. O(2^n)
+Key:c
+
+#
+Section 22.7 Efficient Algorithms for Finding Prime Numbers
+16. The time complexity for the Sieve of Eratosthenes algorithm is ________.
+a. O(n)
+b. O(n^(1.5)/logn)
+c. O(logn)
+d. O(2^n)
+Key:b
+
+#
+Section 22.8 Finding the Closest Pair of Points Using Divide-and-Conquer
+17. The time complexity for the the closest pair of points problem using divide-and-conquer is ________.
+a. O(n)
+b. O(nlogn)
+c. O(logn)
+d. O(2^n)
+Key:b
+
+#
+18. ______________ approach divides the problem into subproblems, solves the subproblems, then combines the solutions of the subproblems to obtain the solution for the entire problem. Unlike the ________ approach, the subproblems in the divide-and-conquer approach don’t overlap. A subproblem is like the original problem with a smaller size, so you can apply recursion to solve the problem. 
+a. Divide-and-conquer/dynamic programming
+b. Dynamic programming/divide-and-conquer
+c. Brutal-force/divide-and-conquer
+d. Backtracking/dynamic programming
+Key:a
+
+#
+Section 22.9 Solving the Eight Queens Problem Using Backtracking
+19. The ________ approach searches for a candidate solution incrementally, abandoning that option as soon as it determines that the candidate cannot possibly be a valid solution, and then looks for a new candidate.
+a. Divide-and-conquer
+b. Dynamic programming
+c. Brutal-force
+d. Backtracking
+Key:d
+
+#
+Section 22.10 Computational Geometry: Finding a Convex Hull
+20. The gift-wrapping algorithm for finding a convex hull takes ______________ time.
+a. O(n)
+b. O(nlogn)
+c. O(logn)
+d. O(n^2)
+Key:d
+
+#
+21. The Graham’s algorithm for finding a convex hull takes ______________ time.
+a. O(n)
+b. O(nlogn)
+c. O(logn)
+d. O(n^2)
+Key:b

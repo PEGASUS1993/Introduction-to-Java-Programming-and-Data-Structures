@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestTreeSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestTreeSetWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestTreeSet" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestTreeSet {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a hash set</span>
+    Set&lt;String&gt; set = <span class = "keyword">new</span> HashSet&lt;&gt;();
+
+    <span class = "comment">// Add strings to the set</span>
+    set.add(<span class = "literal">"London"</span>);
+    set.add(<span class = "literal">"Paris"</span>);
+    set.add(<span class = "literal">"New York"</span>);
+    set.add(<span class = "literal">"San Francisco"</span>);
+    set.add(<span class = "literal">"Beijing"</span>);
+    set.add(<span class = "literal">"New York"</span>);
+
+    TreeSet&lt;String&gt; treeSet = <span class = "keyword">new</span> TreeSet&lt;&gt;(set);
+    System.out.println(<span class = "literal">"Sorted tree set: "</span> + treeSet);
+
+    <span class = "comment">// Use the methods in SortedSet interface</span>
+    System.out.println(<span class = "literal">"first(): "</span> + treeSet.first());
+    System.out.println(<span class = "literal">"last(): "</span> + treeSet.last());
+    System.out.println(<span class = "literal">"headSet(\"New York\"): "</span> + 
+      treeSet.headSet(<span class = "literal">"New York"</span>));
+    System.out.println(<span class = "literal">"tailSet(\"New York\"): "</span> + 
+      treeSet.tailSet(<span class = "literal">"New York"</span>));
+
+    <span class = "comment">// Use the methods in NavigableSet interface</span>
+    System.out.println(<span class = "literal">"lower(\"P\"): "</span> + treeSet.lower(<span class = "literal">"P"</span>));
+    System.out.println(<span class = "literal">"higher(\"P\"): "</span> + treeSet.higher(<span class = "literal">"P"</span>));
+    System.out.println(<span class = "literal">"floor(\"P\"): "</span> + treeSet.floor(<span class = "literal">"P"</span>));
+    System.out.println(<span class = "literal">"ceiling(\"P\"): "</span> + treeSet.ceiling(<span class = "literal">"P"</span>));
+    System.out.println(<span class = "literal">"pollFirst(): "</span> + treeSet.pollFirst());
+    System.out.println(<span class = "literal">"pollLast(): "</span> + treeSet.pollLast());
+    System.out.println(<span class = "literal">"New tree set: "</span> + treeSet);
+  }
+}
+</pre>
+</body>
+</html>

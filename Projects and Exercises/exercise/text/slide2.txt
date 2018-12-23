@@ -1,0 +1,5 @@
+Chapter 3
+
+3.1 Introduction
+
+In Chapter 2, "Primitive Data Types and Operations," if you assigned a negative value for radius in Listing 2.1, ComputeArea.java, the program would print an invalid result. If the radius is negative, you don't want the program to compute the area. Like all high-level programming languages, Java provides selection statements that let you choose actions with two or more alternative courses. You can use selection statements in the following pseudocode (i.e., natural language mixed with programming code) to rewrite Listing 2.1:

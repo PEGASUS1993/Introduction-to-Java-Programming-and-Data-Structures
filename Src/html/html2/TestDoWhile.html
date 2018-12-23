@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestDoWhile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/TestDoWhile.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestDoWhile" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner; 
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestDoWhile {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "keyword">int</span> data;
+    <span class = "keyword">int</span> sum = <span class = "constant">0</span>;
+
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Keep reading data until the input is 0</span>
+    <span class = "keyword">do</span> {
+      <span class = "comment">// Read the next data</span>
+      System.out.print(
+        <span class = "literal">"Enter an integer (the input ends if it is 0): "</span>);
+      data = input.nextInt();
+
+      sum += data;
+    } <span class = "keyword">while</span> (data != <span class = "constant">0</span>);
+
+    System.out.println(<span class = "literal">"The sum is "</span> + sum);
+  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SubtractionQuizLoop.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SubtractionQuizLoop.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "SubtractionQuizLoop" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Scanner;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SubtractionQuizLoop {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "keyword">final</span> <span class = "keyword">int</span> NUMBER_OF_QUESTIONS = <span class = "constant">5</span>; <span class = "comment">// Number of questions</span>
+  6&nbsp;&nbsp;    <span class = "keyword">int</span> correctCount = <span class = "constant">0</span>; <span class = "comment">// Count the number of correct answers</span>
+  7&nbsp;&nbsp;    <span class = "keyword">int</span> count = <span class = "constant">0</span>; <span class = "comment">// Count the number of questions</span>
+  8&nbsp;&nbsp;    <span class = "keyword">long</span> startTime = System.currentTimeMillis();
+  9&nbsp;&nbsp;    String output = <span class = "literal">""</span>; <span class = "comment">// output string is initially empty</span>
+ 10&nbsp;&nbsp;    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+ 11&nbsp;&nbsp;    
+ 12&nbsp;&nbsp;    <span class = "keyword">while</span> (count &lt; NUMBER_OF_QUESTIONS) {
+ 13&nbsp;&nbsp;      <span class = "comment">// 1. Generate two random single-digit integers</span>
+ 14&nbsp;&nbsp;      <span class = "keyword">int</span> number1 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>);
+ 15&nbsp;&nbsp;      <span class = "keyword">int</span> number2 = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>);
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;      <span class = "comment">// 2. If number1 &lt; number2, swap number1 with number2</span>
+ 18&nbsp;&nbsp;      <span class = "keyword">if</span> (number1 &lt; number2) {
+ 19&nbsp;&nbsp;        <span class = "keyword">int</span> temp = number1;
+ 20&nbsp;&nbsp;        number1 = number2;
+ 21&nbsp;&nbsp;        number2 = temp;
+ 22&nbsp;&nbsp;      }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;      <span class = "comment">// 3. Prompt the student to answer "What is number1 – number2?"</span>
+ 25&nbsp;&nbsp;      System.out.print(
+ 26&nbsp;&nbsp;        <span class = "literal">"What is "</span> + number1 + <span class = "literal">" - "</span> + number2 + <span class = "literal">"? "</span>);
+ 27&nbsp;&nbsp;      <span class = "keyword">int</span> answer = input.nextInt();
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;      <span class = "comment">// 4. Grade the answer and display the result</span>
+ 30&nbsp;&nbsp;      <span class = "keyword">if</span> (number1 - number2 == answer) {
+ 31&nbsp;&nbsp;        System.out.println(<span class = "literal">"You are correct!\n"</span>);
+ 32&nbsp;&nbsp;        correctCount++;
+ 33&nbsp;&nbsp;      }
+ 34&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 35&nbsp;&nbsp;        System.out.println(<span class = "literal">"Your answer is wrong.\n"</span> + number1 
+ 36&nbsp;&nbsp;          + <span class = "literal">" - "</span> + number2 + <span class = "literal">" should be "</span> + (number1 - number2) + <span class = "literal">"\n"</span>);
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;      <span class = "comment">// Increase the count</span>
+ 39&nbsp;&nbsp;      count++;
+ 40&nbsp;&nbsp;
+ 41&nbsp;&nbsp;      output += <span class = "literal">"\n"</span> + number1 + <span class = "literal">"-"</span> + number2 + <span class = "literal">"="</span> + answer + 
+ 42&nbsp;&nbsp;        ((number1 - number2 == answer) ? <span class = "literal">" correct"</span> : <span class = "literal">" wrong"</span>);
+ 43&nbsp;&nbsp;    }
+ 44&nbsp;&nbsp;
+ 45&nbsp;&nbsp;    <span class = "keyword">long</span> endTime = System.currentTimeMillis();
+ 46&nbsp;&nbsp;    <span class = "keyword">long</span> testTime = endTime - startTime;
+ 47&nbsp;&nbsp;
+ 48&nbsp;&nbsp;    System.out.println(<span class = "literal">"Correct count is "</span> + correctCount + 
+ 49&nbsp;&nbsp;      <span class = "literal">"\nTest time is "</span> + testTime / <span class = "constant">1000</span> + <span class = "literal">" seconds\n"</span> + output);
+ 50&nbsp;&nbsp;  }
+ 51&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

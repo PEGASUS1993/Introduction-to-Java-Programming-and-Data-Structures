@@ -1,0 +1,124 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Registration.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Registration.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">package</span> jsf2demo;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javax.enterprise.context.RequestScoped;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javax.inject.Named;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;@Named(value = <span class = "literal">"registration"</span>)
+  7&nbsp;&nbsp;@RequestScoped
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Registration {
+  9&nbsp;&nbsp;  <span class = "keyword">private</span> String lastName;
+ 10&nbsp;&nbsp;  <span class = "keyword">private</span> String firstName;
+ 11&nbsp;&nbsp;  <span class = "keyword">private</span> String mi;
+ 12&nbsp;&nbsp;  <span class = "keyword">private</span> String gender;
+ 13&nbsp;&nbsp;  <span class = "keyword">private</span> String major;
+ 14&nbsp;&nbsp;  <span class = "keyword">private</span> String[] minor;
+ 15&nbsp;&nbsp;  <span class = "keyword">private</span> String[] hobby;
+ 16&nbsp;&nbsp;  <span class = "keyword">private</span> String remarks;
+ 17&nbsp;&nbsp;  
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> Registration() {
+ 19&nbsp;&nbsp;  }
+ 20&nbsp;&nbsp;    
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> String getLastName() {
+ 22&nbsp;&nbsp;    <span class = "keyword">return</span> lastName;
+ 23&nbsp;&nbsp;  }
+ 24&nbsp;&nbsp;  
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setLastName(String lastName) {
+ 26&nbsp;&nbsp;    <span class = "keyword">this</span>.lastName = lastName;
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;  
+ 29&nbsp;&nbsp;  <span class = "keyword">public</span> String getFirstName() {
+ 30&nbsp;&nbsp;    <span class = "keyword">return</span> firstName;
+ 31&nbsp;&nbsp;  }
+ 32&nbsp;&nbsp;  
+ 33&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setFirstName(String firstName) {
+ 34&nbsp;&nbsp;    <span class = "keyword">this</span>.firstName = firstName;
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;  
+ 37&nbsp;&nbsp;  <span class = "keyword">public</span> String getMi() {
+ 38&nbsp;&nbsp;    <span class = "keyword">return</span> mi;
+ 39&nbsp;&nbsp;  }
+ 40&nbsp;&nbsp;  
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setMi(String mi) {
+ 42&nbsp;&nbsp;    <span class = "keyword">this</span>.mi = mi;
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;  
+ 45&nbsp;&nbsp;  <span class = "keyword">public</span> String getGender() {
+ 46&nbsp;&nbsp;    <span class = "keyword">return</span> gender;
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;  
+ 49&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setGender(String gender) {
+ 50&nbsp;&nbsp;    <span class = "keyword">this</span>.gender = gender;
+ 51&nbsp;&nbsp;  }
+ 52&nbsp;&nbsp;  
+ 53&nbsp;&nbsp;  <span class = "keyword">public</span> String getMajor() {
+ 54&nbsp;&nbsp;    <span class = "keyword">return</span> major;
+ 55&nbsp;&nbsp;  }
+ 56&nbsp;&nbsp;  
+ 57&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setMajor(String major) {
+ 58&nbsp;&nbsp;    <span class = "keyword">this</span>.major = major;
+ 59&nbsp;&nbsp;  }
+ 60&nbsp;&nbsp;  
+ 61&nbsp;&nbsp;  <span class = "keyword">public</span> String[] getMinor() {
+ 62&nbsp;&nbsp;    <span class = "keyword">return</span> minor;
+ 63&nbsp;&nbsp;  }
+ 64&nbsp;&nbsp;  
+ 65&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setMinor(String[] minor) {
+ 66&nbsp;&nbsp;    <span class = "keyword">this</span>.minor = minor;
+ 67&nbsp;&nbsp;  }
+ 68&nbsp;&nbsp;  
+ 69&nbsp;&nbsp;  <span class = "keyword">public</span> String[] getHobby() {
+ 70&nbsp;&nbsp;    <span class = "keyword">return</span> hobby;
+ 71&nbsp;&nbsp;  }
+ 72&nbsp;&nbsp;  
+ 73&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setHobby(String[] hobby) {
+ 74&nbsp;&nbsp;    <span class = "keyword">this</span>.hobby = hobby;
+ 75&nbsp;&nbsp;  }
+ 76&nbsp;&nbsp;  
+ 77&nbsp;&nbsp;  <span class = "keyword">public</span> String getRemarks() {
+ 78&nbsp;&nbsp;    <span class = "keyword">return</span> remarks;
+ 79&nbsp;&nbsp;  }
+ 80&nbsp;&nbsp;  
+ 81&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setRemarks(String remarks) {
+ 82&nbsp;&nbsp;    <span class = "keyword">this</span>.remarks = remarks;
+ 83&nbsp;&nbsp;  }
+ 84&nbsp;&nbsp;  
+ 85&nbsp;&nbsp;  <span class = "keyword">public</span> String getResponse() {
+ 86&nbsp;&nbsp;    <span class = "keyword">if</span> (lastName == <span class = "keyword">null</span>)
+ 87&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">""</span>; <span class = "comment">// Request has not been made</span>
+ 88&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 89&nbsp;&nbsp;      String allMinor = <span class = "literal">""</span>;
+ 90&nbsp;&nbsp;      <span class = "keyword">for</span> (String s: minor) {
+ 91&nbsp;&nbsp;        allMinor += s + <span class = "literal">" "</span>;
+ 92&nbsp;&nbsp;      }
+ 93&nbsp;&nbsp;      
+ 94&nbsp;&nbsp;      String allHobby = <span class = "literal">""</span>;
+ 95&nbsp;&nbsp;      <span class = "keyword">for</span> (String s: hobby) {
+ 96&nbsp;&nbsp;        allHobby += s + <span class = "literal">" "</span>;
+ 97&nbsp;&nbsp;      }
+ 98&nbsp;&nbsp;
+ 99&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">"&lt;p style=\"color:red\"&gt;You entered &lt;br /&gt;"</span> + 
+100&nbsp;&nbsp;         <span class = "literal">"Last Name: "</span> + lastName + <span class = "literal">"&lt;br /&gt;"</span> + 
+101&nbsp;&nbsp;         <span class = "literal">"First Name: "</span> + firstName + <span class = "literal">"&lt;br /&gt;"</span> + 
+102&nbsp;&nbsp;         <span class = "literal">"MI: "</span> + mi + <span class = "literal">"&lt;br /&gt;"</span> +
+103&nbsp;&nbsp;         <span class = "literal">"Gender: "</span> + gender + <span class = "literal">"&lt;br /&gt;"</span> + 
+104&nbsp;&nbsp;         <span class = "literal">"Major: "</span> + major + <span class = "literal">"&lt;br /&gt;"</span> + 
+105&nbsp;&nbsp;         <span class = "literal">"Minor: "</span> + allMinor + <span class = "literal">"&lt;br /&gt;"</span> + 
+106&nbsp;&nbsp;         <span class = "literal">"Hobby: "</span> + allHobby + <span class = "literal">"&lt;br /&gt;"</span> + 
+107&nbsp;&nbsp;         <span class = "literal">"Remarks: "</span> + remarks + <span class = "literal">"&lt;/p&gt;"</span>; 
+108&nbsp;&nbsp;    }
+109&nbsp;&nbsp;  }
+110&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

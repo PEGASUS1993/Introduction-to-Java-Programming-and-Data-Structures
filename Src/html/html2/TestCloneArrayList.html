@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCloneArrayList.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCloneArrayListWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCloneArrayList" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.ArrayList;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestCloneArrayList {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    ArrayList&lt;Double&gt; list1 = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+    list1.add(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">5</span>);
+    list1.add(<span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>);
+    list1.add(<span class = "constant">3</span><span class = "literal">.</span><span class = "constant">5</span>);
+    ArrayList&lt;Double&gt; list2 = (ArrayList&lt;Double&gt;)list1.clone();
+    ArrayList&lt;Double&gt; list3 = list1;
+    list2.add(<span class = "constant">4</span><span class = "literal">.</span><span class = "constant">5</span>); 
+    list3.remove(<span class = "constant">1</span><span class = "literal">.</span><span class = "constant">5</span>); 
+    System.out.println(<span class = "literal">"list1 is "</span> + list1);
+    System.out.println(<span class = "literal">"list2 is "</span> + list2);
+    System.out.println(<span class = "literal">"list3 is "</span> + list3);
+  }
+}
+</pre>
+</body>
+</html>

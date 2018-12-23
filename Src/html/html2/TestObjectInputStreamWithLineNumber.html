@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestObjectInputStream.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestObjectInputStream.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestObjectInputStream" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestObjectInputStream {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args)
+  5&nbsp;&nbsp;    <span class = "keyword">throws</span> ClassNotFoundException, IOException {
+  6&nbsp;&nbsp;    <span class = "keyword">try</span> ( <span class = "comment">// Create an input stream for file object.dat</span>
+  7&nbsp;&nbsp;      ObjectInputStream input =
+  8&nbsp;&nbsp;        <span class = "keyword">new</span> ObjectInputStream(<span class = "keyword">new</span> FileInputStream(<span class = "literal">"object.dat"</span>));
+  9&nbsp;&nbsp;    ) {
+ 10&nbsp;&nbsp;      <span class = "comment">// Read a string, double value, and object from the file</span>
+ 11&nbsp;&nbsp;      String name = input.readUTF();
+ 12&nbsp;&nbsp;      <span class = "keyword">double</span> score = input.readDouble();
+ 13&nbsp;&nbsp;      java.util.Date date = (java.util.Date)(input.readObject());
+ 14&nbsp;&nbsp;      System.out.println(name + <span class = "literal">" "</span> + score + <span class = "literal">" "</span> + date);
+ 15&nbsp;&nbsp;    }
+ 16&nbsp;&nbsp;  }
+ 17&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

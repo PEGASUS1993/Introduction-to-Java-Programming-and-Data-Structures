@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Loan.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LoanWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Loan {
+  <span class = "keyword">private</span> <span class = "keyword">double</span> annualInterestRate;
+  <span class = "keyword">private</span> <span class = "keyword">int</span> numberOfYears;
+  <span class = "keyword">private</span> <span class = "keyword">double</span> loanAmount;
+  <span class = "keyword">private</span> java.util.Date loanDate;
+
+  <span class = "comment">/** Default constructor */</span>
+  <span class = "keyword">public</span> Loan() {
+    <span class = "keyword">this</span>(<span class = "constant">2</span><span class = "literal">.</span><span class = "constant">5</span>, <span class = "constant">1</span>, <span class = "constant">1000</span>);
+  }
+
+  <span class = "comment">/** Construct a loan with specified annual interest rate,
+      number of years, and loan amount
+    */</span>
+  <span class = "keyword">public</span> Loan(<span class = "keyword">double</span> annualInterestRate, <span class = "keyword">int</span> numberOfYears,
+      <span class = "keyword">double</span> loanAmount) {
+    <span class = "keyword">this</span>.annualInterestRate = annualInterestRate;
+    <span class = "keyword">this</span>.numberOfYears = numberOfYears;
+    <span class = "keyword">this</span>.loanAmount = loanAmount;
+    loanDate = <span class = "keyword">new</span> java.util.Date();
+  }
+
+  <span class = "comment">/** Return annualInterestRate */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getAnnualInterestRate() {
+    <span class = "keyword">return</span> annualInterestRate;
+  }
+
+  <span class = "comment">/** Set a new annualInterestRate */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setAnnualInterestRate(<span class = "keyword">double</span> annualInterestRate) {
+    <span class = "keyword">this</span>.annualInterestRate = annualInterestRate;
+  }
+
+  <span class = "comment">/** Return numberOfYears */</span>
+  <span class = "keyword">public</span> <span class = "keyword">int</span> getNumberOfYears() {
+    <span class = "keyword">return</span> numberOfYears;
+  }
+
+  <span class = "comment">/** Set a new numberOfYears */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setNumberOfYears(<span class = "keyword">int</span> numberOfYears) {
+    <span class = "keyword">this</span>.numberOfYears = numberOfYears;
+  }
+
+  <span class = "comment">/** Return loanAmount */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getLoanAmount() {
+    <span class = "keyword">return</span> loanAmount;
+  }
+
+  <span class = "comment">/** Set a newloanAmount */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setLoanAmount(<span class = "keyword">double</span> loanAmount) {
+    <span class = "keyword">this</span>.loanAmount = loanAmount;
+  }
+
+  <span class = "comment">/** Find monthly payment */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getMonthlyPayment() {
+    <span class = "keyword">double</span> monthlyInterestRate = annualInterestRate / <span class = "constant">1200</span>;
+    <span class = "keyword">double</span> monthlyPayment = loanAmount * monthlyInterestRate / (<span class = "constant">1</span> -
+      (<span class = "constant">1</span> / Math.pow(<span class = "constant">1</span> + monthlyInterestRate, numberOfYears * <span class = "constant">12</span>)));
+    <span class = "keyword">return</span> monthlyPayment;    
+  }
+
+  <span class = "comment">/** Find total payment */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getTotalPayment() {
+    <span class = "keyword">double</span> totalPayment = getMonthlyPayment() * numberOfYears * <span class = "constant">12</span>;
+    <span class = "keyword">return</span> totalPayment;    
+  }
+
+  <span class = "comment">/** Return loan date */</span>
+  <span class = "keyword">public</span> java.util.Date getLoanDate() {
+    <span class = "keyword">return</span> loanDate;
+  }
+}
+</pre>
+</body>
+</html>

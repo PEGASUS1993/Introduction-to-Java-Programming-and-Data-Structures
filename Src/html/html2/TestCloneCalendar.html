@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestCloneCalendar.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestCloneCalendarWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestCloneCalendar" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestCloneCalendar {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Calendar calendar = <span class = "keyword">new</span> GregorianCalendar(<span class = "constant">2013</span>, <span class = "constant">2</span>, <span class = "constant">1</span>);
+    Calendar calendar1 = calendar;
+    Calendar calendar2 = (Calendar)calendar.clone();
+    System.out.println(<span class = "literal">"calendar == calendar1 is "</span> 
+      + (calendar == calendar1));
+    System.out.println(<span class = "literal">"calendar == calendar2 is "</span> 
+      + (calendar == calendar2));
+    System.out.println(<span class = "literal">"calendar.equals(calendar2) is "</span>
+      + calendar.equals(calendar2));
+  }
+}
+</pre>
+</body>
+</html>

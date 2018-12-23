@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ShowPolygon.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ShowPolygon.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.collections.ObservableList;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Polygon;
+  8&nbsp;&nbsp;
+  9&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ShowPolygon <span class = "keyword">extends</span> Application {
+ 10&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+ 12&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 13&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> MyPolygon(), <span class = "constant">400</span>, <span class = "constant">400</span>);
+ 14&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ShowPolygon"</span>); <span class = "comment">// Set the stage title</span>
+ 15&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 16&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;  
+ 19&nbsp;&nbsp;  <span class = "comment">/**
+ 20&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 21&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 22&nbsp;&nbsp;   */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 24&nbsp;&nbsp;    launch(args);
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;}
+ 27&nbsp;&nbsp;
+ 28&nbsp;&nbsp;<span class = "keyword">class</span> MyPolygon <span class = "keyword">extends</span> Pane {
+ 29&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> paint() {
+ 30&nbsp;&nbsp;    <span class = "comment">// Create a polygon and place polygon to pane</span>
+ 31&nbsp;&nbsp;    Polygon polygon = <span class = "keyword">new</span> Polygon();
+ 32&nbsp;&nbsp;    polygon.setFill(Color.WHITE);
+ 33&nbsp;&nbsp;    polygon.setStroke(Color.BLACK);
+ 34&nbsp;&nbsp;    ObservableList&lt;Double&gt; list = polygon.getPoints();
+ 35&nbsp;&nbsp;    
+ 36&nbsp;&nbsp;    <span class = "keyword">double</span> centerX = getWidth() / <span class = "constant">2</span>, centerY = getHeight() / <span class = "constant">2</span>;
+ 37&nbsp;&nbsp;    <span class = "keyword">double</span> radius = Math.min(getWidth(), getHeight()) * <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">4</span>;
+ 38&nbsp;&nbsp;
+ 39&nbsp;&nbsp;    <span class = "comment">// Add points to the polygon list</span>
+ 40&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; <span class = "constant">6</span>; i++) {
+ 41&nbsp;&nbsp;      list.add(centerX + radius * Math.cos(<span class = "constant">2</span> * i * Math.PI / <span class = "constant">6</span>)); 
+ 42&nbsp;&nbsp;      list.add(centerY - radius * Math.sin(<span class = "constant">2</span> * i * Math.PI / <span class = "constant">6</span>));
+ 43&nbsp;&nbsp;    }     
+ 44&nbsp;&nbsp;    
+ 45&nbsp;&nbsp;    getChildren().clear();
+ 46&nbsp;&nbsp;    getChildren().add(polygon); 
+ 47&nbsp;&nbsp;  }
+ 48&nbsp;&nbsp;  
+ 49&nbsp;&nbsp;  @Override
+ 50&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setWidth(<span class = "keyword">double</span> width) {
+ 51&nbsp;&nbsp;    <span class = "keyword">super</span>.setWidth(width);
+ 52&nbsp;&nbsp;    paint();
+ 53&nbsp;&nbsp;  }
+ 54&nbsp;&nbsp;  
+ 55&nbsp;&nbsp;  @Override
+ 56&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setHeight(<span class = "keyword">double</span> height) {
+ 57&nbsp;&nbsp;    <span class = "keyword">super</span>.setHeight(height);
+ 58&nbsp;&nbsp;    paint();
+ 59&nbsp;&nbsp;  }
+ 60&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

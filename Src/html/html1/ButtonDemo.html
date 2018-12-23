@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ButtonDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ButtonDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.stage.Stage;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Button;
+<span class = "keyword">import</span> javafx.scene.image.ImageView;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.scene.layout.HBox;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ButtonDemo <span class = "keyword">extends</span> Application {
+  <span class = "keyword">protected</span> Text text = <span class = "keyword">new</span> Text(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "literal">"JavaFX Programming"</span>);
+  
+  <span class = "keyword">protected</span> BorderPane getPane() {
+    HBox paneForButtons = <span class = "keyword">new</span> HBox(<span class = "constant">20</span>);
+    Button btLeft = <span class = "keyword">new</span> Button(<span class = "literal">"Left"</span>, 
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/left.gif"</span>));
+    Button btRight = <span class = "keyword">new</span> Button(<span class = "literal">"Right"</span>, 
+      <span class = "keyword">new</span> ImageView(<span class = "literal">"image/right.gif"</span>));   
+    paneForButtons.getChildren().addAll(btLeft, btRight);
+    paneForButtons.setAlignment(Pos.CENTER);
+    paneForButtons.setStyle(<span class = "literal">"-fx-border-color: green"</span>);
+
+    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+    pane.setBottom(paneForButtons);
+    
+    Pane paneForText = <span class = "keyword">new</span> Pane();
+    paneForText.getChildren().add(text);
+    pane.setCenter(paneForText);
+    
+    btLeft.setOnAction(e -&gt; text.setX(text.getX() - <span class = "constant">10</span>));
+    btRight.setOnAction(e -&gt; text.setX(text.getX() + <span class = "constant">10</span>));
+    
+    <span class = "keyword">return</span> pane;
+  }
+  
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(getPane(), <span class = "constant">450</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"ButtonDemo"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

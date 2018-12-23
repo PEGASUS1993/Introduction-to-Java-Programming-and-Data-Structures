@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CurveDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CurveDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.layout.Pane;
+<span class = "keyword">import</span> javafx.scene.text.Text;
+<span class = "keyword">import</span> javafx.scene.shape.Circle; 
+<span class = "keyword">import</span> javafx.scene.paint.Color;
+<span class = "keyword">import</span> javafx.scene.shape.*;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> CurveDemo <span class = "keyword">extends</span> Application {
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    Pane pane = <span class = "keyword">new</span> Pane(); <span class = "comment">// PaneBuilder.create().build(); </span>
+    
+    <span class = "comment">// Create a QuadCurve</span>
+    QuadCurve quadCurve = <span class = "keyword">new</span> QuadCurve(<span class = "constant">10</span>, <span class = "constant">80</span>, <span class = "constant">40</span>, <span class = "constant">20</span>, <span class = "constant">150</span>, <span class = "constant">56</span>);
+    quadCurve.setFill(Color.WHITE);
+    quadCurve.setStroke(Color.BLACK);
+
+    pane.getChildren().addAll(quadCurve, <span class = "keyword">new</span> Circle(<span class = "constant">40</span>, <span class = "constant">20</span>, <span class = "constant">6</span>),
+      <span class = "keyword">new</span> Text(<span class = "constant">40</span> + <span class = "constant">5</span>, <span class = "constant">20</span> - <span class = "constant">5</span>, <span class = "literal">"Control point"</span>));
+    
+    <span class = "comment">// Create a CubicCurve</span>
+    CubicCurve cubicCurve = <span class = "keyword">new</span> CubicCurve
+      (<span class = "constant">200</span>, <span class = "constant">80</span>, <span class = "constant">240</span>, <span class = "constant">20</span>, <span class = "constant">350</span>, <span class = "constant">156</span>, <span class = "constant">450</span>, <span class = "constant">80</span>);
+    cubicCurve.setFill(Color.WHITE);
+    cubicCurve.setStroke(Color.BLACK);
+
+    pane.getChildren().addAll(cubicCurve, <span class = "keyword">new</span> Circle(<span class = "constant">240</span>, <span class = "constant">20</span>, <span class = "constant">6</span>),
+      <span class = "keyword">new</span> Text(<span class = "constant">240</span> + <span class = "constant">5</span>, <span class = "constant">20</span> - <span class = "constant">5</span>, <span class = "literal">"Control point 1"</span>),
+      <span class = "keyword">new</span> Circle(<span class = "constant">350</span>, <span class = "constant">156</span>, <span class = "constant">6</span>),
+      <span class = "keyword">new</span> Text(<span class = "constant">350</span> + <span class = "constant">5</span>, <span class = "constant">156</span> - <span class = "constant">5</span>, <span class = "literal">"Control point 2"</span>));
+
+    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+    primaryStage.setTitle(<span class = "literal">"CurveDemo"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">// Launch the program from command-line</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

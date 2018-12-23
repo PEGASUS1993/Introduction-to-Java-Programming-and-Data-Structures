@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for TicTacToe -->
+
+<jnlp spec="1.0+"
+      codebase="file:///C:/book" 
+      href="TicTacToe.jnlp">
+   <information>
+      <title>TicTacToe Demo</title>
+      <vendor>The Java(tm) Tutorial</vendor>
+      <description>TicTacToe Demo</description>
+      <homepage href="http://download.oracle.com/docs/cd/E17409_01/javase/tutorial/deployment/webstart/running.html"/>
+      <description kind="short">ClickMeApp uses 3 custom classes plus several
+       standard ones</description>
+      <offline-allowed/>
+   </information>
+   <resources>     
+   	<jar href="TicTacToe.jar"/>   
+	<j2se version="1.6+"
+	      href="http://java.sun.com/products/autodl/j2se"/>
+   </resources>
+   <application-desc main-class="TicTacToe"/>
+</jnlp>

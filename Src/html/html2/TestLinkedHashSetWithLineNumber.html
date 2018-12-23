@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestLinkedHashSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestLinkedHashSet.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestLinkedHashSet" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestLinkedHashSet {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a linked hash set</span>
+  6&nbsp;&nbsp;    Set&lt;String&gt; set = <span class = "keyword">new</span> LinkedHashSet&lt;&gt;();
+  7&nbsp;&nbsp;    
+  8&nbsp;&nbsp;    <span class = "comment">// Add strings to the set</span>
+  9&nbsp;&nbsp;    set.add(<span class = "literal">"London"</span>);
+ 10&nbsp;&nbsp;    set.add(<span class = "literal">"Paris"</span>);
+ 11&nbsp;&nbsp;    set.add(<span class = "literal">"New York"</span>);
+ 12&nbsp;&nbsp;    set.add(<span class = "literal">"San Francisco"</span>);
+ 13&nbsp;&nbsp;    set.add(<span class = "literal">"Beijing"</span>);
+ 14&nbsp;&nbsp;    set.add(<span class = "literal">"New York"</span>);
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    System.out.println(set);
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    <span class = "comment">// Display the elements in the hash set</span>
+ 19&nbsp;&nbsp;    <span class = "keyword">for</span> (String element: set)
+ 20&nbsp;&nbsp;      System.out.print(element.toLowerCase() + <span class = "literal">" "</span>);
+ 21&nbsp;&nbsp;  }
+ 22&nbsp;&nbsp;} 
+</pre>
+</body>
+</html>

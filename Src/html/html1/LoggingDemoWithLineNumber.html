@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - LoggingDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "LoggingDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "LoggingDemo" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.logging.FileHandler;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.util.logging.Level;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.logging.Logger;
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> LoggingDemo {
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) <span class = "keyword">throws</span> Exception {
+  7&nbsp;&nbsp;    <span class = "comment">// Obtain the logger object</span>
+  8&nbsp;&nbsp;    Logger logger = Logger.getGlobal();
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;    <span class = "comment">// Create a file handler</span>
+ 11&nbsp;&nbsp;    FileHandler handler = <span class = "keyword">new</span> FileHandler(<span class = "literal">"c:\\temp.log"</span>);
+ 12&nbsp;&nbsp;    <span class = "comment">// Add the file handler to the logger</span>
+ 13&nbsp;&nbsp;    logger.addHandler(handler); 
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;    <span class = "comment">// Set logger level</span>
+ 16&nbsp;&nbsp;    logger.setLevel(Level.FINEST);
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;    logger.severe(<span class = "literal">"my severe message"</span>);
+ 19&nbsp;&nbsp;    logger.warning(<span class = "literal">"my warning message"</span>);
+ 20&nbsp;&nbsp;    logger.info(<span class = "literal">"my info message"</span>);
+ 21&nbsp;&nbsp;    logger.config(<span class = "literal">"my config message"</span>);
+ 22&nbsp;&nbsp;    logger.fine(<span class = "literal">"my fine message"</span>);
+ 23&nbsp;&nbsp;    logger.finer(<span class = "literal">"my finer message"</span>);
+ 24&nbsp;&nbsp;    logger.finest(<span class = "literal">"my finest message"</span>);
+ 25&nbsp;&nbsp;  }
+ 26&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

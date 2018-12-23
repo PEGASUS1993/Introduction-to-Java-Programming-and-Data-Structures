@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SimpleGeometricObject.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SimpleGeometricObject.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SimpleGeometricObject {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> String color = <span class = "literal">"white"</span>;
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">boolean</span> filled;
+  4&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.Date dateCreated;
+  5&nbsp;&nbsp;  
+  6&nbsp;&nbsp;  <span class = "comment">/** Construct a default geometric object */</span>
+  7&nbsp;&nbsp;  <span class = "keyword">public</span> SimpleGeometricObject() {
+  8&nbsp;&nbsp;    dateCreated = <span class = "keyword">new</span> java.util.Date();
+  9&nbsp;&nbsp;  }
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;  <span class = "comment">/** Construct a geometric object with the specified color 
+ 12&nbsp;&nbsp;    *  and filled value */</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> SimpleGeometricObject(String color, <span class = "keyword">boolean</span> filled) {
+ 14&nbsp;&nbsp;    dateCreated = <span class = "keyword">new</span> java.util.Date();
+ 15&nbsp;&nbsp;    <span class = "keyword">this</span>.color = color;
+ 16&nbsp;&nbsp;    <span class = "keyword">this</span>.filled = filled;
+ 17&nbsp;&nbsp;  }
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;  <span class = "comment">/** Return color */</span>
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> String getColor() {
+ 21&nbsp;&nbsp;    <span class = "keyword">return</span> color;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  <span class = "comment">/** Set a new color */</span>
+ 25&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setColor(String color) {
+ 26&nbsp;&nbsp;    <span class = "keyword">this</span>.color = color;
+ 27&nbsp;&nbsp;  }
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "comment">/** Return filled. Since filled is boolean, 
+ 30&nbsp;&nbsp;     its get method is named isFilled */</span>
+ 31&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isFilled() {
+ 32&nbsp;&nbsp;    <span class = "keyword">return</span> filled;
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "comment">/** Set a new filled */</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setFilled(<span class = "keyword">boolean</span> filled) {
+ 37&nbsp;&nbsp;    <span class = "keyword">this</span>.filled = filled;
+ 38&nbsp;&nbsp;  }
+ 39&nbsp;&nbsp;  
+ 40&nbsp;&nbsp;  <span class = "comment">/** Get dateCreated */</span>
+ 41&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Date getDateCreated() {
+ 42&nbsp;&nbsp;    <span class = "keyword">return</span> dateCreated;
+ 43&nbsp;&nbsp;  }
+ 44&nbsp;&nbsp;  
+ 45&nbsp;&nbsp;  <span class = "comment">/** Return a string representation of this object */</span>
+ 46&nbsp;&nbsp;  <span class = "keyword">public</span> String toString() {
+ 47&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "literal">"created on "</span> + dateCreated + <span class = "literal">"\ncolor: "</span> + color + 
+ 48&nbsp;&nbsp;      <span class = "literal">" and filled: "</span> + filled;
+ 49&nbsp;&nbsp;  }
+ 50&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

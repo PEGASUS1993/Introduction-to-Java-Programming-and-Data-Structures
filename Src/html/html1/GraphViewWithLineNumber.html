@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GraphView.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GraphView.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Group;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Line;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+  6&nbsp;&nbsp;
+  7&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GraphView <span class = "keyword">extends</span> BorderPane {
+  8&nbsp;&nbsp;  <span class = "keyword">private</span> Graph&lt;? <span class = "keyword">extends</span> Displayable&gt; graph;
+  9&nbsp;&nbsp;  <span class = "keyword">private</span> Group group = <span class = "keyword">new</span> Group();
+ 10&nbsp;&nbsp;  
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> GraphView(Graph&lt;? <span class = "keyword">extends</span> Displayable&gt; graph) {
+ 12&nbsp;&nbsp;    <span class = "keyword">this</span>.graph = graph;
+ 13&nbsp;&nbsp;    <span class = "keyword">this</span>.setCenter(group); <span class = "comment">// Center the group</span>
+ 14&nbsp;&nbsp;    repaintGraph();
+ 15&nbsp;&nbsp;  }
+ 16&nbsp;&nbsp;  
+ 17&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> repaintGraph() {
+ 18&nbsp;&nbsp;    group.getChildren().clear(); <span class = "comment">// Clear group for a new display</span>
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    <span class = "comment">// Draw vertices and text for vertices</span>
+ 21&nbsp;&nbsp;    java.util.List&lt;? <span class = "keyword">extends</span> Displayable&gt; vertices 
+ 22&nbsp;&nbsp;      = graph.getVertices();    
+ 23&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; graph.getSize(); i++) {
+ 24&nbsp;&nbsp;      <span class = "keyword">double</span> x = vertices.get(i).getX();
+ 25&nbsp;&nbsp;      <span class = "keyword">double</span> y = vertices.get(i).getY();
+ 26&nbsp;&nbsp;      String name = vertices.get(i).getName();
+ 27&nbsp;&nbsp;      
+ 28&nbsp;&nbsp;      group.getChildren().add(<span class = "keyword">new</span> Circle(x, y, <span class = "constant">16</span>)); 
+ 29&nbsp;&nbsp;      group.getChildren().add(<span class = "keyword">new</span> Text(x - <span class = "constant">8</span>, y - <span class = "constant">18</span>, name)); 
+ 30&nbsp;&nbsp;    }
+ 31&nbsp;&nbsp;    
+ 32&nbsp;&nbsp;    <span class = "comment">// Draw edges for pairs of vertices</span>
+ 33&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; graph.getSize(); i++) {
+ 34&nbsp;&nbsp;      java.util.List&lt;Integer&gt; neighbors = graph.getNeighbors(i);
+ 35&nbsp;&nbsp;      <span class = "keyword">double</span> x1 = graph.getVertex(i).getX();
+ 36&nbsp;&nbsp;      <span class = "keyword">double</span> y1 = graph.getVertex(i).getY();
+ 37&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> v: neighbors) {
+ 38&nbsp;&nbsp;        <span class = "keyword">double</span> x2 = graph.getVertex(v).getX();
+ 39&nbsp;&nbsp;        <span class = "keyword">double</span> y2 = graph.getVertex(v).getY();
+ 40&nbsp;&nbsp;        
+ 41&nbsp;&nbsp;        <span class = "comment">// Draw an edge for (i, v)</span>
+ 42&nbsp;&nbsp;        group.getChildren().add(<span class = "keyword">new</span> Line(x1, y1, x2, y2)); 
+ 43&nbsp;&nbsp;      }
+ 44&nbsp;&nbsp;    }
+ 45&nbsp;&nbsp;  }
+ 46&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

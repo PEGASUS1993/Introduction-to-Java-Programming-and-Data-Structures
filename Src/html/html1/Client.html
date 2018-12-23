@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Client.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ClientWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.io.*;
+<span class = "keyword">import</span> java.net.*;
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.geometry.Insets;
+<span class = "keyword">import</span> javafx.geometry.Pos;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Label;
+<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+<span class = "keyword">import</span> javafx.scene.control.TextArea;
+<span class = "keyword">import</span> javafx.scene.control.TextField;
+<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> Client <span class = "keyword">extends</span> Application {
+  <span class = "comment">// IO streams</span>
+  DataOutputStream toServer = <span class = "keyword">null</span>;
+  DataInputStream fromServer = <span class = "keyword">null</span>;
+
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+    <span class = "comment">// Panel p to hold the label and text field</span>
+    BorderPane paneForTextField = <span class = "keyword">new</span> BorderPane();
+    paneForTextField.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>, <span class = "constant">5</span>)); 
+    paneForTextField.setStyle(<span class = "literal">"-fx-border-color: green"</span>);
+    paneForTextField.setLeft(<span class = "keyword">new</span> Label(<span class = "literal">"Enter a radius: "</span>));
+    
+    TextField tf = <span class = "keyword">new</span> TextField();
+    tf.setAlignment(Pos.BOTTOM_RIGHT);
+    paneForTextField.setCenter(tf);
+    
+    BorderPane mainPane = <span class = "keyword">new</span> BorderPane();
+    <span class = "comment">// Text area to display contents</span>
+    TextArea ta = <span class = "keyword">new</span> TextArea();
+    mainPane.setCenter(<span class = "keyword">new</span> ScrollPane(ta));
+    mainPane.setTop(paneForTextField);
+    
+    <span class = "comment">// Create a scene and place it in the stage</span>
+    Scene scene = <span class = "keyword">new</span> Scene(mainPane, <span class = "constant">450</span>, <span class = "constant">200</span>);
+    primaryStage.setTitle(<span class = "literal">"Client"</span>); <span class = "comment">// Set the stage title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+    primaryStage.show(); <span class = "comment">// Display the stage</span>
+    
+    tf.setOnAction(e -&gt; {
+      <span class = "keyword">try</span> {
+        <span class = "comment">// Get the radius from the text field</span>
+        <span class = "keyword">double</span> radius = Double.parseDouble(tf.getText().trim());
+  
+        <span class = "comment">// Send the radius to the server</span>
+        toServer.writeDouble(radius);
+        toServer.flush();
+  
+        <span class = "comment">// Get area from the server</span>
+        <span class = "keyword">double</span> area = fromServer.readDouble();
+  
+        <span class = "comment">// Display to the text area</span>
+        ta.appendText(<span class = "literal">"Radius is "</span> + radius + <span class = "literal">"\n"</span>);
+        ta.appendText(<span class = "literal">"Area received from the server is "</span>
+          + area + <span class = "literal">'\n'</span>);
+      }
+      <span class = "keyword">catch</span> (IOException ex) {
+        System.err.println(ex);
+      }
+    });
+  
+    <span class = "keyword">try</span> {
+      <span class = "comment">// Create a socket to connect to the server</span>
+      Socket socket = <span class = "keyword">new</span> Socket(<span class = "literal">"localhost"</span>, <span class = "constant">8000</span>);
+      <span class = "comment">// Socket socket = new Socket("130.254.204.36", 8000);</span>
+      <span class = "comment">// Socket socket = new Socket("drake.Armstrong.edu", 8000);</span>
+
+      <span class = "comment">// Create an input stream to receive data from the server</span>
+      fromServer = <span class = "keyword">new</span> DataInputStream(socket.getInputStream());
+
+      <span class = "comment">// Create an output stream to send data to the server</span>
+      toServer = <span class = "keyword">new</span> DataOutputStream(socket.getOutputStream());
+    }
+    <span class = "keyword">catch</span> (IOException ex) {
+      ta.appendText(ex.toString() + <span class = "literal">'\n'</span>);
+    }
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

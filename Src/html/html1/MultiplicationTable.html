@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MultiplicationTable.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/MultiplicationTable.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "MultiplicationTable" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> MultiplicationTable {
+  <span class = "comment">/** Main method */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Display the table heading</span>
+    System.out.println(<span class = "literal">"           Multiplication Table"</span>);
+
+    <span class = "comment">// Display the number title</span>
+    System.out.print(<span class = "literal">"    "</span>);
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">1</span>; j &lt;= <span class = "constant">9</span>; j++)
+      System.out.print(<span class = "literal">"   "</span> + j);
+
+    System.out.println(<span class = "literal">"\n-----------------------------------------"</span>);
+
+    <span class = "comment">// Print table body</span>
+    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">1</span>; i &lt;= <span class = "constant">9</span>; i++) {
+      System.out.print(i + <span class = "literal">" | "</span>);
+      <span class = "keyword">for</span> (<span class = "keyword">int</span> j = <span class = "constant">1</span>; j &lt;= <span class = "constant">9</span>; j++) {
+        <span class = "comment">// Display the product and align properly</span>
+        System.out.printf(<span class = "literal">"%4d"</span>, i * j);
+      }
+      System.out.println();
+    }
+  }
+}
+</pre>
+</body>
+</html>

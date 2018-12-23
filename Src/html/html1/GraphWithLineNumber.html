@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Graph.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Graph.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">interface</span> Graph&lt;V&gt; {
+  2&nbsp;&nbsp;  <span class = "comment">/** Return the number of vertices in the graph */</span>
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize();
+  4&nbsp;&nbsp;
+  5&nbsp;&nbsp;  <span class = "comment">/** Return the vertices in the graph */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.List&lt;V&gt; getVertices();
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;  <span class = "comment">/** Return the object for the specified vertex index */</span>
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> V getVertex(<span class = "keyword">int</span> index);
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;  <span class = "comment">/** Return the index for the specified vertex object */</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getIndex(V v);
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "comment">/** Return the neighbors of vertex with the specified index */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.List&lt;Integer&gt; getNeighbors(<span class = "keyword">int</span> index);
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;  <span class = "comment">/** Return the degree for a specified vertex */</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getDegree(<span class = "keyword">int</span> v);
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Print the edges */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> printEdges();
+ 22&nbsp;&nbsp;
+ 23&nbsp;&nbsp;  <span class = "comment">/** Clear the graph */</span>
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> clear();
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  <span class = "comment">/** Add a vertex to the graph */</span>  
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addVertex(V vertex);
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "comment">/** Add an edge (u, v) to the graph */</span>  
+ 30&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v);
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;  <span class = "comment">/** Add an edge to the graph */</span>  
+ 33&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> addEdge(Edge e);
+ 34&nbsp;&nbsp;
+ 35&nbsp;&nbsp;  <span class = "comment">/** Remove a vertex v from the graph, return true if successful */</span>  
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(V v);
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  <span class = "comment">/** Remove an edge (u, v) from the graph */</span>  
+ 39&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> remove(<span class = "keyword">int</span> u, <span class = "keyword">int</span> v);
+ 40&nbsp;&nbsp;  
+ 41&nbsp;&nbsp;  <span class = "comment">/** Obtain a depth-first search tree */</span>
+ 42&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph&lt;V&gt;.SearchTree dfs(<span class = "keyword">int</span> v);
+ 43&nbsp;&nbsp;
+ 44&nbsp;&nbsp;  <span class = "comment">/** Obtain a breadth-first search tree */</span>
+ 45&nbsp;&nbsp;  <span class = "keyword">public</span> UnweightedGraph&lt;V&gt;.SearchTree bfs(<span class = "keyword">int</span> v);
+ 46&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

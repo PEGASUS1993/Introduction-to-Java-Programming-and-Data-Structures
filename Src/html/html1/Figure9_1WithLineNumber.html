@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Figure9_1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Figure9_1.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Insets;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.*;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+ 12&nbsp;&nbsp;
+ 13&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Figure9_1 <span class = "keyword">extends</span> Application { 
+ 14&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 16&nbsp;&nbsp;    
+ 17&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">8</span>);
+ 18&nbsp;&nbsp;    hBox.setPadding(<span class = "keyword">new</span> Insets(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">10</span>));
+ 19&nbsp;&nbsp;    
+ 20&nbsp;&nbsp;    ComboBox&lt;String&gt; cb = <span class = "keyword">new</span> ComboBox&lt;&gt;();
+ 21&nbsp;&nbsp;    cb.getItems().addAll(<span class = "literal">"Freshman"</span>, <span class = "literal">"Sophmore"</span>);
+ 22&nbsp;&nbsp;    
+ 23&nbsp;&nbsp;    TextField tf = <span class = "keyword">new</span> TextField();
+ 24&nbsp;&nbsp;    tf.setPrefColumnCount(<span class = "constant">9</span>);
+ 25&nbsp;&nbsp;    
+ 26&nbsp;&nbsp;    hBox.getChildren().addAll(<span class = "keyword">new</span> Button(<span class = "literal">"OK"</span>), <span class = "keyword">new</span> Button(<span class = "literal">"Cancel"</span>), 
+ 27&nbsp;&nbsp;        <span class = "keyword">new</span> Label(<span class = "literal">"Enter Your Name:"</span>), tf, <span class = "keyword">new</span> CheckBox(<span class = "literal">"Bold"</span>),
+ 28&nbsp;&nbsp;        <span class = "keyword">new</span> CheckBox(<span class = "literal">"Italic"</span>), <span class = "keyword">new</span> RadioButton(<span class = "literal">"Red"</span>), <span class = "keyword">new</span> RadioButton(<span class = "literal">"Yellow"</span>),
+ 29&nbsp;&nbsp;        cb);
+ 30&nbsp;&nbsp;    
+ 31&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 32&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(hBox, <span class = "constant">650</span>, <span class = "constant">100</span>);
+ 33&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"Show GUI"</span>); <span class = "comment">// Set the stage title</span>
+ 34&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 35&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 36&nbsp;&nbsp;  }
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;  <span class = "comment">/**
+ 39&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 40&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 41&nbsp;&nbsp;   */</span>
+ 42&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 43&nbsp;&nbsp;    launch(args);
+ 44&nbsp;&nbsp;  }
+ 45&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

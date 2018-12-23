@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Rectangle.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "RectangleWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> Rectangle <span class = "keyword">extends</span> GeometricObject {
+  <span class = "keyword">private</span> <span class = "keyword">double</span> width;
+  <span class = "keyword">private</span> <span class = "keyword">double</span> height;
+
+  <span class = "keyword">public</span> Rectangle() {
+  }
+
+  <span class = "keyword">public</span> Rectangle(<span class = "keyword">double</span> width, <span class = "keyword">double</span> height) {
+    <span class = "keyword">this</span>.width = width;
+    <span class = "keyword">this</span>.height = height;
+  }
+
+  <span class = "comment">/** Return width */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getWidth() {
+    <span class = "keyword">return</span> width;
+  }
+
+  <span class = "comment">/** Set a new width */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setWidth(<span class = "keyword">double</span> width) {
+    <span class = "keyword">this</span>.width = width;
+  }
+
+  <span class = "comment">/** Return height */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getHeight() {
+    <span class = "keyword">return</span> height;
+  }
+
+  <span class = "comment">/** Set a new height */</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setHeight(<span class = "keyword">double</span> height) {
+    <span class = "keyword">this</span>.height = height;
+  }
+
+  @Override <span class = "comment">/** Return area */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getArea() {
+    <span class = "keyword">return</span> width * height;
+  }
+
+  @Override <span class = "comment">/** Return perimeter */</span>
+  <span class = "keyword">public</span> <span class = "keyword">double</span> getPerimeter() {
+    <span class = "keyword">return</span> <span class = "constant">2</span> * (width + height);
+  }
+}
+</pre>
+</body>
+</html>

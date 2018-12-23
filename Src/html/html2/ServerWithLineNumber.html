@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Server.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Server.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.io.*;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> java.net.*;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.util.Date;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Platform;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextArea;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Server <span class = "keyword">extends</span> Application {
+ 12&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 14&nbsp;&nbsp;    <span class = "comment">// Text area for displaying contents</span>
+ 15&nbsp;&nbsp;    TextArea ta = <span class = "keyword">new</span> TextArea();
+ 16&nbsp;&nbsp;
+ 17&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 18&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> ScrollPane(ta), <span class = "constant">450</span>, <span class = "constant">200</span>);
+ 19&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"Server"</span>); <span class = "comment">// Set the stage title</span>
+ 20&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 21&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 22&nbsp;&nbsp;    
+ 23&nbsp;&nbsp;    <span class = "keyword">new</span> Thread( () -&gt; {
+ 24&nbsp;&nbsp;      <span class = "keyword">try</span> {
+ 25&nbsp;&nbsp;        <span class = "comment">// Create a server socket</span>
+ 26&nbsp;&nbsp;        ServerSocket serverSocket = <span class = "keyword">new</span> ServerSocket(<span class = "constant">8000</span>);
+ 27&nbsp;&nbsp;        Platform.runLater(() -&gt;
+ 28&nbsp;&nbsp;          ta.appendText(<span class = "literal">"Server started at "</span> + <span class = "keyword">new</span> Date() + <span class = "literal">'\n'</span>));
+ 29&nbsp;&nbsp;  
+ 30&nbsp;&nbsp;        <span class = "comment">// Listen for a connection request</span>
+ 31&nbsp;&nbsp;        Socket socket = serverSocket.accept();
+ 32&nbsp;&nbsp;  
+ 33&nbsp;&nbsp;        <span class = "comment">// Create data input and output streams</span>
+ 34&nbsp;&nbsp;        DataInputStream inputFromClient = <span class = "keyword">new</span> DataInputStream(
+ 35&nbsp;&nbsp;          socket.getInputStream());
+ 36&nbsp;&nbsp;        DataOutputStream outputToClient = <span class = "keyword">new</span> DataOutputStream(
+ 37&nbsp;&nbsp;          socket.getOutputStream());
+ 38&nbsp;&nbsp;  
+ 39&nbsp;&nbsp;        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+ 40&nbsp;&nbsp;          <span class = "comment">// Receive radius from the client</span>
+ 41&nbsp;&nbsp;          <span class = "keyword">double</span> radius = inputFromClient.readDouble();
+ 42&nbsp;&nbsp;  
+ 43&nbsp;&nbsp;          <span class = "comment">// Compute area</span>
+ 44&nbsp;&nbsp;          <span class = "keyword">double</span> area = radius * radius * Math.PI;
+ 45&nbsp;&nbsp;  
+ 46&nbsp;&nbsp;          <span class = "comment">// Send area back to the client</span>
+ 47&nbsp;&nbsp;          outputToClient.writeDouble(area);
+ 48&nbsp;&nbsp;  
+ 49&nbsp;&nbsp;          Platform.runLater(() -&gt; {
+ 50&nbsp;&nbsp;            ta.appendText(<span class = "literal">"Radius received from client: "</span> 
+ 51&nbsp;&nbsp;              + radius + <span class = "literal">'\n'</span>);
+ 52&nbsp;&nbsp;            ta.appendText(<span class = "literal">"Area is: "</span> + area + <span class = "literal">'\n'</span>); 
+ 53&nbsp;&nbsp;          });
+ 54&nbsp;&nbsp;        }
+ 55&nbsp;&nbsp;      }
+ 56&nbsp;&nbsp;      <span class = "keyword">catch</span>(IOException ex) {
+ 57&nbsp;&nbsp;        ex.printStackTrace();
+ 58&nbsp;&nbsp;      }
+ 59&nbsp;&nbsp;    }).start();
+ 60&nbsp;&nbsp;  }
+ 61&nbsp;&nbsp;
+ 62&nbsp;&nbsp;  <span class = "comment">/**
+ 63&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 64&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 65&nbsp;&nbsp;   */</span>
+ 66&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 67&nbsp;&nbsp;    launch(args);
+ 68&nbsp;&nbsp;  }
+ 69&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CourseNameJSFBean.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CourseNameJSFBean.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">package</span> jsf2demo;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> java.sql.*;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> java.util.ArrayList;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javax.enterprise.context.ApplicationScoped;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javax.inject.Named;
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;@Named(value = <span class = "literal">"courseName"</span>)
+  9&nbsp;&nbsp;@ApplicationScoped
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> CourseNameJSFBean {
+ 11&nbsp;&nbsp;  <span class = "keyword">private</span> PreparedStatement studentStatement = <span class = "keyword">null</span>;
+ 12&nbsp;&nbsp;  <span class = "keyword">private</span> String choice; <span class = "comment">// Selected course</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">private</span> String[] titles; <span class = "comment">// Course titles</span>
+ 14&nbsp;&nbsp;
+ 15&nbsp;&nbsp;  <span class = "comment">/** Creates a new instance of CourseName */</span>
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> CourseNameJSFBean() {
+ 17&nbsp;&nbsp;    initializeJdbc();
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Initialize database connection */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">void</span> initializeJdbc() {
+ 22&nbsp;&nbsp;    <span class = "keyword">try</span> {
+ 23&nbsp;&nbsp;      Class.forName(<span class = "literal">"com.mysql.jdbc.Driver"</span>);
+ 24&nbsp;&nbsp;      System.out.println(<span class = "literal">"Driver loaded"</span>);
+ 25&nbsp;&nbsp;      
+ 26&nbsp;&nbsp;      <span class = "comment">// Connect to the sample database</span>
+ 27&nbsp;&nbsp;      Connection connection = DriverManager.getConnection(
+ 28&nbsp;&nbsp;        <span class = "literal">"jdbc:mysql://localhost/javabook"</span>, <span class = "literal">"scott"</span>, <span class = "literal">"tiger"</span>);
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;      <span class = "comment">// Get course titles</span>
+ 31&nbsp;&nbsp;      PreparedStatement statement = connection.prepareStatement(
+ 32&nbsp;&nbsp;        <span class = "literal">"select title from course"</span>);
+ 33&nbsp;&nbsp;      
+ 34&nbsp;&nbsp;      ResultSet resultSet = statement.executeQuery();
+ 35&nbsp;&nbsp;      
+ 36&nbsp;&nbsp;      <span class = "comment">// Store resultSet into array titles</span>
+ 37&nbsp;&nbsp;      ArrayList&lt;String&gt; list = <span class = "keyword">new</span> ArrayList&lt;&gt;();
+ 38&nbsp;&nbsp;      <span class = "keyword">while</span> (resultSet.next()) {
+ 39&nbsp;&nbsp;        list.add(resultSet.getString(<span class = "constant">1</span>));
+ 40&nbsp;&nbsp;      }
+ 41&nbsp;&nbsp;      titles = <span class = "keyword">new</span> String[list.size()]; <span class = "comment">// An array for titles</span>
+ 42&nbsp;&nbsp;      list.toArray(titles); <span class = "comment">// Copy strings from list to array</span>
+ 43&nbsp;&nbsp;        
+ 44&nbsp;&nbsp;      <span class = "comment">// Define a SQL statement for getting students</span>
+ 45&nbsp;&nbsp;      studentStatement = connection.prepareStatement(
+ 46&nbsp;&nbsp;        <span class = "literal">"select Student.ssn, "</span>
+ 47&nbsp;&nbsp;        + <span class = "literal">"student.firstName, Student.mi, Student.lastName, "</span>
+ 48&nbsp;&nbsp;        + <span class = "literal">"Student.phone, Student.birthDate, Student.street, "</span>
+ 49&nbsp;&nbsp;        + <span class = "literal">"Student.zipCode, Student.deptId "</span>
+ 50&nbsp;&nbsp;        + <span class = "literal">"from Student, Enrollment, Course "</span>
+ 51&nbsp;&nbsp;        + <span class = "literal">"where Course.title = ? "</span>
+ 52&nbsp;&nbsp;        + <span class = "literal">"and Student.ssn = Enrollment.ssn "</span>
+ 53&nbsp;&nbsp;        + <span class = "literal">"and Enrollment.courseId = Course.courseId;"</span>);
+ 54&nbsp;&nbsp;    } 
+ 55&nbsp;&nbsp;    <span class = "keyword">catch</span> (Exception ex) {
+ 56&nbsp;&nbsp;      ex.printStackTrace();
+ 57&nbsp;&nbsp;    }
+ 58&nbsp;&nbsp;  }
+ 59&nbsp;&nbsp;
+ 60&nbsp;&nbsp;  <span class = "keyword">public</span> String[] getTitles() {
+ 61&nbsp;&nbsp;    <span class = "keyword">return</span> titles;
+ 62&nbsp;&nbsp;  }
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;  <span class = "keyword">public</span> String getChoice() {
+ 65&nbsp;&nbsp;    <span class = "keyword">return</span> choice;
+ 66&nbsp;&nbsp;  }
+ 67&nbsp;&nbsp;
+ 68&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setChoice(String choice) {
+ 69&nbsp;&nbsp;    <span class = "keyword">this</span>.choice = choice;
+ 70&nbsp;&nbsp;  }
+ 71&nbsp;&nbsp;
+ 72&nbsp;&nbsp;  <span class = "keyword">public</span> ResultSet getStudents() <span class = "keyword">throws</span> SQLException {
+ 73&nbsp;&nbsp;    <span class = "keyword">if</span> (choice == <span class = "keyword">null</span>) {
+ 74&nbsp;&nbsp;      <span class = "keyword">if</span> (titles.length == <span class = "constant">0</span>)
+ 75&nbsp;&nbsp;        <span class = "keyword">return</span> <span class = "keyword">null</span>;
+ 76&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 77&nbsp;&nbsp;        studentStatement.setString(<span class = "constant">1</span>, titles[<span class = "constant">0</span>]);
+ 78&nbsp;&nbsp;    } 
+ 79&nbsp;&nbsp;    <span class = "keyword">else</span> {
+ 80&nbsp;&nbsp;      studentStatement.setString(<span class = "constant">1</span>, choice); <span class = "comment">// Set course title</span>
+ 81&nbsp;&nbsp;    }
+ 82&nbsp;&nbsp;    
+ 83&nbsp;&nbsp;    <span class = "comment">// Get students for the specified course</span>
+ 84&nbsp;&nbsp;    <span class = "keyword">return</span> studentStatement.executeQuery();
+ 85&nbsp;&nbsp;  }
+ 86&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

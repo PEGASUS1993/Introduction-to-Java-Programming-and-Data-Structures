@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TabPaneDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TabPaneDemoWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> javafx.application.Application;
+<span class = "keyword">import</span> javafx.scene.Scene;
+<span class = "keyword">import</span> javafx.scene.control.Tab;
+<span class = "keyword">import</span> javafx.scene.control.TabPane;
+<span class = "keyword">import</span> javafx.scene.layout.StackPane;
+<span class = "keyword">import</span> javafx.scene.shape.Circle;
+<span class = "keyword">import</span> javafx.scene.shape.Ellipse;
+<span class = "keyword">import</span> javafx.scene.shape.Line;
+<span class = "keyword">import</span> javafx.scene.shape.Rectangle;
+<span class = "keyword">import</span> javafx.stage.Stage;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TabPaneDemo <span class = "keyword">extends</span> Application {   
+  @Override <span class = "comment">// Override the start method in the Application class</span>
+  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {   
+    TabPane tabPane = <span class = "keyword">new</span> TabPane();
+    Tab tab1 = <span class = "keyword">new</span> Tab(<span class = "literal">"Line"</span>);
+    StackPane pane1 = <span class = "keyword">new</span> StackPane();
+    pane1.getChildren().add(<span class = "keyword">new</span> Line(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">80</span>, <span class = "constant">80</span>));
+    tab1.setContent(pane1);
+    Tab tab2 = <span class = "keyword">new</span> Tab(<span class = "literal">"Rectangle"</span>);
+    tab2.setContent(<span class = "keyword">new</span> Rectangle(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">200</span>, <span class = "constant">200</span>));
+    Tab tab3 = <span class = "keyword">new</span> Tab(<span class = "literal">"Circle"</span>);
+    tab3.setContent(<span class = "keyword">new</span> Circle(<span class = "constant">50</span>, <span class = "constant">50</span>, <span class = "constant">20</span>));    
+    Tab tab4 = <span class = "keyword">new</span> Tab(<span class = "literal">"Ellipse"</span>);
+    tab4.setContent(<span class = "keyword">new</span> Ellipse(<span class = "constant">10</span>, <span class = "constant">10</span>, <span class = "constant">100</span>, <span class = "constant">80</span>));
+    tabPane.getTabs().addAll(tab1, tab2, tab3, tab4);
+
+    Scene scene = <span class = "keyword">new</span> Scene(tabPane, <span class = "constant">300</span>, <span class = "constant">250</span>);  
+    primaryStage.setTitle(<span class = "literal">"DisplayFigure"</span>); <span class = "comment">// Set the window title</span>
+    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+    primaryStage.show(); <span class = "comment">// Display the window</span>
+  }
+
+  <span class = "comment">/**
+   * The main method is only needed for the IDE with limited
+   * JavaFX support. Not needed for running from the command line.
+   * line.
+   */</span>
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    launch(args);
+  }
+}
+</pre>
+</body>
+</html>

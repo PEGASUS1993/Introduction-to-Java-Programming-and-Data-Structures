@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ConnectedCircles.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ConnectedCircles.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Point2D;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Node;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Circle;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ConnectedCircles <span class = "keyword">extends</span> Application {
+ 11&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 13&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 14&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(<span class = "keyword">new</span> CirclePane(), <span class = "constant">450</span>, <span class = "constant">350</span>);
+ 15&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ConnectedCircles"</span>); <span class = "comment">// Set the stage title</span>
+ 16&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 17&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Panel for displaying circles */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">class</span> CirclePane <span class = "keyword">extends</span> Pane {
+ 22&nbsp;&nbsp;    <span class = "keyword">public</span> CirclePane() {
+ 23&nbsp;&nbsp;      <span class = "keyword">this</span>.setOnMouseClicked(e -&gt; {
+ 24&nbsp;&nbsp;        <span class = "keyword">if</span> (!isInsideACircle(<span class = "keyword">new</span> Point2D(e.getX(), e.getY()))) { 
+ 25&nbsp;&nbsp;          <span class = "comment">// Add a new circle</span>
+ 26&nbsp;&nbsp;          getChildren().add(<span class = "keyword">new</span> Circle(e.getX(), e.getY(), <span class = "constant">20</span>));
+ 27&nbsp;&nbsp;          colorIfConnected();
+ 28&nbsp;&nbsp;        }
+ 29&nbsp;&nbsp;      });
+ 30&nbsp;&nbsp;    }
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;    <span class = "comment">/** Returns true if the point is inside an existing circle */</span>
+ 33&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">boolean</span> isInsideACircle(Point2D p) {
+ 34&nbsp;&nbsp;      <span class = "keyword">for</span> (Node circle: <span class = "keyword">this</span>.getChildren())
+ 35&nbsp;&nbsp;        <span class = "keyword">if</span> (circle.contains(p))
+ 36&nbsp;&nbsp;          <span class = "keyword">return</span> <span class = "keyword">true</span>;
+ 37&nbsp;&nbsp;
+ 38&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "keyword">false</span>;
+ 39&nbsp;&nbsp;    }
+ 40&nbsp;&nbsp;
+ 41&nbsp;&nbsp;    <span class = "comment">/** Color all circles if they are connected */</span>
+ 42&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">void</span> colorIfConnected() {
+ 43&nbsp;&nbsp;      <span class = "keyword">if</span> (getChildren().size() == <span class = "constant">0</span>)
+ 44&nbsp;&nbsp;        <span class = "keyword">return</span>; <span class = "comment">// No circles in the pane</span>
+ 45&nbsp;&nbsp;
+ 46&nbsp;&nbsp;      <span class = "comment">// Build the edges</span>
+ 47&nbsp;&nbsp;      java.util.List&lt;Edge&gt; edges = 
+ 48&nbsp;&nbsp;          <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;();
+ 49&nbsp;&nbsp;      <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; getChildren().size(); i++)
+ 50&nbsp;&nbsp;        <span class = "keyword">for</span> (<span class = "keyword">int</span> j = i + <span class = "constant">1</span>; j &lt; getChildren().size(); j++)
+ 51&nbsp;&nbsp;          <span class = "keyword">if</span> (overlaps((Circle)(getChildren().get(i)), 
+ 52&nbsp;&nbsp;              (Circle)(getChildren().get(j)))) {
+ 53&nbsp;&nbsp;            edges.add(<span class = "keyword">new</span> Edge(i, j));
+ 54&nbsp;&nbsp;            edges.add(<span class = "keyword">new</span> Edge(j, i));
+ 55&nbsp;&nbsp;          }
+ 56&nbsp;&nbsp;
+ 57&nbsp;&nbsp;      <span class = "comment">// Create a graph with circles as vertices</span>
+ 58&nbsp;&nbsp;      Graph&lt;Node&gt; graph = <span class = "keyword">new</span> UnweightedGraph&lt;&gt;
+ 59&nbsp;&nbsp;        ((java.util.List&lt;Node&gt;)getChildren(), edges);
+ 60&nbsp;&nbsp;      UnweightedGraph&lt;Node&gt;.SearchTree tree = graph.dfs(<span class = "constant">0</span>); 
+ 61&nbsp;&nbsp;      <span class = "keyword">boolean</span> isAllCirclesConnected = getChildren().size() == tree
+ 62&nbsp;&nbsp;          .getNumberOfVerticesFound();
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;      <span class = "keyword">for</span> (Node circle: getChildren()) {
+ 65&nbsp;&nbsp;        <span class = "keyword">if</span> (isAllCirclesConnected) { <span class = "comment">// All circles are connected</span>
+ 66&nbsp;&nbsp;          ((Circle)circle).setFill(Color.RED);
+ 67&nbsp;&nbsp;        } 
+ 68&nbsp;&nbsp;        <span class = "keyword">else</span> {
+ 69&nbsp;&nbsp;          ((Circle)circle).setStroke(Color.BLACK);
+ 70&nbsp;&nbsp;          ((Circle)circle).setFill(Color.WHITE);
+ 71&nbsp;&nbsp;        }
+ 72&nbsp;&nbsp;      }
+ 73&nbsp;&nbsp;    }
+ 74&nbsp;&nbsp;  }
+ 75&nbsp;&nbsp;  
+ 76&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">boolean</span> overlaps(Circle circle1, Circle circle2) {
+ 77&nbsp;&nbsp;    <span class = "keyword">return</span> <span class = "keyword">new</span> Point2D(circle1.getCenterX(), circle1.getCenterY()).
+ 78&nbsp;&nbsp;      distance(circle2.getCenterX(), circle2.getCenterY()) 
+ 79&nbsp;&nbsp;      &lt;= circle1.getRadius() + circle2.getRadius();
+ 80&nbsp;&nbsp;  }
+ 81&nbsp;&nbsp;
+ 82&nbsp;&nbsp;  <span class = "comment">/**
+ 83&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 84&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 85&nbsp;&nbsp;   */</span>
+ 86&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 87&nbsp;&nbsp;    launch(args);
+ 88&nbsp;&nbsp;  }
+ 89&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

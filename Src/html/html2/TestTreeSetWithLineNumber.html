@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestTreeSet.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestTreeSet.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<form action = "http://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestTreeSet" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" style = "background-color: goldenrod; color: white; border:0px;" value = "Compile/Run Example Live" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> java.util.*;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> TestTreeSet {
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+  5&nbsp;&nbsp;    <span class = "comment">// Create a hash set</span>
+  6&nbsp;&nbsp;    Set&lt;String&gt; set = <span class = "keyword">new</span> HashSet&lt;&gt;();
+  7&nbsp;&nbsp;
+  8&nbsp;&nbsp;    <span class = "comment">// Add strings to the set</span>
+  9&nbsp;&nbsp;    set.add(<span class = "literal">"London"</span>);
+ 10&nbsp;&nbsp;    set.add(<span class = "literal">"Paris"</span>);
+ 11&nbsp;&nbsp;    set.add(<span class = "literal">"New York"</span>);
+ 12&nbsp;&nbsp;    set.add(<span class = "literal">"San Francisco"</span>);
+ 13&nbsp;&nbsp;    set.add(<span class = "literal">"Beijing"</span>);
+ 14&nbsp;&nbsp;    set.add(<span class = "literal">"New York"</span>);
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;    TreeSet&lt;String&gt; treeSet = <span class = "keyword">new</span> TreeSet&lt;&gt;(set);
+ 17&nbsp;&nbsp;    System.out.println(<span class = "literal">"Sorted tree set: "</span> + treeSet);
+ 18&nbsp;&nbsp;
+ 19&nbsp;&nbsp;    <span class = "comment">// Use the methods in SortedSet interface</span>
+ 20&nbsp;&nbsp;    System.out.println(<span class = "literal">"first(): "</span> + treeSet.first());
+ 21&nbsp;&nbsp;    System.out.println(<span class = "literal">"last(): "</span> + treeSet.last());
+ 22&nbsp;&nbsp;    System.out.println(<span class = "literal">"headSet(\"New York\"): "</span> + 
+ 23&nbsp;&nbsp;      treeSet.headSet(<span class = "literal">"New York"</span>));
+ 24&nbsp;&nbsp;    System.out.println(<span class = "literal">"tailSet(\"New York\"): "</span> + 
+ 25&nbsp;&nbsp;      treeSet.tailSet(<span class = "literal">"New York"</span>));
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;    <span class = "comment">// Use the methods in NavigableSet interface</span>
+ 28&nbsp;&nbsp;    System.out.println(<span class = "literal">"lower(\"P\"): "</span> + treeSet.lower(<span class = "literal">"P"</span>));
+ 29&nbsp;&nbsp;    System.out.println(<span class = "literal">"higher(\"P\"): "</span> + treeSet.higher(<span class = "literal">"P"</span>));
+ 30&nbsp;&nbsp;    System.out.println(<span class = "literal">"floor(\"P\"): "</span> + treeSet.floor(<span class = "literal">"P"</span>));
+ 31&nbsp;&nbsp;    System.out.println(<span class = "literal">"ceiling(\"P\"): "</span> + treeSet.ceiling(<span class = "literal">"P"</span>));
+ 32&nbsp;&nbsp;    System.out.println(<span class = "literal">"pollFirst(): "</span> + treeSet.pollFirst());
+ 33&nbsp;&nbsp;    System.out.println(<span class = "literal">"pollLast(): "</span> + treeSet.pollLast());
+ 34&nbsp;&nbsp;    System.out.println(<span class = "literal">"New tree set: "</span> + treeSet);
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

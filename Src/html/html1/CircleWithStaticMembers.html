@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - CircleWithStaticMembers.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "CircleWithStaticMembersWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> CircleWithStaticMembers {
+  <span class = "comment">/** The radius of the circle */</span>
+  <span class = "keyword">double</span> radius;
+
+  <span class = "comment">/** The number of the objects created */</span>
+  <span class = "keyword">static</span> <span class = "keyword">int</span> numberOfObjects = <span class = "constant">0</span>;
+
+  <span class = "comment">/** Construct a circle with radius 1 */</span>
+  CircleWithStaticMembers() {
+    radius = <span class = "constant">1</span><span class = "literal">.</span><span class = "constant">0</span>;
+    numberOfObjects++;
+  }
+
+  <span class = "comment">/** Construct a circle with a specified radius */</span>
+  CircleWithStaticMembers(<span class = "keyword">double</span> newRadius) {
+    radius = newRadius;
+    numberOfObjects++;
+  }
+
+  <span class = "comment">/** Return numberOfObjects */</span>
+  <span class = "keyword">static</span> <span class = "keyword">int</span> getNumberOfObjects() {
+    <span class = "keyword">return</span> numberOfObjects;
+  }
+
+  <span class = "comment">/** Return the area of this circle */</span>
+  <span class = "keyword">double</span> getArea() {
+    <span class = "keyword">return</span> radius * radius * Math.PI;
+  }
+}
+</pre>
+</body>
+</html>

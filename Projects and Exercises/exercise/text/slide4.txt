@@ -1,0 +1,7 @@
+Chapter 5
+
+5.1 Introduction
+
+In the preceding chapters, you learned about such methods as System.out.println, JOptionPane.showMessageDialog, JOptionPane.showInputDialog, Integer.parseInt, Double.parseDouble, System.exit, Math.pow, and Math.random(). A method is a series of statements that are grouped together to perform an operation. When you call the System.out.println method, for example, the system actually executes several statements in order to display a message on the console.
+
+This chapter introduces several topics that involve, or are related to, methods. You will learn how to create your own methods with or without return values, invoke a method with or without parameters, overload methods using the same names, and apply method abstraction in the program design.

@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestShortestPath.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestShortestPathWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestShortestPath" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestShortestPath {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    String[] vertices = {<span class = "literal">"Seattle"</span>, <span class = "literal">"San Francisco"</span>, <span class = "literal">"Los Angeles"</span>,
+      <span class = "literal">"Denver"</span>, <span class = "literal">"Kansas City"</span>, <span class = "literal">"Chicago"</span>, <span class = "literal">"Boston"</span>, <span class = "literal">"New York"</span>,
+      <span class = "literal">"Atlanta"</span>, <span class = "literal">"Miami"</span>, <span class = "literal">"Dallas"</span>, <span class = "literal">"Houston"</span>};
+
+    <span class = "keyword">int</span>[][] edges = {
+      {<span class = "constant">0</span>, <span class = "constant">1</span>, <span class = "constant">807</span>}, {<span class = "constant">0</span>, <span class = "constant">3</span>, <span class = "constant">1331</span>}, {<span class = "constant">0</span>, <span class = "constant">5</span>, <span class = "constant">2097</span>},
+      {<span class = "constant">1</span>, <span class = "constant">0</span>, <span class = "constant">807</span>}, {<span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">381</span>}, {<span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">1267</span>},
+      {<span class = "constant">2</span>, <span class = "constant">1</span>, <span class = "constant">381</span>}, {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">1015</span>}, {<span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">1663</span>}, {<span class = "constant">2</span>, <span class = "constant">10</span>, <span class = "constant">1435</span>},
+      {<span class = "constant">3</span>, <span class = "constant">0</span>, <span class = "constant">1331</span>}, {<span class = "constant">3</span>, <span class = "constant">1</span>, <span class = "constant">1267</span>}, {<span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">1015</span>}, {<span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">599</span>}, 
+        {<span class = "constant">3</span>, <span class = "constant">5</span>, <span class = "constant">1003</span>},
+      {<span class = "constant">4</span>, <span class = "constant">2</span>, <span class = "constant">1663</span>}, {<span class = "constant">4</span>, <span class = "constant">3</span>, <span class = "constant">599</span>}, {<span class = "constant">4</span>, <span class = "constant">5</span>, <span class = "constant">533</span>}, {<span class = "constant">4</span>, <span class = "constant">7</span>, <span class = "constant">1260</span>},
+        {<span class = "constant">4</span>, <span class = "constant">8</span>, <span class = "constant">864</span>}, {<span class = "constant">4</span>, <span class = "constant">10</span>, <span class = "constant">496</span>},
+      {<span class = "constant">5</span>, <span class = "constant">0</span>, <span class = "constant">2097</span>}, {<span class = "constant">5</span>, <span class = "constant">3</span>, <span class = "constant">1003</span>}, {<span class = "constant">5</span>, <span class = "constant">4</span>, <span class = "constant">533</span>}, 
+        {<span class = "constant">5</span>, <span class = "constant">6</span>, <span class = "constant">983</span>}, {<span class = "constant">5</span>, <span class = "constant">7</span>, <span class = "constant">787</span>},
+      {<span class = "constant">6</span>, <span class = "constant">5</span>, <span class = "constant">983</span>}, {<span class = "constant">6</span>, <span class = "constant">7</span>, <span class = "constant">214</span>},
+      {<span class = "constant">7</span>, <span class = "constant">4</span>, <span class = "constant">1260</span>}, {<span class = "constant">7</span>, <span class = "constant">5</span>, <span class = "constant">787</span>}, {<span class = "constant">7</span>, <span class = "constant">6</span>, <span class = "constant">214</span>}, {<span class = "constant">7</span>, <span class = "constant">8</span>, <span class = "constant">888</span>},
+      {<span class = "constant">8</span>, <span class = "constant">4</span>, <span class = "constant">864</span>}, {<span class = "constant">8</span>, <span class = "constant">7</span>, <span class = "constant">888</span>}, {<span class = "constant">8</span>, <span class = "constant">9</span>, <span class = "constant">661</span>}, 
+        {<span class = "constant">8</span>, <span class = "constant">10</span>, <span class = "constant">781</span>}, {<span class = "constant">8</span>, <span class = "constant">11</span>, <span class = "constant">810</span>},
+      {<span class = "constant">9</span>, <span class = "constant">8</span>, <span class = "constant">661</span>}, {<span class = "constant">9</span>, <span class = "constant">11</span>, <span class = "constant">1187</span>},
+      {<span class = "constant">10</span>, <span class = "constant">2</span>, <span class = "constant">1435</span>}, {<span class = "constant">10</span>, <span class = "constant">4</span>, <span class = "constant">496</span>}, {<span class = "constant">10</span>, <span class = "constant">8</span>, <span class = "constant">781</span>}, {<span class = "constant">10</span>, <span class = "constant">11</span>, <span class = "constant">239</span>},
+      {<span class = "constant">11</span>, <span class = "constant">8</span>, <span class = "constant">810</span>}, {<span class = "constant">11</span>, <span class = "constant">9</span>, <span class = "constant">1187</span>}, {<span class = "constant">11</span>, <span class = "constant">10</span>, <span class = "constant">239</span>}
+    };
+
+    WeightedGraph&lt;String&gt; graph1 = 
+      <span class = "keyword">new</span> WeightedGraph&lt;&gt;(vertices, edges);
+    WeightedGraph&lt;String&gt;.ShortestPathTree tree1 = 
+      graph1.getShortestPath(graph1.getIndex(<span class = "literal">"Chicago"</span>));
+    tree1.printAllPaths();
+
+    <span class = "comment">// Display shortest paths from Houston to Chicago</span>
+    System.out.print(<span class = "literal">"Shortest path from Houston to Chicago: "</span>);
+    java.util.List&lt;String&gt; path 
+      = tree1.getPath(graph1.getIndex(<span class = "literal">"Houston"</span>));
+    <span class = "keyword">for</span> (String s: path) {
+      System.out.print(s + <span class = "literal">" "</span>);
+    }
+
+    edges = <span class = "keyword">new</span> <span class = "keyword">int</span>[][] {
+      {<span class = "constant">0</span>, <span class = "constant">1</span>, <span class = "constant">2</span>}, {<span class = "constant">0</span>, <span class = "constant">3</span>, <span class = "constant">8</span>}, 
+      {<span class = "constant">1</span>, <span class = "constant">0</span>, <span class = "constant">2</span>}, {<span class = "constant">1</span>, <span class = "constant">2</span>, <span class = "constant">7</span>}, {<span class = "constant">1</span>, <span class = "constant">3</span>, <span class = "constant">3</span>},
+      {<span class = "constant">2</span>, <span class = "constant">1</span>, <span class = "constant">7</span>}, {<span class = "constant">2</span>, <span class = "constant">3</span>, <span class = "constant">4</span>}, {<span class = "constant">2</span>, <span class = "constant">4</span>, <span class = "constant">5</span>},
+      {<span class = "constant">3</span>, <span class = "constant">0</span>, <span class = "constant">8</span>}, {<span class = "constant">3</span>, <span class = "constant">1</span>, <span class = "constant">3</span>}, {<span class = "constant">3</span>, <span class = "constant">2</span>, <span class = "constant">4</span>}, {<span class = "constant">3</span>, <span class = "constant">4</span>, <span class = "constant">6</span>},
+      {<span class = "constant">4</span>, <span class = "constant">2</span>, <span class = "constant">5</span>}, {<span class = "constant">4</span>, <span class = "constant">3</span>, <span class = "constant">6</span>}
+    };
+    WeightedGraph&lt;Integer&gt; graph2 = <span class = "keyword">new</span> WeightedGraph&lt;&gt;(edges, <span class = "constant">5</span>);
+    WeightedGraph&lt;Integer&gt;.ShortestPathTree tree2 = 
+      graph2.getShortestPath(<span class = "constant">3</span>); <span class = "comment">// Get shortest path from 3</span>
+    System.out.println(<span class = "literal">"\n"</span>);
+    tree2.printAllPaths();
+  }
+}
+</pre>
+</body>
+</html>

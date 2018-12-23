@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - Heap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "Heap.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> Heap&lt;E&gt; {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.ArrayList&lt;E&gt; list = <span class = "keyword">new</span> java.util.ArrayList&lt;&gt;();
+  3&nbsp;&nbsp;  <span class = "keyword">private</span> java.util.Comparator&lt;? <span class = "keyword">super</span> E&gt; c;
+  4&nbsp;&nbsp;  
+  5&nbsp;&nbsp;  <span class = "comment">/** Create a default heap using a natural order for comparison */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> Heap() {
+  7&nbsp;&nbsp;    <span class = "keyword">this</span>.c = (e1, e2) -&gt; ((Comparable&lt;E&gt;)e1).compareTo(e2);
+  8&nbsp;&nbsp;  }
+  9&nbsp;&nbsp;
+ 10&nbsp;&nbsp;  <span class = "comment">/** Create a heap with a specified comparator */</span>
+ 11&nbsp;&nbsp;  <span class = "keyword">public</span> Heap(java.util.Comparator&lt;E&gt; c) {
+ 12&nbsp;&nbsp;    <span class = "keyword">this</span>.c = c;
+ 13&nbsp;&nbsp;  }
+ 14&nbsp;&nbsp;  
+ 15&nbsp;&nbsp;  <span class = "comment">/** Create a heap from an array of objects */</span>
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> Heap(E[] objects) {
+ 17&nbsp;&nbsp;  	<span class = "keyword">this</span>.c = (e1, e2) -&gt; ((Comparable&lt;E&gt;)e1).compareTo(e2);
+ 18&nbsp;&nbsp;    <span class = "keyword">for</span> (<span class = "keyword">int</span> i = <span class = "constant">0</span>; i &lt; objects.length; i++)
+ 19&nbsp;&nbsp;      add(objects[i]);
+ 20&nbsp;&nbsp;  }
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;  <span class = "comment">/** Add a new object into the heap */</span>
+ 23&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> add(E newObject) {
+ 24&nbsp;&nbsp;    list.add(newObject); <span class = "comment">// Append to the heap</span>
+ 25&nbsp;&nbsp;    <span class = "keyword">int</span> currentIndex = list.size() - <span class = "constant">1</span>; <span class = "comment">// The index of the last node</span>
+ 26&nbsp;&nbsp;
+ 27&nbsp;&nbsp;    <span class = "keyword">while</span> (currentIndex &gt; <span class = "constant">0</span>) {
+ 28&nbsp;&nbsp;      <span class = "keyword">int</span> parentIndex = (currentIndex - <span class = "constant">1</span>) / <span class = "constant">2</span>;
+ 29&nbsp;&nbsp;      <span class = "comment">// Swap if the current object is greater than its parent</span>
+ 30&nbsp;&nbsp;      <span class = "keyword">if</span> (c.compare(list.get(currentIndex),
+ 31&nbsp;&nbsp;          list.get(parentIndex)) &gt; <span class = "constant">0</span>) {
+ 32&nbsp;&nbsp;        E temp = list.get(currentIndex);
+ 33&nbsp;&nbsp;        list.set(currentIndex, list.get(parentIndex));
+ 34&nbsp;&nbsp;        list.set(parentIndex, temp);
+ 35&nbsp;&nbsp;      }
+ 36&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 37&nbsp;&nbsp;        <span class = "keyword">break</span>; <span class = "comment">// the tree is a heap now</span>
+ 38&nbsp;&nbsp;
+ 39&nbsp;&nbsp;      currentIndex = parentIndex;
+ 40&nbsp;&nbsp;    }
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;
+ 43&nbsp;&nbsp;  <span class = "comment">/** Remove the root from the heap */</span>
+ 44&nbsp;&nbsp;  <span class = "keyword">public</span> E remove() {
+ 45&nbsp;&nbsp;    <span class = "keyword">if</span> (list.size() == <span class = "constant">0</span>) <span class = "keyword">return</span> <span class = "keyword">null</span>;
+ 46&nbsp;&nbsp;
+ 47&nbsp;&nbsp;    E removedObject = list.get(<span class = "constant">0</span>);
+ 48&nbsp;&nbsp;    list.set(<span class = "constant">0</span>, list.get(list.size() - <span class = "constant">1</span>));
+ 49&nbsp;&nbsp;    list.remove(list.size() - <span class = "constant">1</span>);
+ 50&nbsp;&nbsp;
+ 51&nbsp;&nbsp;    <span class = "keyword">int</span> currentIndex = <span class = "constant">0</span>;
+ 52&nbsp;&nbsp;    <span class = "keyword">while</span> (currentIndex &lt; list.size()) {
+ 53&nbsp;&nbsp;      <span class = "keyword">int</span> leftChildIndex = <span class = "constant">2</span> * currentIndex + <span class = "constant">1</span>;
+ 54&nbsp;&nbsp;      <span class = "keyword">int</span> rightChildIndex = <span class = "constant">2</span> * currentIndex + <span class = "constant">2</span>;
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;      <span class = "comment">// Find the maximum between two children</span>
+ 57&nbsp;&nbsp;      <span class = "keyword">if</span> (leftChildIndex &gt;= list.size()) <span class = "keyword">break</span>; <span class = "comment">// The tree is a heap</span>
+ 58&nbsp;&nbsp;      <span class = "keyword">int</span> maxIndex = leftChildIndex;
+ 59&nbsp;&nbsp;      <span class = "keyword">if</span> (rightChildIndex &lt; list.size()) {
+ 60&nbsp;&nbsp;        <span class = "keyword">if</span> (c.compare(list.get(maxIndex),
+ 61&nbsp;&nbsp;            list.get(rightChildIndex)) &lt; <span class = "constant">0</span>) {
+ 62&nbsp;&nbsp;          maxIndex = rightChildIndex;
+ 63&nbsp;&nbsp;        }
+ 64&nbsp;&nbsp;      }
+ 65&nbsp;&nbsp;
+ 66&nbsp;&nbsp;      <span class = "comment">// Swap if the current node is less than the maximum</span>
+ 67&nbsp;&nbsp;      <span class = "keyword">if</span> (c.compare(list.get(currentIndex), 
+ 68&nbsp;&nbsp;      		list.get(maxIndex)) &lt; <span class = "constant">0</span>) {
+ 69&nbsp;&nbsp;        E temp = list.get(maxIndex);
+ 70&nbsp;&nbsp;        list.set(maxIndex, list.get(currentIndex));
+ 71&nbsp;&nbsp;        list.set(currentIndex, temp);
+ 72&nbsp;&nbsp;        currentIndex = maxIndex;
+ 73&nbsp;&nbsp;      }
+ 74&nbsp;&nbsp;      <span class = "keyword">else</span>
+ 75&nbsp;&nbsp;        <span class = "keyword">break</span>; <span class = "comment">// The tree is a heap</span>
+ 76&nbsp;&nbsp;    }
+ 77&nbsp;&nbsp;
+ 78&nbsp;&nbsp;    <span class = "keyword">return</span> removedObject;
+ 79&nbsp;&nbsp;  }
+ 80&nbsp;&nbsp;
+ 81&nbsp;&nbsp;  <span class = "comment">/** Get the number of nodes in the tree */</span>
+ 82&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+ 83&nbsp;&nbsp;    <span class = "keyword">return</span> list.size();
+ 84&nbsp;&nbsp;  }
+ 85&nbsp;&nbsp;  
+ 86&nbsp;&nbsp;  <span class = "comment">/** Return true if heap is empty */</span>
+ 87&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty() {
+ 88&nbsp;&nbsp;    <span class = "keyword">return</span> list.size() == <span class = "constant">0</span>;
+ 89&nbsp;&nbsp;  }
+ 90&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

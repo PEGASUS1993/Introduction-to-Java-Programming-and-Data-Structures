@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestRationalWithOverflow.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestRationalWithOverflowWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestRationalWithOverflow" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestRationalWithOverflow {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Rational r1 = <span class = "keyword">new</span> Rational(<span class = "constant">1</span>, <span class = "constant">123456789</span>);
+    Rational r2 = <span class = "keyword">new</span> Rational(<span class = "constant">1</span>, <span class = "constant">123456789</span>);
+    Rational r3 = <span class = "keyword">new</span> Rational(<span class = "constant">1</span>, <span class = "constant">123456789</span>);
+    System.out.println(<span class = "literal">"r1 * r2 * r3 is "</span> + 
+      r1.multiply(r2.multiply(r3)));
+  }
+}
+</pre>
+</body>
+</html>

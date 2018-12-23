@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GuessBirthday.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GuessBirthdayWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "GuessBirthday" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> GuessBirthday {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    String set1 =
+      <span class = "literal">" 1  3  5  7\n"</span> +
+      <span class = "literal">" 9 11 13 15\n"</span> +
+      <span class = "literal">"17 19 21 23\n"</span> +
+      <span class = "literal">"25 27 29 31"</span>;
+
+    String set2 =
+      <span class = "literal">" 2  3  6  7\n"</span> +
+      <span class = "literal">"10 11 14 15\n"</span> +
+      <span class = "literal">"18 19 22 23\n"</span> +
+      <span class = "literal">"26 27 30 31"</span>;
+
+    String set3 =
+      <span class = "literal">" 4  5  6  7\n"</span> +
+      <span class = "literal">"12 13 14 15\n"</span> +
+      <span class = "literal">"20 21 22 23\n"</span> +
+      <span class = "literal">"28 29 30 31"</span>;
+
+    String set4 =
+      <span class = "literal">" 8  9 10 11\n"</span> +
+      <span class = "literal">"12 13 14 15\n"</span> +
+      <span class = "literal">"24 25 26 27\n"</span> +
+      <span class = "literal">"28 29 30 31"</span>;
+
+    String set5 =
+      <span class = "literal">"16 17 18 19\n"</span> +
+      <span class = "literal">"20 21 22 23\n"</span> +
+      <span class = "literal">"24 25 26 27\n"</span> +
+      <span class = "literal">"28 29 30 31"</span>;
+
+    <span class = "keyword">int</span> day = <span class = "constant">0</span>;
+
+    <span class = "comment">// Create a Scanner</span>
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    <span class = "comment">// Prompt the user to answer questions</span>
+    System.out.print(<span class = "literal">"Is your birthday in Set1?\n"</span>);
+    System.out.print(set1);
+    System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+    <span class = "keyword">int</span> answer = input.nextInt();
+
+    <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+      day += <span class = "constant">1</span>;
+
+    <span class = "comment">// Prompt the user to answer questions</span>
+    System.out.print(<span class = "literal">"\nIs your birthday in Set2?\n"</span>);
+    System.out.print(set2);
+    System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+    answer = input.nextInt();
+
+    <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+      day += <span class = "constant">2</span>;
+
+    <span class = "comment">// Prompt the user to answer questions</span>
+    System.out.print(<span class = "literal">"\nIs your birthday in Set3?\n"</span>);
+    System.out.print(set3);
+    System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+    answer = input.nextInt();
+
+    <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+      day += <span class = "constant">4</span>;
+
+    <span class = "comment">// Prompt the user to answer questions</span>
+    System.out.print(<span class = "literal">"\nIs your birthday in Set4?\n"</span>);
+    System.out.print(set4);
+    System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+    answer = input.nextInt();
+
+    <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+      day += <span class = "constant">8</span>;
+
+    <span class = "comment">// Prompt the user to answer questions</span>
+    System.out.print(<span class = "literal">"\nIs your birthday in Set5?\n"</span>);
+    System.out.print(set5);
+    System.out.print(<span class = "literal">"\nEnter 0 for No and 1 for Yes: "</span>);
+    answer = input.nextInt();
+
+    <span class = "keyword">if</span> (answer == <span class = "constant">1</span>)
+      day += <span class = "constant">16</span>;
+
+    System.out.println(<span class = "literal">"\nYour birthday is "</span> + day + <span class = "literal">"!"</span>);
+  }
+}
+</pre>
+</body>
+</html>

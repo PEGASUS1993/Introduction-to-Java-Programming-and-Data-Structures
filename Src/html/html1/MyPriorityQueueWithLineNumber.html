@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyPriorityQueue.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyPriorityQueue.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> MyPriorityQueue&lt;E&gt; {
+  2&nbsp;&nbsp;  <span class = "keyword">private</span> Heap&lt;E&gt; heap; 
+  3&nbsp;&nbsp;  
+  4&nbsp;&nbsp;  <span class = "keyword">public</span> MyPriorityQueue() {
+  5&nbsp;&nbsp;    heap = <span class = "keyword">new</span> Heap&lt;E&gt;();
+  6&nbsp;&nbsp;  }
+  7&nbsp;&nbsp;  
+  8&nbsp;&nbsp;  <span class = "keyword">public</span> MyPriorityQueue(java.util.Comparator&lt;E&gt; c) {
+  9&nbsp;&nbsp;    heap = <span class = "keyword">new</span> Heap&lt;E&gt;(c);
+ 10&nbsp;&nbsp;  }
+ 11&nbsp;&nbsp;  
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> enqueue(E newObject) {
+ 13&nbsp;&nbsp;    heap.add(newObject);
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> E dequeue() {
+ 17&nbsp;&nbsp;    <span class = "keyword">return</span> heap.remove();
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> getSize() {
+ 21&nbsp;&nbsp;    <span class = "keyword">return</span> heap.getSize();
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

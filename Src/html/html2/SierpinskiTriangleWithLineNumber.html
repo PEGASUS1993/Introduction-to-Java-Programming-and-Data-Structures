@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - SierpinskiTriangle.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "SierpinskiTriangle.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Point2D;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.geometry.Pos;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.Label;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.TextField;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.HBox;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+ 11&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.shape.Polygon;
+ 12&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> SierpinskiTriangle <span class = "keyword">extends</span> Application {
+ 15&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {       
+ 17&nbsp;&nbsp;    SierpinskiTrianglePane pane = <span class = "keyword">new</span> SierpinskiTrianglePane(); 
+ 18&nbsp;&nbsp;    TextField tfOrder = <span class = "keyword">new</span> TextField(); 
+ 19&nbsp;&nbsp;    tfOrder.setOnAction(
+ 20&nbsp;&nbsp;      e -&gt; pane.setOrder(Integer.parseInt(tfOrder.getText())));
+ 21&nbsp;&nbsp;    tfOrder.setPrefColumnCount(<span class = "constant">4</span>);
+ 22&nbsp;&nbsp;    tfOrder.setAlignment(Pos.BOTTOM_RIGHT);
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;    <span class = "comment">// Pane to hold label, text field, and a button</span>
+ 25&nbsp;&nbsp;    HBox hBox = <span class = "keyword">new</span> HBox(<span class = "constant">10</span>);
+ 26&nbsp;&nbsp;    hBox.getChildren().addAll(<span class = "keyword">new</span> Label(<span class = "literal">"Enter an order: "</span>), tfOrder);
+ 27&nbsp;&nbsp;    hBox.setAlignment(Pos.CENTER);
+ 28&nbsp;&nbsp;    
+ 29&nbsp;&nbsp;    BorderPane borderPane = <span class = "keyword">new</span> BorderPane();
+ 30&nbsp;&nbsp;    borderPane.setCenter(pane);
+ 31&nbsp;&nbsp;    borderPane.setBottom(hBox);
+ 32&nbsp;&nbsp;        
+ 33&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 34&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(borderPane, <span class = "constant">200</span>, <span class = "constant">210</span>);
+ 35&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"SierpinskiTriangle"</span>); <span class = "comment">// Set the stage title</span>
+ 36&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 37&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 38&nbsp;&nbsp;    
+ 39&nbsp;&nbsp;    pane.widthProperty().addListener(ov -&gt; pane.paint());
+ 40&nbsp;&nbsp;    pane.heightProperty().addListener(ov -&gt; pane.paint());
+ 41&nbsp;&nbsp;  }
+ 42&nbsp;&nbsp;
+ 43&nbsp;&nbsp;  <span class = "comment">/** Pane for displaying triangles */</span>
+ 44&nbsp;&nbsp;  <span class = "keyword">static</span> <span class = "keyword">class</span> SierpinskiTrianglePane <span class = "keyword">extends</span> Pane {
+ 45&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">int</span> order = <span class = "constant">0</span>;
+ 46&nbsp;&nbsp;
+ 47&nbsp;&nbsp;    <span class = "comment">/** Set a new order */</span>
+ 48&nbsp;&nbsp;    <span class = "keyword">public</span> <span class = "keyword">void</span> setOrder(<span class = "keyword">int</span> order) {
+ 49&nbsp;&nbsp;      <span class = "keyword">this</span>.order = order;
+ 50&nbsp;&nbsp;      paint();
+ 51&nbsp;&nbsp;    }
+ 52&nbsp;&nbsp;
+ 53&nbsp;&nbsp;    SierpinskiTrianglePane() {
+ 54&nbsp;&nbsp;    }
+ 55&nbsp;&nbsp;
+ 56&nbsp;&nbsp;    <span class = "keyword">protected</span> <span class = "keyword">void</span> paint() {
+ 57&nbsp;&nbsp;      <span class = "comment">// Select three points in proportion to the panel size</span>
+ 58&nbsp;&nbsp;      Point2D p1 = <span class = "keyword">new</span> Point2D(getWidth() / <span class = "constant">2</span>, <span class = "constant">10</span>);
+ 59&nbsp;&nbsp;      Point2D p2 = <span class = "keyword">new</span> Point2D(<span class = "constant">10</span>, getHeight() - <span class = "constant">10</span>);
+ 60&nbsp;&nbsp;      Point2D p3 = <span class = "keyword">new</span> Point2D(getWidth() - <span class = "constant">10</span>, getHeight() - <span class = "constant">10</span>);
+ 61&nbsp;&nbsp;
+ 62&nbsp;&nbsp;      <span class = "keyword">this</span>.getChildren().clear(); <span class = "comment">// Clear the pane before redisplay</span>
+ 63&nbsp;&nbsp;
+ 64&nbsp;&nbsp;      displayTriangles(order, p1, p2, p3);
+ 65&nbsp;&nbsp;    }
+ 66&nbsp;&nbsp;
+ 67&nbsp;&nbsp;    <span class = "keyword">private</span> <span class = "keyword">void</span> displayTriangles(<span class = "keyword">int</span> order, Point2D p1, 
+ 68&nbsp;&nbsp;        Point2D p2, Point2D p3) {
+ 69&nbsp;&nbsp;      <span class = "keyword">if</span> (order == <span class = "constant">0</span>) {
+ 70&nbsp;&nbsp;        <span class = "comment">// Draw a triangle to connect three points</span>
+ 71&nbsp;&nbsp;        Polygon triangle = <span class = "keyword">new</span> Polygon();
+ 72&nbsp;&nbsp;        triangle.getPoints().addAll(p1.getX(), p1.getY(), p2.getX(), 
+ 73&nbsp;&nbsp;          p2.getY(), p3.getX(), p3.getY());
+ 74&nbsp;&nbsp;        triangle.setStroke(Color.BLACK);
+ 75&nbsp;&nbsp;        triangle.setFill(Color.WHITE);
+ 76&nbsp;&nbsp;
+ 77&nbsp;&nbsp;        <span class = "keyword">this</span>.getChildren().add(triangle);
+ 78&nbsp;&nbsp;      } 
+ 79&nbsp;&nbsp;      <span class = "keyword">else</span> {
+ 80&nbsp;&nbsp;        <span class = "comment">// Get the midpoint on each edge in the triangle</span>
+ 81&nbsp;&nbsp;        Point2D p12 = p1.midpoint(p2);
+ 82&nbsp;&nbsp;        Point2D p23 = p2.midpoint(p3);
+ 83&nbsp;&nbsp;        Point2D p31 = p3.midpoint(p1);
+ 84&nbsp;&nbsp;
+ 85&nbsp;&nbsp;        <span class = "comment">// Recursively display three triangles</span>
+ 86&nbsp;&nbsp;        displayTriangles(order - <span class = "constant">1</span>, p1, p12, p31);
+ 87&nbsp;&nbsp;        displayTriangles(order - <span class = "constant">1</span>, p12, p2, p23);
+ 88&nbsp;&nbsp;        displayTriangles(order - <span class = "constant">1</span>, p31, p23, p3);
+ 89&nbsp;&nbsp;      }
+ 90&nbsp;&nbsp;    }
+ 91&nbsp;&nbsp;  }
+ 92&nbsp;&nbsp;  
+ 93&nbsp;&nbsp;  <span class = "comment">/**
+ 94&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 95&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 96&nbsp;&nbsp;   */</span>
+ 97&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 98&nbsp;&nbsp;    launch(args);
+ 99&nbsp;&nbsp;  }
+100&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

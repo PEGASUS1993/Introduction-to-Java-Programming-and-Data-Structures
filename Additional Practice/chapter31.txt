@@ -1,0 +1,353 @@
+Chapter 31 Advanced JavaFX
+
+Section 31.2 JavaFX CSS
+1.	A JavaFX style property is defined with a prefix _______.
+a.	-fx-
+b.	fx-
+c.	-fx 
+d.	fx
+Key:a
+
+#
+2.	_______ defines a style class.
+a.  .plaincircle {-fx-fill: white; -fx-stroke: black;}
+b.  #plaincircle {-fx-fill: white; -fx-stroke: black;}
+c.  plaincircle {-fx-fill: white; -fx-stroke: black;}
+d.  +plaincircle {-fx-fill: white; -fx-stroke: black;}
+Key:a
+
+#
+3.	_______ defines a style id.
+a.  .plaincircle {-fx-fill: white; -fx-stroke: black;}
+b.  #plaincircle {-fx-fill: white; -fx-stroke: black;}
+c.  plaincircle {-fx-fill: white; -fx-stroke: black;}
+d.  +plaincircle {-fx-fill: white; -fx-stroke: black;}
+Key:b
+
+#
+4.  Which of the following statements are true?
+a.  Multiple style sheets can be loaded to a Scene or a Parent.
+b.  Multiple style classes can be applied to a single node.
+c.  A style id can be applied to a unique node. 
+d.  A style class and a style id can both be applied to a node.
+e. If the same property is defined in both a style class and a style id and applied to a node, the one defined in the style id takes precedence. 
+Key:abcde
+
+#
+5.  The _________ method loads a style sheet named style.css for a node or a scene.
+a.  node.setStyleSheet("style.css");
+b.  node.getStyleSheets.setStyleSheet("style.css");
+c.  node.getStylesheets.add("style.css");
+d.  node.setStylesheets("style.css");
+Key:c
+
+#
+6.  The _________ method sets a style class is named plaincircle for a node or a scene.
+a.  node.setStyleClass("plaincircle");
+b.  node.getStyleSheets.setStyleClass("plaincircle");
+c.  node.getStylesheets.addClass("plaincircle");
+d.  node.setStyle("plaincircle");
+Key:a
+
+#
+7.  The _________ method sets a style id named greencircle for a node or a scene.
+a.  node.setStyleId("greencircle");
+b.  node.setId("greencircle");
+c.  node.getStylesheets.addId("greencircle");
+d.  node.setStyle("greencircle");
+Key:b
+
+#
+6.  The getStylesheets() method is defined in _________.
+a.  Scene
+b.  Node
+c.  Parent
+d.  Pane
+e.  Control
+Key:ac
+
+#
+Section 31.3 QuadCurve, CubicCurve, and Path
+9. The QuadCurve class contains the ___________ properties.
+a. startX, startY
+b. endX, endY
+c. controlX, controlY
+d. x, y
+Key:abc
+
+#
+13. To construct a QuadCurve with starting point (100, 75.5), control point (40, 55.5), and end point (56, 80), use _______. 
+a. new QuadCurve(100, 75.5, 40, 55.5, 56, 80)
+b. new QuadCurve(100, 75.5, 56, 80, 40, 55.5)
+c. new QuadCurve(40, 55.5, 100, 75.5, 56, 80)
+d. QuadCurve.build().startX(100).startY(75.5).controlX(40).controlY(55.5).endX(56).endY(80).create()
+Key:ad
+
+#
+9. The CubicCurve class contains the ___________ properties.
+a. startX, startY
+b. endX, endY
+c. controlX1, controlY1
+d. controlX2, controlY2
+e. x, y
+Key:abcd
+
+#
+12. The __________ method moves the Path position to (100, 100).
+a. path.moveTo(100, 100)
+b. path.getElements().add(new MoveTo(100, 100))
+c. path.add(new MoveTo(100, 100))
+d. path.getElements().move(100, 100)
+Key:b
+
+#
+12. You can draw a segment in the path using ___________.
+a. path.addElements().add(new MoveTo(100, 100));
+b. path.addElements().add(new HLineTo(100));
+c. path.addElements().add(new VLineTo(100));
+d. path.addElements().add(new LineTo(100, 300));
+Key:abcd
+
+#
+Section 31.4 Coordinate Transformations 
+14. The translateX, translateY, translateZ, rotate, scaleX, scaleY, scaleZ properties are defined in _________.
+a. Scene
+b. Parent
+c. Stage
+d. Node
+Key:d
+
+#
+15. Assume Rectangle rectangle = new Rectangle(10, 10, 50, 60), what is rectangle.getX() after rectangle.setTranslateX(10)?
+a. 10
+b. 0
+c. 20
+d. -10
+Key:a
+
+#
+16. Assume Rectangle rectangle = new Rectangle(10, 10, 50, 60), what is rectangle.getX() after rectangle.setRotate(10)?
+a. 10
+b. 0
+c. 20
+d. -10
+Key:a
+
+#
+17. Assume Rectangle rectangle = new Rectangle(10, 10, 50, 60), what is rectangle.getWidth() after rectangle.setScaleX(2)?
+a. 100
+b. 50
+c. 200
+d. 10
+Key:b
+
+#
+Section 31.5 Strokes
+14. The stroke property is defined in _________.
+a. Scene
+b. Parent
+c. Stage
+d. Node
+e. Shape
+Key:e
+
+#
+14. The _________ property is defined in Shape.
+a. stroke
+b. strokeWidth
+c. strokeType
+d. strokeLineCap
+e. strokeLineJoin
+Key:abcde
+
+#
+14. _________ is a valid stroke type.
+a. StrokeType.INSIDE
+b. StrokeType.CENTER
+c. StrokeType.OUTSIDE
+d. StrokeType.LEFT
+e. StrokeType.RIGHT
+Key:abc
+
+#
+14. _________ is a valid stroke cap type.
+a. StrokeLineCap.BUTT
+b. StrokeLineCap.ROUND
+c. StrokeLineCap.SQUARE
+d. StrokeLineCap.ELLIPSE
+e. StrokeLineCap.CIRCLE
+Key:abc
+
+#
+14. _________ is a valid stroke line join.
+a. StrokeLineJOIN.MITER
+b. StrokeLineJOIN.BEVEL
+c. StrokeLineJOIN.ROUND
+d. StrokeLineJOIN.SQUARE
+e. StrokeLineJOIN.CENTER
+Key:abc
+
+#
+14. strokeDashArray is an instance of _________.
+a. List<Double>
+b. List<double>
+c. ObservableList<Double>
+d. ObservableList<double>
+Key:d
+
+#
+Section 31.6 Menus
+14. To create a menu bar, use ________.
+a. new MenuBar()
+b. new Menu()
+c. new MenuItem()
+d. new CheckMenuItem()
+e. new RadioMenuItem()
+Key:a
+
+#
+14. To create a menu, use ________.
+a. new MenuBar()
+b. new Menu()
+c. new MenuItem()
+d. new CheckMenuItem()
+e. new RadioMenuItem()
+Key:b
+
+#
+14. To create a menu item, use ________.
+a. new MenuBar()
+b. new Menu()
+c. new MenuItem()
+d. new CheckMenuItem()
+e. new RadioMenuItem()
+Key:c
+
+#
+14. To create a check menu item, use ________.
+a. new MenuBar()
+b. new Menu()
+c. new MenuItem()
+d. new CheckMenuItem()
+e. new RadioMenuItem()
+Key:d
+
+#
+14. To create a radio menu item, use ________.
+a. new MenuBar()
+b. new Menu()
+c. new MenuItem()
+d. new CheckMenuItem()
+e. new RadioMenuItem()
+Key:e
+
+#
+14. You can set a graphic such as an ImageView in a ________.
+a. MenuBar
+b. Menu
+c. MenuItem
+d. CheckMenuItem
+e. RadioMenuItem
+Key:bcde
+
+#
+14. To add a menu to a menu bar, use _______.
+a. menuBar.add(menu)
+b. menuBar.addAll(menu)
+c. menuBar.getMenus().add(menu)
+d. menuBar.getItems().add(menu)
+Key:c
+
+#
+14. To add a menu item to a menu, use _______.
+a. menu.add(menuItem)
+b. menu.addAll(menuItem)
+c. menu.getItems().add(menuItem)
+d. menu.getMenus().add(menuItem)
+Key:c
+
+#
+Section 31.7 Context Menus
+14. To add a menu item to a context menu, use _______.
+a. contextMenu.add(menuItem)
+b. contextMenu.addAll(menuItem)
+c. contextMenu.getItems().add(menuItem)
+d. contextMenu.getMenus().add(menuItem)
+Key:c
+
+#
+14. To display a context menu, use _______.
+a. contextMenu.show()
+b. contextMenu.show(node)
+c. contextMenu.show(node, x, y)
+d. contextMenu.show(x, y)
+Key:c
+
+#
+Section 31.8 SplitPane
+14. To add a node to a split pane, use ________.
+a. splitPane.add(node)
+b. splitPane.getChildren().add(node)
+c. splitPane.getItems().add(node)
+d. splitPane.getChildren().addItem(node)
+Key:c
+
+#
+Section 31.9 TabPane
+14. The possible value of a tab side is ______.
+a. Side.TOP
+b. Side.BOTTOM
+c. Side.LEFT
+d. Side.RIGHT
+Key:abcd
+
+#
+14. The ___________ properties are defined in the Tab class.
+a. id
+b. text
+c. tooltip
+d. graphic
+e. content
+Key:abcde
+
+#
+14. To add a node to a tab, use ___________.
+a. tab.getItems().add(node)
+b. tab.getChildren().add(node)
+c. tab.setContent(node)
+d. tab.add(node)
+Key:c
+
+#
+14. To add tabs to a tab pane, use ___________.
+a. tabPane.getItems().addAll(tab1, tab2)
+b. tabPane.getTabs().addAll(tab1, tab2)
+c. tabPane.geChildren().addAll(tab1, tab2)
+d. tab.addAll(tab1, tab2)
+Key:b
+
+#
+Section 31.10 TableView
+14. The __________ properties are defined in the TableView class.
+a. editable
+b. items
+c. placeholder
+d. selectionModel
+Key:abcd
+
+#
+14. The __________ properties are defined in the TableColumn class.
+a. editable
+b. graphic
+c. id
+d. resizable
+e. text
+Key:abcde
+
+#
+14. To add a table column to a table view, use __________.
+a. tableView.add(tableColumn)
+b. tableView.getItems().add(tableColumn)
+c. tableView.getChildren().add(tableColumn)
+d. tableView.getColumns().add(tableColumn)
+Key:d

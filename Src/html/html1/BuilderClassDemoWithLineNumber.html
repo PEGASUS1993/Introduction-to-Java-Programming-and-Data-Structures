@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - BuilderClassDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "BuilderClassDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.Pane;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.PaneBuilder;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.paint.Color;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Font;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.Text;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.text.TextBuilder;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> BuilderClassDemo <span class = "keyword">extends</span> Application {
+ 12&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 13&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 14&nbsp;&nbsp;    Pane pane = PaneBuilder.create().build();
+ 15&nbsp;&nbsp;    
+ 16&nbsp;&nbsp;    TextBuilder textBuilder = TextBuilder.create().fill(Color.RED)
+ 17&nbsp;&nbsp;      .font(Font.font(<span class = "literal">"Times"</span>, <span class = "constant">20</span>)).x(<span class = "constant">40</span>);
+ 18&nbsp;&nbsp;    Text text1 = textBuilder.y(<span class = "constant">20</span>).text(<span class = "literal">"Java"</span>).build();
+ 19&nbsp;&nbsp;    Text text2 = textBuilder.y(<span class = "constant">40</span>).text(<span class = "literal">"C++"</span>).build();
+ 20&nbsp;&nbsp;    Text text3 = textBuilder.y(<span class = "constant">60</span>).text(<span class = "literal">"Python"</span>).build();
+ 21&nbsp;&nbsp;
+ 22&nbsp;&nbsp;    pane.getChildren().addAll(text1, text2, text3);
+ 23&nbsp;&nbsp;    
+ 24&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">300</span>, <span class = "constant">250</span>);           
+ 25&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"BuilderClassDemo"</span>); <span class = "comment">// Set the window title</span>
+ 26&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the window</span>
+ 27&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the window</span>
+ 28&nbsp;&nbsp;  }
+ 29&nbsp;&nbsp;
+ 30&nbsp;&nbsp;  <span class = "comment">// Lauch the program from command-line</span>
+ 31&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 32&nbsp;&nbsp;    launch(args);
+ 33&nbsp;&nbsp;  }
+ 34&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

@@ -1,0 +1,565 @@
+Chapter 30 Aggregate Operations on Collection Streams
+
+Section 30.2 Streams
+1. The default ______ method is defined the Collection interface for creating a stream.
+a. getStream()
+b. Stream()
+c. stream()
+d. findStream()
+Key:c
+
+#
+2. The Stream interface extends ___________.
+a. Collection
+b. Collections
+c. BaseStreams
+d. BaseStream
+Key:d
+
+#
+3. A stream pipeline may contain __________ intermediate methods.
+a. 0
+b. 1
+c. 0 or 1
+d. 0 or more
+Key:d
+
+#
+4. A stream pipeline may contain __________ terminal methods.
+a. 0
+b. 1
+c. 0 or 1
+d. 0 or more
+Key:b
+
+#
+5. The Stream<T> interface contains static methods _______ for creating instances of Stream.
+a. empty()
+b. of(T... values)
+c. of(values: T)
+d. concat(Stream<? extedns T> s1, Stream<? extedns T> s2)
+Key:abcd
+
+#
+6. ___________ is an intermediate method.
+a. distinct
+b. filter
+c. limit
+d. skip
+Key:abcd
+
+#
+7. ___________ is an intermediate method.
+a. sorted
+b. map
+c. mapToInt
+d. mapToLong
+e. mapToDouble
+Key:abcde
+
+#
+8. ___________ is a terminal method.
+a. count
+b. max
+c. min
+d. findFirst
+e. findAny
+Key:abcde
+
+#
+9. ___________ is a terminal method.
+a. allMatch
+b. anyMatch
+c. noneMatch
+d. forEach
+Key:abcd
+
+#
+10. ___________ is a terminal method.
+a. reduce
+b. collect
+c. toArray
+d. map
+Key:abc
+
+#
+11. Which of the following method takes an argument of the Comaprator type?
+a. max
+b. min
+c. sorted
+d. forEach
+Key:abc
+
+#
+12. The statement forEach(System.out::println) is the same as ________.
+a. forEach(System.out::print)
+b. forEach(System.out.println)
+c. forEach(e -> System.out.println())
+d. forEach(e -> System.out.println(e))
+Key:d
+
+#
+13. The statement sorted((s1, s2) -> s1.compareToIgnoreCase(s2)) is the same as ________.
+a. sorted(String::compareToIgnoreCase(s))
+b. sorted(String::compareToIgnoreCase())
+c. sorted(String::compareToIgnoreCase)
+d. sorted(compareToIgnoreCase(s))
+Key:c
+
+#
+14. What is the output of the following code?
+    Character[] chars = {'D', 'B', 'A', 'C'};
+    Stream.of(chars).filter(e -> e > 'B').sorted()
+      .forEach(System.out::print);
+a. DC
+b. CD
+c. ABCD
+d. DCBA
+Key:b
+
+#
+15. What is the output of the following code?
+    Character[] chars = {'D', 'B', 'A', 'C'};
+    System.out.println(Stream.of(chars).allMatch(e -> e > 'B') + " " +   
+      Stream.of(chars).noneMatch(e -> e > 'B'));
+a. true true
+b. true false
+c. false true
+d. false false
+Key:d
+
+#
+16. What is the output of the following code?
+    Character[] chars = {'D', 'B', 'A', 'C'};
+    System.out.println(Stream.of(chars).skip(2)
+      .max(Character::compareTo) + " " +   
+      Stream.of(chars).skip(2)
+      .min(Character::compareTo));
+a. C C
+b. A A
+c. A C
+d. C A
+Key:d
+
+#
+17. What is the output of the following code?
+    Character[] chars = {'D', 'B', 'A', 'C'};
+    Stream.of(chars).map(e -> e.toLowerCase()).forEach(System.out::print);
+a. D B A C
+b. d b a c
+c. DBAC
+d. dbac
+Key:d
+
+#
+17. What is the output of the following code?
+    System.out.println(Stream.of(new Loan(2.5, 1, 10.0), 
+      new Loan(7.5, 5, 10.1), new Loan(7.5, 3, 10.2), 
+      new Loan(7.5, 3, 10.3))
+      .max((e1, e2) -> e1.getNumberOfYears() - e2.getNumberOfYears())
+      .get().getLoanAmount());
+a. 10.0
+b. 10.1
+c. 10.2
+d. 10.3
+Key:b
+
+#
+Section 30.3 IntStream, LongStream, and DoubleStream 
+18. __________ is a subtype of BaseStream.
+a. Stream
+b. IntStream
+c. LongStream
+d. DoubleStream
+Key:abcd
+
+#
+19. __________ represents a sequence of _____ values.
+a. IntStream, int
+b. LongStream, long
+c. DoubleStream, double
+d. FloatStream, float
+Key:abc
+
+#
+20. sum() is a method defined in __________.
+a. Stream
+b. IntStream
+c. LongStream
+d. DoubleStream
+Key:bcd
+
+#
+21. What is the output of the following code?
+    Character[] chars = {'D', 'B', 'A', 'C'};
+    System.out.println(Stream.of(chars).mapToInt(e -> e - 'A').sum());
+a. 4
+b. 5
+c. 6
+d. 7
+Key:c
+
+#
+22. What is the output of the following code?
+    double[] numbers = {1.2, 1, 2.2, 3.6};
+    System.out.println(DoubleStream.of(numbers)
+      .mapToInt(e -> (int)e).sum());
+a. 4
+b. 5
+c. 6
+d. 7
+Key:d
+
+#
+23. What is the output of the following code?
+    double[] numbers = {1.2, 1.23, 2.2, 3.6};
+    System.out.println(DoubleStream.of(numbers)
+      .mapToObj(e -> e + "").mapToInt(e -> e.length()).sum());
+a. 12
+b. 13
+c. 14
+d. 15
+Key:b
+
+#
+Section 30.3 Parallel Streams
+24. To create a parallel stream from a Collection object c, use __________.
+a. c.stream()
+b. c.parallelStream()
+c. c.stream().parallel()
+d. c.stream().sequential()
+Key:bc
+
+#
+25. The following statement displays ____________.
+
+    IntStream.of(1, 2, 3, 4, 5).parallel()
+      .forEach(e -> System.out.print(e + " "));
+
+a. 1 2 3 4 5
+b. 5 4 3 2 1
+c. 1 2 3 5 4
+d. 1 2 3 4 5 in a random order
+Key:d
+
+#
+26. _________ is a stateless method.
+a. sorted
+b. filter
+c. limit
+d. map
+e. distinct
+Key:bcd
+
+#
+27. _________ is a stateful method.
+a. sorted
+b. filter
+c. limit
+d. map
+e. distinct
+Key:ae
+
+#
+Section 30.4 Stream Reduction Using the reduce method
+28. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5).parallel()
+      .reduce(0, (e1, e2) -> e1 + e2));
+a. 14
+b. 15
+c. 16
+d. 17
+e. 18
+Key:b
+
+#
+29. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5).parallel()
+      .reduce(1, (e1, e2) -> e1 * e2));
+a. 120
+b. 140
+c. 130
+d. 150
+e. 170
+Key:a
+
+#
+30. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5).parallel()
+      .reduce(Integer.MAX_VALUE, (e1, e2) -> Math.min(e1, e2)));
+a. 1
+b. 2
+c. 3
+d. 4
+e. 5
+Key:a
+
+#
+31. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5)
+      .mapToObj(e -> e + "").reduce((e1, e2) -> e1 + " " + e2).get());
+a. nothing
+b. 1
+c. 2
+d. 3
+e. 1 2 3 4 5
+Key:e
+
+#
+32. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5)
+      .mapToObj(e -> e + "").reduce((e1, e2) -> e1 + " " + e2).get());
+a. nothing
+b. 1
+c. 2
+d. 3
+e. 1 2 3 4 5
+Key:e
+
+#
+33. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5)
+      .mapToObj(e -> e + "").reduce((e1, e2) -> e1 + ", " + e2).get());
+a. nothing
+b. 1
+c. 2
+d. 3
+e. 1 2 3 4 5
+Key:e
+
+5.1 2.6 4.1 red
+
+1.00#2.00#none#1.00#5.10#4.10#red#10.45#1.00#1.00#2.00#none#2.00#5.10#2.60#4.10#red#15.78
+
+#
+44. Show the output of the following code:
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Test {
+   public static void main(String [] args){
+    int[][] m = {{1, 2, 3}, {3, 4, 5}, {5, 2}, {1, 3}};
+    Stream.of(m).map(e -> IntStream.of(e))
+      .reduce((e1, e2) -> IntStream.concat(e1, e2))
+      .get().distinct()
+      .forEach(e -> System.out.print(e + " "));
+   }
+}
+a. 1 2 3 3 4 5 5 2 1 2
+b. 1 2 3 4 5
+c. 1 2 3 4 5 in a random order
+d. 5 4 3 2 1
+Key:b
+
+#
+44. Show the output of the following code:
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Test {
+   public static void main(String [] args){
+    int[][] m = {{1, 2, 3}, {3, 4, 5}, {5, 2}, {1, 3}};
+    Stream.of(m).map(e -> IntStream.of(e))
+      .reduce((e1, e2) -> IntStream.concat(e1, e2))
+      .get().distinct()
+      .forEach(e -> System.out.print(e + " "));
+   }
+}
+a. 1 2 3 3 4 5 5 2 1 2
+b. 1 2 3 4 5
+c. 1 2 3 4 5 in a random order
+d. 5 4 3 2 1
+Key:c
+
+#
+44. Show the output of the following code:import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Test {
+   public static void main(String [] args){
+    int[][] m = {{1, 2, 3}, {3, 4, 5}, {5, 2}, {1, 3}};
+    System.out.println(
+      Stream.of(m).map(e -> IntStream.of(e))
+        .reduce((e1, e2) -> IntStream.concat(e1, e2))
+        .get().distinct().mapToObj(e -> e + "")
+        .reduce((e1, e2) -> e1 + ", " + e2).get());
+   }
+}
+a. 1, 2, 3, 3, 4, 5, 5, 2, 1, 2
+b. 1, 2, 3, 3, 4, 5, 5, 2, 1, 2,
+c. 1, 2, 3, 4, 5,
+d. 1, 2, 3, 4, 5
+Key:d
+
+#
+44. Show the output of the following code:import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Test {
+   public static void main(String [] args){
+    int[][] m = {{1, 2, 3}, {3, 4, 5}, {5, 2}, {1, 3}};
+    System.out.println(
+      Stream.of(m).map(e -> IntStream.of(e))
+        .reduce((e1, e2) -> IntStream.concat(e1, e2))
+        .get().distinct().mapToObj(e -> e + "")
+        .reduce((e1, e2) -> e1 + ", " + e2).get());
+   }
+}
+a. 1, 2, 3, 3, 4, 5, 5, 2, 1, 2
+b. 1, 2, 3, 3, 4, 5, 5, 2, 1, 2,
+c. 1, 2, 3, 4, 5,
+d. 1, 2, 3, 4, 5
+Key:d
+
+#
+Section 30.5 Stream Reduction Using the collect Method
+35. The following statement displays ____________.
+    System.out.println(IntStream.of(1, 2, 3, 4, 5)
+      .collect(() -> new ArrayList(), (c, e) -> c.add(e),
+        (c1, c2) -> c1.addAll(c2)));
+a. [1, 2, 3, 4]
+b. [1]
+c. [1, 2]
+d. [1, 2, 3]
+e. [1, 2, 3, 4, 5]
+Key:e
+
+#
+36. The following statement displays ____________.
+    System.out.println(IntStream.of(2, 5, 5, 4, 5)
+      .collect(() -> new TreeSet(), (c, e) -> c.add(e),
+        (c1, c2) -> c1.addAll(c2)));
+a. [2, 4, 5, 5]
+b. [2, 5, 4]
+c. [2, 5, 5, 4, 5]
+d. [5, 2, 4]
+e. [2, 4, 5]
+Key:e
+
+#
+37. The following statement displays ____________.
+    System.out.println(IntStream.of(2, 5, 5, 4, 5)
+      .mapToObj(e -> e).collect(Collectors.toList()));
+a. [2, 4, 5, 5]
+b. [2, 5, 4]
+c. [2, 5, 5, 4, 5]
+d. [5, 2, 4]
+e. [2, 4, 5]
+Key:c
+
+#
+38. The following statement displays ____________.
+    IntStream.of(2, 5, 5, 4, 5)
+      .mapToObj(e -> e).collect(Collectors.toSet())
+      .stream().sorted().forEach(e -> System.out.print(e + " "));
+a. 2 4 5 5
+b. 2 5 4
+c. 2 5 5 4 5
+d. 5 2 4
+e. 2 4 5
+Key:e
+
+#
+Section 30.6 Grouping Elements Using the groupingby Collector
+39. The following statement displays ____________.
+    IntStream.of(1, 2, 3, 4, 1, 3, 5, 4, 4).mapToObj(e -> e).collect(
+      Collectors.groupingBy(e -> e, Collectors.counting()))
+      .forEach((k, v) -> {if (k == 3) System.out.println(k + " " + v);});
+a. 3 1
+b. 3 2
+c. 3 3
+d. 2 3 
+e. 2 1
+Key:b
+
+#
+40. __________ is a terminal method.
+a. reduce
+b. collect
+c. forEach
+d. map
+e. mapToInt
+Key:abc
+
+#
+41. The forEach method is defined in the __________ interface.
+a. Stream
+b. IntStream
+c. LongStream
+d. DoubleStream
+e. Collection
+Key:abcde
+
+#
+42. The following statement displays ____________.
+    IntStream.of(1, 2, 2, 1, 1).mapToObj(e -> e).collect(
+      Collectors.groupingBy(e -> e, TreeMap::new, Collectors.counting()))
+      .forEach((k, v) -> {System.out.print(k + " " + v + " ");});
+a. 1 3 2 3
+b. 1 3 2 1
+c. 1 3 2 2
+d. 2 3 1 3
+e. 2 2 1 3
+Key:c
+
+#
+42. The following statement displays ____________.
+    Map<Double, Double> map = Stream.of(new Loan(2.5, 1, 10.0), 
+      new Loan(7.5, 5, 10.1), new Loan(7.5, 3, 10.2), 
+      new Loan(7.5, 5, 10.3))
+      .collect(Collectors.groupingBy(Loan::getAnnualInterestRate, 
+        TreeMap::new,
+        Collectors.summingDouble(Loan::getLoanAmount)));
+    map.forEach((k, v) -> System.out.print(k + " " + v + " "));a. 1 3 2 3
+a. 7.5 10.0 2.5 30.6
+b. 7.5 30.6 2.5 10.0 
+c. 2.5 7.5 2.5 30.6
+d. 2.5 10.0 7.5 30.6
+Key:d
+
+#
+30. Show the output of the following code.
+      String s = "good"; 
+      Stream.of(s).forEach(e -> 
+        System.out.print(e + " "));
+a. g o o d
+b. good
+c. a random object reference
+d. [g, o, o, d]
+Key:b
+
+#
+44. Show the output of the following code.
+      String s = "good"; 
+      Stream.of(s.toCharArray()).forEach(e -> 
+        System.out.print(e + " "));
+a. g o o d
+b. good
+c. a random object reference
+d. [g, o, o, d]
+Key:c
+
+#
+45. Show the output of the following code.
+import java.util.stream.Stream;
+
+public class Test {
+  public static void main(String[] args) {
+    String s = "good"; 
+    Stream.of(toCharacterArray(s.toCharArray())).forEach(e -> 
+      System.out.print(e + " "));
+  }
+  
+  public static Character[] toCharacterArray(char[] list) {
+    Character[] result = new Character[list.length];
+    for (int i = 0; i < result.length; i++) {
+      result[i] = list[i];
+    }
+    return result;
+  }
+}
+a. g o o d
+b. good
+c. a random object reference
+d. [g, o, o, d]
+Key:a

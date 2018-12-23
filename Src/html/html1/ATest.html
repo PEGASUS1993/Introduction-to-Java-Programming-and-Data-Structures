@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ATest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ATestWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<pre>
+<span class = "keyword">import</span> org.junit.*;
+<span class = "keyword">import</span> <span class = "keyword">static</span> org.junit.Assert.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ATest {    
+  @Test
+  <span class = "keyword">public</span> <span class = "keyword">void</span> m1() {
+    <span class = "comment">// Write a test method </span>
+  } 
+
+  @Test
+  <span class = "keyword">public</span> <span class = "keyword">void</span> m2() {
+    <span class = "comment">// Write another test method</span>
+  }     
+
+  @Before
+  <span class = "keyword">public</span> <span class = "keyword">void</span> setUp() <span class = "keyword">throws</span> Exception {
+    <span class = "comment">// Common objects used by test methods may be set up here</span>
+  }
+}
+</pre>
+</body>
+</html>

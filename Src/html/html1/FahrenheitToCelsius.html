@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - FahrenheitToCelsius.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "https://liveexample.pearsoncmg.com/codeanimation/FahrenheitToCelsius.html" method = "get" target="_blank" style="display: inline">
+<input type = "submit" class = "button" value = "Animation" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "FahrenheitToCelsius" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.Scanner;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> FahrenheitToCelsius {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    Scanner input = <span class = "keyword">new</span> Scanner(System.in);
+
+    System.out.print(<span class = "literal">"Enter a degree in Fahrenheit: "</span>);
+    <span class = "keyword">double</span> fahrenheit = input.nextDouble(); 
+
+    <span class = "comment">// Convert Fahrenheit to Celsius</span>
+    <span class = "keyword">double</span> celsius = (<span class = "constant">5</span><span class = "literal">.</span><span class = "constant">0</span> / <span class = "constant">9</span>) * (fahrenheit - <span class = "constant">32</span>);
+    System.out.println(<span class = "literal">"Fahrenheit "</span> + fahrenheit + <span class = "literal">" is "</span> + 
+      celsius + <span class = "literal">" in Celsius"</span>);  
+  }
+}
+</pre>
+</body>
+</html>

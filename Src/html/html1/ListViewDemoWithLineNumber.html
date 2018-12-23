@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ListViewDemo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ListViewDemo.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">import</span> javafx.application.Application;
+  2&nbsp;&nbsp;<span class = "keyword">import</span> javafx.stage.Stage;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javafx.collections.FXCollections;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.Scene;
+  5&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ListView;
+  6&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.ScrollPane;
+  7&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.control.SelectionMode;
+  8&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.image.ImageView;
+  9&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.BorderPane;
+ 10&nbsp;&nbsp;<span class = "keyword">import</span> javafx.scene.layout.FlowPane;
+ 11&nbsp;&nbsp;
+ 12&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> ListViewDemo <span class = "keyword">extends</span> Application {
+ 13&nbsp;&nbsp;  <span class = "comment">// Declare an array of Strings for flag titles</span>
+ 14&nbsp;&nbsp;  <span class = "keyword">private</span> String[] flagTitles = {<span class = "literal">"Canada"</span>, <span class = "literal">"China"</span>, <span class = "literal">"Denmark"</span>,
+ 15&nbsp;&nbsp;    <span class = "literal">"France"</span>, <span class = "literal">"Germany"</span>, <span class = "literal">"India"</span>, <span class = "literal">"Norway"</span>, <span class = "literal">"United Kingdom"</span>,
+ 16&nbsp;&nbsp;    <span class = "literal">"United States of America"</span>};
+ 17&nbsp;&nbsp;
+ 18&nbsp;&nbsp;  <span class = "comment">// Declare an ImageView array for the national flags of 9 countries</span>
+ 19&nbsp;&nbsp;  <span class = "keyword">private</span> ImageView[] ImageViews = {
+ 20&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/ca.gif"</span>),
+ 21&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/china.gif"</span>),
+ 22&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/denmark.gif"</span>),
+ 23&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/fr.gif"</span>),
+ 24&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/germany.gif"</span>),
+ 25&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/india.gif"</span>),
+ 26&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/norway.gif"</span>),
+ 27&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/uk.gif"</span>),
+ 28&nbsp;&nbsp;    <span class = "keyword">new</span> ImageView(<span class = "literal">"image/us.gif"</span>)
+ 29&nbsp;&nbsp;  };
+ 30&nbsp;&nbsp;
+ 31&nbsp;&nbsp;  @Override <span class = "comment">// Override the start method in the Application class</span>
+ 32&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> start(Stage primaryStage) {
+ 33&nbsp;&nbsp;    ListView&lt;String&gt; lv = <span class = "keyword">new</span> ListView&lt;&gt;
+ 34&nbsp;&nbsp;      (FXCollections.observableArrayList(flagTitles));
+ 35&nbsp;&nbsp;    lv.setPrefSize(<span class = "constant">140</span>, <span class = "constant">400</span>);
+ 36&nbsp;&nbsp;    lv.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+ 37&nbsp;&nbsp;    
+ 38&nbsp;&nbsp;    <span class = "comment">// Create a pane to hold image views</span>
+ 39&nbsp;&nbsp;    FlowPane imagePane = <span class = "keyword">new</span> FlowPane(<span class = "constant">10</span>, <span class = "constant">10</span>);
+ 40&nbsp;&nbsp;    BorderPane pane = <span class = "keyword">new</span> BorderPane();
+ 41&nbsp;&nbsp;    pane.setLeft(<span class = "keyword">new</span> ScrollPane(lv));   
+ 42&nbsp;&nbsp;    pane.setCenter(imagePane);
+ 43&nbsp;&nbsp;
+ 44&nbsp;&nbsp;    lv.getSelectionModel().selectedItemProperty().addListener(
+ 45&nbsp;&nbsp;      ov -&gt; { 
+ 46&nbsp;&nbsp;        imagePane.getChildren().clear();
+ 47&nbsp;&nbsp;        <span class = "keyword">for</span> (Integer i: lv.getSelectionModel().getSelectedIndices()) {
+ 48&nbsp;&nbsp;          imagePane.getChildren().add(ImageViews[i]);
+ 49&nbsp;&nbsp;        }
+ 50&nbsp;&nbsp;    });
+ 51&nbsp;&nbsp;
+ 52&nbsp;&nbsp;    <span class = "comment">// Create a scene and place it in the stage</span>
+ 53&nbsp;&nbsp;    Scene scene = <span class = "keyword">new</span> Scene(pane, <span class = "constant">450</span>, <span class = "constant">170</span>);
+ 54&nbsp;&nbsp;    primaryStage.setTitle(<span class = "literal">"ListViewDemo"</span>); <span class = "comment">// Set the stage title</span>
+ 55&nbsp;&nbsp;    primaryStage.setScene(scene); <span class = "comment">// Place the scene in the stage</span>
+ 56&nbsp;&nbsp;    primaryStage.show(); <span class = "comment">// Display the stage</span>
+ 57&nbsp;&nbsp;  }
+ 58&nbsp;&nbsp;
+ 59&nbsp;&nbsp;  <span class = "comment">/**
+ 60&nbsp;&nbsp;   * The main method is only needed for the IDE with limited
+ 61&nbsp;&nbsp;   * JavaFX support. Not needed for running from the command line.
+ 62&nbsp;&nbsp;   */</span>
+ 63&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+ 64&nbsp;&nbsp;    launch(args);
+ 65&nbsp;&nbsp;  }
+ 66&nbsp;&nbsp;}
+</pre>
+</body>
+</html>

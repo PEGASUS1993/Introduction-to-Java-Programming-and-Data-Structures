@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - MyMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "MyMap.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">interface</span> MyMap&lt;K, V&gt; {
+  2&nbsp;&nbsp;  <span class = "comment">/** Remove all of the entries from this map */</span> 
+  3&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> clear();
+  4&nbsp;&nbsp;  
+  5&nbsp;&nbsp;  <span class = "comment">/** Return true if the specified key is in the map */</span>
+  6&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsKey(K key);
+  7&nbsp;&nbsp;  
+  8&nbsp;&nbsp;  <span class = "comment">/** Return true if this map contains the specified value */</span> 
+  9&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> containsValue(V value);
+ 10&nbsp;&nbsp;
+ 11&nbsp;&nbsp;  <span class = "comment">/** Return a set of entries in the map */</span>
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Set&lt;Entry&lt;K, V&gt;&gt; entrySet();
+ 13&nbsp;&nbsp;
+ 14&nbsp;&nbsp;  <span class = "comment">/** Return the first value that matches the specified key */</span>
+ 15&nbsp;&nbsp;  <span class = "keyword">public</span> V get(K key);
+ 16&nbsp;&nbsp;  
+ 17&nbsp;&nbsp;  <span class = "comment">/** Return true if this map contains no entries */</span>
+ 18&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">boolean</span> isEmpty();
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "comment">/** Return a set consisting of the keys in this map */</span>
+ 21&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Set&lt;K&gt; keySet();
+ 22&nbsp;&nbsp;  
+ 23&nbsp;&nbsp;  <span class = "comment">/** Add an entry (key, value) into the map */</span>
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> V put(K key, V value);
+ 25&nbsp;&nbsp;
+ 26&nbsp;&nbsp;  <span class = "comment">/** Remove the entries for the specified key */</span>
+ 27&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> remove(K key);
+ 28&nbsp;&nbsp;
+ 29&nbsp;&nbsp;  <span class = "comment">/** Return the number of mappings in this map */</span>
+ 30&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">int</span> size();
+ 31&nbsp;&nbsp;
+ 32&nbsp;&nbsp;  <span class = "comment">/** Return a set consisting of the values in this map */</span>
+ 33&nbsp;&nbsp;  <span class = "keyword">public</span> java.util.Set&lt;V&gt; values();
+ 34&nbsp;&nbsp;  
+ 35&nbsp;&nbsp;  <span class = "comment">/** Define inner class for Entry */</span>
+ 36&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Entry&lt;K, V&gt; {
+ 37&nbsp;&nbsp;    K key;
+ 38&nbsp;&nbsp;    V value;
+ 39&nbsp;&nbsp;    
+ 40&nbsp;&nbsp;    <span class = "keyword">public</span> Entry(K key, V value) {
+ 41&nbsp;&nbsp;      <span class = "keyword">this</span>.key = key;
+ 42&nbsp;&nbsp;      <span class = "keyword">this</span>.value = value;
+ 43&nbsp;&nbsp;    }
+ 44&nbsp;&nbsp;    
+ 45&nbsp;&nbsp;    <span class = "keyword">public</span> K getKey() {
+ 46&nbsp;&nbsp;      <span class = "keyword">return</span> key;
+ 47&nbsp;&nbsp;    }
+ 48&nbsp;&nbsp;    
+ 49&nbsp;&nbsp;    <span class = "keyword">public</span> V getValue() {
+ 50&nbsp;&nbsp;      <span class = "keyword">return</span> value;
+ 51&nbsp;&nbsp;    }
+ 52&nbsp;&nbsp;    
+ 53&nbsp;&nbsp;    @Override
+ 54&nbsp;&nbsp;    <span class = "keyword">public</span> String toString() {
+ 55&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">"["</span> + key + <span class = "literal">", "</span> + value + <span class = "literal">"]"</span>;
+ 56&nbsp;&nbsp;    }
+ 57&nbsp;&nbsp;  }
+ 58&nbsp;&nbsp;}    
+</pre>
+</body>
+</html>

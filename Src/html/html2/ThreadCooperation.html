@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - ThreadCooperation.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "ThreadCooperationWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "ThreadCooperation" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.concurrent.*;
+<span class = "keyword">import</span> java.util.concurrent.locks.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> ThreadCooperation {
+  <span class = "keyword">private</span> <span class = "keyword">static</span> Account account = <span class = "keyword">new</span> Account();
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a thread pool with two threads</span>
+    ExecutorService executor = Executors.newFixedThreadPool(<span class = "constant">2</span>);
+    executor.execute(<span class = "keyword">new</span> DepositTask());
+    executor.execute(<span class = "keyword">new</span> WithdrawTask());
+    executor.shutdown();
+
+    System.out.println(<span class = "literal">"Thread 1\t\tThread 2\t\tBalance"</span>);
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> DepositTask <span class = "keyword">implements</span> Runnable {
+    @Override <span class = "comment">// Keep adding an amount to the account</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      <span class = "keyword">try</span> { <span class = "comment">// Purposely delay it to let the withdraw method proceed</span>
+        <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+          account.deposit((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>) + <span class = "constant">1</span>);
+          Thread.sleep(<span class = "constant">1000</span>);
+        }
+      }
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">class</span> WithdrawTask <span class = "keyword">implements</span> Runnable {
+    @Override <span class = "comment">// Keep subtracting an amount from the account</span>
+    <span class = "keyword">public</span> <span class = "keyword">void</span> run() {
+      <span class = "keyword">while</span> (<span class = "keyword">true</span>) {
+        account.withdraw((<span class = "keyword">int</span>)(Math.random() * <span class = "constant">10</span>) + <span class = "constant">1</span>);
+      }
+    }
+  }
+
+  <span class = "comment">// An inner class for account</span>
+  <span class = "keyword">private</span> <span class = "keyword">static</span> <span class = "keyword">class</span> Account {
+    <span class = "comment">// Create a new lock</span>
+    <span class = "keyword">private</span> <span class = "keyword">static</span> Lock lock = <span class = "keyword">new</span> ReentrantLock();
+
+    <span class = "comment">// Create a condition</span>
+    <span class = "keyword">private</span> <span class = "keyword">static</span> Condition newDeposit = lock.newCondition();
+
+    <span class = "keyword">private</span> <span class = "keyword">int</span> balance = <span class = "constant">0</span>;
+
+    <span class = "keyword">public</span> <span class = "keyword">int</span> getBalance() {
+      <span class = "keyword">return</span> balance;
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> withdraw(<span class = "keyword">int</span> amount) {
+      lock.lock(); <span class = "comment">// Acquire the lock</span>
+      <span class = "keyword">try</span> {
+        <span class = "keyword">while</span> (balance &lt; amount) {
+          System.out.println(<span class = "literal">"\t\t\tWait for a deposit"</span>);
+          newDeposit.await();
+        }
+        
+        balance -= amount;
+        System.out.println(<span class = "literal">"\t\t\tWithdraw "</span> + amount +
+          <span class = "literal">"\t\t"</span> + getBalance());
+      }
+      <span class = "keyword">catch</span> (InterruptedException ex) {
+        ex.printStackTrace();
+      }
+      <span class = "keyword">finally</span> {
+        lock.unlock(); <span class = "comment">// Release the lock</span>
+      }
+    }
+
+    <span class = "keyword">public</span> <span class = "keyword">void</span> deposit(<span class = "keyword">int</span> amount) {
+      lock.lock(); <span class = "comment">// Acquire the lock</span>
+      <span class = "keyword">try</span> {
+        balance += amount;
+        System.out.println(<span class = "literal">"Deposit "</span> + amount +
+          <span class = "literal">"\t\t\t\t\t"</span> + getBalance());
+
+        <span class = "comment">// Signal thread waiting on the condition</span>
+        newDeposit.signalAll();
+      }
+      <span class = "keyword">finally</span> {
+        lock.unlock(); <span class = "comment">// Release the lock</span>
+      }
+    }
+  }
+}
+</pre>
+</body>
+</html>

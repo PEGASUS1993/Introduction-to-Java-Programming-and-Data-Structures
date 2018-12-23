@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - TestMap.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "TestMapWithLineNumber.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code With Line Numbers" />
+</form>
+<form action = "https://liveexample.pearsoncmg.com/LiveRun/faces/LiveExample.xhtml" method = "get" target="_blank" style="display: inline">
+<input type = "hidden" name = "programName" value = "TestMap" />
+<input type = "hidden" name = "username" value = "slide" />
+<input type = "hidden" name = "header" value = "on" />
+<input type = "submit" class = "button" value = "Compile/Run Example Live" />
+</form>
+<pre>
+<span class = "keyword">import</span> java.util.*;
+
+<span class = "keyword">public</span> <span class = "keyword">class</span> TestMap {
+  <span class = "keyword">public</span> <span class = "keyword">static</span> <span class = "keyword">void</span> main(String[] args) {
+    <span class = "comment">// Create a HashMap</span>
+    Map&lt;String, Integer&gt; hashMap = <span class = "keyword">new</span> HashMap&lt;&gt;();
+    hashMap.put(<span class = "literal">"Smith"</span>, <span class = "constant">30</span>);
+    hashMap.put(<span class = "literal">"Anderson"</span>, <span class = "constant">31</span>);
+    hashMap.put(<span class = "literal">"Lewis"</span>, <span class = "constant">29</span>);
+    hashMap.put(<span class = "literal">"Cook"</span>, <span class = "constant">29</span>);
+
+    System.out.println(<span class = "literal">"Display entries in HashMap"</span>);
+    System.out.println(hashMap + <span class = "literal">"\n"</span>);
+
+    <span class = "comment">// Create a TreeMap from the preceding HashMap</span>
+    Map&lt;String, Integer&gt; treeMap = <span class = "keyword">new</span> TreeMap&lt;&gt;(hashMap);
+    System.out.println(<span class = "literal">"Display entries in ascending order of key"</span>);
+    System.out.println(treeMap);
+
+    <span class = "comment">// Create a LinkedHashMap</span>
+    Map&lt;String, Integer&gt; linkedHashMap =
+      <span class = "keyword">new</span> LinkedHashMap&lt;&gt;(<span class = "constant">16</span>, <span class = "constant">0</span><span class = "literal">.</span><span class = "constant">75f</span>, <span class = "keyword">true</span>);
+    linkedHashMap.put(<span class = "literal">"Smith"</span>, <span class = "constant">30</span>);
+    linkedHashMap.put(<span class = "literal">"Anderson"</span>, <span class = "constant">31</span>);
+    linkedHashMap.put(<span class = "literal">"Lewis"</span>, <span class = "constant">29</span>);
+    linkedHashMap.put(<span class = "literal">"Cook"</span>, <span class = "constant">29</span>);
+
+    <span class = "comment">// Display the age for Lewis</span>
+    System.out.println(<span class = "literal">"\nThe age for "</span> + <span class = "literal">"Lewis is "</span> +
+      linkedHashMap.get(<span class = "literal">"Lewis"</span>));
+
+    System.out.println(<span class = "literal">"Display entries in LinkedHashMap"</span>);
+    System.out.println(linkedHashMap);
+    
+    <span class = "comment">// Display each entry with name and age</span>
+    System.out.print(<span class = "literal">"\nNames and ages are "</span>);
+    treeMap.forEach(
+      (name, age) -&gt; System.out.print(name + <span class = "literal">": "</span> + age + <span class = "literal">" "</span>));
+  }
+}
+</pre>
+</body>
+</html>

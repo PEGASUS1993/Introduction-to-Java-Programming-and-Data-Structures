@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Intro to Java Programming, Y. Daniel Liang - GuessNumberJSFBean.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="codecolor.css" />
+</head>
+<body>
+<form action = "GuessNumberJSFBean.html" method = "get" style="display: inline">
+<input type = "submit" style = "background-color: green; color: white; border:0px;" value = "Show Code Without Line Numbers" />
+</form>
+<pre>
+  1&nbsp;&nbsp;<span class = "keyword">package</span> jsf2demo;
+  2&nbsp;&nbsp;
+  3&nbsp;&nbsp;<span class = "keyword">import</span> javax.inject.Named;
+  4&nbsp;&nbsp;<span class = "keyword">import</span> javax.faces.view.ViewScoped;
+  5&nbsp;&nbsp;
+  6&nbsp;&nbsp;@Named(value = <span class = "literal">"guessNumber"</span>)
+  7&nbsp;&nbsp;@ViewScoped
+  8&nbsp;&nbsp;<span class = "keyword">public</span> <span class = "keyword">class</span> GuessNumberJSFBean {
+  9&nbsp;&nbsp;  <span class = "keyword">private</span> <span class = "keyword">int</span> number;
+ 10&nbsp;&nbsp;  <span class = "keyword">private</span> String guessString;
+ 11&nbsp;&nbsp;  
+ 12&nbsp;&nbsp;  <span class = "keyword">public</span> GuessNumberJSFBean() {
+ 13&nbsp;&nbsp;    number = (<span class = "keyword">int</span>)(Math.random() * <span class = "constant">100</span>);
+ 14&nbsp;&nbsp;  }
+ 15&nbsp;&nbsp;
+ 16&nbsp;&nbsp;  <span class = "keyword">public</span> String getGuessString() {
+ 17&nbsp;&nbsp;    <span class = "keyword">return</span> guessString;
+ 18&nbsp;&nbsp;  }
+ 19&nbsp;&nbsp;
+ 20&nbsp;&nbsp;  <span class = "keyword">public</span> <span class = "keyword">void</span> setGuessString(String guessString) {
+ 21&nbsp;&nbsp;    <span class = "keyword">this</span>.guessString = guessString;
+ 22&nbsp;&nbsp;  }
+ 23&nbsp;&nbsp;
+ 24&nbsp;&nbsp;  <span class = "keyword">public</span> String getResponse() {
+ 25&nbsp;&nbsp;    <span class = "keyword">if</span> (guessString == <span class = "keyword">null</span>)
+ 26&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">""</span>; <span class = "comment">// No user input yet</span>
+ 27&nbsp;&nbsp;    
+ 28&nbsp;&nbsp;    <span class = "keyword">int</span> guess = Integer.parseInt(guessString);
+ 29&nbsp;&nbsp;    <span class = "keyword">if</span> (guess &lt; number) 
+ 30&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">"Too low"</span>;
+ 31&nbsp;&nbsp;    <span class = "keyword">else</span> <span class = "keyword">if</span> (guess == number) 
+ 32&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">"You got it"</span>;
+ 33&nbsp;&nbsp;    <span class = "keyword">else</span> 
+ 34&nbsp;&nbsp;      <span class = "keyword">return</span> <span class = "literal">"Too high"</span>;
+ 35&nbsp;&nbsp;  }
+ 36&nbsp;&nbsp;}
+</pre>
+</body>
+</html>
