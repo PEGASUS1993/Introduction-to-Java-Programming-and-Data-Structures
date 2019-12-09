@@ -14,6 +14,6 @@
 
 本书组织架构：  
 
-![](https://i.imgur.com/avuZGSr.png)
+<img src="Src/组织结构.jpg" width="" />
 
 
