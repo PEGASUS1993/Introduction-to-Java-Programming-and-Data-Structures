@@ -10,7 +10,10 @@
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu"></a>  
 
-![](https://i.imgur.com/yBCyJ8P.png)![](https://i.imgur.com/2UsF5lI.png)
+![](https://i.imgur.com/yBCyJ8P.png)![](https://i.imgur.com/2UsF5lI.png)  
 
+本书组织架构：  
+
+![](https://i.imgur.com/avuZGSr.png)
 
 
